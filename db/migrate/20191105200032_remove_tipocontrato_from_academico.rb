@@ -1,6 +1,0 @@
-class RemoveTipocontratoFromAcademico < ActiveRecord::Migration[6.0]
-  def change
-
-    remove_column :academicos, :tipocontrato, :string
-  end
-end
