@@ -1,0 +1,2 @@
+class Coordinador < ApplicationRecord
+end

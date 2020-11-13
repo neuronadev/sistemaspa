@@ -1,0 +1,35 @@
+<div class="card">
+   <div class="card-body">
+  
+
+     <strong>Presupuesto Operativo 2019</strong>
+     <table class="table table-striped table-sm table-bordered col-md-9 col-sm-7">
+        <thead>
+           <tr>
+             <th class="text-center">No.</th>
+             <th class="text-center">No. Empleado</th>
+             <th class="text-center">Investigador</th>
+             <th class="text-center">PMT</th>
+             <th class="text-center">Presupuesto Operativo</th>
+           </tr>
+        </thead>
+
+        <tbody>
+          <% @lista.each do |l|
+             persona = Persona.find(l.persona_id)
+             nombre = (persona.paterno||'') + " " + (persona.materno||'') + " " + (persona.nombre||'')
+          %>
+             <tr>
+               <td class="text-center" > <%= l.numero %> </td>
+               <td class="text-center"> <%= l.noempleado %> </td>
+               <td> <%= nombre %> </td>
+               <td  class="text-center"> <%= l.pmt.to_d.round(9) %> </td>
+               <td  class="text-center"> <%= number_to_currency(l.monto.to_d) %> </td>
+             </tr>
+          <% end %>  
+        </tbody>
+     </table> 
+
+
+   </div>
+</div>   

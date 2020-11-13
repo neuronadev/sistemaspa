@@ -1,0 +1,45 @@
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+  #autoresl { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+  #autoresl li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1em; }
+  #autoresl li span { position: absolute; margin-left: -1.3em; }
+  </style>
+  <div class="card">
+    
+     <div class="card-body">
+       <% if @action == 'show' %>
+          <%= render "crud/actividad/listado_autores" %>  
+       <% else %>
+          <ul id="autoresl"> 
+             <%= form.fields_for :autores, @actividad.autores.order("posicion asc") do |autor_form| %>
+             <%= render "crud/actividad/autor_fields", f:autor_form %>
+             <% end %>
+         </ul>
+       <% end %>  
+     </div>   
+ </div>
+<% if !@disabled %>
+    <i class="fas fa-plus"></i>&nbsp;<%= link_to_add_fields("Agregar autor(participante)", form, :autores) %> <span style="color:red"><I><- Haga clic en el link para agregar participante</I></span>
+<% end %>
+
+<script>
+  $( function() {
+    $( "#autoresl" ).sortable({
+         stop: function( event, ui ) { 
+           var i =1;  
+           $( ".orden" ).each(
+               function(){
+                   var iddestroy = this.id.replace("posicion","_destroy") 
+                   if ( $("#"+iddestroy).val()!= '1' ){
+                        this.value=i;
+                        i++;
+                     }
+               }
+           );
+
+          }
+    });
+    $( "#autoresl" ).disableSelection();
+  } );
+  </script>

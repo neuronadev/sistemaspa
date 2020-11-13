@@ -1,0 +1,11 @@
+
+<% if @red.errors.messages.count > 0 %>
+   alert('Propocione la información')
+   <%  @red.errors.each do |attr, msg| %>
+         $('#red_'+'<%= attr %>').addClass("error");
+   <% end %>
+<% else %>   
+ 
+   alert('Red registrada correctamente')
+    $(location).attr('href','<%= j redes_path %>'); 
+<% end %>

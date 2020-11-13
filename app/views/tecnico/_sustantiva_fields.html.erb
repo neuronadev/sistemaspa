@@ -1,0 +1,30 @@
+<div class='nested-fields form-row'>
+    <%= f.hidden_field :academico_id, value:current_usuario.persona.academico.id %>
+    <div class="col-4">
+     <div class="form-group">
+       <%= f.label :investigadorid, "Colaboración con (seleccione al Investigador o Técnico):" %>
+       <%= f.select :investigadorid, Persona.where("orden=2").all.order(:orden).order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, { :include_blank=>'-Seleccione una opción-'}, {class:"form-control" } %>
+     </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+       <%= f.label :descripcion, "Actividad:" %>
+       <%= f.text_area :descripcion, class:"form-control", placeholder: "Descripción" %>
+      </div>
+    </div>  
+    <div class="col-2">
+      <div class="form-group">
+        <%= f.label :porcentaje, "Porcentaje (omita el simbolo %):" %>
+        <%= f.text_field :porcentaje, class:"form-control", placeholder: "% de participación" %>
+        <span class=" text-danger ">Solo números o decimales.</span>
+      </div>
+    </div>  
+    <% if @action != 'edit' %>
+    <div class="col-2">
+     <div class="form-group"> 
+       <%= f.hidden_field :_destroy, class:"destroy" %>
+       <%= link_to "[Quitar]","#",onClick: "removeField(this); return false;" %> 
+     </div>  
+   </div> 
+  <% end %>
+  </div>

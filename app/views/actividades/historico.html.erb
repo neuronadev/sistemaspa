@@ -1,0 +1,27 @@
+<div class="d-flex p-2">
+  <div class="card">
+     <div class="card-body">
+        <table class="table">
+        <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Título</th>
+            <th>Autores</th>
+            <th>Año</th>
+        </tr>
+        </thead> 
+        <tbody> 
+
+        </tbody>
+        <% @productos.each do |p| %>
+                <tr> 
+                <td><%= p.producto %> </td>
+                <td> <%= p.titulo %> </td>
+                <td> <%= p.autores %> </td>
+                <td> <%= p.anio %> </td>
+                </tr>
+        <% end %>
+        </table>
+    </div>
+  </div>
+</div>

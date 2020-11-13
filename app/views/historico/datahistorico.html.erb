@@ -1,0 +1,57 @@
+<div class="card">
+  <div class="card-body">
+   <h5 class="card-title">Histórico - Producción 2017</h5>
+    <table class='table table-striped table-bordered table-sm'>
+      <thead>
+        <tr>
+            <th class="text-center">Id</th>
+            <th class="text-center">Producto</th>
+            <th class="text-center">Título</th>
+        </tr>
+      </thead>
+
+    <tbody>
+         <%  @actividades.each do |p| 
+             ref = p.referencia.split("-")  
+             @idRef = ''
+             if !ref.blank?
+                 @idRef = ref[1]
+             end
+         
+         %>
+               <tr>
+                   <td><%= @idRef %></td>
+                   <td><%= p.producto %></td>
+                   <td><%= p.cita %></td>
+               </tr>
+         <% end %>
+
+    <!--2017 EN 2019 -->
+     <%  @items_h.each do |p|  
+       if p.anio == 2017
+         autores = Autor.where(:actividad_id=>p.id).where(:persona_id=>current_usuario.persona_id).first
+         if !autores.nil?
+     %>
+       <tr> 
+         <td><%= p.id %></td>
+         <td><%= p.producto.descripcion %></td>
+         <td> <%= p.titulo %>. 
+             <%= cita(p.id).html_safe %> 
+             <% if p.documentos.attached? %> 
+                 <% p.documentos.each do |d|%>
+                    <%= link_to rails_blob_path(d, disposition: "inline"), { target: '_blank' } do %>
+                        <i class="fas fa-file-pdf fa-2x"></i>
+                    <% end %>
+               <% end %>  
+             <% end %>  
+         </td>
+      </tr>   
+     <% end
+      end
+    end %>
+
+    </tbody>
+
+   </table>
+  </div> 
+</div>  

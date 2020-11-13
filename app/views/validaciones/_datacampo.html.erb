@@ -1,0 +1,215 @@
+<% if @actividad.producto.prodgrupo.clave == 'ART' %>
+    <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+    </div>
+    <div class="col">
+      <b>Volumen:</b> <%= @actividad.articulo.volumen %>
+    </div>
+    <div class="col">
+      <b>Pg Inicio:</b> <%= @actividad.articulo.pgini %>
+    </div>
+    <div class="col">
+      <b>Pg Final:</b> <%= @actividad.articulo.pgfin %>
+    </div>
+    <div class="col-3">
+      <b>Revista:</b> <%= @actividad.articulo.revista.nomrevista %>
+    </div>
+<% end %>
+<% if @actividad.producto.prodgrupo.clave == 'PERIODICO' %>
+    <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+    </div>
+    <div class="col">
+      <b>Sección:</b> <%= @actividad.articulo.volumen %>
+    </div>
+     <div class="col-3">
+       <b>Periodico:</b> <%= @actividad.articulo.revista.nomrevista %>
+    </div>
+<% end %>
+<% if @actividad.producto.prodgrupo.clave == 'LIB' %>
+     <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+    </div>
+     <div class="col">
+         <b>ISBN:</b> <%= @actividad.libroarbitrado.isbn %>
+    </div>
+    <div class="col">
+         <b>No. Páginas:</b> <%= @actividad.libroarbitrado.nopaginas %>
+    </div>
+<% end %>
+<% if @actividad.producto.prodgrupo.clave == 'CAP' %>
+      <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+       </div>
+      <div class="col">
+         <b>Pg Inicial:</b> <%= @actividad.capitulo.pgini %>
+      </div>
+      <div class="col">
+         <b>Pg Final:</b> <%= @actividad.capitulo.pgfin %>
+      </div>
+      <div class="col">
+         <b>Libro:</b> <%= @actividad.capitulo.libro.nomlibro %>
+      </div>
+<% end %>
+<% if @actividad.producto.prodgrupo.clave == 'CUR' %>
+         <div class="col">
+           <% if @actividad.anio.present? %>     
+             <b>Año:</b> <%= @actividad.anio %>
+           <% end %>  
+         </div>
+         <div class="col-12">
+          <b>Tipo:</b> <span class=" text-bold text-success"> <%= @actividad.curso.tipocurso.nomtipocurso %> </span>
+         </div> 
+       
+        <div class="col-12">
+          <b>F. Inicio:</b> <%= @actividad.curso.fini.strftime("%d-%m-%Y") %>
+        </div>  
+      
+      
+        <div class="col-12">
+          <b>F. Termino:</b> <%= @actividad.curso.ffin.strftime("%d-%m-%Y") %>
+        </div>  
+       
+        <div class="col-12">
+          <b>Horas curso:</b> <%= @actividad.curso.hcurso %>
+        </div>  
+       
+        <div class="col-12">
+          <b>Horas impartidas:</b> <%= @actividad.curso.himpartidas%>
+        </div>  
+      
+        <div class="col-12">
+          <b>Creditos:</b> <%= @actividad.curso.creditos %>
+        </div>  
+      
+         <div class="col-12">
+          <b>Coordinador del curso:</b> 
+           <% if @actividad.curso.coordinador %> 
+              SI
+           <% else %>   
+              NO
+            <% end%>
+         </div> 
+       </div>
+<% end %>
+<% if @actividad.producto.prodgrupo.clave == 'TESIS' %>
+     <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+    </div>
+     <div class="col-12">
+          <b>Nivel:</b> <%= @actividad.tesista.nivelestudio.nomnivel %>
+     </div> 
+     <div class="col-12">
+          <b>Fecha termino:</b> <%= @actividad.tesista.ftermino.strftime("%d-%m-%Y") %>
+     </div> 
+<% end %>
+<% if @actividad.producto.prodgrupo.clave == 'EDREV' %>
+      <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+    </div>
+      <div class="col">
+         <b>Revista:</b> <%= @actividad.editor.medio %>
+       </div>
+        <div class="col">
+         <b>ISSN:</b> <%= @actividad.editor.codigo %>
+       </div>
+<% end %>
+
+<% if @actividad.producto.prodgrupo.clave == 'EDLIB' %>
+      <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+    </div>
+      <div class="col">
+         <b>Libro:</b> <%= @actividad.editor.medio %>
+       </div>
+        <div class="col">
+         <b>ISSN:</b> <%= @actividad.editor.codigo %>
+       </div>
+        <div class="col">
+         <b>Editorial:</b> <%= @actividad.editor.editorial %>
+       </div>
+        <div class="col">
+         <b>Pais:</b> <%= @actividad.editor.pais %>
+       </div>
+<% end %>
+
+<% if @actividad.producto.prodgrupo.clave == 'INT' || @actividad.producto.prodgrupo.clave == 'IND' %>
+  
+     <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+     </div>
+     <div class="col">
+         <b>Tipo:</b> <%= @actividad.patente.tipopatente.nomtipopatente %>
+       </div>
+<% end %>
+<% if @actividad.producto.prodgrupo.clave == 'VINSP' %>
+    <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+    </div>
+    
+<% end %>
+<% if @actividad.producto.prodgrupo.clave == 'VINPP' %>
+    <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+     </div>
+    <% if @actividad.vinculacion.present? %>
+        <% if @actividad.vinculacion.niveliniciativa.present? %>
+          <div class="col">
+            <b>Nivel:</b> <%= @actividad.vinculacion.niveliniciativa=='E' ? 'Estatal' : 'Federal' %>
+          </div>
+        <% end %> 
+        <% if @actividad.vinculacion.nivelcomite.present? %>
+          <div class="col">
+            <b>Tipo participación:</b> <%= @actividad.vinculacion.nivelcomite=='M' ? 'Miembro' : @actividad.vinculacion.nivelcomite=='P' ? 'Presidente' : 'Coordinador' %>
+          </div>
+        <% end %> 
+    <% end %>    
+<% end %>
+<% if @actividad.producto.prodgrupo.clave == 'DECRETO' || @actividad.producto.prodgrupo.clave== 'ORDENAMIENTO' || @actividad.producto.prodgrupo.clave == 'INICIATIVA' || @actividad.producto.prodgrupo.clave == 'REGLA' || @actividad.producto.prodgrupo.clave== 'COMITE' %>
+    <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+     </div> 
+    <% if @actividad.vinculacion.present? %>
+        <% if @actividad.vinculacion.niveliniciativa.present? %>
+          <div class="col">
+            <b>Nivel:</b> <%= @actividad.vinculacion.niveliniciativa=='E' ? 'Estatal' : 'Federal' %>
+          </div>
+        <% end %> 
+        <% if @actividad.vinculacion.nivelcomite.present? %>
+          <div class="col">
+            <b>Tipo participación:</b> <%= @actividad.vinculacion.nivelcomite=='M' ? 'Miembro' : @actividad.vinculacion.nivelcomite=='P' ? 'Presidente' : 'Coordinador' %>
+          </div>
+        <% end %> 
+    <% end %>    
+<% end %>
+
+<% if @actividad.producto.prodgrupo.clave == 'OTRASD' %>
+    <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+     </div>
+    <div class="col">
+        <b>Tipo:</b> <%= @actividad.divulgacion.tipodivulgacion.nomtipodivulgacion %>
+    </div>
+<% end %> 
+
+<% if @actividad.producto.prodgrupo.clave == 'FASC' %>
+    <div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+     </div>
+     <div class="col">
+      <b>Tipo:</b> <%= @actividad.fasciculo.tipofasciculo.nomtipofasciculo %>
+     </div>
+     <div class="col">
+      <b>Medio:</b> <%= @actividad.fasciculo.nommedio %>
+     </div>
+     <div class="col">
+      <b>Tipo Medio:</b> <%= @actividad.fasciculo.tipomedio.nomtipomedio %>
+     </div>
+
+<% end %>
+
+<% if @actividad.producto.prodgrupo.clave== 'ACTIVIDAD' %>
+<div class="col">
+      <b>Año:</b> <%= @actividad.anio %>
+     </div>
+<% end %>

@@ -1,0 +1,24 @@
+<div class="form-group">  
+           <strong>Comprobante</strong>
+       </div>
+        <% if !@disabled %>
+            <div class="form-group">  
+               <%= form.file_field :documentos, multiple: true %>
+            </div>
+        <% end %>
+       <div class="form-group">
+
+           <% if @actividad.documentos.attached? %> 
+              <% @actividad.documentos.each do |d|%>
+                <div id="doc<%= d.id %>">
+                  <%= link_to d.filename, rails_blob_path(d, disposition: "attachment"), { target: '_blank' } %>
+                  <% if !@disabled %> 
+                     <%= link_to deldoc_path(d.id), method: "delete", data:{confirm: '¿Desea eliminar el comprobante?'}, remote:true  do %>
+                          <i class="fas fa-times"></i> 
+                     <% end %>
+                 <% end %>    
+               </div>   
+              <% end %>  
+           <% end %>   
+       
+       </div>

@@ -1,0 +1,26 @@
+<%= f.fields_for :articulo do |a| %>
+   <li> 
+       <%= a.label :volumen, "Volumen:" %>
+       <%= a.text_field :volumen, class:"form-control" %>
+   </li>
+   <li> 
+       <%= a.label :pgini, "Página inicial:" %>
+       <%= a.text_field :pgini, class:"form-control" %>
+   </li>
+   <li> 
+       <%= a.label :pgfin, "Página final:" %>
+       <%= a.text_field :pgfin, class:"form-control" %>
+   </li>
+   <li> 
+       <%= a.label :eidentificador, "Identificador electrónico:" %>
+       <%= a.text_field :eidentificador, class:"form-control" %>
+   </li>
+   <%= a.label :revista_id, "Revista:" %>
+   <%= a.select :revista_id, Revista.all.order(:nomrevista).pluck(:nomrevista,:id), { :include_blank=>'Buscar revista'},{class:"selectize", } %> 
+<% end %>
+
+<script>
+  $(document).on("turbolinks:load", function(){
+         $(".selectize").selectize();
+  })
+</script>

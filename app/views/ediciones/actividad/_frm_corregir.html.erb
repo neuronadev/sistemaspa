@@ -1,0 +1,31 @@
+
+<div class="row">
+ <div class="col-12">
+   <strong><%= @actividad.producto.descripcion %></strong>
+ </div> 
+</div>
+<hr>
+<%= form_with(model: @mensaje, url:coordinasave_path)  do |f| %>
+  <%= f.hidden_field :actividad_id, value: @actividad.id %> 
+  <%= f.hidden_field :persona_id, value: current_usuario.persona_id %> 
+  <%= f.hidden_field :tipo, value: @tipo %> 
+  <%= f.hidden_field :estado, value: 'A' %> 
+
+   <div class="col">
+    <div class="form-group">
+     <strong><label>Título:</label></strong>
+     <div> <%= @actividad.titulo %> </div>
+    </div> 
+  </div>  
+
+  <div class="col">
+    <div class="form-group">
+     <strong><%= f.label :txt, 'Escriba el Motivo:' %>  </strong>
+     <%= f.text_area :txt, class:"form-control" %>
+    </div> 
+  </div>
+  <br>
+  <div class="form-group">   
+     <%= f.submit "Enviar", data: { confirm: 'La información será enviada para validación, ¿Desea continuar?' } %>
+  </div>   
+<% end %>

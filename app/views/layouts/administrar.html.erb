@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>INECOL::Sistema de Producción Académica</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'sesion', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' %>
+          
+  </head>
+
+  <body>
+      
+        <div class="grid">
+            <header class="header">
+                <i class="fas fa-bars header__menu"></i>
+                <div class="header__search">
+                <input class="header__input" placeholder="Search..." />
+                </div>
+                <div class="header__avatar">
+                <div class="dropdown">
+                    <ul class="dropdown__list">
+                    <li class="dropdown__list-item">
+                        <span class="dropdown__icon"><i class="far fa-user"></i></span>
+                        <span class="dropdown__title">my profile</span>
+                    </li>
+                    <li class="dropdown__list-item">
+                        <span class="dropdown__icon"><i class="fas fa-clipboard-list"></i></span>
+                        <span class="dropdown__title">my account</span>
+                    </li>
+                    <li class="dropdown__list-item">
+                        <span class="dropdown__icon"><i class="fas fa-sign-out-alt"></i></span>
+                        <span class="dropdown__title"><%= link_to('Logout', destroy_usuario_session_path) %>  </span>
+                    </li>
+                    </ul>
+                </div>
+                </div>
+            </header>
+
+    <aside class="sidenav">
+        <div class="sidenav__brand">
+        <i class="fas fa-feather-alt sidenav__brand-icon"></i>
+        <a class="sidenav__brand-link" href="#">Ux<span class="text-light">Pro</span></a>
+        <i class="fas fa-times sidenav__brand-close"></i>
+        </div>
+        <div class="sidenav__profile">
+        <div class="sidenav__profile-avatar"></div>
+        <div class="sidenav__profile-title text-light">Matthew H</div>
+        </div>
+        <div class="row row--align-v-center row--align-h-center">
+        <ul class="navList">
+            <li>
+             <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-briefcase-medical"></i></span>
+                <span class="navList__subheading-title">Personal</span>
+            </div> 
+              <ul class="subList subList--hidden">
+                <li class="subList__item"><%= link_to('Nuevo...', new_persona_path, data: { turbolinks: false } ) %></li>
+                <li class="subList__item"><%= link_to('Personal cadémico', personas_path, data:{turbolinks: false}) %></li>
+                <li class="subList__item">Cátedras</li>
+                <li class="subList__item">Técnicos</li>
+              </ul>
+            </li>
+            <li>
+             <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-briefcase-medical"></i></span>
+                <span class="navList__subheading-title">Productos</span>
+            </div> 
+              <ul class="subList subList--hidden">
+                <li class="subList__item"><%= link_to('Listado', productos_path, data: { turbolinks: false } ) %></li>
+                <li class="subList__item"><%= link_to('Categorias', prodcategorias_path, data: { turbolinks: false } ) %></li>
+                <li class="subList__item"><%= link_to('Grupos', prodgrupos_path, data: { turbolinks: false } ) %></li>
+              </ul>
+            </li>
+            <li>
+             <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-briefcase-medical"></i></span>
+                <span class="navList__subheading-title">Editoriales</span>
+            </div> 
+              <ul class="subList subList--hidden">
+                <li class="subList__item"><%= link_to('Listado', editoriales_path, data: { turbolinks: false } ) %></li>
+              </ul>
+            </li>
+            <li>
+             <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-briefcase-medical"></i></span>
+                <span class="navList__subheading-title">Revistas</span>
+            </div> 
+              <ul class="subList subList--hidden">
+                <li class="subList__item"><%= link_to('Listado', revistas_path, data: { turbolinks: false } ) %></li>
+              </ul>
+            </li>
+            <li>
+             <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-briefcase-medical"></i></span>
+                <span class="navList__subheading-title">Libros</span>
+            </div> 
+              <ul class="subList subList--hidden">
+                <li class="subList__item"><%= link_to('Listado', libros_path, data: { turbolinks: false } ) %></li>
+              </ul>
+            </li>
+            <li>
+            <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-briefcase-medical"></i></span>
+                <span class="navList__subheading-title">Usuarios</span>
+            </div>
+            <ul class="subList subList--hidden">
+                <li class="subList__item">Ver todos</li>
+                <li class="subList__item"><%= link_to('Nuevo...', new_persona_path, data: { turbolinks: false } ) %></li>
+                
+            </ul>
+            </li>
+            <li>
+            <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-briefcase-medical"></i></span>
+                <span class="navList__subheading-title">Catálogos</span>
+            </div>
+            <ul class="subList subList--hidden">
+                <li class="subList__item"><%= link_to('Redes académicas', redes_path, data:{turbolinks: false}) %></li>
+                <li class="subList__item"><%= link_to('Categorias', categorias_path, data:{turbolinks: false}) %></li>
+                <li class="subList__item"><%= link_to('Niveles', niveles_path, data:{turbolinks: false}) %></li>
+                <li class="subList__item">Nivel SNI</li>
+                
+            </ul>
+            </li>
+            
+        </ul>
+        </div>
+    </aside>
+
+    <main class="main">
+      
+         <%= yield %>
+        
+    </main>
+
+    <footer class="footer">
+        <p>Secretaría Académica</p>
+        <p>2018 Instituto de Ecología</p>
+    </footer>
+    </div>
+  </body>
+</html>

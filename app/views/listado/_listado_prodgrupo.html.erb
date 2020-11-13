@@ -1,0 +1,17 @@
+<table>
+  <thead>
+     <tr>
+       <th>Nombre Grupo</th>
+     </tr>
+  </thead>
+  <tbody>
+      <% @prodgrupos.each do |c| %>
+        <tr>
+         <td> <%= c.nomgrupo %> </td>
+         <td> <%= link_to("Editar", edit_prodgrupo_path(c), data:{turbolinks:false})%> </td>
+         <td> <%= link_to("Eliminar", c, method: "delete", data:{confirm: '¿Desea eliminar este registro?'} ) %> </td>  
+        </tr> 
+      <% end %>
+  </tbody>
+
+</table>

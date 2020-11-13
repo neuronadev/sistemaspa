@@ -1,0 +1,41 @@
+
+<div class="card">
+<div class="card-body">
+  <% if current_usuario.rol == 'T' %>
+          <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", investigador_path, data: {turbolinks:false} ) %>&nbsp
+          <i class="fas fa-layer-group"></i>&nbsp;<%= link_to("Listado de productos", actividades_path, data: {turbolinks:false} ) %>
+  <% else %>
+          <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", investigador_path, data: {turbolinks:false} ) %>&nbsp
+          <i class="fas fa-layer-group"></i>&nbsp;<%= link_to("Listado de productos", actividades_path, data: {turbolinks:false} ) %>
+  <% end %>
+ </div> 
+</div>
+
+
+<div class="card">
+ 
+<div class="row">
+ <div class="col-12">
+   <strong><%= @actividad.producto.descripcion %></strong>
+ </div> 
+</div>
+<hr>
+  <div class="col">
+    <div class="form-group">
+     <strong><label>Título:</label></strong>
+     <div> <%= @actividad.titulo %> </div>
+    </div> 
+  </div>  
+  <% @msg.each do |m| %>  
+
+  <div class="col">
+    <div class="form-group">
+     <strong><label>Motivo:</label></strong>
+     <div> <%= m.txt %> </div>
+    </div> 
+  </div>   
+  
+    
+ <% end %>
+
+</div> 

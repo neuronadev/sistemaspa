@@ -1,0 +1,21 @@
+<% if @persona.errors.messages.count > 0 %>
+     alert('Propocione la información')
+    <%  @persona.errors.each do |attr, msg| %>
+        <%  if attr.to_s == 'academico.noempleado' %>
+             $('#persona_academico_attributes_noempleado').addClass("error"); 
+        <%  elsif attr.to_s == 'academico.fingreso' %>
+             $('#persona_academico_attributes_fingreso').addClass("error");      
+        <%  elsif attr.to_s == 'academico.categoria_id' %>
+             $('#persona_academico_attributes_categoria_id').addClass("error");      
+        <%  elsif attr.to_s == 'academico.nivel_id' %>
+             $('#persona_academico_attributes_nivel_id').addClass("error");
+        <%  elsif attr.to_s == 'academico.red_id' %>
+             $('#persona_academico_attributes_red_id').addClass("error");           
+        <% else %>
+             $('#persona_'+'<%= attr %>').addClass("error");
+        <% end %>
+    <% end %>    
+<% else %>   
+   alert('Registro realizado correctamente')
+   $(location).attr('href','<%= j personas_path %>'); 
+<% end %>

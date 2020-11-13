@@ -1,0 +1,71 @@
+<% 
+
+  disabled ||= @disabled
+  
+%>
+
+<li class="ui-state-default">
+<div class="form-row">
+   <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+
+       <%= f.hidden_field :posicion, value:f.object.posicion, class:"orden" %>
+     
+   <div class="col-3">
+     <div class="form-group">
+       Nombre
+       <%= f.select :persona_id, Persona.all.order(:orden).order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, { :include_blank=>'-Seleccione una opción-'},{class:"form-control", disabled: disabled } %>
+     </div>       
+   </div> 
+
+    <% if @producto.prodgrupo.clave != 'ACTIVIDAD' &&  @producto.prodgrupo.clave != 'PROY'   %> 
+
+   <div class="col-3">
+     <div class="form-group"> 
+       Nombre abreviado del autor
+       <%= f.text_field :firma, class:"form-control", placeholder: "Como se muestra en comprobante",  disabled: disabled %> 
+     </div>  
+   </div>
+
+   <% end %> 
+
+   <div class="col-2">
+     <div class="form-group"> 
+        Participación
+        <%= f.select :rol_id, Rol.all.order(:nomrol).collect {|p| [p.nomrol, p.id]}, { :include_blank=>'-Seleccione una opción-'},{class:"form-control",  disabled: disabled } %>
+     </div>        
+   </div> 
+   <% if @producto.prodgrupo.clave != 'ACTIVIDAD' &&  @producto.prodgrupo.clave != 'PROY'   %>
+     <div class="col-2">
+       <div class="form-group"> 
+         ¿Es corresponsal?
+          <% if @action == 'edit' || @action == 'editdata' %>
+                <%=  f.select :corresponsal,options_for_select(@corresponsal,f.object.corresponsal), {},{class:"form-control",  disabled: disabled } %> 
+          <% else %>
+              <%=  f.select :corresponsal,options_for_select(@corresponsal), { :include_blank=>'-Seleccione una opción-'} ,{class:"form-control",  disabled: disabled } %>
+          <% end %>
+
+       </div>        
+     </div>  
+     <% else %>
+      <%= f.hidden_field :corresponsal, value:'N'%>
+   <% end %> 
+   
+   <% if @producto.prodgrupo.clave == 'PROY'   %>
+     <div class="col-3">
+      <div class="form-group"> 
+         (%) de participación
+        <%= f.text_field :porcentaje, class:"form-control", placeholder: "% participación",  disabled: disabled %> 
+      </div>  
+     </div>
+   <% end %> 
+
+
+   <div class="col-2">
+     <div class="form-group"> 
+       <%= f.hidden_field :_destroy, class:"destroy" %>
+       <%= link_to "[Quitar]","#",onClick: "removeField(this); return false;" %> 
+     </div>  
+   </div>  
+
+</div>
+</li>   

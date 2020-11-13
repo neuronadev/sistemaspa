@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+     <tr>
+        <th>Descripcion</th>
+        <th>Puntaje</th> 
+     </tr>
+  </thead> 
+  <tbody>
+    <% @productos.each do |p| %>
+      <tr>
+          <td><%= p.descripcion %></td>
+          <td><%= p.puntaje %></td> 
+      </tr>
+    <% end %>
+ </tbody>
+ </table>   

@@ -1,0 +1,13 @@
+<%= form_with(model:@prodgrupo, local:true) do |f| %>
+  
+ <ul class="flex-outer"> 
+   <li>
+       <%= f.label :nomgrupo, "Nombre del grupo" %>
+       <%= f.text_field :nomgrupo, class:"form-control" %>
+   </li>
+   <li>
+      <button type="submit">Guardar</button>
+   </li>
+ </ul>
+
+<% end %>

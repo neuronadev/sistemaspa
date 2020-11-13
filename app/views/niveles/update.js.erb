@@ -1,0 +1,10 @@
+<% if @nivel.errors.messages.count > 0 %>
+   alert('Propocione la información')
+   <%  @nivel.errors.each do |attr, msg| %>
+         $('#nivel_'+'<%= attr %>').addClass("error");
+   <% end %>
+<% else %>   
+ 
+   alert('Nivel actualizado correctamente')
+    $(location).attr('href','<%= j niveles_path %>'); 
+<% end %>

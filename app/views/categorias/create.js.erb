@@ -1,0 +1,10 @@
+<% if @categoria.errors.messages.count > 0 %>
+   alert('Propocione la información')
+   <%  @categoria.errors.each do |attr, msg| %>
+         $('#categoria_'+'<%= attr %>').addClass("error");
+   <% end %>
+<% else %>   
+    alert('Categoria creada correctamente')
+    $(location).attr('href','<%= j categorias_path %>'); 
+<% end %>
+

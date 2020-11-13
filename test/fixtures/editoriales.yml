@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nomeditorial: MyString
+  especializada: MyString
+  ciudad: MyString
+  estado: MyString
+  pais: one
+  ambito: one
+
+two:
+  nomeditorial: MyString
+  especializada: MyString
+  ciudad: MyString
+  estado: MyString
+  pais: two
+  ambito: two

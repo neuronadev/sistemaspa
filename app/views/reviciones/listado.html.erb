@@ -1,0 +1,55 @@
+<div class = "card">
+  <div class="card-body">
+
+    <div class="col-4">
+      <div class="form-group">
+        <%= label_tag 'Técnico:' %>
+         <select id="persona_id" name="persona_id" class='form-control'> 
+            <% @personas.each do |p| %>  
+                <option value="<%= p.id %>"><%= (p.paterno||'')+" "+(p.materno||'')+" "+(p.nombre||'') %></option>
+            <% end %>
+         </select>
+      </div>  
+    </div>  
+     <button type="button" class="btn btn-primary" id='consultar'>Consultar</button> 
+  </div>
+</div>
+
+<div class = "card">
+  <div class="card-body" id="datatec">
+  </div>
+</div>  
+
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content"></div>
+   </div>
+</div>
+
+<div id="modal-editar" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content"></div>
+   </div>
+</div>
+
+
+<script>
+
+  $(document).ready(function() {
+         $("#consultar").click(function(event) { 
+                $.ajax({
+                    url: '<%= revisarregistros_path %>',
+                    data: "personaid="+$("#persona_id").val(),
+                    type: "post",
+                    success: function(data){ 
+                         if (data.html != 'X'){ 
+                           $("#datatec").html(data.html); 
+                         }
+                     },
+                    error: function(dayta){   }
+                })
+            });
+
+   });
+
+</script>

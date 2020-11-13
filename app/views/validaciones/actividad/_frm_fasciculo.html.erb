@@ -1,0 +1,60 @@
+<% 
+  disabled ||= @disabled
+%>
+<div class="row">
+ <div class="col-12">
+   <strong><%= @producto.descripcion %></strong>
+ </div> 
+</div>
+<hr>
+
+<%= form_with(model: @actividad, local: true)  do |form| %>
+     <%= form.hidden_field :producto_id, value: @producto.id %> 
+     <%= form.hidden_field :personaid, value: @actividad.personaid %> 
+       <% if @action == 'newact' || @action == 'edit' %>
+         <%= form.hidden_field :estado, value:'A' %> 
+      <% end %>      
+            <%= render "crud/actividad/actividad", form:form %>
+
+            <%= form.fields_for :fasciculo do |fasc| %>
+                <div class="col-4">
+                  <div class="form-group">
+                        <%=  fasc.label :tipofasciculo_id, "Especies:" %>
+                        <%=  fasc.select :tipofasciculo_id, Tipofasciculo.all.pluck(:nomtipofasciculo,:id), { :include_blank=>'No. de especies'},{class:"selectize", disabled: disabled} %>
+                  </div> 
+               </div> 
+                <div class="col-3">
+                  <div class="form-group">
+                        <%=  fasc.label :tipomedio_id, "Medio:" %>
+                        <%=  fasc.select :tipomedio_id, Tipomedio.all.pluck(:nomtipomedio,:id), { :include_blank=>'Medio de publicación'},{class:"selectize", disabled: disabled} %>
+                  </div> 
+               </div> 
+               <div class="col-3">
+                  <div class="form-group">
+                        <%=  fasc.label :nommedio, "Medio:" %>
+                        <%=  fasc.text_field :nommedio, class:"form-control", placeholder:"Nombre medio de publicación", disabled: disabled %> 
+                  </div> 
+               </div>  
+               <div class="col-3">
+                  <div class="form-group">
+                        <%=  fasc.label :codigo, "Código:" %>
+                        <%=  fasc.text_field :codigo, class:"form-control", placeholder:"ISBN o ISSN", disabled: disabled %> 
+                  </div> 
+               </div>
+            <% end %>   
+       </div>
+
+        <%= render "crud/actividad/comprobante", form:form %>
+               <div class="form-group"> 
+          <strong>Autores(Participantes)</strong>
+        </div> 
+        <%= render "crud/actividad/autores", form:form %>
+       
+     <br><br>
+      <% if !@disabled %>
+         <div class="form-group">   
+            <%= form.submit "Guardar información", data: { confirm: 'La información será enviada para validación, ¿Desea continuar?' } %>
+         </div>       
+      <% end %>   
+
+<% end %>

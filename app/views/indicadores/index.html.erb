@@ -1,0 +1,88 @@
+
+<table class="table table-striped table-bordered table-responsive-sm">
+   <thead>
+     <tr>
+       <th>No.</th>
+       <th>ID</th>
+       <th>REPORTA</th>
+       <th>TIPO DE PUBLICACIÓN</th>
+       <th>NOMBRE DEL AUTOR(ES)</th>
+       <th>TÍTULO</th>
+       <th>TÍTULO DE LA REVISTA O LIBRO</th>
+       <th>ISBN</th>
+       <th>EDITORIAL</th>
+       <th>AÑO DE PUBLICACIÓN</th>
+       <th>DOI</th>
+     </tr>
+   </thead>
+   
+   <tbody>
+
+    <%  
+      @i = 1
+      @actividades.each do |p| 
+      @capturo = ''
+      puts "####" + p.id.to_s
+      if p.personaid.present?
+         persona = Persona.find(p.personaid) 
+         usuario = Usuario.where(:persona_id=>persona.id).last
+         if usuario.rol == 'T'
+             @capturo = 'TECNICO'
+         end
+      end
+    %>
+        <tr>
+           <td><%= @i %></td>
+           <td><%= p.id %></td>
+           <td><%= @capturo %></td>
+           <td><%= p.producto.descripcion %></td>
+           <td><%= citaConIdentificacion(p.id).html_safe %></td>
+           <td><%= p.titulo %></td>
+           <td>
+              <% if p.producto.prodgrupo.clave == 'ART' %>
+                    <%= p.articulo.revista.nomrevista %>
+              <% end %>
+              <% if p.producto.prodgrupo.clave == 'CAP' %>
+                    <%= p.capitulo.libro.nomlibro %>
+              <% end %>
+              <% if p.producto.prodgrupo.clave == 'EDREV' || p.producto.prodgrupo.clave == 'EDLIB' %>
+                  <% if  p.editor.present?  %>
+                      <%= p.editor.medio %> 
+                  <% end %>    
+              <% end %>
+
+           </td>
+           
+           <td>
+              <% if p.producto.prodgrupo.clave == 'LIB' %>
+                    <%= p.libroarbitrado.isbn %>
+              <% end %>
+              <% if p.producto.prodgrupo.clave == 'CAP' %>
+                    <%= p.capitulo.libro.isbn %>
+              <% end %>
+           </td>
+           <td>
+              <% if p.producto.prodgrupo.clave == 'LIB' %>
+                    <%= p.libroarbitrado.editorial.nomeditorial %>
+              <% end %>
+              <% if p.producto.prodgrupo.clave == 'CAP' %>
+                    <%= p.capitulo.libro.editorial.nomeditorial %>
+              <% end %>
+              <% if p.producto.prodgrupo.clave == 'EDREV' || p.producto.prodgrupo.clave == 'EDLIB' %>
+                  <% if  p.editor.present?  %> 
+                     <%= p.editor.codigo %> 
+                  <% end %>   
+              <% end %>
+           </td>
+           <td>
+                <%= p.anio %>
+           </td>
+           <td></td>
+        </tr>
+
+    <% @i = @i + 1
+     end %>
+
+   </tbody>
+
+</table>

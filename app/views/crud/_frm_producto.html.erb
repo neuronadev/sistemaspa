@@ -1,0 +1,29 @@
+<%= form_with(model:@producto, local:true) do |f| %>
+
+ <ul class="flex-outer">
+  <li> 
+     <%= f.label :descripcion, "Descripción:" %>
+     <%= f.text_field :descripcion, class:"form-control" %>
+   </li> 
+   <li> 
+     <%= f.label :descripcioncorta, "Descripción corta:" %>
+     <%= f.text_field :descripcioncorta, class:"form-control" %>
+   </li> 
+   <li> 
+     <%= f.label :puntaje, "Puntaje:" %>
+     <%= f.text_field :puntaje, class:"form-control" %>
+   </li> 
+   <li> 
+     <%= f.label :prodcategoria_id, "Categoria:" %>
+     <%= f.select :prodcategoria_id, Prodcategoria.where("estado='A'").order(:nomcategoria).collect{|t| [t.nomcategoria,t.id]}, {:include_blank=>'--Seleccione una categoria--'} ,class:"form-control" %>
+   </li> 
+   <li> 
+     <%= f.label :prodgrupo_id, "Grupo:" %>
+     <%= f.select :prodgrupo_id, Prodgrupo.where("estado='A'").order(:nomgrupo).collect{|t| [t.nomgrupo,t.id]}, {:include_blank=>'--Seleccione un grupo--'} ,class:"form-control" %>
+   </li> 
+   <li>
+        <button type="submit">Guardar</button>
+   </li>
+ </ul>
+
+<% end %>

@@ -1,0 +1,88 @@
+<div class="card">
+  <div class="card-body">
+   <h5 class="card-title">Histórico - Producción 2019</h5>
+ </div>  
+
+
+<table class="table table-striped table-sm table-bordered">
+ <thead class="thead-light"> 
+   <tr>
+     <th class="text-center">Producto</th>
+     <th class="text-center">Título</th>
+     <th class="text-center">Autores</th>
+     <th class="text-center">Comprobante</th>
+   </tr>
+ </thead>
+ <tbody> 
+
+<% @actividades.each do |a| 
+   producto = Producto.find(a.producto.id) 
+   
+   autores = a.autores.order(:posicion)
+   @str = ""
+   idreporta = ''
+   i = 0
+   @conNota = 'N'
+   autores.each do |p|
+         
+        if i > 0  
+            simbolo = ", " 
+         else      
+            simbolo = "" 
+        end
+        if !p.firma.present?
+            @str = @str + simbolo + (p.persona.paterno||"") + "," + (p.persona.nombre||"")
+        else
+            @str = @str + simbolo + (p.firma||"")
+        end     
+
+        if p.filiacion == 'F'
+            if current_usuario.persona_id == p.persona_id
+                @conNota = 'S'
+            end
+        end
+
+       i = i+1
+   end
+  mostrar = 'S'
+  if producto.prodgrupo.clave == 'ACTIVIDAD' && (current_usuario.rol == 'I' || current_usuario.rol == 'C')
+     mostrar = 'N'
+  end
+
+   
+
+  if mostrar == 'S'
+
+%>
+     <tr>
+         <td><%= a.producto.descripcion %></td> 
+          <td>
+            <% if a.producto_id == 81 || a.producto_id == 82 || a.producto_id == 83 %>
+                <span class=' text-primary'> <%= a.titulo.html_safe %> </span>
+                <% if a.estado == 'A' %>
+                 <br><span class=' text-danger'>Deberá agregar a los participantes, clic en la opción Editar</span> 
+                <% end %> 
+            <% else %>   
+               <%= a.titulo.html_safe %>
+            <% end %>   
+              
+          </td>
+          <td> <%= cita(a.id).html_safe %> 
+          </td>
+          <td class="text-center">
+               <% if a.documentos.attached? %> 
+                 <% a.documentos.each do |d|%>
+                    <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank' } do %>
+                        <i class="fas fa-file-pdf fa-2x"></i>
+                    <% end %>
+               <% end %>  
+             <% end %>   
+          </td>
+        
+        </tr>
+  <% end %>      
+<% end %>
+
+</tbody>
+</table>
+</div> 

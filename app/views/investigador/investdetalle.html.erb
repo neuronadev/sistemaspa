@@ -1,0 +1,45 @@
+<div class="card">
+  <div class="card-body">
+        <table class='table'>
+          <thead>
+            <tr>
+                <th class="text-center">Consecutivo</th>
+                <th class="text-center" >Nombre</th>
+                <th class="text-center">Red</th>
+            </tr>
+          </thead>
+          <tbody>
+               <% 
+                 @i=1
+                 @investigador.each do |p| 
+               %>   
+                   <tr class="text-bold" >
+                        <td class="text-center"> <%= @i %> </td>
+                        <td> <%= (p.paterno||'') + ' ' + (p.materno||'') + ' ' + (p.nombre||'') %> </td>
+                        <td> <%= p.academico.red.nomred %> </td>
+                   </tr>   
+                   <tr>
+                       <td colspan='3'>
+                          <%= render "itemdetalle", persona:p %>
+                       </td>
+                   </tr>
+               <% 
+                   @i = @i +1
+                 end
+                 %>
+          </tbody>
+        </table>
+   </div>
+</div>  
+
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content"></div>
+   </div>
+</div>
+
+<div id="modal-editar" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content"></div>
+   </div>
+</div>

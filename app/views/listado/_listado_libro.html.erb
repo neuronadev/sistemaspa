@@ -1,0 +1,32 @@
+<%= link_to("Nuevo libro + ", new_libro_path, data:{turbolinks:false}) %>
+
+<table class="table">
+  <thead>
+     <tr>
+       <th>Nombre Libro</th>
+       <th>Editores</th>
+       <th>ISBN</th>
+       <th>Año</th>
+       <th>No. Páginas</th>
+       <th>Editorial</th>
+       <th>Editar</th>
+       <th>Eliminar</th>
+
+     </tr>
+  </thead>
+  <tbody>
+      <% @libros.each do |e| %>
+        <tr>
+          <td> <%= e.nomlibro %> </td>
+          <td> <%= e.editores %> </td>
+          <td> <%= e.isbn %> </td>
+          <td> <%= e.anio %> </td>
+          <td> <%= e.nopaginas %> </td>
+          <td> <%= e.editorial.nomeditorial %> </td>
+          <td> <%= link_to("Editar", edit_libro_path(e), data:{turbolinks:false})%> </td>
+          <td> <%= link_to("Eliminar", e, method: "delete", data:{confirm: '¿Desea eliminar este registro?'} ) %> </td>
+        </tr> 
+      <% end %>
+  </tbody>
+
+</table>

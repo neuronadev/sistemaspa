@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-4">
+    <b>Buscar: <input id="buscar" type="text" placeholder="Search here"></b> 
+  </div> 
+   
+</div>
+
+<div class="card">
+  <div class="card-body">
+
+     <table class='table table-sm table-striped'>
+       <thead> 
+         <tr>
+            <th>Investigador</th>
+            <th>Productos</th>
+         </tr>
+       </thead>  
+       <tbody id='titulos'> 
+          
+           <% @personas.each do |p| %>
+              <tr>
+                  <td><%= (p.paterno||'')+" "+(p.materno||'')+" "+(p.nombre||'') %></td>
+                  <td><%= link_to("Lista de productos", listproduccion_path(p.id), data:{turbolinks:false}) %></td>
+              </tr>   
+
+           <% end %>
+
+       </tbody>
+
+     </table>
+
+
+  </div>
+</div>  
+
+<script> 
+            $(document).ready(function() { 
+                $("#buscar").on("keyup", function() { 
+                    var value = $(this).val().toLowerCase(); 
+                    $("#titulos tr").filter(function() { 
+                        $(this).toggle($(this).text() 
+                        .toLowerCase().indexOf(value) > -1) 
+                    }); 
+                }); 
+            }); 
+        </script> 

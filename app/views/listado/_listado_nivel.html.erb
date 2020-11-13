@@ -1,0 +1,18 @@
+<%= link_to("Nuevo registro", new_nivel_path, data:{turbolinks:false} ) %>
+
+<table class="table">
+  <thead>
+     <tr>
+        <th>Nombre nivel</th>
+        <th>Clave</th> 
+     </tr>
+  </thead> 
+  <tbody>
+    <% @niveles.each do |r| %>
+      <tr>
+          <td><%= link_to(r.nomnivel, nivel_path(r), data:{turbolinks:false}) %></td>
+          <td><%= r.clavenivel %></td> 
+      </tr>
+    <% end %>
+ </tbody>
+ </table>   

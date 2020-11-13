@@ -1,0 +1,42 @@
+<div class="card p-3">
+  <div class="card-body">
+    <strong class="text-primary">Técnicos Académicos: Actividades Adicionales</strong> 
+    <table class='table table-bordered table-sm'>
+    <thead>
+        <tr>
+            <th class="text-center">Consecutivo</th>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Red</th>
+            <th class="text-center">Adicionales</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%  @i = 1
+            @listado.each do |l|
+            @academico = Academico.find(l[0])
+            @persona = Persona.find(@academico.persona_id) 
+            @strColor = ''
+            if l[1] < 8.5
+            @strColor = ' text-danger'
+            else
+            @strColor = ''
+            end
+        %>
+        <tr>
+        <td class="text-center"><%= @i %></td>
+        <td><span class='<%= @strColor %>'><%= (@persona.paterno||'') + " " + (@persona.materno||'') + " " + (@persona.nombre||'') %></span></td>
+        <td><%= @academico.red.nomred %></td>
+        <td> <%= link_to("Ver Adicionales", auditdetalle_path(@academico.id), data:{turbolinks:false} ) %> </td>
+        </tr>
+        <% @i = @i+1 
+          end %>
+    </tbody>   
+
+    </table>
+  </div>  
+</div>  
+<div id="modal-window_msg" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content"></div>
+   </div>
+</div>

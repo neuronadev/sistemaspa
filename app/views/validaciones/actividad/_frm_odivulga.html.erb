@@ -1,0 +1,64 @@
+<% 
+  disabled ||= @disabled
+%>
+<div class="row">
+ <div class="col-12">
+   <strong><%= @producto.descripcion %></strong>
+ </div> 
+</div>
+<hr>
+
+<%= form_with(model: @actividad, local: true)  do |form| %>
+     <%= form.hidden_field :producto_id, value: @producto.id %>
+     <%= form.hidden_field :personaid, value: @actividad.personaid %>  
+     <% if @action == 'newact' || @action == 'edit' %>
+         <%= form.hidden_field :estado, value:'A' %> 
+      <% end %> 
+     <div class="form-group">
+         <%= form.label :titulo, "Título:"%>
+         <%= form.text_field :titulo, class:"form-control", disabled: disabled %>
+     </div>
+     <div class="row">
+         <div class="col-2">
+            <div class="form-group">
+               <%= form.label :anio, "Año:" %>
+               <%= form.text_field :anio,class:"form-control", disabled: disabled  %> 
+            </div>    
+         </div>  
+            <%= form.fields_for :divulgacion do |div_form| %>
+                <div class="col-4">
+                  <div class="form-group">
+                      <!-- PONER LA LISTA DE ACUERDO AL TIPO DE REVISTA: CIENTIFICA | DIVULGACION -->  
+                        <%=  div_form.label :tipodivulgacion_id, "Tipo:" %>
+                        <%=  div_form.select :tipodivulgacion_id, Tipodivulgacion.all.pluck(:nomtipodivulgacion,:id), { :include_blank=>'Seleccione una opcion'},{class:"selectize", disabled: disabled} %>
+                  </div> 
+               </div>
+              <!-- <div class="col-2">
+                 <div class="form-group">
+                   <%= div_form.label :noparticipantes, "Participantes:" %>
+                   <%= div_form.text_field :noparticipantes, class:"form-control", disabled: disabled  %> 
+                 </div>    
+               </div>   
+               <div class="col-2">
+                 <div class="form-group">
+                   <%= div_form.label :nodias, "No. dias:" %>
+                   <%= div_form.text_field :nodias, class:"form-control", disabled: disabled  %> 
+                 </div>    
+               </div>   -->
+            <% end %>   
+       </div>
+
+       <%= render "crud/actividad/comprobante", form:form %>
+            <div class="form-group"> 
+          <strong>Autores(Participantes)</strong>
+        </div> 
+        <%= render "crud/actividad/autores", form:form %>
+       
+     <br><br>
+      <% if !@disabled %>
+         <div class="form-group">   
+            <%= form.submit "Guardar información", data: { confirm: 'La información será enviada para validación, ¿Desea continuar?' } %>
+         </div>       
+      <% end %>   
+
+<% end %>

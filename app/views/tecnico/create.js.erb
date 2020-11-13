@@ -1,0 +1,9 @@
+<% if @sust.errors.messages.count > 0 %>
+   alert('Ha ocurrido un error debido a que falta informaicón en los campos. Favor de verificar.');
+   <% @sust.errors.each do |attr, msg| %>
+         
+   <% end %>
+<% else %> 
+   alert('Registro realizado correctamente')
+   $(location).attr('href','<%= j sustdetalle_path %>'); 
+<% end %>   

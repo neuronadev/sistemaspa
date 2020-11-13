@@ -1,0 +1,20 @@
+<%= render partial: "head/utils_nivel" %>
+
+<%= form_with(model:@nivel) do |f| %>
+<ul class="flex-outer">
+   <li>
+     <div class="field-with-errors"></div>
+     <%= f.label :nomnivel, "Nombre nivel:" %>
+     <%= f.text_field :nomnivel, class:"form-control" %>
+   </li>  
+   <li> 
+     <%= f.label :clavenivel, "clave nivel:" %>
+     <%= f.text_field :clavenivel, class:"form-control" %>
+   </li>
+    <li>
+        <button type="submit">Guardar</button>
+    </li>
+</ul>   
+
+
+<% end %>

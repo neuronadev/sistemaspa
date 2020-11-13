@@ -1,0 +1,50 @@
+
+<table class="table">
+ <thead>
+    <tr>
+       <th>NO.</th>
+       <th>ID</th>
+       <th>PRODUCTO</th>
+       <th>TITULO</th>
+       <th>AUTORES</th>
+       <th>RED</th>
+
+    </tr>
+ </thead>
+ <tbody>
+<% 
+   @i = 1
+   @actividades.each do |a|
+   puts a.id
+   @red = Red.find(a.asignared)
+   @medio = ""
+   
+   if a.producto.id == 1 || a.producto.id == 2 || a.producto.id == 5
+       @medio = a.articulo.revista.nomrevista + ". " + a.articulo.volumen.to_s + ": " + a.articulo.pgini.to_s + "-" + a.articulo.pgfin
+       if a.producto.id == 1
+          @medio = @medio + ". ISI FI: " + a.articulo.revista.factor.to_s
+       end
+   end
+   if a.producto.id == 6
+          @medio = "ISBN: " + (a.libroarbitrado.isbn||" ") + ". " +  a.libroarbitrado.nopaginas.to_s + " pags."
+   end
+   if a.producto.id == 7
+          @medio = a.capitulo.libro.nomlibro + ". ISBN: " + a.capitulo.libro.isbn + ". " + a.capitulo.libro.nopaginas + " pags."
+   end
+
+ %>
+   <tr>
+       <td> <%= @i %>  </td>
+       <td> <%= a.id %> </td>
+       <td> <%= a.producto.descripcion %> </td>
+       <td> <%= a.titulo %>  </td>
+       <td> <%= citaConIdentificacion(a.id).html_safe + ". " + a.anio.to_s + "." %> <I><%= a.titulo + "." %></I> <%= @medio %>  </td>
+       <td> <%= @red.nomred %> </td>
+   </tr>
+<%
+ @i=@i+1
+ end 
+ %>
+
+ </tbody>
+ </table>

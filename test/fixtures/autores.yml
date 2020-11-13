@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  firma: MyString
+  rol: one
+  posicion: 1
+  corresponsal: MyString
+  reporta: MyString
+  tipoautor: MyString
+  filiacion: MyString
+  persona: one
+
+two:
+  firma: MyString
+  rol: two
+  posicion: 1
+  corresponsal: MyString
+  reporta: MyString
+  tipoautor: MyString
+  filiacion: MyString
+  persona: two

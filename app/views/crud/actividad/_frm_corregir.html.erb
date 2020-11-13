@@ -1,0 +1,59 @@
+<div class="row">
+   <%= link_to actividad_path(@actividad.id), data:{turbolinks:false} do %>
+          <i class="fas fa-arrow-left text-primary" style="margin-left:5px;""></i> Regresar
+  <% end %> 
+</div>
+<hr>
+<div class="row">
+ <div class="col-12">
+   <strong><%= @actividad.producto.descripcion %></strong>
+ </div> 
+</div>
+<hr>
+<%= form_with(model: @mensaje, url:coordinasave_path)  do |f| %>
+  <%= f.hidden_field :actividad_id, value: @actividad.id %> 
+  <%= f.hidden_field :persona_id, value: current_usuario.persona_id %>  
+  <%= f.hidden_field :tipo, value: @tipo %> 
+  <%= f.hidden_field :estado, value: 'A' %> 
+
+   <div class="col">
+    <div class="form-group">
+     <strong><label>Título:</label></strong>
+     <div> <%= @actividad.titulo %> </div>
+     <br>
+     <strong><label>Comprobante:</label></strong>
+     <div>
+          <% if @actividad.documentos.attached? %> 
+              <% @actividad.documentos.each do |d|%>
+                   <div id="doc<%= d.id %>">
+                       <%= link_to d.filename, rails_blob_path(d, disposition: "attachment"), { target: '_blank' } %>
+                   </div>   
+               <% end %>  
+           <% end %>   
+     </div>
+    </div> 
+  </div>  
+
+  <div class="col">
+    <div class="form-group">
+      <% if @tipo == 'C' %> 
+        <strong><%= f.label :txt, 'Escriba el Motivo por el cual el producto será enviado al investigador:' %>  </strong>
+      <% end %>
+       <% if @tipo == 'N' %> 
+        <strong><%= f.label :txt, 'Escriba el Motivo por el cual el producto no será considerado:' %>  </strong>
+      <% end %> 
+     <%= f.text_area :txt, class:"form-control" %>
+    </div> 
+  </div>
+  <br>
+   <% if @tipo == 'C' %> 
+      <div class="form-group">   
+        <%= f.submit "Enviar", data: { confirm: 'La información será enviada al investigador para que realice las correcciones, ¿Desea continuar?' } %>
+      </div>   
+    <% end %>
+    <% if @tipo == 'N' %> 
+      <div class="form-group">   
+        <%= f.submit "Enviar", data: { confirm: 'Le producto será marcado como no considerado, ¿Desea continuar?' } %>
+      </div>   
+    <% end %>
+<% end %>

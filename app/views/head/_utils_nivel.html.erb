@@ -1,0 +1,6 @@
+<div class='utils'>
+     <section class="left"><%= link_to("Regresar", niveles_path, data:{turbolinks:false}) %></section>
+     <% if !@nivel.id.nil? %> 
+       <section class="right"> <%= link_to("Eliminar", @nivel, method: "delete", data:{confirm: '¿Desea eliminar este registro?'} ) %> </section>
+     <% end %> 
+</div>

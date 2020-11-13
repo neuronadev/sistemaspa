@@ -1,0 +1,20 @@
+
+<% if flash[:error] %>
+   <%= content_tag :div, flash[:error], class: "flash error" %>
+<% end %>
+
+<%= form_with(model:@prodcategoria, local:true) do |f| %>
+
+ <ul class="flex-outer">
+   <li>
+     <%= f.label :nomcategoria, "Nombre de la categoria:" %>
+     <%= f.text_field :nomcategoria, class:"form-control" %>
+   </li>
+   
+   <li> 
+      <button type="submit">Guardar</button>
+   </li>
+
+ </ul> 
+
+<% end %>

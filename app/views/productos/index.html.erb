@@ -1,0 +1,10 @@
+<%  cerraddo = true %>
+<%= link_to("Nuevo producto + ", new_producto_path, data: {turbolinks:false}) %>
+
+<%  if !cerrado %>
+  <%= render partial: "listado/listado_producto", layout: "crud/layout" %>
+<% end %>  
+
+<%  if cerrado %>
+  <%= render partial: "listado/captura_cerrar", layout: "crud/layout" %>
+<% end %>  

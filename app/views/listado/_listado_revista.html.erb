@@ -1,0 +1,31 @@
+
+<%= link_to("Nueva revista+ ", new_revista_path, data:{turbolinks:false}) %>
+
+<table class="table">
+  <thead>
+     <tr>
+       <th>Nombre revista</th>
+       <th>ISSN/E-ISSN</th>
+       <th>Editorial</th>
+       <th>Cuartil</th>
+       <th>Factor</th>
+       <th>Editar</th>
+       <th>Eliminar</th>
+
+     </tr>
+  </thead>
+  <tbody>
+      <% @revistas.each do |e| %>
+        <tr>
+          <td> <%= e.nomrevista %> </td>
+          <td> <%= e.issn||" "||e.eissn %> </td>
+          <td> <%= e.editorial.nomeditorial %> </td>
+          <td> <%= e.cuartil.to_s %> </td>
+          <td> <%= e.factor.to_s %> </td>
+          <td> <%= link_to("Editar", edit_revista_path(e), data:{turbolinks:false})%> </td>
+          <td> <%= link_to("Eliminar", e, method: "delete", data:{confirm: '¿Desea eliminar este registro?'} ) %> </td>
+        </tr> 
+      <% end %>
+  </tbody>
+
+</table>

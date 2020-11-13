@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  noempleado: 1
+  fingreso: 2019-11-04
+  categoria: MyString
+  tipocontrato: MyString
+  fbaja: 2019-11-04
+  nivelacad: MyString
+  tipoinst: MyString
+  estatus: MyString
+  firma: MyString
+  persona: one
+
+two:
+  noempleado: 1
+  fingreso: 2019-11-04
+  categoria: MyString
+  tipocontrato: MyString
+  fbaja: 2019-11-04
+  nivelacad: MyString
+  tipoinst: MyString
+  estatus: MyString
+  firma: MyString
+  persona: two

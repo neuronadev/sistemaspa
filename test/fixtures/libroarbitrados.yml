@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nopaginas: 1
+  idioma: one
+  editorial: one
+  actividad: one
+
+two:
+  nopaginas: 1
+  idioma: two
+  editorial: two
+  actividad: two

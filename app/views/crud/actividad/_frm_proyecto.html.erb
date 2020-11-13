@@ -1,0 +1,56 @@
+<% 
+  disabled ||= @disabled
+%>
+<div class="row">
+ <div class="col-12">
+   <strong><%= @producto.descripcion %></strong>
+ </div>  
+</div>
+<hr>
+
+<%= form_with(model: @actividad, local: true)  do |form| %>
+     <%= form.hidden_field :reemplazaidact, value:@idactividad_ant %> 
+     <%= form.hidden_field :producto_id, value: @producto.id %> 
+     <%= form.hidden_field :personaid, value: current_usuario.persona_id %> 
+     <%= form.hidden_field :periodo, value: '2020' %> 
+     <%= form.hidden_field :personaid, value: current_usuario.persona_id %> 
+     <%= form.hidden_field :estado, value:'A' %> 
+
+     
+     <div class="form-group">
+         <%= form.label :titulo, "Título:"%>
+         <%= form.text_field :titulo, class:"form-control", disabled: true %>
+     </div>
+     <div class="row">
+         <div class="col-1">
+            <div class="form-group">
+               <%= form.label :anio, "Año:" %>
+               <%= form.text_field :anio,class:"form-control", disabled: true  %> 
+            </div>    
+         </div>  
+         
+     
+         <div class="col-2">
+            <div class="form-group">
+               <%= form.label :monto, "Monto:" %>
+               <%= form.text_field :monto,class:"form-control", disabled: true  %> 
+            </div>    
+         </div>  
+         
+     </div>
+         
+       
+        <div class="form-group"> 
+          <strong>Participantes. El porcentaje total deberá ser igual al 100%</strong><br>
+          <I>El porcentaje se asigna al responsable del proyecto y a los participantes.</I>
+        </div> 
+        <%= render "crud/actividad/autores", form:form %>
+       
+     <br><br>
+      <% if !@disabled %>
+         <div class="form-group">   
+            <%= form.submit "Guardar información", data: { confirm: 'Se van a realizar los cambios, ya no podrá editar la información, ¿Desea continuar?' } %>
+         </div>       
+      <% end %>   
+
+<% end %>

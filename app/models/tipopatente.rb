@@ -1,0 +1,2 @@
+class Tipopatente < ApplicationRecord
+end

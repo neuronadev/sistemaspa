@@ -1,0 +1,65 @@
+ <% if flash[:error] %>
+             <%= content_tag :div, flash[:error], class: "flash error" %>
+   <% end %>
+
+<%= form_with(model:@persona, local:true) do |f| %>
+  <ul class="flex-outer">
+   <li> 
+     <%= f.label :nombre, "Nombre:" %>
+     <%= f.text_field :nombre, class:"form-control" %>
+   </li>  
+   <li> 
+     <%= f.label :paterno, "A. Paterno:" %>
+     <%= f.text_field :paterno, class:"form-control" %>
+   </li>
+   <li> 
+     <%= f.label :materno, "A. Materno:" %>
+     <%= f.text_field :materno, class:"form-control" %>
+   </li>
+   <li> 
+     <%= f.label :email, "Email:" %>
+     <%= f.text_field :email, class:"form-control" %>
+   </li>
+   <li> 
+     <%= f.label :genero, "Género:" %>
+     <%= f.select :genero, options_for_select([["Masculino", "M"],["Femenino","F"]]), {:include_blank=>'--Selecione una opción--'}, class:"form-control" %>
+   </li>
+   <li> 
+     <%= f.label :tipopersona_id, "Tipo personal:" %>
+     <%= f.select :tipopersona_id, Tipopersona.all.collect {|p| [p.nomtipopersona, p.id] },{:include_blank=>'--Selecione una opción--'}, class:"form-control" %>
+   </li>
+
+     <%=  f.fields_for :academico do |a| %>
+        <li> 
+          <%= a.label :noempleado, "No. Empleado:" %>
+          <%= a.text_field :noempleado, class:"form-control" %>
+       </li>
+       <li> 
+          <%= a.label :fingreso, "Fecha ingreso:" %>
+          <%= a.date_field :fingreso, class:"form-control" %>
+       </li>
+       <li> 
+          <%= a.label :red_id, "Red:" %>
+          <%= a.select :red_id, Red.all.order(:nomred).collect { |r| [r.nomred,r.id] }, {:include_blank=>'--Seleccione una red--'}, class:"form-control" %>
+       </li>
+       <li> 
+          <%= a.label :categoria_id, "Red:" %>
+          <%= a.select :categoria_id, Categoria.all.order(:nomcategoria).collect { |r| [r.nomcategoria,r.id] }, {:include_blank=>'--Seleccione una categoria--'}, class:"form-control" %>
+       </li>
+       <li> 
+          <%= a.label :nivel_id, "Nivel académico:" %>
+          <%= a.select :nivel_id, Nivel.all.order(:nomnivel).collect { |r| [r.nomnivel,r.id] }, {:include_blank=>'--Seleccione un nivel--'}, class:"form-control" %>
+       </li>
+        <li>
+        <button type="submit">Guardar</button>
+       </li>
+
+    <%end%>
+    
+
+  </ul>
+   
+
+
+  
+<% end %>

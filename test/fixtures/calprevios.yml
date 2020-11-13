@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  idpersona: 1
+  tipoprod: MyString
+  anio: 1
+  fuente: MyString
+  idfuente: 1
+  nopart: 1
+  noparts: 1
+  equivalencia: MyString
+  numeral: MyString
+  tipopersona: MyString
+  estimulo: MyString
+
+two:
+  idpersona: 1
+  tipoprod: MyString
+  anio: 1
+  fuente: MyString
+  idfuente: 1
+  nopart: 1
+  noparts: 1
+  equivalencia: MyString
+  numeral: MyString
+  tipopersona: MyString
+  estimulo: MyString

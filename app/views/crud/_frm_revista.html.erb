@@ -1,0 +1,96 @@
+<script>
+  $(document).on("turbolinks:load", function(){
+      var selectizeCallback = null;
+      $(".category-modal").on("hide.bs.modal", function(e) {
+            if (selectizeCallback != null) {
+            selectizeCallback();
+            selecitzeCallback = null;
+            }
+
+            $("#form_new_editorial").trigger("reset");
+            
+       });
+
+      $(".selectize").selectize({
+           create: function(input, callback) {
+             selectizeCallback = callback;
+              $(".category-modal").modal();
+              $("#editorial_nomeditorial").val(input);
+             }
+     });
+  })
+</script>
+
+<%= form_with(model:@revista, local:true) do |f| %>
+   <ul class="flex-outer">
+    <li> 
+      <%= f.label :nomrevista, "Nombre de la revista:" %>
+      <%= f.text_field :nomrevista, class:"form-control" %>
+    </li> 
+    <li> 
+      <%= f.label :issn, "ISSN:" %>
+      <%= f.text_field :issn, class:"form-control" %>
+    </li>   
+    <li>  
+      <%= f.label :eissn, "ISSN-E:" %>
+      <%= f.text_field :eissn, class:"form-control" %>
+    </li> 
+    <li>   
+      <%= f.label :cuartil, "Cuartil:" %>
+      <%= f.text_field :cuartil, class:"form-control" %>
+    </li>   
+    <li> 
+      <%= f.label :factor, "Factor de impacto:" %>
+      <%= f.text_field :factor, class:"form-control" %>
+    </li>   
+    <li>  </li> 
+      <%= f.label :editorial_id, "Editorial:" %>
+    
+      <%= f.select :editorial_id, Editorial.all.pluck(:nomeditorial,:id), { :include_blank=>'Buscar editorial'},{class:"selectize", } %>
+      <li>  </li> 
+      <li>  </li> 
+    <li>
+        <button type="submit">Guardar</button>
+    </li>
+   </ul>   
+<% end %>
+
+<div class="modal fade category-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="mySmallModalLabel">Agregar Editorial</h4>
+      </div>
+      <div class="modal-body">
+        <% @editorial = Editorial.new %> 
+            <%= form_with model:@editorial, id:"form_new_editorial" do |f| %>
+               <ul class="flex-outer">          
+                  <li> 
+                    <%= f.label :nomeditorial, "Nombre de la editorial:" %>
+                    <%= f.text_field :nomeditorial, class:"form-control" %>
+                  </li>
+                  <li> 
+                   <%= f.label :especializada, "Editorial especializada:" %>
+                   <%= f.select :especializada, @especializada, {:include_blank=>'--Seleccione una opción--'} ,class:"form-control" %>
+                  </li>  
+                  <li> 
+                   <%= f.label :ciudad, "Ciudad(ubicación):" %>
+                   <%= f.text_field :ciudad, class:"form-control" %>
+                  </li>
+                  <li> 
+                   <%= f.label :pais_id, "País:" %>
+                   <%= f.select :pais_id, Pais.all.order(:nompais).collect { |r| [r.nompais,r.id] }, {:include_blank=>'--Seleccione un pais--'}, class:"form-control" %>
+                  </li>
+                  <li> 
+                   <%= f.label :ambito_id, "Ambito:" %>
+                   <%= f.select :ambito_id, Ambito.all.order(:nomambito).collect { |r| [r.nomambito,r.id] }, {:include_blank=>'--Seleccione una opción--'}, class:"form-control" %>
+                  </li>  
+                  <li> 
+                   <button type="submit">Guardar</button>
+                  </li>  
+            <% end %>
+      </div>
+    </div>
+  </div>
+</div>

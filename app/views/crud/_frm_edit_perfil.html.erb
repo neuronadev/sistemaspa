@@ -1,0 +1,12 @@
+
+<h5>Editar perfil de usuario</h5>
+<hr>
+
+<%= form_with(model:@persona, local:true) do |f| %>
+     <%= f.fields_for :usuario do |u| %>
+          <%= u.label "Seleccione una imagen" %>
+          <%= u.file_field :imagen %>
+     <% end %> 
+     <br><br><br>
+ <%= f.submit "Guardar información", data: { confirm: 'La información será enviada para validación, ¿Desea continuar?' } %>
+<% end %>

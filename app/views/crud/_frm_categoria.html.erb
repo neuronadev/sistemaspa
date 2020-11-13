@@ -1,0 +1,19 @@
+<%= render partial: "head/utils_categoria" %>
+<%= form_with(model:@categoria) do |f| %>
+<ul class="flex-outer">
+   <li>
+     <div class="field-with-errors"></div>
+     <%= f.label :nomcategoria, "Nombre categoria:" %>
+     <%= f.text_field :nomcategoria, class:"form-control" %>
+   </li>  
+   <li> 
+     <%= f.label :clavecategoria, "clave de la categoria:" %>
+     <%= f.text_field :clavecategoria, class:"form-control" %>
+   </li>
+    <li>
+        <button type="submit">Guardar</button>
+    </li>
+</ul>   
+
+
+<% end %>

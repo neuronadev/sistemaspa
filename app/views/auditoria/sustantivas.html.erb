@@ -1,0 +1,104 @@
+<%= link_to("<-- Regresar", auditevaluacion_path, class:"dropdown-item", data: {turbolinks:false}) %>
+
+
+<div class="card">
+  <div class="card-body">
+   <strong class="text-danger">Técnico: <%= @t %></strong>
+   <table class="table"> 
+     <thead> 
+       <tr>
+          <th>En conlaboración con</th>
+          <th>Actividad</th>
+          <th>Participación(%)</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+          <th>Vo.Bo.</th>
+          <th>Calf. Calidad</th>
+          <th>Calf. Eficiencia</th>
+          
+       </tr>
+     </thead>
+
+     <tbody>
+         <% @sust.each do |s|
+            #@tot_cal = @tot_cal + s.calidad
+            #@tot_efi = @tot_efi + s.eficiencia 
+            @invest = Persona.find(s.investigadorid)
+         %>
+           <tr>
+              <td><%= (@invest.paterno||'') + " " + (@invest.materno||'') + (@invest.nombre||'') %></td>
+              <td><%= s.descripcion  %> </td>
+              <td><%= s.porcentaje  %> </td>
+              <td>
+                   <% if s.estado == 'A' %>
+                       <%= link_to sustedit_path(s.id), data:{turbolinks:false}  do %>
+                         <i class="fas fa-edit fa-2x"></i>
+                       <% end %>
+                   <% end %>
+                    <% if s.estado == 'U' || s.estado == 'C' %>
+                        <i class="fas fa-edit fa-2x"></i>
+                   <% end %>
+               </td>
+               <td>
+                   <% if s.estado == 'A' %>
+                        <%= link_to sustvalidar_path(s.id,2), data: { turbolinks:false, confirm: 'El registro será eliminado, ¿Desea continuar?' } do %>
+                            <i class="fas fa-minus-circle fa-2x text-danger"></i>
+                        <% end %>
+                   <% end %>
+                   <% if s.estado == 'U' || s.estado == 'C' %>
+                        <i class="fas fa-minus-circle fa-2x"></i>
+                   <% end %>
+               </td>
+               <td>
+                   <% if s.estado == 'A' %>
+                       <%= link_to sustvalidar_path(s.id,1), data: { turbolinks:false, confirm: 'La información será enviada para validación, ¿Desea continuar?' } do %>
+                          <i class="fas fa-check-circle fa-2x text-info"></i>
+                       <% end %>
+                   <% end %>
+                   <% if s.estado == 'U' || s.estado == 'C' %>
+                       <i class="fas fa-check-double fa-2x text-success"></i>
+                   <% end %>
+               </td>
+               <td>                   
+                 <% if !s.calidad.nil? %>
+                   <strong> <%= s.calidad.to_s %></strong>
+                  <% else %>
+                     Sin calificar
+                 <% end %>
+               </td>
+               <td>
+                  <% if !s.calidad.nil? %>
+                    <strong><%= s.eficiencia.to_s %></strong>
+                  <% else %>
+                     Sin calificar
+                 <% end %>
+               </td>
+           </tr> 
+         <% end %>
+       </tbody>
+         <tfoot>
+             <tr>
+               <td></td><td></td><td></td><td></td><td></td><td></td>
+               <td><%= @tot_cal.to_s %></td>
+               <td>
+                <%= @tot_efi.to_s %>
+               </td>
+            </tr>
+           
+         </tfoot> 
+  </table>
+
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <strong>Evaluación (ver página 49 y 58 de los lineamientos)</strong><br>
+    <strong>Total actividades evaluadas: <%= @tot_act %>, Evaluación: <%= @prom %></strong>. 
+    <% if @prom.to_i >= 8.5 %>
+     <!--   <span class="text-success text-bold"> Ya puede registrar las actividades adicionales </span>  -->
+    <% else %>
+    <!--    <span class="text-danger text-bold"> No puede registrar actividades adicionales, se requiere el promedio minimo de 8.5 </span>  -->
+    <% end %>
+  </div>
+ </div>

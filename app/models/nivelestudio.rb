@@ -1,0 +1,2 @@
+class Nivelestudio < ApplicationRecord
+end

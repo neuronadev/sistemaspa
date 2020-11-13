@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-4">
+    <b>Buscar: <input id="buscar" type="text" placeholder="Search here"></b> 
+  </div> 
+  <!-- 
+  <div class="col-6">
+     <%= link_to "Ver historico 2018", histoconsultar_path, data: {turbolinks:false}, target: '_blank' %>
+  </div>
+ --> 
+</div>
+<table class='table table-sm table-striped table-bordered'>
+<thead>
+     <tr>
+        <th>Producto</th>
+        <th>Título</th>
+        <th>Autores</th>
+        <th>Año</th>
+        <th>Editar</th>
+     </tr>
+ </thead>
+ <tbody id='titulos'> 
+<%  
+   idred = red
+   items.each do |a|
+   @msg = ''
+   if a.estado == 'W'
+       Autor.where("actividad_id=#{a.id}").each do |p|
+          if p.filiacion == 'F'
+              persona = Persona.find(p.persona_id)
+              @msg = @msg + "<br>" + (persona.paterno||'') + " " + (persona.materno||' ') + (persona.nombre||' ') + " (ver nota)"
+          end
+       end
+   end
+
+%>
+
+   <tr>
+    <td id="desc<%= a.id %>"><%= a.producto.descripcion %>  </td>
+    <td>
+        <%= a.titulo %>
+    </td>
+    <td><%= cita(a.id).html_safe %>
+        <% if !@msg.nil? %>
+          <span class="text-danger"><%= @msg.html_safe %></span> 
+        <% end %>
+    
+    </td>
+    <td><%= a.anio %></td>
+    <td id="td<%= a.id %>">
+        <%= link_to "[Editar]", edicionesdata_path(a.id,idred), data: {turbolinks:false} %>  
+    </td>
+   </tr> 
+ <%        
+   end
+%>
+</tbody> 
+</table>
+
+<div id="modal-window_msg" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content"></div>
+   </div>
+</div>
+
+
+<script> 
+            $(document).ready(function() { 
+                $("#buscar").on("keyup", function() { 
+                    var value = $(this).val().toLowerCase(); 
+                    $("#titulos tr").filter(function() { 
+                        $(this).toggle($(this).text() 
+                        .toLowerCase().indexOf(value) > -1) 
+                    }); 
+                }); 
+            }); 
+        </script> 

@@ -1,0 +1,102 @@
+
+
+<div class = "card">
+<strong> <%= @red.nomred %> </strong>
+ <table class="table table-sm table-striped table-bordered">
+    <thead class="thead-light">
+       <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">Producto</th>
+        <th class="text-center">Titulo</th>
+        <th class="text-center">Autores</th>
+        <th class="text-center">Validar</th>
+        <th class="text-center">Estado</th>
+       </tr>    
+    </thead>
+     <tbody>
+       <% @data.each do |idx,item| %>
+          <tr id="<%= item['id'] %>"> 
+               <td><%= item['id'] %></td>
+               <td><%= item['producto'] %></td>
+               <td>
+                  <div>
+                    <% if item['personaid'].present? %> 
+                       <b>Reporta:</b> <%= reporta(item['personaid'])%>
+                    <% else %>    
+                       <b>Reporta:</b> Verificar
+                    <% end %> 
+                  </div> 
+                  <% if item['estado'] == 'C' %> 
+                     <I class="text-success"><strong><%= item['titulo'] %></strong></I> <i class="fas fa-check-double text-success"></i>
+                  <% elsif item['estado'] == 'G' %>
+                     <I style="color:#EA5838"><%= item['titulo'] %> <i class="fas fa-user-edit"></i>
+                  <% else %>  
+                     <I><%= item['titulo'] %></I>
+                  <% end %>
+               </td>
+               
+               <td><%= cita(item['id']).html_safe %></td>
+
+               <td class="text-center">
+                  <% if item['estado'] == 'U' %> 
+                      <%= link_to actividad_path(item['id']), data:{turbolinks:false} do %>
+                          <i class="fas fa-check"></i>
+                          <p style="font-size:12px"><strong>Validar</strong></p>
+                      <% end %>    
+                  <% end %>
+                  <% if item['estado'] == 'C' %> 
+                     <%= link_to actividad_path(item['id']), data:{turbolinks:false} do %>
+                          <i class="fas fa-check-double text-success"></i>
+                          <p style="font-size:12px" class="text-success">Ver</p>
+                     <% end %>
+                  <% end %>
+                  <% if item['estado'] == 'G' %> 
+                     <%= link_to actividad_path(item['id']), data:{turbolinks:false} do %>
+                          <i class="fas fa-check-double"  style="color:#EA5838;"></i>
+                          <p style="font-size:12px" style="color:#EA5838;">Ver</p>
+                     <% end %>
+                  <% end %>
+                  <% if item['estado'] == 'D' %> 
+                     <%= link_to actividad_path(item['id']), data:{turbolinks:false} do %>
+                          <i class="fas fa-user-times" style="color:#EA5838;"></i>
+                          <p style="font-size:12px" style="color:#EA5838;">Ver</p>
+                     <% end %>
+                  <% end %>
+               </td>
+
+               <td>
+                  <% if item['estado'] == 'C' %> 
+                      <i class="fas fa-check-double text-success"></i>
+                  <% end %>
+                  <% if item['estado'] == 'G' %> 
+                    <span style="color:#EA5838" >  
+                       <i class="fas fa-user-edit"></i>
+                       <p style="font-size:12px">Enviado para correcciones</p>
+                     </span>
+                   <% end %>
+                   <% if item['estado'] == 'D' %> 
+                    <span style="color:#EA5838" >  
+                       <i class="fas fa-user-times" style="color:#EA5838;"></i>
+                       <p style="font-size:12px">No considerado</p>
+                     </span>
+                   <% end %>
+                   <% if item['estado'] == 'S' %> 
+                    <span style="color:green" >  
+                       <i class="fas fa-user-edit"></i>
+                       <p style="font-size:12px">Validado por SA</p>
+                     </span>
+                   <% end %>
+                   <% if item['estado'] == 'Z' %> 
+                    <span style="color:#EA5838" >  
+                       <i class="fas fa-user-edit"></i>
+                       <p style="font-size:12px">No considerado-Validó SA</p>
+                     </span>
+                   <% end %>
+               </td>
+          </tr>
+       <% end %>
+  
+
+     </tbody>
+</table>
+</div>

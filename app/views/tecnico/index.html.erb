@@ -1,0 +1,181 @@
+<div class="main-overview">
+        <div class="overviewCard">
+            <div class="overviewCard-icon overviewCard-icon--document">
+            <i class="fas fa-newspaper"></i>
+            </div>
+            <div class="overviewCard-description">
+            <p class="overviewCard-subtitle"> <%= link_to("Artículos Indizados", filtro_path(1)) %> </p>
+            </div>
+        </div>
+        <div class="overviewCard">
+            <div class="overviewCard-icon overviewCard-icon--calendar">
+            <i class="fas fa-book"></i>
+            </div>
+            <div class="overviewCard-description">
+            <p class="overviewCard-subtitle"><%= link_to("Libros, Capítulos y Editor", filtro_path(2)) %></p>
+            </div>
+        </div>
+        <div class="overviewCard">
+            <div class="overviewCard-icon overviewCard-icon--photo">
+           <i class="fas fa-book-reader"></i>
+            </div>
+            <div class="overviewCard-description">
+            <p class="overviewCard-subtitle"><%= link_to("Divulgación", filtro_path(3)) %></p>
+            </div>
+        </div>
+       
+         <% if   current_usuario.rol == 'C' %>
+            <div class="overviewCard">
+                <div class="overviewCard-icon overviewCard-icon--red">
+                <i class="fas fa-project-diagram"></i>
+                </div>
+                <div class="overviewCard-description">
+                <p class="overviewCard-subtitle"><%= link_to("Productos por red", validared_path) %></p>
+                </div>
+            </div> 
+          <% end %>
+          <% if   current_usuario.rol == 'T'
+                total = Sustantiva.where("investigadorid=?",current_usuario.persona_id).count
+             if total.to_i > 0          
+          %>
+            <div class="overviewCard">
+                <div class="overviewCard-icon overviewCard-icon--evaltec">
+                <i class="fas fa-spell-check"></i>
+                </div>
+                <div class="overviewCard-description">
+                <p class="overviewCard-subtitle"><%= link_to("Evaluación de Técnicos", evaltecnico_path, data:{turbolinks:false}) %></p>
+                </div>
+            </div>
+        <% 
+          end
+        end %>
+
+        </div>
+
+        <div class="main__cards">
+        <div class="card">
+            <div class="card__header">
+            <div class="card__header-title text-light">Actividades adicionales (últimos registros) 
+                <a href="#" class="card__header-link text-bold"><%= link_to("Ver todo", actividades_path, data:{turbolinks:false}) %></a>
+            </div>
+            </div>
+
+            <div class="card__main">
+             <% if !@actividades.present? %>
+                    <div class="card__row">
+                            <div class="card__icon"></div>
+                            <div class="card__time">
+                            <div></div>
+                            </div>
+                            <div class="card__detail">
+                            <div class="card__source text-bold"> No hay actividades adicionales registradas </div>
+                            <div class="card__description"><%= @str %></div>
+                             <div class="card__note"></div>
+                            </div>
+                        </div> 
+             <% else %> 
+                <% @actividades.each do |a| 
+                    autores = a.autores.order(:posicion)
+                    @str = ""
+                    idreporta = ''
+                    i=0
+                    autores.each do |p|
+                        if i > 0  
+                          simbolo = ", " 
+                        else
+                          simbolo = "" 
+                        end
+                         if !p.firma.present?
+                             @str = @str + simbolo + (p.persona.paterno||"") + "," + (p.persona.nombre||"")
+                         else
+                             @str = @str + simbolo + (p.firma||"")
+                         end     
+                       i = i+1
+                    end
+                    
+                %>
+                        <div class="card__row">
+                            <div class="card__icon"><i class="fas fa-book"></i></div>
+                            <div class="card__time">
+                            <div><%= a.producto.prodgrupo.nomgrupo %></div>
+                            </div>
+                            <div class="card__detail">
+                            <div class="card__source text-bold"> <%= link_to(a.titulo, actividad_path(a.id), data:{turbolinks:false}) %> </div>
+                            <div class="card__description"><%= @str %></div>
+                             <div class="card__note"></div>
+                            </div>
+                        </div>
+                <% 
+                 end %>        
+             <% end %>          
+            </div>
+        </div>
+        
+        <!-- <div class="card">
+            <div class="card__header">
+            <div class="card__header-title text-light">Producción de la Red
+                <a href="#" class="card__header-link text-bold"> <%= link_to("Listado", externos_path, data:{turbolinks:false}) %>  </a>
+            </div>
+            
+            </div>
+            <div class="card">
+            </div>
+        </div> -->
+         <div class="card">
+                <div class="card__header" style="background-color:#740202;">
+                <div class="card__header-title text-light"><strong>Estímulo 2019</strong>
+                    
+                </div>
+                </div>
+                <div class="card p-2">
+                <%
+                   monto_esti = Estimulo.where(:persona_id=>current_usuario.persona_id).first
+                %> 
+                <table class="table">
+                <tbody>
+                    <tr>   
+                    <td>Estímulo: <strong>
+                       <% if !monto_esti.nil? %>
+                            <% if monto_esti.monto.to_d > 0 %>
+                                    <%= number_to_currency(monto_esti.monto.to_d) %> 
+                            <% else %>
+                                    "-----" 
+                            <% end %>
+                        <% end %>    
+                     </strong> </td>
+                    </tr>
+                </tbody>     
+                </table>  
+                </div>
+            </div>
+
+        <div class="card card--finance">
+            <div class="card__header">
+            <div class="card__header-title text-light">Actividades sustantivas
+                <%= link_to("Ver detalle", sustdetalle_path, data:{turbolinks:false}) %>  |
+                <%= link_to("Registrar nueva", sustantiva_path, data:{turbolinks:false}) %> 
+            </div>
+            </div>
+            <div id="card__row">
+                            <table class='table'>
+                              <thead>
+                                 <tr>
+                                    <th>En Colaboracion con</th> 
+                                    <th>Descripcion</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                  <%  @sust.each do |s|
+                                      @invest = Persona.find(s.investigadorid)
+                                  %>
+                                      <tr>
+                                          <td><%= (@invest.paterno||'') + " " + (@invest.materno||'') + (@invest.nombre||'') %></td>
+                                          <td><%= s.descripcion %> </td>
+                                      </tr>
+                                  <% end %>
+                              </tbody>
+                            </table>
+            
+            </div>
+        </div>
+        </div> <!-- /.main-cards -->

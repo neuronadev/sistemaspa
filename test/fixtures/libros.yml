@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nomlibro: MyString
+  editores: MyString
+  isbn: MyString
+  anio: MyString
+  nopaginas: MyString
+  editorial: one
+  estado: MyString
+
+two:
+  nomlibro: MyString
+  editores: MyString
+  isbn: MyString
+  anio: MyString
+  nopaginas: MyString
+  editorial: two
+  estado: MyString

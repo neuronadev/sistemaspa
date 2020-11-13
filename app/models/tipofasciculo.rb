@@ -1,0 +1,2 @@
+class Tipofasciculo < ApplicationRecord
+end

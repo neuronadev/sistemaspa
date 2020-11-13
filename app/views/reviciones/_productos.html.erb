@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col-4">
+    <b>Buscar: <input id="buscar" type="text" placeholder="Search here"></b> 
+  </div> 
+  <!-- 
+  <div class="col-6">
+     <%= link_to "Ver historico 2018", histoconsultar_path, data: {turbolinks:false}, target: '_blank' %>
+  </div>
+ --> 
+</div>
+<table class='table table-sm table-striped table-bordered'>
+<thead>
+     <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">Producto</th>
+        <th class="text-center">Título</th>
+        <th class="text-center">Autores</th>
+        <th class="text-center">Año</th>
+        <th class="text-center">Evaluación</th>
+        <th class="text-center">Técnico</th>
+     </tr>
+ </thead>
+ <tbody id='titulos'> 
+<%  
+   items.each do |a|
+%>
+
+   <tr>
+    <td><%= a.id %></td>
+    <td id="desc<%= a.id %>"><%= a.producto.descripcion %>  </td>
+    <td>
+        <%= link_to a.titulo, valdatadetalle_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>
+       <% if current_usuario.evaluador != 'T' %>   
+          <%= link_to "[Editar]", valideditdata_path(a.id,idred), data: {turbolinks:false} %> 
+       <% end %> 
+       <% if a.reemplazaidact.present? %>
+          <br><span class=' text-danger'><strong>Recategorización:</strong> Reemplaza al producto con ID: 
+              <u><%= link_to a.reemplazaidact, datamsg_path(a.reemplazaidact),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %></u>
+           </span>
+       <% end %>
+       <% if a.estado == 'U' && !a.reemplazaidact.present?
+             @msg = Mensaje.where(:actividad_id=>a.id).order(:created_at).last
+             if @msg.present?
+       %>
+             <br><span class=' text-danger'><strong>Este registro fue modificado. </strong>
+              Texto de la Evaluación: <%= @msg.txt %> 
+             </span>
+            <% end %> 
+       <% end %>
+ 
+
+    </td>
+    <td><%= cita(a.id).html_safe %></td>
+    <td><%= a.anio %></td>
+    <td id="td<%= a.id %>">
+       <% if a.estado == 'U' %>
+          <span class="text-primary"> Sin validar </span>
+       <% end %>    
+       <% if a.estado == 'S' %>
+          <span class="text-success">Validado</span>
+       <% end %> 
+       <% if a.estado == 'Z' %>
+          <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+          <%= link_to "No se considera o modificar. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+       <% end %>   
+       <% if a.estado == 'W' %>
+          <i class="fas fa-times fa-1x text-success"></i> <span class="text-danger">
+          <%= link_to "Nota. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+       <% end %>    
+    </td>
+    <td class=" text-center">
+       <% if a.estado == 'Z' && a.aceptado == 'S' %> 
+         <i class="fas fa-user-check fa-2x text-success"></i>
+       <% end %>
+       <% if a.estado == 'S' && a.aceptado == 'S' %> 
+         <i class="fas fa-user-check fa-2x text-success"></i>
+       <% end %>
+    </td>
+   </tr> 
+ <%        
+   end
+%>
+</tbody> 
+</table>
+
+<div id="modal-window_msg" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content"></div>
+   </div>
+</div>
+
+
+<script> 
+            $(document).ready(function() { 
+                $("#buscar").on("keyup", function() { 
+                    var value = $(this).val().toLowerCase(); 
+                    $("#titulos tr").filter(function() { 
+                        $(this).toggle($(this).text() 
+                        .toLowerCase().indexOf(value) > -1) 
+                    }); 
+                }); 
+            }); 
+        </script> 

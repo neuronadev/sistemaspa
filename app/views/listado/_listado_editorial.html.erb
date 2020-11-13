@@ -1,0 +1,31 @@
+
+<%= link_to("Nueva editorial+ ", new_editorial_path, data:{turbolinks:false}) %>
+
+<table class="table">
+  <thead>
+     <tr>
+       <th>Nombre Editorial</th>
+       <th>Especializada</th>
+       <th>Ciudad</th>
+       <th>País</th>
+       <th>Ambito</th>
+       <th>Editar</th>
+       <th>Eliminar</th>
+
+     </tr>
+  </thead>
+  <tbody>
+      <% @editoriales.each do |e| %>
+        <tr>
+          <td> <%= e.nomeditorial %> </td>
+          <td> <%= e.especializada %> </td>
+          <td> <%= e.ciudad %> </td>
+          <td> <%= e.pais.nompais %> </td>
+          <td> <%= e.ambito.nomambito %> </td>
+          <td> <%= link_to("Editar", edit_editorial_path(e), data:{turbolinks:false})%> </td>
+          <td> <%= link_to("Eliminar", e, method: "delete", data:{confirm: '¿Desea eliminar este registro?'} ) %> </td>
+        </tr> 
+      <% end %>
+  </tbody>
+
+</table>

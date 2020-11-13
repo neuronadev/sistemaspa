@@ -1,0 +1,19 @@
+
+<%= link_to("Nuevo registro", new_categoria_path, data:{turbolinks:false} ) %>
+
+<table class="table">
+  <thead>
+     <tr>
+        <th>Nombre categoria</th>
+        <th>Clave</th> 
+     </tr>
+  </thead> 
+  <tbody>
+    <% @categorias.each do |r| %>
+      <tr>
+          <td><%= link_to(r.nomcategoria, categoria_path(r), data:{turbolinks:false}) %></td>
+          <td><%= r.clavecategoria %></td> 
+      </tr>
+    <% end %>
+ </tbody>
+ </table>  

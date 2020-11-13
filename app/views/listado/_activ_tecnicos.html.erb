@@ -1,0 +1,48 @@
+
+<div class="card">
+ <div class="card-body">
+  <% if current_usuario.rol == 'T' %>
+     <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", tecnico_path, data: {turbolinks:false} ) %>&nbsp
+  <% else %>
+    <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", investigador_path, data: {turbolinks:false} ) %>&nbsp
+  <% end %>
+</div> 
+</div> 
+
+<table class="table">
+  <thead>
+     <tr>
+        <th>Técnico</th>
+        <th>Actividad</th>
+        <th>% Participación</th>
+        <th>Calidad</th>
+        <th>Eficiencia</th>
+     </tr>
+  </thead>
+  <tbody>
+      <%  @sustantivas.each do |s| %>
+           <tr> 
+              <td><%= (s.academico.persona.paterno||'')+" "+(s.academico.persona.materno)+" "+(s.academico.persona.nombre) %></td>
+              <td><%= s.descripcion %></td>
+              <td><%= s.porcentaje %></td>
+              <td>
+                 <% if (s.estado == 'U' || s.estado == 'C') && s.calidad.nil? %>
+                   <%= link_to("Cuestionario", cuestionario_path(s.academico_id,'C',s.id), data:{turbolinks:false}) %>
+                 <% end %>
+                 <% if !s.calidad.nil? %>
+                     <i class="fas fa-check-double fa-1x text-success"></i> <%= (s.calidad/10).to_s %>
+                 <% end %>
+                 
+                 </td>
+              <td>
+                  <% if (s.estado == 'U' || s.estado == 'C') && s.eficiencia.nil? %> 
+                    <%= link_to("Cuestionario", cuestionario_path(s.academico_id,'E',s.id), data:{turbolinks:false}) %>
+                  <% end %>
+                  <% if !s.eficiencia.nil? %> 
+                       <i class="fas fa-check-double fa-1x text-success"></i> <%= (s.eficiencia/10).to_s %>
+                  <% end %>
+                </td>
+            </tr>
+      <% end %>
+  </tbody>
+</table>

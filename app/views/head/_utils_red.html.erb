@@ -1,0 +1,6 @@
+<div class='utils'>
+     <section class="left"><%= link_to("Regresar", redes_path, data:{turbolinks:false}) %></section>
+     <% if !@red.id.nil? %> 
+       <section class="right"> <%= link_to("Eliminar", @red, method: "delete", data:{confirm: '¿Desea eliminar este registro?'} ) %> </section>
+     <% end %> 
+</div>

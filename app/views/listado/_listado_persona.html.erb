@@ -1,0 +1,39 @@
+<% if flash[:notice] %>
+    <%= content_tag :div, flash[:notice], class: "flash notice" %>
+<% end %>
+
+<table class="table">
+  <thead>
+     <tr>
+        <th>A. Paterno</th>
+        <th>A. Materno</th> 
+        <th>Nombre</th> 
+        <th>Tipo alta</th> 
+        <th>noempleado</th> 
+        <th>F. Ingreso</th>
+        <th>Red</th> 
+        <th>Categoria</th>
+        <th>Nivel</th>
+        <th>Editar</th>
+
+
+     </tr>
+  </thead> 
+  <tbody>
+    <% @personas.each do |p| %>
+      <tr>
+          <td><%= p.paterno %></td>
+          <td><%= p.materno %></td> 
+          <td><%= p.nombre %></td> 
+          <td><%= p.tipopersona.nomtipopersona %></td> 
+          <td><%= p.academico.present? ? p.academico.noempleado : "" %></td>     
+          <td><%= p.academico.present? ? p.academico.fingreso : "" %></td>
+          <td><%= p.academico.present? ? p.academico.red.nomred : "" %></td>    
+          <td><%= p.academico.present? ? p.academico.categoria.nomcategoria : "" %></td>    
+          <td><%= p.academico.present? ? p.academico.nivel.nomnivel : "" %></td>   
+          <td><%= link_to("Editar", persona_path(p), data:{turbolinks:false} ) %></td>   
+
+      </tr>
+    <% end %>
+ </tbody>
+ </table>   

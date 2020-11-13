@@ -1,0 +1,146 @@
+<style>
+ .redw{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+ }
+ .reditem{
+    display: flex;
+    flex-direction: row;
+ }
+ .selectw{
+    width: 30%;
+ }
+</style>
+
+<% 
+  disabled ||= @disabled
+%>
+<div class="row">
+ <div class="col-12">
+   <strong><%= @producto.descripcion %></strong>
+ </div> 
+</div>
+<hr>
+
+<%= form_with(model: @actividad, local: true)  do |form| %>
+     <%= form.hidden_field :reemplazaidact, value:@idactividad_ant %> 
+     <%= form.hidden_field :producto_id, value: @producto.id %> 
+     <%= form.hidden_field :personaid, value: current_usuario.persona_id %> 
+     <%= form.hidden_field :periodo, value: "2020" %> 
+     <%= form.hidden_field :estado, value:'A' %>
+     <!--
+      <% if @action == 'newact' || @action == 'edit' %>
+           <% if current_usuario.persona_id == 64 %>
+              <%= form.hidden_field :estado, value:'S' %> 
+           <% else %> 
+              <%= form.hidden_field :estado, value:'C' %> 
+            <% end %>
+      <% end %> 
+      -->
+           <div class="row">
+             <div class="col">
+               <div class="form-group">
+                  <%= form.label :titulo, "Título:"%>
+                  <%= form.text_field :titulo, class:"form-control", disabled: disabled  %>
+               </div>
+             </div>  
+            </div>  
+            <div class="row">
+               <%  if @producto.prodgrupo.clave == "PERIODICO" %>  
+                     <div class="col">
+                        <div class="form-group">
+                           <%= form.label :fechapub, "Fecha:" %>
+                           <%= form.date_field :fechapub,class:"form-control col-2", disabled: disabled  %> 
+                        </div>    
+                     </div>  
+               <% else %>
+                     <div class="col">
+                        <div class="form-group">
+                           <%= form.label :anio, "Año:" %>
+                           <%= form.text_field :anio,class:"form-control col-2", disabled: disabled  %> 
+                        </div>    
+                     </div>  
+               <% end %>       
+             </div> 
+            
+               <%= form.fields_for :articulo do |art_form| %>
+                 <div class="row"> 
+                     <div class="col">
+                        <div class="form-group">
+                           <% if @producto.prodgrupo.clave == "PERIODICO" %> 
+                              <%= art_form.label :volumen, "Sección/Página:" %>
+                              <%= art_form.text_field :volumen, class:"form-control col-3", disabled: disabled %>
+                           <% else %>
+                              <%= art_form.label :volumen, "Volumen:" %>
+                              <%= art_form.text_field :volumen, class:"form-control col", disabled: disabled %>
+                           <% end %>   
+                        </div>    
+                     </div>  
+                     <%  if @producto.prodgrupo.clave != "PERIODICO" %> 
+                           <div class="col">
+                              <div class="form-group">
+                                 <%= art_form.label :pgini, "Página inicial:" %>
+                                 <%= art_form.text_field :pgini, class:"form-control col", disabled: disabled %> 
+                              </div>    
+                           </div>  
+                           <div class="col">
+                              <div class="form-group">
+                                 <%= art_form.label :pgfin, "Página final:" %>
+                                 <%= art_form.text_field :pgfin, class:"form-control col", disabled: disabled %>
+                              </div> 
+                           </div> 
+
+                     <% end%>   
+                  </div>     
+
+                  <div class="row">  
+                     <div class="col-4">
+                        <div class="form-group">
+                           <!-- PONER LA LISTA DE ACUERDO AL TIPO DE REVISTA: CIENTIFICA | DIVULGACION |PERIODICO -->  
+                           <% if @producto.prodgrupo.clave == "PERIODICO" %> 
+                              <%=  art_form.label :revista_id, "Periódico:" %>
+                              <%=  art_form.select :revista_id, Revista.all.where("tiporevista='P'").order(:nomrevista).pluck(:nomrevista,:id), { :include_blank=>'Buscar periodico'},{class:"selectize", disabled: disabled} %>
+                           <% else %>
+                              <%=  art_form.label :revista_id, "Revista:" %>
+                              <%=  art_form.select :revista_id, Revista.all.order(:nomrevista).pluck(:nomrevista,:id), { :include_blank=>'Buscar revista'},{class:"selectize", disabled: disabled} %>
+                           <% end %> 
+                        </div> 
+                     </div>  
+                  </div>
+                   <% if @producto.prodgrupo.clave == "INDIZADO" %> 
+                     <div class="row"> 
+                        <div class="col-4">
+                           <div class="form-group">
+                                 <%= art_form.label :doi, "DOI:" %>
+                                 <%= art_form.text_field :doi, class:"form-control", disabled: disabled %>
+                           </div> 
+                        </div>  
+                     </div>
+                   <% end %>
+               <% end %>   
+     
+      
+       <div class="redw">
+         <strong>Red</strong><I>Seleccione la red a la que pertenece la publicación</I>
+          <div class="reditem">
+              <%= form.select :asignared, Red.all.order(:nomred).pluck(:nomred,:id), { :include_blank=>'Seleccione una red'}, {class:"selectize selectw", disabled: disabled} %>             
+          </div>
+       </div>       
+
+        <%= render "crud/actividad/comprobante", form:form %>
+
+        <div class="form-group"> 
+          <strong>Autores(Participantes)</strong>
+        </div> 
+ 
+        <%= render "crud/actividad/autores", form:form %>
+       
+     <br><br>
+      <% if !@disabled %>
+         <div class="form-group">   
+            <%= form.submit "Guardar información", data: { confirm: 'La información será enviada para validación, ¿Desea continuar?' } %>
+         </div>       
+      <% end %>   
+
+<% end %>

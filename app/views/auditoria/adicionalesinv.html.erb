@@ -1,0 +1,55 @@
+<div class="row p-2">
+  <div class="col-4">
+     <strong class="text-primary">Listado de Investigadores</strong>
+  </div>
+  <div class="col-4">
+    <b>Buscar: <input id="buscar" type="text" placeholder="Search here"></b> 
+  </div> 
+</div>
+
+<div class="card p-2">
+  <div class="card-body">
+
+     <table class='table table-sm table-striped col-8'>
+       <thead class="thead-dark"> 
+         <tr>
+            <th class="text-center">Consecutivo</th> 
+            <th class="text-center">Investigador</th>
+            <th class="text-center">Productos</th>
+         </tr>
+       </thead>  
+       <tbody id='titulos'> 
+          
+           <% 
+             @i = 1
+             @personas.each do |p| 
+              
+           %>
+              <tr>
+                  <td class="text-center"><%= @i %></td>
+                  <td><%= (p.paterno||'')+" "+(p.materno||'')+" "+(p.nombre||'') %></td>
+                  <td class="text-center"><%= link_to("Lista de productos", listaadicinv_path(p.id), data:{turbolinks:false}) %></td>
+              </tr>   
+
+           <% @i = @i+1
+              end %>
+
+       </tbody>
+
+     </table>
+
+
+  </div>
+</div>  
+
+<script> 
+            $(document).ready(function() { 
+                $("#buscar").on("keyup", function() { 
+                    var value = $(this).val().toLowerCase(); 
+                    $("#titulos tr").filter(function() { 
+                        $(this).toggle($(this).text() 
+                        .toLowerCase().indexOf(value) > -1) 
+                    }); 
+                }); 
+            }); 
+        </script> 

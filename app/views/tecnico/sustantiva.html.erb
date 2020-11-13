@@ -1,0 +1,59 @@
+<div class="card">
+ <div class="card-body">
+   <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", tecnico_path, data: {turbolinks:false} ) %>
+ </div>
+</div> 
+
+
+<div class="card">
+ <div class="card-body">
+
+   <%= form_with(model: @academico, url:sustcreate_path)  do |form| %>
+    <div id='sustantivas'>
+       <%= form.fields_for :sustantivas do |s| %>
+           <%= render 'sustantiva_fields', f:s %>
+       <% end %>
+       <div class="col-12">
+         <div class="form-group">
+           <i class="fas fa-plus"></i>&nbsp;<%= link_to_add_adic("Agregar actividad sustantiva", form, :sustantivas) %> <span style="color:red"><I><- Haga clic en el link</I></span>
+           <hr>
+         </div> 
+      </div>
+   </div> 
+
+  <br><br>
+  <hr>
+  <div class="col-2">
+    <div class="form-group">
+      <%= form.submit 'Enviar información', data: { confirm: 'La información será registrada, ¿Desea continuar?' } %>
+    </div> 
+  </div>  
+ <% end %>
+ </div>
+</div>
+
+<script>
+
+$(document).on("turbolinks:load", function(){
+      $(".selectize").selectize();
+})
+
+function add_fields(link, association, content) {
+    var new_id = new Date().getTime();
+    // find the new_ + "association" that was defined in Rails helper
+    var regexp = new RegExp("new_" + association, "g");
+  
+    // find the container and append in the sub field content
+    //$(link).prev().append(content.replace(regexp, new_id));
+    $("#sustantivas").append(content.replace(regexp, new_id));
+    //$(".datat").last().css( "background-color", "#FFFFA5" );
+    return false;
+  }
+function removeField(link) {
+  $(link).prev("input[type=hidden]").val("1");
+  $(link).closest(".nested-fields").fadeOut();
+
+}
+
+
+</script>

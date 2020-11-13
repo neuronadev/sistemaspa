@@ -1,0 +1,7 @@
+<tr>
+<td><%= select_tag "personas[]", options_from_collection_for_select(@personas, "id", "nombre"), prompt: "--Seleccione una opción--" %></td>
+<td><%= text_field_tag 'firma[]' %></td>
+<td><%= text_field_tag 'filiacion[]' %></td>
+<td><%= select_tag "corresponsal[]", options_for_select([["SI","S"],["NO","N"]]), prompt: "--Seleccione una opción--" %></td>
+<td><button type="button" id="quitar">Eliminar</button></td>
+</tr>      

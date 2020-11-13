@@ -1,0 +1,63 @@
+
+<strong>Editar información de productos registrados.</strong>
+<div class = "card">
+  <div class="card-body">
+
+    <div class="col-4">
+      <div class="form-group">
+        <%= label_tag 'Red:' %>
+        <%= collection_select :red, :id, Red.all.order(:nomred), :id, :nomred,{ :include_blank=>'Seleccione una red'},{class:"form-control", :onchange => 'getData("red",this.value)'} %>
+      </div>  
+    </div>  
+ 
+    <div class="col-4">
+      <div class="form-group">
+        <%= label_tag 'Investigador:' %>
+        <%= select_tag(:persona, options_for_select([["-- Todos --","0"]]),{:class=>'browser-default', class:"form-control"}) %>
+        
+      </div>  
+    </div> 
+   
+    <button type="button" class="btn btn-primary" onclick="consultar()" >Consultar</button> 
+  </div>
+</div>
+
+
+<div class = "card">
+  <div class="card-body" id="datared">
+  </div>
+</div>  
+
+<script>
+
+ $(document).ready(function() { 
+     $("#red_id").val('<%= @idred %>');
+     getData('red',<%= @idred %>)
+     
+ });
+
+
+function getData(fuente,id){
+             $.ajax({
+                    url: '<%= listapred_path %>',
+                    data: "redid=" +  $("#red_id").val(),
+                    type: "post",
+                    success: function(data){ 
+                        $("#persona").html(data);
+                    },
+                    error: function(dayta){   }
+               })
+}
+
+function consultar(){
+              $.ajax({
+                    url: '<%= ediproductos_path %>',
+                    data: "redid="+  $("#red_id").val() + "&personaid=" + $("#persona").val(),
+                    type: "post",
+                    success: function(data){ $("#datared").html(data.html); },
+                    error: function(dayta){   }
+               })
+
+}
+
+</script>

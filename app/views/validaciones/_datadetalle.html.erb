@@ -1,0 +1,94 @@
+
+<div class="modal-header">
+   <%= render partial: "datavalida"%>
+   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+ </div>
+ <div class="modal-body">
+   <div class="container-fluid">
+   <div class="row">
+     
+      <div class="col-12">
+      <!-- 
+        <% if @actividad.documentos.attached? %> 
+                 <% @actividad.documentos.each do |d|%>
+                    <%= link_to rails_blob_path(d, disposition: "inline"),  target: '_blank' do %>
+                        <i class="fas fa-file-pdf fa-2x"></i>
+                    <% end %>
+               <% end %>  
+             <% end %>  
+      -->       
+       </div>      
+     </div>
+     <div class="row" id='producto_a'>
+      <div class="col-12"> 
+       <strong>Producto:</strong><span class="text-bold text-success"> <%= @actividad.producto.descripcion %>&nbsp;&nbsp;&nbsp;
+     <!-- <button id='cambiarprod'> Cambiar </button> -->
+      </div> 
+     </div> 
+     <div class="row" id='producto_b'>
+       <div class="col-12"> 
+      <!-- <strong>Producto:</strong>
+          <select id='cmbProd'  style="width:320px">
+            <%=  @listaProds.html_safe %>
+          </select>&nbsp;&nbsp;&nbsp;       
+       <button id='appCambio'>Aceptar</button> -->
+      </div> 
+     </div> 
+
+     <div class="row">
+      <div class="col-12"> 
+        <strong>Título:</strong> <%= @actividad.titulo %>
+      </div>  
+     </div>
+     
+     <div class='row'>
+        <%= render partial: "datacampo"%>
+     </div>
+     <div class='row'>
+        <%= render partial: "dataautores"%>
+     </div>
+     
+    <!--
+
+     <div class='row'>
+       <div id='txt'> 
+       
+       <hr>
+         <div class="col-12">
+          <b>No se considera este producto</b>
+          <%= link_to '#', {id:'cnoconcidera'} do %>  
+              [Cerrar]
+          <% end %> 
+          <br>
+          <strong>Motivo o nota:</strong>
+          <br>
+          <textarea id="message" name="message" rows="3" cols="65"></textarea>
+         </div> 
+          
+          
+       </div>   
+     </div>
+
+     <div class='row'>
+       <div id='marcar'> 
+       <hr>
+          <b>Marcar sólo para presupuesto</b><br>
+          <b>Seleccione un Autor:</b><br>
+          <select name='listaut' id='listaut'>
+             <%= @lista_aut.html_safe %>
+          </select>
+          <br>
+          <strong>Motivo:</strong><br>
+          <textarea id="msgmarcar" name="msgmarcar" rows="3" cols="65"></textarea>
+       </div>   
+     </div>
+
+   </div>  
+ </div>
+-->
+
+ <div class="modal-footer">
+   <!-- <button class="btn btn-success " id='btntxt' >Enviar datos[No se considera]</button>
+    <button class="btn btn-info " id='btnmarcar' >Aplicar cambio[Marcar]</button> -->
+    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+ </div>

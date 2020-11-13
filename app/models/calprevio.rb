@@ -1,0 +1,2 @@
+class Calprevio < ApplicationRecord
+end

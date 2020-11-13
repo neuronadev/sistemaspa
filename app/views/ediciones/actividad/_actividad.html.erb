@@ -1,0 +1,23 @@
+<% 
+  disabled ||= @disabled
+%>
+<div class="form-group">
+         <%= form.label :titulo, "Título:"%>
+         <%= form.text_field :titulo, class:"form-control", disabled: disabled  %>
+     </div>
+     <div class="row">
+     <%  if @producto.prodgrupo.clave == "PERIODICO" %>  
+         <div class="col">
+             <div class="form-group">
+                <%= form.label :fechapub, "Fecha:" %>
+                <%= form.date_field :fechapub,class:"form-control", disabled: disabled  %> 
+             </div>    
+           </div>  
+     <% else %>
+           <div class="col">
+             <div class="form-group">
+                <%= form.label :anio, "Año:" %>
+                <%= form.text_field :anio,class:"form-control", disabled: disabled  %> 
+             </div>    
+           </div>  
+     <% end %>       

@@ -1,0 +1,83 @@
+<% if @producto.prodgrupo.clave == 'INDIZADO' || @producto.prodgrupo.clave == 'PERIODICO' || @producto.prodgrupo.clave == 'ART'  %>
+    <%= render partial: "crud/actividad/frm_actividad", layout: "crud/layout" %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'LIB' %>
+    <%= render partial: "crud/actividad/frm_libro", layout: "crud/layout" %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'CAP' %>
+    <%= render partial: "crud/actividad/frm_capitulo", layout: "crud/layout" %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'CUR' %>
+    <%= render partial: "crud/actividad/frm_curso", layout: "crud/layout" %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'TESIS' %>
+    <%= render partial: "crud/actividad/frm_tesis", layout: "crud/layout" %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'EDREV' || @producto.prodgrupo.clave == 'EDLIB' %>
+    <%= render partial: "crud/actividad/frm_editor", layout: "crud/layout" %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'INT' || @producto.prodgrupo.clave == 'IND' %>
+    <%= render partial: "crud/actividad/frm_patente", layout: "crud/layout" %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'VINSP' %>
+    <%= render partial: "crud/actividad/frm_vinculasp", layout: "crud/layout" %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'VINPP' %>
+    <%= render partial: "crud/actividad/frm_vinculapp", layout: "crud/layout" %>
+<% end %>
+
+<% if @producto.prodgrupo.clave == 'DECRETO' || @producto.prodgrupo.clave == 'ORDENAMIENTO' || @producto.prodgrupo.clave == 'INICIATIVA' || @producto.prodgrupo.clave == 'REGLA' || @producto.prodgrupo.clave == 'COMITE' %>
+    <%= render partial: "crud/actividad/frm_vinculapp", layout: "crud/layout" %>
+<% end %>
+
+<% if @producto.prodgrupo.clave == 'OTRASD' %>
+    <%= render partial: "crud/actividad/frm_odivulga", layout: "crud/layout" %>
+<% end %>
+
+<% if @producto.prodgrupo.clave == 'FASC' %>
+    <%= render partial: "crud/actividad/frm_fasciculo", layout: "crud/layout" %>
+<% end %>
+
+<% if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
+    <%= render partial: "crud/actividad/frm_simple", layout: "crud/layout" %>
+<% end %>
+
+
+<script>
+
+$(document).on("turbolinks:load", function(){
+      $(".selectize").selectize();
+})
+
+function add_fields(link, association, content) {
+    var new_id = new Date().getTime();
+    // find the new_ + "association" that was defined in Rails helper
+    var regexp = new RegExp("new_" + association, "g");
+  
+    // find the container and append in the sub field content
+    //$(link).prev().append(content.replace(regexp, new_id));
+    $("#autoresl").append(content.replace(regexp, new_id));
+    $(".datat").last().css( "background-color", "#FFFFA5" );
+    ordenar(); 
+    return false;
+  }
+function removeField(link) {
+  $(link).prev("input[type=hidden]").val("1");
+  $(link).closest(".form-row").fadeOut();
+  ordenar();
+}
+
+function ordenar(){
+   var i =1;  
+      $( ".orden" ).each(
+       function(){
+        var iddestroy = this.id.replace("posicion","_destroy") 
+        if ( $("#"+iddestroy).val()!= '1' ){
+           this.value=i;
+           i++;
+         }
+       }
+     );
+}
+
+</script>

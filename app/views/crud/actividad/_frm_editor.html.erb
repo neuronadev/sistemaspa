@@ -1,0 +1,98 @@
+<% 
+  disabled ||= @disabled
+%>
+<div class="row">
+ <div class="col-12">
+   <strong><%= @producto.descripcion %></strong>
+ </div>  
+</div>
+<hr>
+
+<%= form_with(model: @actividad, local: true)  do |form| %>
+     <%= form.hidden_field :reemplazaidact, value:@idactividad_ant %> 
+     <%= form.hidden_field :producto_id, value: @producto.id %> 
+     <%= form.hidden_field :periodo, value: '2020' %> 
+     <%= form.hidden_field :personaid, value: current_usuario.persona_id %> 
+     <%= form.hidden_field :estado, value:'A' %> 
+     
+
+
+      
+         <%= form.hidden_field :titulo, value:"EDITOR" %>
+     
+     <div class="row">
+         <div class="col">
+            <div class="form-group">
+               <%= form.label :anio, "Año:" %>
+               <%= form.text_field :anio,class:"form-control", disabled: disabled  %> 
+            </div>    
+         </div>  
+            <%= form.fields_for :editor do |ed_form| %>
+                <div class="col-4">
+                  <div class="form-group">
+                      <% if @producto.prodgrupo.clave == "EDREV" %>
+                         <%= ed_form.hidden_field :idioma_id, value:"4" %> 
+                         <%= ed_form.hidden_field :ambito_id, value:"4" %> 
+                         <%= ed_form.label :medio, "Revista:" %>
+                      <% else %>  
+                         <%= ed_form.label :medio, "Libro:" %> 
+                      <% end %>  
+                        <%= ed_form.text_field :medio, class:"form-control",disabled: disabled  %> 
+                  </div> 
+                </div>   
+                <div class="col-4">
+                  <div class="form-group">
+                       <% if @producto.prodgrupo.clave == "EDREV" %>
+                           <%= ed_form.label :codigo, "ISSN:" %>
+                       <% else %>  
+                           <%= ed_form.label :codigo, "ISBN:" %>
+                       <% end %>   
+                        <%= ed_form.text_field :codigo, class:"form-control", disabled: disabled  %> 
+                  </div> 
+                </div>   
+                   
+                <% if @producto.prodgrupo.clave == "EDLIB" %>
+                <div class="col-2">
+                  <div class="form-group">
+                        <%= ed_form.label :idioma_id, "Idioma:" %>
+                        <%= ed_form.select :idioma_id, Idioma.all.pluck(:nomidioma,:id), { :include_blank=>'Idioma'},{class:"selectize",disabled: disabled } %>
+                  </div> 
+                </div>
+
+                  <div class="col-4">
+                       <div class="form-group">
+                        <%= ed_form.label :editorial, "Editorial:" %>
+                        <%= ed_form.text_field :editorial, class:"form-control",disabled: disabled  %> 
+                       </div> 
+                   </div>
+                   <div class="col-4">    
+                       <div class="form-group">
+                        <%= ed_form.label :pais, "Pais:" %>
+                        <%= ed_form.text_field :pais, class:"form-control", disabled: disabled  %> 
+                       </div> 
+                    </div>   
+                    <div class="col">
+                     <div class="form-group">
+                        <%= ed_form.label :ambito_id, "Ambito:" %>
+                        <%= ed_form.select :ambito_id, Ambito.all.pluck(:nomambito,:id), { :include_blank=>'Ambito'},{class:"selectize",disabled: disabled } %>
+                     </div> 
+                   </div>   
+                <% end %>    
+                            
+            <% end %>   
+       </div>
+       
+      <%= render "crud/actividad/comprobante", form:form %>
+         <div class="form-group"> 
+          <strong>Autores(Participantes)</strong>
+        </div> 
+        <%= render "crud/actividad/autores", form:form %>
+       
+     <br><br>
+      <% if !@disabled %>
+         <div class="form-group">   
+            <%= form.submit "Guardar información", data: { confirm: 'La información será enviada para validación, ¿Desea continuar?' } %>
+         </div>       
+      <% end %> 
+
+<% end %>

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  volumen: MyString
+  doi: MyString
+  issue: MyString
+  pgini: MyString
+  pgfin: MyString
+  revista: one
+  actividad: one
+
+two:
+  volumen: MyString
+  doi: MyString
+  issue: MyString
+  pgini: MyString
+  pgfin: MyString
+  revista: two
+  actividad: two

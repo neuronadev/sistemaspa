@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ftermino: 2019-11-17
+  nivelestudio: one
+  actividad: one
+
+two:
+  ftermino: 2019-11-17
+  nivelestudio: two
+  actividad: two

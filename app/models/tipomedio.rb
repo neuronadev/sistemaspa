@@ -1,0 +1,2 @@
+class Tipomedio < ApplicationRecord
+end

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  descripcion: MyString
+  descripcioncorta: MyString
+  puntaje: 1
+  prodcategoria: one
+  prodgrupo: one
+  estado: MyString
+
+two:
+  descripcion: MyString
+  descripcioncorta: MyString
+  puntaje: 1
+  prodcategoria: two
+  prodgrupo: two
+  estado: MyString

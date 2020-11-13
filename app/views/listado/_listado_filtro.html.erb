@@ -1,0 +1,411 @@
+<div class="row">
+  <div class="col-md-4">
+     <% if current_usuario.rol == 'T' %>
+       <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", tecnico_path, data: {turbolinks:false} ) %>&nbsp
+    <% else %>
+       <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", investigador_path, data: {turbolinks:false} ) %>&nbsp
+    <% end %>
+
+    <i class="fas fa-plus"></i>&nbsp;<%= link_to("Registrar nuevo..", producto_path(0), data: {turbolinks:false} ) %>
+  
+  </div>
+  <div class="col-md-4 ml-auto align-middle"> </div>
+</div>
+<% if current_usuario.rol == 'T' %>
+<div class="row">
+  <div class="col-md-12 text-justify" style="font-size:13px;">
+    <strong>Procedimiento:</strong><br>
+<br><strong>1.-</strong> En la columna <strong>Validación-Comité</strong> se muestra el resultado de la evaluación. Lo que esta marcado con doble check(doble paloma) son productos validados correctamente. Sólo deberá hacer clic en la opción “Aceptar” (color azul)
+<br><strong>2.-</strong> Para los productos que tienen el texto <strong>“No se considera o modificar. Ver motivo”</strong> deberá hacer clic en la palabra "Ver motivo". Si el texto dice que se debe modificar/corregir el registro, en la columna aceptar se mostrará la opción <strong>“Corregir”</strong>. 
+                         Si el texto dice que se debe recategorizar(cambiar de categoría el producto), en la columna aceptar se mostrara la opción <strong>“Categorizar”</strong> para que vuelva a registrar su producto nuevamente dentro de la categoría correcta.
+<br><strong>3.-</strong> Si en el texto no parece nada relacionado que los puntos anteriores, quiere decir que no se aceptó el registro, el texto "Ver motivo" indica por que no fue aceptado. Sólo deberá car clic en la <strong>“Aceptar”</strong>.<br>
+<br><strong>Nota</strong>Si el producto no fue reportado por usted, no se mostrara ninguna de las opciones anteriores, sólo a la persona que lo registro.
+  </div>
+</div>  
+<% end %>
+<% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %>
+<div class="row">
+  <div class="col-md-12 text-justify text-bold" style="font-size:13px;">
+     <i class="fas fa-check-circle text-success"></i> Clic en el icono para "Aceptar la evaluación"<br>
+     <i class="fas fa-pen text-primary "></i> Clic en el icono para "Editar el producto"<br>
+      <i class="fas fa-columns text-primary"></i> Clic en el icono para "Recategorizar el producto"<br>
+  </div>
+</div>     
+<% end %>
+<table class="table table-striped table-sm table-bordered">
+ <thead class="thead-light"> 
+   <tr>
+     <th class="text-center">Producto</th>
+     <th class="text-center">Título</th>
+     <th class="text-center">Autores</th>
+     <th class="text-center">Comprobante</th>
+     <th class="text-center">Editar</th>
+     <th class="text-center">Eliminar</th>
+     <th class="text-center">Vo.Bo.</th>
+     <% if current_usuario.rol == 'T' %>
+      <th class="text-center">Validación-Comite</th> 
+     <% else %> 
+      <th class="text-center">Coordinador</th>
+     <% end %> 
+     <% if current_usuario.rol == 'I' ||  current_usuario.rol == 'C' %>
+      <th class="text-center">Sec Acad.</th>
+     <% end %> 
+     <% if current_usuario.rol == 'T' %>
+         <th class="text-center">Aceptar</th> 
+      <% else %>
+         <th class="text-center">Aceptar Evaluación</th> 
+     <% end %> 
+   </tr>
+ </thead>
+ <tbody> 
+
+<% @actividades.each do |a| 
+   producto = Producto.find(a.producto.id) 
+   
+   autores = a.autores.order(:posicion)
+   @str = ""
+   idreporta = ''
+   i = 0
+   @conNota = 'N'
+   autores.each do |p|
+         
+        if i > 0  
+            simbolo = ", " 
+         else      
+            simbolo = "" 
+        end
+        if !p.firma.present?
+            @str = @str + simbolo + (p.persona.paterno||"") + "," + (p.persona.nombre||"")
+        else
+            @str = @str + simbolo + (p.firma||"")
+        end     
+
+        if p.filiacion == 'F'
+            if current_usuario.persona_id == p.persona_id
+                @conNota = 'S'
+            end
+        end
+
+       i = i+1
+   end
+  mostrar = 'S'
+  if producto.prodgrupo.clave == 'ACTIVIDAD' && (current_usuario.rol == 'I' || current_usuario.rol == 'C')
+     mostrar = 'N'
+  end
+
+   
+
+  if mostrar == 'S'
+
+%>
+     <tr>
+         <td><%= a.producto.descripcion %></td> 
+          <td>
+            <% if a.producto_id == 81 || a.producto_id == 82 || a.producto_id == 83 %>
+                <span class=' text-primary'> <%= a.titulo.html_safe %> </span>
+                <% if a.estado == 'A' %>
+                 <br><span class=' text-danger'>Deberá agregar a los participantes, clic en la opción Editar</span> 
+                <% end %> 
+            <% else %>   
+               <%= a.titulo.html_safe %>
+            <% end %>   
+              
+          </td>
+          <td> <%= cita(a.id).html_safe %> 
+          </td>
+          <td class="text-center">
+               <% if a.documentos.attached? %> 
+                 <% a.documentos.each do |d|%>
+                    <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank' } do %>
+                        <i class="fas fa-file-pdf fa-2x"></i>
+                    <% end %>
+               <% end %>  
+             <% end %>   
+          </td>
+          <td class="text-center">
+              <% if  a.estado == "U" || a.estado == "C" || a.estado == "G" || a.estado == "D" || a.estado == "S" || a.estado == "Z" || a.estado == "W" %>
+                     
+                     <i class="fas fa-edit fa-2x text-secondary"></i>
+                     <%= link_to("Ver", actividad_path(a.id), data:{turbolinks:false}) %>
+              <% end %>     
+              <% if a.estado == "A" || a.estado == "G" %>
+                     <%= link_to edit_actividad_path(a.id), data:{turbolinks:false}  do %> 
+                          <i class="fas fa-edit fa-2x"></i>
+                      <% end %>    
+              <% end %>   
+
+
+              <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %> 
+              <% if a.estado == 'Z' && !a.aceptado.present? 
+                    @indica = "" 
+                    mensaje = Mensaje.where(:actividad_id=>a.id)
+                    mensaje.each do |m|
+                        if m.accion.present?
+                            @indica = m.accion
+                        end
+                    end
+              %>  
+                 <% if  @indica == 'L' %>
+                         <br><br>
+                         <%= link_to  edit_actividad_path(a.id), data:{turbolinks:false} do %>
+                              <i class="fas fa-pen fa-2x"></i> Editar
+                         <% end %>
+               <% end %>  
+
+               <% if  @indica == 'M' %>
+                      <br><br>
+                         <%= link_to prodcambio_path(0,a.id), data:{turbolinks:false} do %>
+                              <i class="fas fa-columns fa-2x"></i> Recategorizar
+                         <% end %>
+                <% end %>
+
+              <% end %>
+              <% end %>
+          </td>
+          <td class="text-center">
+             <!-- 
+               <% if a.estado == "U" || a.estado == "C" || a.estado == "G" || a.estado == "D" || a.estado == "S" || a.estado == "Z" || a.estado == "W" %>
+                     <i class="fas fa-minus-circle fa-2x text-secondary"></i>
+               <% end %> 
+               <% if a.estado == "A" %>
+                     <%= link_to a, method:"delete", data:{confirm:"¿Desea eliminar el registro?", disabled_with: "Eliminado..."} do %>
+                        <i class="fas fa-minus-circle fa-2x text-danger"></i>
+                    <% end %>
+               <% end %>     
+             -->  
+             <i class="fas fa-minus-circle fa-2x text-secondary"></i>
+          </td>
+          <td class="text-center">
+          
+             <% if a.estado == 'A' || a.estado == "G"  %>
+                <!--  <%= link_to validar_path(a,'user'),  data:{confirm:"¿Desea validar el registro? Al aceptar no podrá hacer cambios. Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %> -->
+                       <i class="fas fa-check-circle fa-2x text-secondary"></i>
+                <!-- <% end %> -->
+             <% end %>     
+             <% if a.estado == 'U' || a.estado == "C" || a.estado == "S" || a.estado == "Z" || a.estado == "W"%>
+                      <i class="fas fa-check-double fa-2x text-success"></i>
+             <% end %>     
+            
+            
+          </td>
+          <td class="text-center">
+                
+           <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %>  
+                 <% if a.estado == 'C' || a.estado == 'S' || a.estado == 'W' || a.estado == 'Z'  %>
+                      <i class="fas fa-check-double fa-2x text-success"></i>
+               <% end %>   
+           <% else %>  
+               <% if a.estado == 'C' || a.estado == 'S'  %>
+                      <i class="fas fa-check-double fa-2x text-success"></i>
+               <% end %>   
+            <% end %>
+
+            <% if a.estado == 'G'  %>
+                 <i class="fas fa-exclamation-triangle text-danger"></i> <span style="color:#EA5838; font-size:12px">Corregir, clic en la opción Editar</span>
+             <% end %>    
+             <% if a.estado == 'D'  %>
+                 <%= link_to coordinamostrar_path(a.id) do %>
+                       <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">Este producto no se considera.</span>
+                 <% end %>
+             <% end %> 
+
+              <% if current_usuario.rol == 'T' %>   
+                <% if a.estado == 'Z' %>  
+                    <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                        <%= link_to "No se considera o modifiar. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                        </span>
+                <% end %>
+                <% if a.estado == 'W'
+                        if @conNota == 'N'
+                  %>
+                          <i class="fas fa-check-double fa-2x text-success"></i>
+                        <% else %>
+                          <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                          <%= link_to "Nota. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                          </span>
+                        <% end %> 
+                  <% end %> 
+              <% end %>    
+
+          </td>
+          <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %>
+            <td class="text-center"> 
+               <% if a.estado == 'C' %>
+                   En validación
+               <% end %> 
+               <% if a.estado == 'S' %>
+                      <i class="fas fa-check-double fa-2x text-success"></i>
+               <% end %> 
+               <% if a.estado == 'Z'  %>
+                     <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                     <%= link_to "No se considera o modificar. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                     </span>
+                     
+               <% end %> 
+               <% if a.estado == 'W'
+                    if @conNota == 'N'
+               %>
+                      <i class="fas fa-check-double fa-2x text-success"></i>
+                  <% else %>
+                       <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                       <%= link_to "No se considera o modificar. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                       </span>
+                  <% end %> 
+               <% end %> 
+            </td>
+          <% end %>
+
+   
+          <% if current_usuario.rol == 'T'  %>
+           <% if current_usuario.persona_id == a.personaid  %>
+
+                <% if a.estado == 'A' %> 
+                    <td></td>                
+                <% end %>
+                <% if a.estado == 'U' %> 
+                    <td class="text-center">En validación</td>                
+                <% end %>
+                <% if a.estado == 'S' && !a.aceptado.present? %> 
+                    <td class="text-center"> <%= link_to "Aceptar", aceptaval_path(a.id), data:{confirm:"¿Acepta la evaluación que realizó el Comite Evaluador?", disabled_with: "Enviando.."}  %> </td>
+                <% end %>
+                <% if a.estado == 'S' && a.aceptado == 'S' %> 
+                    <td class="text-center"> <i class="fas fa-user-check fa-2x text-success"></i> </td>
+                <% end %>
+
+                <% if a.estado == 'Z' && !a.aceptado.present? 
+                    @indica = "" 
+                    mensaje = Mensaje.where(:actividad_id=>a.id)
+                    mensaje.each do |m|
+                        if m.accion.present?
+                            @indica = m.accion
+                        end
+
+                    end
+                %> 
+                
+                
+
+                <% if  @indica == 'X' %>
+                   <td class="text-center"> <%= link_to "Aceptar", aceptaval_path(a.id), data:{confirm:"¿Acepta la evaluación que realizó el Comité Evaluador?", disabled_with: "Enviando.."}  %> </td>
+                  <!-- <td class="text-center">Aceptar</td>-->
+                <% end %> 
+                <% if  @indica == 'L' %>
+
+                       <% if current_usuario.persona_id == 168 || current_usuario.persona_id == 219 || current_usuario.persona_id == 199 || current_usuario.persona_id == 251 ||  current_usuario.persona_id == 204 ||  current_usuario.persona_id == 144 || current_usuario.persona_id == 205 || current_usuario.persona_id == 232 || current_usuario.persona_id == 242 %>
+                             <td class="text-center">
+                                <%= link_to ">Corregir", edit_actividad_path(a.id), data:{turbolinks:false} %> |
+                                <%= link_to ">Cerrar", aceptaval_path(a.id), data:{confirm:"Si ya corrigío el registro o no desea hacer cambios, se va a proceder a cerrarlo y con esto se acepta la validación del Comite Evaluador, ¿Desea continuar?", disabled_with: "Enviando.."}  %>
+                             </td>
+                       <% else %>
+                          <td class="text-center">Corregir<!-- <%= link_to ">Corregir", edit_actividad_path(a.id), data:{turbolinks:false} %>--> |
+                           <!-- <%= link_to ">Cerrar", aceptaval_path(a.id), data:{confirm:"Si ya no desea editar el registro se va a proceder a cerrarlo y con esto se acepta la validación del Comite Evaluador, ¿Desea continuar?", disabled_with: "Enviando.."}  %> -->
+                           Cerrar
+                          </td>
+                      <% end %>  
+                    
+                <% end %> 
+
+                <% if  @indica == 'M' %>
+                   <% if current_usuario.persona_id == 237 || current_usuario.persona_id == 199 || current_usuario.persona_id == 251 || current_usuario.persona_id == 232 %>
+                         <td class="text-center"><%= link_to ">Categorizar", prodcambio_path(0,a.id), data:{turbolinks:false} %>|
+                            <%= link_to ">Cerrar", aceptaval_path(a.id), data:{confirm:"Si ya no desea editar el registro se va a proceder a cerrarlo y con esto se acepta la validación del Comite Evaluador, ¿Desea continuar?", disabled_with: "Enviando.."}  %> 
+                        </td> 
+                   <% else %> 
+                        <td class="text-center">Categorizar<!-- <%= link_to ">Categorizar", prodcambio_path(0,a.id), data:{turbolinks:false} %> -->|
+                           <!-- <%= link_to ">Cerrar", aceptaval_path(a.id), data:{confirm:"Si ya no desea editar el registro se va a proceder a cerrarlo y con esto se acepta la validación del Comite Evaluador, ¿Desea continuar?", disabled_with: "Enviando.."}  %> -->
+                           Cerrar
+                        </td>
+                   <% end %>
+                <% end %>
+                <% if @indica == "" %>
+                    <td></td>
+                <% end %>
+
+            <% end %>
+            <% if a.estado == 'Z' && a.aceptado == 'S' %>
+                <td class="text-center"><i class="fas fa-user-check fa-2x text-success"></i></td>  
+            <% end %>
+
+           <% else %>
+                <% if a.estado == 'S' && a.aceptado == 'S' %> 
+                    <td class="text-center"> <i class="fas fa-user-check fa-2x text-success"></i> </td>
+                <% elsif a.estado == 'S' %> 
+                    <td class="text-center"> <i class="fas fa-user-check fa-2x text-success"></i> </td>    
+                <% elsif a.estado == 'Z' && a.aceptado == 'S' %> 
+                    <td class="text-center"> <i class="fas fa-user-check fa-2x text-success"></i> </td>        
+                <% else %>   
+                    <td></td>
+                <% end %>
+          <% end %>
+         <% end %>
+           <!-- Aceptar Investigadores -->
+          <% if current_usuario.rol == 'I' || current_usuario.rol == 'C'  %>
+                <% if a.estado == 'A' %> 
+                    <td></td>                
+                <% end %>
+                <% if a.estado == 'S' && !a.aceptado.present? %> 
+                    <td class="text-center"> 
+                       <%= link_to aceptaval_path(a.id), data:{confirm:"¿Aceptar la evaluación del producto?", disabled_with: "Enviando.."}  do %>
+                             <i class="fas fa-check-circle fa-2x text-success"></i>
+                       <% end %>
+                     </td>
+                <% end %>
+                <% if a.estado == 'S' && a.aceptado == 'S' %> 
+                    <td class="text-center"> <i class="fas fa-user-check fa-2x text-success"></i> </td>
+                <% end %>
+
+                <% if a.estado == 'Z' && !a.aceptado.present? 
+                    @indica = "" 
+                    mensaje = Mensaje.where(:actividad_id=>a.id).order("created_at asc")
+                    mensaje.each do |m|
+                        if m.accion.present?
+                            @indica = m.accion
+                        end
+                    end
+                %> 
+                <% if  @indica == 'X' %>
+                   <td class="text-center"> 
+                        <%= link_to aceptaval_path(a.id), data:{confirm:"¿Aceptar la evaluación del producto?", disabled_with: "Enviando.."}  do %>
+                             <i class="fas fa-check-circle fa-2x text-success"></i>
+                       <% end %>
+                   </td>
+                 <% else %>  
+                   <td></td>
+                <% end %> 
+                <!--
+                <% if  @indica == 'L' %>
+                             <td class="text-center">
+                                <%= link_to ">Corregir", edit_actividad_path(a.id), data:{turbolinks:false} %> |
+                                <%= link_to ">Cerrar", aceptaval_path(a.id), data:{confirm:"Si ya corrigío el registro o no desea hacer cambios, se va a proceder a cerrarlo y con esto se acepta la validación del Comite Evaluador, ¿Desea continuar?", disabled_with: "Enviando.."}  %>
+                             </td>
+                <% end %> 
+                -->
+                <!--
+                <% if  @indica == 'M' %>
+                         <td class="text-center"><%= link_to ">Categorizar", prodcambio_path(0,a.id), data:{turbolinks:false} %>|
+                            <%= link_to ">Cerrar", aceptaval_path(a.id), data:{confirm:"Si ya no desea editar el registro se va a proceder a cerrarlo y con esto se acepta la validación del Comite Evaluador, ¿Desea continuar?", disabled_with: "Enviando.."}  %> 
+                        </td> 
+                <% end %>
+                -->
+                <% if @indica == "" %>
+                    <td></td>
+                <% end %>
+
+            <% end %>
+            <% if a.estado == 'Z' && a.aceptado == 'S' %>
+                <td class="text-center"><i class="fas fa-user-check fa-2x text-success"></i></td>  
+            <% end %>
+         <% end %>
+        
+        </tr>
+  <% end %>      
+<% end %>
+
+</tbody>
+</table>
+
+<div id="modal-window_msg" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content"></div>
+   </div>
+</div>

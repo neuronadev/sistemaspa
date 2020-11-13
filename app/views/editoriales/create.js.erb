@@ -1,0 +1,14 @@
+<% if @editorial.errors.messages.count > 0 %>
+   alert('Propocione la información')
+   <%  @editorial.errors.each do |attr, msg| %>
+         $('#editorial_'+'<%= attr %>').addClass("error");
+   <% end %>
+<% else %>   
+    alert('Editorial registrada correctamente')
+    var $select = $('select').selectize();
+    var selectize = $select[0].selectize;
+    selectize.addOption({value: '<%= @editorial.id %>', text: '<%= @editorial.nomeditorial %>'});
+    selectize.refreshOptions();
+    selectize.addItem('<%= @editorial.id %>')
+    $(".category-modal").modal('toggle');    
+<% end %>

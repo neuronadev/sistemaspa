@@ -1,0 +1,21 @@
+<%= render partial: "head/utils_red"%>
+
+  <% if flash[:error] %>
+             <%= content_tag :div, flash[:error], class: "flash error" %>
+   <% end %>
+
+<%= form_with(model:@red, local:true) do |f| %>
+<ul class="flex-outer">
+   <li>
+     <%= f.label :nomred, "Nombre red:" %>
+     <%= f.text_field :nomred, class:"form-control" %>
+   </li>  
+   <li> 
+     <%= f.label :clavered, "clave de la red:" %>
+     <%= f.text_field :clavered, class:"form-control" %>
+   </li>
+    <li>
+        <button type="submit">Guardar</button>
+    </li>
+</ul>   
+<% end %>

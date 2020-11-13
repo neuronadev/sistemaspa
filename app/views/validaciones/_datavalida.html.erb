@@ -1,0 +1,88 @@
+<!-- 
+<%= link_to validasa_path(@actividad.id), remote:true, data:{confirm:'El registro se marcará como validado, ¿desea continuar?'} do %> 
+    <i class="fas fa-check-double fa-2x text-primary"></i> Validar
+
+<% end %>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to '#', {id:'noconsidera'} do %>  
+    <i class="fas fa-minus-square fa-2x text-primary"></i> No considerar
+<% end %> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<% if !current_usuario.evaluador.present? || current_usuario.evaluador == 'I' %>
+    <%= link_to '#', {id:'marcarprep'} do %>  
+        <i class="fas fa-window-restore fa-2x text-primary"></i> Nota
+    <% end %> 
+<% end %>
+-->
+<script>
+/*
+ $(document).ready(function() { 
+            $("#noconsidera").click(function(event) { 
+                event.preventDefault(); 
+                $('#txt').show();
+                $('#btntxt').show();
+            }); 
+            $("#marcarprep").click(function(event) { 
+                event.preventDefault(); 
+                $('#marcar').show();
+                $('#btnmarcar').show();
+            }); 
+            $("#cnoconcidera").click(function(event) { 
+                event.preventDefault(); 
+                $('#txt').hide();
+                $('#btntxt').hide();
+            }); 
+            $("#btntxt").click(function(event) { 
+                $.ajax({
+                    url: '<%= validacriterio_path %>',
+                    data: "actividad=<%= @actividad.id %>" + "&txt=" + $("#message").val(),
+                    type: "post",
+                    success: function(data){ 
+                         $("#modal-window").modal('hide');
+                         $("#td<%=@actividad.id%>").html("<span class='text-danger'>No se considera o modificar</span>")
+                         alert("Registro modificado.");
+                     },
+                    error: function(dayta){   }
+                })
+            });
+            $("#btnmarcar").click(function(event) { 
+                $.ajax({
+                    url: '<%= validamarcar_path %>',
+                    data: "actividad=<%= @actividad.id %>" + "&txt=" + $("#msgmarcar").val() + "&idautor=" + $("#listaut").val(),
+                    type: "post",
+                    success: function(data){ 
+                         $("#modal-window").modal('hide');
+                         $("#td<%=@actividad.id%>").html("<span class='text-success'>Validado, Ver nota</span>")
+                         alert("Registro marcado.");
+                     },
+                    error: function(dayta){   }
+                })
+            });
+            $("#appCambio").click(function(event) { 
+                $.ajax({
+                    url: '<%= cambiarprod_path %>',
+                    data: "actividad=<%= @actividad.id %>" + "&prodid=" + $("#cmbProd").val(),
+                    type: "post",
+                    success: function(data){ 
+                         $("#modal-window").modal('hide');
+                         $("#desc<%=@actividad.id%>").html("<span class='text-success'>"+data.html+"</span>")
+                         alert("Registro modificado.");
+                     },
+                    error: function(dayta){   }
+                })
+            });
+            $("#producto_a").click(function(event) { 
+                $('#producto_b').show();
+                $('#producto_a').hide();
+            }); 
+            $('#txt').hide();
+            $('#btntxt').hide();
+            $('#producto_b').hide();
+            $('#marcar').hide();
+            $('#btnmarcar').hide();
+
+
+ }); */
+</script>
+

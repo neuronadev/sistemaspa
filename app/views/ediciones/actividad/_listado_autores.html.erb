@@ -1,0 +1,36 @@
+<table class="table">
+  <thead>
+     <tr>
+        <th>Nombre</th>
+        <th>Participación</th>
+         <% if @producto.prodgrupo.clave != 'ACTIVIDAD' && @producto.prodgrupo.clave != 'PROY' %>
+          <th>Corresponsal</th>
+         <% end %> 
+         <% if @producto.prodgrupo.clave == 'PROY' %>
+          <th>Porcentaje</th>
+         <% end %> 
+
+     </tr>   
+  </thead>
+  <tbody>
+<% @actividad.autores.order(:posicion).each do |a| %>
+    <tr>
+       <td> 
+          <% if a.firma.present? %> 
+             <%= a.firma %> 
+          <% else %>
+             <%= (a.persona.paterno||'') + " " + (a.persona.materno||'') + " " + (a.persona.nombre||'') %> 
+          <% end %>
+         </td>
+       <td> <%= a.rol.nomrol %> </td>
+       <% if @producto.prodgrupo.clave != 'ACTIVIDAD' && @producto.prodgrupo.clave != 'PROY' %>
+         <td> <%= a.corresponsal %> </td>
+       <% end %>  
+       <% if @producto.prodgrupo.clave == 'PROY' %>
+          <td> <%= a.porcentaje %> </td>
+       <% end %>
+    </tr>   
+  
+<% end %>
+</tbody>
+</table>

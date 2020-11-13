@@ -1,0 +1,112 @@
+ <table class="table table-sm table-bordered">
+     <thead  class="thead-dark">
+        <tr>
+           <th class="text-center">ID</th>
+           <th class="text-center">Producto</th>
+           <th class="text-center">Título</th>
+           <th class="text-center">Participantes</th>
+           <th class="text-center">Val-CR</th>
+           <th class="text-center">Val-SA</th>
+           <th class="text-center">¿Aceptado?</th>
+        </tr>
+     </thead>
+     <tbody>
+     <%
+        idsActiv = Array.new
+        Autor.where(:persona_id=>persona.id).each do |a| ##############
+           idsActiv.push(a.actividad_id) 
+        end
+        @actividad = Actividad.where(:id=>idsActiv).where("estado in ('C','S','Z','W','A','D','G')").order(:titulo)
+        @actividad.each do |p|  ###########
+        mostrar = 'S'
+         if p.producto.prodgrupo.clave == 'ACTIVIDAD'
+            mostrar = 'N'
+         end
+          if mostrar == 'S'
+     %> 
+            <tr>
+                <td> <%= p.id %> </td>
+                <td id="desc<%= p.id %>"> <%= p.producto.descripcion %> </td>
+                <td> 
+                     <%= link_to p.titulo.html_safe, datadetalle_path(p.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>
+                     <% if p.documentos.attached? %> 
+                        <% p.documentos.each do |d|%>
+                           <%= link_to rails_blob_path(d, disposition: "inline"), { target: '_blank' } do %>
+                                 <i class="fas fa-file-pdf fa-1x"></i>
+                           <% end %>
+                        <% end %>  
+                     <% end %> 
+                     
+                </td>
+                <td> <%= cita(p.id).html_safe %>  </td>
+                <td class="text-center text-danger ">
+                     <% if p.estado == 'A' %>
+                        <span class="text-danger" >No dió VoBo.</span>
+                     <% end %>
+                     <% if p.estado == 'C' || p.estado == 'S' || p.estado == 'W' || p.estado == 'Z' %>
+                              <i class="fas fa-check-double fa-2x text-success"></i>
+                     <% elsif p.estado == 'D' || p.estado == 'G' %>    
+                         <!--  <%= p.estado %> -->
+                           <i class="fas fa-times text-danger "></i>
+                           <%= link_to "[CR]-No se considera", datamsg_path(p.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                     <% else %>
+                       <%= p.estado %>
+                     <% end %>   
+                </td>
+                <td id="td<%= p.id %>" class="text-center">
+                    <% if p.estado == 'S' || p.estado == 'W' %>
+                           <% if p.estado == 'W' %>
+                              <% @filial = Autor.where(:actividad_id=>p.id).where(:filiacion=>'F').first  %>
+                              <% if !@filial.nil?  %>
+                                   <% if @filial.persona_id == persona.id %> 
+                                        <i class="fas fa-times text-danger "></i>
+                                        <%= link_to "[SA]-Ver Nota", datamsg_path(p.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                                   <% else %>
+                                        <i class="fas fa-check-double fa-2x text-success"></i>
+                                   <% end %>  
+                              <% end %>
+                           <% else %> 
+                               <i class="fas fa-check-double fa-2x text-success"></i>
+                           <% end %>
+                     <% elsif p.estado == 'D' || p.estado == 'G' %>    
+                          <!-- <%= p.estado %> -->
+                          <i class="fas fa-times text-danger "></i>
+                     <% elsif p.estado == 'Z' %>    
+                          <!-- <%= p.estado %> -->
+                          <i class="fas fa-times text-danger "></i>
+                          <%= link_to "[SA]-Ver Nota", datamsg_path(p.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                     <% elsif p.estado == 'C' %>    
+                           En validación por [SA]
+                           <% 
+                             msg = Mensaje.where(:actividad_id=>p.id).order("created_at asc").last
+                             if !msg.nil?
+                           %>
+                               <%= link_to "Ver Nota", datamsg_path(p.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>       
+                            <% end %>  
+                     <% else %>
+                          <%= p.estado %>
+                     <% end %> 
+                </td>
+                <td class="text-center" >
+                     <% if p.estado == 'S' && p.aceptado == 'S' %> 
+                          <i class="fas fa-user-check fa-2x text-success"></i>
+                     <% elsif p.estado == 'Z' && p.aceptado == 'S' %>
+                       <i class="fas fa-user-check fa-2x text-success"></i>
+                     <% elsif p.estado == 'W' && p.aceptado == 'S' %>
+                       <i class="fas fa-user-check fa-2x text-success"></i>  
+                     <% else %>
+                       <b>---</b>  
+                     <% end %>
+                </td>
+            </tr>
+          <% end %>
+        <% end %>
+
+     </tbody>
+</table>
+
+<div id="modal-window_msg" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content"></div>
+   </div>
+</div>

@@ -1,0 +1,79 @@
+<% 
+  disabled ||= @disabled
+%>
+<div class="row">
+ <div class="col-12">
+   <strong><%= @producto.descripcion %></strong>
+ </div> 
+</div>
+<hr>
+
+<%= form_with(model: @actividad, url:validupdatedata_path, local: true)  do |form| %>
+     <%= form.hidden_field :producto_id, value: @producto.id %> 
+     <%= form.hidden_field :personaid, value: @actividad.personaid %> 
+      <% if @action == 'newact' || @action == 'edit' %>
+         <%= form.hidden_field :estado, value:'A' %> 
+      <% end %> 
+      <% if @action == 'editdata' %>
+         <%= form.hidden_field :asignared, value:@red %> 
+      <% end %> 
+      
+            <%= render "crud/actividad/actividad", form:form %>
+
+            <%= form.fields_for :articulo do |art_form| %>
+               <div class="col">
+                  <div class="form-group">
+                     <% if @producto.prodgrupo.clave == "PERIODICO" %> 
+                        <%= art_form.label :volumen, "Sección/Página:" %>
+                        <%= art_form.text_field :volumen, class:"form-control", disabled: disabled %>
+                     <% else %>
+                        <%= art_form.label :volumen, "Volumen:" %>
+                        <%= art_form.text_field :volumen, class:"form-control", disabled: disabled %>
+                     <% end %>   
+                  </div>    
+               </div>  
+                <%  if @producto.prodgrupo.clave != "PERIODICO" %> 
+                     <div class="col">
+                        <div class="form-group">
+                           <%= art_form.label :pgini, "Página inicial:" %>
+                           <%= art_form.text_field :pgini, class:"form-control", disabled: disabled %> 
+                        </div>    
+                     </div>  
+                     <div class="col">
+                        <div class="form-group">
+                           <%= art_form.label :pgfin, "Página final:" %>
+                           <%= art_form.text_field :pgfin, class:"form-control", disabled: disabled %>
+                        </div> 
+                     </div> 
+                <% end%>     
+               <div class="col-6">
+                  <div class="form-group">
+                      <!-- PONER LA LISTA DE ACUERDO AL TIPO DE REVISTA: CIENTIFICA | DIVULGACION |PERIODICO -->  
+                       <% if @producto.prodgrupo.clave == "PERIODICO" %> 
+                         <%=  art_form.label :revista_id, "Periódico:" %>
+                         <%=  art_form.select :revista_id, Revista.all.where("tiporevista='P'").order(:nomrevista).pluck(:nomrevista,:id), { :include_blank=>'Buscar periodico'},{class:"selectize", disabled: disabled} %>
+                       <% else %>
+                         <%=  art_form.label :revista_id, "Revista:" %>
+                         <%=  art_form.select :revista_id, Revista.all.order(:nomrevista).pluck(:nomrevista,:id), { :include_blank=>'Buscar revista'},{class:"selectize", disabled: disabled} %>
+                       <% end %> 
+                  </div> 
+               </div>   
+            <% end %>   
+       </div>
+      
+        <%= render "crud/actividad/comprobante", form:form %>
+
+        <div class="form-group"> 
+          <strong>Autores(Participantes)</strong>
+        </div> 
+ 
+        <%= render "crud/actividad/autores", form:form %>
+       
+     <br><br>
+      <% if !@disabled %>
+         <div class="form-group">   
+            <%= form.submit "Guardar información", data: { confirm: 'La información será enviada para validación, ¿Desea continuar?' } %>
+         </div>       
+      <% end %>   
+
+<% end %>

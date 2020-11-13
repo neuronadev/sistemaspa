@@ -1,0 +1,2 @@
+class Tipodivulgacion < ApplicationRecord
+end

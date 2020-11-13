@@ -1,0 +1,35 @@
+<div class = "card">
+  <div class="card-body">
+
+    <div class="col-4">
+      <div class="form-group">
+        <%= label_tag 'Investigador:' %>
+        <select name='perrsona' id="persona" class="form-control">
+           <%= @str_noms.html_safe %> 
+        </select>
+      </div>  
+    </div>  
+
+     <div class="col-4">
+      <div class="form-group">
+         <button type="button" class="btn btn-primary" onclick="getDatah(this.value)" >Consultar</button> 
+      </div>
+    </div>  
+ </div>   
+</div> 
+
+<div id="historico">
+
+</div>
+
+<script>
+function getDatah(idp){
+             $.ajax({
+                    url: '<%= datah_path %>',
+                    data: "idp=" +  $("#persona").val(),
+                    type: "post",
+                    success: function(data){ $("#historico").html(data.html);},
+                    error: function(dayta){   }
+               })
+}
+</script>

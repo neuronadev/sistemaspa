@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>INECOL::Sistema de Producción Académica</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'sesion', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' %>
+ 
+  </head>
+
+  <body>
+      
+        <div class="grid">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+             
+              <div class="collapse navbar-collapse align-items-end" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <%=  @usuario_nom %>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <!--<%= link_to("Perfil", perfil_path(current_usuario.persona_id), class:"dropdown-item", data:{turbolinks:false}) %> -->
+                      <!-- <a class="dropdown-item" href="#">Another action</a> -->
+                      <div class="dropdown-divider"></div>
+                      <%= link_to('Salir', destroy_usuario_session_path, class:"dropdown-item") %>
+                    </div>
+                  </li>
+                  
+                </ul>
+                
+              </div>
+             </nav>
+
+    <aside class="sidenav">
+        <!-- <div class="sidenav__brand">
+        <i class="fas fa-feather-alt sidenav__brand-icon"></i>
+        <a class="sidenav__brand-link" href="#">Instituto de Ecología</a>
+        <i class="fas fa-times sidenav__brand-close"></i>
+        </div> -->
+        <div class="w-50 mx-auto">
+         <%= image_pack_tag 'logo100_White.png', class:"card-img-top img-fluid" %>
+        </div> 
+       <hr>
+       
+       <!-- Esto se tiene que poner  
+        <div class="d-flex justify-content-center">
+              <div class="w-50">
+                  <% if  current_usuario.imagen.present?  %> 
+                     <%= image_tag current_usuario.imagen, class:"rounded-circle img-fluid" %>
+                  <% else %>
+                     <%= image_pack_tag 'avatar.png', class:"card-img-top rounded-circle img-fluid" %>
+                  <% end %>
+               </div>
+        </div>
+        <hr>    
+        --> 
+
+
+        <!-- <div class="sidenav__profile">
+          <div class="sidenav__profile-avatar"></div> 
+           <div class="sidenav__profile-title text-light"><%=  @usuario_nom %></div>
+        </div>-->
+        <div class="row row--align-v-center row--align-h-center">
+          <ul class="navList">
+            <li>
+                <div class="navList__subheading row row--align-v-center">
+                  <span class="navList__subheading-icon"><i class="fas fa-home fa-2x"></i></span>
+                   <span class="navList__subheading-title"><%= link_to("Inicio", tecnico_path, data: {turbolinks:false}) %></span>
+                </div> 
+            </li>
+            
+            <li>
+             <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-layer-group fa-2x"></i></span>
+                <span class="navList__subheading-title">Producción</span>
+            </div> 
+              <ul class="subList subList--hidden">
+                <li class="subList__item"><%= link_to("Nuevo..", producto_path(0), data:{turbolinks:false}) %></li>
+                <li class="subList__item"><%= link_to("Ver registros..", actividades_path, data:{turbolinks:false}) %></li>
+              </ul>
+            </li>
+
+           <% if current_usuario.persona_id.to_i == 255 %>
+            <li>
+             <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-list-alt fa-2x"></i></i></span>
+                <span class="navList__subheading-title">Validaciones</span>
+            </div> 
+              <ul class="subList subList--hidden">
+                <li class="subList__item"><%= link_to("Consultar por Red", consultasa_path(0,0), data:{turbolinks:false}) %></li>
+                <li class="subList__item"><%= link_to("Eval Tecnicos", listaevaltecnico_path, data:{turbolinks:false}) %></li>
+              </ul>
+            </li>
+           <% end %> 
+
+           <% if current_usuario.evaluador == "T" %> 
+
+           <li>
+            <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-list-alt fa-2x"></i></i></span>
+                <span class="navList__subheading-title">Eval. Tecnicos</span>
+            </div> 
+              <ul class="subList subList--hidden">
+                <li class="subList__item"><%= link_to("Ver listado", revisarlistado_path, data:{turbolinks:false}) %></li>
+              </ul>
+            </li>
+
+            <% end %>
+            <% if current_usuario.persona_id.to_i == 210 %>
+            <li>
+             <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-tachometer-alt fa-2x"></i></i></i></span>
+                <span class="navList__subheading-title">Indicadores</span>
+            </div> 
+              <ul class="subList subList--hidden">
+                <li class="subList__item"><%= link_to("CART", indicador_path, data:{turbolinks:false}) %></li>
+                <li class="subList__item"><%= link_to("ListaWord", listaword_path, data:{turbolinks:false}) %></li>
+              </ul>
+            </li>
+           <% end %> 
+
+        </ul>
+        </div>
+    </aside>
+
+    <main class="main">
+      
+         <%= yield %>
+        
+    </main>
+
+    <footer class="footer">
+        <p>Secretaría Académica</p>
+        <p>2018 Instituto de Ecología</p>
+    </footer>
+    </div>
+  </body>
+</html>

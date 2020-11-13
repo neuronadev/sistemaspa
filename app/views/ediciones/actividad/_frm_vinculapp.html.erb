@@ -1,0 +1,85 @@
+<% 
+  disabled ||= @disabled
+%>
+<div class="row">
+ <div class="col-12">
+   <strong><%= @producto.descripcion %></strong>
+ </div>  
+</div>
+<hr>
+
+<%= form_with(model: @actividad, local: true)  do |form| %>
+     <%= form.hidden_field :reemplazaidact, value:@idactividad_ant %> 
+     <%= form.hidden_field :producto_id, value: @producto.id %>
+     <%= form.hidden_field :estado, value:'S' %> 
+     <%= form.hidden_field :personaid, value: @actividad.personaid %> 
+     <div class="form-group">
+         <%= form.label :titulo, "Título:"%>
+         <%= form.text_field :titulo, class:"form-control", disabled: disabled %>
+     </div>
+     <div class="row">
+         <div class="col-2">
+            <div class="form-group">
+               <%= form.label :anio, "Año:" %>
+               <%= form.text_field :anio,class:"form-control", disabled: disabled  %> 
+            </div>    
+         </div>  
+
+          <%= form.fields_for :vinculacion do |vin_form| %>
+                <%= vin_form.hidden_field :tipovinculacion, value:"PP" %> 
+                <% if @producto.prodgrupo.clave == 'DECRETO' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <%= vin_form.label :niveldecreto, "Nivel:" %>
+                          <%= vin_form.select :niveldecreto, options_for_select(@niveldecreto), { :include_blank=>'-Nivel de gobierno-', disabled: disabled}, class:"form-control"  %> 
+                       </div>   
+                    </div>   
+                <% end %> 
+                <% if @producto.prodgrupo.clave == 'ORDENAMIENTO' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <%= vin_form.label :ordenamiento, "Fase:" %>
+                          <%= vin_form.select :fase, options_for_select(@ordenamiento), { :include_blank=>'-Fase-', disabled: disabled}, class:"form-control"  %> 
+                       </div>   
+                    </div>   
+                <% end %> 
+                <% if @producto.prodgrupo.clave == 'INICIATIVA' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <%= vin_form.label :niveliniciativa, "Nivel:" %>
+                          <%= vin_form.select :niveliniciativa, options_for_select(@niveliniciativa), { :include_blank=>'-Nivel de gobierno-', disabled: disabled}, class:"form-control"  %> 
+                       </div>   
+                    </div>   
+                <% end %> 
+                <% if @producto.prodgrupo.clave == 'REGLA' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <%= vin_form.label :nivelregla, "Nivel:" %>
+                          <%= vin_form.select :nivelregla, options_for_select(@nivelregla), { :include_blank=>'-Nivel de gobierno-', disabled: disabled}, class:"form-control"  %> 
+                       </div>   
+                    </div>   
+                <% end %> 
+                <% if @producto.prodgrupo.clave == 'COMITE' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <%= vin_form.label :nivelcomite, "Participación:" %>
+                          <%= vin_form.select :nivelcomite, options_for_select(@nivelcomite), { :include_blank=>'-Tipo de participación-', disabled: disabled}, class:"form-control"  %> 
+                       </div>   
+                    </div>   
+                <% end %> 
+          <% end %> 
+       </div>
+
+      <%= render "crud/actividad/comprobante", form:form %>
+                 <div class="form-group"> 
+          <strong>Autores(Participantes)</strong>
+        </div> 
+        <%= render "crud/actividad/autores", form:form %>
+       
+     <br><br>
+      <% if !@disabled %>
+         <div class="form-group">   
+            <%= form.submit "Guardar información", data: { confirm: 'La información será enviada para validación, ¿Desea continuar?' } %>
+         </div>       
+      <% end %>          
+<% end %>

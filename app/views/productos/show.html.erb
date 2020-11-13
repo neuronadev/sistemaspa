@@ -1,0 +1,10 @@
+<%  cerrado = false %>
+<%  if !cerrado %>
+    <%= render partial: "listado/listado_productocap", layout: "crud/layout" %>
+<% end %>  
+
+<%  if cerrado %>
+  <%= render partial: "listado/captura_cerrar", layout: "crud/layout" %>
+<% end %>  
+
+
