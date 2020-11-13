@@ -23,7 +23,7 @@ set :rvm_ruby_version, 'ruby-2.6.3'
 append :linked_files, "config/database.yml", "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
-before "deploy:assets:precompile", "deploy:yarn_install"
+#before "deploy:assets:precompile", "deploy:yarn_install"
 
 #namespace :deploy do
 #  desc 'Run rake yarn:install'
