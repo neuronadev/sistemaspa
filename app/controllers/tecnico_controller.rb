@@ -1,7 +1,7 @@
 class TecnicoController < ApplicationController
   def index
-    @actividades = Persona.find(current_usuario.persona_id).actividades.where("estado!='X'").limit(4).order(created_at: :desc)
-    @sust = Sustantiva.where("academico_id=? and estado != 'X'",current_usuario.persona.academico.id).limit(7)
+    @actividades = Persona.find(current_usuario.persona_id).actividades.where("estado!='X'").where("periodo=2020").limit(4).order(created_at: :desc)
+    @sust = Sustantiva.where("academico_id=? and estado != 'X' and anio=2020",current_usuario.persona.academico.id).limit(7)
   end
 
  def sustantiva
@@ -10,12 +10,12 @@ class TecnicoController < ApplicationController
  end 
 
  def detalle
-  @sust = Sustantiva.where("academico_id=? and estado != 'X'",current_usuario.persona.academico.id)
+  @sust = Sustantiva.where("academico_id=? and estado != 'X' and anio=2020",current_usuario.persona.academico.id)
   
-  @tot_act = Sustantiva.where("academico_id=? and estado != 'X'",current_usuario.persona.academico.id).count()
+  @tot_act = Sustantiva.where("academico_id=? and estado != 'X' and anio=2020",current_usuario.persona.academico.id).count()
   @prom = 0.0
   evaltec = 0.0
-  Sustantiva.where("academico_id=? and estado = 'C'",current_usuario.persona.academico.id).each do |s|
+  Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",current_usuario.persona.academico.id).each do |s|
    if s.calidad.present? && s.eficiencia.present? 
        evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
    end    
@@ -27,12 +27,12 @@ class TecnicoController < ApplicationController
  
  def mostraractiv
   idacad = params[:idacad] 
-  @sust = Sustantiva.where("academico_id=? and estado != 'X'",idacad)
+  @sust = Sustantiva.where("academico_id=? and estado != 'X' and anio=2020",idacad)
   
-  @tot_act = Sustantiva.where("academico_id=? and estado != 'X'",idacad).count()
+  @tot_act = Sustantiva.where("academico_id=? and estado != 'X' and anio=2020",idacad).count()
   @prom = 0.0
   evaltec = 0.0
-  Sustantiva.where("academico_id=? and estado = 'C'",idacad).each do |s|
+  Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",idacad).each do |s|
      if s.calidad.present? && s.eficiencia.present?
         evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
      end 
@@ -46,7 +46,7 @@ class TecnicoController < ApplicationController
    academico = Academico.find(idacad)
    persona = Persona.find(academico.persona_id)
 
-   @actividad = Actividad.where(:personaid=>persona.id).where("estado in ('U','S','Z','W')").order(:producto_id).order(:id)
+   @actividad = Actividad.where(:personaid=>persona.id).where("estado in ('U','S','Z','W') and periodo=2020").order(:producto_id).order(:id)
     
     
  end
@@ -55,14 +55,17 @@ class TecnicoController < ApplicationController
   
   params[:academico][:sustantivas_attributes].each do |item|
      item.each do |r|
-        @sust = Sustantiva.create('investigadorid':r['investigadorid'],
-                                   'descripcion':r['descripcion'],
-                                   'porcentaje':r['porcentaje'],
-                                   'academico_id':r['academico_id'])
-       if @sust.valid?
-           @sust.save
-       end  
-      
+       if r['_destroy'] == 'false'
+            @sust = Sustantiva.create('investigadorid':r['investigadorid'],
+                                       'descripcion':r['descripcion'],
+                                       'porcentaje':r['porcentaje'],
+                                       'academico_id':r['academico_id'])
+
+            if @sust.valid?
+               @sust.save
+               puts @sust
+            end  
+       end
      end 
      #redirect_to sustdetalle_path
   end
@@ -112,7 +115,7 @@ def listaevaltecnico
    
    tecnicos.each do |t|
       evaltec = 0.0
-      Sustantiva.where("academico_id=? and estado = 'C'",t).each do |s|
+      Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",t).each do |s|
          if s.calidad.present? && s.eficiencia.present?
              evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
          end      
@@ -131,7 +134,7 @@ def tecnicoadetalle
    
    tecnicos.each do |t|
       evaltec = 0.0
-      Sustantiva.where("academico_id=? and estado = 'C'",t).each do |s|
+      Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",t).each do |s|
          if s.calidad.present? && s.eficiencia.present?
              evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
          end      

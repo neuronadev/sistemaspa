@@ -25,9 +25,9 @@
             <p class="overviewCard-subtitle"><%= link_to("Divulgación", filtro_path(3)) %></p>
             </div>
         </div>
-        
+        --> 
         <%
-            total = Sustantiva.where("investigadorid=?",current_usuario.persona_id).count
+            total = Sustantiva.where("investigadorid=? and anio=2020",current_usuario.persona_id).count
             if total.to_i > 0    
         
         %>
@@ -40,7 +40,7 @@
                 </div>
             </div>
         <% end  %>
-     -->   
+       
          <% if   current_usuario.rol == 'C' %>
             <div class="overviewCard">
                 <div class="overviewCard-icon overviewCard-icon--red">

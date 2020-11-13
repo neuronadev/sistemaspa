@@ -63,10 +63,10 @@ class ProductosController < ApplicationController
          @categorias = Prodcategoria.where("estado = 'A' and id not in (?)",ids).order(:nomcategoria)
       end  
          
-         @tot_act = Sustantiva.where("academico_id=? and estado != 'X'",current_usuario.persona.academico.id).count()
+         @tot_act = Sustantiva.where("academico_id=? and estado != 'X' and anio=2020",current_usuario.persona.academico.id).count()
          @prom = 0.0
          evaltec = 0.0
-         Sustantiva.where("academico_id=? and estado = 'C'",current_usuario.persona.academico.id).each do |s|
+         Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",current_usuario.persona.academico.id).each do |s|
              evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
          end
          

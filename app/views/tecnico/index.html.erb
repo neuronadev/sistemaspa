@@ -1,28 +1,5 @@
 <div class="main-overview">
-        <div class="overviewCard">
-            <div class="overviewCard-icon overviewCard-icon--document">
-            <i class="fas fa-newspaper"></i>
-            </div>
-            <div class="overviewCard-description">
-            <p class="overviewCard-subtitle"> <%= link_to("Artículos Indizados", filtro_path(1)) %> </p>
-            </div>
-        </div>
-        <div class="overviewCard">
-            <div class="overviewCard-icon overviewCard-icon--calendar">
-            <i class="fas fa-book"></i>
-            </div>
-            <div class="overviewCard-description">
-            <p class="overviewCard-subtitle"><%= link_to("Libros, Capítulos y Editor", filtro_path(2)) %></p>
-            </div>
-        </div>
-        <div class="overviewCard">
-            <div class="overviewCard-icon overviewCard-icon--photo">
-           <i class="fas fa-book-reader"></i>
-            </div>
-            <div class="overviewCard-description">
-            <p class="overviewCard-subtitle"><%= link_to("Divulgación", filtro_path(3)) %></p>
-            </div>
-        </div>
+        
        
          <% if   current_usuario.rol == 'C' %>
             <div class="overviewCard">
@@ -55,8 +32,8 @@
         <div class="main__cards">
         <div class="card">
             <div class="card__header">
-            <div class="card__header-title text-light">Actividades adicionales (últimos registros) 
-                <a href="#" class="card__header-link text-bold"><%= link_to("Ver todo", actividades_path, data:{turbolinks:false}) %></a>
+            <div class="card__header-title text-light">Actividades adicionales 2020 (últimos registros) 
+                <a href="#" class="card__header-link text-bold"><%= link_to("Ver", actividades_path, data:{turbolinks:false}) %></a>
             </div>
             </div>
 
@@ -121,33 +98,7 @@
             <div class="card">
             </div>
         </div> -->
-         <div class="card">
-                <div class="card__header" style="background-color:#740202;">
-                <div class="card__header-title text-light"><strong>Estímulo 2019</strong>
-                    
-                </div>
-                </div>
-                <div class="card p-2">
-                <%
-                   monto_esti = Estimulo.where(:persona_id=>current_usuario.persona_id).first
-                %> 
-                <table class="table">
-                <tbody>
-                    <tr>   
-                    <td>Estímulo: <strong>
-                       <% if !monto_esti.nil? %>
-                            <% if monto_esti.monto.to_d > 0 %>
-                                    <%= number_to_currency(monto_esti.monto.to_d) %> 
-                            <% else %>
-                                    "-----" 
-                            <% end %>
-                        <% end %>    
-                     </strong> </td>
-                    </tr>
-                </tbody>     
-                </table>  
-                </div>
-            </div>
+         
 
         <div class="card card--finance">
             <div class="card__header">
@@ -178,4 +129,28 @@
             
             </div>
         </div>
+
+        <div class="card card--finance">
+            <div class="card__header">
+            <div class="card__header-title text-light">Histórico
+                <a href="#" class="card__header-link text-bold"></a>
+            </div>
+            </div>
+            <div id="chartdiv">
+                       <div class="list-group">
+                            <% if current_usuario.rol == "T" %> 
+                                    <%= link_to datahistory_path(2019), class:"list-group-item list-group-item-action", data:{turbolinks:false} do %>
+                                        <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">Actividades adicionales 2019</h5>
+                                        <small class="text-success" ><b>Disponible</b></small>
+                                        </div>
+                                    <% end %>
+                            <% end %>        
+                        </div>   
+            
+            </div>
+        </div>
+ 
+
+
         </div> <!-- /.main-cards -->

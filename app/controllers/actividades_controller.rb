@@ -145,7 +145,7 @@ class ActividadesController < ApplicationController
   end
 
    def evaltecnico
-      @sustantivas = Sustantiva.where("investigadorid=? and (estado='U' or estado='C')",current_usuario.persona_id).order(:academico_id)
+      @sustantivas = Sustantiva.where("investigadorid=? and (estado='U' or estado='C') and anio=2020",current_usuario.persona_id).order(:academico_id)
    end
 
    def cuestionario
