@@ -6,6 +6,7 @@ class TecnicoController < ApplicationController
 
  def sustantiva
   @academico = Academico.new
+  
   #@academico.sustantivas.build
  end 
 

@@ -67,8 +67,20 @@ class ProductosController < ApplicationController
          @prom = 0.0
          evaltec = 0.0
          Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",current_usuario.persona.academico.id).each do |s|
-             evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
-         end
+             if s.calidad.nil?
+                 dCalidad = 0.0
+             else
+                 dCalidad = s.calidad
+             end  
+             if s.eficiencia.nil?
+                 dEfi = 0.0
+             else
+                 dEfi = s.eficiencia
+             end   
+              
+              evaltec = evaltec + (  (s.porcentaje/100)*(((dCalidad/10)+(dEfi/10))/2)  )
+         
+        end
          
          @prom = evaltec.round(2)
          

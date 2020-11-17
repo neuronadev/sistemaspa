@@ -1,5 +1,6 @@
 <% 
   disabled ||= @disabled
+  @disable = disabled
 %>
 <div class="row">
  <div class="col-12">
@@ -81,7 +82,7 @@
                             
             <% end %>   
        </div>
-       
+      <%= render "crud/actividad/red", form:form %> 
       <%= render "crud/actividad/comprobante", form:form %>
          <div class="form-group"> 
           <strong>Autores(Participantes)</strong>
