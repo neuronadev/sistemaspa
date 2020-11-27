@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   #####
 
   ## Act. sustantivas
-  #get 'tecnico/sustantiva', to: "tecnico#sustantiva", as: 'sustantiva' 
+  get 'tecnico/sustantiva', to: "tecnico#sustantiva", as: 'sustantiva' 
   post 'tecnico/create', to: "tecnico#create", as: 'sustcreate' 
   get 'tecnico/detalle', to: "tecnico#detalle", as: 'sustdetalle' 
   get 'tecnico/mostraractiv/:idacad', to: "tecnico#mostraractiv", as: 'mostraractiv' 
