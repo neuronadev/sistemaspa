@@ -36,10 +36,12 @@
                 @pasar = 1 
           %>
              <span class="text-success text-bold"> Ya puede registrar las actividades adicionales </span>
-          <% else %>
-              <span class="text-danger text-bold"> No puede registrar actividades adicionales, se requiere el promedio minimo de 8.5 en la evaluación de actividades sustantivas.</span>
+          <% else 
+               @pasar = 0
+          %>
+               <span class="text-danger text-bold"> No puede registrar actividades adicionales, se requiere el promedio minimo de 8.5 en la evaluación de actividades sustantivas.</span>
           <% end
-            @pasar = 0
+            
           %>
       </div>
   </div>
@@ -47,31 +49,38 @@
   <br>
 <% end %>
     <% @categorias.each do |c| %>
+       <% if c.id != 5 %>
            <div class="hijo">   
                <strong><%= c.nomcategoria %></strong><br>
                     <% Producto.where("prodcategoria_id = ?", c.id).order(:descripcion).each do |p| %>
                        <% if current_usuario.rol != 'T' %>
                           <% if current_usuario.persona_id == 64 %>
                                 <i class="fas fa-angle-right"></i> <%= link_to(p.descripcion, newact_path(p.id,0), data:{turbolinks:false}) %><br>
-                          <% else %>      
-                               <i class="fas fa-angle-right"></i> <%= link_to(p.descripcion, newact_path(p.id,0), data:{turbolinks:false}) %> <br>
+                          <% else %>   
+                               <% if p.id != 83 && p.id != 82 %> 
+                                 <i class="fas fa-angle-right"></i> <%= link_to(p.descripcion, newact_path(p.id,0), data:{turbolinks:false}) %> <br>
+                               <% end %>  
                           <% end %>     
 
                         <% else %>
                            <% if @pasar == 1 %> 
-                              <i class="fas fa-angle-right"></i> <%= link_to(p.descripcion, newact_path(p.id,0), data:{turbolinks:false}) %><br>
+                              <% if p.id != 83 && p.id != 82 %> 
+                                <i class="fas fa-angle-right"></i> <%= link_to(p.descripcion, newact_path(p.id,0), data:{turbolinks:false}) %><br>
+                              <% end %>  
                            <% else %>  
                                 <% if current_usuario.persona_id == 64 %>
                                    <i class="fas fa-angle-right"></i> <%= link_to(p.descripcion, newact_path(p.id,0), data:{turbolinks:false}) %><br>
                                 <% else %>
-                                  <i class="fas fa-angle-right"></i> <%= p.descripcion %><br> 
+                                   <% if p.id != 83 and p.id != 82 %>  
+                                     <i class="fas fa-angle-right"></i> <%= p.descripcion %><br> 
+                                   <% end %>
                                 <% end %> 
                            <% end %>  
                         <% end %>
                     <% end %>
 
-          </div>     
-
+           </div>     
+        <% end %>
      <% end %>
 
 </section>

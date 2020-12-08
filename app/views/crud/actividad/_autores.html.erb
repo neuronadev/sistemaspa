@@ -5,6 +5,7 @@
   #autoresl li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1em; }
   #autoresl li span { position: absolute; margin-left: -1.3em; }
   </style>
+  <I style="color:grey;">Nota: Usted también debe incluirse en la lista, además de los otros participantes si es que los hay.</I>
   <div class="card">
     
      <div class="card-body">
@@ -20,7 +21,7 @@
      </div>   
  </div>
 <% if !@disabled %>
-    <i class="fas fa-plus"></i>&nbsp;<%= link_to_add_fields("Agregar autor(participante)", form, :autores) %> <span style="color:red"><I><- Haga clic en el link para agregar participante</I></span>
+    <i class="fas fa-plus"></i>&nbsp;<%= link_to_add_fields("Agregar participante", form, :autores) %> <span style="color:red"><I><- Haga clic en el link para agregar participante</I></span>
 <% end %>
 
 <script>
