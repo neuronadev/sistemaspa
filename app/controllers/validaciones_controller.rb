@@ -13,9 +13,12 @@ class ValidacionesController < ApplicationController
      red_corr = 0
      i = 0
      activs.each do |a|
-      @data[i]={"id"=>a.id,"personaid"=>a.personaid,"producto"=>a.producto.descripcion,
+        persona = Persona.find(a.personaid)
+        if persona.tipopersona_id != 4 
+          @data[i]={"id"=>a.id,"personaid"=>a.personaid,"producto"=>a.producto.descripcion,
                              "titulo"=>a.titulo,"estado"=>a.estado}
-      i=i+1
+          i=i+1
+        end  
      end
       
    #  activs.each do |a|
