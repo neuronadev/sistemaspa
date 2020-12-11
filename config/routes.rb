@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   get 'validaciones/datadetalle/:id', to: "validaciones#datadetalle", as: 'datadetalle'  
   get 'validaciones/datamsg/:id', to: "validaciones#datamsg", as: 'datamsg'  
   get 'validaciones/aplicavalsa/:id', to: "validaciones#aplicavalsa", as: 'validasa'  
+  get 'validaciones/rechazar', to: "validaciones#rechazar", as: 'rechazasa'  
   post 'validaciones/validacriterio', to: "validaciones#validacriterio", as: 'validacriterio'
   post 'validaciones/cambiarprod', to: "validaciones#cambiarprod", as: 'cambiarprod'  
   get 'validaciones/editdata/:id/:red', to: "validaciones#editdata", as: 'valideditdata'  

@@ -216,10 +216,25 @@ class ValidacionesController < ApplicationController
   end 
   def aplicavalsa
     @idactividad = params[:id]
-    actividad = Actividad.find(@idactividad)
+    actividad = Actividad.find(@idactividad.to_i)
     actividad.fecha3 = Date.today
     actividad.estado = 'S'
     actividad.save
+    respond_to do |format| 
+      format.js
+    end
+  end
+
+  def rechazar
+    @idactividad = params[:id]
+    @txt = params[:txt]
+    actividad = Actividad.find(@idactividad.to_i)
+    actividad.fecha3 = Date.today
+    actividad.estado = 'Z'
+    actividad.save
+    
+    mensaje = Mensaje.create(actividad_id:@idactividad, persona_id: current_usuario.persona_id, tipo:'Z', estado:'A', txt:@txt)
+    
     respond_to do |format| 
       format.js
     end

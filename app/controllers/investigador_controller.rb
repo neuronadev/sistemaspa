@@ -7,7 +7,7 @@ class InvestigadorController < ApplicationController
 
   def listado
     @personas = Persona.where(:tipopersona_id=>2).order(:paterno)
-     
+    @redes = Red.where(id:[1,8,9,10,11,12,13,14,15,16,17,21])
   end 
 
   def produccion 
@@ -16,7 +16,7 @@ class InvestigadorController < ApplicationController
       Autor.where(:persona_id=>personaid).each do |a|
          idsActiv.push(a.actividad_id) 
       end
-       @actividad = Actividad.where(:id=>idsActiv).where("estado in ('C','S','Z','W')").order(:producto_id).order(:id)
+       @actividad = Actividad.where(:id=>idsActiv).where(periodo:2020).where("estado in ('C','S','Z','W')").order(:producto_id).order(:id)
   end
 
   def investdetalle

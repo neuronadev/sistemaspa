@@ -1,46 +1,67 @@
-<div class="row">
-  <div class="col-4">
-    <b>Buscar: <input id="buscar" type="text" placeholder="Search here"></b> 
-  </div> 
-   
+<style>
+.box {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  width: 80%;
+}
+
+ .redtxt{
+   font-size: 16px;
+   font-weight: bold;
+   margin-top: 10px;
+}  
+.dattable{
+   justify-content: left;
+   align-items: left;
+}
+
+.itemsdata{
+   display: flex;
+   flex-direction: column;
+   width: 80%;
+}
+.itemdata{
+   display: flex;
+   flex-direction: row;
+   margin-left: 15px;
+}
+.itemdata_ac{
+   width: 50%;
+}
+.itemdata_opt{
+  width: 50%;
+}
+
+</style>
+
+<div class="box">
+
+<%  
+   @redes.each do |r|
+%>
+ <div class="redtxt"> 
+      <%= r.nomred %>
+ </div>
+ 
+<%
+   @academicos = Academico.where(red_id:r.id)
+     @academicos.each do |a|  
+     if a.persona.tipopersona_id == 2 || a.persona.tipopersona_id == 3
+
+%>
+  
+    <div class="itemsdata">       
+         <div class="itemdata">
+            <div class="itemdata_ac"><%= (a.persona.paterno||'') + ' ' + (a.persona.materno||'') + ' ' + (a.persona.nombre||'') %></div>
+            <div class="itemdata_opt"> <%= link_to "Ver productos", listproduccion_path(a.persona.id) %> </div>  
+         </div> 
+    </div> 
+
+     <% end %>
+   <% end %>
+
+<% end %>
+
 </div>
-
-<div class="card">
-  <div class="card-body">
-
-     <table class='table table-sm table-striped'>
-       <thead> 
-         <tr>
-            <th>Investigador</th>
-            <th>Productos</th>
-         </tr>
-       </thead>  
-       <tbody id='titulos'> 
-          
-           <% @personas.each do |p| %>
-              <tr>
-                  <td><%= (p.paterno||'')+" "+(p.materno||'')+" "+(p.nombre||'') %></td>
-                  <td><%= link_to("Lista de productos", listproduccion_path(p.id), data:{turbolinks:false}) %></td>
-              </tr>   
-
-           <% end %>
-
-       </tbody>
-
-     </table>
-
-
-  </div>
-</div>  
-
-<script> 
-            $(document).ready(function() { 
-                $("#buscar").on("keyup", function() { 
-                    var value = $(this).val().toLowerCase(); 
-                    $("#titulos tr").filter(function() { 
-                        $(this).toggle($(this).text() 
-                        .toLowerCase().indexOf(value) > -1) 
-                    }); 
-                }); 
-            }); 
-        </script> 
+<br>

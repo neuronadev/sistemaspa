@@ -1,112 +1,132 @@
-<div class="row">
-  <div class="col-4">
-    <b>Buscar: <input id="buscar" type="text" placeholder="Search here"></b> 
-  </div> 
+<style>
+.contprod{
+   display: flex;
+   flex-direction: column;
+   width: 80%;
+   margin-bottom: 15px;
+   padding: 2px 4px 6px 7px;
+   margin-left: 10px;
+   border: 1px solid grey;
+   background-color: white;
+}
+
+.rwp{
+   display: flex;
+   flex-direction: row;
    
-  <div class="col-6">
-     <%= link_to "Regresar", :back, data: {turbolinks:false} %>
-  </div>
- 
+}
+.rwopts{
+   display: flex;
+   flex-direction: row;
+   margin-top:15px;
+}
+.divide{
+   height:15px; 
+}
+
+.hoptions{
+   margin-left: 10px;
+   width: 100%;
+   margin-bottom: 15px; 
+}
+.frmopt{
+   display: flex;
+   flex-direction: row;
+}
+</style>
+
+<div class="hoptions">
+   <%= link_to "Regresar", investlista_path %>
 </div>
-<div class="card">
-  <div class="card-body">
-    <table class='table table-sm table-striped table-bordered'>
-    <thead>
-        <tr>
-            <th class="text-center">ID</th>
-            <th class="text-center">Producto</th>
-            <th class="text-center">Título</th>
-            <th class="text-center">Autores</th>
-            <th class="text-center">Año</th>
-            <th class="text-center">Estatus</th>
-        </tr>
-    </thead>
-    <tbody id='titulos'> 
-    <%  
+
+<%  
     @actividad.each do |a|
-    @msg = ''
-    producto = Producto.find(a.producto_id)
-    if a.estado == 'W'
-        Autor.where("actividad_id=#{a.id}").each do |p|
-            if p.filiacion == 'F'
-                persona = Persona.find(p.persona_id)
-                @msg = @msg + "<br>" + (persona.paterno||'') + " " + (persona.materno||' ') + (persona.nombre||' ') + " (ver nota)"
-            end
-        end
-    end
+%>
 
-   if producto.prodgrupo.clave != 'ACTIVIDAD' 
 
-    %>
 
-    <tr>
-        <td class="text-center"><%= a.id %></td>
-        <td id="desc<%= a.id %>"><%= a.producto.descripcion %>  </td>
-        <td>
-            <%= link_to a.titulo, datadetalle_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>
-        
-        </td>
-        <td><%= cita(a.id).html_safe %>
-            <% if !@msg.nil? %>
-            <span class="text-danger"><%= @msg.html_safe %></span> 
-            <% end %>
-        
-        </td>
-        <td><%= a.anio %></td>
-        <td id="td<%= a.id %>">
-        <% if a.estado == 'C' %>
-            <span class="text-primary"> Sin validar </span>
-        <% end %>    
-        <% if a.estado == 'S' %>
-            <span class="text-success">Validado</span>
+  <div class="contprod">
+        <div class="rwp">
+             <div style="font-weight: bold; color:#154360; text-decoration: underline grey;"><%= a.producto.descripcion %></div>
+             <div style="margin-left:20px; color:blue;"><b>Año:</b> <%= a.anio %></div>
+             <div style="margin-left:20px; color:blue;"><b>Folio:</b> <%= a.id %></div>
+        </div>
+        <div class="divide"></div>
+        <div><b>Título:</b> <%= a.titulo %> </div>
+        <div><b>Autores:</b> <%= cita(a.id).html_safe %> </div>
+        <div class="rwp"> <div style="font-weight: bold;">Comprobante:</div>  
+        <% if a.documentos.attached? %> 
+            <div style="font-size:14px; margin-left:10px;">  
+                <% a.documentos.each do |d|%>
+                    <%= link_to rails_blob_path(d, disposition: "inline"),  target: '_blank' do %>
+                        <i class="fas fa-file-pdf"></i> Ver documento
+                    <% end %>
+                <% end %>
+            </div>
         <% end %> 
-        <% if a.estado == 'Z' %>
-            <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
-            <%= link_to "No se considera o modificar. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
-        <% end %>   
-        <% if a.estado == 'W' %>
-            <span class="text-success"> Validado. </span>
-            <%= link_to "Ver Nota", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
-        <% end %>    
-        </td>
-    </tr> 
-    <%        
-    end
-   end 
-    %>
-    </tbody> 
-    </table>
+        </div>  
+        <% if a.estado == 'C' %> 
+                <div class="rwopts">
+                    <div id="val<%= a.id %>" style="font-size:14px; color:green;"> 
+                            <%= link_to validasa_path(a.id), remote:true, data:{confirm:'El registro se marcará como validado, ¿desea continuar?'} do %>    
+                                <i class="fas fa-check-double text-success"></i> Validar
+                            <% end %>
+                    </div>
+                    <div id="no<%= a.id %>" style="margin-left:10px; font-size:14px; color:red; cursor: pointer; " onclick="showform(<%= a.id %>)"> 
+                            <i class="fas fa-check-double text-danger"></i> No se considera
+                    </div> 
+                    <div id="rechazar<%= a.id %>" class="formrechaza" style="margin-left:10px; font-size:14px; color:red;">
+                        <div>Motivo:</div> 
+                        <div> <textarea id="motivotxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
+                        <div class="frmopt">
+                                 <div style="cursor: pointer;" onclick="aceptarform(<%= a.id %>)">Aceptar</div>
+                                 <div onclick="cancelform(<%= a.id %>)" style="cursor: pointer;">Cancelar</div> 
+                        </div>
+                    </div>
+
+                </div>
+            <% else %> 
+                <% if a.estado == 'S' %> 
+                    <div style="margin-top:15px; color:green;">Producto aceptado</div>
+                <% end %> 
+                
+                <% if a.estado == 'Z' %>  
+                    <div style="margin-top:15px; color:red;">Producto rechazado</div>
+                    <div id="txtrechazav<%= a.id %>"></div> 
+                <% end %>
+            <% end %>
+
   </div>
- </div> 
 
+<% end %>
 
-<div id="modal-window_msg" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content"></div>
-   </div>
-</div>
-<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content"></div>
-   </div>
-</div>
+<br><br>
 
-<div id="modal-editar" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content"></div>
-   </div>
-</div>
+<script>
+    $(function () {
+        $('.formrechaza').hide(); 
+    });
+     
+    function showform(idact){
+        $('#rechazar'+idact).show();  
+    }
 
+    function hideform(idact){
+        $('#rechazar'+idact).hide();  
+    }
+    function cancelform(idact){
+        $('#rechazar'+idact).hide();  
+    }
+    function aceptarform(idact){
+          $.ajax({
+                    url: '<%= rechazasa_path %>',
+                    data: "id="+idact + "&txt=" + $("#motivotxt"+idact).val(),
+                    type: "get",
+                    success: function(data){ 
+                         alert("Registro marcado.");
+                     },
+                    error: function(dayta){   }
+                })
+    }
 
-
-<script> 
-            $(document).ready(function() { 
-                $("#buscar").on("keyup", function() { 
-                    var value = $(this).val().toLowerCase(); 
-                    $("#titulos tr").filter(function() { 
-                        $(this).toggle($(this).text() 
-                        .toLowerCase().indexOf(value) > -1) 
-                    }); 
-                }); 
-            }); 
-        </script> 
+</script>
