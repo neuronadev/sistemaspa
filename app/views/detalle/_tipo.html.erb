@@ -1,0 +1,18 @@
+<% if @producto.prodgrupo.clave == 'INDIZADO' || @producto.prodgrupo.clave == 'PERIODICO' || @producto.prodgrupo.clave == 'ART'  %>
+      <%= render partial: "detalle/articulo"  %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'LIB' %>
+    <%= render partial: "detalle/libro" %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'CAP' %>
+    <%= render partial: "detalle/capitulo" %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'CUR' %>
+    <%= render partial: "detalle/curso" %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'TESIS' %>
+    <%= render partial: "detalle/tesis" %>
+<% end %>
+<% if @producto.prodgrupo.clave == 'EDREV' || @producto.prodgrupo.clave == 'EDLIB' %>
+   <%= render partial: "detalle/editor" %>
+<% end %>

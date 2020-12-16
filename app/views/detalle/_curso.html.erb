@@ -1,0 +1,17 @@
+<%
+
+ @data = @dataAct.curso
+
+%>
+
+<div class="itemdetallep">
+
+   <div style="margin-left:10px; color:#566573;"><b>Tipo impartición:</b> <%= @data.tipocurso.nomtipocurso %></div>
+   <div style="margin-left:10px; color:#566573;"><b>Fecha inicio:</b> <%= @data.fini %></div>
+   <div style="margin-left:10px; color:#566573;"><b>Fecha fin:</b> <%= @data.ffin %></div>
+   <div style="margin-left:10px; color:#566573;"><b>Horas curso:</b> <%= @data.hcurso %></div>
+   <div style="margin-left:10px; color:#566573;"><b>Horas impartidas:</b> <%= @data.himpartidas %></div>
+   <div style="margin-left:10px; color:#566573;"><b>Creditos:</b> <%= @data.creditos %></div>
+   <div style="margin-left:10px; color:#566573;"><b>No. alumnos:</b> <%= @data.noalumnos %></div>
+   <div style="margin-left:10px; color:#566573;"><b>Coordinador:</b> <%= @data.coordinador %></div>
+</div>

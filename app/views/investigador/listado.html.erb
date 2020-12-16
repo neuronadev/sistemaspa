@@ -47,7 +47,7 @@
 <%
    @academicos = Academico.where(red_id:r.id)
      @academicos.each do |a|  
-     if a.persona.tipopersona_id == 2 || a.persona.tipopersona_id == 3
+     if (a.persona.tipopersona_id == 2 || a.persona.tipopersona_id == 3) && a.persona.estado == 'A'
 
 %>
   

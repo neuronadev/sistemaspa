@@ -1,0 +1,15 @@
+<%
+
+ @data = @dataAct.capitulo
+
+%>
+
+<div class="itemdetallep">
+
+   <div style="margin-left:10px; color:#566573;"><b>Año:</b> <%= @dataAct.anio %></div>
+   <div style="margin-left:10px; color:#566573;"><b>Pg inicial:</b> <%= @data.pgini %></div>
+   <div style="margin-left:10px; color:#566573;"><b>Pg final:</b> <%= @data.pgfin %></div>
+   <div style="margin-left:10px; color:#566573;"><b>Idioma:</b> <%= @data.idioma.nomidioma %></div>
+   <div style="margin-left:10px; color:#566573;"><b>Libro:</b> <%= @data.libro.nomlibro %></div>
+   <div style="margin-left:10px; color:#566573;"><b>ISBN:</b> <%= @data.libro.isbn %></div>
+</div>

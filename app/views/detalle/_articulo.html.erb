@@ -1,0 +1,23 @@
+<%
+
+ @data = @dataAct.articulo
+
+%>
+
+<div class="itemdetallep">
+
+    <% if @producto.prodgrupo.clave == 'INDIZADO' || @producto.prodgrupo.clave == 'ART' %>
+        <div style="margin-left:10px; color:#566573;"><b>Volumen:</b> <%= @data.volumen %></div>
+        <div style="margin-left:10px; color:#566573;"><b>Pag. incial:</b> <%= @data.pgini %></div>
+        <div style="margin-left:10px; color:#566573;"><b>Pag. final:</b> <%= @data.pgfin %></div>
+        <div style="margin-left:10px; color:#566573;"><b>Revista:</b> <%= @data.revista.nomrevista %></div>
+    <% end %>
+    <% if @producto.prodgrupo.clave == 'PERIODICO' %>
+        <div style="margin-left:10px; color:#566573;"><b>Sección:</b> <%= @data.volumen %></div>
+        <div style="margin-left:10px; color:#566573;"><b>Fecha pub:</b> <%= @dataAct.fechapub %></div>
+        <div style="margin-left:10px; color:#566573;"><b>Periodico:</b> <%= @data.revista.nomrevista %></div>
+    <% end %>
+    
+
+
+</div>

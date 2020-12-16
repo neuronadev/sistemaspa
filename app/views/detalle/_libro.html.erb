@@ -1,0 +1,11 @@
+<%
+
+ @data = @dataAct.libroarbitrado
+
+%>
+
+<div class="itemdetallep">
+   <div style="margin-left:10px; color:#566573;"><b>ISBN:</b> <%= @data.isbn %></div>
+   <div style="margin-left:10px; color:#566573;"><b>No. páginas:</b> <%= @data.nopaginas %></div>
+   <div style="margin-left:10px; color:#566573;"><b>Editorial:</b> <%= @data.editorial.nomeditorial %></div>
+</div>

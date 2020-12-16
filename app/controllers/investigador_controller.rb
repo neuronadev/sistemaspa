@@ -17,6 +17,7 @@ class InvestigadorController < ApplicationController
          idsActiv.push(a.actividad_id) 
       end
        @actividad = Actividad.where(:id=>idsActiv).where(periodo:2020).where("estado in ('C','S','Z','W')").order(:producto_id).order(:id)
+       @persona = Persona.find(personaid.to_i)
   end
 
   def investdetalle
