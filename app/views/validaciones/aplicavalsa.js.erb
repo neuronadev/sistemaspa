@@ -1,3 +1,5 @@
-$("#modal-window").modal('hide');
-$("#val<%=@idactividad%>").html("<span class='text-success'>Validado</span>")
+$("#no<%=@idactividad%>").hide()
+$("#val<%=@idactividad%>").hide()
+$("#msgsicon<%=@idactividad%>").html("<span style='color:green;'>Producto Validado</span>")
+$("#anulasa<%=@idactividad%>").show()
 alert("Registro validado.")

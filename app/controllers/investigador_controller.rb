@@ -16,7 +16,8 @@ class InvestigadorController < ApplicationController
       Autor.where(:persona_id=>personaid).each do |a|
          idsActiv.push(a.actividad_id) 
       end
-       @actividad = Actividad.where(:id=>idsActiv).where(periodo:2020).where("estado in ('C','S','Z','W')").order(:producto_id).order(:id)
+       #@actividad = Actividad.where(:id=>idsActiv).where(periodo:2020).where("estado in ('C','S','Z','W')").order(:producto_id).order(:id)
+       @actividad = Actividad.where(:id=>idsActiv).where(periodo:2020).where("estado in ('A','U','C','S','Z','W')").order(:producto_id).order(:id)
        @persona = Persona.find(personaid.to_i)
   end
 
@@ -26,6 +27,29 @@ class InvestigadorController < ApplicationController
     Persona.where(:tipopersona_id=>tipoper).order(:paterno).each do |p|
       @investigador.push(p)
     end
+  end
+
+  def activar
+    actividad = Actividad.find(params[:id].to_i)
+    tipo = params[:tipo]
+    if tipo == 'I'
+       actividad.estado = 'A'
+       actividad.save
+    end 
+    if tipo == 'C'
+      actividad.estado = 'U'
+      actividad.save
+    end 
+    if tipo == 'COM'
+      actividad.estado = 'U'
+      actividad.save
+    end 
+    if tipo == 'S'
+      actividad.estado = 'C'
+      actividad.save
+    end 
+   
+
   end
 
 end

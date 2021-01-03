@@ -52,7 +52,7 @@
 </div>
 
 <div class="hoptions">
-  <strong>  <%=  (@persona.paterno||'') + ' ' + (@persona.materno||'') + ' ' + (@persona.nombre||'') %></strong> 
+ <strong>Academico:</strong>  <%=  (@persona.paterno||'') + ' ' + (@persona.materno||'') + ' ' + (@persona.nombre||'') %>
 </div>
 
 <%  
@@ -61,9 +61,7 @@
     @dataAct = Actividad.find(a.id)
 %>
 
-
-
-  <div class="contprod">
+  <div class="contprod" id="div<%= a.id %>">
         <div class="rwp">
              <div style="font-weight: bold; color:#154360; text-decoration: underline grey;"><%= a.producto.descripcion %></div>
              <div style="margin-left:20px; color:blue;"><b>Año:</b> <%= a.anio %></div>
@@ -85,10 +83,44 @@
         </div>  
 
         <div class="detallep">
-            <%= render partial: "detalle/tipo"  %>
+            <%= render partial: "detalle/tipo"  %> 
         </div>
-
-
+          
+        <div class="detallep">
+          <% if a.estado == 'A' %>
+                <div style="margin-left:10px; color:#DEA101;"><b>Investigador:</b> 
+                    En validación (Falata VoBo)
+                </div> 
+          <% end %> 
+          <% if a.estado == 'U' %>
+                <div style="margin-left:10px; color:#566573;"><b>VoBo Investigador:</b> 
+                    <%= a.fecha1 %> <I><%= link_to "Activar", activar_path(a.id,'I'), remote:true %></I>
+                </div>
+                <div style="margin-left:10px; color:#DEA101;"><b>Coordinador:</b> 
+                    En validación
+                </div>
+          <% end %>  
+          <% if a.estado == 'C' %>  
+                <div style="margin-left:10px; color:#566573;"><b>VoBo Investigador:</b> 
+                    <%= a.fecha1 %> <I><%= link_to "Activar", activar_path(a.id,'I'), remote:true %></I>
+                </div>
+                <div style="margin-left:10px; color:#566573;"><b>Coordinador:</b> 
+                    <%= a.fecha2 %> <I><%= link_to "Activar", activar_path(a.id,'C'), remote:true %></I>
+                </div>
+                <div style="margin-left:10px; color:#566573;"><b>Sec. Academica:</b> 
+                    <% if a.fecha3.nil? %>
+                        <I style="color:green;">Envalidación</I>
+                    <% else %> 
+                    <%= a.fecha3 %> <I><%= link_to "Activar", activar_path(a.id,'S'), remote:true %></I> 
+                    <% end%>
+                </div>
+           <% end %>     
+           <% if a.estado == 'Z' || a.estado == 'S' %>  
+                <div style="margin-left:10px; color:#566573;"><b>VoBo Investigador: <%= a.fecha1 %></b></div>
+                <div style="margin-left:10px; color:#566573;"><b>Coordinador: <%= a.fecha2 %> </b></div>
+                <div style="margin-left:10px; color:#566573;"><b>Sec. Academica: <%= a.fecha3 %></b></div>
+           <% end %>     
+        </div>
         <% if a.estado == 'C' %> 
                 <div class="rwopts">
                     <div id="val<%= a.id %>" style="font-size:14px; color:green;"> 
@@ -97,26 +129,42 @@
                             <% end %>
                     </div>
                     <div id="no<%= a.id %>" style="margin-left:10px; font-size:14px; color:red; cursor: pointer; " onclick="showform(<%= a.id %>)"> 
-                            <i class="fas fa-times text-danger"></i></i> No considerar
+                            <i class="fas fa-times text-danger"></i> No considerar
                     </div> 
                     <div id="rechazar<%= a.id %>" class="formrechaza" style="margin-left:10px; font-size:14px; color:red;">
                         <div>Motivo:</div> 
                         <div> <textarea id="motivotxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
                         <div class="frmopt">
                                  <div style="cursor: pointer;" onclick="aceptarform(<%= a.id %>)">Aceptar</div>
-                                 <div onclick="cancelform(<%= a.id %>)" style="cursor: pointer;">Cancelar</div> 
+                                 <div onclick="cancelform(<%= a.id %>)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
                         </div>
                     </div>
-
+                    <div id="msgnocon<%= a.id %>"></div>
+                    <div id="msgsicon<%= a.id %>"></div>
+                    <div id="anulasa<%= a.id %>" style="margin-left:10px; color:#566573; display:none;">
+                       <I><%= link_to "Anular validación", anularsa_path(a.id), remote:true %></I>
+                    </div> 
                 </div>
             <% else %> 
                 <% if a.estado == 'S' %> 
-                    <div style="margin-top:15px; color:green; font-weight: bold;">Producto aceptado</div>
+                    <div style="width:45%;margin-top:15px; color: white; background-color: #033B08; font-weight: bold;">
+                     <i class="fas fa-check-double text-success" style="margin-left:5px; color:white;"></i> Producto aceptado
+                    </div>
+                    <div id="anulasa<%= a.id %>" style="margin-left:10px; color:#566573;">
+                       <I><%= link_to "Anular validación", anularsa_path(a.id), remote:true %></I>
+                    </div> 
                 <% end %> 
                 
-                <% if a.estado == 'Z' %>  
-                    <div style="margin-top:15px; color:red;">Producto rechazado</div>
-                    <div id="txtrechazav<%= a.id %>"></div> 
+                <% if a.estado == 'Z'
+                   @m = Mensaje.where(actividad_id:a.id).where(tipo:'Z').where(estado:'A').first
+                %>  
+                    <div style="margin-top:15px; color:red;">
+                      <i class="fas fa-times text-danger"></i> Producto rechazado : <%= @m.txt %>
+                    </div>
+                    <div id="txtrechazav<%= a.id %>"></div>
+                    <div id="anulasa<%= a.id %>" style="margin-left:10px; color:#566573;">
+                     <I><%= link_to "Anular validación", anularsa_path(a.id), remote:true %></I>
+                    </div>
                 <% end %>
             <% end %>
 
@@ -125,12 +173,18 @@
 <% end %>
 
 <br><br>
-
+<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
 <script>
     $(function () {
         $('.formrechaza').hide(); 
+        
+        $('#test').click(function(){
+           $('body').scrollTo('#div3135');
+        });
     });
      
+    
+
     function showform(idact){
         $('#rechazar'+idact).show();  
     }

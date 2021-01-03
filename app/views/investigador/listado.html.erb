@@ -26,42 +26,45 @@
    flex-direction: row;
    margin-left: 15px;
 }
+.itemdata_num{
+  width: 6%;
+}
 .itemdata_ac{
-   width: 50%;
+   width: 47%;
 }
 .itemdata_opt{
-  width: 50%;
+  width: 47%;
 }
 
 </style>
 
 <div class="box">
+   <%  
+       @redes.each do |r|
+   %>
 
-<%  
-   @redes.each do |r|
-%>
- <div class="redtxt"> 
-      <%= r.nomred %>
- </div>
- 
-<%
-   @academicos = Academico.where(red_id:r.id)
-     @academicos.each do |a|  
-     if (a.persona.tipopersona_id == 2 || a.persona.tipopersona_id == 3) && a.persona.estado == 'A'
+        <div class="redtxt"> 
+            <%= r.nomred %>
+         </div>
+      
+         <%
+            @academicos = Academico.where(red_id:r.id)
+            @i = 0
+            @academicos.each do |a|  
+              if (a.persona.tipopersona_id == 2 || a.persona.tipopersona_id == 3) && a.persona.estado == 'A'
+                @i += 1
+         %>
+               <div class="itemsdata">       
+                  <div class="itemdata">
+                     <div class="itemdata_num"><%= @i.to_s + "." %></div>
+                     <div class="itemdata_ac"><%= (a.persona.paterno||'') + ' ' + (a.persona.materno||'') + ' ' + (a.persona.nombre||'') %></div>
+                     <div class="itemdata_opt"> <%= link_to "Ver productos", listproduccion_path(a.persona.id) %> </div>  
+                  </div> 
+               </div> 
 
-%>
-  
-    <div class="itemsdata">       
-         <div class="itemdata">
-            <div class="itemdata_ac"><%= (a.persona.paterno||'') + ' ' + (a.persona.materno||'') + ' ' + (a.persona.nombre||'') %></div>
-            <div class="itemdata_opt"> <%= link_to "Ver productos", listproduccion_path(a.persona.id) %> </div>  
-         </div> 
-    </div> 
+              <% end %>
+            <% end %>
 
-     <% end %>
    <% end %>
-
-<% end %>
-
+    
 </div>
-<br>

@@ -30,6 +30,7 @@
 <table class="table table-striped table-sm table-bordered tablaf">
  <thead class="thead-light"> 
    <tr>
+     <th class="text-center">Folio</th>
      <th class="text-center">Producto</th>
      <th class="text-center">Título</th>
      <th class="text-center">Autores</th>
@@ -38,7 +39,7 @@
      <th class="text-center">Eliminar</th>
      <th class="text-center">Vo.Bo.</th>
      <% if current_usuario.rol == 'T' %>
-      <th class="text-center">Validación-Comite</th> 
+      <th class="text-center">Validación</th> 
      <% else %> 
       <th class="text-center">Coordinador</th>
      <% end %> 
@@ -88,12 +89,13 @@
      mostrar = 'N'
   end
 
-   
-
+  persona_cap = Persona.find(a.personaid) 
+  @tipo_per = persona_cap.tipopersona_id
   if mostrar == 'S'
 
 %>
      <tr>
+         <td><%= a.id %></td>
          <td><%= a.producto.descripcion %></td> 
           <td>
             <% if a.producto_id == 81 || a.producto_id == 82 || a.producto_id == 83 %>
@@ -234,6 +236,8 @@
               <% end %>    
 
           </td>
+           
+
            <!-- FIN PRIMER VALIDACION -->
            <!-- VALIDACION POR LA SA PARA INVEST --> 
           <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %>
@@ -363,9 +367,9 @@
                 <% end %>
                 <% if a.estado == 'S' && !a.aceptado.present? %> 
                     <td class="text-center"> 
-                     <!-- <%= link_to aceptaval_path(a.id), data:{confirm:"¿Aceptar la evaluación del producto?", disabled_with: "Enviando.."}  do %> 
-                             <i class="fas fa-check-circle fa-2x text-secondary"></i>
-                      <% end %> -->
+                      <%= link_to aceptaval_path(a.id), data:{confirm:"¿Aceptar la evaluación del producto?", disabled_with: "Enviando.."}  do %> 
+                             <i class="fas fa-check-circle fa-2x text-primary"></i>
+                      <% end %>
                     </td> 
                 <% end %>
                 <% if a.estado == 'S' && a.aceptado == 'S' %> 
@@ -401,9 +405,9 @@
                  <% else %>  
                    <td class="text-center">
                           
-                    <!--  <%= link_to aceptaval_path(a.id), data:{confirm:"¿Aceptar la evaluación del producto?", disabled_with: "Enviando.."}  do %> -->
-                             <i class="fas fa-check-circle iconsize  text-secondary "></i>
-                    <!--  <% end %> -->
+                      <%= link_to aceptaval_path(a.id), data:{confirm:"¿Aceptar la evaluación del producto?", disabled_with: "Enviando.."}  do %> 
+                             <i class="fas fa-check-circle iconsize  text-primary "></i>
+                     <% end %>
               
                    
                    </td>
@@ -434,6 +438,15 @@
          <% end %>
         
         </tr>
+        <!-- DETALLE PARA PRODUCTOS CAPTURADOS POR INVESTIGADORES y lo ven los TECNICOS -->
+        <% if current_usuario.rol == 'T' && [2,3].include?(@tipo_per) %>
+            <tr align="center">
+              <td colspan="9"><I><b style="color:blue;">El producto con el Folio <%= a.id %> es validado por el Coordinador de Red y la SA</b></I></td>
+            </tr> 
+        <% end %>
+            
+
+
   <% end %>      
 <% end %>
 

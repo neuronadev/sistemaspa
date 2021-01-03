@@ -43,8 +43,8 @@ class TecnicoController < ApplicationController
  end
 
  def mostraradicional
-   idacad = params[:idacad] 
-   academico = Academico.find(idacad)
+   @idacad = params[:idacad] 
+   academico = Academico.find(@idacad)
    persona = Persona.find(academico.persona_id)
 
    @actividad = Actividad.where(:personaid=>persona.id).where("estado in ('U','S','Z','W') and periodo=2020").order(:producto_id).order(:id)
@@ -107,7 +107,7 @@ class TecnicoController < ApplicationController
  end
 
 def listaevaltecnico
-   academicos = Academico.all
+   academicos = Academico.all.order(:red_id)
    tecnicos = Array.new
    @listado = Array.new
    Persona.where(:tipopersona_id=>4).order(:paterno).each do |p|

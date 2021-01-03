@@ -225,6 +225,23 @@ class ValidacionesController < ApplicationController
     end
   end
 
+  def anularsa
+    idactividad = params[:id]
+    @actividad = Actividad.find(idactividad)
+    @actividad.estado = 'C'
+    @actividad.save
+
+    mensaje = Mensaje.where(actividad_id:idactividad).where(tipo:'Z')
+    mensaje.each do |m|
+      m.estado = 'X'
+      m.save
+    end
+
+    respond_to do |format| 
+      format.js
+    end
+  end 
+
   def rechazar
     @idactividad = params[:id]
     @txt = params[:txt]

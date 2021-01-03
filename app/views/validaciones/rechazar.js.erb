@@ -1,4 +1,7 @@
 
-$("#no<%=@idactividad%>").html("<span class='text-warning'>Rechazado</span>")
+$("#no<%=@idactividad%>").hide()
+$("#val<%=@idactividad%>").hide()
+$("#msgnocon<%=@idactividad%>").html("<span style='color:red'>No se considera: <%= @txt %></span>")
+$("#anulasa<%=@idactividad%>").show()
 $("#rechazar<%=@idactividad%>").hide();  
 alert("Registro validado.")

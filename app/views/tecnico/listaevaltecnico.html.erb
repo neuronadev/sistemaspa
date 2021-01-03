@@ -8,7 +8,8 @@
     <table class='table'>
     <thead>
         <tr>
-            <th>Nombre</th>
+            <th>Académico</th>
+            <th>Red</th>
             <th>Evaluación</th>
             <th>Red</th>
             <th>Sustantivas</th>
@@ -28,10 +29,11 @@
         %>
         <tr>
         <td><span class='<%= @strColor %>'><%= (@persona.paterno||'') + " " + (@persona.materno||'') + " " + (@persona.nombre||'') %></span></td>
+        <td> <%= @academico.red.nomred %> </td>
         <td><span class='<%= @strColor %>'><%= l[1] %></span></td>
         <td><%= @academico.red.nomred %></td>
         <td> <%= link_to("Ver", mostraractiv_path(@academico.id), data:{turbolinks:false} ) %> </td>
-        <td> <%= link_to("Ver", mostraradicional_path(@academico.id), data:{turbolinks:false} ) %> </td>
+        <td> <%= link_to("Ver", actividadt_path(@academico.id), data:{turbolinks:false} ) %> </td>
         </tr>
         <% end %>
     </tbody>   

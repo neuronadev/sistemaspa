@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :autores
   resources :externos
   resources :perfil
+  resources :academicos
   #resources :indicadores
     
   get "actividad/newact/:producto_id/:idanterior", to: "actividades#newact", as: 'newact'
@@ -70,7 +71,7 @@ Rails.application.routes.draw do
   get 'validaciones/editdata/:id/:red', to: "validaciones#editdata", as: 'valideditdata'  
   patch 'validaciones/updatedata/:id', to: "validaciones#updatedata", as: 'validupdatedata'  
   post  'validaciones/validamarcar', to:'validaciones#validamarcar', as: 'validamarcar'
-
+  get 'validaciones/anularsa/:id', to: "validaciones#anularsa", as: 'anularsa'  
   # Historico
   get 'historico/datahistory/:periodo', to: 'historico#datahistory', as: 'datahistory'
   get 'historico/consultar', to: 'historico#consultar', as: 'histoconsultar'  
@@ -89,8 +90,8 @@ Rails.application.routes.draw do
   get 'investigador/listado', to: 'investigador#listado', as: 'investlista' 
   get 'investigador/produccion/:id', to: 'investigador#produccion', as: 'listproduccion' 
   get 'investigador/investdetalle', to: 'investigador#investdetalle', as: 'investdetalle' 
+  get 'investigador/activar/:id/:tipo', to: 'investigador#activar', as: 'activar' 
   
-
   #aceptar
   get 'validaciones/aceptaval/:id', to: 'validaciones#aceptaval', as: 'aceptaval' 
   get 'productos/cambio/:id/:idactiv', to: 'productos#cambio', as: 'prodcambio'
@@ -114,6 +115,9 @@ Rails.application.routes.draw do
   get 'auditoria/adicionalesinv/', to:'auditoria#adicionalesinv', as:'auditadicionalesinv'
   get 'auditoria/listaadicinv/:id', to:'auditoria#listaadicinv', as:'listaadicinv'
   get 'auditoria/downother/:id/:tipo', to:'auditoria#downother', as:'downother'
+
+  #Academicos Validacion de tecnicos
+  get 'academicos/actividadt/:idacadem', to:'academicos#actividadt', as:'actividadt'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
