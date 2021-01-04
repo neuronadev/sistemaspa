@@ -225,6 +225,16 @@ class ValidacionesController < ApplicationController
     end
   end
 
+  def anularcoor
+    idactividad = params[:id]
+    @actividad = Actividad.find(idactividad)
+    @actividad.estado = 'U'
+    @actividad.save
+    respond_to do |format| 
+      format.js
+    end
+  end
+
   def anularsa
     idactividad = params[:id]
     @actividad = Actividad.find(idactividad)

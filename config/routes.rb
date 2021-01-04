@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   patch 'validaciones/updatedata/:id', to: "validaciones#updatedata", as: 'validupdatedata'  
   post  'validaciones/validamarcar', to:'validaciones#validamarcar', as: 'validamarcar'
   get 'validaciones/anularsa/:id', to: "validaciones#anularsa", as: 'anularsa'  
+  get 'validaciones/anularcoor/:id', to: "validaciones#anularcoor", as: 'anularcoor'
   # Historico
   get 'historico/datahistory/:periodo', to: 'historico#datahistory', as: 'datahistory'
   get 'historico/consultar', to: 'historico#consultar', as: 'histoconsultar'  

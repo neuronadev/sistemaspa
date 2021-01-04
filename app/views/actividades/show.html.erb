@@ -20,8 +20,11 @@
               <% end %> 
               <% if @actividad.estado == 'C' %> 
                   <div style="font-size:1.5em">
-                     <i class="fas fa-check-double text-success"></i> Registro validado por la Coordinación de red
+                     <i class="fas fa-check-double text-success"></i> Registro validado por la Coordinación de red-
                   </div> 
+                  <div>
+                     <I><%= link_to "Anular validación", anularcoor_path(@actividad.id), remote:true, data:{confirm:'El registro será habilitado para validación, ¿desea continuar?'} %></I>
+                  </div>
               <% end %>
               <% if @actividad.estado == 'S' %> 
                   <div style="font-size:1.5em">

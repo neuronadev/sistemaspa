@@ -66,6 +66,7 @@
 
             <div class="card__main">
                 <% @actividades.each do |a| 
+                    producto = Producto.find(a.producto_id) 
                     autores = a.autores.order(:posicion)
                     @str = ""
                     idreporta = ''
@@ -83,7 +84,12 @@
                          end     
                        i = i+1
                     end
-                    
+                    mostrar = 'S'
+                    if producto.prodgrupo.clave == 'ACTIVIDAD' && (current_usuario.rol == 'I' || current_usuario.rol == 'C')
+                        mostrar = 'N'
+                    end
+
+                   if mostrar == 'S' 
                 %>
                         <div class="card__row">
                             <div class="card__icon"><i class="fas fa-book"></i></div>
@@ -96,8 +102,8 @@
                              <div class="card__note"></div>
                             </div>
                         </div>
-                <% 
-                 end %>        
+                   <% end %>      
+                <% end %>
                        
             </div>
         </div>
