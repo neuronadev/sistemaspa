@@ -122,7 +122,16 @@
               </ul>
             </li>
            <% end %> 
-
+           
+          <li>--</i> 
+          <% if current_usuario.evaluador == 'S' %>
+              <li>
+                <div class="navList__subheading row row--align-v-center">
+                  <span class="navList__subheading-icon"><i class="fas fa-align-justify"></i></span>
+                   <span class="navList__subheading-title"><%= link_to("Eval.Técnicos", listaevaltecnico_path, data: {turbolinks:false}) %></span>
+                </div> 
+              </li> 
+            <% end %>
         </ul>
         </div>
     </aside>

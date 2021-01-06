@@ -107,22 +107,30 @@ class TecnicoController < ApplicationController
  end
 
 def listaevaltecnico
-   academicos = Academico.all.order(:red_id)
-   tecnicos = Array.new
-   @listado = Array.new
-   Persona.where(:tipopersona_id=>4).order(:paterno).each do |p|
-     tecnicos.push(p.academico.id)
-   end
-   
-   tecnicos.each do |t|
-      evaltec = 0.0
-      Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",t).each do |s|
-         if s.calidad.present? && s.eficiencia.present?
-             evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
-         end      
+
+      academicos = Academico.all.order(:red_id)
+      tecnicos = Array.new
+      @listado = Array.new
+
+      if current_usuario.evaluador == 'S'
+         Persona.where(tipopersona_id:4,evalua:current_usuario.persona_id).order(:paterno).each do |p|
+            tecnicos.push(p.academico.id)
+         end
+      else    
+         Persona.where(:tipopersona_id=>4).order(:paterno).each do |p|
+            tecnicos.push(p.academico.id)
+         end
+      end   
+      
+      tecnicos.each do |t|
+         evaltec = 0.0
+         Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",t).each do |s|
+            if s.calidad.present? && s.eficiencia.present?
+               evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
+            end      
+         end
+         @listado.push([t,evaltec.round(2)])     
       end
-      @listado.push([t,evaltec.round(2)])     
-   end
 
 end
 def tecnicoadetalle

@@ -7,15 +7,19 @@ class AcademicosController < ApplicationController
   end
 
   def actividadt
-    @academico = params[:idacadem]
+    idacademico = params[:idacadem]
+    academico = Academico.find(idacademico)
 
-    personaid = params[:idacadem]
+    personaid = academico.persona_id
     idsActiv = Array.new
-      Autor.where(:persona_id=>personaid).each do |a|
-         idsActiv.push(a.actividad_id) 
-      end
+   
+     @actividad = Actividad.where(periodo:2020).where("estado in ('A','U','C','S','Z','W')").order(:producto_id).order(:id).joins(:autores).where(autores: {persona_id:personaid}) 
+     
+     #Autor.where(:persona_id=>personaid).each do |a|
+     #    idsActiv.push(a.actividad_id) 
+     # end
        #@actividad = Actividad.where(:id=>idsActiv).where(periodo:2020).where("estado in ('C','S','Z','W')").order(:producto_id).order(:id)
-       @actividad = Actividad.where(:id=>idsActiv).where(periodo:2020).where("estado in ('A','U','C','S','Z','W')").order(:producto_id).order(:id)
-       @persona = Persona.find(personaid.to_i)
+     #  @actividad = Actividad.where(:id=>idsActiv).where(periodo:2020).where("estado in ('A','U','C','S','Z','W')").order(:producto_id).order(:id)
+       @persona = Persona.find(personaid)
   end
 end
