@@ -99,11 +99,32 @@
                         <% end %> 
                         <% if a.estado == 'U' %>
                                 <div style="margin-left:10px; color:#566573;"><b>VoBo Académico:</b> 
-                                    <%= a.fecha1 %> <I><%= link_to "Activar", activar_path(a.id,'I'), remote:true %></I>
+                                    <%= a.fecha1 %> <I> <span onclick="showform(<%= a.id %>,1)" style="color:blue;cursor: pointer;"><I>Activar</I></span>
+                                     <!-- -------------------------------------------------------------------------------------- -->
+                                    <div id="activar<%= a.id %>" class="formactivar" style="margin-bottom:15px; margin-left:30px; font-size:14px; color:blue;">
+                                                    <div>Escriba a continuación el motivo por el cual se va a activar:</div> 
+                                                    <div> <textarea id="activartxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
+                                                    <div class="frmopt">
+                                                            <div style="cursor: pointer;" onclick="aceptaractivar(<%= a.id %>)">Aceptar</div>
+                                                            <div onclick="cancelform(<%= a.id %>,1)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
+                                                    </div>
+                                    </div>
+                                    <!-- -------------------------------------------------------------------------------------- -->
                                 </div>
                                 <div style="margin-left:10px; color:#DEA101;"><b>Comite:</b> 
                                     En validación
                                 </div>
+                                
+                                   <%  
+                                       @mensaje = Mensaje.where(actividad_id:a.id).where(tipo:'C').where(estado:'A').first
+                                       if !@mensaje.nil?
+                                   %>
+                                   <div style="margin-top: 10px; margin-left:15px;">
+                                      <I style="color:green">Este producto fue enviado al Técnico para correciones con el siguiente mensaje: <%= @mensaje.txt %> </I>
+                                      <div><%= link_to "Cerrar mensaje", cerrarmensaje_path(a.id), remote:true %></div>
+                                   </div>
+                                   <%  end %>    
+                                
                         <% end %>  
                         <% if a.estado == 'S' %>  
                                 <div style="margin-left:10px; color:#566573;"><b>VoBo Académico:</b> 
@@ -114,7 +135,15 @@
                                 </div>
                             
                         <% end %>     
+                        <% if a.estado == 'G' %>
+                          <%  
+                              @mensaje = Mensaje.where(actividad_id:a.id).where(tipo:'C').where(estado:'A').first
+                          %> 
+                             <I style="color:green;">Este producto se activo para correccion: <%= @mensaje.txt %></I> 
+                             <%= link_to "Anular acción", anularactiv_path(a.id), remote:true %>
+                        <% end %>  
                         </div>
+                       
                         <% if a.estado == 'U' %> 
                                 <div class="rwopts">
                                     <div id="val<%= a.id %>" style="font-size:16px; color:green;"> 
@@ -122,7 +151,7 @@
                                                 <i class="fas fa-check-double text-success"></i> Validar
                                             <% end %>
                                     </div>
-                                    <div id="no<%= a.id %>" style="margin-left:10px; font-size:16px; color:red; cursor: pointer; " onclick="showform(<%= a.id %>)"> 
+                                    <div id="no<%= a.id %>" style="margin-left:10px; font-size:16px; color:red; cursor: pointer; " onclick="showform(<%= a.id %>,2)"> 
                                             <i class="fas fa-times text-danger"></i> No considerar
                                     </div> 
                                     <div id="rechazar<%= a.id %>" class="formrechaza" style="margin-left:10px; font-size:14px; color:red;">
@@ -130,7 +159,7 @@
                                         <div> <textarea id="motivotxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
                                         <div class="frmopt">
                                                 <div style="cursor: pointer;" onclick="aceptarform(<%= a.id %>)">Aceptar</div>
-                                                <div onclick="cancelform(<%= a.id %>)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
+                                                <div onclick="cancelform(<%= a.id %>,2)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
                                         </div>
                                     </div>
 
@@ -143,10 +172,14 @@
                                 <% end %> 
                                 
                                 <% if a.estado == 'Z' %>  
+                                        <%  
+                                            @mensaje = Mensaje.where(actividad_id:a.id).where(tipo:'Z').where(estado:'A').first
+                                        %>   
                                     <div style="margin-top:15px; color:red;">
-                                    <i class="fas fa-times text-danger"></i> Producto rechazado
+                                    <i class="fas fa-times text-danger"></i> Producto rechazado : <b style="color:red"><%= @mensaje.txt %></b>   
                                     </div>
                                     <div id="txtrechazav<%= a.id %>"></div> 
+                                    
                                 <% end %>
                             <% end %>
                 <% else %>
@@ -165,16 +198,38 @@
     $(function () {
         $('.formrechaza').hide(); 
     });
-     
-    function showform(idact){
-        $('#rechazar'+idact).show();  
+    $(function () {
+        $('.formactivar').hide(); 
+    });
+
+    function showform(idact,tipo){
+       if (tipo == 1){
+          $('#activar'+idact).show();  
+       }  
+       if (tipo == 2){
+          $('#rechazar'+idact).show();  
+       }   
     }
 
     function hideform(idact){
         $('#rechazar'+idact).hide();  
     }
-    function cancelform(idact){
-        $('#rechazar'+idact).hide();  
+    function cancelform(idact,tipo){
+        if (tipo == 1){ $('#activar'+idact).hide(); }
+        if (tipo == 2){ $('#rechazar'+idact).hide(); }
+    }
+    function aceptaractivar(idact){
+      
+        $.ajax({
+                    url: '<%= activartec_path %>',
+                    data: "id="+idact + "&txt=" + $("#activartxt"+idact).val(),
+                    type: "get",
+                    success: function(data){ 
+                         
+                     },
+                    error: function(dayta){   }
+                })
+           
     }
     function aceptarform(idact){
           $.ajax({

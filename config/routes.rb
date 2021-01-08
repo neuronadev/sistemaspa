@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :autores
   resources :externos
   resources :perfil
-  resources :academicos
+  #resources :academicos
   #resources :indicadores
     
   get "actividad/newact/:producto_id/:idanterior", to: "actividades#newact", as: 'newact'
@@ -119,6 +119,9 @@ Rails.application.routes.draw do
 
   #Academicos Validacion de tecnicos
   get 'academicos/actividadt/:idacadem', to:'academicos#actividadt', as:'actividadt'
+  get 'academicos/activar', to:'academicos#activar', as:'activartec'
+  get 'academicos/anularactiv/:id', to:'academicos#anularactiv', as:'anularactiv'
+  get 'academicos/cerrarmensaje/:id', to:'academicos#cerrarmensaje', as:'cerrarmensaje'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

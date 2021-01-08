@@ -1,0 +1,176 @@
+<style>
+  .tablaf{
+      font-size: 13px;
+  }
+  .iconsize{
+      font-size: 18px;
+  }
+</style>
+<h5>Producción 2020</h5>
+<hr>
+<div class="row">
+  <div class="col-md-4">
+       <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", tecnico_path, data: {turbolinks:false} ) %>&nbsp
+
+    <i class="fas fa-plus"></i>&nbsp;<%= link_to("Registrar nuevo..", producto_path(0), data: {turbolinks:false} ) %>
+  
+  </div>
+  <div class="col-md-4 ml-auto align-middle"> <%= pagy_bootstrap_nav(@pagy).html_safe %> </div>
+</div>
+
+<table class="table  table-sm  tablaf">
+  <thead class="thead-light"> 
+    <tr>
+        <th class="text-center">Folio</th>
+        <th class="text-center">Producto</th>
+        <th class="text-center">Título</th>
+        <th class="text-center">Autores</th>
+        <th class="text-center">Comprobante</th>
+        <th class="text-center">Editar</th>
+        <th class="text-center">Eliminar</th>
+        <th class="text-center">Vo.Bo.</th>
+        <th class="text-center">Comite</th> 
+        <th class="text-center">Aceptar</th> 
+    </tr>
+  </thead>
+  <tbody> 
+     <% @actividades.each do |a| 
+        producto = a.producto
+        autores = a.autores.order(:posicion)
+        @str = ""
+        idreporta = ''
+        i = 0
+        @conNota = 'N'
+        autores.each do |p|
+          if i > 0  
+            simbolo = ", " 
+          else      
+            simbolo = "" 
+          end
+          if !p.firma.present?
+            @str = @str + simbolo + (p.persona.paterno||"") + "," + (p.persona.nombre||"")
+          else
+            @str = @str + simbolo + (p.firma||"")
+          end     
+
+          if p.filiacion == 'F'
+            if current_usuario.persona_id == p.persona_id
+                @conNota = 'S'
+            end
+          end
+
+          i = i+1
+        end
+        mostrar = 'S'
+        if producto.prodgrupo.clave == 'ACTIVIDAD' && (current_usuario.rol == 'I' || current_usuario.rol == 'C')
+            mostrar = 'N'
+        end
+
+        persona_cap = Persona.find(a.personaid) 
+        @tipo_per = persona_cap.tipopersona_id
+        if mostrar == 'S'
+        end
+
+%>
+
+    <tr>
+       
+        <td style="color:blue;"><%= a.id %></td>
+        <td>  <%= a.producto.descripcion %></td> 
+        <td><%= link_to(a.titulo.html_safe, actividad_path(a.id), data:{turbolinks:false}) %></td>
+        <td><%= cita(a.id).html_safe %></td>
+        <td class="text-center">
+                <% if a.documentos.attached? %> 
+                    <% a.documentos.each do |d|%>
+                        <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank' } do %>
+                            <i class="fas fa-file-pdf iconsize"></i>
+                        <% end %>
+                <% end %>  
+                <% end %>   
+        </td>
+        <td>
+           <% if  a.estado == "U" || a.estado == 'S' || a.estado == 'Z' %>
+              <i class="fas fa-edit iconsize text-secondary"></i>
+           <% elsif   a.estado == "A" || a.estado == "G" %>   
+               <%= link_to edit_actividad_path(a.id), data:{turbolinks:false}  do %> 
+                  <i class="fas fa-edit iconsize"></i>
+              <% end %>  
+           <% else %>
+              <b> -- </b> 
+           <% end %>  
+       </td>
+       
+       <td class="text-center">
+            
+          <% if a.estado == "U" || a.estado == "G" || a.estado == "S" || a.estado == 'Z' %>
+               <i class="fas fa-minus-circle iconsize text-secondary"></i>
+          <% end %> 
+          <% if a.estado == "A" %>
+               <%= link_to a, method:"delete", data:{confirm:"¿Desea eliminar el registro?", disabled_with: "Eliminando..."} do %>
+                   <i class="fas fa-minus-circle iconsize text-danger"></i>
+               <% end %>
+          <% end %> 
+        </td>
+        <td class="text-center">
+             <% if a.estado == 'A' || a.estado == "G"  %>
+                 <%= link_to validar_path(a,'user'),  data:{confirm:"¿Desea validar el registro? Al aceptar no podrá hacer cambios. Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
+                       <i class="fas fa-check-circle iconsize text-primary"></i>
+                <% end %>
+             <% end %>     
+             <% if a.estado == 'U' || a.estado == "S" || a.estado == 'Z' %>
+                  <i class="fas fa-check-double iconsize text-success"></i>
+             <% end %>     
+        </td>
+        <td>
+          <% if a.estado == 'S'  %>
+                <i class="fas fa-check-double iconsize text-success"></i>
+          <% elsif a.estado == 'G' %>       
+                <I>Corregir</I>
+          <% elsif a.estado == 'Z' %>  
+             <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                 <%= link_to "No se considera", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+             </span> 
+          <% elsif a.estado == 'U' %>       
+              <I>En validación</I>
+          <% else %>      
+               <I> -- </I>
+          <% end %>  
+        </td>
+        <td class="text-center">
+          <% if a.estado == 'S' && !a.aceptado.present? %> 
+                 <%= link_to "Aceptar", aceptaval_path(a.id), data:{confirm:"¿Acepta la evaluación que realizó el Comite Evaluador?", disabled_with: "Enviando.."}  %> 
+           <% elsif a.estado == 'Z' && !a.aceptado.present? %> 
+                 <%= link_to "Aceptar", aceptaval_path(a.id), data:{confirm:"¿Acepta la evaluación que realizó el Comite Evaluador?", disabled_with: "Enviando.."}  %>             
+          <% elsif a.estado == 'S' && a.aceptado == 'S'  %>  
+                 <i class="fas fa-user-check iconsize text-success"></i>
+          <% elsif a.estado == 'Z' && a.aceptado == 'S'  %>  
+                 <i class="fas fa-user-check iconsize text-success"></i>       
+          <% else %> 
+               <I> -- </I>
+          <% end %>
+        </td>
+    </tr> 
+    <tr>
+      <td></td>
+      <td colspan="9">
+          <% if a.estado == 'G' %>
+           <%  
+             @mensaje = Mensaje.where(actividad_id:a.id).where(tipo:'C').where(estado:'A').first
+           %>   
+            <b style="color:red">Validación: <%= @mensaje.txt %></b>     
+          <% end %>
+          <% if a.estado == 'Z' %>
+           <%  
+             @mensaje = Mensaje.where(actividad_id:a.id).where(tipo:'Z').where(estado:'A').first
+           %>   
+            <b style="color:red">No se considera: <%= @mensaje.txt %></b>     
+          <% end %>
+     </td>
+    </tr> 
+
+
+  <% end %>
+
+  </tbody>
+
+</table>

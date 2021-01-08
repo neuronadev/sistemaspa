@@ -11,19 +11,13 @@
 <%= form_with(model: @actividad, local: true)  do |form| %>
      <%= form.hidden_field :reemplazaidact, value:@idactividad_ant %> 
      <%= form.hidden_field :producto_id, value: @producto.id %> 
-     <%= form.hidden_field :personaid, value: current_usuario.persona_id %> 
-     <%= form.hidden_field :periodo, value: "2020" %> 
-     <%= form.hidden_field :estado, value:'A' %>
+     
+     <%= form.hidden_field :personaid, value: @actividad.personaid %> 
+     <%= form.hidden_field :estado, value:@actividad.estado %>
 
-     <% if current_usuario.persona_id == 64 %>
-          <div class="col-4">
-            <div class="form-group"> 
-              <%= form.select :personaid, Persona.where("tipopersona_id in (2,3)").order(:paterno).collect{|t| [(t.paterno||'') + ' ' + (t.materno||'') + ' ' + (t.nombre||''),t.id]}, {:include_blank=>'--Seleccione un Investigador--'} ,class:"form-control" %> 
-            </div>
-          </div>  
-      <% else %>
-         <%= form.hidden_field :personaid, value: current_usuario.persona_id %> 
-      <% end %>
+     <%= form.hidden_field :periodo, value: "2020" %> 
+      
+             
      <!--
       <% if @action == 'newact' || @action == 'edit' %>
            <% if current_usuario.persona_id == 64 %>

@@ -1,6 +1,8 @@
 <% 
+
+  
   if @actividad.estado == 'G'
-     @mensajes = Mensaje.where("actividad_id=?",@actividad.id).order(:created_at)
+     @mensajes = Mensaje.where(actividad_id:@actividad.id).where(estado:'A').where(tipo:'C').order(:created_at)
   else
      @mensajes = nil
   end   

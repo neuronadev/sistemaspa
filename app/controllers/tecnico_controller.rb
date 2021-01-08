@@ -155,6 +155,20 @@ def tecnicoadetalle
 
 end
 
+def activartec
+    @idactividad = params[:id]
+    @txt = params[:txt]
+    actividad = Actividad.find(@idactividad.to_i)
+    actividad.estado = 'A'
+    actividad.save
+    
+    mensaje = Mensaje.create(actividad_id:@idactividad, persona_id: current_usuario.persona_id, tipo:'G', estado:'A', txt:@txt)
+    
+    respond_to do |format| 
+      format.js
+    end
+    
+end
 
  private def sustantivas_params
   params.require(:academico).permit(sustantivas_attributes:[:id,:investigadorid,:descripcion,:porcentaje,:academico_id,:_destroy])
