@@ -1,5 +1,8 @@
-$("#no<%=@idactividad%>").hide()
-$("#val<%=@idactividad%>").hide()
-$("#msgsicon<%=@idactividad%>").html("<span style='color:green;'>Producto Validado</span>")
-$("#anulasa<%=@idactividad%>").show()
 alert("Registro validado.")
+
+<% if  @accion == 'VAL' %>
+   $("#item<%=@idactividad%>").hide("slow")
+<% else %>   
+   window.location.reload(true);
+<% end %>
+

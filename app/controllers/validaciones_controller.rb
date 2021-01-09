@@ -216,6 +216,7 @@ class ValidacionesController < ApplicationController
   end 
   def aplicavalsa
     @idactividad = params[:id]
+    @accion = 'VAL'
     actividad = Actividad.find(@idactividad.to_i)
     actividad.fecha3 = Date.today
     actividad.estado = 'S'

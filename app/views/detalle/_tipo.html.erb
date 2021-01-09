@@ -16,3 +16,6 @@
 <% if @producto.prodgrupo.clave == 'EDREV' || @producto.prodgrupo.clave == 'EDLIB' %>
    <%= render partial: "detalle/editor" %>
 <% end %>
+<% if @producto.prodgrupo.clave == 'OTRASD' %>
+    <%= render partial: "detalle/otrasd" %>
+<% end %>

@@ -8,13 +8,17 @@ class AcademicosController < ApplicationController
 
   def actividadt
     idacademico = params[:idacadem]
-    academico = Academico.find(idacademico)
+    @tipo = params[:tipo].to_i
+    @academico = Academico.find(idacademico)
 
-    personaid = academico.persona_id
+    personaid = @academico.persona_id
     idsActiv = Array.new
-   
-     @actividad = Actividad.where(periodo:2020).where("estado in ('S','A','U','G','Z')").order(:producto_id).order(:id).joins(:autores).where(autores: {persona_id:personaid}) 
-     
+    if @tipo == 1
+      @actividad = Actividad.where(periodo:2020).where("estado in ('A','U','G','Z')").order(:producto_id).order(:id).joins(:autores).where(autores: {persona_id:personaid}) 
+    end  
+    if @tipo == 2
+       @actividad = Actividad.where(periodo:2020).where("estado in ('S')").order(:producto_id).order(:id).joins(:autores).where(autores: {persona_id:personaid}) 
+    end  
      #Autor.where(:persona_id=>personaid).each do |a|
      #    idsActiv.push(a.actividad_id) 
      # end

@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   get 'tecnico/edit/:id', to: "tecnico#edit", as: 'sustedit' 
   get 'tecnico/validar/:id/:tipo', to: "tecnico#validar", as: 'sustvalidar' 
   patch 'tecnico/updateitem', to: "tecnico#updateitem", as: 'sustupdateitem' 
-  get 'tecnicos/listaevaltecnico', to:  "tecnico#listaevaltecnico", as: 'listaevaltecnico'
+  get 'tecnicos/listaevaltecnico/', to:  "tecnico#listaevaltecnico", as: 'listaevaltecnico'
   get 'tecnicos/mostraradicional/:idacad', to:  "tecnico#mostraradicional", as: 'mostraradicional'
   get 'tecnico/tecnicoadetalle', to: "tecnico#tecnicoadetalle", as: 'tecnicoadetalle' 
 
@@ -118,7 +118,7 @@ Rails.application.routes.draw do
   get 'auditoria/downother/:id/:tipo', to:'auditoria#downother', as:'downother'
 
   #Academicos Validacion de tecnicos
-  get 'academicos/actividadt/:idacadem', to:'academicos#actividadt', as:'actividadt'
+  get 'academicos/actividadt/:idacadem/:tipo', to:'academicos#actividadt', as:'actividadt'
   get 'academicos/activar', to:'academicos#activar', as:'activartec'
   get 'academicos/anularactiv/:id', to:'academicos#anularactiv', as:'anularactiv'
   get 'academicos/cerrarmensaje/:id', to:'academicos#cerrarmensaje', as:'cerrarmensaje'

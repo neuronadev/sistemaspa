@@ -47,12 +47,40 @@
 
 </style>
 
-<div class="hoptions">
-  <strong> <%= link_to "Regresar", listaevaltecnico_path %> </strong>
-</div>
+<nav class="navbar navbar-expand-lg  bg-light">
+  <div class="container-fluid">
+   
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <%= link_to listaevaltecnico_path, class:"nav-link text-secondary" do %>
+              <i class="fas fa-long-arrow-alt-left"></i> Regresar
+        <% end %>
+        <%= link_to actividadt_path(@academico.id,1), class:"nav-link" do %>
+            <i class="fas fa-list-ol"></i> Sin validar
+        <% end %>
+        <%= link_to actividadt_path(@academico.id,2), class:"nav-link text-success"  do %>
+            <i class="fas fa-check-double"></i> Listado Validados
+        <% end %>
+       
+      </div>
+    </div>
+  </div>
+</nav>
+
 
 <div class="hoptions">
- <strong>Academico:</strong>  <%=  (@persona.paterno||'') + ' ' + (@persona.materno||'') + ' ' + (@persona.nombre||'') %>
+ <strong>Academico:  <%=  (@persona.paterno||'') + ' ' + (@persona.materno||'') + ' ' + (@persona.nombre||'') %></strong>
+</div>
+<div class="hoptions">
+   <% if @tipo == 1 %>
+    <strong class="text-primary"> Listado de actividades que no se han validado o no fueron consideradas </strong>
+   <% end %> 
+   <% if @tipo == 2 %>
+     <strong class="text-success"> Listado de actividades que ya fueron validadas </strong>
+   <% end %> 
 </div>
 
 
@@ -65,9 +93,9 @@
       
 %>
 
-  <div class="contprod">
+  <div class="contprod" id="item<%= a.id %>">
         <div class="rwp">
-             <div style="font-weight: bold; color:#154360; text-decoration: underline grey;"><%= a.producto.descripcion %></div>
+             <div style="font-weight: bold; color:#154360; text-decoration: underline grey;">  <%= a.producto.descripcion %> </div>
              <div style="margin-left:20px; color:blue;"><b>Año:</b> <%= a.anio %></div>
              <div style="margin-left:20px; color:blue;"><b>Folio:</b> <%= a.id %></div>
         </div>
@@ -99,7 +127,7 @@
                         <% end %> 
                         <% if a.estado == 'U' %>
                                 <div style="margin-left:10px; color:#566573;"><b>VoBo Académico:</b> 
-                                    <%= a.fecha1 %> <I> <span onclick="showform(<%= a.id %>,1)" style="color:blue;cursor: pointer;"><I>Activar</I></span>
+                                    <%= a.fecha1 %> <span onclick="showform(<%= a.id %>,1)" style="color:blue;cursor: pointer;"><I>Activar</I></span>
                                      <!-- -------------------------------------------------------------------------------------- -->
                                     <div id="activar<%= a.id %>" class="formactivar" style="margin-bottom:15px; margin-left:30px; font-size:14px; color:blue;">
                                                     <div>Escriba a continuación el motivo por el cual se va a activar:</div> 
@@ -195,6 +223,7 @@
 <br><br>
 
 <script>
+
     $(function () {
         $('.formrechaza').hide(); 
     });
@@ -225,7 +254,7 @@
                     data: "id="+idact + "&txt=" + $("#activartxt"+idact).val(),
                     type: "get",
                     success: function(data){ 
-                         
+                          window.location.reload(true);
                      },
                     error: function(dayta){   }
                 })
@@ -237,7 +266,7 @@
                     data: "id="+idact + "&txt=" + $("#motivotxt"+idact).val(),
                     type: "get",
                     success: function(data){ 
-                         alert("Registro marcado.");
+                          window.location.reload(true);
                      },
                     error: function(dayta){   }
                 })

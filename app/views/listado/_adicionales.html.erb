@@ -89,7 +89,7 @@
                 <% end %>   
         </td>
         <td>
-           <% if  a.estado == "U" || a.estado == 'S' || a.estado == 'Z' %>
+           <% if  a.estado == "U" || a.estado == 'S' || a.estado == 'Z' || a.estado == 'C' %>
               <i class="fas fa-edit iconsize text-secondary"></i>
            <% elsif   a.estado == "A" || a.estado == "G" %>   
                <%= link_to edit_actividad_path(a.id), data:{turbolinks:false}  do %> 
@@ -102,7 +102,7 @@
        
        <td class="text-center">
             
-          <% if a.estado == "U" || a.estado == "G" || a.estado == "S" || a.estado == 'Z' %>
+          <% if a.estado == "U" || a.estado == "G" || a.estado == "S" || a.estado == 'Z' || a.estado == 'C' %>
                <i class="fas fa-minus-circle iconsize text-secondary"></i>
           <% end %> 
           <% if a.estado == "A" %>
@@ -117,7 +117,7 @@
                        <i class="fas fa-check-circle iconsize text-primary"></i>
                 <% end %>
              <% end %>     
-             <% if a.estado == 'U' || a.estado == "S" || a.estado == 'Z' %>
+             <% if a.estado == 'U' || a.estado == "S" || a.estado == 'Z' || a.estado == 'C' %>
                   <i class="fas fa-check-double iconsize text-success"></i>
              <% end %>     
         </td>
@@ -150,6 +150,12 @@
           <% end %>
         </td>
     </tr> 
+     <!-- DETALLE PARA PRODUCTOS CAPTURADOS POR INVESTIGADORES y lo ven los TECNICOS -->
+    <% if current_usuario.rol == 'T' && [2,3].include?(@tipo_per) %>
+            <tr align="center">
+              <td colspan="9"><I><b style="color:blue;">El producto con el Folio <%= a.id %> es validado por el Coordinador de Red y la SA</b></I></td>
+            </tr> 
+   <% end %>
     <tr>
       <td></td>
       <td colspan="9">
@@ -167,6 +173,7 @@
           <% end %>
      </td>
     </tr> 
+   
 
 
   <% end %>
