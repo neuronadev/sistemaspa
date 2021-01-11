@@ -52,4 +52,12 @@ class InvestigadorController < ApplicationController
 
   end
 
+  def valcompleta
+      idpersona = params[:idpersona]
+      @persona = Persona.find(idpersona.to_i)
+      @persona.evaluacion = "S"
+      @persona.save
+      puts @persona.errors.messages
+  end
+
 end

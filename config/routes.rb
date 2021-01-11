@@ -91,7 +91,9 @@ Rails.application.routes.draw do
   get 'investigador/listado', to: 'investigador#listado', as: 'investlista' 
   get 'investigador/produccion/:id', to: 'investigador#produccion', as: 'listproduccion' 
   get 'investigador/investdetalle', to: 'investigador#investdetalle', as: 'investdetalle' 
-  get 'investigador/activar/:id/:tipo', to: 'investigador#activar', as: 'activar' 
+  get 'investigador/activar/:id/:tipo', to: 'investigador#activar', as: 'activar'
+  get 'investigador/valcompleta/:idpersona/', to: 'investigador#valcompleta', as: 'valcompleta'
+
   
   #aceptar
   get 'validaciones/aceptaval/:id', to: 'validaciones#aceptaval', as: 'aceptaval' 

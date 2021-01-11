@@ -35,6 +35,9 @@
 .itemdata_opt{
   width: 47%;
 }
+.completa{
+   color:grey;
+}
 
 </style>
 
@@ -59,6 +62,13 @@
                      <div class="itemdata_num"><%= @i.to_s + "." %></div>
                      <div class="itemdata_ac"><%= (a.persona.paterno||'') + ' ' + (a.persona.materno||'') + ' ' + (a.persona.nombre||'') %></div>
                      <div class="itemdata_opt"> <%= link_to "Ver productos", listproduccion_path(a.persona.id) %> </div>  
+                     <div class="itemdata_opt" id="persona<%= a.persona.id %>"> 
+                        <% if a.persona.evaluacion == 'N' || a.persona.evaluacion.nil? %>
+                          <%= link_to "Validación completa", valcompleta_path(a.persona.id), remote:true, class:"completa" %> 
+                        <% else %>  
+                             <i class="fas fa-check-double text-success"></i><b style="color:green;"> Validado</b>
+                        <% end %>
+                     </div>  
                   </div> 
                </div> 
 

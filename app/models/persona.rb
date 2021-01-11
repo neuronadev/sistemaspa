@@ -17,7 +17,7 @@ class Persona < ApplicationRecord
   validates :paterno, presence:true
   #validates :materno, presence:true
   #validates :email, presence:true, uniqueness: true
-  validates :genero, presence:true
+  #validates :genero, presence:true
   validates :tipopersona_id, presence:true
   
   def default_values
