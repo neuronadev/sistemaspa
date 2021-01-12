@@ -184,9 +184,14 @@
           <td class="text-center">
           
              <% if a.estado == 'A' || a.estado == "G"  %>
-                 <%= link_to validar_path(a,'user'),  data:{confirm:"¿Desea validar el registro? Al aceptar no podrá hacer cambios. Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
+                 <% if current_usuario.persona_id != 15 %> 
+                    <%= link_to validar_path(a,'user'),  data:{confirm:"¿Desea validar el registro? Al aceptar no podrá hacer cambios. Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
                        <i class="fas fa-check-circle iconsize text-primary"></i>
-                <% end %>
+                    <% end %>
+                 <% else %> 
+                    <i class="fas fa-check-circle iconsize text-secondary"></i>
+                 <% end %>
+             
              <% end %>     
              <% if a.estado == 'U' || a.estado == "C" || a.estado == "S" || a.estado == "Z" || a.estado == "W"%>
                       <i class="fas fa-check-double iconsize text-success"></i>
