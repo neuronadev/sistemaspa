@@ -1,6 +1,7 @@
 alert("Registro validado.")
 
 <% if  @accion == 'VAL' %>
+   window.location.reload(true);
    $("#item<%=@idactividad%>").hide("slow")
 <% else %>   
    window.location.reload(true);

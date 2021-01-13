@@ -10,6 +10,25 @@ class InvestigadorController < ApplicationController
     @redes = Red.where(id:[1,8,9,10,11,12,13,14,15,16,17,21])
   end 
 
+  def vistalista
+    personaid = params[:id]
+    idsActiv = Array.new
+      Autor.where(:persona_id=>personaid).each do |a|
+         idsActiv.push(a.actividad_id) 
+      end
+       #@actividad = Actividad.where(:id=>idsActiv).where(periodo:2020).where("estado in ('C','S','Z','W')").order(:producto_id).order(:id)
+       @actividad = Actividad.where(:id=>idsActiv).where(periodo:2020).where("estado in ('A','U','C','S','Z','W')").order(:id)
+       @persona = Persona.find(personaid.to_i)
+  end
+
+  def verproducto
+      @actividad = Actividad.find(params[:idprod].to_i)
+      @academico =params[:idacad].to_i
+      @persona = Persona.find(@academico.to_i)
+      @producto = Producto.find(@actividad.producto_id)
+      @dataAct = Actividad.find(@actividad.id)
+  end
+  
   def produccion 
     personaid = params[:id]
     idsActiv = Array.new

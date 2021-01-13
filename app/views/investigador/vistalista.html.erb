@@ -1,0 +1,72 @@
+
+<div class="hoptions">
+  <strong> <%= link_to "Regresar", investlista_path %> </strong>
+</div>
+
+<div class="hoptions">
+ <strong>Academico:</strong>  <%=  (@persona.paterno||'') + ' ' + (@persona.materno||'') + ' ' + (@persona.nombre||'') %>
+</div>
+
+<table class="table">
+   <thead>
+      <tr>
+          <th>Folio</th>
+          <th>Producto</th>
+          <th>Año</th>
+          <th>Título</th>
+          <th>VoBo Invest</th>
+          <th>VoBo Coord</th>
+          <th>VoBo SA</th>
+      </tr>
+   </thead>
+   <tbody>
+      <%  
+         @actividad.each do |a|
+         @producto = Producto.find(a.producto_id)
+         @dataAct = Actividad.find(a.id)
+      %>
+         <tr>
+             <td><%= a.id %></td>
+             <td><%= a.producto.descripcion %></td>
+             <td><%= a.anio %></td>
+             <td><%= link_to a.titulo, verproducto_path(a.id, @persona.id) %></td>
+             <td>  <!-- USUARIO -->
+                 <% if a.estado == 'A' %>
+                     <span style="color:red;font-size:13px;">Falata VoBo</span>
+                 <% elsif a.estado == 'U' || a.estado == 'C' || a.estado == 'Z' || a.estado == 'S' %>   
+                     <i class="fas fa-check-double text-success"></i> 
+                 <% end %>  
+             </td>
+             <td> <!-- COORDINADOR -->
+                 <% if a.estado == 'U' %>
+                     <span style="color:red;font-size:13px;">Falata VoBo</span>
+                 <% elsif a.estado == 'C' || a.estado == 'S' || a.estado == 'Z' %>   
+                     <i class="fas fa-check-double text-success"></i> 
+                 <% else %>    
+                     ------
+                 <% end %>  
+             </td>
+             <td> <!-- SA -->
+                 <% if a.estado == 'C' %>
+                     <span><I>En validación</I></span>
+                 <% elsif a.estado == 'S' %>   
+                     <i class="fas fa-check-double text-success"></i> 
+                 <% elsif a.estado == 'Z' %> 
+                     <i class="fas fa-user-times text-danger"></i> <span style="color:red;font-size:13px;">Rechazado</span>
+                 <% else %>    
+                    ------
+                 <% end %>  
+             </td>
+         </tr>
+          <% if a.estado == 'Z' %>
+             <% 
+                @m = Mensaje.where(actividad_id:a.id).where(tipo:'Z').where(estado:'A').first 
+             %>
+              <tr>
+                <td> <td> <td> 
+                <td colspan='4'><span style="color:red"><I>Folio <%=a.id %> rechazado. Motivo: <%= @m.txt %></I></td>
+              </tr>
+          <% end %>
+     <% end %>
+   </tbody>
+</table>
