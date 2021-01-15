@@ -91,12 +91,11 @@ class ActividadesController < ApplicationController
     respond_to do |format|
        if @actividad.update(actividad_params)
           flash[:notice] = 'Actualización ok...'
-          if current_usuario.rol == 'T'
-             @actividad.estado='U'
-          else  
+          if current_usuario.rol != 'T'
             @actividad.estado='C'
-          end   
             @actividad.save
+          end   
+
           
           format.html {redirect_to actividades_path}
           #format.html {redirect_to editarindex_path(0,0)}
