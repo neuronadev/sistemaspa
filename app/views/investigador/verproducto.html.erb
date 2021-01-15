@@ -85,7 +85,14 @@
         <div class="detallep">
           <% if a.estado == 'A' %>
                 <div style="margin-left:10px; color:#DEA101;"><b>Investigador:</b> 
-                    En validación (Falata VoBo)
+                    En validación (Falta VoBo)
+                </div> 
+          <% end %> 
+          <% if a.estado == 'G' 
+                   @m = Mensaje.where(actividad_id:a.id).where(tipo:'C').where(estado:'A').order(created_at: :desc).first
+          %>
+                <div style="margin-left:10px; color:#DEA101;"><b>Investigador:</b> 
+                    En edición: <b><%= @m.txt %></b>
                 </div> 
           <% end %> 
           <% if a.estado == 'U' %>
@@ -98,7 +105,17 @@
           <% end %>  
           <% if a.estado == 'C' %>  
                 <div style="margin-left:10px; color:#566573;"><b>VoBo Investigador:</b> 
-                    <%= a.fecha1 %> <I><%= link_to "Activar", activar_path(a.id,'I'), remote:true %></I>
+                    <%= a.fecha1 %> <span onclick="showform(<%= a.id %>,1)" style="color:blue;cursor: pointer;"><I>Activar para edición</I></span>
+                    <!-- -------------------------------------------------------------------------------------- -->
+                                    <div id="activar<%= a.id %>" class="formactivar" style="margin-bottom:15px; margin-left:30px; font-size:14px; color:blue;">
+                                                    <div>Escriba a continuación el motivo por el cual se va a activar:</div> 
+                                                    <div> <textarea id="activartxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
+                                                    <div class="frmopt">
+                                                            <div style="cursor: pointer;" onclick="aceptaractivar(<%= a.id %>)">Aceptar</div>
+                                                            <div onclick="cancelform(<%= a.id %>,1)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
+                                                    </div>
+                                    </div>
+                    <!-- -------------------------------------------------------------------------------------- -->
                 </div>
                 <div style="margin-left:10px; color:#566573;"><b>Coordinador:</b> 
                     <%= a.fecha2 %> <I><%= link_to "Activar", activar_path(a.id,'C'), remote:true %></I>
@@ -124,7 +141,7 @@
                                 <i class="fas fa-check-double text-success"></i> Validar
                             <% end %>
                     </div>
-                    <div id="no<%= a.id %>" style="margin-left:10px; font-size:14px; color:red; cursor: pointer; " onclick="showform(<%= a.id %>)"> 
+                    <div id="no<%= a.id %>" style="margin-left:10px; font-size:14px; color:red; cursor: pointer; " onclick="showform(<%= a.id %>,2)"> 
                             <i class="fas fa-times text-danger"></i> No considerar
                     </div> 
                     <div id="rechazar<%= a.id %>" class="formrechaza" style="margin-left:10px; font-size:14px; color:red;">
@@ -132,7 +149,7 @@
                         <div> <textarea id="motivotxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
                         <div class="frmopt">
                                  <div style="cursor: pointer;" onclick="aceptarform(<%= a.id %>)">Aceptar</div>
-                                 <div onclick="cancelform(<%= a.id %>)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
+                                 <div onclick="cancelform(<%= a.id %>,2)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
                         </div>
                     </div>
                     <div id="msgnocon<%= a.id %>"></div>
@@ -178,19 +195,43 @@
            $('body').scrollTo('#div3135');
         });
     });
+    $(function () {
+        $('.formactivar').hide(); 
+    });
      
     
 
-    function showform(idact){
-        $('#rechazar'+idact).show();  
+    function showform(idact,tipo){
+       if (tipo == 1){
+          $('#activar'+idact).show();  
+       }  
+       if (tipo == 2){
+          $('#rechazar'+idact).show();  
+       }   
     }
 
     function hideform(idact){
         $('#rechazar'+idact).hide();  
     }
-    function cancelform(idact){
-        $('#rechazar'+idact).hide();  
+    function cancelform(idact,tipo){
+         if (tipo == 1){ $('#activar'+idact).hide(); }
+        if (tipo == 2){ $('#rechazar'+idact).hide(); }
     }
+
+    function aceptaractivar(idact){
+      
+        $.ajax({
+                    url: '<%= activartec_path %>',
+                    data: "id="+idact + "&txt=" + $("#activartxt"+idact).val(),
+                    type: "get",
+                    success: function(data){ 
+                          window.location.reload(true);
+                     },
+                    error: function(dayta){   }
+                })
+           
+    }
+
     function aceptarform(idact){
           $.ajax({
                     url: '<%= rechazasa_path %>',

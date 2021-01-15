@@ -87,9 +87,12 @@ class ActividadesController < ApplicationController
   def update
     id = params[:id]
     @actividad = Actividad.find(id)
+    
     respond_to do |format|
        if @actividad.update(actividad_params)
           flash[:notice] = 'Actualización ok...'
+          @actividad.estado='C'
+          @actividad.save
           format.html {redirect_to actividades_path}
           #format.html {redirect_to editarindex_path(0,0)}
           format.js
