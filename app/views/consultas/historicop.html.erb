@@ -1,4 +1,14 @@
 <%
+items_pub=@items_pub
+items_activ=@items_activ
+items_activp=@items_activp
+persona=@persona
+actividades=@actividades
+act19=@act19
+
+%>
+<div><b>Académico: <%= (persona.paterno||'') + ' ' +(persona.materno||'') + ' ' + (persona.nombre||'') %> </b></div>
+<%
 def citaProductoGeneral(autores,idpersona)
          str_autores = ''
            if !autores.empty?

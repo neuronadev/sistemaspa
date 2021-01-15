@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>INECOL::Sistema de Producción Académica</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'sesion', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' %>
+
+  <style>
+       .contp{
+           display: grid;
+           grid-template-columns: 1fr 6fr 1fr;
+           grid-template-rows: 50px 2fr 50px;
+           height: 100vh;
+       }
+       .datah{
+          grid-column-start: 2;
+          grid-column-end: 3;
+          grid-row-start: 2;
+          grid-row-end: 3;
+       }
+
+
+  </style> 
+
+  </head>
+
+  <body>
+   <div class="contp">
+      <div></div>
+      <div class="datah"><%= yield %></div>
+      <div> </div>
+   </div>   
+  </body>
+</html>

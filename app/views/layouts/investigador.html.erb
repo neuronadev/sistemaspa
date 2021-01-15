@@ -118,7 +118,7 @@
                 <span class="navList__subheading-icon"><i class="fas fa-list-alt fa-2x"></i></i></span>
                 <span class="navList__subheading-title">Validaciones</span>
             </div> 
-              <ul class="subList subList--hidden">
+              <ul class="subList">
               <!--
                 <li class="subList__item"><%= link_to("Consultar por Red", consultasa_path(0,0), data:{turbolinks:false}) %></li>
               -->  
@@ -140,7 +140,7 @@
                 <span class="navList__subheading-title">Historicos</span>
             </div> 
               <ul class="subList subList--hidden">
-                <li class="subList__item"><%= link_to("Consultar", histgeneral_path, data:{turbolinks:false}) %></li>
+                <li class="subList__item"><%= link_to("Consultar", histgeneral_path, target: "_blank", data:{turbolinks:false}) %></li>
               </ul>
             </li>
            <% end %> 

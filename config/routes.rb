@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  
   #get 'indicadores/index'
   get 'perfil/index'
   devise_for :usuarios
@@ -80,7 +81,8 @@ Rails.application.routes.draw do
   get 'historico/datahistorico', to: 'historico#datahistorico', as: 'datahistorico'
   get 'historico/histgeneral', to: 'historico#histgeneral', as: 'histgeneral'
   post 'historico/datah', to: "historico#datah", as: 'datah'
- 
+  get 'historico/hacademico/:periodo/:idacademico', to: 'historico#hacademico', as: 'hacademico'
+
   # Validacion tecnicos
   get 'reviciones/listado', to: 'reviciones#listado', as: 'revisarlistado'
   post 'reviciones/registros', to: 'reviciones#registros', as: 'revisarregistros'
@@ -126,6 +128,9 @@ Rails.application.routes.draw do
   get 'academicos/activar', to:'academicos#activar', as:'activartec'
   get 'academicos/anularactiv/:id', to:'academicos#anularactiv', as:'anularactiv'
   get 'academicos/cerrarmensaje/:id', to:'academicos#cerrarmensaje', as:'cerrarmensaje'
+
+  get 'consultas/historicop/:idacad/:tipoc', to:'consultas#historicop', as:'historicop'
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -89,4 +89,11 @@ class HistoricoController < ApplicationController
       render json: { html: render_to_string(partial: 'condata', locals: {items_pub:@items_pub,items_activ:@items_activ,items_activp:@items_activp,persona:@persona,actividades:@actividades, act19:@act19} )}
 
     end
+
+    def hacademico
+        periodo = params[:periodo]
+        academico = params[:idacademico]
+    end
+
+
 end

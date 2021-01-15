@@ -4,7 +4,7 @@
 </div>
 
 <div class="hoptions">
- <strong>Academico:</strong>  <%=  (@persona.paterno||'') + ' ' + (@persona.materno||'') + ' ' + (@persona.nombre||'') %>
+ <strong>Academico:</strong>  <%=  (@persona.paterno||'') + ' ' + (@persona.materno||'') + ' ' + (@persona.nombre||'') %> <%= link_to "Ver Historico", historicop_path(@persona.id,'H'), target:"_blank" %>
 </div>
 
 <table class="table">
