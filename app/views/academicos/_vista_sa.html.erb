@@ -1,0 +1,101 @@
+<nav class="navbar navbar-expand-lg  bg-light">
+  <div class="container-fluid">
+   
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <%= link_to listaevaltecnico_path, class:"nav-link text-secondary" do %>
+              <i class="fas fa-long-arrow-alt-left"></i> Regresar
+        <% end %>
+       
+       
+      </div>
+    </div>
+  </div>
+</nav>
+
+<table class="table">
+  <thead>
+     <tr>
+        <th>Folio</th>
+        <th>Producto</th>
+        <th>Título</th>
+        <th>Vo.Bo.</th>
+        <th>Comité</th>
+        <th>Aceptado</th>
+     </tr> 
+  </thead>
+
+  <tbody>
+     <%  
+        @actividad.each do |a|
+        @producto = Producto.find(a.producto_id)
+        @dataAct = Actividad.find(a.id)
+        @captura = Persona.find(a.personaid)
+        @tipo_cap = @captura.tipopersona_id
+       
+    %>
+      <tr> 
+        <td> <%= a.id %> </td>
+        <td> <%= @producto.descripcion %> </td>
+        <td> <%= link_to a.titulo, detalleactividad_path(@academico.id,a.id)  %> </td>
+        <td>
+             <% if a.estado == 'A' %>
+                <I>En validación (Falata VoBo)</I>
+             <% elsif a.estado == 'U' || a.estado == 'S' || a.estado == 'Z' || a.estado == 'C' %>   
+                 <i class="fas fa-check-double text-success"></i> 
+             <% elsif a.estado == 'G' %>       
+                 <I>En edición</I>
+             <% else %>    
+                 ----
+             <% end %> 
+        </td>
+        <td>
+             <% if a.estado == 'A' || a.estado == 'G' %>
+                 ----
+             <% elsif a.estado == 'U' || a.estado == 'G' %>   
+                 <I>En validación</I>
+             <% elsif a.estado == 'Z' %>           
+                 <i class="fas fa-check-double text-success"></i> 
+             <% elsif a.estado == 'S' %>       
+                 <i class="fas fa-check-double text-success"></i> 
+             <% else %>    
+                 ----
+             <% end %>  
+        </td>
+        <td>
+            <% if a.aceptado == 'S' %>
+                 <i class="fas fa-check-double text-success"></i> 
+            <% else %>     
+                 ---
+            <% end %>
+        </td>
+      </tr>
+        <% if a.estado == 'Z' %>  
+          <%  
+             @mensaje = Mensaje.where(actividad_id:a.id).where(tipo:'Z').where(estado:'A').first
+          %>   
+             <tr style="margin-top:15px; color:red;">
+              <td></td> 
+              <td colspan="4"><i class="fas fa-times text-danger"></i> Producto rechazado : <b style="color:red"><%= @mensaje.txt %></b></td>
+              <td></td>
+             </tr>
+        <% end %>
+        <% if a.estado == 'G' %>  
+        <%  
+             @mensaje = Mensaje.where(actividad_id:a.id).where(tipo:'C').where(estado:'A').first
+              if !@mensaje.nil?
+        %>
+                 <tr style="margin-top: 10px; margin-left:15px;">
+                  <td></td>
+                  <td colspan="4"><I style="color:green">Este producto fue enviado al Técnico para correciones con el siguiente mensaje: <%= @mensaje.txt %> </I></td>
+                  <td></td>
+                 </tr>
+              <%  end %>   
+        <% end %> 
+    <% end %>
+  </tbody>
+
+</table>

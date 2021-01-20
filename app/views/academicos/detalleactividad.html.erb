@@ -1,0 +1,264 @@
+<%
+  a = @actividad
+%>
+<style>
+.contprod{
+   display: flex;
+   flex-direction: column;
+   width: 80%;
+   margin-bottom: 15px;
+   padding: 2px 4px 6px 7px;
+   margin-left: 10px;
+   border: 1px solid grey;
+   background-color: white;
+}
+
+.rwp{
+   display: flex;
+   flex-direction: row;
+   
+}
+.rwopts{
+   display: flex;
+   flex-direction: row;
+   margin-top:15px;
+}
+.divide{
+   height:15px; 
+}
+
+.hoptions{
+   margin-left: 10px;
+   width: 100%;
+   margin-bottom: 15px; 
+}
+.frmopt{
+   display: flex;
+   flex-direction: row;
+}
+
+.detallep{
+   display: flex;
+   flex-direction: column;
+   margin-top: 15px;
+}
+.itemdetallep{
+    display: flex;
+    flex-direction: row;
+}
+
+
+</style>
+
+<nav class="navbar navbar-expand-lg  bg-light">
+  <div class="container-fluid">
+   
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <%= link_to actividadt_path(@academico.id,3), class:"nav-link text-secondary" do %>
+              <i class="fas fa-long-arrow-alt-left"></i> Regresar
+        <% end %>
+       
+       
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="hoptions">
+ <strong>Academico:  <%=  (@persona.paterno||'') + ' ' + (@persona.materno||'') + ' ' + (@persona.nombre||'') %></strong>
+</div>
+<div class="hoptions">
+   <% if @tipo == 1 %>
+    <strong class="text-primary"> Listado de actividades que no se han validado o no fueron consideradas </strong>
+   <% end %> 
+   <% if @tipo == 2 %>
+     <strong class="text-success"> Listado de actividades que ya fueron validadas </strong>
+   <% end %> 
+</div>
+
+
+  <div class="contprod" id="item<%= @actividad.id %>">
+        <div class="rwp">
+             <div style="font-weight: bold; color:#154360; text-decoration: underline grey;">  <%= @actividad.producto.descripcion %> </div>
+             <div style="margin-left:20px; color:blue;"><b>Año:</b> <%= @actividad.anio %></div>
+             <div style="margin-left:20px; color:blue;"><b>Folio:</b> <%= @actividad.id %></div>
+        </div>
+        <div class="divide"></div>
+        <div><b>Título:</b> <%= @actividad.titulo %> </div>
+        <div><b>Autores:</b> <%= cita(@actividad.id).html_safe %> </div>
+        <div class="rwp"> <div style="font-weight: bold;">Comprobante:</div>  
+        <% if @actividad.documentos.attached? %> 
+            <div style="font-size:14px; margin-left:10px;">  
+                <% @actividad.documentos.each do |d|%>
+                    <%= link_to rails_blob_path(d, disposition: "inline"),  target: '_blank' do %>
+                        <i class="fas fa-file-pdf"></i> Ver documento
+                    <% end %>
+                <% end %>
+            </div>
+        <% end %> 
+        </div>  
+
+        <div class="detallep">
+            <%= render partial: "detalle/tipo"  %> 
+        </div>
+          <% if @tipo_cap != 2 && @tipo_cap != 3 %>
+             <% if @actividad.personaid == @persona.id
+                 
+             %>
+                        <div class="detallep">
+                        <% if a.estado == 'A' %>
+                                <div style="margin-left:10px; color:#DEA101;"><b>Académico:</b> 
+                                    En validación (Falata VoBo)
+                                </div> 
+                        <% end %> 
+                        <% if a.estado == 'U' %>
+                                <div style="margin-left:10px; color:#566573;"><b>VoBo Académico:</b> 
+                                    <%= a.fecha1 %> <span onclick="showform(<%= @actividad.id %>,1)" style="color:blue;cursor: pointer;"><I>Activar</I></span>
+                                     <!-- -------------------------------------------------------------------------------------- -->
+                                    <div id="activar<%= @actividad.id %>" class="formactivar" style="margin-bottom:15px; margin-left:30px; font-size:14px; color:blue;">
+                                                    <div>Escriba a continuación el motivo por el cual se va a activar:</div> 
+                                                    <div> <textarea id="activartxt<%= @actividad.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
+                                                    <div class="frmopt">
+                                                            <div style="cursor: pointer;" onclick="aceptaractivar(<%= @actividad.id %>)">Aceptar</div>
+                                                            <div onclick="cancelform(<%= @actividad.id %>,1)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
+                                                    </div>
+                                    </div>
+                                    <!-- -------------------------------------------------------------------------------------- -->
+                                </div>
+                                <div style="margin-left:10px; color:#DEA101;"><b>Comite:</b> 
+                                    En validación
+                                </div>
+                                
+                                   <%  
+                                       @mensaje = Mensaje.where(actividad_id:@actividad.id).where(tipo:'C').where(estado:'A').first
+                                       if !@mensaje.nil?
+                                   %>
+                                   <div style="margin-top: 10px; margin-left:15px;">
+                                      <I style="color:green">Este producto fue enviado al Técnico para correciones con el siguiente mensaje: <%= @mensaje.txt %> </I>
+                                      <div><%= link_to "Cerrar mensaje", cerrarmensaje_path(@actividad.id), remote:true %></div>
+                                   </div>
+                                   <%  end %>    
+                                
+                        <% end %>  
+                        <% if a.estado == 'S' %>  
+                                <div style="margin-left:10px; color:#566573;"><b>VoBo Académico:</b> 
+                                    <%= a.fecha1 %> <I><%= link_to "Activar", activar_path(@actividad.id,'I'), remote:true %></I>
+                                </div>
+                                <div style="margin-left:10px; color:#566573;"><b>Comite:</b> 
+                                    <%= a.fecha3 %> <I><%= link_to "Activar", activar_path(@actividad.id,'COM'), remote:true %></I>
+                                </div>
+                            
+                        <% end %>     
+                        <% if a.estado == 'G' %>
+                          <%  
+                              @mensaje = Mensaje.where(actividad_id:@actividad.id).where(tipo:'C').where(estado:'A').first
+                          %> 
+                             <I style="color:green;">Este producto se activo para correccion: <%= @mensaje.txt %></I> 
+                             <%= link_to "Anular acción", anularactiv_path(@actividad.id), remote:true %>
+                        <% end %>  
+                        </div>
+                       
+                        <% if a.estado == 'U' %> 
+                                <div class="rwopts">
+                                    <div id="val<%= @actividad.id %>" style="font-size:16px; color:green;"> 
+                                            <%= link_to validasa_path(@actividad.id), remote:true, data:{confirm:'El registro se marcará como validado, ¿desea continuar?'} do %>    
+                                                <i class="fas fa-check-double text-success"></i> Validar
+                                            <% end %>
+                                    </div>
+                                    <div id="no<%= @actividad.id %>" style="margin-left:10px; font-size:16px; color:red; cursor: pointer; " onclick="showform(<%= @actividad.id %>,2)"> 
+                                            <i class="fas fa-times text-danger"></i> No considerar
+                                    </div> 
+                                    <div id="rechazar<%= @actividad.id %>" class="formrechaza" style="margin-left:10px; font-size:14px; color:red;">
+                                        <div>Motivo:</div> 
+                                        <div> <textarea id="motivotxt<%= @actividad.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
+                                        <div class="frmopt">
+                                                <div style="cursor: pointer;" onclick="aceptarform(<%= @actividad.id %>)">Aceptar</div>
+                                                <div onclick="cancelform(<%= @actividad.id %>,2)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
+                                        </div>
+                                    </div>
+
+                                </div>
+                            <% else %> 
+                                <% if a.estado == 'S' %> 
+                                    <div style="width:45%;margin-top:15px; color: white; background-color: #033B08; font-weight: bold;">
+                                    <i class="fas fa-check-double text-success" style="margin-left:5px; color:white;"></i> Producto aceptado
+                                    </div>
+                                <% end %> 
+                                
+                                <% if a.estado == 'Z' %>  
+                                        <%  
+                                            @mensaje = Mensaje.where(actividad_id:@actividad.id).where(tipo:'Z').where(estado:'A').first
+                                        %>   
+                                    <div style="margin-top:15px; color:red;">
+                                    <i class="fas fa-times text-danger"></i> Producto rechazado : <b style="color:red"><%= @mensaje.txt %></b>   
+                                    </div>
+                                    <div id="txtrechazav<%= @actividad.id %>"></div> 
+                                    
+                                <% end %>
+                            <% end %>
+                <% else %>
+                      <div style="margin-left:10px;"><b><I style="color:green;">Este producto lo registro otro académico: <%= ( @captura.paterno||'') + ' ' + ( @captura.materno||'') + ' ' + ( @captura.nombre||'') %> </I></b></div>  
+                <% end %>
+          <% else %>        
+            <div style="margin-left:10px;"><b><I style="color:green;">Este producto fue capturado por un Investigador: <%= ( @captura.paterno||'') + ' ' + ( @captura.materno||'') + ' ' + ( @captura.nombre||'') %>, lo valida el Coordinador de red y la SA.</I></b></div>
+          <% end %>
+  </div>
+
+<br><br>
+
+<script>
+
+    $(function () {
+        $('.formrechaza').hide(); 
+    });
+    $(function () {
+        $('.formactivar').hide(); 
+    });
+
+    function showform(idact,tipo){
+       if (tipo == 1){
+          $('#activar'+idact).show();  
+       }  
+       if (tipo == 2){
+          $('#rechazar'+idact).show();  
+       }   
+    }
+
+    function hideform(idact){
+        $('#rechazar'+idact).hide();  
+    }
+    function cancelform(idact,tipo){
+        if (tipo == 1){ $('#activar'+idact).hide(); }
+        if (tipo == 2){ $('#rechazar'+idact).hide(); }
+    }
+    function aceptaractivar(idact){
+      
+        $.ajax({
+                    url: '<%= activartec_path %>',
+                    data: "id="+idact + "&txt=" + $("#activartxt"+idact).val(),
+                    type: "get",
+                    success: function(data){ 
+                          window.location.reload(true);
+                     },
+                    error: function(dayta){   }
+                })
+           
+    }
+    function aceptarform(idact){
+          $.ajax({
+                    url: '<%= rechazasa_path %>',
+                    data: "id="+idact + "&txt=" + $("#motivotxt"+idact).val(),
+                    type: "get",
+                    success: function(data){ 
+                          window.location.reload(true);
+                     },
+                    error: function(dayta){   }
+                })
+    }
+
+</script>

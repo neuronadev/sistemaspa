@@ -35,7 +35,13 @@
         <td><span class='<%= @strColor %>'><%= l[1] %></span></td>
         <td><%= @academico.red.nomred %></td>
         <td> <%= link_to("Ver", mostraractiv_path(@academico.id), data:{turbolinks:false} ) %> </td>
-        <td> <%= link_to("Ver", actividadt_path(@academico.id,1), data:{turbolinks:false} ) %> </td>
+        <td> 
+             <% if current_usuario.persona_id == 64 %>
+                <%= link_to("Ver", actividadt_path(@academico.id,3), data:{turbolinks:false} ) %>  
+             <% else %>
+                <%= link_to("Ver", actividadt_path(@academico.id,1), data:{turbolinks:false} ) %> 
+             <% end %>
+        </td>
         </tr>
         <% end %>
     </tbody>   
