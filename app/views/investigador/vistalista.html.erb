@@ -35,6 +35,8 @@
                      <span style="color:red;font-size:13px;">Falta VoBo</span>
                  <% elsif a.estado == 'U' || a.estado == 'C' || a.estado == 'Z' || a.estado == 'S' %>   
                      <i class="fas fa-check-double text-success"></i> 
+                 <% else %>
+                     ----
                  <% end %>  
              </td>
              <td> <!-- COORDINADOR -->
@@ -66,6 +68,19 @@
                     <tr>
                         <td> <td> <td> 
                         <td colspan='4'><span style="color:green"><I>Folio <%=a.id %>, observaciones: <%= @m.txt %></I></td>
+                    </tr>
+           <%   end
+             end 
+           %>
+           <!-- ------------ -->
+           <% if a.estado == 'G' %>
+             <% 
+                @m = Mensaje.where(actividad_id:a.id).where(tipo:'C').where(estado:'A').first 
+                if  !@m.nil?
+             %>
+                    <tr>
+                        <td> <td> <td> 
+                        <td colspan='4'><span style="color:red"><I>Folio <%= a.id %>, Se envio a corrección por parte del Coordinador de Red: <%= @m.txt %></I></td>
                     </tr>
            <%   end
              end 
