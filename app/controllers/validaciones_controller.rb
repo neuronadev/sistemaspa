@@ -214,6 +214,7 @@ class ValidacionesController < ApplicationController
       format.js
      end
   end 
+  
   def aplicavalsa
     @idactividad = params[:id]
     @accion = 'VAL'
@@ -225,6 +226,25 @@ class ValidacionesController < ApplicationController
       format.js
     end
   end
+
+  def aplicavalsamsg
+    @idactividad = params[:id]
+    @txt = params[:txt]
+    @accion = 'VAL'
+    actividad = Actividad.find(@idactividad.to_i)
+    actividad.fecha3 = Date.today
+    actividad.estado = 'S'
+    actividad.save
+    
+    if !@txt.blank? 
+      mensaje = Mensaje.create(actividad_id:@idactividad, persona_id: current_usuario.persona_id, tipo:'O', estado:'A', txt:@txt)
+    end 
+
+    respond_to do |format| 
+      format.js
+    end
+  end
+
 
   def anularcoor
     idactividad = params[:id]
@@ -242,7 +262,7 @@ class ValidacionesController < ApplicationController
     @actividad.estado = 'C'
     @actividad.save
 
-    mensaje = Mensaje.where(actividad_id:idactividad).where(tipo:'Z')
+    mensaje = Mensaje.where(actividad_id:idactividad).where(tipo:['Z','O'])
     mensaje.each do |m|
       m.estado = 'X'
       m.save

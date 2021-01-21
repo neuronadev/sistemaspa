@@ -32,14 +32,14 @@
              <td><%= link_to a.titulo, verproducto_path(a.id, @persona.id) %></td>
              <td>  <!-- USUARIO -->
                  <% if a.estado == 'A' %>
-                     <span style="color:red;font-size:13px;">Falata VoBo</span>
+                     <span style="color:red;font-size:13px;">Falta VoBo</span>
                  <% elsif a.estado == 'U' || a.estado == 'C' || a.estado == 'Z' || a.estado == 'S' %>   
                      <i class="fas fa-check-double text-success"></i> 
                  <% end %>  
              </td>
              <td> <!-- COORDINADOR -->
                  <% if a.estado == 'U' %>
-                     <span style="color:red;font-size:13px;">Falata VoBo</span>
+                     <span style="color:red;font-size:13px;">Falta VoBo</span>
                  <% elsif a.estado == 'C' || a.estado == 'S' || a.estado == 'Z' %>   
                      <i class="fas fa-check-double text-success"></i> 
                  <% else %>    
@@ -58,15 +58,18 @@
                  <% end %>  
              </td>
          </tr>
-          <% if a.estado == 'Z' %>
+           <% if a.estado == 'S' %>
              <% 
-                @m = Mensaje.where(actividad_id:a.id).where(tipo:'Z').where(estado:'A').first 
+                @m = Mensaje.where(actividad_id:a.id).where(tipo:'O').where(estado:'A').first 
+                if  !@m.nil?
              %>
-              <tr>
-                <td> <td> <td> 
-                <td colspan='4'><span style="color:red"><I>Folio <%=a.id %> rechazado. Motivo: <%= @m.txt %></I></td>
-              </tr>
-          <% end %>
+                    <tr>
+                        <td> <td> <td> 
+                        <td colspan='4'><span style="color:green"><I>Folio <%=a.id %>, observaciones: <%= @m.txt %></I></td>
+                    </tr>
+           <%   end
+             end 
+           %>
      <% end %>
    </tbody>
 </table>

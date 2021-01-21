@@ -443,6 +443,20 @@
          <% end %>
         
         </tr>
+         <!-- OBSERVACIONES AL PRODUCTO -->
+        <% if a.estado == 'S' %>
+             <% 
+                @m = Mensaje.where(actividad_id:a.id).where(tipo:'O').where(estado:'A').first 
+                if  !@m.nil?
+             %>
+                    <tr>
+                        <td></td><td></td> 
+                        <td colspan='9'><span style="color:green; font-weight:bold;"><I>Folio <%=a.id %>, Observaciones: <%= @m.txt %></I></td>
+                    </tr>
+           <%   end
+             end 
+           %>
+            
         <!-- DETALLE PARA PRODUCTOS CAPTURADOS POR INVESTIGADORES y lo ven los TECNICOS -->
         <% if current_usuario.rol == 'T' && [2,3].include?(@tipo_per) %>
             <tr align="center">
