@@ -79,7 +79,13 @@ class AcademicosController < ApplicationController
     if !mensaje.nil?
         mensaje.estado = 'X'
         mensaje.save
+    end 
+    mensaje = Mensaje.where(actividad_id:@idactividad.to_i).where(tipo:'Z').where(estado:'A').first
+    if !mensaje.nil?
+        mensaje.estado = 'X'
+        mensaje.save
     end    
+    
     respond_to do |format| 
       format.js
     end
