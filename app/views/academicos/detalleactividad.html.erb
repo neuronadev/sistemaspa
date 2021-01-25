@@ -113,7 +113,7 @@
                         <div class="detallep">
                         <% if a.estado == 'A' %>
                                 <div style="margin-left:10px; color:#DEA101;"><b>Académico:</b> 
-                                    En validación (Falata VoBo)
+                                    En validación (Falta VoBo)
                                 </div> 
                         <% end %> 
                         <% if a.estado == 'U' %>
@@ -165,10 +165,8 @@
                        
                         <% if a.estado == 'U' %> 
                                 <div class="rwopts">
-                                    <div id="val<%= @actividad.id %>" style="font-size:16px; color:green;"> 
-                                            <%= link_to validasa_path(@actividad.id), remote:true, data:{confirm:'El registro se marcará como validado, ¿desea continuar?'} do %>    
-                                                <i class="fas fa-check-double text-success"></i> Validar
-                                            <% end %>
+                                    <div id="val<%= a.id %>" style="font-size:14px; color:green; cursor: pointer;" onclick="showform(<%= a.id %>,3)"> 
+                                          <i class="fas fa-check-double text-success"></i> Validar
                                     </div>
                                     <div id="no<%= @actividad.id %>" style="margin-left:10px; font-size:16px; color:red; cursor: pointer; " onclick="showform(<%= @actividad.id %>,2)"> 
                                             <i class="fas fa-times text-danger"></i> No considerar
@@ -183,10 +181,23 @@
                                     </div>
 
                                 </div>
+                                 <!-- ----------------------------------------------------------------------------------------------------------- -->
+                                    <div id="msgaceptar<%= a.id %>" class="formaceptar" style="margin-left:10px; font-size:14px; color:green; font-weight:bold;">
+                                        <div>Este producto será aceptado. ¿Desea escribir alguna Observacion?</div> 
+                                        <div> <textarea id="aceptartxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
+                                        <div class="frmopt">
+                                                <div style="cursor: pointer;" onclick="aceptarproducto(<%= a.id %>)">Aceptar producto</div>
+                                                <div onclick="cancelform(<%= a.id %>,3)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
+                                        </div>
+                                    </div>
+                                <!-- ----------------------------------------------------------------------------------------------------------- -->   
                             <% else %> 
                                 <% if a.estado == 'S' %> 
                                     <div style="width:45%;margin-top:15px; color: white; background-color: #033B08; font-weight: bold;">
-                                    <i class="fas fa-check-double text-success" style="margin-left:5px; color:white;"></i> Producto aceptado
+                                       <i class="fas fa-check-double text-success" style="margin-left:5px; color:white;"></i> Producto aceptado
+                                    </div>
+                                    <div>
+                                      <I> <%= link_to "Anular validación", anularaceptado_path(@actividad.id), remote:true, data:{confirm:'Con esta acción se anulará la validación, ¿desea continuar?'} %> </I>
                                     </div>
                                 <% end %> 
                                 
@@ -215,6 +226,7 @@
 
     $(function () {
         $('.formrechaza').hide(); 
+         $('.formaceptar').hide(); 
     });
     $(function () {
         $('.formactivar').hide(); 
@@ -227,6 +239,9 @@
        if (tipo == 2){
           $('#rechazar'+idact).show();  
        }   
+       if (tipo == 3){
+          $('#msgaceptar'+idact).show();  
+       }   
     }
 
     function hideform(idact){
@@ -235,6 +250,7 @@
     function cancelform(idact,tipo){
         if (tipo == 1){ $('#activar'+idact).hide(); }
         if (tipo == 2){ $('#rechazar'+idact).hide(); }
+        if (tipo == 3){ $('#msgaceptar'+idact).hide(); }
     }
     function aceptaractivar(idact){
       
@@ -260,5 +276,20 @@
                     error: function(dayta){   }
                 })
     }
+
+     function aceptarproducto(idact){
+       if (confirm('¿Desea continuar?')) {
+           $.ajax({
+                    url: '<%= validasamsg_path %>',
+                    data: "id="+idact + "&txt=" + $("#aceptartxt"+idact).val(),
+                    type: "get",
+                    success: function(data){ 
+                         alert("Producto aceptado");
+                         window.location.reload(true);
+                     },
+                    error: function(dayta){   }
+                })
+       }        
+   }
 
 </script>

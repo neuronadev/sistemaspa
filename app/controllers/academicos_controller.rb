@@ -70,6 +70,21 @@ class AcademicosController < ApplicationController
     end
   end
 
+  def anularaceptado
+    @idactividad = params[:id]
+    actividad = Actividad.find(@idactividad.to_i)
+    actividad.estado = 'U'
+    actividad.save
+    mensaje = Mensaje.where(actividad_id:@idactividad.to_i).where(tipo:'O').where(estado:'A').first
+    if !mensaje.nil?
+        mensaje.estado = 'X'
+        mensaje.save
+    end    
+    respond_to do |format| 
+      format.js
+    end
+  end
+
   def cerrarmensaje
     @idactividad = params[:id]
     mensaje = Mensaje.where(actividad_id:@idactividad.to_i).where(tipo:'C').where(estado:'A').first

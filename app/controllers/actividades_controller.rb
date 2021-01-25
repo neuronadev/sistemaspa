@@ -102,6 +102,8 @@ class ActividadesController < ApplicationController
           format.js
        else
           flash[:error] = "Error, la información esta incompleta."
+          puts @actividad.errors.full_messages
+          @producto = Producto.find(@actividad.producto_id) 
           format.html {render :action=>'edit'}
        end   
     end  

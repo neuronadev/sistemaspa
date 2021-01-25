@@ -128,6 +128,7 @@ Rails.application.routes.draw do
   get 'academicos/actividadt/:idacadem/:tipo', to:'academicos#actividadt', as:'actividadt'
   get 'academicos/activar', to:'academicos#activar', as:'activartec'
   get 'academicos/anularactiv/:id', to:'academicos#anularactiv', as:'anularactiv'
+  get 'academicos/anularaceptado/:id', to:'academicos#anularaceptado', as:'anularaceptado'
   get 'academicos/cerrarmensaje/:id', to:'academicos#cerrarmensaje', as:'cerrarmensaje'
   get 'academicos/detalleactividad/:idacademico/:id', to:'academicos#detalleactividad', as:'detalleactividad'
   get 'consultas/historicop/:idacad/:tipoc', to:'consultas#historicop', as:'historicop'

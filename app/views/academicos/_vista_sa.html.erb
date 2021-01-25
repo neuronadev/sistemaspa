@@ -73,6 +73,19 @@
             <% end %>
         </td>
       </tr>
+        <% if a.estado == 'S' %>
+             <% 
+                @m = Mensaje.where(actividad_id:a.id).where(tipo:'O').where(estado:'A').first 
+                if  !@m.nil?
+             %>
+                    <tr>
+                        <td> </td>
+                        <td colspan='4'><span style="color:green"><I>Folio <%=a.id %>, observaciones: <%= @m.txt %></I></td>
+                        <td></td>
+                    </tr>
+           <%   end
+             end 
+           %> 
         <% if a.estado == 'Z' %>  
           <%  
              @mensaje = Mensaje.where(actividad_id:a.id).where(tipo:'Z').where(estado:'A').first
