@@ -5,9 +5,15 @@ class InvestigadorController < ApplicationController
     @actividades = Persona.find(current_usuario.persona_id).actividades.where("periodo=2020 and (estado!='X' and estado!='H')").order(:titulo)
   end
 
+  def listarredes
+    @redes = Red.where(id:[1,8,9,10,11,12,13,14,15,16,17,21]).order(:nomred)
+  end
+
   def listado
+    @idred = params[:idred]
     @personas = Persona.where(:tipopersona_id=>2).order(:paterno)
-    @redes = Red.where(id:[1,8,9,10,11,12,13,14,15,16,17,21])
+    #@redes = Red.where(id:[1,8,9,10,11,12,13,14,15,16,17,21])
+    @redes = Red.where(id:@idred)
   end 
 
   def vistalista
@@ -19,6 +25,7 @@ class InvestigadorController < ApplicationController
        #@actividad = Actividad.where(:id=>idsActiv).where(periodo:2020).where("estado in ('C','S','Z','W')").order(:producto_id).order(:id)
        @actividad = Actividad.where(:id=>idsActiv).where(periodo:2020).where("estado in ('A','U','C','S','Z','W','G')").order(:id)
        @persona = Persona.find(personaid.to_i)
+       @academico = Academico.where(persona_id:@persona.id).first
   end
 
   def verproducto

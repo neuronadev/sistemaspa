@@ -41,6 +41,10 @@
 
 </style>
 
+<div class="hoptions">
+  <strong> <i class="fas fa-arrow-left"></i> <%= link_to "Regresar", listarredes_path, 'data-turbolinks-scroll': false %> </strong>
+</div>
+
 <div class="box">
    <%  
        @redes.each do |r|
@@ -79,3 +83,37 @@
    <% end %>
     
 </div>
+
+<script>
+Turbolinks.savedScrolls = {}
+
+document.addEventListener("turbolinks:before-visit", function(event) {
+  if (document.querySelector("body[data-preserve-scroll=true]")) {
+    Turbolinks.savedScrolls = {
+      [window.location.href]: {
+        document: document.documentElement.scrollTop,
+        body: document.body.scrollTop
+      }
+    }
+  }
+});
+
+document.addEventListener("turbolinks:render", function(event) {
+  const savedScroll = Turbolinks.savedScrolls[window.location.href]
+  if (!savedScroll) { return; }
+
+  delete(Turbolinks.savedScrolls[window.location.href])
+
+  if (savedScroll.document != null) {
+    if (savedScroll.document < document.documentElement.scrollHeight) {
+      document.documentElement.scrollTop = savedScroll.document
+    }
+  }
+
+  if (savedScroll.document != null) {
+    if (savedScroll.body < document.body.scrollHeight) {
+      document.body.scrollTop = savedScroll.body
+    }
+  }
+});
+</script>

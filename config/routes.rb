@@ -91,12 +91,13 @@ Rails.application.routes.draw do
 
 
   # Investigadores
-  get 'investigador/listado', to: 'investigador#listado', as: 'investlista' 
+  get 'investigador/listado/:idred', to: 'investigador#listado', as: 'investlista' 
+  get 'investigador/listarredes', to: 'investigador#listarredes', as: 'listarredes' 
   get 'investigador/produccion/:id', to: 'investigador#produccion', as: 'listproduccion'   ##VISTA TARJETAS
   get 'investigador/investdetalle', to: 'investigador#investdetalle', as: 'investdetalle' 
   get 'investigador/activar/:id/:tipo', to: 'investigador#activar', as: 'activar'
   get 'investigador/valcompleta/:idpersona/', to: 'investigador#valcompleta', as: 'valcompleta'
-  get 'investigador/vistalista/:id/', to: 'investigador#vistalista', as: 'vistalista'
+  get 'investigador/vistalista/:id', to: 'investigador#vistalista', as: 'vistalista'
   get 'investigador/verproducto/:idprod/:idacad', to: 'investigador#verproducto', as: 'verproducto'   ##VISTA TARJETA
 
   

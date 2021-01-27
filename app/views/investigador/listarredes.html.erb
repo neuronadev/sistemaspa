@@ -1,0 +1,42 @@
+
+<style>
+ .contred{
+     display: grid;
+     grid-template-columns: 1fr 4fr 1fr;
+     grid-template-rows: 100px 1fr 1fr;
+ }
+ .box {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3
+}
+
+ .redtxt{
+   margin-left: 10px; 
+}  
+.dataelm{
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+</style>
+<b>Listado de Redes INECOL</b>
+
+<div class="contred">
+  <div class="box">
+   <%  
+       @i = 1 
+       @redes.each do |r|
+       
+   %>
+     <div class="dataelm">  
+        <div><%= @i %>.</div> 
+        <div class="redtxt"> 
+            <%= link_to r.nomred, investlista_path(r.id) %>
+         </div>
+     </div>
+    <% @i += 1 
+     end %>    
+  </div>   
+</div>    
