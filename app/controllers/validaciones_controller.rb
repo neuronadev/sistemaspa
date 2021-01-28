@@ -7,7 +7,7 @@ class ValidacionesController < ApplicationController
      @red = Red.find(idred)
      #activs = Actividad.where("estado='U' or estado='C' or estado='G' and periodo=2020").order(:titulo)
      #activs = Actividad.where("estado !='X' and estado != 'A' and periodo=2020 ").order(:titulo)
-     activs = Actividad.where("estado in('U','C','G','D') and asignared=#{idred.to_i} and periodo=2020").order(:titulo)
+     activs = Actividad.where("estado in('U','C','G','D','S','Z') and asignared=#{idred.to_i} and periodo=2020").order(:titulo)
      @data = Hash.new
      #@pagy, @activs = pagy(Actividad.where("estado='U' or estado='C' or estado='G'").order(:titulo), page: params[:page], items: 10)
      red_corr = 0
