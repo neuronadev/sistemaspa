@@ -1,4 +1,10 @@
-<%  cerrado = true %>
+<%  cerrado = true 
+
+    if current_usuario.persona_id == 64
+       cerrado = false 
+    end
+
+%>
 <%  if !cerrado %>
     <%= render partial: "listado/listado_productocap", layout: "crud/layout" %>
 <% end %>  
