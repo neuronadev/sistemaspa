@@ -96,6 +96,8 @@
               </ul>
             </li>
            <% end %> 
+           
+         
 
            <% if current_usuario.evaluador == "T" %> 
 
@@ -123,8 +125,21 @@
             </li>
            <% end %> 
            
-          <li>--</i> 
+          <li></i> 
+           <% if current_usuario.persona_id.to_i == 213 || current_usuario.persona_id.to_i == 255 %>
+           <hr>
+            <li>
+             <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-list-alt fa-2x"></i></i></span>
+                <span class="navList__subheading-title">Eval. Invest.</span>
+            </div> 
+              <ul class="subList">
+                <li class="subList__item"><%= link_to("Listado redes", listarredes_path) %></li>
+              </ul>
+            </li>
+           <% end %>  
           <% if current_usuario.evaluador == 'S' %>
+           <hr>
               <li>
                 <div class="navList__subheading row row--align-v-center">
                   <span class="navList__subheading-icon"><i class="fas fa-align-justify"></i></span>
