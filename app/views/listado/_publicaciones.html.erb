@@ -123,7 +123,7 @@
          <!-- VER / EDITAR --> 
 
           <td class="text-center">
-              <% if  a.estado == "U" || a.estado == "C" || a.estado == "G" || a.estado == "D" || a.estado == "S" || a.estado == "Z" || a.estado == "W" %>
+              <% if  a.estado == "U" || a.estado == "C" || a.estado == "D" || a.estado == "S" || a.estado == "Z" || a.estado == "W" %>
                      
                      <i class="fas fa-edit iconsize text-secondary"></i>
                      <%= link_to("Ver", actividad_path(a.id), data:{turbolinks:false}) %>
@@ -255,7 +255,7 @@
                <% end %> 
                <% if a.estado == 'Z'  %>
                      <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
-                     <%= link_to "No se considera o modificar. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                     <%= link_to "No se considera. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
                      </span>
                      
                <% end %> 
