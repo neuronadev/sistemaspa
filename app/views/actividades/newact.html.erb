@@ -42,6 +42,10 @@
     <%= render partial: "crud/actividad/frm_simple", layout: "crud/layout" %>
 <% end %>
 
+<% if @producto.prodgrupo.clave == 'PROY' %>
+    <%= render partial: "crud/actividad/frm_proyecto", layout: "crud/layout" %>
+<% end %>
+
 
 <script>
 

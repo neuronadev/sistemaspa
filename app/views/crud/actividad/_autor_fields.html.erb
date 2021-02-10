@@ -30,8 +30,14 @@
 
    <div class="col-2">
      <div class="form-group"> 
-        Participación
-        <%= f.select :rol_id, Rol.where(estado:'A').all.order(:nomrol).collect {|p| [p.nomrol, p.id]}, { :include_blank=>'-Seleccione una opción-'},{class:"form-control",  disabled: disabled } %>
+        Tipo participación
+        <% if @producto.prodgrupo.clave == 'PROY'   %>
+           <%= f.select :rol_id, Rol.where(estado:'A').all.order(:nomrol).collect {|p| [p.nomrol, p.id]}, { :include_blank=>'-Seleccione una opción-'},{class:"form-control",  disabled: disabled } %>  
+        <% else %>
+           <%= f.select :rol_id, Rol.where(estado:['A','B']).all.order(:nomrol).collect {|p| [p.nomrol, p.id]}, { :include_blank=>'-Seleccione una opción-'},{class:"form-control",  disabled: disabled } %>
+        <% end %>
+           
+
      </div>        
    </div> 
    <% if @producto.prodgrupo.clave != 'ACTIVIDAD' &&  @producto.prodgrupo.clave != 'PROY'   %>
@@ -54,7 +60,7 @@
      <div class="col-3">
       <div class="form-group"> 
          (%) de participación
-        <%= f.text_field :porcentaje, class:"form-control", placeholder: "% participación",  disabled: disabled %> 
+        <%= f.text_field :porcentaje, class:"form-control porcentaje", placeholder: "% participación",  disabled: disabled %> 
       </div>  
      </div>
    <% end %> 

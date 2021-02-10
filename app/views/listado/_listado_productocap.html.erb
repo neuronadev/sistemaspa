@@ -50,7 +50,7 @@
 <% end %>
     <% @categorias.each do |c| %>
        <%  #c.id == 9 || c.id == 14
-       if c.id != 5 %>
+       if c.id != 0 %>
            <div class="hijo">   
                <strong><%= c.nomcategoria %></strong><br>
                     <% Producto.where("prodcategoria_id = ?", c.id).order(:descripcion).each do |p| %>

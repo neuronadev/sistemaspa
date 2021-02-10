@@ -92,7 +92,11 @@ class ActividadesController < ApplicationController
        if @actividad.update(actividad_params)
           flash[:notice] = 'Actualización ok...'
           if current_usuario.rol != 'T'
-            @actividad.estado='C'
+            if @actividad.producto_id == 81 || @actividad.producto_id == 85
+               @actividad.estado='S'
+            else 
+               @actividad.estado='C'
+            end
             @actividad.save
           end   
 

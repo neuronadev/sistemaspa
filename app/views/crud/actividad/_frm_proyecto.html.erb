@@ -8,7 +8,7 @@
 </div>
 <hr>
 
-<%= form_with(model: @actividad, local: true)  do |form| %>
+<%= form_with(model: @actividad, html:{id:"actividadine"}, local: true)  do |form| %>
      <%= form.hidden_field :reemplazaidact, value:@idactividad_ant %> 
      <%= form.hidden_field :producto_id, value: @producto.id %> 
      <%= form.hidden_field :personaid, value: current_usuario.persona_id %> 
@@ -41,7 +41,7 @@
          
        
         <div class="form-group"> 
-          <strong>Participantes. El porcentaje total deberá ser igual al 100%</strong><br>
+          <strong>Participantes. El porcentaje total deberá ser igual al <span style="color:red;">100%</span></strong><br>
           <I>El porcentaje se asigna al responsable del proyecto y a los participantes.</I>
         </div> 
         <%= render "crud/actividad/autores", form:form %>
@@ -54,3 +54,51 @@
       <% end %>   
 
 <% end %>
+
+<script>
+$('body').on('keypress','.porcentaje', function(evt){
+    var $txtBox = $(this);
+         var charCode = (evt.which) ? evt.which : evt.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46)
+             return false;
+         else {
+             var len = $txtBox.val().length;
+             var index = $txtBox.val().indexOf('.');
+             if (index > 0 && charCode == 46) {
+               return false;
+             }
+             if (index > 0) {
+                 var charAfterdot = (len + 1) - index;
+                 if (charAfterdot > 3) {
+                     return false;
+                 }
+             }
+         }
+         return $txtBox;
+  }); 
+
+
+$( "form#actividadine" ).submit(function( event ) {
+     var sumaPorc = sumporc();
+     
+     if ( sumaPorc != 100.00 ){
+          alert("La suma de los porcentajes de participación debe sumar 100");
+          return false;
+     }else{
+         return true;   
+    }
+     
+});
+
+ function sumporc(){
+    var totalp = 0;
+    $(".porcentaje").each(function(){
+          if(!isNaN(this.value) && this.value.length!=0) {
+              totalp += parseFloat(this.value);
+           }
+    });
+    total = totalp.toFixed(2);
+    return total;
+}
+
+</script>

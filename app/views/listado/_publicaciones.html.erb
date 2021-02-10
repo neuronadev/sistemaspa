@@ -33,7 +33,7 @@
      <th class="text-center">Folio</th>
      <th class="text-center">Producto</th>
      <th class="text-center">Título</th>
-     <th class="text-center">Autores</th>
+     <th class="text-center">Autores/Participantes</th>
      <th class="text-center">Comprobante</th>
      <th class="text-center">Editar</th>
      <th class="text-center">Eliminar</th>
@@ -98,10 +98,14 @@
          <td><%= a.id %></td>
          <td><%= a.producto.descripcion %></td> 
           <td>
-            <% if a.producto_id == 81 || a.producto_id == 82 || a.producto_id == 83 %>
+            <% if a.producto_id == 81 || a.producto_id == 85 %>
                 <span class=' text-primary'> <%= a.titulo.html_safe %> </span>
-                <% if a.estado == 'A' %>
-                 <br><span class=' text-danger'>Deberá agregar a los participantes, clic en la opción Editar</span> 
+                <% if a.estado == 'S' && (a.aceptado.nil? || a.aceptado.blank? ) %>
+                   <br><strong>Responsable: <span class='text-primary'><%= (persona_cap.paterno||'') + ' ' + (persona_cap.materno||'') + ' ' + (persona_cap.nombre||'') %></span> </strong>
+                   <br><strong><span class='text-success'>Deberá agregar a los participantes en el siguiente link: </strong></span>
+                    <%= link_to edit_actividad_path(a.id), data:{turbolinks:false}  do %> 
+                          <i class="fas fa-users"></i> Participantes
+                    <% end %> 
                 <% end %> 
             <% else %>   
                <%= a.titulo.html_safe %>
