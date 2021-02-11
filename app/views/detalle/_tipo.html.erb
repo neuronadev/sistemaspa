@@ -19,3 +19,6 @@
 <% if @producto.prodgrupo.clave == 'OTRASD' %>
     <%= render partial: "detalle/otrasd" %>
 <% end %>
+<% if @producto.prodgrupo.clave == 'PROY' %>
+    <%= render partial: "detalle/proyecto" %>
+<% end %>

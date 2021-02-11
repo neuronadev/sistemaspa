@@ -1,0 +1,29 @@
+
+<div class="itemdetallep">
+
+     <table class="table"> 
+       <thead> 
+          <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Porcentaje</th>
+          </tr>
+       </thead> 
+       <tbody>
+            <%
+                 @dataAct.autores.each do |a|
+            %>
+               <tr>
+                    <td> <%= (a.persona.paterno||'')+' '+(a.persona.materno||'')+' '+(a.persona.nombre||'') %> </td>
+                    <td> <%= a.rol.nomrol %> </td>
+                    <td> <%= a.porcentaje %>  </td>
+               </tr> 
+            <%
+                end
+            %>
+
+       </tbody>
+     </table> 
+
+   
+</div>
