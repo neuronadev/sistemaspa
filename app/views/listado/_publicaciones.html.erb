@@ -1,3 +1,7 @@
+<%
+ cap_porc = false
+%>
+
 <style>
   .tablaf{
       font-size: 13px;
@@ -98,14 +102,29 @@
          <td><%= a.id %></td>
          <td><%= a.producto.descripcion %></td> 
           <td>
-            <% if a.producto_id == 81 || a.producto_id == 85 %>
+            <% if a.producto_id == 81 || a.producto_id == 85
+                  suma_porc = 0.0 
+                  a.autores.each do |autor|
+                       if !autor.porcentaje.nil? && !autor.porcentaje.blank?
+                           suma_porc += autor.porcentaje
+                       end 
+                  end
+                  if suma_porc != 100  
+                     class_porc = "text-danger" 
+                  else 
+                     class_porc = "text-success"   
+                  end
+            %>
                 <span class=' text-primary'> <%= a.titulo.html_safe %> </span>
                 <% if a.estado == 'S' && (a.aceptado.nil? || a.aceptado.blank? ) %>
                    <br><strong>Responsable: <span class='text-primary'><%= (persona_cap.paterno||'') + ' ' + (persona_cap.materno||'') + ' ' + (persona_cap.nombre||'') %></span> </strong>
-                   <br><strong><span class='text-success'>Deberá agregar a los participantes en el siguiente link: </strong></span>
-                    <%= link_to edit_actividad_path(a.id), data:{turbolinks:false}  do %> 
+                   <br><strong>Porcentaje de participación asginado: <span class="<%=  class_porc  %>"><%= suma_porc.to_s %>%</span> </strong> 
+                    <% if cap_porc %> 
+                     <br><strong><span class='text-success'>Deberá agregar a los participantes en el siguiente link: </strong></span>
+                      <%= link_to edit_actividad_path(a.id), data:{turbolinks:false}  do %> 
                           <i class="fas fa-users"></i> Participantes
-                    <% end %> 
+                      <% end %> 
+                    <% end %>
                 <% end %> 
             <% else %>   
                <%= a.titulo.html_safe %>
