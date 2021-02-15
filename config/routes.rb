@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   
   
+  get 'cargas/index'
+  get 'cargas/show'
+  get 'cargas/edit'
+  get 'cargas/create'
   #get 'indicadores/index'
   get 'perfil/index'
   devise_for :usuarios

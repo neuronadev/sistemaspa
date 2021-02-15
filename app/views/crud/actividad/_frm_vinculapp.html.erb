@@ -65,7 +65,17 @@
                      <div class="col-4">
                         <div class="form-group">
                           <%= vin_form.label :nivelcomite, "Participación:" %>
-                          <%= vin_form.select :nivelcomite, options_for_select(@nivelcomite), { :include_blank=>'-Tipo de participación-', disabled: disabled}, class:"form-control"  %> 
+                            <%
+                              nivelc = @actividad.vinculacion.nivelcomite
+                            %> 
+                            <% if !nivelc.nil? %>
+                                <% 
+                                  nivelc = @actividad.vinculacion.nivelcomite
+                                %>
+                                <%= vin_form.select :nivelcomite, options_for_select(@nivelcomite), {selected:nivelc,disabled: disabled}, class:"form-control"  %> 
+                            <% else %>
+                                <%= vin_form.select :nivelcomite, options_for_select(@nivelcomite), { :include_blank=>'-Tipo de participación-', disabled: disabled}, class:"form-control"  %> 
+                            <% end %> 
                        </div>   
                     </div>   
                 <% end %> 
