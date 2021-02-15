@@ -241,14 +241,14 @@
              <% end %>    
              <% if a.estado == 'D'  %>
                  <%= link_to coordinamostrar_path(a.id) do %>
-                       <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">Este producto no se considera.</span>
+                       <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">No cumple la normativa</span>
                  <% end %>
              <% end %> 
 
               <% if current_usuario.rol == 'T' %>   
                 <% if a.estado == 'Z' %>  
                     <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
-                        <%= link_to "No se considera o modifiar. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                        <%= link_to "No cumple la normativa. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
                         </span>
                 <% end %>
                 <% if a.estado == 'W'
@@ -278,7 +278,7 @@
                <% end %> 
                <% if a.estado == 'Z'  %>
                      <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
-                     <%= link_to "No se considera. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                     <%= link_to "No cumple la normativa. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
                      </span>
                      
                <% end %> 
@@ -288,7 +288,7 @@
                       <i class="fas fa-check-double iconsize text-success"></i>
                   <% else %>
                        <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
-                       <%= link_to "No se considera o modificar. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                       <%= link_to "No cumple la normativa. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
                        </span>
                   <% end %> 
                <% end %> 

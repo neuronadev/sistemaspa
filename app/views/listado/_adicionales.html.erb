@@ -128,7 +128,7 @@
                 <I>Corregir</I>
           <% elsif a.estado == 'Z' %>  
              <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
-                 <%= link_to "No se considera", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                 <%= link_to "No cumple la normativa.", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
              </span> 
           <% elsif a.estado == 'U' %>       
               <I>En validación</I>
@@ -183,7 +183,7 @@
            <%  
              @mensaje = Mensaje.where(actividad_id:a.id).where(tipo:'Z').where(estado:'A').first
            %>   
-            <b style="color:red">No se considera: <%= @mensaje.txt %></b>     
+            <b style="color:red">No cumple la normativa: <%= @mensaje.txt %></b>     
           <% end %>
      </td>
     </tr> 

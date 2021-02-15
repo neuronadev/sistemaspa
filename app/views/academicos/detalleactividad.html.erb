@@ -206,7 +206,7 @@
                                             @mensaje = Mensaje.where(actividad_id:@actividad.id).where(tipo:'Z').where(estado:'A').first
                                         %>   
                                     <div style="margin-top:15px; color:red;">
-                                    <i class="fas fa-times text-danger"></i> Producto rechazado : <b style="color:red"><%= @mensaje.txt %></b>   
+                                    <i class="fas fa-times text-danger"></i> No cubre la normativa : <b style="color:red"><%= @mensaje.txt %></b>   
                                     </div>
                                     <div id="txtrechazav<%= @actividad.id %>"></div> 
                                      <div>
