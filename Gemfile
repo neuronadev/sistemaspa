@@ -33,7 +33,7 @@ gem 'image_processing', '~> 1.2'
 #gem 'cocoon', '~> 1.2', '>= 1.2.14'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
-
+gem 'roo', '~> 2.8', '>= 2.8.3'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

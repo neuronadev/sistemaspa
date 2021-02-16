@@ -138,6 +138,8 @@ Rails.application.routes.draw do
   get 'academicos/detalleactividad/:idacademico/:id', to:'academicos#detalleactividad', as:'detalleactividad'
   get 'consultas/historicop/:idacad/:tipoc', to:'consultas#historicop', as:'historicop'
 
+  #posgrado
+   get 'cargas/comprobante/:id/:comprobante', to: 'cargas#comprobante', as: 'pstcomprobante'  
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
