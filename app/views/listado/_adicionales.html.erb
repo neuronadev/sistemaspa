@@ -80,10 +80,14 @@
         <td><%= link_to(a.titulo.html_safe, actividad_path(a.id), data:{turbolinks:false}) %></td>
         <td><%= cita(a.id).html_safe %></td>
         <td class="text-center">
-            <% if a.producto_id == 82 %>
-                    <%= link_to pstcomprobante_path(a.id, a.curso.comprobante), { target: '_blank' } do %>
+            <% if a.producto_id == 82
+                 files = a.curso.comprobante.split(',')
+                    files.each do |file|   
+             %>
+                           <%= link_to pstcomprobante_path(a.id, file.strip), { target: '_blank' } do %>
                                 <i class="fas fa-file-pdf iconsize"></i>
-                    <% end %>
+                           <% end %>
+                    <% end %> 
             <% elsif a.producto_id == 83 %>
                     <%= link_to pstcomtesis_path(a.id), { target: '_blank' } do %>
                                 <i class="fas fa-file-pdf iconsize"></i>
