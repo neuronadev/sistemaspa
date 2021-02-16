@@ -80,6 +80,11 @@
         <td><%= link_to(a.titulo.html_safe, actividad_path(a.id), data:{turbolinks:false}) %></td>
         <td><%= cita(a.id).html_safe %></td>
         <td class="text-center">
+            <% if a.producto_id == 82 %>
+                    <%= link_to pstcomprobante_path(a.id, a.curso.comprobante), { target: '_blank' } do %>
+                                <i class="fas fa-file-pdf iconsize"></i>
+                    <% end %>
+            <% else %>  
                 <% if a.documentos.attached? %> 
                     <% a.documentos.each do |d|%>
                         <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank' } do %>
@@ -87,6 +92,7 @@
                         <% end %>
                 <% end %>  
                 <% end %>   
+            <% end %>  
         </td>
         <td>
            <% if  a.estado == "U" || a.estado == 'S' || a.estado == 'Z' || a.estado == 'C' %>
