@@ -140,6 +140,7 @@ Rails.application.routes.draw do
 
   #posgrado
    get 'cargas/comprobante/:id/:comprobante', to: 'cargas#comprobante', as: 'pstcomprobante'  
+   get 'cargas/comtesis/:id', to: 'cargas#comtesis', as: 'pstcomtesis'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

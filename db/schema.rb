@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_031201) do
+ActiveRecord::Schema.define(version: 2021_02_16_160449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -908,6 +908,8 @@ ActiveRecord::Schema.define(version: 2021_02_16_031201) do
     t.string "programa"
     t.date "fgrado"
     t.string "efterminal", limit: 2
+    t.string "acta"
+    t.string "comprobante"
     t.index ["actividad_id"], name: "index_tesistas_on_actividad_id"
     t.index ["nivelestudio_id"], name: "index_tesistas_on_nivelestudio_id"
   end

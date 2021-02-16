@@ -126,7 +126,7 @@
                       <% end %> 
                     <% end %>
                 <% end %> 
-             <% elsif a.producto_id == 82 %>
+             <% elsif a.producto_id == 82 ||  a.producto_id == 83 %>
                  <span class=' text-primary'> <%= a.titulo.html_safe %> </span>    
             <% else %>   
                  <%= a.titulo.html_safe %>
@@ -140,6 +140,10 @@
                     <%= link_to pstcomprobante_path(a.id, a.curso.comprobante), { target: '_blank' } do %>
                                 <i class="fas fa-file-pdf iconsize"></i>
                     <% end %>
+             <% elsif a.producto_id == 83 %>
+                    <%= link_to pstcomtesis_path(a.id), { target: '_blank' } do %>
+                                <i class="fas fa-file-pdf iconsize"></i>
+                    <% end %> 
              <% else %> 
                     <% if a.documentos.attached? %> 
                         <% a.documentos.each do |d|%>
