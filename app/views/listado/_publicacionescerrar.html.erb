@@ -1,0 +1,495 @@
+<%
+ cap_porc = false
+%>
+
+<style>
+  .tablaf{
+      font-size: 13px;
+  }
+  .iconsize{
+      font-size: 18px;
+  }
+</style>
+<h5>Producción 2020</h5>
+<hr>
+<div class="row">
+  <div class="col-md-4">
+     <% if current_usuario.rol == 'T' %>
+       <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", tecnico_path, data: {turbolinks:false} ) %>&nbsp
+    <% else %>
+       <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", investigador_path, data: {turbolinks:false} ) %>&nbsp
+    <% end %>
+
+    <i class="fas fa-plus"></i>&nbsp;<%= link_to("Registrar nuevo..", producto_path(0), data: {turbolinks:false} ) %>
+  
+  </div>
+  <div class="col-md-4 ml-auto align-middle"> <%= pagy_bootstrap_nav(@pagy).html_safe %> </div>
+</div>
+<% if current_usuario.rol == 'T' %>
+
+<% end %>
+<% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %>
+
+<% end %>
+<table class="table table-striped table-sm table-bordered tablaf">
+ <thead class="thead-light"> 
+   <tr>
+     <th class="text-center">Folio</th>
+     <th class="text-center">Producto</th>
+     <th class="text-center">Título</th>
+     <th class="text-center">Autores/Participantes</th>
+     <th class="text-center">Comprobante</th>
+     <th class="text-center">Editar</th>
+     <th class="text-center">Eliminar</th>
+     <th class="text-center">Vo.Bo.</th>
+     <th class="text-center">Coordinador</th>
+     <th class="text-center">Sec Acad.</th>
+     <th class="text-center">Aceptar Evaluación</th> 
+   </tr>
+ </thead>
+ <tbody> 
+
+<% @actividades.each do |a| 
+   producto = Producto.find(a.producto.id) 
+   
+   autores = a.autores.order(:posicion)
+   @str = ""
+   idreporta = ''
+   i = 0
+   @conNota = 'N'
+   autores.each do |p|
+         
+        if i > 0  
+            simbolo = ", " 
+         else      
+            simbolo = "" 
+        end
+        if !p.firma.present?
+            @str = @str + simbolo + (p.persona.paterno||"") + "," + (p.persona.nombre||"")
+        else
+            @str = @str + simbolo + (p.firma||"")
+        end     
+
+        if p.filiacion == 'F'
+            if current_usuario.persona_id == p.persona_id
+                @conNota = 'S'
+            end
+        end
+
+       i = i+1
+   end
+  mostrar = 'S'
+  if producto.prodgrupo.clave == 'ACTIVIDAD' && (current_usuario.rol == 'I' || current_usuario.rol == 'C')
+     mostrar = 'N'
+  end
+
+  persona_cap = Persona.find(a.personaid) 
+  @tipo_per = persona_cap.tipopersona_id
+  if mostrar == 'S'
+
+%>
+     <tr>
+         <td><%= a.id %></td>
+         <td><%= a.producto.descripcion %></td> 
+          <td>
+            <% if a.producto_id == 81 || a.producto_id == 85
+                  suma_porc = 0.0 
+                  a.autores.each do |autor|
+                       if !autor.porcentaje.nil? && !autor.porcentaje.blank?
+                           suma_porc += autor.porcentaje
+                       end 
+                  end
+                  if suma_porc != 100  
+                     class_porc = "text-danger" 
+                  else 
+                     class_porc = "text-success"   
+                  end
+            %>
+                <span class=' text-primary'> <%= a.titulo.html_safe %> </span>
+                <% if a.estado == 'S' && (a.aceptado.nil? || a.aceptado.blank? ) %>
+                   <br><strong>Responsable: <span class='text-primary'><%= (persona_cap.paterno||'') + ' ' + (persona_cap.materno||'') + ' ' + (persona_cap.nombre||'') %></span> </strong>
+                   <br><strong>Porcentaje de participación asginado: <span class="<%=  class_porc  %>"><%= suma_porc.to_s %>%</span> </strong> 
+                    <% if cap_porc %> 
+                     <br><strong><span class='text-success'>Deberá agregar a los participantes en el siguiente link: </strong></span>
+                      <%= link_to edit_actividad_path(a.id), data:{turbolinks:false}  do %> 
+                          <i class="fas fa-users"></i> Participantes
+                      <% end %> 
+                    <% end %>
+                <% end %> 
+             <% elsif a.producto_id == 82 ||  a.producto_id == 83 %>
+                 <span class=' text-primary'> <%= a.titulo.html_safe %> </span>    
+            <% else %>   
+                 <%= a.titulo.html_safe %>
+            <% end %>   
+              
+          </td>
+          <td> <%= cita(a.id).html_safe %> 
+          </td>
+          <td class="text-center">
+             <% if a.producto_id == 82
+                    files = a.curso.comprobante.split(',')
+                       files.each do |file|      
+             %>
+                           <%= link_to pstcomprobante_path(a.id, file.strip), { target: '_blank' } do %>
+                                    <i class="fas fa-file-pdf iconsize"></i>
+                           <% end %>
+                       <% end %>
+             <% elsif a.producto_id == 83 %>
+                    <%= link_to pstcomtesis_path(a.id), { target: '_blank' } do %>
+                                <i class="fas fa-file-pdf iconsize"></i>
+                    <% end %> 
+             <% else %> 
+                    <% if a.documentos.attached? %> 
+                        <% a.documentos.each do |d|%>
+                            <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank' } do %>
+                                <i class="fas fa-file-pdf iconsize"></i>
+                            <% end %>
+                        <% end %>  
+                    <% end %>   
+             <% end %>
+          </td>
+
+         <!-- VER / EDITAR --> 
+
+          <td class="text-center">
+              <% if  a.estado == "U" || a.estado == "C" || a.estado == "D" || a.estado == "S" || a.estado == "Z" || a.estado == "W" %>
+                     <i class="fas fa-edit iconsize text-secondary"></i>
+                     <%= link_to("Ver", actividad_path(a.id), data:{turbolinks:false}) %>
+              <% end %>     
+             
+              <% if a.estado == "A" || a.estado == "G" %>
+                          <i class="fas fa-edit iconsize"></i>
+              <% end %>   
+
+
+              <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %> 
+              <% if a.estado == 'Z' && !a.aceptado.present? 
+                    @indica = "" 
+                    mensaje = Mensaje.where(:actividad_id=>a.id)
+                    mensaje.each do |m|
+                        if m.accion.present?
+                            @indica = m.accion
+                        end
+                    end
+              %>  
+                 <% if  @indica == 'L' %>
+                         <br><br>
+                              <i class="fas fa-pen iconsize"></i> Editar
+               <% end %>  
+
+               <% if  @indica == 'M' %>
+                      <br><br>
+                              <i class="fas fa-columns iconsize"></i> Recategorizar
+                <% end %>
+
+              <% end %>
+              <% end %>
+            
+          </td>
+          <!-- FIN VER / EDITAR-->
+          <!-- ELIMINAR -->
+          <td class="text-center">
+            
+               <% if a.estado == "U" || a.estado == "C" || a.estado == "G" || a.estado == "D" || a.estado == "S" || a.estado == "Z" || a.estado == "W" %>
+                     <i class="fas fa-minus-circle iconsize text-secondary"></i>
+               <% end %> 
+               <% if a.estado == "A" %>
+                        <i class="fas fa-minus-circle iconsize text-danger"></i>
+               <% end %>     
+             
+              <!--  <i class="fas fa-minus-circle fa-2x text-secondary"></i>-->  
+          </td>
+          <!-- FIN ELIMINAR -->
+          <!-- VO.BO -->
+          <td class="text-center">
+          
+             <% if a.estado == 'A' || a.estado == "G"  %>
+                 <% if current_usuario.persona_id != 15 %> 
+                       <i class="fas fa-check-circle iconsize text-primary"></i>
+                 <% else %> 
+                    <i class="fas fa-check-circle iconsize text-secondary"></i>
+                 <% end %>
+             
+             <% end %>     
+             <% if a.estado == 'U' || a.estado == "C" || a.estado == "S" || a.estado == "Z" || a.estado == "W"%>
+                      <i class="fas fa-check-double iconsize text-success"></i>
+             <% end %>     
+            
+            
+          </td>
+          <!-- FIN VO.BO -->
+          <!-- PRIMER VALIDACION: CR O COMITE(TECNICOS) -->
+          <td class="text-center">
+                
+           <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %>  
+                 <% if a.estado == 'C' || a.estado == 'S' || a.estado == 'W' || a.estado == 'Z'  %>
+                      <i class="fas fa-check-double iconsize text-success"></i>
+               <% end %>   
+           <% else %>  
+               <% if a.estado == 'C' || a.estado == 'S'  %>
+                      <i class="fas fa-check-double iconsize text-success"></i>
+               <% end %>   
+            <% end %>
+
+            <% if a.estado == 'G'  %>
+                 <i class="fas fa-exclamation-triangle text-danger"></i> <span style="color:#EA5838; font-size:12px">Corregir, clic en la opción Editar</span>
+             <% end %>    
+             <% if a.estado == 'D'  %>
+                 <%= link_to coordinamostrar_path(a.id) do %>
+                       <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">No cumple la normativa</span>
+                 <% end %>
+             <% end %> 
+
+              <% if current_usuario.rol == 'T' %>   
+                <% if a.estado == 'Z' %>  
+                    <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                        <%= link_to "No cumple la normativa. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                        </span>
+                <% end %>
+                <% if a.estado == 'W'
+                        if @conNota == 'N'
+                  %>
+                          <i class="fas fa-check-double iconsize text-success"></i>
+                        <% else %>
+                          <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                          <%= link_to "Nota. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                          </span>
+                        <% end %> 
+                  <% end %> 
+              <% end %>    
+
+          </td>
+           
+
+           <!-- FIN PRIMER VALIDACION -->
+           <!-- VALIDACION POR LA SA PARA INVEST --> 
+          <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %>
+            <td class="text-center"> 
+               <% if a.estado == 'C' %>
+                   En validación
+               <% end %> 
+               <% if a.estado == 'S' %>
+                      <i class="fas fa-check-double iconsize text-success"></i>
+               <% end %> 
+               <% if a.estado == 'Z'  %>
+                     <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                     <%= link_to "No cumple la normativa. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                     </span>
+                     
+               <% end %> 
+               <% if a.estado == 'W'
+                    if @conNota == 'N'
+               %>
+                      <i class="fas fa-check-double iconsize text-success"></i>
+                  <% else %>
+                       <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                       <%= link_to "No cumple la normativa. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                       </span>
+                  <% end %> 
+               <% end %> 
+            </td>
+          <% end %>
+          <!-- FIN VALIDACION POR LA SA --> 
+          <!-- VALIDACION POR LA EL COMITE (TECNICOS) --> 
+          <% if current_usuario.rol == 'T'  %>
+           <% if current_usuario.persona_id == a.personaid  %>
+
+                <% if a.estado == 'A' %> 
+                    <td></td>                
+                <% end %>
+                <% if a.estado == 'U' %> 
+                    <td class="text-center">En validación</td>                
+                <% end %>
+                <% if a.estado == 'S' && !a.aceptado.present? %> 
+                    <td class="text-center"> <%= link_to "Aceptar", aceptaval_path(a.id), data:{confirm:"¿Acepta la evaluación que realizó el Comite Evaluador?", disabled_with: "Enviando.."}  %> </td>
+                <% end %>
+                <% if a.estado == 'S' && a.aceptado == 'S' %> 
+                    <td class="text-center"> <i class="fas fa-user-check iconsize text-success"></i> </td>
+                <% end %>
+
+                <% if a.estado == 'Z' && !a.aceptado.present? 
+                    @indica = "" 
+                    mensaje = Mensaje.where(:actividad_id=>a.id)
+                    mensaje.each do |m|
+                        if m.accion.present?
+                            @indica = m.accion
+                        end
+
+                    end
+                %> 
+                
+                
+
+                <% if  @indica == 'X' %>
+                   <td class="text-center"> <%= link_to "Aceptar", aceptaval_path(a.id), data:{confirm:"¿Acepta la evaluación que realizó el Comité Evaluador?", disabled_with: "Enviando.."}  %> </td>
+                  <!-- <td class="text-center">Aceptar</td>-->
+                <% end %> 
+                <% if  @indica == 'L' %>
+
+                       <% if current_usuario.persona_id == 168 || current_usuario.persona_id == 219 || current_usuario.persona_id == 199 || current_usuario.persona_id == 251 ||  current_usuario.persona_id == 204 ||  current_usuario.persona_id == 144 || current_usuario.persona_id == 205 || current_usuario.persona_id == 232 || current_usuario.persona_id == 242 %>
+                             <td class="text-center">
+                                <%= link_to ">Corregir", edit_actividad_path(a.id), data:{turbolinks:false} %> |
+                                <%= link_to ">Cerrar", aceptaval_path(a.id), data:{confirm:"Si ya corrigío el registro o no desea hacer cambios, se va a proceder a cerrarlo y con esto se acepta la validación del Comite Evaluador, ¿Desea continuar?", disabled_with: "Enviando.."}  %>
+                             </td>
+                       <% else %>
+                          <td class="text-center">Corregir<!-- <%= link_to ">Corregir", edit_actividad_path(a.id), data:{turbolinks:false} %>--> |
+                           <!-- <%= link_to ">Cerrar", aceptaval_path(a.id), data:{confirm:"Si ya no desea editar el registro se va a proceder a cerrarlo y con esto se acepta la validación del Comite Evaluador, ¿Desea continuar?", disabled_with: "Enviando.."}  %> -->
+                           Cerrar
+                          </td>
+                      <% end %>  
+                    
+                <% end %> 
+
+                <% if  @indica == 'M' %>
+                   <% if current_usuario.persona_id == 237 || current_usuario.persona_id == 199 || current_usuario.persona_id == 251 || current_usuario.persona_id == 232 %>
+                         <td class="text-center"><%= link_to ">Categorizar", prodcambio_path(0,a.id), data:{turbolinks:false} %>|
+                            <%= link_to ">Cerrar", aceptaval_path(a.id), data:{confirm:"Si ya no desea editar el registro se va a proceder a cerrarlo y con esto se acepta la validación del Comite Evaluador, ¿Desea continuar?", disabled_with: "Enviando.."}  %> 
+                        </td> 
+                   <% else %> 
+                        <td class="text-center">Categorizar<!-- <%= link_to ">Categorizar", prodcambio_path(0,a.id), data:{turbolinks:false} %> -->|
+                           <!-- <%= link_to ">Cerrar", aceptaval_path(a.id), data:{confirm:"Si ya no desea editar el registro se va a proceder a cerrarlo y con esto se acepta la validación del Comite Evaluador, ¿Desea continuar?", disabled_with: "Enviando.."}  %> -->
+                           Cerrar
+                        </td>
+                   <% end %>
+                <% end %>
+                <% if @indica == "" %>
+                    <td></td>
+                <% end %>
+
+            <% end %>
+            <% if a.estado == 'Z' && a.aceptado == 'S' %>
+                <td class="text-center"><i class="fas fa-user-check iconsize text-success"></i></td>  
+            <% end %>
+
+           <% else %>
+                <% if a.estado == 'S' && a.aceptado == 'S' %> 
+                    <td class="text-center"> <i class="fas fa-user-check iconsize text-success"></i> </td>
+                <% elsif a.estado == 'S' %> 
+                    <td class="text-center"> <i class="fas fa-user-check iconsize text-success"></i> </td>    
+                <% elsif a.estado == 'Z' && a.aceptado == 'S' %> 
+                    <td class="text-center"> <i class="fas fa-user-check iconsize text-success"></i> </td>        
+                <% else %>   
+                    <td></td>
+                <% end %>
+          <% end %>
+         <% end %>
+         <!-- FIN VALIDACION POR EL COMITE (TECNICOS) --> 
+           <!-- Aceptar Investigadores -->
+          <% if current_usuario.rol == 'I' || current_usuario.rol == 'C'  %>
+                <% if a.estado == 'C' %> 
+                    <td></td>                
+                <% end %>
+                <% if a.estado == 'G' %> 
+                    <td></td>                
+                <% end %>
+                <% if a.estado == 'D' %> 
+                    <td></td>                
+                <% end %>
+                <% if a.estado == 'A' %> 
+                    <td></td>                
+                <% end %>
+                <% if a.estado == 'S' && !a.aceptado.present? %> 
+                    <td class="text-center"> 
+                             <i class="fas fa-check-circle fa-2x text-secondary"></i>
+                    </td> 
+                <% end %>
+                <% if a.estado == 'S' && a.aceptado == 'S' %> 
+                    <td class="text-center"> <i class="fas fa-user-check iconsize text-success"></i> </td>
+                <% end %>
+                <% if a.estado == 'W' && !a.aceptado.present? %> 
+                    <td class="text-center"> 
+                      <!--  <%= link_to aceptaval_path(a.id), data:{confirm:"¿Aceptar la evaluación del producto?", disabled_with: "Enviando.."}  do %> -->
+                             <i class="fas fa-check-circle iconsize text-secondary"></i>
+                     <!--   <% end %> -->
+                     </td>
+                <% end %>   
+                <% if a.estado == 'W' && a.aceptado == 'S' %> 
+                    <td class="text-center"> <i class="fas fa-user-check iconsize text-success"></i> </td>
+                <% end %>
+                
+                <% if a.estado == 'Z' && !a.aceptado.present? 
+                    @indica = "" 
+                    mensaje = Mensaje.where(:actividad_id=>a.id).order("created_at asc")
+                    mensaje.each do |m|
+                        if m.accion.present?
+                            @indica = m.accion
+                        end
+                    end
+                %> 
+                 
+                <% if  @indica == 'X' %>
+                   <td class="text-center"> 
+                    <!--  <%= link_to aceptaval_path(a.id), data:{confirm:"¿Aceptar la evaluación del producto?", disabled_with: "Enviando.."}  do %> -->
+                             <i class="fas fa-check-circle iconsize  text-secondary "></i>
+                    <!--  <% end %> -->
+                   </td>
+                 <% else %>  
+                   <td class="text-center">
+                          
+                      <%= link_to aceptaval_path(a.id), data:{confirm:"¿Aceptar la evaluación del producto?", disabled_with: "Enviando.."}  do %> 
+                             <i class="fas fa-check-circle iconsize  text-primary "></i>
+                     <% end %>
+              
+                   
+                   </td>
+                <% end %> 
+                <!--
+                <% if  @indica == 'L' %>
+                             <td class="text-center">
+                                <%= link_to ">Corregir", edit_actividad_path(a.id), data:{turbolinks:false} %> |
+                                <%= link_to ">Cerrar", aceptaval_path(a.id), data:{confirm:"Si ya corrigío el registro o no desea hacer cambios, se va a proceder a cerrarlo y con esto se acepta la validación del Comite Evaluador, ¿Desea continuar?", disabled_with: "Enviando.."}  %>
+                             </td>
+                <% end %> 
+                -->
+                <!--
+                <% if  @indica == 'M' %>
+                         <td class="text-center"><%= link_to ">Categorizar", prodcambio_path(0,a.id), data:{turbolinks:false} %>|
+                            <%= link_to ">Cerrar", aceptaval_path(a.id), data:{confirm:"Si ya no desea editar el registro se va a proceder a cerrarlo y con esto se acepta la validación del Comite Evaluador, ¿Desea continuar?", disabled_with: "Enviando.."}  %> 
+                        </td> 
+                <% end %>
+                
+                <% if @indica == "" %>
+                    <td></td>
+                <% end %>
+               -->
+            <% end %>
+            <% if a.estado == 'Z' && a.aceptado == 'S' %>
+                <td class="text-center"><i class="fas fa-user-check iconsize text-success"></i></td>  
+            <% end %>
+         <% end %>
+        
+        </tr>
+         <!-- OBSERVACIONES AL PRODUCTO -->
+        <% if a.estado == 'S' %>
+             <% 
+                @m = Mensaje.where(actividad_id:a.id).where(tipo:'O').where(estado:'A').first 
+                if  !@m.nil?
+             %>
+                    <tr>
+                        <td></td><td></td> 
+                        <td colspan='9'><span style="color:green; font-weight:bold;"><I>Folio <%=a.id %>, Observaciones: <%= @m.txt %></I></td>
+                    </tr>
+           <%   end
+             end 
+           %>
+            
+        <!-- DETALLE PARA PRODUCTOS CAPTURADOS POR INVESTIGADORES y lo ven los TECNICOS -->
+        <% if current_usuario.rol == 'T' && [2,3].include?(@tipo_per) %>
+            <tr align="center">
+              <td colspan="9"><I><b style="color:blue;">El producto con el Folio <%= a.id %> es validado por el Coordinador de Red y la SA</b></I></td>
+            </tr> 
+        <% end %>
+            
+
+
+  <% end %>      
+<% end %>
+
+</tbody>
+</table>
+
+<div id="modal-window_msg" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content"></div>
+   </div>
+</div>
