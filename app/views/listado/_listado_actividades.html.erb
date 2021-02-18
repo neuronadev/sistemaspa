@@ -1,5 +1,13 @@
 <% if  current_usuario.rol == 'I' || current_usuario.rol == 'C' %>
-   <%= render "listado/publicacionescerrar" %>
+    
+     <%  personau = Persona.find(current_usuario.persona_id) %>
+
+     <% if personau.idfnet == 1000 %> 
+        <%= render "listado/publicaciones" %> 
+     <% else %> 
+        <%= render "listado/publicacionescerrar" %>
+     <% end %>
+
 <% end %>
 <% if  current_usuario.rol == 'T' %>
    <%= render "listado/adicionales" %>
