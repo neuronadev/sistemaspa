@@ -377,6 +377,17 @@ class ValidacionesController < ApplicationController
       redirect_to actividades_path
   end
 
+ def aceptavalsa
+      idact = params[:id]
+      actividad = Actividad.find(idact)
+      actividad.aceptado = 'S'
+      actividad.faceptado = Date.today
+      actividad.save
+      respond_to do |format|
+          format.js
+      end
+  end 
+
 
 
   private def mensaje_params

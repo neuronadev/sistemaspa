@@ -1,0 +1,290 @@
+<style>
+.contprod{
+   display: flex;
+   flex-direction: column;
+   width: 80%;
+   margin-bottom: 15px;
+   padding: 2px 4px 6px 7px;
+   margin-left: 10px;
+   border: 1px solid grey;
+   background-color: white;
+}
+
+.rwp{
+   display: flex;
+   flex-direction: row;
+   
+}
+.rwopts{
+   display: flex;
+   flex-direction: row;
+   margin-top:15px;
+}
+.divide{
+   height:15px; 
+}
+
+.hoptions{
+   margin-left: 10px;
+   width: 100%;
+   margin-bottom: 15px; 
+}
+.frmopt{
+   display: flex;
+   flex-direction: row;
+}
+
+.detallep{
+   display: flex;
+   flex-direction: column;
+   margin-top: 15px;
+}
+.itemdetallep{
+    display: flex;
+    flex-direction: row;
+}
+
+
+</style>
+
+<div class="modal-header">
+   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+   
+ </div>
+ <div class="modal-body">
+  
+ <% a = @actividad %>
+
+
+<div class="hoptions">
+ <strong>Academico:</strong>  <%=  (@persona.paterno||'') + ' ' + (@persona.materno||'') + ' ' + (@persona.nombre||'') %>
+</div>
+
+
+
+  <div class="contprod" id="div<%= a.id %>">
+        <div class="rwp">
+             <div style="font-weight: bold; color:#154360; text-decoration: underline grey;"><%= a.producto.descripcion %></div>
+             <div style="margin-left:20px; color:blue;"><b>Año:</b> <%= a.anio %></div>
+             <div style="margin-left:20px; color:blue;"><b>Folio:</b> <%= a.id %></div>
+        </div>
+        <div class="divide"></div>
+        <div><b>Título:</b> <%= a.titulo %> </div>
+        <div><b>Autores:</b> <%= cita(a.id).html_safe %> </div>
+        <div class="rwp"> <div style="font-weight: bold;">Comprobante:</div>  
+        <% if a.documentos.attached? %> 
+            <div style="font-size:14px; margin-left:10px;">  
+                <% a.documentos.each do |d|%>
+                    <%= link_to rails_blob_path(d, disposition: "inline"),  target: '_blank' do %>
+                        <i class="fas fa-file-pdf"></i> Ver documento
+                    <% end %>
+                <% end %>
+            </div>
+        <% end %> 
+        </div>  
+
+        <div class="detallep">
+            <%= render partial: "detalle/tipo"  %> 
+        </div>
+          
+        <div class="detallep">
+          <% if a.estado == 'A' %>
+                <div style="margin-left:10px; color:#DEA101;"><b>Investigador:</b> 
+                    En validación (Falta VoBo)
+                </div> 
+          <% end %> 
+          <% if a.estado == 'G' 
+                   @m = Mensaje.where(actividad_id:a.id).where(tipo:'C').where(estado:'A').order(created_at: :desc).first
+          %>
+                <div style="margin-left:10px; color:#DEA101;"><b>Investigador:</b> 
+                    En edición: <b><%= @m.txt %></b>
+                </div> 
+          <% end %> 
+          <% if a.estado == 'U' %>
+                <div style="margin-left:10px; color:#566573;"><b>VoBo Investigador:</b> 
+                    <%= a.fecha1 %> <I><%= link_to "Activar", activar_path(a.id,'I'), remote:true %></I>
+                </div>
+                <div style="margin-left:10px; color:#DEA101;"><b>Coordinador:</b> 
+                    En validación
+                </div>
+          <% end %>  
+          <% if a.estado == 'C' %>  
+                <div style="margin-left:10px; color:#566573;"><b>VoBo Investigador:</b> 
+                    <%= a.fecha1 %> <span onclick="showform(<%= a.id %>,1)" style="color:blue;cursor: pointer;"><I>Activar para edición</I></span>
+                    <!-- -------------------------------------------------------------------------------------- -->
+                                    <div id="activar<%= a.id %>" class="formactivar" style="margin-bottom:15px; margin-left:30px; font-size:14px; color:blue;">
+                                                    <div>Escriba a continuación el motivo por el cual se va a activar:</div> 
+                                                    <div> <textarea id="activartxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
+                                                    <div class="frmopt">
+                                                            <div style="cursor: pointer;" onclick="aceptaractivar(<%= a.id %>)">Aceptar</div>
+                                                            <div onclick="cancelform(<%= a.id %>,1)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
+                                                    </div>
+                                    </div>
+                    <!-- -------------------------------------------------------------------------------------- -->
+                </div>
+                <div style="margin-left:10px; color:#566573;"><b>Coordinador:</b> 
+                    <%= a.fecha2 %> <I><%= link_to "Activar", activar_path(a.id,'C'), remote:true %></I>
+                </div>
+                <div style="margin-left:10px; color:#566573;"><b>Sec. Academica:</b> 
+                    <% if a.fecha3.nil? %>
+                        <I style="color:green;">Envalidación</I>
+                    <% else %> 
+                    <%= a.fecha3 %> <I><%= link_to "Activar", activar_path(a.id,'S'), remote:true %></I> 
+                    <% end%>
+                </div>
+           <% end %>     
+           <% if a.estado == 'Z' || a.estado == 'S' %>  
+                <div style="margin-left:10px; color:#566573;"><b>VoBo Investigador: <%= a.fecha1 %></b></div>
+                <div style="margin-left:10px; color:#566573;"><b>Coordinador: <%= a.fecha2 %> </b></div>
+                <div style="margin-left:10px; color:#566573;"><b>Sec. Academica: <%= a.fecha3 %></b></div>
+           <% end %>     
+        </div>
+        <% if a.estado == 'C' %> 
+                <div class="rwopts">
+                    <div id="val<%= a.id %>" style="font-size:14px; color:green; cursor: pointer;" onclick="showform(<%= a.id %>,3)"> 
+                            <i class="fas fa-check-double text-success"></i> Validar
+                    </div>
+                    
+                    <!-- ----------------------------------------------------------------------------------------------------------- -->
+                    <div id="no<%= a.id %>" style="margin-left:10px; font-size:14px; color:red; cursor: pointer;" onclick="showform(<%= a.id %>,2)"> 
+                            <i class="fas fa-times text-danger"></i> No considerar
+                    </div> 
+                    <!-- ----------------------------------------------------------------------------------------------------------- -->
+                    <div id="rechazar<%= a.id %>" class="formrechaza" style="margin-left:10px; font-size:14px; color:red;">
+                        <div>Motivo:</div> 
+                        <div> <textarea id="motivotxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
+                        <div class="frmopt">
+                                 <div style="cursor: pointer;" onclick="aceptarform(<%= a.id %>)">Aceptar</div>
+                                 <div onclick="cancelform(<%= a.id %>,2)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
+                        </div>
+                    </div>
+                    <!-- ----------------------------------------------------------------------------------------------------------- -->
+                    <div id="msgnocon<%= a.id %>"></div>
+                    <div id="msgsicon<%= a.id %>"></div>
+                    <div id="anulasa<%= a.id %>" style="margin-left:10px; color:#566573; display:none;">
+                       <I><%= link_to "Anular validación", anularsa_path(a.id), remote:true %></I>
+                    </div> 
+                </div>
+                 <!-- ----------------------------------------------------------------------------------------------------------- -->
+                    <div id="msgaceptar<%= a.id %>" class="formaceptar" style="margin-left:10px; font-size:14px; color:green; font-weight:bold;">
+                        <div>Este producto será aceptado. ¿Desea escribir alguna Observacion?</div> 
+                        <div> <textarea id="aceptartxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
+                        <div class="frmopt">
+                                 <div style="cursor: pointer;" onclick="aceptarproducto(<%= a.id %>)">Aceptar producto</div>
+                                 <div onclick="cancelform(<%= a.id %>,3)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
+                        </div>
+                    </div>
+                 <!-- ----------------------------------------------------------------------------------------------------------- -->   
+            <% else %> 
+                <% if a.estado == 'S' %> 
+                    <div style="width:45%;margin-top:15px; color: white; background-color: #033B08; font-weight: bold;">
+                     <i class="fas fa-check-double text-success" style="margin-left:5px; color:white;"></i> Producto aceptado
+                    </div>
+                    <div id="anulasa<%= a.id %>" style="margin-left:10px; color:#566573;">
+                       <I><%= link_to "Anular validación", anularsa_path(a.id), remote:true %></I>
+                    </div> 
+                <% end %> 
+                
+                <% if a.estado == 'Z'
+                   @m = Mensaje.where(actividad_id:a.id).where(tipo:'Z').where(estado:'A').first
+                %>  
+                    <div style="margin-top:15px; color:red;">
+                      <i class="fas fa-times text-danger"></i> No cubre la normativa. : <%= @m.txt %>
+                    </div>
+                    <div id="txtrechazav<%= a.id %>"></div>
+                    <div id="anulasa<%= a.id %>" style="margin-left:10px; color:#566573;">
+                     <I><%= link_to "Anular validación", anularsa_path(a.id), remote:true %></I>
+                    </div>
+                <% end %>
+            <% end %>
+
+  </div>
+
+
+ </div>
+ <div class="modal-footer">
+   <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+ </div>
+
+<script>
+    $(function () {
+        $('.formrechaza').hide(); 
+        $('.formaceptar').hide(); 
+
+        $('#test').click(function(){
+           $('body').scrollTo('#div3135');
+        });
+    });
+    $(function () {
+        $('.formactivar').hide(); 
+    });
+     
+    
+
+    function showform(idact,tipo){
+       if (tipo == 1){
+          $('#activar'+idact).show();  
+       }  
+       if (tipo == 2){
+          $('#rechazar'+idact).show();  
+       } 
+       if (tipo == 3){
+          $('#msgaceptar'+idact).show();  
+       }   
+    }
+
+    function hideform(idact){
+        $('#rechazar'+idact).hide();  
+    }
+    function cancelform(idact,tipo){
+        if (tipo == 1){ $('#activar'+idact).hide(); }
+        if (tipo == 2){ $('#rechazar'+idact).hide(); }
+        if (tipo == 3){ $('#msgaceptar'+idact).hide(); }
+        
+    }
+
+    function aceptaractivar(idact){
+      
+        $.ajax({
+                    url: '<%= activartec_path %>',
+                    data: "id="+idact + "&txt=" + $("#activartxt"+idact).val(),
+                    type: "get",
+                    success: function(data){ 
+                          window.location.reload(true);
+                     },
+                    error: function(dayta){   }
+                })
+           
+    }
+
+    function aceptarform(idact){
+          $.ajax({
+                    url: '<%= rechazasa_path %>',
+                    data: "id="+idact + "&txt=" + $("#motivotxt"+idact).val(),
+                    type: "get",
+                    success: function(data){ 
+                         $('#modal-window').modal('hide')
+                         $("#sa"+idact).html("<i class='fas fa-user-times text-danger'></i> No cubre la normativa.")
+                     },
+                    error: function(dayta){   }
+                })
+    }  
+
+   function aceptarproducto(idact){
+       if (confirm('¿Desea continuar?')) {
+           $.ajax({
+                    url: '<%= validasamsg_path %>',
+                    data: "id="+idact + "&txt=" + $("#aceptartxt"+idact).val(),
+                    type: "get",
+                    success: function(data){ 
+                         alert("Producto aceptado");
+                         $('#modal-window').modal('hide')
+                         $("#sa"+idact).html("<i class='fas fa-check-double text-success'></i>")
+                         $("#saaceptar"+idact).html("<i class='fas fa-check text-primary' onclick='aceptarsa("+idact+")' style='cursor: pointer;'></i>")
+                     },
+                    error: function(dayta){   }
+                })
+       }        
+   }
+
+</script>

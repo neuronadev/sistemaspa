@@ -1,0 +1,138 @@
+    <%  
+     @personas.each do |p| 
+    %>
+    <div style="width:100%;" class="bg-info text-white text-center" ><strong><%= (p.paterno||'') + ' ' + (p.materno||'') + ' ' + (p.nombre||'')  %></strong></div>  
+    <table class="table table-sm bg-white table-striped" style="font-family:Helvetica, sans-serif;  font-stretch: semi-expanded; ">
+      <thead>
+       <tr>
+        <th class="text-center">Folio</th>
+        <th class="text-center">Producto</th>
+        <th class="text-center">Año</th>
+        <th class="text-center">Título</th>
+        <th class="text-center">VoBo Invest</th>
+        <th class="text-center">VoBo Coord</th>
+        <th class="text-center">VoBo SA</th>
+        <th class="text-center">Aceptar</th> 
+       </tr>
+      </thead>
+      <tbody> 
+    <%
+       Actividad.where(periodo:2020,estado:['A','U','C','S','Z','W','G']).joins(:autores).where('autores.persona_id'=>p.id).each do |a|
+      
+    %>
+     
+            <tr>
+                
+                <td class="text-center"><strong><%= a.id %></strong></td>
+                <td><%= a.producto.descripcion %></td>
+                <td class="text-center"><%= a.anio %></td>
+                <td>
+
+                    <%= link_to a.titulo, verproductofl_path(a.id, a.personaid),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>           
+
+                </td>
+                <td class="text-center">  <!-- USUARIO -->
+                    <% if a.estado == 'A' %>
+                        <span style="color:red;font-size:13px;">Falta VoBo</span>
+                    <% elsif a.estado == 'U' || a.estado == 'C' || a.estado == 'Z' || a.estado == 'S' %>   
+                        <i class="fas fa-check-double text-success"></i> 
+                    <% else %>
+                        ----
+                    <% end %>  
+                </td>
+                <td class="text-center"> <!-- COORDINADOR -->
+                    <% if a.estado == 'U' %>
+                        <span style="color:red;font-size:13px;">Falta VoBo</span>
+                    <% elsif a.estado == 'C' || a.estado == 'S' || a.estado == 'Z' %>   
+                        <i class="fas fa-check-double text-success"></i> 
+                    <% else %>    
+                        ------
+                    <% end %>  
+                </td>
+                <td class="text-center" id="sa<%= a.id %>"> <!-- SA -->
+                    <% if a.estado == 'C' %>
+                        <span><I>En validación</I></span>
+                    <% elsif a.estado == 'S' %>   
+                        <i class="fas fa-check-double text-success"></i> 
+                    <% elsif a.estado == 'Z' %> 
+                        <i class="fas fa-user-times text-danger"></i> <span style="color:red;font-size:13px;">No cubre la normativa.</span>
+                    <% else %>    
+                        ------
+                    <% end %>  
+                </td>
+                <td class="text-center" id="saaceptar<%= a.id %>">
+                   <% if a.estado == 'S' && (a.aceptado.nil? || a.aceptado.blank? ) %>
+                        <i class="fas fa-check text-primary" onclick="aceptarsa(<%= a.id %>)" style="cursor: pointer;"></i>
+                    <% elsif  a.estado == 'S' && a.aceptado == 'S' %>
+                         <i class="fas fa-user-check text-success"></i>
+                   <% end %> 
+               </td>
+            </tr>
+            <% if a.estado == 'S' %>
+                <% 
+                    @m = Mensaje.where(actividad_id:a.id).where(tipo:'O').where(estado:'A').first 
+                    if  !@m.nil?
+                %>
+                        <tr>
+                            <td> </td><td> </td>
+                            <td colspan='5'><span style="color:green"><I>Folio <%=a.id %>, observaciones: <%= @m.txt %></I></td>
+                            <td> </td>
+                        </tr>
+            <%   end
+                end 
+            %>
+            <% if a.estado == 'Z' %>
+                <% 
+                    @m = Mensaje.where(actividad_id:a.id).where(tipo:'Z').where(estado:'A').first 
+                    if  !@m.nil?
+                %>
+                        <tr>
+                            <td> </td><td> </td>
+                            <td colspan='5'><span style="color:red"><I>Folio <%=a.id %>, observaciones: <%= @m.txt %></I></td>
+                            <td> </td>
+                        </tr>
+            <%   end
+                end 
+            %>
+            <!-- ------------ -->
+            <!-- ------------ -->
+            <% if a.estado == 'G' %>
+                <% 
+                    @m = Mensaje.where(actividad_id:a.id).where(tipo:'C').where(estado:'A').first 
+                    if  !@m.nil?
+                %>
+                        <tr>
+                            <td> </td><td> </td>
+                            <td colspan='5'><span style="color:red"><I>Folio <%= a.id %>, Se envio a corrección por parte del Coordinador de Red: <%= @m.txt %></I></td>
+                            <td> </td>
+                        </tr>
+            <%   end
+                end 
+            %>
+     
+     <% end %>
+    </tbody>
+    </table>
+  <% end %>
+
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<script>
+function aceptarsa(idact){
+       if (confirm('¿Desea continuar?')) {
+           $.ajax({
+                    url: '<%= aceptavalsa_path %>',
+                    data: "id="+idact,
+                    type: "get",
+                    success: function(data){ 
+                         $("#saaceptar"+idact).html("<i class='fas fa-user-check text-success'></i>")
+                     },
+                    error: function(dayta){   }
+                })
+       }        
+   }
+</script>

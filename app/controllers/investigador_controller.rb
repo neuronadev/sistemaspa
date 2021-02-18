@@ -16,6 +16,13 @@ class InvestigadorController < ApplicationController
     @redes = Red.where(id:@idred)
   end 
 
+  def listatodo
+    idsActiv = Array.new
+    @personas = Persona.where(:tipopersona_id=>2).order(:paterno)
+    
+    
+  end 
+
   def vistalista
     personaid = params[:id]
     idsActiv = Array.new
@@ -34,6 +41,18 @@ class InvestigadorController < ApplicationController
       @persona = Persona.find(@academico.to_i)
       @producto = Producto.find(@actividad.producto_id)
       @dataAct = Actividad.find(@actividad.id)
+  end
+
+def verproductofl
+      @actividad = Actividad.find(params[:idprod].to_i)
+      @academico =params[:idacad].to_i
+      @persona = Persona.find(@academico.to_i)
+      @producto = Producto.find(@actividad.producto_id)
+      @dataAct = Actividad.find(@actividad.id)
+      respond_to do |format|
+          format.html
+          format.js
+      end
   end
   
   def produccion 

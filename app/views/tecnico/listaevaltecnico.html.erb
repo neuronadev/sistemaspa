@@ -16,6 +16,7 @@
             <th>Red</th>
             <th>Sustantivas</th>
             <th>Adicionales</th>
+            <th>Validación completa</th>
         </tr>
     </thead>
     <tbody>
@@ -42,6 +43,17 @@
                 <%= link_to("Ver", actividadt_path(@academico.id,1), data:{turbolinks:false} ) %> 
              <% end %>
         </td>
+
+        <td>
+              <div class="itemdata_opt" id="persona<%= @academico.persona.id %>"> 
+                        <% if @academico.persona.evaluacion == 'N' || @academico.persona.evaluacion.nil? %>
+                          <%= link_to "Validación completa", valcompleta_path(@academico.persona.id), remote:true, class:"completa" %> 
+                        <% else %>  
+                             <i class="fas fa-check-double text-success"></i><b style="color:green;"> Validado</b>
+                        <% end %>
+                     </div> 
+        </td>
+
         </tr>
         <% end %>
     </tbody>   

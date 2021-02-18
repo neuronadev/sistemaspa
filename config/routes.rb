@@ -103,11 +103,15 @@ Rails.application.routes.draw do
   get 'investigador/valcompleta/:idpersona/', to: 'investigador#valcompleta', as: 'valcompleta'
   get 'investigador/vistalista/:id', to: 'investigador#vistalista', as: 'vistalista'
   get 'investigador/verproducto/:idprod/:idacad', to: 'investigador#verproducto', as: 'verproducto'   ##VISTA TARJETA
+  get 'investigador/listatodo/', to: 'investigador#listatodo', as: 'listatodo'
+get 'investigador/verproductofl/:idprod/:idacad', to: 'investigador#verproductofl', as: 'verproductofl'   ##VISTA TARJETA
 
   
   #aceptar
   get 'validaciones/aceptaval/:id', to: 'validaciones#aceptaval', as: 'aceptaval' 
   get 'productos/cambio/:id/:idactiv', to: 'productos#cambio', as: 'prodcambio'
+  get 'validaciones/aceptavalsa/', to: 'validaciones#aceptavalsa', as: 'aceptavalsa' 
+
 
   #Edicione
   get 'ediciones/index/:red/:persona', to: 'ediciones#index', as: 'editarindex'
