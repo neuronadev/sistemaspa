@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   get 'tecnicos/listaevaltecnico/', to:  "tecnico#listaevaltecnico", as: 'listaevaltecnico'
   get 'tecnicos/mostraradicional/:idacad', to:  "tecnico#mostraradicional", as: 'mostraradicional'
   get 'tecnico/tecnicoadetalle', to: "tecnico#tecnicoadetalle", as: 'tecnicoadetalle' 
+  get 'tecnico/listatodo', to: "tecnico#listatodo", as: 'listatodot' 
 
   #######
   #Sec Acad Validaciones
@@ -104,8 +105,7 @@ Rails.application.routes.draw do
   get 'investigador/vistalista/:id', to: 'investigador#vistalista', as: 'vistalista'
   get 'investigador/verproducto/:idprod/:idacad', to: 'investigador#verproducto', as: 'verproducto'   ##VISTA TARJETA
   get 'investigador/listatodo/', to: 'investigador#listatodo', as: 'listatodo'
-get 'investigador/verproductofl/:idprod/:idacad', to: 'investigador#verproductofl', as: 'verproductofl'   ##VISTA TARJETA
-
+  get 'investigador/verproductofl/:idprod/:idpersona', to: 'investigador#verproductofl', as: 'verproductofl'   ##VISTA TARJETA
   
   #aceptar
   get 'validaciones/aceptaval/:id', to: 'validaciones#aceptaval', as: 'aceptaval' 
@@ -141,6 +141,7 @@ get 'investigador/verproductofl/:idprod/:idacad', to: 'investigador#verproductof
   get 'academicos/cerrarmensaje/:id', to:'academicos#cerrarmensaje', as:'cerrarmensaje'
   get 'academicos/detalleactividad/:idacademico/:id', to:'academicos#detalleactividad', as:'detalleactividad'
   get 'consultas/historicop/:idacad/:tipoc', to:'consultas#historicop', as:'historicop'
+  get 'academicos/detalleactfl/:idactiv/:idpersona', to: 'academicos#detalleactfl', as: 'detalleactfl'   ##VISTA TARJETA
 
   #posgrado
    get 'cargas/comprobante/:id/:comprobante', to: 'cargas#comprobante', as: 'pstcomprobante'  

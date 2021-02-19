@@ -42,6 +42,18 @@ class AcademicosController < ApplicationController
       personaid = @academico.persona_id
       @persona = Persona.find(personaid)
   end
+  def detalleactfl
+      idactividad = params[:idactiv]
+      idpersona = params[:idpersona]
+      #@academico = Academico.find(idacademico)
+      @actividad = Actividad.find(idactividad)
+      @producto = Producto.find(@actividad.producto_id)
+      @dataAct = Actividad.find(@actividad.id)
+      @captura = Persona.find(@actividad.personaid)
+      @tipo_cap = @captura.tipopersona_id
+      #personaid = @academico.persona_id
+      @persona = Persona.find(idpersona)
+  end
 
   def activar
     @idactividad = params[:id]

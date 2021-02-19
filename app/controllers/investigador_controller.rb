@@ -45,8 +45,9 @@ class InvestigadorController < ApplicationController
 
 def verproductofl
       @actividad = Actividad.find(params[:idprod].to_i)
-      @academico =params[:idacad].to_i
-      @persona = Persona.find(@academico.to_i)
+      @idpersona = params[:idpersona].to_i
+      #@academico =params[:idacad].to_i
+      @persona = Persona.find(@idpersona)
       @producto = Producto.find(@actividad.producto_id)
       @dataAct = Actividad.find(@actividad.id)
       respond_to do |format|

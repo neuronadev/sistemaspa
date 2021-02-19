@@ -73,6 +73,11 @@ class TecnicoController < ApplicationController
 
  end
 
+ def listatodo
+   @personas = Persona.where(:tipopersona_id=>4).order(:paterno)
+ end
+
+
  def edit
   sustid = params[:id]
   @action = params[:action]
