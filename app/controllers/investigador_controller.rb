@@ -18,7 +18,7 @@ class InvestigadorController < ApplicationController
 
   def listatodo
     idsActiv = Array.new
-    @personas = Persona.where(:tipopersona_id=>2).order(:paterno)
+    @personas = Persona.where(tipopersona_id:[2,3]).order(:paterno)
     
     
   end 
