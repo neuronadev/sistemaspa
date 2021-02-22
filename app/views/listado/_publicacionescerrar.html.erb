@@ -390,7 +390,9 @@
                 <% end %>
                 <% if a.estado == 'S' && !a.aceptado.present? %> 
                     <td class="text-center"> 
-                             <i class="fas fa-check-circle fa-2x text-secondary"></i>
+                        <%= link_to aceptaval_path(a.id), data:{confirm:"¿Aceptar la evaluación del producto?", disabled_with: "Enviando.."}  do %> 
+                             <i class="fas fa-check-circle fa-2x text-primary"></i>
+                        <% end %>
                     </td> 
                 <% end %>
                 <% if a.estado == 'S' && a.aceptado == 'S' %> 
@@ -425,11 +427,10 @@
                    </td>
                  <% else %>  
                    <td class="text-center">
-                          
-                      
-                             <i class="fas fa-check-circle iconsize  text-primary "></i>
                      
-              
+                    <%= link_to aceptaval_path(a.id), data:{confirm:"¿Aceptar la evaluación del producto?", disabled_with: "Enviando.."}  do %> 
+                             <i class="fas fa-check-circle iconsize  text-primary "></i>
+                     <% end %>
                    
                    </td>
                 <% end %> 

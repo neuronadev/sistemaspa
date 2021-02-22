@@ -152,9 +152,13 @@
         </td>
         <td class="text-center">
           <% if a.estado == 'S' && !a.aceptado.present? %> 
-                 <%= link_to "Aceptar", aceptaval_path(a.id), data:{confirm:"¿Acepta la evaluación que realizó el Comite Evaluador?", disabled_with: "Enviando.."}  %> 
+                 <%= link_to aceptaval_path(a.id), data:{confirm:"¿Acepta la evaluación que realizó el Comite Evaluador?", disabled_with: "Enviando.."} do %> 
+                     <i class="fas fa-check-circle iconsize  text-primary "></i>
+                 <% end %> 
            <% elsif a.estado == 'Z' && !a.aceptado.present? %> 
-                 <%= link_to "Aceptar", aceptaval_path(a.id), data:{confirm:"¿Acepta la evaluación que realizó el Comite Evaluador?", disabled_with: "Enviando.."}  %>             
+                 <%= link_to aceptaval_path(a.id), data:{confirm:"¿Acepta la evaluación que realizó el Comite Evaluador?", disabled_with: "Enviando.."} do %>
+                     <i class="fas fa-check-circle iconsize  text-primary "></i>
+                 <% end %> 
           <% elsif a.estado == 'S' && a.aceptado == 'S'  %>  
                  <i class="fas fa-user-check iconsize text-success"></i>
           <% elsif a.estado == 'Z' && a.aceptado == 'S'  %>  
