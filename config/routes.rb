@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   get 'tecnicos/mostraradicional/:idacad', to:  "tecnico#mostraradicional", as: 'mostraradicional'
   get 'tecnico/tecnicoadetalle', to: "tecnico#tecnicoadetalle", as: 'tecnicoadetalle' 
   get 'tecnico/listatodo', to: "tecnico#listatodo", as: 'listatodot' 
+  get 'tecnico/anularaceptado', to: "tecnico#anularaceptado", as: 'anularaceptadotec' 
 
   #######
   #Sec Acad Validaciones

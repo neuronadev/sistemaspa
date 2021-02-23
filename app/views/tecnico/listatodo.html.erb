@@ -42,7 +42,7 @@
                     <% end %>  
                 </td>
                
-                <td class="text-center" id="sa<%= a.id %>"> <!-- SA -->
+                <td class="text-center sa<%= a.id %>" id="sa<%= a.id %>" > <!-- SA -->
                     <% if a.estado == 'U' %>
                         <span><I>En validación</I></span>
                     <% elsif a.estado == 'S' %>   
@@ -53,7 +53,7 @@
                         ------
                     <% end %>  
                 </td>
-                <td class="text-center" id="saaceptar<%= a.id %>">
+                <td class="text-center saaceptar<%= a.id %>" id="saaceptar<%= a.id %>">
                    <% if a.estado == 'S' && (a.aceptado.nil? || a.aceptado.blank? ) %>
                         <i class="fas fa-check text-primary" onclick="aceptarsa(<%= a.id %>)" style="cursor: pointer;"></i>
                     <% elsif  a.estado == 'S' && a.aceptado == 'S' %>
@@ -129,7 +129,7 @@ function aceptarsa(idact){
                     data: "id="+idact,
                     type: "get",
                     success: function(data){ 
-                         $("#saaceptar"+idact).html("<i class='fas fa-user-check text-success'></i>")
+                         $(".saaceptar"+idact).html("<i class='fas fa-user-check text-success'></i>")
                      },
                     error: function(dayta){   }
                 })

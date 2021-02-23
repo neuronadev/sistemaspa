@@ -10,6 +10,29 @@ class TecnicoController < ApplicationController
   #@academico.sustantivas.build
  end 
 
+def anularaceptado
+    @idactividad = params[:id]
+    actividad = Actividad.find(@idactividad.to_i)
+    actividad.estado = 'U'
+    actividad.aceptado = nil
+    actividad.save
+    mensaje = Mensaje.where(actividad_id:@idactividad.to_i).where(tipo:'O').where(estado:'A').first
+    if !mensaje.nil?
+        mensaje.estado = 'X'
+        mensaje.save
+    end 
+    mensaje = Mensaje.where(actividad_id:@idactividad.to_i).where(tipo:'Z').where(estado:'A').first
+    if !mensaje.nil?
+        mensaje.estado = 'X'
+        mensaje.save
+    end    
+    
+    respond_to do |format| 
+      format.js
+    end
+  end
+
+
  def detalle
   @sust = Sustantiva.where("academico_id=? and estado != 'X' and anio=2020",current_usuario.persona.academico.id)
   

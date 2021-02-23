@@ -175,7 +175,7 @@
                                             <i class="fas fa-check-double text-success" style="margin-left:5px; color:white;"></i> Producto aceptado
                                             </div>
                                             <div>
-                                            <I> <%= link_to "Anular validación", anularaceptado_path(@actividad.id), remote:true, data:{confirm:'Con esta acción se anulará la validación, ¿desea continuar?'} %> </I>
+                                            <I> <div onclick="anularaceptado(<%= a.id %>)" style="cursor: pointer; margin-left:10px;">Anular validación</div> </I>
                                             </div>
                                         <% end %> 
                                         
@@ -188,7 +188,7 @@
                                             </div>
                                             <div id="txtrechazav<%= @actividad.id %>"></div> 
                                             <div>
-                                            <I> <%= link_to "Anular validación", anularaceptado_path(@actividad.id), remote:true, data:{confirm:'Con esta acción se anulará la validación, ¿desea continuar?'} %> </I>
+                                            <I> <div onclick="anularaceptado(<%= a.id %>)" style="cursor: pointer; margin-left:10px;">Anular validación</div> </I>
                                             </div>
                                         <% end %>
                                     <% end %>
@@ -255,7 +255,7 @@
                     type: "get",
                     success: function(data){ 
                           $('#modal-window').modal('hide')
-                          $("#sa"+idact).html("<i class='fas fa-user-times text-danger'></i> No cubre la normativa.")
+                          $(".sa"+idact).html("<i class='fas fa-user-times text-danger'></i> No cubre la normativa.")
                      },
                     error: function(dayta){   }
                 })
@@ -270,12 +270,28 @@
                     success: function(data){ 
                          alert("Producto aceptado");
                          $('#modal-window').modal('hide')
-                         $("#sa"+idact).html("<i class='fas fa-check-double text-success'></i>")
-                         $("#saaceptar"+idact).html("<i class='fas fa-check text-primary' onclick='aceptarsa("+idact+")' style='cursor: pointer;'></i>")
+                         $(".sa"+idact).html("<i class='fas fa-check-double text-success'></i>")
+                         $(".saaceptar"+idact).html("<i class='fas fa-check text-primary' onclick='aceptarsa("+idact+")' style='cursor: pointer;'></i>")
                      },
                     error: function(dayta){   }
                 })
        }        
    }
+
+ function anularaceptado(idact){
+    if (confirm('¿Desea continuar?')) {
+           $.ajax({
+                    url: '<%= anularaceptadotec_path %>',
+                    data: "id="+idact,
+                    type: "get",
+                    success: function(data){ 
+                         $('#modal-window').modal('hide')
+                         $(".sa"+idact).html("En validación")
+                         $(".saaceptar"+idact).html("---") 
+                     },
+                    error: function(dayta){   }
+                })
+       }     
+ }
 
 </script>
