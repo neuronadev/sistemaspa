@@ -1,5 +1,4 @@
 <div><strong>Listado de Investigadores</strong></div>
-
 <br>
    
  <%  
@@ -69,14 +68,12 @@
                         <i class="fas fa-check text-primary" onclick="aceptarsa(<%= a.id %>)" style="cursor: pointer;"></i>
                     <% elsif  a.estado == 'S' && a.aceptado == 'S' %>
                          <i class="fas fa-user-check text-success"></i>
-                    <% elsif  a.estado == 'Z' && (a.aceptado == 'S' ) %>
+                    <% elsif  a.estado == 'Z' && a.aceptado == 'S' %>
                          <i class="fas fa-user-check text-success"></i>
                     <% elsif  a.estado == 'G' && a.aceptado == 'S' %>
                          <i class="fas fa-user-check text-success"></i>
                     <% elsif  a.estado == 'D' && a.aceptado == 'S' %>
                          <i class="fas fa-user-check text-success"></i> 
-                     <% elsif  a.estado == 'Z' && a.aceptado.nil? %>
-                         <i class="fas fa-check text-primary" onclick="aceptarsa(<%= a.id %>)" style="cursor: pointer;"></i>
                     <% else %>
                          -----   
                    <% end %> 

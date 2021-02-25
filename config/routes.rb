@@ -106,6 +106,7 @@ Rails.application.routes.draw do
   get 'investigador/vistalista/:id', to: 'investigador#vistalista', as: 'vistalista'
   get 'investigador/verproducto/:idprod/:idacad', to: 'investigador#verproducto', as: 'verproducto'   ##VISTA TARJETA
   get 'investigador/listatodo/', to: 'investigador#listatodo', as: 'listatodo'
+  get 'investigador/listatodofal/', to: 'investigador#listatodofal', as: 'listatodofal'
   get 'investigador/verproductofl/:idprod/:idpersona', to: 'investigador#verproductofl', as: 'verproductofl'   ##VISTA TARJETA
   
   #aceptar
