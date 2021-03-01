@@ -204,6 +204,8 @@ a {
 
 .sidenav {
   position: fixed; // Access sidenav at any scroll position; relatively positioned on medium + screens
+
+
   grid-area: sidenav;
   height: 100%;
   overflow-y: auto;
@@ -815,8 +817,13 @@ a {
   }
 
   .sidenav {
-    position: relative;
+    //position: relative;
+
+
+
     transform: translateX(0);
+      
+
 
     &__brand-close {
       visibility: hidden;
