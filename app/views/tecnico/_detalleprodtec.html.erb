@@ -249,9 +249,11 @@
            
     }
     function aceptarform(idact){
+          var dtxt = $("#motivotxt"+idact).val()
+          dtxt = dtxt.replace("%"," porciento") 
           $.ajax({
                     url: '<%= rechazasa_path %>',
-                    data: "id="+idact + "&txt=" + $("#motivotxt"+idact).val(),
+                    data: "id="+idact + "&txt=" + dtxt,
                     type: "get",
                     success: function(data){ 
                           $('#modal-window').modal('hide')

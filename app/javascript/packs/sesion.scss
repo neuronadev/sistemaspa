@@ -817,7 +817,7 @@ a {
   }
 
   .sidenav {
-    //position: relative;
+    position: fixed;
 
 
 
@@ -869,4 +869,8 @@ a {
       align-items: flex-start;
     }
   }
+}
+
+.nolink{
+   color: white;
 }

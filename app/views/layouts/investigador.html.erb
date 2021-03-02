@@ -14,6 +14,7 @@
   <body>
       
         <div class="grid">
+         <!--  
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
              
               <div class="collapse navbar-collapse align-items-end" id="navbarSupportedContent">
@@ -23,8 +24,6 @@
                       <%=  @usuario_nom %>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <!--<%= link_to("Perfil", perfil_path(current_usuario.persona_id), class:"dropdown-item", data:{turbolinks:false}) %> -->
-                      <!-- <a class="dropdown-item" href="#">Another action</a> -->
                       <div class="dropdown-divider"></div>
                       <%= link_to('Salir', destroy_usuario_session_path, class:"dropdown-item") %>
                     </div>
@@ -33,14 +32,16 @@
                 </ul>
                 
               </div>
-             </nav>
+             </nav> -->
 
     <aside class="sidenav">
         
         <div class="w-50 mx-auto">
          <%= image_pack_tag 'logo100_White.png', class:"card-img-top img-fluid" %>
+         <%=  @usuario_nom %>
+         
         </div> 
-       
+        
        
         <div class="row row--align-v-center row--align-h-center">
           <ul class="navList">
@@ -80,7 +81,7 @@
            <% if current_usuario.persona_id.to_i == 210 %>
             <li>
              <div class="navList__subheading row row--align-v-center">
-                <span class="navList__subheading-icon"><i class="fas fa-tachometer-alt fa-2x"></i></i></i></span>
+                <span class="navList__subheading-icon"><i class="fas fa-tachometer-alt fa-2x"></i></span>
                 <span class="navList__subheading-title">Indicadores</span>
             </div> 
               <ul class="subList subList--hidden">
@@ -93,7 +94,7 @@
            <hr>
             <li>
              <div class="navList__subheading row row--align-v-center">
-                <span class="navList__subheading-icon"><i class="fas fa-list-alt fa-2x"></i></i></span>
+                <span class="navList__subheading-icon"><i class="fas fa-list-alt fa-2x"></i></span>
                 <span class="navList__subheading-title">Validaciones</span>
             </div> 
               <ul class="subList">
@@ -115,7 +116,7 @@
            <% if current_usuario.persona_id.to_i == 64 %>
             <li>
              <div class="navList__subheading row row--align-v-center">
-                <span class="navList__subheading-icon"><i class="fas fa-user-clock fa-2x"></i></i></i></span>
+                <span class="navList__subheading-icon"><i class="fas fa-user-clock fa-2x"></i></span>
                 <span class="navList__subheading-title">Historicos</span>
             </div> 
               <ul class="subList subList--hidden">
@@ -129,7 +130,7 @@
 
            <li>
             <div class="navList__subheading row row--align-v-center">
-                <span class="navList__subheading-icon"><i class="fas fa-list-alt fa-2x"></i></i></span>
+                <span class="navList__subheading-icon"><i class="fas fa-list-alt fa-2x"></i></span>
                 <span class="navList__subheading-title">Eval. Tecnicos</span>
             </div> 
               <ul class="subList subList--hidden">
@@ -139,6 +140,13 @@
 
             <% end %>
 
+           <li> 
+              <div class="navList__subheading row row--align-v-center">
+                 <span class="navList__subheading-icon"><i class="fas fa-sign-out-alt fa-2x"></i></span>
+                 <span class="navList__subheading-title"><%= link_to('Salir', destroy_usuario_session_path, class:"nolink") %></span>
+              </div>          
+               
+           </li>
         </ul>
         </div>
     </aside>
