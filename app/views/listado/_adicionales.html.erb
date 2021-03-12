@@ -41,6 +41,7 @@
         idreporta = ''
         i = 0
         @conNota = 'N'
+        @noaplica = 'S'
         autores.each do |p|
           if i > 0  
             simbolo = ", " 
@@ -56,6 +57,11 @@
           if p.filiacion == 'F'
             if current_usuario.persona_id == p.persona_id
                 @conNota = 'S'
+            end
+          end
+          if p.filiacion == 'N'
+            if current_usuario.persona_id == p.persona_id
+                @noaplica = 'N'
             end
           end
 
@@ -136,19 +142,25 @@
              <% end %>     
         </td>
         <td>
-          <% if a.estado == 'S'  %>
-                <i class="fas fa-check-double iconsize text-success"></i>
-          <% elsif a.estado == 'G' %>       
-                <I>Corregir</I>
-          <% elsif a.estado == 'Z' %>  
-             <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
-                 <%= link_to "No cumple la normativa.", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
-             </span> 
-          <% elsif a.estado == 'U' %>       
-              <I>En validación</I>
-          <% else %>      
-               <I> -- </I>
-          <% end %>  
+          <% if @noaplica == 'N'  %>
+                <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                    <%= link_to "No cumple la normativa.", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                </span> 
+          <% else %>
+              <% if a.estado == 'S'  %>
+                    <i class="fas fa-check-double iconsize text-success"></i>
+              <% elsif a.estado == 'G' %>       
+                    <I>Corregir</I>
+              <% elsif a.estado == 'Z' %>  
+                <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                    <%= link_to "No cumple la normativa.", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                </span> 
+              <% elsif a.estado == 'U' %>       
+                  <I>En validación</I>
+              <% else %>      
+                  <I> -- </I>
+              <% end %>  
+          <% end %> 
         </td>
         <td class="text-center">
           <% if a.estado == 'S' && !a.aceptado.present? %> 
@@ -168,13 +180,13 @@
           <% end %>
         </td>
     </tr> 
-     <!-- DETALLE PARA PRODUCTOS CAPTURADOS POR INVESTIGADORES y lo ven los TECNICOS -->
+     <!-- DETALLE PARA PRODUCTOS CAPTURADOS POR INVESTIGADORES y lo ven los TECNICOS 
     <% if current_usuario.rol == 'T' && [2,3].include?(@tipo_per) %>
             <tr align="center">
               <td></td>
               <td colspan="9"><I><b style="color:blue;">El producto con el Folio <%= a.id %> es validado por el Coordinador de Red y la SA</b></I></td>
             </tr> 
-   <% end %>
+   <% end %> -->
    <!-- OBSERVACIONES AL PRODUCTO -->
         <% if a.estado == 'S' %>
              <% 
@@ -188,6 +200,13 @@
            <%   end
              end 
     %>
+    <!-- PARA PROYECTOS, APLICACION PARCIAL -->
+    <% if @noaplica == 'N'  %>
+          <tr>
+                <td></td>
+                <td colspan='9'><b style="color:red">No cumple la normativa: Actividad no considerada como extraordinaria porque forma parte de sus actividades sustantivas.</b>  </td>
+          </tr>
+    <% end %>
     <tr>
       <td></td>
       <td colspan="9">

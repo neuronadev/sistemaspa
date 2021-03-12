@@ -20,7 +20,10 @@
       <tbody> 
     <%
        Actividad.where(periodo:2020,estado:['A','U','C','S','Z','W','G']).joins(:autores).where('autores.persona_id'=>p.id).each do |a|
-    %>
+       r_autores = Autor.where(actividad_id:a.id,persona_id:p.id).first
+       @aplicar = r_autores.filiacion
+
+   %>
      
             <tr>
                 
@@ -43,15 +46,19 @@
                 </td>
                
                 <td class="text-center sa<%= a.id %>" id="sa<%= a.id %>" > <!-- SA -->
-                    <% if a.estado == 'U' %>
-                        <span><I>En validación</I></span>
-                    <% elsif a.estado == 'S' %>   
-                        <i class="fas fa-check-double text-success"></i> 
-                    <% elsif a.estado == 'Z' %> 
-                        <i class="fas fa-user-times text-danger"></i> <span style="color:red;font-size:13px;">No cubre la normativa.</span>
-                    <% else %>    
-                        ------
-                    <% end %>  
+                    <% if  @aplicar == 'N' %>
+                            <i class="fas fa-user-times text-danger"></i> <span style="color:red;font-size:13px;">No cubre la normativa.</span>
+                    <% else %>
+                            <% if a.estado == 'U' %>
+                                <span><I>En validación</I></span>
+                            <% elsif a.estado == 'S' %>   
+                                <i class="fas fa-check-double text-success"></i> 
+                            <% elsif a.estado == 'Z' %> 
+                                <i class="fas fa-user-times text-danger"></i> <span style="color:red;font-size:13px;">No cubre la normativa.</span>
+                            <% else %>    
+                                ------
+                            <% end %>  
+                    <% end %> 
                 </td>
                 <td class="text-center saaceptar<%= a.id %>" id="saaceptar<%= a.id %>">
                    <% if a.estado == 'S' && (a.aceptado.nil? || a.aceptado.blank? ) %>
@@ -110,6 +117,15 @@
             <%   end
                 end 
             %>
+ 
+            <% if @aplicar == 'N' %>
+                   <tr>
+                            <td> </td><td> </td>
+                            <td colspan='5'><span style="color:red"><I>Folio <%= a.id %>, Actividad no considerada como extraordinaria porque forma parte de sus actividades sustantivas.</I></td>
+                            <td> </td>
+                    </tr>
+            <% end %> 
+            
        <% end %>
     </tbody>
     </table>

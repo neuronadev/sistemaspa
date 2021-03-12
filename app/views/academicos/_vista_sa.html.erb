@@ -35,7 +35,8 @@
         @dataAct = Actividad.find(a.id)
         @captura = Persona.find(a.personaid)
         @tipo_cap = @captura.tipopersona_id
-       
+        r_autores = Autor.where(actividad_id:a.id,persona_id:@persona.id).first
+        @aplicar = r_autores.filiacion
     %>
       <tr> 
         <td> <%= a.id %> </td>
@@ -53,6 +54,9 @@
              <% end %> 
         </td>
         <td>
+          <% if  @aplicar == 'N' %>
+                 <i class="fas fa-user-times text-danger"></i> <span style="color:red;font-size:13px;">No cubre la normativa.</span>
+          <% else %>
              <% if a.estado == 'A' || a.estado == 'G' %>
                  ----
              <% elsif a.estado == 'U' || a.estado == 'G' %>   
@@ -64,6 +68,7 @@
              <% else %>    
                  ----
              <% end %>  
+          <% end %>
         </td>
         <td>
             <% if a.aceptado == 'S' %>
@@ -73,6 +78,15 @@
             <% end %>
         </td>
       </tr>
+        
+       <% if @aplicar == 'N' %>
+                   <tr>
+                            <td> </td>
+                            <td colspan='4'><span style="color:red">No cubre la normativa: Actividad no considerada como extraordinaria porque forma parte de sus actividades sustantivas.</span></td>
+                            <td> </td>
+                    </tr>
+       <% end %> 
+            
         <% if a.estado == 'S' %>
              <% 
                 @m = Mensaje.where(actividad_id:a.id).where(tipo:'O').where(estado:'A').first 
