@@ -70,15 +70,29 @@
                 <div><b>Título:</b> <%= @actividad.titulo %> </div>
                 <div><b>Autores:</b> <%= cita(@actividad.id).html_safe %> </div>
                 <div class="rwp"> <div style="font-weight: bold;">Comprobante:</div>  
-                <% if @actividad.documentos.attached? %> 
-                    <div style="font-size:14px; margin-left:10px;">  
-                        <% @actividad.documentos.each do |d|%>
-                            <%= link_to rails_blob_path(d, disposition: "inline"),  target: '_blank' do %>
-                                <i class="fas fa-file-pdf"></i> Ver documento
-                            <% end %>
-                        <% end %>
-                    </div>
-                <% end %> 
+                  <% if @actividad.producto_id == 82
+                           files = @actividad.curso.comprobante.split(',')
+                           files.each do |file|      
+                   %>
+                               <%= link_to pstcomprobante_path(@actividad.id, file.strip), { target: '_blank' } do %>
+                                       <i class="fas fa-file-pdf iconsize"></i> Ver documento
+                               <% end %>
+                           <% end %>
+                  <% elsif @actividad.producto_id == 83 %>
+                          <%= link_to pstcomtesis_path(@actividad.id), { target: '_blank' } do %>
+                                <i class="fas fa-file-pdf iconsize"></i> Ver documento
+                          <% end %> 
+                  <% else %> 
+                        <% if @actividad.documentos.attached? %> 
+                            <div style="font-size:14px; margin-left:10px;">  
+                                <% @actividad.documentos.each do |d|%>
+                                    <%= link_to rails_blob_path(d, disposition: "inline"),  target: '_blank' do %>
+                                        <i class="fas fa-file-pdf"></i> Ver documento
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        <% end %> 
+                 <% end %> 
                 </div>  
 
                 <div class="detallep">

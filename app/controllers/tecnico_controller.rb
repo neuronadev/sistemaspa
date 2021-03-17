@@ -10,7 +10,11 @@ class TecnicoController < ApplicationController
   #@academico.sustantivas.build
  end 
 
-def anularaceptado
+ def mostrarprod
+    @personas = Persona.where(:tipopersona_id=>4).order(:paterno)
+ end
+
+ def anularaceptado
     @idactividad = params[:id]
     actividad = Actividad.find(@idactividad.to_i)
     actividad.estado = 'U'

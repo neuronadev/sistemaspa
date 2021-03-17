@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   get 'tecnico/tecnicoadetalle', to: "tecnico#tecnicoadetalle", as: 'tecnicoadetalle' 
   get 'tecnico/listatodo', to: "tecnico#listatodo", as: 'listatodot' 
   get 'tecnico/anularaceptado', to: "tecnico#anularaceptado", as: 'anularaceptadotec' 
+  get 'tecnico/mostrarprod', to: "tecnico#mostrarprod", as: 'mostrarprod' 
 
   #######
   #Sec Acad Validaciones
