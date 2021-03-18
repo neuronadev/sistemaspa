@@ -52,6 +52,10 @@ class TecnicoController < ApplicationController
   @prom = evaltec.round(2)
 
  end
+
+ def mostrarcargas
+     @extras = Extra.all.order(:persona_id)
+ end
  
  def mostraractiv
   idacad = params[:idacad] 

@@ -107,12 +107,22 @@
                 <li class="subList__item"><%= link_to("Eval Tecnicos", listaevaltecnico_path, data:{turbolinks:false}) %></li>
                 <li class="subList__item"><%= link_to("Tecnicos Todos",  listatodot_path) %></li>
                 <li class="subList__item"><%= link_to("Agradecimientos",  mostrarprod_path) %></li>    
+                    
               <!--
                 <li class="subList__item"><%= link_to("Técnicos Actividades", tecnicoadetalle_path, data:{turbolinks:false}) %></li>
                 <li class="subList__item"><%= link_to("Investigadores Activ.", investdetalle_path, data:{turbolinks:false}) %></li>
               -->  
               </ul>
             </li>
+            <li>
+               <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-list-alt fa-2x"></i></span>
+                <span class="navList__subheading-title">Documentos</span>
+               </div>
+               <ul class="subList">
+                   <li class="subList__item"><%= link_to("Todos", mostrarcargas_path) %></li>
+               </ul>
+            </li>  
            <% end %> 
            <% if current_usuario.persona_id.to_i == 64 %>
             <li>
