@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_160449) do
+ActiveRecord::Schema.define(version: 2021_03_18_191638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -433,6 +433,14 @@ ActiveRecord::Schema.define(version: 2021_02_16_160449) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["persona_id"], name: "index_externos_on_persona_id"
+  end
+
+  create_table "extras", force: :cascade do |t|
+    t.bigint "persona_id", null: false
+    t.text "descripcion"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["persona_id"], name: "index_extras_on_persona_id"
   end
 
   create_table "factores", force: :cascade do |t|
@@ -1158,6 +1166,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_160449) do
   add_foreign_key "editoriales", "paises"
   add_foreign_key "estimulos", "personas"
   add_foreign_key "externos", "cru.personas", column: "persona_id"
+  add_foreign_key "extras", "personas"
   add_foreign_key "fasciculos", "actividades"
   add_foreign_key "fasciculos", "tipofasciculos"
   add_foreign_key "fasciculos", "tipomedios"

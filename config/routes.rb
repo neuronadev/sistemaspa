@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   
   
+  get 'extras/index'
+  get 'extras/show'
+  get 'extras/new'
   get 'cargas/index'
   get 'cargas/show'
   get 'cargas/edit'
@@ -28,6 +31,7 @@ Rails.application.routes.draw do
   resources :autores
   resources :externos
   resources :perfil
+  resources :extras
   #resources :academicos
   #resources :indicadores
     
@@ -150,6 +154,9 @@ Rails.application.routes.draw do
   #posgrado
    get 'cargas/comprobante/:id/:comprobante', to: 'cargas#comprobante', as: 'pstcomprobante'  
    get 'cargas/comtesis/:id', to: 'cargas#comtesis', as: 'pstcomtesis'
+
+  #extras
+    
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

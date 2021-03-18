@@ -1,0 +1,29 @@
+  
+
+ <table class="table">
+    <tr>
+        <td><%= link_to 'Regresar', extras_path %></td>
+        <td></td>
+    <tr>     
+    <tr>
+        <td colspan='2' align='center'> <b>Cargar documentos</b> </td>
+    </tr>
+   </table> 
+<br>
+
+<%= form_with model: @extra do |form| %>
+   <%= form.hidden_field :persona_id, value: current_usuario.persona_id %>  
+   <table class="table">
+    <tr>
+        <td>Nombre del documento:</td>
+        <td><%= form.text_field :descripcion %></td>
+    </tr>
+    <tr>
+        <td>Documento:</td> 
+        <td><%= form.file_field :documento %></td>
+    </tr>
+    <tr>
+        <td colspan='2' align='center'> <%= form.submit "Enviar documento" %> </td>
+    </tr>
+   </table> 
+<% end %>

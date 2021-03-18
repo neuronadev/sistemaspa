@@ -83,6 +83,13 @@
                 <li class="subList__item"><%= link_to("Ver registros..", actividades_path, data:{turbolinks:false}) %></li>
               </ul>
             </li>
+            <li>
+             <div class="navList__subheading row row--align-v-center">
+                <span class="navList__subheading-icon"><i class="fas fa-upload fa-2x"></i></span>
+                <span class="navList__subheading-title"><%= link_to("Subir docum...", extras_path, data:{turbolinks:false}) %></span>
+            </div> 
+              
+            </li> 
 
            <% if current_usuario.persona_id.to_i == 255 %>
             <li>

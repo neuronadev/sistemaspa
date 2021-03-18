@@ -1,0 +1,26 @@
+<div style="margin-left:10px;"><i class="fas fa-plus"></i> <%= link_to "Subir Nuevo Documento..", new_extra_path %></div>
+<br>
+<table class="table">
+   <thead>
+      <th>Folio carga</th>
+      <th>Descripción</th>
+      <th>Documento</th> 
+   </thead> 
+   <tbody>
+      <% @extras.each do |ex| %>
+           <tr>
+               <td> <%= ex.id %> </td>
+               <td> <%= ex.descripcion %> </td>
+               <td>
+                   <% if ex.documento.attached? %>  
+                      <%= link_to ex.documento.filename, rails_blob_path(ex.documento, disposition: "attachment"), { target: '_blank' } %>
+                    <% else %>
+                      <I>Sin arcivo</I>
+                   <% end %>
+               </td> 
+           </tr>
+      <% end %>
+   </tbody>
+
+</table>
+
