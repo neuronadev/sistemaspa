@@ -6,14 +6,16 @@
       <th>Técnico</th> 
       <th>Descripción</th>
       <th>Documento</th> 
+      <th></th> 
    </thead> 
    <tbody>
     <% Persona.order(:paterno).each do |p|  %>
       <% Extra.where(persona_id:p.id).each do |ex|
          #sp = Persona.find(ex.persona_id)
          nombre = (ex.persona.paterno||'') + ' ' + (ex.persona.materno||'') + ' ' + (ex.persona.nombre||'') + ' '
+         @style = ex.estado == 'P' ? 'background-color:#7DCEA0' : ''
       %>
-           <tr>
+           <tr id="rw<%= ex.id %>"  style = <%= @style %> >
                <td> <%= ex.id %> </td>
                <td> <%= nombre %> </td>
                <td> <%= ex.descripcion %> </td>
@@ -24,6 +26,15 @@
                       <I>Sin archivo</I>
                    <% end %>
                </td> 
+            <td id="td<%= ex.id %>">
+                <% if ex.estado.blank? || ex.estado == 'A' %>
+                      <%= link_to procesado_path(ex.id), remote:true, data:{confirm:"Desea continuar?"}  do %>
+                         <i class="fas fa-check"></i>
+                     <% end %>
+                 <% else %>
+                         <i class="fas fa-check-double"></i>
+                <% end %> 
+            </td>
            </tr>
       <% end %>
    <% end %> 

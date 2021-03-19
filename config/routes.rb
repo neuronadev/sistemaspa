@@ -157,7 +157,7 @@ Rails.application.routes.draw do
    get 'cargas/comtesis/:id', to: 'cargas#comtesis', as: 'pstcomtesis'
 
   #extras
-    
+  get 'extras/procesado/:id', to: 'extras#procesado', as: 'procesado'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

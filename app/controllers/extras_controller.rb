@@ -10,6 +10,16 @@ class ExtrasController < ApplicationController
      @extra = Extra.new
   end
   
+  def procesado
+     @id = params[:id]
+     @extra = Extra.find(@id.to_i)
+     @extra.estado = 'P'
+     @extra.save
+     respond_to do |f|
+        f.js
+     end
+  end
+
   def create
     @extra = Extra.new(extra_params) 
       if @extra.save
