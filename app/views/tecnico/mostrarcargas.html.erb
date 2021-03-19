@@ -8,7 +8,8 @@
       <th>Documento</th> 
    </thead> 
    <tbody>
-      <% @extras.each do |ex|
+    <% Persona.order(:paterno).each do |p|  %>
+      <% Extra.where(persona_id:p.id).each do |ex|
          #sp = Persona.find(ex.persona_id)
          nombre = (ex.persona.paterno||'') + ' ' + (ex.persona.materno||'') + ' ' + (ex.persona.nombre||'') + ' '
       %>
@@ -18,13 +19,14 @@
                <td> <%= ex.descripcion %> </td>
                <td>
                    <% if ex.documento.attached? %>  
-                      <%= link_to ex.documento.filename, rails_blob_path(ex.documento, disposition: "attachment"), { target: '_blank' } %>
+                      <%= link_to ex.documento.filename, rails_blob_path(ex.documento, disposition: "inline"), { target: '_blank' } %>
                     <% else %>
                       <I>Sin archivo</I>
                    <% end %>
                </td> 
            </tr>
       <% end %>
+   <% end %> 
    </tbody>
 
 </table>

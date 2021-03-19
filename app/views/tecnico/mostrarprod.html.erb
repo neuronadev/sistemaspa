@@ -4,6 +4,7 @@
   <thead>
     <tr>
        <th class="text-center">Folio</th>
+       <th class="text-center">Técnico</th>
        <th class="text-center">Producto</th>
        <th class="text-center">Año</th>
        <th class="text-center">Título</th>
@@ -13,8 +14,9 @@
     </tr>
   </thead>
   <tbody> 
-    <%
-       Actividad.where(periodo:2020, producto_id:[51,62,60,61,30], estado:['A','U','C','S','Z','W','G']).order(:titulo).each do |a|
+  <% Persona.where(:tipopersona_id=>4).order(:paterno).each do |persona| %> 
+     <%
+       Actividad.where(periodo:2020, producto_id:[51,62,60,61,30], estado:['A','U','C','S','Z','W','G'],personaid:persona.id).order(:titulo).each do |a|
            p = Persona.find(a.personaid)
            nombre = (p.paterno||'') + ' ' + (p.materno||'') + ' ' + (p.nombre||'')
            pasa = 'N'
@@ -24,15 +26,16 @@
            end
           
            if pasa == 'S'
-    %>
+     %>
             <tr>
                 <td class="text-center"><strong><%= a.id %></strong></td>
+                <td class="text-center"><strong><%= nombre %></strong></td> 
                 <td><%= a.producto.descripcion %></td>
                 <td class="text-center"><%= a.anio %></td>
                 <td>
 
                     <%= link_to a.titulo, detalleactfl_path(a.id, p.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>           
-                    <I><%= "Capturado por: #{nombre}" %></I>
+                    
                 </td>
                 <td class="text-center">  <!-- USUARIO -->
                     <% if a.estado == 'A' %>
@@ -122,7 +125,8 @@
             <% end %> 
 
           <% end %> 
-       <% end %>
+        <% end %>
+   <% end %>
  </tbody>
 </table>
 

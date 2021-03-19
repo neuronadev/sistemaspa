@@ -12,6 +12,7 @@ class TecnicoController < ApplicationController
 
  def mostrarprod
     @personas = Persona.where(:tipopersona_id=>4).order(:paterno)
+    
  end
 
  def anularaceptado
@@ -54,7 +55,9 @@ class TecnicoController < ApplicationController
  end
 
  def mostrarcargas
-     @extras = Extra.all.order(:persona_id)
+   @p= Persona.order(:paterno) 
+   @extras = Extra.where(persona_id:@p)
+
  end
  
  def mostraractiv
