@@ -99,7 +99,7 @@
             </div>
         </div> -->
          
-
+       
         <div class="card card--finance">
             <div class="card__header">
             <div class="card__header-title text-light">Actividades sustantivas
@@ -150,6 +150,31 @@
             </div>
         </div>
  
+ <div class="card">
+                <div class="card__header" style="background-color:#740202;">
+                <div class="card__header-title text-light"><strong>Estímulo 2020</strong>
+                    
+                </div>
+                </div>
+                <div class="card p-2">
+                <%
+                monto_esti = Estimulo.where(persona_id:current_usuario.persona_id).where(anio:2021).first
+                %> 
+                <table class="table">
+                <tbody>
+                    <tr>   
+                    <td>
+                        <% if monto_esti.monto != '0' %>  
+                            <strong>Monto:  <%= number_to_currency(monto_esti.monto)  %></strong>
+                        <% else %>
+                            <strong>No cumplió los requisitos de los lineamientos</strong>
+                        <% end %> 
+                    </td>
 
+                    </tr>
+                </tbody>     
+                </table>  
+                </div>
+        </div> 
 
         </div> <!-- /.main-cards -->

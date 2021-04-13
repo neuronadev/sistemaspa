@@ -107,33 +107,39 @@
                        
             </div>
         </div>
-        <% if current_usuario.persona_id != 101  %>
-        <!--
-            <div class="card">
-                <div class="card__header" style="background-color:#740202;">
-                <div class="card__header-title text-light"><strong>Presupuesto Operativo y Estímulo 2019</strong>
-                    
-                </div>
-                </div>
-                <div class="card p-2">
-                <%
-                monto_esti = Estimulo.where(:persona_id=>current_usuario.persona_id).first
-                %> 
-                <table class="table">
-                <tbody>
-                    <tr>   
-                    <td>Presupuesto Operativo: <%= link_to("Ver listado", presupuesto_path, data:{turbolinks:false}) %></td>
-                    </tr>
-                    <tr>   
-                    <td>Estímulo: <strong>
-                       
-                    </strong> </td>
-                    </tr>
-                </tbody>     
-                </table>  
-                </div>
-            </div>
-         -->   
+        <% if current_usuario.persona_id != 101
+              per = Persona.find(current_usuario.persona_id) 
+       %>
+             <% if per.tipopersona_id != 3 %>
+                    <div class="card">
+                        <div class="card__header" style="background-color:#740202;">
+                        <div class="card__header-title text-light"><strong>Estímulo 2020</strong>
+                            
+                        </div>
+                        </div>
+                        <div class="card p-2">
+                        <%
+                        monto_esti = Estimulo.where(persona_id:current_usuario.persona_id).where(anio:2021).first
+                        %> 
+                        <table class="table">
+                        <tbody>
+                            <tr>   
+                            <td>
+                            
+                                    <% if monto_esti.monto != '0' %>  
+                                        <strong>Monto:  <%= number_to_currency(monto_esti.monto)  %></strong>
+                                    <% else %>
+                                        <strong>No cumplió los requisitos de los lineamientos</strong>
+                                    <% end %> 
+                            
+                            </td>
+
+                            </tr>
+                        </tbody>     
+                        </table>  
+                        </div>
+                    </div>
+              <% end %>
         <% end %>
 
         <div class="card card--finance">
