@@ -140,6 +140,28 @@
                         </div>
                     </div>
               <% end %>
+             <div class="card">
+                        <div class="card__header" style="background-color:#DF5C28;">
+                        <div class="card__header-title text-light"><strong>Presupuesto Operativo 2020</strong>
+                            
+                        </div>
+                        </div>
+                        <div class="card p-2">
+                        <%
+                        monto_esti = Estimulo.where(persona_id:current_usuario.persona_id).where(anio:2021).first
+                        %> 
+                        <table class="table">
+                        <tbody>
+                            <tr>   
+                            <td>
+                               <strong>Ver prespuesto operativo de investigadores: <a href='http://195.154.40.61/docs/Presupuesto_Operativo.pdf' target='_blank'>Presupuesto Operativo</a></strong>
+                            </td>
+
+                            </tr>
+                        </tbody>     
+                        </table>  
+                        </div>
+                    </div> 
         <% end %>
 
         <div class="card card--finance">
