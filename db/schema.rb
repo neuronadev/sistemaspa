@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_151026) do
+ActiveRecord::Schema.define(version: 2021_06_25_070906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -188,6 +188,8 @@ ActiveRecord::Schema.define(version: 2021_04_13_151026) do
     t.string "eidentificador"
     t.integer "kate"
     t.integer "puntos"
+    t.date "fechapub"
+    t.text "abstract"
     t.index ["actividad_id"], name: "index_articulos_on_actividad_id"
     t.index ["revista_id"], name: "index_articulos_on_revista_id"
   end
@@ -710,33 +712,22 @@ ActiveRecord::Schema.define(version: 2021_04_13_151026) do
   end
 
   create_table "publicaciones", force: :cascade do |t|
-    t.string "titulo"
-    t.integer "nocontrol"
-    t.string "idioma", limit: 20
-    t.string "fuente", limit: 2
-    t.integer "idfnet"
-    t.string "naturaleza", limit: 1
-    t.string "medio", limit: 50
-    t.string "doi"
-    t.string "estado", limit: 1
-    t.string "alcance", limit: 100
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "producto_id"
-    t.string "volumen", limit: 10
-    t.string "issue", limit: 10
-    t.integer "pgini"
-    t.integer "pgfin"
-    t.date "fpub"
-    t.bigint "medio_id"
-    t.integer "paginas"
-    t.integer "creditos"
-    t.string "institucionexterna", limit: 150
-    t.decimal "monto"
-    t.string "abstract"
-    t.bigint "red_id"
-    t.string "web"
-    t.integer "reporta"
+    t.text "titulo"
+    t.text "cita"
+    t.integer "anio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["medio_id"], name: "index_publicaciones_on_medio_id"
+    t.index ["producto_id"], name: "index_publicaciones_on_producto_id"
+    t.index ["red_id"], name: "index_publicaciones_on_red_id"
+  end
+
+  create_table "publicaciones", force: :cascade do |t|
+    t.text "titulo"
+    t.text "cita"
+    t.integer "anio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["medio_id"], name: "index_publicaciones_on_medio_id"
     t.index ["producto_id"], name: "index_publicaciones_on_producto_id"
     t.index ["red_id"], name: "index_publicaciones_on_red_id"
@@ -1139,15 +1130,15 @@ ActiveRecord::Schema.define(version: 2021_04_13_151026) do
   add_foreign_key "articulos", "revistas"
   add_foreign_key "autores", "actividades"
   add_foreign_key "autores", "cru.personas", column: "persona_id"
+  add_foreign_key "autores", "cru.publicaciones", column: "publicacion_id"
   add_foreign_key "autores", "cru.roles", column: "rol_id"
   add_foreign_key "autores", "personas"
-  add_foreign_key "autores", "publicaciones"
   add_foreign_key "autores", "roles"
   add_foreign_key "autores", "actividades"
   add_foreign_key "autores", "cru.personas", column: "persona_id"
+  add_foreign_key "autores", "cru.publicaciones", column: "publicacion_id"
   add_foreign_key "autores", "cru.roles", column: "rol_id"
   add_foreign_key "autores", "personas"
-  add_foreign_key "autores", "publicaciones"
   add_foreign_key "autores", "roles"
   add_foreign_key "capitulos", "actividades"
   add_foreign_key "capitulos", "idiomas"
@@ -1198,6 +1189,9 @@ ActiveRecord::Schema.define(version: 2021_04_13_151026) do
   add_foreign_key "productos", "cru.categorias", column: "categoria_id"
   add_foreign_key "productos", "prodcategorias"
   add_foreign_key "productos", "prodgrupos"
+  add_foreign_key "publicaciones", "cru.productos", column: "producto_id"
+  add_foreign_key "publicaciones", "cru.redes", column: "red_id"
+  add_foreign_key "publicaciones", "medios"
   add_foreign_key "publicaciones", "cru.productos", column: "producto_id"
   add_foreign_key "publicaciones", "cru.redes", column: "red_id"
   add_foreign_key "publicaciones", "medios"

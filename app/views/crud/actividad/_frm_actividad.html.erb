@@ -53,12 +53,14 @@
                         </div>    
                      </div>  
                <% else %>
+                  <!--
                      <div class="col">
                         <div class="form-group">
                            <%= form.label :anio, "Año:" %>
                            <%= form.text_field :anio,class:"form-control col-2", disabled: disabled  %> 
                         </div>    
-                     </div>  
+                     </div>
+                  -->     
                <% end %>       
              </div> 
             
@@ -78,6 +80,12 @@
                      <%  if @producto.prodgrupo.clave != "PERIODICO" %> 
                            <div class="col">
                               <div class="form-group">
+                                 <%= art_form.label :issue, "Issue:" %>
+                                 <%= art_form.text_field :issue, class:"form-control col", disabled: disabled %> 
+                              </div>    
+                           </div>  
+                           <div class="col">
+                              <div class="form-group">
                                  <%= art_form.label :pgini, "Página inicial:" %>
                                  <%= art_form.text_field :pgini, class:"form-control col", disabled: disabled %> 
                               </div>    
@@ -88,10 +96,33 @@
                                  <%= art_form.text_field :pgfin, class:"form-control col", disabled: disabled %>
                               </div> 
                            </div> 
+                           <div class="col">
+                              <div class="form-group">
+                                 <%= art_form.label :fechapub, "Fecha de publicación:" %>
+                                 <%= art_form.date_field :fechapub, class:"form-control col", disabled: disabled %>
+                              </div> 
+                           </div> 
+                           
 
                      <% end%>   
                   </div>     
-
+                   <%  if @producto.prodgrupo.clave != "PERIODICO" %> 
+                       <div class="row">
+                              <div class="col">
+                                 <div class="form-group">
+                                    <%= art_form.label :doi, "Doi:" %>
+                                    <%= art_form.text_field :doi, class:"form-control col", disabled: disabled %>
+                                 </div> 
+                              </div> 
+                           
+                              <div class="col">
+                                 <div class="form-group">
+                                    <%= art_form.label :abstract, "Abstract:" %>
+                                    <%= art_form.text_area :abstract, class:"form-control col", disabled: disabled %>
+                                 </div> 
+                             </div> 
+                       </div>
+                   <% end %> 
                   <div class="row">  
                      <div class="col-4">
                         <div class="form-group">
