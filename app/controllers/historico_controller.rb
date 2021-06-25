@@ -1,8 +1,8 @@
 class HistoricoController < ApplicationController
 
     def datahistory
-       periodo = params[:periodo].to_i
-       @actividades = Persona.find(current_usuario.persona_id).actividades.where(:periodo=>periodo).where("estado='S' or estado='W'").order(:titulo)
+       @periodo = params[:periodo].to_i
+       @actividades = Persona.find(current_usuario.persona_id).actividades.where(:periodo=>@periodo).where("estado='S' or estado='W'").order(:titulo)
        #@actividad = Actividad.where(:periodo=>periodo).where("estado='S' or estado='W'")
     end
     #layout "historico"
