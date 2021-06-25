@@ -12,9 +12,11 @@
 <hr>
 
 <%= form_with(model: @actividad, local: true)  do |form| %>
-     <%= form.hidden_field :reemplazaidact, value:@idactividad_ant %> 
+     <%= form.hidden_field :reemplazaidact, value:'0' %> 
      <%= form.hidden_field :producto_id, value: @producto.id %> 
-     
+     <% if @action == 'edit' %> 
+       <%= form.hidden_field :id, value: @actividad.id %> 
+     <% end %>
      <%= form.hidden_field :periodo, value: "2021" %> 
      <%= form.hidden_field :estado, value:'A' %>
 
@@ -65,6 +67,11 @@
              </div> 
             
                <%= form.fields_for :articulo do |art_form| %>
+
+                 <% if @action == 'edit' %>
+                     <%= art_form.hidden_field :id, value: @actividad.articulo.id %> 
+                 <% end %>
+               
                  <div class="row"> 
                      <div class="col">
                         <div class="form-group">

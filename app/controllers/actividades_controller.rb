@@ -72,6 +72,7 @@ class ActividadesController < ApplicationController
      @metodo = "show" 
      @disabled = true
      @actividad = Actividad.find(idact)
+     
      @producto = Producto.find(@actividad.producto_id) 
   end
 
@@ -81,7 +82,7 @@ class ActividadesController < ApplicationController
     @actividad = Actividad.find(idact)
     @producto = Producto.find(@actividad.producto_id) 
     @actividad.autores.order("id asc")
-     
+    
   end
 
   def update
@@ -212,7 +213,7 @@ class ActividadesController < ApplicationController
 
 
   private def actividad_params
-   params.require(:actividad).permit(:titulo,:anio,:producto_id, :personaid,:estado, :fechapub, :reemplazaidact, :periodo, :asignared, documentos:[],
+   params.require(:actividad).permit(:id,:titulo,:anio,:producto_id, :personaid,:estado, :fechapub, :reemplazaidact, :periodo, :asignared, documentos:[],
         articulo_attributes:[:id,:volumen,:pgini,:pgfin,:revista_id,:actividad_id,:eidentificador,:doi, :issue,:fechapub,:abstract],
         libroarbitrado_attributes:[:id,:nopaginas, :idioma_id, :editorial_id, :actividad_id],
         capitulo_attributes: [:id,:pgini,:pgfin,:idioma_id,:libro_id, :actividad_id],

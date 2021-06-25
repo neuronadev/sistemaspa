@@ -13,7 +13,11 @@
    <div class="col">
      <div class="form-group">
        Nombre:
-       <%= f.select :persona_id, Persona.all.order(:orden).order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, { :selected => 211},{class:"form-control", disabled: disabled } %>
+         <% if  @action == 'edit' %>
+            <%= f.select :persona_id, Persona.all.order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, {},{class:"form-control", disabled: disabled } %>
+         <% else%>
+            <%= f.select :persona_id, Persona.all.order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, { :selected => 211},{class:"form-control", disabled: disabled } %> 
+         <%end %>
      </div>       
    </div> 
 
