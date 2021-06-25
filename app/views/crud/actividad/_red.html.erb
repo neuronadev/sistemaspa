@@ -2,19 +2,19 @@
  .redw{
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
  }
  .reditem{
     display: flex;
     flex-direction: row;
  }
  .selectw{
-    width: 30%;
+    width: 80%;
  }
 </style>
 <div class="redw">
-         <strong>Red</strong><I>Seleccione la red a la que pertenece la publicación</I>
-          <div class="reditem">
-              <%= form.select :asignared, Red.all.order(:nomred).pluck(:nomred,:id), { :include_blank=>'Seleccione una red'}, {class:"selectize selectw", disabled: @disable} %>             
-          </div>
+     <div class="form-group">
+         <label><I>Seleccione la red a la que pertenece la publicación</I></label>
+           <%= form.select :asignared, Red.all.order(:nomred).pluck(:nomred,:id), { :include_blank=>'Seleccione una red'}, {class:"selectize selectw", disabled: @disable} %>             
+     </div>
 </div>     

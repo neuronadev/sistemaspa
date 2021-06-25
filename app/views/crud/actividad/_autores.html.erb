@@ -5,7 +5,33 @@
   #autoresl li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1em; }
   #autoresl li span { position: absolute; margin-left: -1.3em; }
   </style>
- 
+
+<div class="text-secondary mt-md-4">
+  En la siguiente sección deberá ingresar a los autores de la publicación. Seleccione del lado izquierdo, en la columna "Nombre"; a un investigador del INECOL o si es autor externo seleccione la opción "::Externo Autor" y a continuación escriba el nombre.
+  Para agregar otro autor a la lista, haga clic en el botón "+ Agregar autor"
+</div>
+
+<div class="col">
+  
+</div>
+
+<% if current_usuario.persona_id==64 %>
+
+<div class="row">
+    <div class="col">
+         <div class="form-group">
+             <input type="text" name="listaut" id="listaut" class="form-control">
+             <div class="btn btn-secondary" id="striplist">Aplicar</div> 
+         </div>
+
+    </div>  
+</div>  
+
+<% end %>
+
+ <% if !@disabled %>
+    <%= link_to_add_fields("+ Agregar autor", form, :autores) %>
+<% end %>
   <div class="card">
     
      <div class="card-body">
@@ -20,9 +46,7 @@
        <% end %>  
      </div>   
  </div>
-<% if !@disabled %>
-    <i class="fas fa-plus"></i>&nbsp;<%= link_to_add_fields("Agregar participante", form, :autores) %> <span style="color:red"><I><- Haga clic en el link para agregar participante</I></span>
-<% end %>
+
 
 <script>
   $( function() {

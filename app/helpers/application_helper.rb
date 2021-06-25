@@ -8,7 +8,7 @@ module ApplicationHelper
          link_to_function(name, h("add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\");return false;"))
      end
   
-     def link_to_function(name, js, opts={})
+     def link_to_function(name, js, opts={class:'btn btn-primary btn-sm mb-md-2 mt-md-2 addautor'})
           link_to name, '#', opts.merge({onclick: js})
      end
 

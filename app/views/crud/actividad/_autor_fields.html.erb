@@ -9,45 +9,34 @@
    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
 
        <%= f.hidden_field :posicion, value:f.object.posicion, class:"orden" %>
-     
-   <div class="col-3">
+       <%= f.hidden_field :rol_id, value:'1' %>
+   <div class="col">
      <div class="form-group">
-       Nombre
-       <%= f.select :persona_id, Persona.all.order(:orden).order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, { :include_blank=>'-Seleccione una opción-'},{class:"form-control", disabled: disabled } %>
+       Nombre:
+       <%= f.select :persona_id, Persona.all.order(:orden).order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, { :selected => 211},{class:"form-control", disabled: disabled } %>
      </div>       
    </div> 
 
     <% if @producto.prodgrupo.clave != 'ACTIVIDAD' &&  @producto.prodgrupo.clave != 'PROY'   %> 
 
-   <div class="col-3">
+   <div class="col">
      <div class="form-group"> 
-       Nombre abreviado del autor
-       <%= f.text_field :firma, class:"form-control", placeholder: "Como se muestra en comprobante",  disabled: disabled %> 
+       Nombre abreviado del autor:
+       <%= f.text_field :firma, class:"form-control txtfirma", placeholder: "Solo aplica para autor externo",  disabled: disabled %> 
      </div>  
    </div>
 
    <% end %> 
 
-   <div class="col-2">
-     <div class="form-group"> 
-        Tipo participación
-        <% if @producto.prodgrupo.clave == 'PROY'   %>
-           <%= f.select :rol_id, Rol.where(estado:'A').all.order(:nomrol).collect {|p| [p.nomrol, p.id]}, { :include_blank=>'-Seleccione una opción-'},{class:"form-control",  disabled: disabled } %>  
-        <% else %>
-           <%= f.select :rol_id, Rol.where(estado:['A','B']).all.order(:nomrol).collect {|p| [p.nomrol, p.id]}, { :include_blank=>'-Seleccione una opción-'},{class:"form-control",  disabled: disabled } %>
-        <% end %>
-           
-
-     </div>        
-   </div> 
+   
    <% if @producto.prodgrupo.clave != 'ACTIVIDAD' &&  @producto.prodgrupo.clave != 'PROY'   %>
-     <div class="col-2">
+     <div class="col">
        <div class="form-group"> 
          ¿Es corresponsal?
           <% if @action == 'edit' || @action == 'editdata' %>
                 <%=  f.select :corresponsal,options_for_select(@corresponsal,f.object.corresponsal), {},{class:"form-control",  disabled: disabled } %> 
           <% else %>
-              <%=  f.select :corresponsal,options_for_select(@corresponsal), { :include_blank=>'-Seleccione una opción-'} ,{class:"form-control",  disabled: disabled } %>
+              <%=  f.select :corresponsal,options_for_select(@corresponsal), {} ,{class:"form-control",  disabled: disabled } %>
           <% end %>
 
        </div>        
@@ -57,7 +46,7 @@
    <% end %> 
    
    <% if @producto.prodgrupo.clave == 'PROY'   %>
-     <div class="col-3">
+     <div class="col">
       <div class="form-group"> 
          (%) de participación
         <%= f.text_field :porcentaje, class:"form-control porcentaje", placeholder: "% participación",  disabled: disabled %> 
@@ -66,10 +55,12 @@
    <% end %> 
 
 
-   <div class="col-2">
+   <div class="col">
      <div class="form-group"> 
        <%= f.hidden_field :_destroy, class:"destroy" %>
-       <%= link_to "[Quitar]","#",onClick: "removeField(this); return false;" %> 
+       <%= link_to "#", onClick: "removeField(this); return false;", class:'text-danger' do %> 
+              <i class="fas fa-trash-alt"></i> Quitar
+       <% end %>
      </div>  
    </div>  
 

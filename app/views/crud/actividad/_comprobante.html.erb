@@ -1,9 +1,10 @@
 <div class="form-group">  
            <strong>Comprobante</strong>
+           <p><I>Seleccione un archivo en formato PDF.</I></p>
        </div>
         <% if !@disabled %>
             <div class="form-group">  
-               <%= form.file_field :documentos, multiple: true %>
+               <%= form.file_field :documentos, multiple: true, class:"form-control col-6" %>
             </div>
         <% end %>
        <div class="form-group">

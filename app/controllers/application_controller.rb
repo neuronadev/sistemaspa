@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
       private def ambitos_select
           @usuario_nom =  (current_usuario.persona.nombre) + " " + (current_usuario.persona.paterno||'')
           @especializada = {"SI":"S", "NO":"N"}
-          @corresponsal = {"SI":"S", "NO":"N"}
+          @corresponsal = {"NO":"N", "SI":"S"}
           @niveldecreto = {"Municipal":"M", "Estatal":"E", "Federal":"F"}
           @ordenamiento = {"Aceptado":"A", "Publicado":"P"}
           @niveliniciativa = {"Estatal":"E", "Federal":"F"}
