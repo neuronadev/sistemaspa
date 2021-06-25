@@ -1,8 +1,10 @@
 class InvestigadorController < ApplicationController
+  include Pagy::Backend
   def index
     @persona = Persona.find(current_usuario.persona_id)
-    #@actividades = Persona.find(current_usuario.persona_id).actividades.where("estado!='X'").limit(4).order(created_at: :desc)
-    @actividades = Persona.find(current_usuario.persona_id).actividades.where("periodo=2020 and (estado!='X' and estado!='H')").order(:titulo)
+    #@actividades = Persona.find(current_usuario.persona_id).actividades.where("estado!='X'").order(:titulo)
+    #@pagy, @actividades = pagy(Persona.find(current_usuario.persona_id).actividades.where("estado!='X' and estado!='H' ").order(:titulo), page: params[:page], items: 20)
+    @pagy, @actividades = pagy(Persona.find(current_usuario.persona_id).actividades.where(periodo:2021,estado:['A','C','S','U']).order(:titulo), page: params[:page], items: 20)
   end
 
   def listarredes

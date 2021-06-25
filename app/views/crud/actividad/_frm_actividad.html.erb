@@ -14,9 +14,19 @@
 <%= form_with(model: @actividad, local: true)  do |form| %>
      <%= form.hidden_field :reemplazaidact, value:@idactividad_ant %> 
      <%= form.hidden_field :producto_id, value: @producto.id %> 
-     <%= form.hidden_field :personaid, value: current_usuario.persona_id %> 
-     <%= form.hidden_field :periodo, value: "2020" %> 
+     
+     <%= form.hidden_field :periodo, value: "2021" %> 
      <%= form.hidden_field :estado, value:'A' %>
+
+      <% if @action == 'newact' || @action == 'edit' %>
+           <% if current_usuario.persona_id == 64 %>
+                  <label>A nombre de:</label>
+                 <%= form.select :personaid, Persona.all.where(tipopersona_id:[2,3]).order(:paterno).map{|p| [(p.paterno||'')+' ' + (p.materno||'')+' '+(p.nombre||''), p.id] },{}, {class:"form-control"} %>
+           <% else %>
+               <%= form.hidden_field :personaid, value: current_usuario.persona_id %> 
+           <% end %>
+      <% end %>
+
      <!--
       <% if @action == 'newact' || @action == 'edit' %>
            <% if current_usuario.persona_id == 64 %>
