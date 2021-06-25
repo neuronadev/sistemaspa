@@ -37,7 +37,7 @@ class RevistasController < ApplicationController
   end
 
   private def revista_params
-    params.require(:revista).permit(:nomrevista,:cuartil,:factor,:issn,:eissn,:editorial_id)
+    params.require(:revista).permit(:nomrevista,:cuartil,:factor,:issn,:eissn,:editorial_id,:tiporevista)
   end
 
 end

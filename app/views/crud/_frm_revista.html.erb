@@ -24,6 +24,10 @@
 <%= form_with(model:@revista, local:true) do |f| %>
    <ul class="flex-outer">
     <li> 
+      <%= f.label :tiporevista, "Nombre de la revista:" %>
+      <%= f.text_field :tiporevista, class:"form-control" %>
+    </li> 
+    <li> 
       <%= f.label :nomrevista, "Nombre de la revista:" %>
       <%= f.text_field :nomrevista, class:"form-control" %>
     </li> 
