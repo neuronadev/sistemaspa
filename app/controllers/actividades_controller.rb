@@ -4,7 +4,7 @@ class ActividadesController < ApplicationController
      @persona = Persona.find(current_usuario.persona_id)
      #@actividades = Persona.find(current_usuario.persona_id).actividades.where("estado!='X'").order(:titulo)
      #@pagy, @actividades = pagy(Persona.find(current_usuario.persona_id).actividades.where("estado!='X' and estado!='H' ").order(:titulo), page: params[:page], items: 20)
-     @pagy, @actividades = pagy(Persona.find(current_usuario.persona_id).actividades.where(periodo:2021,estado:['A','C','S','U']).order(:titulo), page: params[:page], items: 20)
+     @pagy, @actividades = pagy(Persona.find(current_usuario.persona_id).actividades.where(periodo:2021,estado:['A','C','S','U','G','D']).order(:titulo), page: params[:page], items: 20)
   end
 
   def filtro
