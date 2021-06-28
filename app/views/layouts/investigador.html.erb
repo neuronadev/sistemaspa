@@ -62,6 +62,16 @@
                 <li class="subList__item"><%= link_to("Ver registros..", actividades_path, data:{turbolinks:false}) %></li>
               </ul>
             </li>
+            <% if   current_usuario.rol == 'C' %>
+                <li>
+                  <div class="navList__subheading row row--align-v-center">
+                    <span class="navList__subheading-icon"><i class="fas fa-align-justify fa-2x"></i></span>
+                    <span class="navList__subheading-title"><%= link_to("Productos por red", validared_path) %></span>
+                  </div> 
+                </li>
+            
+          <% end %>  
+
 
             <li>
              <div class="navList__subheading row row--align-v-center">
