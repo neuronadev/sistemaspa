@@ -26,6 +26,7 @@ class ActividadesController < ApplicationController
        
     @actividad = Actividad.new
     @actividad.autores.build
+    @action = params[:action]
     
     #@actividad.build_articulo
 
@@ -55,15 +56,18 @@ class ActividadesController < ApplicationController
   def create
     @actividad = Actividad.new(actividad_params) 
     @action = params[:action]
-    respond_to do |format| 
+    #respond_to do |format| 
         if @actividad.save
            flash[:notice] = 'Registro realizado correctamente'
-           format.html {redirect_to actividad_path(@actividad.id)}
-           format.js
+           redirect_to actividad_path(@actividad.id)
+           #format.html {redirect_to actividad_path(@actividad.id)}
+           #format.js
            #puts "Ok, Saved.."
            #redirect_to actividad_path(@actividad.id)
         end
-    end    
+    #end 
+    #puts "-----------------------------------------"
+    #puts @actividad.errors.messages   
   end
 
   def show

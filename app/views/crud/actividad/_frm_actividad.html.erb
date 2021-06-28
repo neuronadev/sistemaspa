@@ -11,8 +11,8 @@
 </div>
 <hr>
 
-<%= form_with(model: @actividad, local: true)  do |form| %>
-     <%= form.hidden_field :reemplazaidact, value:'0' %> 
+<%= form_with(model: @actividad, local: false)  do |form| %>
+     <%= form.hidden_field :reemplazaidact, value:0 %> 
      <%= form.hidden_field :producto_id, value: @producto.id %> 
      <% if @action == 'edit' %> 
        <%= form.hidden_field :id, value: @actividad.id %> 
@@ -21,7 +21,7 @@
      <%= form.hidden_field :estado, value:'A' %>
 
       <% if @action == 'newact' || @action == 'edit' %>
-           <% if current_usuario.persona_id == 64 %>
+           <% if current_usuario.persona_id == 210 %>
                   <label>A nombre de:</label>
                  <%= form.select :personaid, Persona.all.where(tipopersona_id:[2,3]).order(:paterno).map{|p| [(p.paterno||'')+' ' + (p.materno||'')+' '+(p.nombre||''), p.id] },{}, {class:"form-control"} %>
            <% else %>
@@ -115,6 +115,7 @@
                   </div>   
 
                    <%  if @producto.prodgrupo.clave != "PERIODICO" %> 
+                    <% if @producto.id == 1 %>
                        <div class="row">
                                 <div class="col">
                                  <div class="form-group">
@@ -123,6 +124,7 @@
                                  </div> 
                              </div> 
                        </div>
+                    <% end %>   
                        <div class="row">
                               <div class="col">
                                  <div class="form-group">
@@ -130,8 +132,10 @@
                                     <%= art_form.text_field :doi, class:"form-control col", disabled: disabled %>
                                  </div> 
                               </div> 
-                           
-                              <div class="col">
+                       </div>       
+                     <% end %>          
+                   
+                              <div class="col-6">
                                  <div class="form-group">
                                     <!-- PONER LA LISTA DE ACUERDO AL TIPO DE REVISTA: CIENTIFICA | DIVULGACION |PERIODICO -->  
                                     <% if @producto.prodgrupo.clave == "PERIODICO" %> 
@@ -144,8 +148,7 @@
                                     <% end %> 
                                 </div> 
                              </div>  
-                       </div>
-                   <% end %> 
+                      
                  
                      
                   
@@ -189,9 +192,9 @@
 
 <script>
   $(document).ready(function(){
-    
-      // $(".addautor").click(); 
-  
+    <% if  @action == 'newact' %>
+       $(".addautor").click(); 
+     <% end %>
   });
 
 
