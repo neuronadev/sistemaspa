@@ -21,7 +21,7 @@
       </thead>
       <tbody> 
     <%
-       Actividad.where(periodo:2020,estado:['A','U','C','S','Z','W','G']).order(:aceptado).joins(:autores).where('autores.persona_id'=>p.id).each do |a|
+       Actividad.where(periodo:2021,estado:['A','U','C','S','Z','W','G']).order(:aceptado).joins(:autores).where('autores.persona_id'=>p.id).each do |a|
        if a.producto.prodgrupo.clave != 'ACTIVIDAD'
     %>
      
