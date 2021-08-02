@@ -4,8 +4,13 @@ class ActividadesController < ApplicationController
      @persona = Persona.find(current_usuario.persona_id)
      #@actividades = Persona.find(current_usuario.persona_id).actividades.where("estado!='X'").order(:titulo)
      #@pagy, @actividades = pagy(Persona.find(current_usuario.persona_id).actividades.where("estado!='X' and estado!='H' ").order(:titulo), page: params[:page], items: 20)
-     @pagy, @actividades = pagy(Persona.find(current_usuario.persona_id).actividades.where(periodo:2021,estado:['A','C','S','U','G','D']).order(:titulo), page: params[:page], items: 20)
-  end
+   
+       if [210,213,255,249,230,216].include? current_usuario.persona_id
+           @pagy, @actividades = pagy(Persona.find(current_usuario.persona_id).actividades.where(periodo:2020,estado:['A','C','S','U','G','D']).order(:titulo), page: params[:page], items: 20)
+        else
+           @pagy, @actividades = pagy(Persona.find(current_usuario.persona_id).actividades.where(periodo:2021,estado:['A','C','S','U','G','D']).order(:titulo), page: params[:page], items: 20)
+        end
+    end
 
   def filtro
    grupo = params[:tipo].to_i
