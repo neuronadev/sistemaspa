@@ -13,7 +13,7 @@ class AuditoriaController < ApplicationController
     
     tecnicos.each do |t|
        evaltec = 0.0
-       Sustantiva.where("academico_id=? and estado = 'C'",t).each do |s|
+       Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",t).each do |s|
           if s.calidad.present? && s.eficiencia.present?
               evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
           end      
@@ -27,12 +27,12 @@ class AuditoriaController < ApplicationController
     a = Academico.find(idacad)
     p = Persona.find(a.persona_id)
     @t = (p.paterno||'') + " " + (p.materno||'') + (p.nombre||'')
-    @sust = Sustantiva.where("academico_id=? and estado != 'X'",idacad)
+    @sust = Sustantiva.where("academico_id=? and estado != 'X' and anio=2020",idacad)
     
-    @tot_act = Sustantiva.where("academico_id=? and estado != 'X'",idacad).count()
+    @tot_act = Sustantiva.where("academico_id=? and estado != 'X' and anio=2020",idacad).count()
     @prom = 0.0
     evaltec = 0.0
-    Sustantiva.where("academico_id=? and estado = 'C'",idacad).each do |s|
+    Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",idacad).each do |s|
       if s.calidad.present? && s.eficiencia.present?
           evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
       end 
@@ -51,7 +51,7 @@ class AuditoriaController < ApplicationController
     
     tecnicos.each do |t|
        evaltec = 0.0
-       Sustantiva.where("academico_id=? and estado = 'C'",t).each do |s|
+       Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",t).each do |s|
           if s.calidad.present? && s.eficiencia.present?
               evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
           end      
@@ -76,7 +76,7 @@ class AuditoriaController < ApplicationController
     
     tecnicos.each do |t|
        evaltec = 0.0
-       Sustantiva.where("academico_id=? and estado = 'C'",t).each do |s|
+       Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",t).each do |s|
           if s.calidad.present? && s.eficiencia.present?
               evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
           end      
@@ -100,7 +100,7 @@ class AuditoriaController < ApplicationController
       Autor.where(:persona_id=>personaid).each do |a|
          idsActiv.push(a.actividad_id) 
       end
-       @actividad = Actividad.where(:id=>idsActiv).where("estado in ('S','W')").order(:producto_id).order(:id)
+       @actividad = Actividad.where(:id=>idsActiv).where("estado in ('S','W') and periodo=2020").order(:producto_id).order(:id)
   end
 
   def downother

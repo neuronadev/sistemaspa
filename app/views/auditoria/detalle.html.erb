@@ -52,174 +52,177 @@
                      facp = !@a.faceptado.nil? ? @a.faceptado.strftime("%d-%m-%Y") : ""
                      if @a.personaid == @persona.id && @a.estado == 'S'         
                      
-                     if  facp == ""
-                         facp = fsa
-                     end
-
+                        if  facp == ""
+                            facp = fsa
+                        end
+                        if @a.periodo == 2020
 
                   %>
-                    <tr> 
-                      <td><%= @a.id %></td> 
-                      <td><%= @a.producto.descripcion %></td>
-                      <td>
-                           <%= @a.titulo %>
-                           <% if @a.producto_id != 82 %>  
-                                <% if @a.documentos.attached? %> 
-                                    <% @a.documentos.each do |d|%>
-                                    <%= link_to rails_blob_path(d, disposition: "inline"), { target: '_blank' } do %>
-                                            <i class="fas fa-file-pdf fa-2x"></i>
+                                <tr> 
+                                <td><%= @a.id %></td> 
+                                <td><%= @a.producto.descripcion %></td>
+                                <td>
+                                    <%= @a.titulo %>
+                                    <% if @a.producto_id != 82 %>  
+                                            <% if @a.documentos.attached? %> 
+                                                <% @a.documentos.each do |d|%>
+                                                <%= link_to rails_blob_path(d, disposition: "inline"), { target: '_blank' } do %>
+                                                        <i class="fas fa-file-pdf fa-2x"></i>
+                                                <% end %>
+                                                <% end %>  
+                                            <% end %> 
+                                        <% end %>  
+
+                                        <% if @a.producto_id == 82 %>  
+                                            <%  
+                                                path = "/home/deploy/documentos/ccursos/" + @a.id.to_s + ".pdf"
+                                                if File.file?(path)
+                                            %> 
+                                                        <%= link_to downother_path(@a.id,'C'), { target: '_blank' } do %>
+                                                            <i class="fas fa-file-pdf fa-2x"></i>
+                                                        <% end %>
+                                                <% else %>       
+                                                    <strong>SIN COMPROBANTE</strong>
+                                                <% end %>        
+                                        <% end %> 
+                                        <% if @a.producto_id == 83 %>  
+                                            <%  
+                                                path = "/home/deploy/documentos/ctesis/" + @a.id.to_s + ".pdf"
+                                                if File.file?(path)
+                                            %> 
+                                                        <%= link_to downother_path(@a.id,'T'), { target: '_blank' } do %>
+                                                            <i class="fas fa-file-pdf fa-2x"></i>
+                                                        <% end %>
+                                                <% else %>       
+                                                    <strong>SIN COMPROBANTE</strong>
+                                                <% end %>        
+                                        <% end %>   
+                                </td>
+                                <td><%= cita(@a.id).html_safe %></td>
+                                <!--  <td><%= fcaptura %></td> -->
+                                <td id="td<%= @a.id %>" class="text-center">
+                                    <% if @a.estado == 'C' %>
+                                        <span class="text-danger">Validó el Coordinador</span>
+                                    <% end %> 
+                                    <% if @a.estado == 'A' %>
+                                        <span class="text-danger">El técnico no dió el VoBo </span>
+                                    <% end %> 
+                                    <% if @a.estado == 'U' %>
+                                        <span class="text-primary"> Sin validar </span>
+                                    <% end %>    
+                                    <% if @a.estado == 'S' %>
+                                        <span class="text-success">Validado</span>
+                                    <% end %> 
+                                    <% if @a.estado == 'Z' || @a.estado == 'D' %>
+                                        <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                                        <%= link_to "No se considera o modificar. Ver motivo", datamsg_path(@a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                                    <% end %>   
+                                    <% if @a.estado == 'W' %>
+                                        <i class="fas fa-times fa-1x text-success"></i> <span class="text-danger">
+                                        <%= link_to "Nota. Ver motivo", datamsg_path(@a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                                    <% end %>   
+                                    <br>
+                                    <strong><%=  fsa %> </strong> 
+                                </td>
+                                <td class="text-center">
+                                    <% if @a.estado == 'Z' && @a.aceptado == 'S' %> 
+                                        <i class="fas fa-user-check fa-2x text-success"></i>
+                                    <% elsif @a.estado == 'S' && @a.aceptado == 'S' %>
+                                        <i class="fas fa-user-check fa-2x text-success"></i>
+                                    <% else %>   
+                                        --
                                     <% end %>
-                                    <% end %>  
-                                <% end %> 
-                            <% end %>  
+                                    <br><strong><%= facp %> </strong>
+                                </td>
+                                </tr>  
+                            <%    end  
+                                end
+                               end
+                            %>
+                            <% Autor.where(:persona_id=>@persona.id).each do |u| 
+                                @actividad = Actividad.find(u.actividad_id)
+                                fcaptura = !@actividad.created_at.nil? ? @actividad.created_at.strftime("%d-%m-%Y") : ""
+                                fcm = !@actividad.fecha2.nil? ? @actividad.fecha2.strftime("%d-%m-%Y") : ""
+                                fsa = !@actividad.fecha3.nil? ? @actividad.fecha3.strftime("%d-%m-%Y") : ""
+                                facp = !@actividad.faceptado.nil? ? @actividad.faceptado.strftime("%d-%m-%Y") : ""
+                                 if @actividad.personaid != @persona.id && @actividad.estado == 'S'
+                                    if @actividad.periodo == 2020  
+                            %> 
+                                <tr class="text-info">
+                                    <td><%= @actividad.id %></td> 
+                                    <td><%= @actividad.producto.descripcion %></td>
+                                    <td>
+                                        <%= @actividad.titulo %>
+                                        <% if @actividad.producto_id != 82 %>  
+                                            <% if @actividad.documentos.attached? %> 
+                                                <% @actividad.documentos.each do |d|%>
+                                                <%= link_to rails_blob_path(d, disposition: "inline"), { target: '_blank' } do %>
+                                                        <i class="fas fa-file-pdf fa-2x"></i>
+                                                <% end %>
+                                                <% end %>  
+                                            <% end %> 
+                                        <% end %>  
 
-                            <% if @a.producto_id == 82 %>  
-                                <%  
-                                    path = "/home/deploy/documentos/ccursos/" + @a.id.to_s + ".pdf"
-                                    if File.file?(path)
-                                %> 
-                                            <%= link_to downother_path(@a.id,'C'), { target: '_blank' } do %>
-                                                <i class="fas fa-file-pdf fa-2x"></i>
-                                            <% end %>
-                                    <% else %>       
-                                        <strong>SIN COMPROBANTE</strong>
-                                    <% end %>        
-                            <% end %> 
-                            <% if @a.producto_id == 83 %>  
-                                <%  
-                                    path = "/home/deploy/documentos/ctesis/" + @a.id.to_s + ".pdf"
-                                    if File.file?(path)
-                                %> 
-                                            <%= link_to downother_path(@a.id,'T'), { target: '_blank' } do %>
-                                                <i class="fas fa-file-pdf fa-2x"></i>
-                                            <% end %>
-                                    <% else %>       
-                                        <strong>SIN COMPROBANTE</strong>
-                                    <% end %>        
-                            <% end %>   
-                      </td>
-                      <td><%= cita(@a.id).html_safe %></td>
-                     <!--  <td><%= fcaptura %></td> -->
-                      <td id="td<%= @a.id %>" class="text-center">
-                          <% if @a.estado == 'C' %>
-                              <span class="text-danger">Validó el Coordinador</span>
-                          <% end %> 
-                          <% if @a.estado == 'A' %>
-                              <span class="text-danger">El técnico no dió el VoBo </span>
-                          <% end %> 
-                          <% if @a.estado == 'U' %>
-                              <span class="text-primary"> Sin validar </span>
-                          <% end %>    
-                          <% if @a.estado == 'S' %>
-                              <span class="text-success">Validado</span>
-                          <% end %> 
-                          <% if @a.estado == 'Z' || @a.estado == 'D' %>
-                              <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
-                              <%= link_to "No se considera o modificar. Ver motivo", datamsg_path(@a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
-                          <% end %>   
-                          <% if @a.estado == 'W' %>
-                              <i class="fas fa-times fa-1x text-success"></i> <span class="text-danger">
-                              <%= link_to "Nota. Ver motivo", datamsg_path(@a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
-                          <% end %>   
-                           <br>
-                           <strong><%=  fsa %> </strong> 
-                      </td>
-                      <td class="text-center">
-                           <% if @a.estado == 'Z' && @a.aceptado == 'S' %> 
-                            <i class="fas fa-user-check fa-2x text-success"></i>
-                          <% elsif @a.estado == 'S' && @a.aceptado == 'S' %>
-                              <i class="fas fa-user-check fa-2x text-success"></i>
-                          <% else %>   
-                              --
-                          <% end %>
-                          <br><strong><%= facp %> </strong>
-                      </td>
-                    </tr>  
-                  <% end
-                     end
-                  %>
-                  <% Autor.where(:persona_id=>@persona.id).each do |u| 
-                     @actividad = Actividad.find(u.actividad_id)
-                     fcaptura = !@actividad.created_at.nil? ? @actividad.created_at.strftime("%d-%m-%Y") : ""
-                     fcm = !@actividad.fecha2.nil? ? @actividad.fecha2.strftime("%d-%m-%Y") : ""
-                     fsa = !@actividad.fecha3.nil? ? @actividad.fecha3.strftime("%d-%m-%Y") : ""
-                     facp = !@actividad.faceptado.nil? ? @actividad.faceptado.strftime("%d-%m-%Y") : ""
-                     if @actividad.personaid != @persona.id && @actividad.estado == 'S'
-                  %> 
-                      <tr class="text-info">
-                          <td><%= @actividad.id %></td> 
-                          <td><%= @actividad.producto.descripcion %></td>
-                          <td>
-                             <%= @actividad.titulo %>
-                             <% if @actividad.producto_id != 82 %>  
-                                <% if @actividad.documentos.attached? %> 
-                                    <% @actividad.documentos.each do |d|%>
-                                      <%= link_to rails_blob_path(d, disposition: "inline"), { target: '_blank' } do %>
-                                            <i class="fas fa-file-pdf fa-2x"></i>
-                                      <% end %>
+                                        <% if @actividad.producto_id == 82 %>  
+                                            <%  
+                                                path = "/home/deploy/documentos/ccursos/" + @actividad.id.to_s + ".pdf"
+                                                if File.file?(path)
+                                            %> 
+                                                        <%= link_to downother_path(@actividad.id,'C'), { target: '_blank' } do %>
+                                                            <i class="fas fa-file-pdf fa-2x"></i>
+                                                        <% end %>
+                                                <% else %>       
+                                                    <strong>SIN COMPROBANTE</strong>
+                                                <% end %>        
+                                        <% end %> 
+                                        <% if @actividad.producto_id == 83 %>  
+                                            <%  
+                                                path = "/home/deploy/documentos/ctesis/" + @actividad.id.to_s + ".pdf"
+                                                if File.file?(path)
+                                            %> 
+                                                        <%= link_to downother_path(@actividad.id,'T'), { target: '_blank' } do %>
+                                                            <i class="fas fa-file-pdf fa-2x"></i>
+                                                        <% end %>
+                                                <% else %>       
+                                                    <strong>SIN COMPROBANTE</strong>
+                                                <% end %>        
+                                        <% end %>  
+                                    </td>
+                                    <td><%= cita(@actividad.id).html_safe %></td>
+                                    <!-- <td><%= fcaptura %></td> -->
+                                    <td id="td<%= @actividad.id %>" class="text-center">
+                                    <% if @actividad.estado == 'U' %>
+                                        <span class="text-primary"> Sin validar </span>
+                                    <% end %>    
+                                    <% if @actividad.estado == 'S' %>
+                                        <span class="text-success">Validado</span>
+                                    <% end %> 
+                                    <% if @actividad.estado == 'Z' %>
+                                        <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                                        <%= link_to "No se considera o modificar. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                                    <% end %>   
+                                    <% if @actividad.estado == 'W' %>
+                                        <i class="fas fa-times fa-1x text-success"></i> <span class="text-danger">
+                                        <%= link_to "Nota. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
                                     <% end %>  
-                                <% end %> 
-                            <% end %>  
-
-                            <% if @actividad.producto_id == 82 %>  
-                                <%  
-                                    path = "/home/deploy/documentos/ccursos/" + @actividad.id.to_s + ".pdf"
-                                    if File.file?(path)
-                                %> 
-                                            <%= link_to downother_path(@actividad.id,'C'), { target: '_blank' } do %>
-                                                <i class="fas fa-file-pdf fa-2x"></i>
-                                            <% end %>
-                                    <% else %>       
-                                        <strong>SIN COMPROBANTE</strong>
-                                    <% end %>        
-                            <% end %> 
-                            <% if @actividad.producto_id == 83 %>  
-                                <%  
-                                    path = "/home/deploy/documentos/ctesis/" + @actividad.id.to_s + ".pdf"
-                                    if File.file?(path)
-                                %> 
-                                            <%= link_to downother_path(@actividad.id,'T'), { target: '_blank' } do %>
-                                                <i class="fas fa-file-pdf fa-2x"></i>
-                                            <% end %>
-                                    <% else %>       
-                                        <strong>SIN COMPROBANTE</strong>
-                                    <% end %>        
-                            <% end %>  
-                          </td>
-                          <td><%= cita(@actividad.id).html_safe %></td>
-                          <!-- <td><%= fcaptura %></td> -->
-                          <td id="td<%= @actividad.id %>" class="text-center">
-                          <% if @actividad.estado == 'U' %>
-                              <span class="text-primary"> Sin validar </span>
-                          <% end %>    
-                          <% if @actividad.estado == 'S' %>
-                              <span class="text-success">Validado</span>
-                          <% end %> 
-                          <% if @actividad.estado == 'Z' %>
-                              <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
-                              <%= link_to "No se considera o modificar. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
-                          <% end %>   
-                          <% if @actividad.estado == 'W' %>
-                              <i class="fas fa-times fa-1x text-success"></i> <span class="text-danger">
-                              <%= link_to "Nota. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
-                          <% end %>  
-                           <br><strong><%=  fsa %> </strong> 
-                      </td>
-                          <td class="text-center">
-                           <% if @actividad.estado == 'Z' && @actividad.aceptado == 'S' %> 
-                            <i class="fas fa-user-check fa-2x text-success"></i>
-                          <% elsif @actividad.estado == 'S' && @actividad.aceptado == 'S' %>
-                              <i class="fas fa-user-check fa-2x text-success"></i>
-                          <% elsif @actividad.estado == 'S' && current_usuario.rol == 'I' %>
-                              <i class="fas fa-user-check fa-2x text-success"></i>
-                          <% else %>   
-                              --
+                                    <br><strong><%=  fsa %> </strong> 
+                                </td>
+                                    <td class="text-center">
+                                    <% if @actividad.estado == 'Z' && @actividad.aceptado == 'S' %> 
+                                        <i class="fas fa-user-check fa-2x text-success"></i>
+                                    <% elsif @actividad.estado == 'S' && @actividad.aceptado == 'S' %>
+                                        <i class="fas fa-user-check fa-2x text-success"></i>
+                                    <% elsif @actividad.estado == 'S' && current_usuario.rol == 'I' %>
+                                        <i class="fas fa-user-check fa-2x text-success"></i>
+                                    <% else %>   
+                                        --
+                                    <% end %>
+                                    <br><strong><%= facp %> </strong>
+                                </td>
+                                </tr>
+                              <% end %>   
                           <% end %>
-                          <br><strong><%= facp %> </strong>
-                      </td>
-                      </tr>
-                  <% end %>
-                  <% end %>  
+                       <% end %>  
 
                  </tbody> 
             </table>   
