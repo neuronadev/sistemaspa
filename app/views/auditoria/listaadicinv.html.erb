@@ -19,13 +19,13 @@
             <th class="text-center th-sm">Folio</th>
             <th class="text-center th-sm">Producto</th>
             <th class="text-center th-sm">Título</th>
-            <th class="text-center th-sm">Autores</th>
-            <th class="text-center th-sm">Año</th>
-            <!--<th class="text-center">Captura</th> -->
+            <!--<th class="text-center th-sm">Autores</th>
+            <th class="text-center th-sm">Año</th>-->
+            <th class="text-center">Captura</th>
             <th class="text-center th-sm">Fecha CR</th>
             <th class="text-center th-sm">Fecha SA</th>
-            <th class="text-center th-sm">Estatus</th>
-            <th class="text-center th-sm">¿Aceptado?</th>
+           <!--  <th class="text-center th-sm">Estatus</th> -->
+            <th class="text-center th-sm">Aceptado</th>
 
 
         </tr>
@@ -39,6 +39,12 @@
     fcr = !a.fecha2.nil? ? a.fecha2.strftime("%d-%m-%Y") : ""
     fsa = !a.fecha3.nil? ? a.fecha3.strftime("%d-%m-%Y") : ""
     facp = !a.faceptado.nil? ? a.faceptado.strftime("%d-%m-%Y") : ""
+
+     if [81,82,83,85].include?(producto.id) 
+         fcr = fcaptura
+         fsa = fcaptura
+     end
+   
 
     if a.estado == 'W'
         Autor.where("actividad_id=#{a.id}").each do |p|
@@ -60,7 +66,7 @@
             <%= link_to a.titulo, datadetalle_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>
                 &nbsp;
               
-                <% if a.producto_id != 82 %>    
+               
                     <% if a.documentos.attached? %> 
                         <% a.documentos.each do |d|%>
                             <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank' } do %>
@@ -68,60 +74,35 @@
                             <% end %>
                         <% end %>  
                     <% end %>  
-                <% end %>  
-                <% if a.producto_id == 82 %>  
-                      <%  
-                         path = "/home/deploy/documentos/ccursos/" + a.id.to_s + ".pdf"
-                         if File.file?(path)
-                       %> 
-                                <%= link_to downother_path(a.id,'C'), { target: '_blank' } do %>
-                                    <i class="fas fa-file-pdf fa-2x"></i>
-                                <% end %>
-                         <% else %>       
-                              <strong>SIN COMPROBANTE</strong>
-                        <% end %>        
-                <% end %> 
-                <% if a.producto_id == 83 %>  
-                      <%  
-                         path = "/home/deploy/documentos/ctesis/" + a.id.to_s + ".pdf"
-                         if File.file?(path)
-                       %> 
-                                <%= link_to downother_path(a.id,'T'), { target: '_blank' } do %>
-                                    <i class="fas fa-file-pdf fa-2x"></i>
-                                <% end %>
-                         <% else %>       
-                              <strong>SIN COMPROBANTE</strong>
-                        <% end %>        
-                <% end %> 
-
+     
         </td>
-        <td style="width:20%;"><%= cita(a.id).html_safe %>
+       <!--  <td style="width:20%;"><%= cita(a.id).html_safe %>
             <% if !@msg.nil? %>
             <span class="text-danger"><%= @msg.html_safe %></span> 
             <% end %>
         
         </td>
-        <td class="text-center"><%= a.anio %></td>
-       <!-- <td><%= fcaptura %></td> -->
+        <td class="text-center"><%= a.anio %></td>-->
+        <td class="text-center"><%= fcaptura %></td>
         <td class="text-center"><%= fcr %></td>
         <td class="text-center"><%= fsa %></td> 
-        <td id="td<%= a.id %>">
-        <% if a.estado == 'C' %>
-            <span class="text-primary"> Sin validar </span>
-        <% end %>    
-        <% if a.estado == 'S' %>
-            <span class="text-success">Validado</span>
-        <% end %> 
-        <% if a.estado == 'Z' %>
-            <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
-            <%= link_to "No se considera o modificar. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
-        <% end %>   
-        <% if a.estado == 'W' %>
-            <span class="text-success"> Validado. </span>
-            <%= link_to "Ver Nota", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
-        <% end %>    
+        <!-- <td id="td<%= a.id %>">
+                <% if a.estado == 'C' %>
+                    <span class="text-primary"> Sin validar </span>
+                <% end %>    
+                <% if a.estado == 'S' %>
+                    <span class="text-success">Validado</span>
+                <% end %> 
+                <% if a.estado == 'Z' %>
+                    <i class="fas fa-times fa-1x text-danger"></i> <span class="text-danger">
+                    <%= link_to "No se considera o modificar. Ver motivo", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                <% end %>   
+                <% if a.estado == 'W' %>
+                    <span class="text-success"> Validado. </span>
+                    <%= link_to "Ver Nota", datamsg_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window_msg'}  %>
+                <% end %>    
            
-        </td>
+        </td> -->
        
         <td class="text-center">
            <%= facp %>
@@ -168,4 +149,4 @@
                     }); 
                 }); 
             }); 
-        </script> 
+</script> 
