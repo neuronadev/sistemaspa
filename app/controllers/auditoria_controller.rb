@@ -94,8 +94,8 @@ class AuditoriaController < ApplicationController
 
   def listaadicinv
     personaid = params[:id]
-    persona = Persona.find(personaid)
-    @nombrc = (persona.paterno||'') + ' ' + (persona.materno||'') + ' ' + (persona.nombre||'')
+    @persona = Persona.find(personaid)
+    @nombrc = (@persona.paterno||'') + ' ' + (@persona.materno||'') + ' ' + (@persona.nombre||'')
     idsActiv = Array.new
       Autor.where(:persona_id=>personaid).each do |a|
          idsActiv.push(a.actividad_id) 

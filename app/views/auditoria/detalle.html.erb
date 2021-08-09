@@ -71,15 +71,34 @@
                                 <td><%= @a.id %></td> 
                                 <td><%= @a.producto.descripcion %></td>
                                 <td>
-                                   <%= link_to @a.titulo, datadetalle_path(@a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>
-                                   
-                                            <% if @a.documentos.attached? %> 
-                                                <% @a.documentos.each do |d|%>
-                                                    <%= link_to rails_blob_path(d, disposition: "inline"), { target: '_blank' } do %>
-                                                            <i class="fas fa-file-pdf fa-2x"></i>
-                                                    <% end %>
+                                  <!-- <%= link_to @a.titulo, datadetalle_path(@a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>-->
+                                   <%= link_to @a.titulo, verproductofl_path(@a.id, @persona.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>       
+                                            
+                                            
+                                               <% if @a.producto_id == 82
+                                                        files = @a.curso.comprobante.split(',')
+                                                        files.each do |file|      
+                                                %>
+                                                            <%= link_to pstcomprobante_path(@a.id, file.strip), { target: '_blank' } do %>
+                                                                    <i class="fas fa-file-pdf iconsize"></i> Ver documento
+                                                            <% end %>
+                                                        <% end %>
+                                                <% elsif @a.producto_id == 83 %>
+                                                                <%= link_to pstcomtesis_path(@a.id), { target: '_blank' } do %>
+                                                                        <i class="fas fa-file-pdf iconsize"></i> Ver documento
+                                                                <% end %> 
+                                                <% else %> 
+                                                        <% if @a.documentos.attached? %> 
+                                                            <div style="font-size:14px; margin-left:10px;">  
+                                                                <% @a.documentos.each do |d|%>
+                                                                    <%= link_to rails_blob_path(d, disposition: "inline"),  target: '_blank' do %>
+                                                                        <i class="fas fa-file-pdf iconsize"></i> Ver documento
+                                                                    <% end %>
+                                                                <% end %>
+                                                            </div>
+                                                        <% end %> 
                                                 <% end %>  
-                                            <% end %> 
+
                                                                               
                                 </td>
                                 <!--<td><%= cita(@a.id).html_safe %></td>-->
@@ -123,16 +142,33 @@
                                     <td><%= @actividad.id %></td> 
                                     <td><%= @actividad.producto.descripcion %></td>
                                     <td>
-                                        <%= link_to @actividad.titulo, datadetalle_path(@actividad.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>
-                                       
-                                            <% if @actividad.documentos.attached? %> 
-                                                <% @actividad.documentos.each do |d|%>
-                                                    <%= link_to rails_blob_path(d, disposition: "inline"), { target: '_blank' } do %>
-                                                            <i class="fas fa-file-pdf fa-2x"></i>
-                                                    <% end %>
+                                      <!--  <%= link_to @actividad.titulo, datadetalle_path(@actividad.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %> -->
+                                      <%= link_to @actividad.titulo, verproductofl_path(@actividad.id, @persona.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>                                              
+                                            
+                                               <% if @actividad.producto_id == 82
+                                                        files = @actividad.curso.comprobante.split(',')
+                                                        files.each do |file|      
+                                                %>
+                                                            <%= link_to pstcomprobante_path(@actividad.id, file.strip), { target: '_blank' } do %>
+                                                                    <i class="fas fa-file-pdf iconsize"></i> Ver documento
+                                                            <% end %>
+                                                        <% end %>
+                                                <% elsif @actividad.producto_id == 83 %>
+                                                                <%= link_to pstcomtesis_path(@actividad.id), { target: '_blank' } do %>
+                                                                        <i class="fas fa-file-pdf iconsize"></i> Ver documento
+                                                                <% end %> 
+                                                <% else %> 
+                                                        <% if @actividad.documentos.attached? %> 
+                                                            <div style="font-size:14px; margin-left:10px;">  
+                                                                <% @actividad.documentos.each do |d|%>
+                                                                    <%= link_to rails_blob_path(d, disposition: "inline"),  target: '_blank' do %>
+                                                                        <i class="fas fa-file-pdf iconsize"></i> Ver documento
+                                                                    <% end %>
+                                                                <% end %>
+                                                            </div>
+                                                        <% end %> 
                                                 <% end %>  
-                                            <% end %> 
-                                       
+
                                     </td>
                                    <!-- <td><%= cita(@actividad.id).html_safe %></td> -->
                                     <td><%= fcaptura %></td>

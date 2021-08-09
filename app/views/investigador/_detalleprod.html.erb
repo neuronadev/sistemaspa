@@ -100,9 +100,9 @@
         <div class="detallep">
             <%= render partial: "detalle/tipo"  %> 
         </div>
-          
-        <div class="detallep">
-          <% if a.estado == 'A' %>
+     
+        <!-- <div class="detallep">
+         <% if a.estado == 'A' %>
                 <div style="margin-left:10px; color:#DEA101;"><b>Investigador:</b> 
                     En validación (Falta VoBo)
                 </div> 
@@ -125,7 +125,7 @@
           <% if a.estado == 'C' %>  
                 <div style="margin-left:10px; color:#566573;"><b>VoBo Investigador:</b> 
                     <%= a.fecha1 %> <span onclick="showform(<%= a.id %>,1)" style="color:blue;cursor: pointer;"><I>Activar para edición</I></span>
-                    <!-- -------------------------------------------------------------------------------------- -->
+                   
                                     <div id="activar<%= a.id %>" class="formactivar" style="margin-bottom:15px; margin-left:30px; font-size:14px; color:blue;">
                                                     <div>Escriba a continuación el motivo por el cual se va a activar:</div> 
                                                     <div> <textarea id="activartxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
@@ -134,7 +134,7 @@
                                                             <div onclick="cancelform(<%= a.id %>,1)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
                                                     </div>
                                     </div>
-                    <!-- -------------------------------------------------------------------------------------- -->
+                    
                 </div>
                 <div style="margin-left:10px; color:#566573;"><b>Coordinador:</b> 
                     <%= a.fecha2 %> <I><%= link_to "Activar", activar_path(a.id,'C'), remote:true %></I>
@@ -151,19 +151,20 @@
                 <div style="margin-left:10px; color:#566573;"><b>VoBo Investigador: <%= a.fecha1 %></b></div>
                 <div style="margin-left:10px; color:#566573;"><b>Coordinador: <%= a.fecha2 %> </b></div>
                 <div style="margin-left:10px; color:#566573;"><b>Sec. Academica: <%= a.fecha3 %></b></div>
-           <% end %>     
-        </div>
-        <% if a.estado == 'C' %> 
+           <% end %>  
+        
+        </div> -->
+         <!-- <% if a.estado == 'C' %> 
                 <div class="rwopts">
                     <div id="val<%= a.id %>" style="font-size:14px; color:green; cursor: pointer;" onclick="showform(<%= a.id %>,3)"> 
                             <i class="fas fa-check-double text-success"></i> Validar
                     </div>
                     
-                    <!-- ----------------------------------------------------------------------------------------------------------- -->
+                    
                     <div id="no<%= a.id %>" style="margin-left:10px; font-size:14px; color:red; cursor: pointer;" onclick="showform(<%= a.id %>,2)"> 
                             <i class="fas fa-times text-danger"></i> No considerar
                     </div> 
-                    <!-- ----------------------------------------------------------------------------------------------------------- -->
+                   
                     <div id="rechazar<%= a.id %>" class="formrechaza" style="margin-left:10px; font-size:14px; color:red;">
                         <div>Motivo:</div> 
                         <div> <textarea id="motivotxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
@@ -172,14 +173,14 @@
                                  <div onclick="cancelform(<%= a.id %>,2)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
                         </div>
                     </div>
-                    <!-- ----------------------------------------------------------------------------------------------------------- -->
+                   
                     <div id="msgnocon<%= a.id %>"></div>
                     <div id="msgsicon<%= a.id %>"></div>
                     <div id="anulasa<%= a.id %>" style="margin-left:10px; color:#566573; display:none;">
                        <I><%= link_to "Anular validación", anularsa_path(a.id), remote:true %></I>
                     </div> 
                 </div>
-                 <!-- ----------------------------------------------------------------------------------------------------------- -->
+                
                     <div id="msgaceptar<%= a.id %>" class="formaceptar" style="margin-left:10px; font-size:14px; color:green; font-weight:bold;">
                         <div>Este producto será aceptado. ¿Desea escribir alguna Observacion?</div> 
                         <div> <textarea id="aceptartxt<%= a.id %>" name="textarea" rows="5" cols="70"></textarea> </div>
@@ -188,7 +189,7 @@
                                  <div onclick="cancelform(<%= a.id %>,3)" style="cursor: pointer; margin-left:10px;">Cancelar</div> 
                         </div>
                     </div>
-                 <!-- ----------------------------------------------------------------------------------------------------------- -->   
+                 
             <% else %> 
                 <% if a.estado == 'S' %> 
                     <div style="width:45%;margin-top:15px; color: white; background-color: #033B08; font-weight: bold;">
@@ -211,7 +212,7 @@
                     </div>
                 <% end %>
             <% end %>
-
+         -->
   </div>
 
 
