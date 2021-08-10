@@ -1,0 +1,12 @@
+<div class="col">
+            <%= link_to "Editar", edit_divulgacion_path(@actividad.id) %>
+</div>
+
+<% if @actividad.producto.prodgrupo.clave == 'PERIODICO' %>
+      <%= render 'mostrar_articulo' %>
+<% end %>
+
+<% if @actividad.producto.prodgrupo.clave == 'OTRASD' %>
+      <%= render 'mostrar_casaabierta' %>
+<% end %>
+

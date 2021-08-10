@@ -61,18 +61,16 @@ class ActividadesController < ApplicationController
   def create
     @actividad = Actividad.new(actividad_params) 
     @action = params[:action]
-    #respond_to do |format| 
-        if @actividad.save
-           flash[:notice] = 'Registro realizado correctamente'
-           redirect_to actividad_path(@actividad.id)
-           #format.html {redirect_to actividad_path(@actividad.id)}
-           #format.js
-           #puts "Ok, Saved.."
-           #redirect_to actividad_path(@actividad.id)
+    if @actividad.save
+        puts "OK, Saved"
+        if params[:captipo] == 'V'
+             redirect_to divulgaciones_path    
+        else
+             redirect_to actividad_path(@actividad.id) 
         end
-    #end 
-    #puts "-----------------------------------------"
-    #puts @actividad.errors.messages   
+    else
+        puts @actividad.errors.messages
+    end
   end
 
   def show
@@ -98,7 +96,7 @@ class ActividadesController < ApplicationController
     id = params[:id]
     @actividad = Actividad.find(id)
     
-    respond_to do |format|
+    #respond_to do |format|
        if @actividad.update(actividad_params)
           flash[:notice] = 'Actualización ok...'
           #if current_usuario.rol != 'T'
@@ -109,18 +107,22 @@ class ActividadesController < ApplicationController
           #  end
             @actividad.save
           #end   
-
+          if params[:captipo] == 'V'
+            redirect_to divulgaciones_path    
+          else
+                redirect_to actividad_path(@actividad.id) 
+          end  
           
-          format.html {redirect_to actividades_path}
+          #format.html {redirect_to actividades_path}
           #format.html {redirect_to editarindex_path(0,0)}
-          format.js
+          #format.js
        else
           flash[:error] = "Error, la información esta incompleta."
           puts @actividad.errors.full_messages
           @producto = Producto.find(@actividad.producto_id) 
           format.html {render :action=>'edit'}
        end   
-    end  
+    #end  
   end
 
   def destroy
@@ -222,7 +224,7 @@ class ActividadesController < ApplicationController
 
 
   private def actividad_params
-   params.require(:actividad).permit(:id,:titulo,:anio,:producto_id, :personaid,:estado, :fechapub, :reemplazaidact, :periodo, :asignared, documentos:[],
+   params.require(:actividad).permit(:id,:titulo,:anio,:producto_id, :personaid,:estado, :fechapub, :reemplazaidact, :periodo, :asignared, :fuente, documentos:[],
         articulo_attributes:[:id,:volumen,:pgini,:pgfin,:revista_id,:actividad_id,:eidentificador,:doi, :issue,:fechapub,:abstract],
         libroarbitrado_attributes:[:id,:nopaginas, :idioma_id, :editorial_id, :actividad_id],
         capitulo_attributes: [:id,:pgini,:pgfin,:idioma_id,:libro_id, :actividad_id],

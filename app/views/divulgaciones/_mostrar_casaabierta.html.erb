@@ -1,0 +1,55 @@
+<div class="card">            
+   <div class="card-body">        
+            
+
+            <div class="col">
+                <strong>Titulo:</strong> <%= @actividad.titulo %>
+            </div>
+            
+            <div class="col  mt-md-2">
+                <strong>Tipo de actividad:</strong> <%= @actividad.divulgacion.tipodivulgacion.nomtipodivulgacion %>
+            </div>
+            
+            <div class="col  mt-md-2">
+            <strong>Comprobante:</strong>
+            <% if @actividad.documentos.attached? %> 
+                        <% @actividad.documentos.each do |d|%>
+                                <div id="doc<%= d.id %>"  class="mt-md-2 pl-md-2">
+                                    <%= link_to d.filename, rails_blob_path(d, disposition: "attachment"), { target: '_blank' } %>
+                                </div>   
+                        <% end %>  
+            <% end %>   
+            </div>
+
+            <div clas="row mt-md-3">
+              <div class="col">  
+                    <table class="table mt-md-3">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Participación</th>
+                                
+
+                            </tr>   
+                        </thead>
+                        <tbody>
+                                <% @actividad.autores.order(:id).each do |a| %>
+                                    <tr>
+                                    <td> 
+                                        <% if a.firma.present? %> 
+                                            <%= a.firma %> 
+                                        <% else %>
+                                            <%= (a.persona.paterno||'') + " " + (a.persona.materno||'') + " " + (a.persona.nombre||'') %> 
+                                        <% end %>
+                                    </td>
+                                    <td> <%= a.rol.nomrol %> </td>
+                                    
+                                    </tr>   
+                                
+                                <% end %>
+                        </tbody>
+                    </table>
+                </div>    
+            </div>
+  </div>           
+</div>            

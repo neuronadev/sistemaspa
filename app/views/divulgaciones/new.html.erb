@@ -1,0 +1,15 @@
+
+
+<% if @tipo == 'ADP' %>
+    <div>
+      <h5>Registro - Articulo de divulgación en periódico</h5>
+    </div>
+    <%= render 'form_periodico', actividad: @actividad %>
+<% end %>
+
+<% if @tipo == 'CASA' %>
+   <div>
+     <h5>Registro - Casa abierta</h5>
+   </div>
+  <%= render 'form_casa_abierta', actividad: @actividad %>
+<% end %>

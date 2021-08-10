@@ -44,5 +44,9 @@ class Actividad < ApplicationRecord
         self.estado ||= 'A'
       end  
 
-    
+      include PgSearch::Model
+      pg_search_scope :search_by_titulo,
+                       against: %i[titulo id],
+                       using: { tsearch: { dictionary: 'spanish' } }
+
 end

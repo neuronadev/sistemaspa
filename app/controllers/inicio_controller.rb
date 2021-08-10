@@ -16,6 +16,9 @@ class InicioController < ApplicationController
     if current_usuario.rol == 'D'
        redirect_to auditoria_path   
     end
+    if current_usuario.rol == 'V'
+      redirect_to divulgaciones_path   
+   end
 
   end
 end

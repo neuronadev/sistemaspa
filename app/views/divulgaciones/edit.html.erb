@@ -1,0 +1,13 @@
+<div>
+  <h5>Editar</h5>
+</div>
+
+
+<% if @actividad.producto.prodgrupo.clave == 'PERIODICO' %>
+      <%= render 'form_periodico', actividad: @actividad %>
+<% end %>
+
+<% if @actividad.producto.prodgrupo.clave == 'OTRASD' %>
+     <%= render 'form_casa_abierta', actividad: @actividad %>
+<% end %>
+

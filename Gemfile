@@ -28,6 +28,7 @@ gem 'rest-client'
  gem 'zeitwerk', '~> 2.2', '>= 2.2.1'
  gem 'bootstrap_form', '~> 4.3'
  gem 'pagy', '~> 3.7', '>= 3.7.1'
+ gem 'pg_search'
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 #gem 'cocoon', '~> 1.2', '>= 1.2.14'

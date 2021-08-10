@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  
-  
+
   get 'extras/index'
   get 'extras/show'
   get 'extras/new'
@@ -32,6 +31,11 @@ Rails.application.routes.draw do
   resources :externos
   resources :perfil
   resources :extras
+  resources :divulgaciones do
+        collection do
+           post 'buscar'
+        end
+  end
   #resources :academicos
   #resources :indicadores
     

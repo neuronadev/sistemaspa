@@ -1,0 +1,13 @@
+
+<% @actividades.each do |actividad| %>
+
+   <tr>
+      <td><%= actividad.id %></td>
+      <td><%= actividad.producto.descripcion %></td>
+      <td>
+           <%= link_to actividad.titulo, divulgacion_path(actividad.id) %> 
+           
+      </td>
+      <td><%= cita(actividad.id).html_safe %></td>
+   </tr>
+<% end %>   

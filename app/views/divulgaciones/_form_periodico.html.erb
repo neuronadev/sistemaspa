@@ -1,0 +1,81 @@
+
+<div class='ml-md-3  mb-md-5'>
+
+   <%= form_with(model: actividad, local:true) do |form|  %>
+       <%= form.hidden_field :producto_id, value: 39 %> 
+       <input type="hidden" name="captipo" value="<%= current_usuario.rol %>">
+       <%= form.hidden_field :estado, value:'A' %>
+       <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
+       <%= form.hidden_field :fuente, value:current_usuario.rol %> 
+        <%= form.hidden_field :periodo, value:2021 %> 
+
+       <div class="form-group">
+            <%= form.label :titulo, 'Título' %>
+            <%= form.text_field :titulo, class:"form-control" %> 
+       </div>
+       
+
+       <%= form.fields_for :articulo do |articulo| %>
+            <div class="form-row">
+               <div class="col">
+                    <%= articulo.label :fechapub, 'Fecha de publicación' %>
+                    <%= articulo.date_field :fechapub, class:"form-control" %> 
+                </div>
+                <div class="col">
+                    <%= articulo.label :volumen, "Sección/Página:" %>
+                    <%= articulo.text_field :volumen, class:"form-control" %>
+                </div>
+                <div class="col">
+                    <%= articulo.label :revista_id, "Medio de publicación:" %>
+                    <%= articulo.select :revista_id, Revista.all.where("tiporevista='P'").order(:nomrevista).pluck(:nomrevista,:id), { :include_blank=>'- Seleccione una opción -'}, {class:"form-control"} %>
+                </div> 
+            </div>    
+       <% end %> 
+  
+       <div class="form-group mt-md-3">  
+               <%= form.label :documentos, "Comprobante:" %>
+               <%= form.file_field :documentos, multiple: true, class:"form-control col-8" %>
+
+               <% if actividad.documentos.attached? %> 
+                    <% actividad.documentos.each do |d|%>
+                        <div id="doc<%= d.id %>">
+                            <%= link_to d.filename, rails_blob_path(d, disposition: "attachment"), { target: '_blank' } %>
+                            <%= link_to deldoc_path(d.id), method: "delete", data:{confirm: '¿Desea eliminar el comprobante?'}, remote:true  do %>
+                                <i class="fas fa-times"></i> 
+                            <% end %>
+                        </div>   
+                    <% end %>  
+               <% end %>   
+       </div>
+
+       <div class="card">
+        <div class="card-body">
+            <div class="card-header">Participantes</div>
+              <div class="card-body">
+                <div data-controller="nested-form">
+                    <template data-target='nested-form.template'>
+                            <%= form.fields_for :autores, Autor.new, child_index: 'TEMPLATE_RECORD' do |autor| %>
+                                <%= render 'autor_fields', form: autor %>
+                            <% end %>
+                    </template> 
+            
+                        <%= form.fields_for :autores do |autor| %>
+                                <%= render 'autor_fields', form: autor %>
+                        <% end %>
+                
+                        <div data-target="nested-form.add_item">
+                          <i class="fas fa-user-plus"></i> <%= link_to "Agregar participante", "#", data: { action: "nested-form#add_association" } %>
+                        </div>
+                
+                </div>
+              </div>  
+        </div>   
+       </div>
+
+       <div class="actions">
+          <%= form.submit "Guardar información", data: { confirm: '¿Desea continuar?' }, class:"btn btn-success" %>
+       </div>
+
+   <% end %>
+
+</div>

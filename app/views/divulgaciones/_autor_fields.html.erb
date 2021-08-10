@@ -1,0 +1,19 @@
+<div class='nested-fields'>
+  <div class='form-group'>
+     <div class="row"> 
+        <div class="col-4">
+            <%= form.hidden_field :_destroy %> 
+            <%= form.hidden_field :rol_id, value:'1' %>
+            <%= form.select :persona_id, Persona.all.order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, {},{class:"form-control form-control-sm"} %> 
+        </div>
+        <div class="col-4">
+            <%= form.text_field :firma, placeholder: 'Participante', class: 'form-control form-control-sm' %>
+        </div>
+        <div class="col-4"> 
+           
+              <i class="fas fa-user-minus"></i> <%= link_to "Eliminar", "#", data: { action: "click->nested-form#remove_association" } %>
+            
+        </div>  
+    </div>
+ </div>
+</div> 
