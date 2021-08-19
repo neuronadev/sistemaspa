@@ -1,0 +1,77 @@
+
+<div class="row mb-md-2">
+    <div class="col-md-1">
+        <%= link_to posgrados_path do %>
+            <i class="fas fa-long-arrow-alt-left"></i> Regresar
+        <% end%>
+    </div>  
+    <div class="col-md-2">
+        <%= link_to edit_posgrado_path(@curso.id) do %>
+            <i class="fas fa-edit"></i> Editar curso
+        <% end%>
+    </div>  
+</div>
+<div class="card">
+   <div class="row pl-md-3 pt-md-3 mb-md-3">
+       <div class="col-md-12">
+              <span class="text-secondary font-weight-bold">Nombre del curso:</span> <%= @curso.titulo %>
+       </div>
+   </div> 
+   <div class="row pl-md-1 pt-md-1">
+      <div class="col-md-4">
+            
+            <div class="col-md-12">
+                <span class="text-secondary font-weight-bold">Tipo impartición:</span> <%= @curso.curso.tipocurso.nomtipocurso %>
+            </div> 
+            <div class="col-md-12">
+                <span class="text-secondary font-weight-bold">Fecha de incio:</span> <%= @curso.curso.fini %>
+            </div>
+            <div class="col-md-12">
+                <span class="text-secondary font-weight-bold">Fecha de fin:</span> <%= @curso.curso.ffin %>
+            </div> 
+      </div> 
+      <div class="col-md-4">
+          <div class="col-md-12">
+                <span class="text-secondary font-weight-bold">Total horas del curso:</span> <%= @curso.curso.hcurso %>
+          </div>
+          <div class="col-md-12">
+                <span class="text-secondary font-weight-bold">Créditos:</span> <%= @curso.curso.creditos %>
+          </div> 
+          <div class="col-md-12">
+                <span class="text-secondary font-weight-bold">Número de alumnos:</span> <%= @curso.curso.noalumnos %>
+          </div> 
+      </div>    
+   </div>
+
+   <div class="row mt-md-3">
+      <div class="col-md-8"> 
+        <table class="table table-bordered ml-md-3">
+            <thead>
+                <tr>
+                   <th>Nombre</th>
+                   <th>Horas impartidas</th>
+                   <th>Coordinador</th>
+                   <th>Comprobante</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @curso.autores.each do |a| %>
+                        <tr>
+                            <td><%= (a.persona.nombre||'') + ' ' + (a.persona.paterno||'') + ' ' + (a.persona.materno||'') %></td>
+                            <td><%= a.horas %></td>
+                            <td><%= a.coordinador ? 'SI' : 'NO' %> </td> 
+                            <td> 
+                                <% if a.posgradoc.attached?  %> 
+                                        <%= link_to a.posgradoc.filename, rails_blob_path(a.posgradoc, disposition: 'attachment', target: '_blank') %>
+                                 <% else %>
+                                        <I>Sin comprobante</I>
+                                <% end %>    
+                            </td> 
+                        </tr>
+                <% end %>
+            </tbody>    
+        </table>         
+       </div>   
+   </div>
+
+</div>

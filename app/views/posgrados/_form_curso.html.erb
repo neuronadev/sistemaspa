@@ -1,0 +1,107 @@
+<div class="card pl-md-3 pt-md-3 pb-md-3">
+  <%= form_with(model: actividad, local:false) do |form| %>
+      <input type="hidden" name="captipo" value="<%= current_usuario.rol %>">
+      <%= form.hidden_field :estado, value:'A' %>
+      <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
+      <%= form.hidden_field :fuente, value:current_usuario.rol %> 
+      <%= form.hidden_field :periodo, value:2021 %> 
+      <%= form.hidden_field :producto_id, value: @producto.id %> 
+
+      <div class="row"> 
+          <div class="col-md-11">
+            <div class="form-group">
+                <%= form.label :titulo, 'Nombre del curso', class:'titulo text-muted' %>
+                <%= form.text_field :titulo, class:"form-control" %> 
+            </div>   
+          </div>
+      </div>
+      <%= form.fields_for :curso do |curso| %>
+            
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                  <%=  curso.label :tipocurso_id, "Tipo impartición:", class:'tipocurso_id text-muted' %>
+                  <%=  curso.select :tipocurso_id, Tipocurso.order(:nomtipocurso).all.pluck(:nomtipocurso,:id), { :include_blank=>'- Seleccione una opción -'},{class:"form-control"} %>
+                </div>   
+            </div> 
+        
+            <div class="col-md-2">
+                <div class="form-group">
+                  <%=  curso.label :fini, "Fecha de inicio:", class:'fini text-muted' %>
+                  <%=  curso.date_field :fini, class:"form-control" %>
+                </div>   
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                  <%=  curso.label :ffin, "Fecha de termino:", class:'ffin text-muted' %>
+                  <%=  curso.date_field :ffin, class:"form-control" %>
+                </div>   
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                  <%=  curso.label :hcurso, "Total horas del curso:",class:'hcurso text-muted'  %>
+                  <%=  curso.text_field :hcurso, class:"form-control" %>
+                </div>   
+            </div>
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                  <%=  curso.label :creditos, "Créditos:", class:'creditos text-muted' %>
+                  <%=  curso.text_field :creditos, class:"form-control" %>
+                </div>   
+            </div>
+            <div class="col-md-2">
+                <div class="form-group ">
+                  <%=  curso.label :noalumnos, "No. de alumnos:", class:'noalumnos text-muted' %>
+                  <%=  curso.text_field :noalumnos, class:"form-control" %>
+                </div>   
+            </div>
+                        
+        </div>
+
+      <% end %>
+
+      <div class="row">
+          <div class="col participantes text-secondary"><h5>Participantes</h5></div>
+          
+      </div>
+ 
+      <div class="row mt-md-2">
+         <div class="col-md-3 text-muted">Nombre</div>
+         <div class="col-md-2 text-muted">Horas Impartidas</div>
+         <div class="col-md-1 text-muted">Coordinador</div>
+         <div class="col-4 text-muted">Comprobante</div>
+      </div>
+
+      <div class="row border-bottom border-top">
+      
+            <div data-controller="nested-form" class="col mt-md-1">
+                    <template data-target='nested-form.template'>
+                        <%= form.fields_for :autores, Autor.new, child_index: 'TEMPLATE_RECORD' do |autor| %>
+                                <%= render 'autor_fields', form: autor %>
+                        <% end %>
+                    </template> 
+                    
+                    <%= form.fields_for :autores do |autor| %>
+                        <%= render 'autor_fields', form: autor %>
+                    <% end %>
+                        
+                    <div class="mt-md-3" data-target="nested-form.add_item">
+                        <i class="fas fa-user-plus"></i> <%= link_to "Agregar participante", "#", data: { action: "nested-form#add_association" } %>
+                    </div>
+                    
+            </div>
+      </div>
+
+    <div class="row mt-md-5 mb-md-5">
+        <div class="col">
+            <%= form.submit "Guardar información", data: { confirm: '¿Desea continuar?' }, class:"btn btn-success" %>
+        </div>   
+    </div>   
+
+  <% end %>
+
+</div>  

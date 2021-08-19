@@ -1,0 +1,24 @@
+
+<% @cursos.each do |c| %>
+
+    <tr> 
+        <td><%= c.producto.descripcion %></td>  
+        <td>
+             <% if c.producto.id == 83 %>
+                   <%= link_to c.tesista.acta+' - '+c.titulo, posgrado_path(c.id) %>
+             <% else %>
+                 <%= link_to c.titulo, posgrado_path(c.id) %>
+              <% end %>   
+          </td>
+        <td>
+            <% if c.producto.id == 82 %>
+                 <%= c.curso.tipocurso.nomtipocurso %>
+            <% end %>
+            <% if c.producto.id == 83 %>
+                 <%= c.tesista.nivelestudio.nomnivel %>
+            <% end %>   
+        </td>
+        
+    </tr>
+
+<% end %>

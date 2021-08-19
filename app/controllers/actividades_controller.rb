@@ -61,16 +61,41 @@ class ActividadesController < ApplicationController
   def create
     @actividad = Actividad.new(actividad_params) 
     @action = params[:action]
-    if @actividad.save
-        puts "OK, Saved"
-        if params[:captipo] == 'V'
-             redirect_to divulgaciones_path    
-        else
-             redirect_to actividad_path(@actividad.id) 
-        end
-    else
-        puts @actividad.errors.messages
-    end
+    @captipo = params[:captipo]
+
+    @errors_participan = false
+    @errors_items_participan = false
+    @error_comp_on_actividad = false
+
+    @errors_items_messages = []
+
+    @errors_participan = helpers.valida_participantes(params)
+    if @errors_participan == false
+      if params[:actividad][:producto_id].to_i == 82
+        @errors_items_participan, @errors_items_messages =  helpers.valida_items_curso(params)
+      end
+    end 
+    if params[:actividad][:producto_id].to_i == 83
+         @error_comp_on_actividad = helpers.valida_doc_onactividad(params)
+    end     
+
+      if @actividad.valid?
+         if @errors_participan == false &&  @errors_items_participan == false && @error_comp_on_actividad = false
+              if @actividad.save
+                  if @captipo == 'V'
+                        redirect_to divulgaciones_path    
+                  elsif @captipo == 'P'     
+                        redirect_to posgrados_path    
+                  else
+                      redirect_to actividad_path(@actividad.id) 
+                  end
+              end
+          else
+            @actividad.errors.add(:partcomp, "Errores") 
+          end  
+      else
+          puts @actividad.errors.full_messages 
+      end
   end
 
   def show
@@ -94,35 +119,39 @@ class ActividadesController < ApplicationController
 
   def update
     id = params[:id]
+    @captipo = params[:captipo]
     @actividad = Actividad.find(id)
     
-    #respond_to do |format|
-       if @actividad.update(actividad_params)
-          flash[:notice] = 'Actualización ok...'
-          #if current_usuario.rol != 'T'
-          #  if @actividad.producto_id == 81 || @actividad.producto_id == 85
-          #     @actividad.estado='S'
-          #  else 
-          #     @actividad.estado='C'
-          #  end
-            @actividad.save
-          #end   
-          if params[:captipo] == 'V'
-            redirect_to divulgaciones_path    
+    @errors_participan = false
+    @errors_items_participan = false
+    @error_comp_on_actividad = false
+
+    @errors_items_messages = [] 
+    @errors_participan = helpers.valida_participantes(params)
+        
+    if @actividad.valid?
+      if @errors_participan == false
+          if @actividad.update(actividad_params)
+              flash[:notice] = 'Actualización ok...'
+
+              if @captipo == 'V'
+                redirect_to divulgaciones_path    
+              elsif @captipo == 'P'     
+                    redirect_to posgrados_path    
+              else
+                  redirect_to actividad_path(@actividad.id) 
+              end
+            
           else
-                redirect_to actividad_path(@actividad.id) 
-          end  
-          
-          #format.html {redirect_to actividades_path}
-          #format.html {redirect_to editarindex_path(0,0)}
-          #format.js
-       else
-          flash[:error] = "Error, la información esta incompleta."
-          puts @actividad.errors.full_messages
-          @producto = Producto.find(@actividad.producto_id) 
-          format.html {render :action=>'edit'}
-       end   
-    #end  
+              puts @actividad.errors.full_messages
+          end
+      else
+         @actividad.errors.add(:partcomp, "Errores") 
+      end       
+    else
+      puts @actividad.errors.full_messages 
+    end
+         
   end
 
   def destroy
@@ -224,18 +253,18 @@ class ActividadesController < ApplicationController
 
 
   private def actividad_params
-   params.require(:actividad).permit(:id,:titulo,:anio,:producto_id, :personaid,:estado, :fechapub, :reemplazaidact, :periodo, :asignared, :fuente, documentos:[],
+   params.require(:actividad).permit(:id,:titulo,:anio,:producto_id, :personaid,:estado, :fechapub, :reemplazaidact, :periodo, :asignared, :fuente, :tesisdoc, documentos:[], 
         articulo_attributes:[:id,:volumen,:pgini,:pgfin,:revista_id,:actividad_id,:eidentificador,:doi, :issue,:fechapub,:abstract],
         libroarbitrado_attributes:[:id,:nopaginas, :idioma_id, :editorial_id, :actividad_id],
         capitulo_attributes: [:id,:pgini,:pgfin,:idioma_id,:libro_id, :actividad_id],
         curso_attributes: [:id,:fini,:ffin,:hcurso,:himpartidas,:creditos,:noalumnos,:coordinador,:tipocurso_id,:actividad_id ],
-        tesista_attributes: [:id,:ftermino,:nivelestudio_id,:actividad_id],
+        tesista_attributes: [:id,:ftermino,:nivelestudio_id,:actividad_id, :fgrado, :efterminal, :acta ],
         editor_attributes: [:id,:idioma_id,:ambito_id,:codigo,:medio,:editorial,:pais,:actividad_id],
         patente_attributes: [:id,:tipopatente_id,:actividad_id],
         vinculacion_attributes: [:id, :tipovinculacion, :niveldecreto, :ordenamiento, :niveliniciativa, :nivelregla, :nivelcomite, :actividad_id],
         divulgacion_attributes: [:id,:noparticipantes, :nodias,:tipodivulgacion_id, :actividad_id],
         fasciculo_attributes: [:id, :tipofasciculo_id, :tipomedio_id, :nommedio, :codigo, :actividad_id],
-        autores_attributes: [:id,:rol_id,:persona_id,:firma,:filiacion,:corresponsal,:posicion,:porcentaje,:_destroy] )
+        autores_attributes: [:id,:rol_id,:persona_id,:firma,:filiacion,:corresponsal,:posicion,:porcentaje, :horas, :coordinador, :posgradoc, :_destroy] )
   end
 
 end

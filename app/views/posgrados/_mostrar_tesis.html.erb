@@ -1,0 +1,73 @@
+
+<div class="row mb-md-2">
+    <div class="col-md-1">
+        <%= link_to posgrados_path do %>
+            <i class="fas fa-long-arrow-alt-left"></i> Regresar
+        <% end%>
+    </div>  
+    <div class="col-md-2">
+        <%= link_to edit_posgrado_path(@curso.id) do %>
+        <i class="fas fa-edit"></i> Editar tesis
+    <% end%>
+    </div>  
+</div>
+<div class="card">
+   <div class="row pl-md-3 pt-md-3">
+       <div class="col-md-12">
+           <span class="text-secondary font-weight-bold">Título de la tesis:</span> <%= @curso.titulo %>
+       </div>
+   </div> 
+   <div class="row pl-md-1 pt-md-1">
+      <div class="col-md-4">
+            
+            <div class="col-md-12">
+                <span class="text-secondary font-weight-bold">Número de acta:</span> <%= @curso.tesista.acta %>
+            </div> 
+            <div class="col-md-12">
+                <span class="text-secondary font-weight-bold">Nivel:</span> <%= @curso.tesista.nivelestudio.nomnivel %>
+            </div>
+            <div class="col-md-12">
+                <span class="text-secondary font-weight-bold">Fecha de grado:</span> <%= @curso.tesista.fgrado %>
+            </div>
+            <div class="col-md-12">
+                <span class="text-secondary font-weight-bold">Eficiencia terminal:</span> <%= @curso.tesista.efterminal %>
+            </div> 
+      </div> 
+      
+   </div>
+    <div class="row pl-md-3 pt-md-2">
+            <div class="col comprobante"><h5>Acta de exámen</h5></div>
+   </div>
+   <div class="col-md-6 pl-md-1 pt-md-1">
+      <div class="col">
+                        <% if @curso.tesisdoc.attached? %>
+                          
+                                <div class="col-6">  <%= link_to @curso.tesisdoc.filename, rails_blob_path(@curso.tesisdoc, disposition: 'attachment', target: '_blank') %> </div>
+                        <% else %>
+                                 <I>Sin comprobante</I>
+                        <% end %>  
+     </div>        
+   </div>  
+   <div class="row mt-md-3">
+      <div class="col-md-6"> 
+        <table class="table table-bordered ml-md-3">
+            <thead>
+                <tr>
+                   <th>Nombre</th>
+                   <th>En calidad de</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                <% @curso.autores.each do |a| %>
+                        <tr>
+                            <td><%= (a.persona.nombre||'') + ' ' + (a.persona.paterno||'') + ' ' + (a.persona.materno||'') %></td>
+                            <td><%= a.rol.nomrol %></td>
+                        </tr>
+                <% end %>
+            </tbody>
+        </table>         
+       </div>   
+   </div>
+
+</div>

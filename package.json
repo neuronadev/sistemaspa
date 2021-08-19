@@ -17,6 +17,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@types/datatables.net": "^1.10.20",
     "webpack-dev-server": "^3.9.0"
   }
 }

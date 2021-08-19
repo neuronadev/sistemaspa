@@ -9,4 +9,37 @@ module ActividadesHelper
             autores.persona_id
         end
     end
+
+    def valida_participantes(params)
+        if !params[:actividad][:autores_attributes].present?
+             return true
+        else
+             return false
+        end            
+    end
+
+    def valida_items_curso(params)
+        errors_items_participan = false
+        errors_items_messages = [] 
+        params[:actividad][:autores_attributes].each do |p,v|
+                if !v[:horas].present?
+                    errors_items_participan = true
+                    errors_items_messages << {'horas'=>p}
+                end
+                if !v[:posgradoc].present?
+                    errors_items_participan = true
+                    errors_items_messages << {'posgradoc'=>p}
+                end
+        end
+        return errors_items_participan, errors_items_messages
+   end
+
+   def valida_doc_onactividad(params)
+        if !params[:actividad][:tesisdoc].present?
+            return true
+        else
+            return false 
+        end
+   end
+
 end

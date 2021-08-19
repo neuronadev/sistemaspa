@@ -36,6 +36,7 @@ Rails.application.routes.draw do
            post 'buscar'
         end
   end
+  resources :posgrados
   #resources :academicos
   #resources :indicadores
     

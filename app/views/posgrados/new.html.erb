@@ -1,0 +1,14 @@
+
+<% if @tipo == 'C' %>
+    <div>
+      <h5><%= @producto.descripcion %></h5>
+    </div>
+    <%= render 'form_curso' , actividad:@actividad %>
+<% end %>
+
+<% if @tipo == 'T' %>
+   <div>
+     <h5><%= @producto.descripcion %></h5>
+   </div>
+  <%= render 'form_tesis', actividad:@actividad  %>
+<% end %>

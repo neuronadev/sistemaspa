@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_25_070906) do
+ActiveRecord::Schema.define(version: 2021_08_13_184050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,8 @@ ActiveRecord::Schema.define(version: 2021_06_25_070906) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "actividad_id", null: false
     t.decimal "porcentaje", precision: 7, scale: 2
+    t.decimal "horas", precision: 16, scale: 2
+    t.boolean "coordinador"
     t.index ["actividad_id"], name: "index_autores_on_actividad_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
@@ -228,6 +230,8 @@ ActiveRecord::Schema.define(version: 2021_06_25_070906) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "actividad_id", null: false
     t.decimal "porcentaje", precision: 7, scale: 2
+    t.decimal "horas", precision: 16, scale: 2
+    t.boolean "coordinador"
     t.index ["actividad_id"], name: "index_autores_on_actividad_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"

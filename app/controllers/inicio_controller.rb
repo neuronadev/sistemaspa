@@ -19,6 +19,9 @@ class InicioController < ApplicationController
     if current_usuario.rol == 'V'
       redirect_to divulgaciones_path   
    end
+   if current_usuario.rol == 'P'
+       redirect_to posgrados_path   
+   end
 
   end
 end

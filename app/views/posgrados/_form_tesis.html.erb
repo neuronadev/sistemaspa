@@ -1,0 +1,102 @@
+<div class="card pl-md-3 pt-md-3 pb-md-3">    
+    <%= form_with(model: actividad, local:false) do |form| %>
+        <input type="hidden" name="captipo" value="<%= current_usuario.rol %>">
+        <%= form.hidden_field :estado, value:'A' %>
+        <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
+        <%= form.hidden_field :fuente, value:current_usuario.rol %> 
+        <%= form.hidden_field :periodo, value:2021 %> 
+        <%= form.hidden_field :producto_id, value: @producto.id %>
+
+        <div class="row"> 
+            <div class="col-md-11">
+            <div class="form-group">
+                <%= form.label :titulo, 'Título de la tesis:', class:'titulo text-muted' %>
+                <%= form.text_field :titulo, class:"form-control" %> 
+            </div>   
+            </div>
+        </div> 
+        <%= form.fields_for :tesista do |tesis| %>
+            <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <%=  tesis.label :acta, "Número de Acta:", class:'acta text-muted' %>
+                            <%=  tesis.text_field :acta, class:"form-control" %>
+                        </div>   
+                    </div> 
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <%=  tesis.label :nivelestudio_id, "Nivel:", class:'nivelestudio_id text-muted' %>
+                            <%=  tesis.select :nivelestudio_id, Nivelestudio.order(:nomnivel).all.pluck(:nomnivel,:id), { :include_blank=>'- Seleccione una opción -'},{class:"form-control"} %>
+                        </div>   
+                    </div> 
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <%=  tesis.label :fgrado, "Fecha obtención de grado:", class:'fgrado text-muted' %>
+                            <%=  tesis.date_field :fgrado, class:"form-control" %>
+                        </div>   
+                    </div> 
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <%=  tesis.label :efterminal, "Ef. terminal:", class:'efterminal text-muted' %>
+                            <%=  tesis.select :efterminal, options_for_sino, {:include_blank=>'- Seleccione una opción -'},{class:"form-control"}  %>
+                        </div>   
+                    </div> 
+            </div>     
+
+        <% end %>
+        <div class="row">
+            <div class="col comprobante text-muted"><h5>Acta de exámen</h5></div>
+        </div>
+        <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <% if actividad.tesisdoc.attached? %>
+                            <div class="row">
+                                <div class="col-6">   <%= link_to actividad.tesisdoc.filename, rails_blob_path(actividad.tesisdoc, disposition: 'attachment', target: '_blank') %></div>
+                                <div class="col"><%= form.file_field :tesisdoc, class:"form-control" %></div>
+                            </div>   
+                        <% else %> 
+                            <%= form.file_field :tesisdoc, class:"form-control col-8" %> 
+                        <% end %>  
+                    </div>        
+                </div>  
+        </div>
+        <div class="row">
+            <div class="col participantes text-muted"><h5>Participantes</h5></div>
+        </div>
+
+        <div class="row mt-md-2">
+            <div class="col-md-3">Nombre</div>
+            <div class="col-md-2">En calidad de</div>
+        </div> 
+
+        <div class="row border-bottom border-top">
+        
+            <div data-controller="nested-form" class="col mt-md-1">
+                    <template data-target='nested-form.template'>
+                        <%= form.fields_for :autores, Autor.new, child_index: 'TEMPLATE_RECORD' do |autor| %>
+                                <%= render 'autor_tesis_fields', form: autor %>
+                        <% end %>
+                    </template> 
+                    
+                    <%= form.fields_for :autores do |autor| %>
+                        <%= render 'autor_tesis_fields', form: autor %>
+                    <% end %>
+                        
+                    <div class="mt-md-3" data-target="nested-form.add_item">
+                        <i class="fas fa-user-plus"></i> <%= link_to "Agregar participante", "#", data: { action: "nested-form#add_association" } %>
+                    </div>
+                    
+            </div>
+        </div>
+
+        <div class="row mt-md-5 mb-md-5">
+        <div class="col">
+            <%= form.submit "Guardar información", data: { confirm: '¿Desea continuar?' }, class:"btn btn-success" %>
+        </div>   
+        </div>   
+
+
+
+    <% end %>
+</div>    

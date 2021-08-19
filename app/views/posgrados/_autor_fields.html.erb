@@ -1,0 +1,36 @@
+
+<div class='nested-fields'>
+    <div class="row"> 
+        <div class="col-md-3">
+            <%= form.hidden_field :_destroy %> 
+            <%= form.hidden_field :rol_id, value:'1' %>
+            <div class="form-group"> 
+                <%= form.select :persona_id, Persona.all.order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, {},{class:"form-control form-control-sm"} %> 
+            </div>                
+        </div>
+        <div class="col-md-2">
+            <%= form.text_field :horas, class: 'form-control form-control-sm' %>
+        </div>
+        <div class="col-md-1">
+            <%= form.check_box :coordinador, class: 'form-control form-control-sm' %>
+        </div>
+
+        <div class="col-md-5">
+           
+            <% if form.object.posgradoc.attached? %>
+                <div class="row">
+                   <div class="col-4 text-truncate">  <%= link_to form.object.posgradoc.filename, rails_blob_path(form.object.posgradoc, disposition: 'attachment', target: '_blank') %> </div>
+                   <div class="col"><%= form.file_field :posgradoc, class:"form-control form-control-sm" %></div>
+                </div>   
+             <% else %> 
+                   <div class="col"><%= form.file_field :posgradoc, class:"form-control col-8 form-control-sm" %></div>  
+             <% end %>  
+                 
+        </div>    
+        
+        <div class="col-md-1"> 
+            <i class="fas fa-user-minus"></i> <%= link_to "Eliminar", "#", data: { action: "click->nested-form#remove_association" } %>
+        </div>  
+    </div>
+ 
+</div> 

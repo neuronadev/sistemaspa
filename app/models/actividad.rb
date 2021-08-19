@@ -1,7 +1,7 @@
 class Actividad < ApplicationRecord
 
     validates :titulo, presence: true
-
+    
     before_save :default_values
     has_one :articulo
     has_one :libroarbitrado
@@ -15,6 +15,7 @@ class Actividad < ApplicationRecord
     has_one :fasciculo
     has_many :mensajes
     has_many_attached :documentos
+    has_one_attached :tesisdoc
     accepts_nested_attributes_for :articulo
     accepts_nested_attributes_for :libroarbitrado
     accepts_nested_attributes_for :capitulo

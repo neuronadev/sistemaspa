@@ -1,0 +1,27 @@
+
+<% if @actividad.producto.id == 82 %>
+    <div>
+      <h5><%= @producto.descripcion %></h5>
+    </div>
+     <div class="row mb-md-2">
+          <div class="col-md-1">
+              <%= link_to posgrado_path(@actividad.id) do %>
+                  <i class="fas fa-long-arrow-alt-left"></i> Regresar
+              <% end%>
+          </div>  
+     </div>
+     <%= render "posgrados/form_curso", actividad:@actividad %>
+<% end %>      
+<% if @actividad.producto.id == 83 %>
+      <div>
+      <h5><%= @producto.descripcion %></h5>
+    </div>
+    <div class="row mb-md-2">
+          <div class="col-md-1">
+              <%= link_to posgrado_path(@actividad.id) do %>
+                  <i class="fas fa-long-arrow-alt-left"></i> Regresar
+              <% end%>
+          </div>  
+     </div>
+      <%= render "posgrados/form_tesis", actividad:@actividad %>
+<% end %>      

@@ -1,9 +1,53 @@
+var elementos1 = document.getElementsByClassName('text-danger');
+var elementos2 = document.getElementsByClassName('error_input');
+
+for ( let elem1 of elementos1 ){
+       elem1.classList.remove("text-danger");
+       elem1.classList.add("text-muted");
+}
+for ( let elem2 of elementos2 ){
+       elem2.classList.remove("error_input");
+}
+
 <% if @actividad.errors.messages.count > 0 %>
-   alert('Propocione la información')
-   <%  @actividad.errors.each do |attr, msg| %>
-         $('#actividad_'+'<%= attr %>').addClass("error");
+   alert('Error: Favor de revisar la información ingresada en los campos')
+   <%  @actividad.errors.each do |attr, msg| 
+      
+       attr_array = attr.to_s.split('.')
+       if attr_array.length() == 1
+             attr = attr_array[0]
+        else
+             attr = attr_array[attr_array.length()-1]
+       end
+       
+   %>
+       $('.'+'<%= attr %>').removeClass( "text-muted" ).addClass( "text-danger" ); 
+         
+
    <% end %>
+
+   <% if @error_comp_on_actividad %>
+         $('.comprobante').removeClass( "text-muted" ).addClass( "text-danger" );   
+   <% end %>
+   <% if @errors_participan %>
+         $('.participantes').removeClass( "text-muted" ).addClass( "text-danger" );   
+    <% end %>
+   
+   <% if  @errors_items_participan %> 
+          <% @errors_items_messages.each do |m| %>
+               <% m.each do |attr, v| %>
+                   $('#actividad_autores_attributes_'+'<%= v %>'+'_'+'<%= attr %>').addClass("error_input"); 
+               <% end %>
+          <% end %> 
+   <% end %>
+
 <% else %>   
-    alert('Red registrada correctamente')
-    $(location).attr('href','<%= j redes_path %>'); 
+    alert('Producto resgistrado correctamente')
+    <% if @captipo == 'V' %>
+           $(location).attr('href','<%= j divulgaciones_path %>');
+    <% elsif @captipo == 'P' %>     
+           $(location).attr('href','<%= j posgrados_path %>');    
+    <% else %>
+           $(location).attr('href','<%= j actividades_path %>');     
+    <% end %>       
 <% end %>

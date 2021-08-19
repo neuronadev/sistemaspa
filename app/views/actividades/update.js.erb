@@ -1,0 +1,24 @@
+var elementos1 = document.getElementsByClassName('text-danger');
+var elementos2 = document.getElementsByClassName('error_input');
+
+for ( let elem1 of elementos1 ){
+       elem1.classList.remove("text-danger");
+       elem1.classList.add("text-muted");
+}
+for ( let elem2 of elementos2 ){
+       elem2.classList.remove("error_input");
+}
+
+<% if @actividad.errors.messages.count > 0 %>
+      alert('Error: Favor de revisar la información ingresada en los campos')
+       <%  @actividad.errors.each do |attr, msg| 
+           attr_array = attr.to_s.split('.')
+           if attr_array.length() == 1
+               attr = attr_array[0]
+           else
+               attr = attr_array[attr_array.length()-1]
+           end
+       %>    
+          $('.'+'<%= attr %>').removeClass( "text-muted" ).addClass( "text-danger" ); 
+       <% end %>
+<% end %>
