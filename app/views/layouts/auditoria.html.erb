@@ -40,6 +40,12 @@
           <%= link_to("Actividades Adicionales", auditadicionales_path, class:"dropdown-item", data: {turbolinks:false}) %>
         </div>
       </li>
+
+      <li class="nav-item active">
+          <%= link_to cancelados_path, class:"nav-link", data: {turbolinks:false} do %>
+                 <i class="fas fa-user-slash"></i> Folios cancelados
+          <% end %>
+      </li>
       
     </ul>
     

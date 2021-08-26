@@ -102,6 +102,11 @@ class AuditoriaController < ApplicationController
       end
        @actividad = Actividad.where(:id=>idsActiv).where("estado in ('S','W') and periodo=2020").order(:producto_id).order(:id)
   end
+  
+  def cancelados
+    @folios = Actividad.where(periodo:2020, estado:['A','C','U','G','D','Z','W','X']).order(:id)
+                                                    
+  end
 
   def downother
     key = params[:id]

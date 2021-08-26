@@ -146,6 +146,7 @@ Rails.application.routes.draw do
   get 'auditoria/adicionalesinv/', to:'auditoria#adicionalesinv', as:'auditadicionalesinv'
   get 'auditoria/listaadicinv/:id', to:'auditoria#listaadicinv', as:'listaadicinv'
   get 'auditoria/downother/:id/:tipo', to:'auditoria#downother', as:'downother'
+  get 'auditoria/cancelados/', to:'auditoria#cancelados', as:'cancelados'
 
   #Academicos Validacion de tecnicos
   get 'academicos/actividadt/:idacadem/:tipo', to:'academicos#actividadt', as:'actividadt'

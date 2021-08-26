@@ -19,9 +19,10 @@
     <% else %>
        <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", investigador_path, data: {turbolinks:false} ) %>&nbsp
     <% end %>
+    <!--
 
-    <i class="fas fa-plus"></i>&nbsp;<%= link_to("Registrar nuevo..", producto_path(0), data: {turbolinks:false} ) %>
-  
+      <i class="fas fa-plus"></i>&nbsp;<%= link_to("Registrar nuevo..", producto_path(0), data: {turbolinks:false} ) %>
+   -->
   </div>
   <div class="col-md-4 ml-auto align-middle"> <%= pagy_bootstrap_nav(@pagy).html_safe %> </div>
 </div>
