@@ -15,7 +15,7 @@ set :pg_ask_for_password, true
 set :pg_encoding, 'UTF-8'
 set :pg_pool, '100'
 
-set :rvm_type, :system
+#set :rvm_type, :system
 set :rvm_ruby_version, 'ruby-2.6.3'
 
 
