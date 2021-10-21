@@ -4,10 +4,30 @@
 
 
 <% if @actividad.producto.prodgrupo.clave == 'PERIODICO' %>
-      <%= render 'form_periodico', actividad: @actividad %>
+    <div>
+      <h5><%= @producto.descripcion %></h5>
+    </div>
+    <div class="row mb-md-2">
+          <div class="col-md-1">
+              <%= link_to divulgacion_path(@actividad.id) do %>
+                  <i class="fas fa-long-arrow-alt-left"></i> Regresar
+              <% end%>
+          </div>  
+    </div>
+    <%= render 'form_periodico', actividad: @actividad %>
 <% end %>
 
 <% if @actividad.producto.prodgrupo.clave == 'OTRASD' %>
+     <div>
+      <h5><%= @producto.descripcion %></h5>
+    </div>
+    <div class="row mb-md-2">
+          <div class="col-md-1">
+              <%= link_to divulgacion_path(@actividad.id) do %>
+                  <i class="fas fa-long-arrow-alt-left"></i> Regresar
+              <% end%>
+          </div>  
+    </div>
      <%= render 'form_casa_abierta', actividad: @actividad %>
 <% end %>
 

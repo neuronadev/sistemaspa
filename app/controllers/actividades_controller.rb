@@ -77,10 +77,13 @@ class ActividadesController < ApplicationController
     end 
     if params[:actividad][:producto_id].to_i == 83
          @error_comp_on_actividad = helpers.valida_doc_onactividad(params)
+    end    
+    if params[:actividad][:producto_id].to_i == 39
+        @error_comp_on_actividad = helpers.valida_enlacedoc_onactividad(params)
     end     
 
       if @actividad.valid?
-         if @errors_participan == false &&  @errors_items_participan == false && @error_comp_on_actividad = false
+         if @errors_participan == false &&  @errors_items_participan == false && @error_comp_on_actividad == false
               if @actividad.save
                   if @captipo == 'V'
                         redirect_to divulgaciones_path    
@@ -91,9 +94,12 @@ class ActividadesController < ApplicationController
                   end
               end
           else
+            puts "AAAAAAAAAAAA:AAAAAAAAAAAAAAA" 
+            puts @actividad.errors.full_messages 
             @actividad.errors.add(:partcomp, "Errores") 
           end  
       else
+        puts "BBBBBBBBBBBB:BBBBBBBBBBBBBB"  
           puts @actividad.errors.full_messages 
       end
   end
@@ -253,7 +259,7 @@ class ActividadesController < ApplicationController
 
 
   private def actividad_params
-   params.require(:actividad).permit(:id,:titulo,:anio,:producto_id, :personaid,:estado, :fechapub, :reemplazaidact, :periodo, :asignared, :fuente, :tesisdoc, documentos:[], 
+   params.require(:actividad).permit(:id,:titulo,:anio,:producto_id, :personaid,:estado, :fechapub, :reemplazaidact, :periodo, :asignared, :fuente, :enlacedoc, :tesisdoc, documentos:[], 
         articulo_attributes:[:id,:volumen,:pgini,:pgfin,:revista_id,:actividad_id,:eidentificador,:doi, :issue,:fechapub,:abstract],
         libroarbitrado_attributes:[:id,:nopaginas, :idioma_id, :editorial_id, :actividad_id],
         capitulo_attributes: [:id,:pgini,:pgfin,:idioma_id,:libro_id, :actividad_id],

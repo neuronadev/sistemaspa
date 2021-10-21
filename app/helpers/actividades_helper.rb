@@ -42,4 +42,12 @@ module ActividadesHelper
         end
    end
 
+   def valida_enlacedoc_onactividad(params)
+    if !params[:actividad][:enlacedoc].present?
+        return true
+    else
+        return false 
+    end
+end
+
 end

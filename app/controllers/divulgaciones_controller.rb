@@ -32,6 +32,7 @@ class DivulgacionesController < ApplicationController
   def edit
     id = params[:id] 
     @actividad = Actividad.find(id)
+    @producto = Producto.find(@actividad.producto_id)
   end
 
   def update

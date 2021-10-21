@@ -16,6 +16,7 @@ class Actividad < ApplicationRecord
     has_many :mensajes
     has_many_attached :documentos
     has_one_attached :tesisdoc
+    has_one_attached :enlacedoc
     accepts_nested_attributes_for :articulo
     accepts_nested_attributes_for :libroarbitrado
     accepts_nested_attributes_for :capitulo

@@ -1,3 +1,17 @@
+<div class="row mb-md-2">
+    <div class="col-md-1">
+        <%= link_to divulgaciones_path do %>
+            <i class="fas fa-long-arrow-alt-left"></i> Regresar
+        <% end%>
+    </div>  
+    <div class="col-md-2">
+        <%= link_to edit_divulgacion_path(@actividad.id) do %>
+        <i class="fas fa-edit"></i> Editar
+    <% end%>
+    
+    </div>  
+</div>
+
 <div class="card">            
    <div class="card-body">        
             
@@ -16,16 +30,19 @@
                 <strong>Medio de publicación:</strong> <%= @actividad.articulo.revista.nomrevista %>
             </div>
 
-            <div class="col  mt-md-2">
-            <strong>Comprobante:</strong>
-            <% if @actividad.documentos.attached? %> 
-                        <% @actividad.documentos.each do |d|%>
-                                <div id="doc<%= d.id %>"  class="mt-md-2 pl-md-2">
-                                    <%= link_to d.filename, rails_blob_path(d, disposition: "attachment"), { target: '_blank' } %>
-                                </div>   
-                        <% end %>  
-            <% end %>   
+            <div class="row pl-md-3 pt-md-2">
+                   <div class="col comprobante">Comprobante</div>
             </div>
+            <div class="col-md-6 pl-md-1 pt-md-1">
+                <div class="col">
+                                    <% if @actividad.enlacedoc.attached? %>
+                                    
+                                            <div class="col-6">  <%= link_to @actividad.enlacedoc.filename, rails_blob_path(@actividad.enlacedoc, disposition: 'attachment', target: '_blank') %> </div>
+                                    <% else %>
+                                            <I>Sin comprobante</I>
+                                    <% end %>  
+                </div>        
+            </div>  
 
             <div clas="row mt-md-3">
               <div class="col">  
