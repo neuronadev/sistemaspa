@@ -123,8 +123,8 @@ a {
     @include profile-avatar;
     position: relative;
     margin: 0 26px;
-    width: 35px;
-    height: 35px;
+    width: 200px;
+    height: 27px;
     cursor: pointer;
 
     &:after {
@@ -831,8 +831,8 @@ a {
     }
 
     &__avatar {
-      width: 40px;
-      height: 40px;
+     width: 200px;
+     height: 27px;
     }
   }
 }

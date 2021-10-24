@@ -5,6 +5,7 @@ class InvestigadorController < ApplicationController
     #@actividades = Persona.find(current_usuario.persona_id).actividades.where("estado!='X'").order(:titulo)
     #@pagy, @actividades = pagy(Persona.find(current_usuario.persona_id).actividades.where("estado!='X' and estado!='H' ").order(:titulo), page: params[:page], items: 20)
     @pagy, @actividades = pagy(Persona.find(current_usuario.persona_id).actividades.where(periodo:2021,estado:['A','C','S','U','G','D']).order(:titulo), page: params[:page], items: 20)
+    redirect_to actividades_actividades_path
   end
 
   def listarredes

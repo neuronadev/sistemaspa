@@ -1,0 +1,32 @@
+<!-- VALIDACION DEL CR  --> 
+<td>
+  <div class="d-flex justify-content-center">
+    <% if activ.estado == 'U' %>
+          <small class="badge badge-info">En validación</small>
+    <% else%>
+            <% if activ.estado == 'A' %>
+                  --
+            <% end%>
+            <% if activ.estado == 'C' %>
+                  <i class="fas fa-check-double text-success"></i>
+            <% end%>
+            <% if activ.estado == 'G' %>
+                   <small class="badge badge-warning">Corregir</small>
+            <% end%>
+            <% if activ.estado == 'D' %>
+                  <small class="badge badge-success"><i class="fas fa-times text-danger"></i> No cumple con la normativa</small>
+            <% end%>
+    <% end %>        
+  </div>  
+</td>
+
+<!-- VALIDACION DE LA SA  --> 
+<td>
+ <div class="d-flex justify-content-center">
+      <% if activ.estado == 'A' %>
+                  --
+      <% else %>
+          <small class="badge badge-info">En validación</small>
+      <% end %>
+ </div>     
+</td>

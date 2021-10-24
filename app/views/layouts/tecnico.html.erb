@@ -17,9 +17,10 @@
      <header class="header">
         <i class="fas fa-bars header__menu"></i>
         <div class="header__search">
-          <input class="header__input" placeholder="Search..." />
+          <input type="hidden" class="header__input" placeholder="Search..." />
         </div>
         <div class="header__avatar">
+            <div class="text-truncate text-primary"><i class="fas fa-user"></i> <%= @usuario_nom %></div> 
             <div class="dropdown">
               <ul class="dropdown__list">
                 
@@ -31,7 +32,7 @@
                 </li>
               </ul>
             </div>
-    </div>
+         </div>
     </header>
          <!--  
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -63,7 +64,7 @@
         
        
         <div class="row row--align-v-center row--align-h-center">
-               <%= render "navs/investigador" %>
+               <%= render "navs/tecnico" %>
         </div>
     </aside>
 

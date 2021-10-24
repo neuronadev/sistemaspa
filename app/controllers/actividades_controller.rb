@@ -186,15 +186,15 @@ class ActividadesController < ApplicationController
     if tipo == 'coor' 
       actividad.estado = 'C'
       actividad.fecha2 = Date.today
-   end   
-   if tipo == 'sa' 
-    actividad.estado = 'S'
-    actividad.fecha3 = Date.today
-  end   
+    end   
+    if tipo == 'sa' 
+       actividad.estado = 'S'
+       actividad.fecha3 = Date.today
+    end   
   
-  actividad.save
-
-   redirect_to actividades_path
+    actividad.save
+    redirect_to actividades_actividades_path
+    #redirect_to actividades_path
 
   end
 
