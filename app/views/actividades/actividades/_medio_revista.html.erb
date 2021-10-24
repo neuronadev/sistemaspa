@@ -1,0 +1,5 @@
+
+  <div class="mb-3 col-4">
+     <%= artc.label :revista_id, "Revista:", class:"form-label"  %>
+     <%= artc.select :revista_id, Revista.all.order(:nomrevista).map{|r| [r.nomrevista.downcase.capitalize, r.id] },{ prompt:'-- Seleccione --'}, class:" form-control"  %>
+  </div>

@@ -1,0 +1,18 @@
+<tr class="rwautor">
+  <td> 
+       <%= form.hidden_field :_destroy %>  
+       <%= form.hidden_field :rol_id, value:'1' %>
+       <%= form.select :persona_id, 
+             Persona.all.order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, 
+             {},
+             {class:"form-control form-control-sm"} %>
+  </td>
+  <td>
+       <%= form.check_box :corresponsal, value:'N',style:"height:100%;" %> 
+  </td>
+  <td>
+     <%= link_to "#", data:{ action:"click->autoria#quitarPart" } do  %>
+           Eliminar
+     <% end %>  
+  </td>
+</tr>

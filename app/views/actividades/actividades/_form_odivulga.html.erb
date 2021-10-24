@@ -1,0 +1,30 @@
+<%= form_with model:[:actividades, actividad], remote:false do |form| %>
+    <%= render "form_inputs_com", form:form %>
+    
+    <div class="row">
+        <div class="mb-3 col-md-9">
+               <%= form.label :titulo, "Título:", class:"form-label" %>
+               <%= form.text_field :titulo, class:"form-control" %>
+         </div>  
+         <div class="mb-3 col-md-3">
+               <%= form.label :fechapub, "Fecha de la actividad:", class:"form-label" %>
+               <%= form.date_field :fechapub, class:"form-control" %>
+         </div>  
+    </div>   
+    <%= form.fields_for :divulgacion do |div_form| %>
+        <div class="mb-3 col-md-5">
+           <%=  div_form.label :tipodivulgacion_id, "Tipo actividad:" %>
+           <%=  div_form.select :tipodivulgacion_id, Tipodivulgacion.all.pluck(:nomtipodivulgacion,:id), { prompt:'-- Seleccione una opcion--'},class:"form-control" %>
+        </div>   
+    <% end %>
+    <%= render "doc_comprobante", form:form %>
+    <%= render "form_autores", form:form %>
+    
+    <%= render "red_acad", form:form  %>
+
+    <div class="row">
+        <div class="col">
+            <%= form.submit %>
+        </div> 
+    </div>
+<% end %>

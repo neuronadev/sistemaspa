@@ -1,0 +1,36 @@
+
+<div class="card">
+ <div class="col">
+
+    <h5><%= @actividad.producto.descripcion %></h5>
+    <div class="card-body">
+            
+       <div class="row">
+                <div class="mb-3 col-md-9">
+                    <label class="form-label">Titulo:</label>
+                    <label><%= @actividad.titulo %></label>
+                
+                </div>
+       </div>       
+        <%= form_with model:@actividad, url:'savedoc', remote:true do |form| %>   
+             <input type="hidden" name="id" value = "<%= @actividad.producto_id %>" >
+             <div class="row">
+                     
+                    <div class="mb-3 col-md-9">
+                        <label class="form-label">Comprobante:</label>
+                        <%= form.file_field :documentos, multiple:true, class:"form-control" %>      
+                       
+                    </div>
+             </div>
+              <div class="row pb-md-3 pl-md-3"> 
+               <div class="col">
+                   <button type="submit" class="btn btn-primary">Enviar comprobante</button>
+                </div>
+       </div>  
+        <% end %>            
+        
+            
+
+   </div>
+  <div>
+</div>

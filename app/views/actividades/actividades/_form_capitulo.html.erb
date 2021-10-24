@@ -1,0 +1,47 @@
+<%= form_with model:[:actividades, actividad], remote:false do |form| %>
+    <%= render "form_inputs_com", form:form %>
+    
+    <div class="row">
+        <div class="mb-3 col-md-9">
+               <%= form.label :titulo, "Título del capítulo:", class:"form-label" %>
+               <%= form.text_field :titulo, class:"form-control" %>
+         </div>  
+         <div class="mb-3 col-md-3">
+               <%= form.label :anio, "Año de publicación:" %>
+               <%= form.text_field :anio, class:"form-control" %>
+         </div>  
+    </div>   
+    <div class="row">
+        <%= form.fields_for :capitulo do |cap_form| %>
+                 
+                  <div class="mb-3 col-md-2">
+                     <%= cap_form.label :pgini, "Página inicial:", class:"form-label" %>
+                     <%= cap_form.text_field :pgini, class:"form-control"%>
+                  </div>    
+                  <div class="mb-3 col-md-2">
+                     <%= cap_form.label :pgfin, "Página final:", class:"form-label" %>
+                     <%= cap_form.text_field :pgfin, class:"form-control" %>
+                  </div> 
+                  <div class="mb-3 col-md-2">
+                     <%=  cap_form.label :idioma_id, "Idioma:", class:"form-label" %>
+                     <%=  cap_form.select :idioma_id, Idioma.all.pluck(:nomidioma,:id), { :include_blank=>'Idioma'},class:"form-control" %>
+                  </div> 
+                  <div class="mb-3 col-md-6">
+                     <%=  cap_form.label :libro_id, "Libro:", class:"form-label" %>
+                     <%=  cap_form.select :libro_id, Libro.all.order(:nomlibro).collect { |l| [l.nomlibro+' (ISBN: '+(l.isbn||'') + ')',l.id] }, { :include_blank=>'Buscar Libro...'},class:"form-control"%>
+                  </div>
+                
+        <% end %>       
+    </div>
+
+    <%= render "doc_comprobante", form:form %>
+    <%= render "form_autores", form:form %>
+    
+    <%= render "red_acad", form:form  %>
+
+    <div class="row">
+        <div class="col">
+            <%= form.submit %>
+        </div> 
+    </div>
+<% end %>

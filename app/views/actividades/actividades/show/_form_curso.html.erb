@@ -1,0 +1,44 @@
+     <div class="row">
+        <div class="mb-3 col-md-12">
+            <label class="font-weight-bold">Título:</label>
+            <div><%= actividad.titulo %></div>
+        </div>   
+     </div>
+     
+ 
+        <div class="row">
+             <div class="mb-3 col-md-5">
+                <label class="font-weight-bold">Tipo impartición:</label>
+                <div><%= actividad.curso.tipocurso.nomtipocurso %></div>
+             </div> 
+             <div class="mb-3 col-md-3">
+                 <label class="font-weight-bold">Feha inicio:</label>
+                 <div><%= actividad.curso.fini %></div>
+             </div>
+             <div class="mb-3 col-md-3">
+                 <label class="font-weight-bold">Feha termino:</label>
+                 <div><%= actividad.curso.ffin %></div>
+             </div>
+             <div class="mb-3 col-md-3">
+                 <label class="font-weight-bold">Total de horas del curso:</label>
+                 <div><%= actividad.curso.hcurso %></div> 
+             </div>
+             <div class="mb-3 col-md-3">
+                 <label class="font-weight-bold">Número de horas impartida:</label>
+                 <div><%= actividad.curso.himpartidas %></div>  
+             </div>
+             <div class="mb-3 col-md-3">
+                 <label class="font-weight-bold">Créditos:</label>
+                 <div><%= actividad.curso.creditos %></div>  
+             </div>
+             <div class="mb-3 col-md-3">
+                 <label class="font-weight-bold">No. de alumnos:</label>
+                 <div><%= actividad.curso.noalumnos %></div>  
+             </div>
+             <div class="mb-3 col-md-3">
+                 <label class="font-weight-bold">¿Coordinador del Curso?:</label>
+                 <div><%= actividad.curso.coordinador %></div>  
+             </div>
+        </div>  
+        <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+        <%= render "actividades/actividades/show/autoria", actividad:@actividad %>

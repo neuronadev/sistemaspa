@@ -1,0 +1,36 @@
+<%= form.fields_for :articulo do |artc| %>
+
+   <div class="row">
+        <%= render "medio_revista", artc:artc %>
+        <div class="mb-3 col-md-2">
+               <%= artc.label :volumen, "Volumen:", class:"form-label" %>
+               <%= artc.text_field :volumen, class:"form-control" %>
+         </div>  
+         <div class="mb-3 col-md-2">
+               <%= artc.label :issue, "Número:", class:"form-label" %>
+               <%= artc.text_field :issue, class:"form-control" %>
+         </div> 
+         <div class="mb-3 col-md-2">
+               <%= artc.label :pgini, "Página inicial:", class:"form-label" %>
+               <%= artc.text_field :pgini, class:"form-control" %>
+         </div>  
+         <div class="mb-3 col-md-2">
+               <%= artc.label :pgfin, "Página final:", class:"form-label" %>
+               <%= artc.text_field :pgfin, class:"form-control" %>
+         </div> 
+         <div class="mb-3 col">
+               <%= artc.label :doi, "DOI:", class:"form-label" %>
+               <%= artc.text_field :doi, class:"form-control" %>
+         </div>  
+         
+   </div> 
+   <div class="row ">  
+         <div class="mb-3 col">
+               <%= artc.label :abstract, "Abstract:", class:"form-label" %>
+               <%= artc.text_area :abstract, class:"form-control" %>
+         </div>    
+    </div>
+
+   
+
+<% end %>

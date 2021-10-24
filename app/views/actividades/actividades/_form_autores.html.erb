@@ -1,0 +1,64 @@
+<div class="card bg-light" data-controller="autoria">
+ <div class="card-body">
+   <div class="row">
+      <div class="col">
+       <h5 id="autores">Participantes</h5>
+      </div> 
+      
+      
+        <button class="btn btn-success dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Agregar participante
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+             <% Tipoautor.all.each do |t| %>
+                 <% if t.clave == 'ACINECOL' %>
+                    <%= link_to "#", data:{ action: "click->autoria#nuevoPart" }, class:"dropdown-item" do %>
+                        <%= t.nomtipoautor %>
+                    <% end %>
+                 <% end %>
+                 <% if t.clave == 'EXTERNO' %>
+                    <%= link_to "#", data:{ action: "click->autoria#nuevoPartExt" }, class:"dropdown-item" do %>
+                        <%= t.nomtipoautor %>
+                    <% end %>
+                 <% end %>
+
+             <% end %> 
+        </div>
+        
+   </div> 
+   <div class="row">
+      <template data-autoria-target='tmpAutor'>
+        <%= form.fields_for :autores, Autor.new, child_index: 'TEMPLATE_RECORD_AUTOR' do |autor| %>
+              <%= render 'autoria_fields', form: autor %>
+        <% end %>
+      </template> 
+      <template data-autoria-target='tmpAutorExt'>
+        <%= form.fields_for :autores, Autor.new, child_index: 'TEMPLATE_RECORD_AUTOR_EXT' do |autor| %>
+              <%= render 'autoria_fields_ext', form: autor %>
+        <% end %>
+      </template> 
+      <div class="col-8">
+        <table class="table table-sm mt-md-1">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Corresponsal</th>
+                    <th></th>
+                </tr>    
+            </thead>
+            <tbody data-autoria-target="rwsAutores">
+                <% if  @actividad.autores.any? %>
+                    <%= form.fields_for :autores, @actividad.autores.where.not(persona_id:[211]) do |autor| %>
+                          <%= render 'autoria_fields', form: autor %>
+                    <% end %>
+                    <%= form.fields_for :autores, @actividad.autores.where(persona_id:[211]) do |autor| %>
+                          <%= render 'autoria_fields_ext', form: autor %>
+                    <% end %>
+                <% end %>    
+
+            </tbody>
+        </table>
+      </div>
+   </div>
+ </div>  
+</div>

@@ -1,5 +1,20 @@
 Rails.application.routes.draw do
 
+  namespace :actividades do
+    resources :actividades do
+                 member do
+                    get 'updoc'
+                    patch 'savedoc'
+                 end
+    end             
+  end
+  namespace :actividades do
+    resources :catalogos
+  end
+  namespace :actividades do
+    resources :productos
+  end
+
   get 'extras/index'
   get 'extras/show'
   get 'extras/new'

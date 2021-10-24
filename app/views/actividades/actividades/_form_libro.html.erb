@@ -1,0 +1,43 @@
+<%= form_with model:[:actividades, actividad], remote:false do |form| %>
+    <%= render "form_inputs_com", form:form %>
+    
+    <div class="row">
+        <div class="mb-3 col-md-9">
+               <%= form.label :titulo, "Título del libro:", class:"form-label" %>
+               <%= form.text_field :titulo, class:"form-control" %>
+         </div>  
+         <div class="mb-3 col-md-3">
+               <%= form.label :anio, "Año de publicación:" %>
+               <%= form.text_field :anio, class:"form-control" %>
+         </div>  
+    </div>   
+    <div class="row">
+        <%= form.fields_for :libroarbitrado do |lib_form| %>
+                  <%= lib_form.hidden_field :editorial_id, value:1 %>  
+                  <div class="mb-3 col-md-3">
+                     <%= lib_form.label :nopaginas, "Número de páginas:", class:"form-label" %>
+                     <%= lib_form.text_field :nopaginas, class:"form-control" %>
+                  </div>    
+                  <div class="mb-3 col-md-3">
+                     <%=  lib_form.label :idioma_id, "Idioma:", class:"form-label" %>
+                     <%=  lib_form.select :idioma_id, Idioma.all.pluck(:nomidioma,:id), { prompt:'-- Seleccione --'}, class:"form-control" %>
+                  </div> 
+                  <div class="mb-3 col-md-3">
+                     <%=  lib_form.label :isbn, "Isbn:", class:"form-label" %>
+                     <%= lib_form.text_field :isbn, class:"form-control" %>
+                  </div> 
+                
+        <% end %>       
+    </div>
+
+    <%= render "doc_comprobante", form:form %>
+    <%= render "form_autores", form:form %>
+    
+    <%= render "red_acad", form:form  %>
+
+    <div class="row">
+        <div class="col">
+            <%= form.submit %>
+        </div> 
+    </div>
+<% end %>

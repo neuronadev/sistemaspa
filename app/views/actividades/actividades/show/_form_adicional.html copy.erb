@@ -1,0 +1,23 @@
+<%= form_with(model: @actividad, local: true)  do |form| %>
+   <%= render "form_inputs_com", form:form %>
+    <div class="row">
+        <div class="mb-3 col-md-8">
+            <%= form.label :titulo, "Título o nombre de la actividad:"%>
+            <%= form.text_field :titulo, class:"form-control" %>
+        </div> 
+        <div class="mb-3 col-md-2">
+            <%= form.label :anio, "Año:" %>
+            <%= form.text_field :anio,class:"form-control" %> 
+        </div>    
+    </div>
+
+     <%= render "doc_comprobante", form:form %>
+     <%= render "form_autores", form:form %>
+     <%= render "red_acad", form:form  %>
+
+    <div class="row">
+        <div class="col">
+            <%= form.submit %>
+        </div> 
+    </div>
+<% end %>

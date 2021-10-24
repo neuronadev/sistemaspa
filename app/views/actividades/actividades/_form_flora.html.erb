@@ -1,0 +1,47 @@
+<%= form_with model:[:actividades, actividad], remote:false do |form| %>
+    <%= render "form_inputs_com", form:form %>
+    
+    <div class="row">
+        <div class="mb-3 col-md-9">
+               <%= form.label :titulo, "Título:", class:"form-label" %>
+               <%= form.text_field :titulo, class:"form-control" %>
+         </div>  
+         <div class="mb-3 col-md-3">
+               <%= form.label :fechapub, "Fecha de publicacion:", class:"form-label" %>
+               <%= form.date_field :fechapub, class:"form-control" %>
+         </div>  
+    </div>   
+    <div class="row">
+        <%= form.fields_for :fasciculo do |fasc| %>
+                 
+                  <div class="mb-3 col-md-3">
+                      <%=  fasc.label :tipofasciculo_id, "Número de especies:", class:"form-label" %>
+                      <%=  fasc.select :tipofasciculo_id, Tipofasciculo.all.pluck(:nomtipofasciculo,:id), { :include_blank=>'No. de especies'},class:"form-control" %>
+                  </div>    
+                  <div class="mb-3 col-md-3">
+                     <%=  fasc.label :tipomedio_id, "Medio de publicación:", class:"form-label" %>
+                     <%=  fasc.select :tipomedio_id, Tipomedio.all.pluck(:nomtipomedio,:id), { :include_blank=>'Medio de publicación'},class:"form-control" %>
+                  </div> 
+                  <div class="mb-3 col-md-3">
+                     <%=  fasc.label :nommedio, "Nombre libro o revista:", class:"form-label" %>
+                     <%=  fasc.text_field :nommedio, class:"form-control", placeholder:"Nombre medio de publicación", class:"form-control" %> 
+                  </div> 
+                  <div class="mb-3 col-md-3">
+                     <%=  fasc.label :codigo, "Código ISBN o ISSN:", class:"form-label" %>
+                     <%=  fasc.text_field :codigo, class:"form-control", placeholder:"ISBN o ISSN", class:"form-control" %> 
+                  </div>
+                
+        <% end %>       
+    </div>
+
+    <%= render "doc_comprobante", form:form %>
+    <%= render "form_autores", form:form %>
+    
+    <%= render "red_acad", form:form  %>
+
+    <div class="row">
+        <div class="col">
+            <%= form.submit %>
+        </div> 
+    </div>
+<% end %>

@@ -1,0 +1,79 @@
+<%= form_with model:[:actividades, actividad], remote:false do |form| %>
+    <%= render "form_inputs_com", form:form %>
+    
+    <div class="row">
+        <div class="mb-3 col-md-9">
+               <%= form.label :titulo, "Título:", class:"form-label" %>
+               <%= form.text_field :titulo, class:"form-control" %>
+         </div>  
+         <div class="mb-3 col-md-3">
+               <%= form.label :anio, "Año:", class:"form-label" %>
+               <%= form.text_field :anio, class:"form-control" %>
+         </div>  
+    </div>   
+    <%= form.fields_for :vinculacion do |vin_form| %>
+                <%= vin_form.hidden_field :tipovinculacion, value:"PP" %> 
+                <% if @producto.prodgrupo.clave == 'DECRETO' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <%= vin_form.label :niveldecreto, "Nivel:" %>
+                          <%= vin_form.select :niveldecreto, options_for_select(@niveldecreto), { :include_blank=>'-Nivel de gobierno-'}, class:"form-control"  %> 
+                       </div>   
+                    </div>   
+                <% end %> 
+                <% if @producto.prodgrupo.clave == 'ORDENAMIENTO' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <%= vin_form.label :ordenamiento, "Fase:" %>
+                          <%= vin_form.select :ordenamiento, options_for_select(@ordenamiento), { :include_blank=>'-Fase-'}, class:"form-control"  %> 
+                       </div>   
+                    </div>   
+                <% end %> 
+                <% if @producto.prodgrupo.clave == 'INICIATIVA' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <%= vin_form.label :niveliniciativa, "Nivel:" %>
+                          <%= vin_form.select :niveliniciativa, options_for_select(@niveliniciativa), { :include_blank=>'-Nivel de gobierno-'}, class:"form-control"  %> 
+                       </div>   
+                    </div>   
+                <% end %> 
+                <% if @producto.prodgrupo.clave == 'REGLA' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <%= vin_form.label :nivelregla, "Nivel:" %>
+                          <%= vin_form.select :nivelregla, options_for_select(@nivelregla), { :include_blank=>'-Nivel de gobierno-'}, class:"form-control"  %> 
+                       </div>   
+                    </div>   
+                <% end %> 
+                <% if @producto.prodgrupo.clave == 'COMITE' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <%= vin_form.label :nivelcomite, "Participación:" %>
+                            <%
+                              nivelc = @actividad.vinculacion.nivelcomite
+                            %> 
+                            <% if !nivelc.nil? %>
+                                <% 
+                                  nivelc = @actividad.vinculacion.nivelcomite
+                                %>
+                                <%= vin_form.select :nivelcomite, options_for_select(@nivelcomite), {selected:nivelc}, class:"form-control"  %> 
+                            <% else %>
+                                <%= vin_form.select :nivelcomite, options_for_select(@nivelcomite), { :include_blank=>'-Tipo de participación-'}, class:"form-control"  %> 
+                            <% end %> 
+                       </div>   
+                    </div>   
+                <% end %> 
+
+    <% end %> 
+    
+    <%= render "doc_comprobante", form:form %>
+    <%= render "form_autores", form:form %>
+    
+    <%= render "red_acad", form:form  %>
+
+    <div class="row">
+        <div class="col">
+            <%= form.submit %>
+        </div> 
+    </div>
+<% end %>

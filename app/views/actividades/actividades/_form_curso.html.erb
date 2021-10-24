@@ -1,0 +1,64 @@
+<%= form_with(model:[:actividades, actividad], local: true)  do |form| %>
+     <%= render "form_inputs_com", form:form %>     
+
+     <div class="row">
+        <div class="mb-3 col-md-12">
+           <%= form.label :titulo, "Nombre del curso:"%>
+           <%= form.text_field :titulo, class:"form-control" %>
+        </div>   
+     </div>
+     
+      <%= form.fields_for :curso do |cur_form| %>
+        <div class="row">
+             <div class="mb-3 col-md-5">
+                        <%=  cur_form.label :tipocurso_id, "Tipo impartición:" %>
+                        <%=  cur_form.select :tipocurso_id, Tipocurso.all.pluck(:nomtipocurso,:id), { :include_blank=>'Tipo de impartición'}, class:"form-control" %>
+             </div> 
+             <div class="mb-3 col-md-3">
+                 <%= cur_form.label :fini, "Feha inicio:" %>
+                 <%= cur_form.date_field :fini, class:"form-control" %>
+             </div>
+             <div class="mb-3 col-md-3">
+                 <%= cur_form.label :ffin, "Feha termino:" %>
+                 <%= cur_form.date_field :ffin, class:"form-control"%>
+             </div>
+             <div class="mb-3 col-md-3">
+                 <%= cur_form.label :hcurso, "Total de horas del curso:" %>
+                 <%= cur_form.text_field :hcurso, class:"form-control" %>
+             </div>
+             <div class="mb-3 col-md-3">
+                 <%= cur_form.label :himpartidas, "Número de horas impartidas:" %>
+                 <%= cur_form.text_field :himpartidas, class:"form-control"%>
+             </div>
+             <div class="mb-3 col-md-3">
+                 <%= cur_form.label :creditos, "Creditos:" %>
+                 <%= cur_form.text_field :creditos, class:"form-control" %>
+             </div>
+             <div class="mb-3 col-md-3">
+                 <%= cur_form.label :noalumnos, "No. de alumnos:" %>
+                 <%= cur_form.text_field :noalumnos, class:"form-control"%>
+             </div>
+             <div class="mb-3 col-md-3">
+                 <%= cur_form.label :coordinador, "¿Coordinador del Curso?:" %>
+                 <%= cur_form.check_box :coordinador, class:"form-checkbox" %>
+             </div>
+                
+
+        </div>  
+
+      
+    <% end %>   
+
+    <%= render "doc_comprobante", form:form %>
+    <%= render "form_autores", form:form %>
+    <%= render "red_acad", form:form  %>
+ 
+    
+
+    <div class="row">
+        <div class="col">
+            <%= form.submit %>
+        </div> 
+    </div>
+      
+<% end %>

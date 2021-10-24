@@ -1,0 +1,41 @@
+    <div class="mb-3 col-md-9">
+               <label class="font-weight-bold">Título:</label>
+               <div><%= actividad.titulo %></div>
+    </div>  
+    <div class="mb-3 col-md-3">
+               <label class="font-weight-bold">Año:</label>
+               <div><%= actividad.anio %></div>
+    </div>  
+    <div class="row">
+            
+             <div class="mb-3 col-md-4">
+                <label class="font-weight-bold">Tipo editor:</label>
+                <div><%= actividad.tipoeditor.nomtipoeditor %></div> 
+             </div> 
+
+             <div class="mb-3 col-md-5">
+                <label class="font-weight-bold">Nombre de la revista o libro:</label>
+                <div><%= actividad.editor.medio %></div> 
+             </div>   
+             <div class="mb-3 col-md-3">
+                <label class="font-weight-bold">ISBN o ISSN:</label>
+                <div><%= actividad.editor.codigo %></div> 
+             </div>   
+             <div class="mb-3 col-md-3">
+                <label class="font-weight-bold">Nombre de la editorial:</label>
+                <div><%= actividad.editor.editorial %></div> 
+                
+             </div> 
+             <div class="mb-3 col-md-4">
+                <label class="font-weight-bold">Lugar de publicación (país o ciudad):</label>
+                <div><%= actividad.editor.pais %></div> 
+             </div> 
+             <div class="mb-3 col-md-3">
+                <label class="font-weight-bold">Ambito:</label>
+                <div><%= actividad.editor.ambito.nomambito %></div> 
+                
+             </div>  
+                 
+    </div>    
+    <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+    <%= render "actividades/actividades/show/autoria", actividad:@actividad %>

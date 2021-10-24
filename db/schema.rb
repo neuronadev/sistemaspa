@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_13_184050) do
+ActiveRecord::Schema.define(version: 2021_10_22_004837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -384,6 +384,7 @@ ActiveRecord::Schema.define(version: 2021_08_13_184050) do
     t.string "pais"
     t.integer "kate"
     t.integer "puntos"
+    t.integer "tipoeditorid"
     t.index ["actividad_id"], name: "index_editores_on_actividad_id"
     t.index ["ambito_id"], name: "index_editores_on_ambito_id"
     t.index ["idioma_id"], name: "index_editores_on_idioma_id"
@@ -683,6 +684,7 @@ ActiveRecord::Schema.define(version: 2021_08_13_184050) do
     t.string "estado", limit: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "pathf"
     t.index ["categoria_id"], name: "index_productos_on_categoria_id"
     t.index ["prodcategoria_id"], name: "index_productos_on_prodcategoria_id"
     t.index ["prodgrupo_id"], name: "index_productos_on_prodgrupo_id"
@@ -697,6 +699,7 @@ ActiveRecord::Schema.define(version: 2021_08_13_184050) do
     t.string "estado", limit: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "pathf"
     t.index ["categoria_id"], name: "index_productos_on_categoria_id"
     t.index ["prodcategoria_id"], name: "index_productos_on_prodcategoria_id"
     t.index ["prodgrupo_id"], name: "index_productos_on_prodgrupo_id"
@@ -937,6 +940,13 @@ ActiveRecord::Schema.define(version: 2021_08_13_184050) do
     t.string "visible", limit: 1
   end
 
+  create_table "tipoautores", force: :cascade do |t|
+    t.string "nomtipoautor"
+    t.string "clave"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tipocursos", force: :cascade do |t|
     t.string "nomtipocurso", limit: 85
     t.datetime "created_at", precision: 6, null: false
@@ -952,7 +962,7 @@ ActiveRecord::Schema.define(version: 2021_08_13_184050) do
   end
 
   create_table "tipoeditores", force: :cascade do |t|
-    t.string "nomtipoeditor", limit: 85
+    t.string "nomtipoeditor", limit: 200
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

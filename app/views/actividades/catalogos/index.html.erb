@@ -1,0 +1,45 @@
+
+<div class="container mt-md-3">
+<h5>Producción 2021</h5>
+<span>Seleccione un producto del catalogo.</span>
+<hr>
+   <div class="card-columns">
+      <% Prodcategoria.where(estado:'A').where(id:[1,2,3,4,5,6,7]).order(:id).each do |c| %>
+         <div class="card">
+            <div class="card-body">
+               <strong><%= c.nomcategoria %></strong>
+               <ul>
+                  <% Producto.where(prodcategoria_id:c.id,estado:'A').order(:descripcion).each do |p| %>
+                      <% if [81,82,83,85].include? p.id %>
+                           <li class="mb-md-1 text-secondary"> <%= p.descripcion %></li>
+                      <% else %>
+                           <li class="mb-md-1"> <%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turbolinks:false} %></li>
+                      <% end %>     
+                  <% end %>
+               </ul>   
+            </div>   
+         </div>   
+      <% end %> 
+   </div> 
+   
+    <% if current_usuario.rol == 'T' %>
+
+    <h5>Catálogo exclusivo de Técnicos</h5>
+    <hr> 
+      <div class="card-columns">
+         <% Prodcategoria.where(estado:'A').where(id:[8,9,10,11,12,13,14,15,16,17,18,19]).order(:id).each do |c| %>
+            <div class="card">
+               <div class="card-body">
+                    <strong><%= c.nomcategoria %></strong>
+                   <ul>
+                     <% Producto.where(prodcategoria_id:c.id).order(:descripcion).each do |p| %>
+                        <li class="mb-md-1"><%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turboliks:false} %></li>
+                     <% end %>
+                   </ul>  
+               </div>   
+            </div>   
+         <% end %> 
+      </div> 
+   <% end %>   
+</div>   
+

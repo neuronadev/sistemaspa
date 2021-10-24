@@ -1,0 +1,28 @@
+ <div class="row">
+     <div class="mb-3 col-md-10">
+        <h6>Participantes</h6>
+        <table class="table">
+                <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Corresponsal</th>
+                            <th></th>
+                        </tr>    
+                    </thead>
+                    <tbody>
+                        <% if actividad.autores.any? %>
+                                <% actividad.autores.each do |a| %>
+                                    <tr>
+                                        <td> <%= (a.persona.paterno||'')+' '+(a.persona.materno||'')+' '+(a.persona.nombre||'') if a.persona.id != 211 %>
+                                            <%= (a.firma || '') if a.persona.id == 211 %>
+                                        </td>
+                                        <td>
+                                            <%= 'SI' if ['1','S'].include? a.corresponsal   %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                        <% end %>
+                    </tbody>
+            </table>            
+  </div>
+</div>    

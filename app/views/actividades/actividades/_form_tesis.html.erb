@@ -1,0 +1,36 @@
+<%= form_with model: [:actividades, actividad], local: true  do |form| %>
+     <%= render "form_inputs_com", form:form %>
+     
+     <div class="row">
+        <div class="mb-3 col-md-12">
+          <%= form.label :titulo, "Título de la tesis:"%>
+          <%= form.text_field :titulo, class:"form-control" %>
+        </div>
+     </div> 
+      <%= form.fields_for :tesista do |tesis_form| %>
+        <%= tesis_form.hidden_field :acta, value:'0000' %>
+         <%= tesis_form.hidden_field :efterminal, value:'EX' %>
+        <div class="row">
+               <div class="mb-3 col-md-8">
+                        <%=  tesis_form.label :nivelestudio_id, "Nivel:" %>
+                        <%=  tesis_form.select :nivelestudio_id, Nivelestudio.all.pluck(:nomnivel,:id), { :include_blank=>'Nivel académico'}, class:'form-control' %>
+               </div>  
+                <div class="mb-3 col-md-3">
+                     <%= tesis_form.label :fgrado, "Feha del exámen de grado:" %>
+                     <%= tesis_form.date_field :fgrado, class:"form-control" %>
+                </div>    
+        </div> 
+  
+      <% end %>  
+
+      <%= render "doc_comprobante", form:form %>
+      <%= render "form_autores", form:form %>
+      <%= render "red_acad", form:form  %>
+ 
+    <div class="row">
+        <div class="col">
+            <%= form.submit %>
+        </div> 
+    </div>
+ 
+<% end %>

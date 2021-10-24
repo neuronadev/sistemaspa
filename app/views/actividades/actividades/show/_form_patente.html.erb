@@ -1,0 +1,20 @@
+
+    <div class="row">
+        <div class="mb-3 col-md-9">
+               <label class="font-weight-bold">Título:</label>
+               <div><%= actividad.titulo %></div>
+         </div>  
+         <div class="mb-3 col-md-3">
+               <label class="font-weight-bold">Año:</label>
+               <div><%= actividad.anio %></div>
+         </div>  
+    </div>   
+  
+    <div class="row">
+         <div class="mb-3 col-md-3">
+               <label class="font-weight-bold">Tipo de patente:</label>
+               <div><%= actividad.tipopatente.nomtipopatente %></div>
+         </div>   
+    </div>   
+    <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+    <%= render "actividades/actividades/show/autoria", actividad:@actividad %>

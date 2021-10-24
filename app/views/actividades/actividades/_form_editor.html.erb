@@ -1,0 +1,52 @@
+<%= form_with model:[:actividades, actividad], remote:false do |form| %>
+     <%= render "form_inputs_com", form:form %>
+     <%= form.hidden_field :titulo, value:'Editor' %>
+
+    <div class="row">
+     
+        <%= form.fields_for :editor do |ed_form| %>
+             <%= ed_form.hidden_field :idioma_id, value:"4" %> 
+             
+             <div class="mb-3 col-md-4">
+                <%= ed_form.label :tipoeditorid, "Tipo editor:" %>
+                <%= ed_form.select :tipoeditorid, Tipoeditor.all.collect { |e| [ e.nomtipoeditor, e.id ] }, { prompt:'-- Seleccione --'},class:"form-control" %>
+             </div> 
+             <div class="mb-3 col-md-5">
+                <%= ed_form.label :medio, "Nombre de la revista o libro:" %>
+                <%= ed_form.text_field :medio, class:"form-control"  %> 
+             </div>   
+             <div class="mb-3 col-md-3">
+                <%= ed_form.label :codigo, "ISBN o ISSN:" %>
+                <%= ed_form.text_field :codigo, class:"form-control"  %> 
+             </div>   
+             <div class="mb-3 col-md-3">
+                <%= ed_form.label :editorial, "Nombre de la editorial:" %>
+                <%= ed_form.text_field :editorial, class:"form-control" %> 
+             </div> 
+             <div class="mb-3 col-md-4">
+                <%= ed_form.label :pais, "Lugar de publicación (país o ciudad):" %>
+                <%= ed_form.text_field :pais, class:"form-control"%> 
+             </div> 
+             <div class="mb-3 col-md-3">
+                <%= ed_form.label :ambito_id, "Ambito de la editorial:" %>
+                <%= ed_form.select :ambito_id, Ambito.all.pluck(:nomambito,:id), { prompt:'-- Seleccione --'}, class:"form-control" %>
+             </div>  
+        <% end %>
+        <div class="mb-3 col-md-2">
+               <%= form.label :anio, "Año:", class:"form-label" %>
+               <%= form.text_field :anio, class:"form-control" %>
+        </div> 
+          
+    </div>    
+    
+   <%= render "doc_comprobante", form:form %>
+    <%= render "form_autores", form:form %>
+    
+    <%= render "red_acad", form:form  %>
+
+    <div class="row">
+        <div class="col">
+            <%= form.submit %>
+        </div> 
+    </div>
+<% end %>

@@ -1,0 +1,32 @@
+<%= form_with model:[:actividades, actividad], remote:false do |form| %>
+    <%= render "form_inputs_com", form:form %>
+
+    <div class="row">
+        <div class="mb-3 col-md-9">
+               <%= form.label :titulo, "Título:", class:"form-label" %>
+               <%= form.text_field :titulo, class:"form-control" %>
+         </div>  
+         <div class="mb-3 col-md-3">
+               <%= form.label :fechapub, "Fecha de publicacion:", class:"form-label" %>
+               <%= form.date_field :fechapub, class:"form-control" %>
+         </div>  
+    </div>   
+
+    <%= render "form_art_c", form:form if @parts[1] == 'C' %>
+    <%= render "form_art_d", form:form if @parts[1] == 'D' %>
+    <%= render "form_art_d", form:form if @parts[1] == 'P' %>
+   
+    <%= render "doc_comprobante", form:form %>
+
+    <%= render "form_autores", form:form %>
+    
+    <%= render "red_acad", form:form  %>
+ 
+    
+
+    <div class="row">
+        <div class="col">
+            <%= form.submit %>
+        </div> 
+    </div>
+<% end %>

@@ -1,0 +1,2 @@
+class Tipoeditor < ApplicationRecord
+end

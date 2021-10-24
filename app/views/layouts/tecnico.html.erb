@@ -8,13 +8,32 @@
     <%= stylesheet_pack_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'sesion', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application' %>
-  
+    
   </head>
 
   <body>
       
-        <div class="grid">
-        <!--  
+  <div class="grid">
+     <header class="header">
+        <i class="fas fa-bars header__menu"></i>
+        <div class="header__search">
+          <input class="header__input" placeholder="Search..." />
+        </div>
+        <div class="header__avatar">
+            <div class="dropdown">
+              <ul class="dropdown__list">
+                
+                <li class="dropdown__list-item">
+                   <%= link_to destroy_usuario_session_path do %>
+                        <span class="dropdown__icon"><i class="fas fa-sign-out-alt"></i></span>
+                        <span class="dropdown__title">Salir</span>
+                   <% end %>     
+                </li>
+              </ul>
+            </div>
+    </div>
+    </header>
+         <!--  
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
              
               <div class="collapse navbar-collapse align-items-end" id="navbarSupportedContent">
@@ -32,145 +51,31 @@
                 </ul>
                 
               </div>
-             </nav>
-          -->
+             </nav> -->
+
     <aside class="sidenav">
-        <!-- <div class="sidenav__brand">
-        <i class="fas fa-feather-alt sidenav__brand-icon"></i>
-        <a class="sidenav__brand-link" href="#">Instituto de Ecología</a>
-        <i class="fas fa-times sidenav__brand-close"></i>
-        </div> -->
-        <div class="w-50 mx-auto">
-           <%= image_pack_tag 'logo100_White.png', class:"card-img-top img-fluid" %>
-            <%=  @usuario_nom %>
-        </div> 
-       <hr>
-       
-       <!-- Esto se tiene que poner  
-        <div class="d-flex justify-content-center">
-              <div class="w-50">
-                  <% if  current_usuario.imagen.present?  %> 
-                     <%= image_tag current_usuario.imagen, class:"rounded-circle img-fluid" %>
-                  <% else %>
-                     <%= image_pack_tag 'avatar.png', class:"card-img-top rounded-circle img-fluid" %>
-                  <% end %>
-               </div>
-        </div>
-        <hr>    
-        --> 
-
-
-        <!-- <div class="sidenav__profile">
-          <div class="sidenav__profile-avatar"></div> 
-           <div class="sidenav__profile-title text-light"><%=  @usuario_nom %></div>
-        </div>-->
-        <div class="row row--align-v-center row--align-h-center">
-          <ul class="navList">
-            <li>
-                <div class="navList__subheading row row--align-v-center">
-                  <span class="navList__subheading-icon"><i class="fas fa-home fa-2x"></i></span>
-                   <span class="navList__subheading-title"><%= link_to("Inicio", tecnico_path, data: {turbolinks:false}) %></span>
-                </div> 
-            </li>
-            
-            <li>
-             <div class="navList__subheading row row--align-v-center">
-                <span class="navList__subheading-icon"><i class="fas fa-layer-group fa-2x"></i></span>
-                <span class="navList__subheading-title">Producción</span>
-            </div> 
-              <ul class="subList subList--hidden">
-                <li class="subList__item"><%= link_to("Nuevo..", producto_path(0), data:{turbolinks:false}) %></li>
-                <li class="subList__item"><%= link_to("Ver registros..", actividades_path, data:{turbolinks:false}) %></li>
-              </ul>
-            </li>
-            
-
-           <% if current_usuario.persona_id.to_i == 255 %>
-            <li>
-             <div class="navList__subheading row row--align-v-center">
-                <span class="navList__subheading-icon"><i class="fas fa-list-alt fa-2x"></i></i></span>
-                <span class="navList__subheading-title">Eval. Tecnicos</span>
-            </div> 
-              <ul class="subList">
-                <!-- <li class="subList__item"><%= link_to("Consultar por Red", consultasa_path(0,0), data:{turbolinks:false}) %></li> -->
-                <li class="subList__item"><%= link_to("Eval Tecnicos", listaevaltecnico_path, data:{turbolinks:false}) %></li>
-              </ul>
-            </li>
-           <% end %> 
-           
+        
+        <div class="w-50 mx-auto mb-md-3">
+         <%= image_pack_tag 'logo100_White.png', class:"card-img-top img-fluid" %>
+        
          
-
-           <% if current_usuario.evaluador == "T" %> 
-
-           <li>
-            <div class="navList__subheading row row--align-v-center">
-                <span class="navList__subheading-icon"><i class="fas fa-list-alt fa-2x"></i></i></span>
-                <span class="navList__subheading-title">Eval. Tecnicos</span>
-            </div> 
-              <ul class="subList subList--hidden">
-                <li class="subList__item"><%= link_to("Ver listado", revisarlistado_path, data:{turbolinks:false}) %></li>
-              </ul>
-            </li>
-
-            <% end %>
-            <% if current_usuario.persona_id.to_i == 210 %>
-            <li>
-             <div class="navList__subheading row row--align-v-center">
-                <span class="navList__subheading-icon"><i class="fas fa-tachometer-alt fa-2x"></i></i></i></span>
-                <span class="navList__subheading-title">Indicadores</span>
-            </div> 
-              <ul class="subList subList--hidden">
-                <li class="subList__item"><%= link_to("CART", indicador_path, data:{turbolinks:false}) %></li>
-                <li class="subList__item"><%= link_to("ListaWord", listaword_path, data:{turbolinks:false}) %></li>
-              </ul>
-            </li>
-           <% end %> 
-           
-          <li></i> 
-           <% if current_usuario.persona_id.to_i == 213 || current_usuario.persona_id.to_i == 255 %>
-           <hr>
-            <li>
-             <div class="navList__subheading row row--align-v-center">
-                <span class="navList__subheading-icon"><i class="fas fa-list-alt fa-2x"></i></i></span>
-                <span class="navList__subheading-title">Eval. Invest.</span>
-            </div> 
-              <ul class="subList">
-                <li class="subList__item"><%= link_to("Invest. Red", listarredes_path) %></li>
-                <% if current_usuario.persona_id.to_i == 213  %>
-                   <li class="subList__item"><%= link_to("Invest. Todos",  listatodo_path) %></li>     
-                <% end %> 
-              </ul>
-            </li>
-           <% end %>  
-          <% if current_usuario.evaluador == 'S' %>
-           <hr>
-              <li>
-                <div class="navList__subheading row row--align-v-center">
-                  <span class="navList__subheading-icon"><i class="fas fa-align-justify"></i></span>
-                   <span class="navList__subheading-title"><%= link_to("Eval.Técnicos", listaevaltecnico_path, data: {turbolinks:false}) %></span>
-                </div> 
-              </li> 
-            <% end %>
-           <li> 
-              <div class="navList__subheading row row--align-v-center">
-                 <span class="navList__subheading-icon"><i class="fas fa-sign-out-alt fa-2x"></i></span>
-                 <span class="navList__subheading-title"><%= link_to('Salir', destroy_usuario_session_path, class:"nolink") %></span>
-              </div>          
-               
-           </li> 
-        </ul>
+        </div> 
+        
+       
+        <div class="row row--align-v-center row--align-h-center">
+               <%= render "navs/investigador" %>
         </div>
     </aside>
 
     <main class="main">
-      
+             
          <%= yield %>
-        
+       
     </main>
 
     <footer class="footer">
         <p>Secretaría Académica</p>
-        <p>2018 Instituto de Ecología</p>
+        <p>2021 Instituto de Ecología</p>
     </footer>
     </div>
   </body>

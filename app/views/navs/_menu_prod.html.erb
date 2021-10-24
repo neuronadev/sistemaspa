@@ -1,0 +1,27 @@
+<ul class="nav">
+  <li class="nav-item">
+        <%= link_to edit_actividades_actividad_path(@actividad.id), class:"nav-link active" do %> 
+            <i class="fas fa-edit"></i> Editar
+        <% end  if @actividad.estado == 'A' %>
+        <%= link_to "#", class:"nav-link active disabled" do %> 
+            <i class="fas fa-edit"></i> Editar
+        <% end  if @actividad.estado != 'A' %>
+  </li>
+  <li class="nav-item">
+        <%= link_to actividades_actividad_path(@actividad.id), method:'delete', class:"nav-link active", data: {confirm: '¿Sea eliminar este producto?'} do %> 
+            <i class="fas fa-trash-alt"></i> Eliminar
+        <% end if @actividad.estado == 'A' %>
+        <%= link_to "#", method:'delete', class:"nav-link active disabled", data: {confirm: '¿Sea eliminar este producto?'} do %> 
+            <i class="fas fa-trash-alt"></i> Eliminar
+        <% end  if @actividad.estado != 'A' %>
+   </li>
+   <li class="nav-item">
+       <% if @actividad.documentos.attached? %> 
+          <% @actividad.documentos.each do |d|%>
+              <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank', class:"nav-link active" } do %>
+                   <i class="fas fa-file-pdf"></i> Comprobante
+              <% end %>
+          <% end %> 
+       <% end %>   
+   </li>
+</ul>

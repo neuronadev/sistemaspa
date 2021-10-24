@@ -5,4 +5,6 @@ class Autor < ApplicationRecord
   
   has_one_attached :posgradoc
 
+  
+
 end

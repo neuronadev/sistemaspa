@@ -1,0 +1,22 @@
+
+<div class="container mt-md-3">
+ 
+   <h5> <%= @producto.descripcion %> </h5>  
+ 
+   <div class="card">
+      <div class="card-body">
+         <%= render "form_art", actividad:@actividad if @parts[0] == 'ART' %>
+         <%= render "form_libro", actividad:@actividad if @parts[0] == 'LIBRO' %>
+         <%= render "form_capitulo", actividad:@actividad if @parts[0] == 'CAPITULO' %>
+         <%= render "form_flora", actividad:@actividad if @parts[0] == 'FLORA' %>
+         <%= render "form_patente", actividad:@actividad if @parts[0] == 'PATENTE' %>
+         <%= render "form_editor", actividad:@actividad if @parts[0] == 'EDITOR' %>
+         <%= render "form_odivulga", actividad:@actividad if @parts[0] == 'ODIV' %>
+         <%= render "form_vinculapp", actividad:@actividad if @parts[0] == 'VINCULAPP' %>
+         <%= render "form_vinculasp", actividad:@actividad if @parts[0] == 'VINCULASP' %>
+         <%= render "form_adicional", actividad:@actividad if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
+         <%= render "form_curso", actividad:@actividad if @producto.prodgrupo.clave == 'CUR' %>
+         <%= render "form_tesis", actividad:@actividad if @producto.prodgrupo.clave == 'TESIS' %>
+      </div>  
+   </div>
+</div>  
