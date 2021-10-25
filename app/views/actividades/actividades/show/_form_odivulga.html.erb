@@ -12,5 +12,8 @@
 
         <div class="mb-3 col-md-5">
            <label class="font-weight-bold">Tipo de actividad:</label>
-            <div><%= actividad.tipodivulgacion.nomtipodivulgacion %></div>
+            <div><%= actividad.divulgacion.tipodivulgacion.nomtipodivulgacion %></div>
         </div>   
+
+     <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+     <%= render "actividades/actividades/show/autoria", actividad:@actividad %>   

@@ -10,43 +10,10 @@
          </div>  
     </div>   
   
+    <%= render "actividades/actividades/show/form_art_c" if @parts[1] == 'C' %>
+    <%= render "actividades/actividades/show/form_art_d" if @parts[1] == 'D' %>
+    <%= render "actividades/actividades/show/form_art_d" if @parts[1] == 'P' %>
     
-    <div class="row">
-            
-            <% if @actividad.articulo.present? %>
-                <div class="mb-3 col-md-6">
-                    <label class="font-weight-bold">Revista:</label>
-                    <div><%= @actividad.articulo.revista.nomrevista %></div>
-                </div>  
-            
-                <div class="mb-3 col-md-3">
-                    <label class="font-weight-bold">Volumen:</label>
-                    <div><%= @actividad.articulo.volumen %></div>
-                </div>  
-                <div class="mb-3 col-md-3">
-                    <label class="font-weight-bold">Número:</label>
-                    <div><%= @actividad.articulo.issue %></div>
-                </div>  
-                <div class="mb-3 col-md-3">
-                    <label class="font-weight-bold">Página inicial:</label>
-                    <div><%= @actividad.articulo.pgini %></div>
-                </div>  
-                <div class="mb-3 col-md-3">
-                    <label class="font-weight-bold">Página final:</label>
-                    <div><%= @actividad.articulo.pgfin %></div>
-                </div>  
-                <div class="mb-3 col-md-4">
-                    <label class="font-weight-bold">DOI:</label>
-                    <div><%= @actividad.articulo.doi %></div>
-                </div>  
-            <% end %>    
-    </div>
-    <div class="row">
-          <div class="mb-3 col-md-12">
-                <label class="font-weight-bold">Abstract:</label>
-                <div><%= @actividad.articulo.abstract %></div>
-           </div>  
-    </div>
 
     <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
     <%= render "actividades/actividades/show/autoria", actividad:@actividad %>

@@ -103,8 +103,7 @@ class Actividades::ActividadesController < ApplicationController
       @actividad = Actividad.find(params[:id].to_i)
       @actividad.estado = 'X'
       @actividad.save
-      puts "-----------------------"
-      puts @actividad.errors.full_messages
+     
       
       redirect_to actividades_actividades_path
   end
