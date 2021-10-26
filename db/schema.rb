@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_22_004837) do
+ActiveRecord::Schema.define(version: 2021_10_26_000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -327,6 +327,15 @@ ActiveRecord::Schema.define(version: 2021_10_22_004837) do
     t.string "issne", limit: 25
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cloudfiles", force: :cascade do |t|
+    t.text "descripcion"
+    t.text "hashlink"
+    t.integer "periodo"
+    t.string "estado"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "codigos", force: :cascade do |t|

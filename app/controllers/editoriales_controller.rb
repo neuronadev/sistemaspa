@@ -1,4 +1,5 @@
 class EditorialesController < ApplicationController
+  before_action :authenticate_usuario!
   #before_action :ambitos_select
 
   def index

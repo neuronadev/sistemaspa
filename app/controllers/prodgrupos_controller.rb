@@ -1,4 +1,5 @@
 class ProdgruposController < ApplicationController
+  before_action :authenticate_usuario!
   def index
      @prodgrupos = Prodgrupo.where("estado='A'").order(:nomgrupo)
   end

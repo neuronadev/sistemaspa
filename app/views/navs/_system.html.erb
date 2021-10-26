@@ -1,0 +1,23 @@
+ <ul class="navList">
+    <li class="navList__heading">
+       <%= link_to actividades_actividades_path, data: {turbolinks:false} do %>
+          <i class="fas fa-home text-white"></i><span class="text-white"> Inicio </span>
+       <% end %>   
+   </li>
+  
+   <li>
+          <div class="navList__subheading row row--align-v-center">
+            <span class="navList__subheading-icon"><i class="fas fa-tasks"></i></span>
+            <span class="navList__subheading-title">Link actas</span>
+          </div>
+          <ul class="subList subList--hidden">
+            <li class="subList__item">
+               <%= link_to new_cloud_cloudfile_path, data:{turbolinks:false} do%> 
+                   <i class="fas fa-plus"></i> Registar nueva
+               <% end %>    
+            </li>
+            
+          </ul>
+   </li>
+   
+ </ul>       

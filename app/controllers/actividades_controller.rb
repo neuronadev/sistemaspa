@@ -1,4 +1,5 @@
 class ActividadesController < ApplicationController
+  before_action :authenticate_usuario!
   include Pagy::Backend
   def index
      @persona = Persona.find(current_usuario.persona_id)

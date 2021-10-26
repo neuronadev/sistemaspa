@@ -1,4 +1,5 @@
 class ProductosController < ApplicationController
+  before_action :authenticate_usuario!
   def index
     @idactiv = 0
      @productos = Producto.where("estado = 'A'").order(:descripcion)

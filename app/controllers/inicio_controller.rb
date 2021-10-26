@@ -1,6 +1,7 @@
 class InicioController < ApplicationController
+  before_action :authenticate_usuario!
   def sesion
-     
+    
     if current_usuario.rol == 'S'
         redirect_to administrador_path   
     end

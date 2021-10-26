@@ -1,4 +1,5 @@
 class LibrosController < ApplicationController
+  before_action :authenticate_usuario!
   def index
     @libros = Libro.where("estado='A'").order(:nomlibro)
   end

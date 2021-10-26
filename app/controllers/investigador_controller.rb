@@ -1,4 +1,6 @@
 class InvestigadorController < ApplicationController
+  before_action :authenticate_usuario!
+  layout 'investigador'
   include Pagy::Backend
   def index
     @persona = Persona.find(current_usuario.persona_id)

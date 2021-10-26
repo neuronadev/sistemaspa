@@ -1,5 +1,5 @@
 class HistoricoController < ApplicationController
-
+  before_action :authenticate_usuario!
     def datahistory
        @periodo = params[:periodo].to_i
        @actividades = Persona.find(current_usuario.persona_id).actividades.where(:periodo=>@periodo).where("estado='S' or estado='W'").order(:titulo)

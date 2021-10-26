@@ -4,6 +4,7 @@ require 'base64'
 require 'date'
 
 class ExternosController < ApplicationController
+  before_action :authenticate_usuario!
   def index
     @items = Array.new 
     persona = Persona.find(current_usuario.persona_id)

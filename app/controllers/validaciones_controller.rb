@@ -1,4 +1,5 @@
 class ValidacionesController < ApplicationController
+  before_action :authenticate_usuario!
   include Pagy::Backend
   def index
      #@academicos = Academico.where("red_id=?",current_usuario.persona.academico.red_id)

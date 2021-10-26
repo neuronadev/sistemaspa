@@ -1,4 +1,5 @@
 class PosgradosController < ApplicationController
+  before_action :authenticate_usuario!
   layout 'posgrados'
 
   def index

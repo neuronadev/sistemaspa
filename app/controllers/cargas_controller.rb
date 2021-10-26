@@ -1,4 +1,5 @@
 class CargasController < ApplicationController
+  before_action :authenticate_usuario!
   def index
   end
 

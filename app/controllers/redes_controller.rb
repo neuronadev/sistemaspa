@@ -1,4 +1,5 @@
 class RedesController < ApplicationController
+  before_action :authenticate_usuario!
   def index
     @redes = Red.all.order(:nomred)
   end

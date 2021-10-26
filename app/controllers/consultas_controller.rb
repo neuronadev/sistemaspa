@@ -1,4 +1,5 @@
 class ConsultasController < ApplicationController
+  before_action :authenticate_usuario!
   layout 'consultas'
 
   def index

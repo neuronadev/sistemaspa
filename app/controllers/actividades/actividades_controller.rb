@@ -1,4 +1,6 @@
 class Actividades::ActividadesController < ApplicationController
+  before_action :authenticate_usuario!
+
   def index
     @actividades = Actividad.where(periodo:2021,estado:['A','U','C','S','G','D']).includes(:autores).where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores)
     

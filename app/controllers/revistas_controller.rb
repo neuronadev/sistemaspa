@@ -1,4 +1,5 @@
 class RevistasController < ApplicationController
+  before_action :authenticate_usuario!
   def index
     @revistas = Revista.where("estado='A'").order(:nomrevista)
   end

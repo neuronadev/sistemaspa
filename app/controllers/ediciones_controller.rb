@@ -1,4 +1,5 @@
 class EdicionesController < ApplicationController
+  before_action :authenticate_usuario!
   def index
      @idred = params[:red] 
      @idpersona = params[:persona] 

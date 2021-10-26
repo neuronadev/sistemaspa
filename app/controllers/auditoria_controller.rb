@@ -1,4 +1,5 @@
 class AuditoriaController < ApplicationController
+  before_action :authenticate_usuario!
    layout 'auditoria'
   def index
   end

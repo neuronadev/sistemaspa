@@ -1,4 +1,5 @@
 class CategoriasController < ApplicationController
+  before_action :authenticate_usuario!
   def index
     @categorias = Categoria.all.order(:nomcategoria)
   end

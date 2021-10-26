@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  namespace :cloud do
+    resources :cloudfile
+    get 'cloudfile/index'
+    get 'cloudfile/show'
+    get 'cloudfile/new'
+    post 'cloudfile/create'
+  end
+
   namespace :actividades do
     resources :actividades do
                  member do

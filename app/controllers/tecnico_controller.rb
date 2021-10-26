@@ -1,4 +1,5 @@
 class TecnicoController < ApplicationController
+   before_action :authenticate_usuario!
   def index
     @actividades = Persona.find(current_usuario.persona_id).actividades.where("estado!='X'").where("periodo=2020").limit(4).order(created_at: :desc)
     @sust = Sustantiva.where("academico_id=? and estado != 'X' and anio=2020",current_usuario.persona.academico.id).limit(7)

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
      
 
-     before_action :select_layout, if: :authenticate_usuario!
+     before_action :select_layout
      layout :select_layout
     
      protected def select_layout
@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
                     "investigador"
                elsif current_usuario.rol == 'T'
                     "tecnico"
+               elsif current_usuario.rol == 'Y'
+                    "system"     
                else
                     "application"
                end

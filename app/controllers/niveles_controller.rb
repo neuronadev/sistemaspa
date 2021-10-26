@@ -1,4 +1,5 @@
 class NivelesController < ApplicationController
+  before_action :authenticate_usuario!
   def index
     @niveles = Nivel.all.order(:nomnivel)
   end

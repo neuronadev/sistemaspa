@@ -1,4 +1,5 @@
 class RevicionesController < ApplicationController
+  before_action :authenticate_usuario!
  def listado
     lista = Array.new
     Evaluador.where(:evaluadorid => current_usuario.persona_id ).each do |l|

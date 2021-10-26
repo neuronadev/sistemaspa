@@ -1,4 +1,5 @@
 class ExtrasController < ApplicationController
+   before_action :authenticate_usuario!
   def index
     @extras = Extra.where(persona_id:current_usuario.persona_id)
   end

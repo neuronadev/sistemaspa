@@ -1,0 +1,25 @@
+<%=  form_with model:[:cloud, cloudfile], url:'create', local:true do |form| %>
+   <%= form.hidden_field :estado, value:'A' %>
+   <%= form.hidden_field :hashlink, value:'' %>
+   <div class="row">
+       <div class="col-md-6">
+           <%= form.label :descripcion, class:"label-control" %>
+           <%= form.text_field :descripcion, class:"form-control" %>
+       </div>
+       
+       <div class="col-md-2">
+           <%= form.label :periodo, "Año", class:"label-control" %>
+           <%= form.text_field :periodo, class:"form-control" %>
+       </div>
+
+       <div class="col-md-8">
+           <%= form.label :actadoc, "Archivo", class:"label-control" %>
+           <%= form.file_field :actadoc, class:"form-control" %>
+       </div>
+
+   </div>
+
+
+   <%= form.submit %>
+
+<% end %>
