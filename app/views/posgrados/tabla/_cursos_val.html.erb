@@ -1,0 +1,80 @@
+<div class="card col-md-12">
+   
+   <div class="card-body">
+        <h5>Productos de Posgrado 2021</h5>
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col" style="width: 20%"><div class="d-flex justify-content-center">Producto</div></th>
+                <th scope="col" style="width: 50%"><div class="d-flex justify-content-center">Título</div></th>
+                <th scope="col" style="width: 10%"><div class="d-flex justify-content-center">Comprobante</div></th>
+                <th scope="col" style="width: 10%"><div class="d-flex justify-content-center">Validar</div></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @cursos.each do |c| %>
+                
+                <tr>
+                    <td> 
+                         <% if c.producto.id == 83 %>
+                              Dirección Tesis
+                         <% end %>
+                         <% if c.producto.id == 82 %>
+                              Impartición de Curso
+                         <% end %>
+                     </td>
+                    <td>
+                        <% if c.producto.id == 83 %>
+                            <%= link_to c.tesista.acta+' - '+c.titulo, posgrado_path(c.id), data:{turbolinks:false} %>
+                        <% else %>
+                            <%= link_to c.titulo, posgrado_path(c.id), data:{turbolinks:false} %>
+                        <% end %>  
+                    </td>
+                    <td>
+                        <div class="d-flex flex-row bd-highlight mb-1  justify-content-center">  
+                           <div class="p-1 bd-highlight"> 
+                               <% if c.tesisdoc.attached? %>
+                                  <span class="badge bg-success"><%= link_to "Acta", rails_blob_path(c.tesisdoc, disposition: 'attachment', target: '_blank'), class:"text-white" %></span>
+                               <% end %>    
+                           </div>
+                           <div class="p-1 bd-highlight"> 
+                               <% if c.tesisportada.attached? %>
+                                  <span class="badge bg-success"><%= link_to "Portada", rails_blob_path(c.tesisportada, disposition: 'attachment', target: '_blank'), class:"text-white" %></span>
+                               <% end %>    
+                           </div>
+                           <div class="p-1 bd-highlight"> 
+                                <% if c.tesiscarta.attached? %>
+                                    <span class="badge bg-success"><%= link_to "Carta", rails_blob_path(c.tesiscarta, disposition: 'attachment', target: '_blank'), class:"text-white" %></span>
+                               <% end %> 
+                           </div>
+                        </div>   
+
+                    </td>
+                    <td id="actividad<%= c.id %>">
+                          <% if c.estado == 'U' %>
+                              <%= link_to validar_path(c,'coor'), remote:true, data:{confirm:"¿Desea validar el registro? Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
+                                <div class="d-flex flex-row bd-highlight mb-1  justify-content-center">  
+                                    <div class="p-1 bd-highlight"> 
+                                        <i class="fas fa-check-circle text-warning fa-lg"></i>
+                                    </div>
+                                    <div class="p-1 bd-highlight"><small>Validar</small></div>   
+                                </div>
+                              <% end %>
+                          <% end %>
+                          <% if c.estado == 'C' %>
+                               <div class="d-flex flex-row bd-highlight mb-1  justify-content-center">  
+                                    <div class="p-1 bd-highlight"> 
+                                        <i class="fas fa-check-double fa-lg text-success"></i>
+                                    </div>
+                                    <div class="p-1 bd-highlight"><small></small></div>   
+                                </div>
+                          <% end %>
+                    </td>
+                </tr>
+
+            <% end %>
+            </tbody> 
+
+        </table>
+    </div>
+</div>        

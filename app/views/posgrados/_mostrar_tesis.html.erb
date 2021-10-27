@@ -1,15 +1,35 @@
 
-<div class="row mb-md-2">
-    <div class="col-md-1">
-        <%= link_to posgrados_path do %>
+<div class="row mb-md-8">
+    <div class="col-md-2">
+        <%= link_to posgrados_path, data:{turbolinks:false} do %>
             <i class="fas fa-long-arrow-alt-left"></i> Regresar
         <% end%>
     </div>  
-    <div class="col-md-2">
-        <%= link_to edit_posgrado_path(@curso.id) do %>
-        <i class="fas fa-edit"></i> Editar tesis
-    <% end%>
-    </div>  
+    <% if current_usuario.persona_id != 105 %>
+        <div class="col-md-4">
+              <% if @curso.estado == 'U' %>
+                    <%= link_to edit_posgrado_path(@curso.id), data:{turbolinks:false} do %>
+                         <i class="fas fa-edit"></i> Editar tesis
+                    <% end%>
+              <% else %>     
+                     <% if @curso.estado == 'C' %>  
+                       <i class="fas fa-check-double text-success"></i> <span class="text-success">Producto validado por la Secretaría de Posgrado</span>
+                     <% end %>  
+              <% end %>         
+        </div>  
+    <% end %>  
+    <% if current_usuario.persona_id == 105 %> 
+        <div class="col-md-3" id="actividad<%= @curso.id %>">
+        <% if @curso.estado == 'U' %>
+                <%= link_to validar_path(@curso,'coor'), remote:true, data:{confirm:"¿Desea validar el registro? Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
+                    <i class="fas fa-check-circle text-warning"></i><small> Validar</small>
+                <% end %>
+        <% end %>
+        <% if @curso.estado == 'C' %>
+                    <i class="fas fa-check-double text-success"></i> <span class="text-success">Producto validado</span>
+        <% end %>
+        </div> 
+    <% end %>
 </div>
 <div class="card">
    <div class="row pl-md-3 pt-md-3">
@@ -36,13 +56,29 @@
       
    </div>
     <div class="row pl-md-3 pt-md-2">
-            <div class="col comprobante"><h5>Acta de exámen</h5></div>
+            <div class="col comprobante"><h5>Comprobantes</h5></div>
     </div>
-   <div class="col-md-6 pl-md-1 pt-md-1">
+   <div class="col-md-10 pl-md-1 pt-md-1">
       <div class="col">
                         <% if @curso.tesisdoc.attached? %>
                           
                                 <div class="col-6">  <%= link_to @curso.tesisdoc.filename, rails_blob_path(@curso.tesisdoc, disposition: 'attachment', target: '_blank') %> </div>
+                        <% else %>
+                                 <I>Sin comprobante</I>
+                        <% end %>  
+     </div>   
+     <div class="col">
+                        <% if @curso.tesisportada.attached? %>
+                          
+                                <div class="col-6">  <%= link_to @curso.tesisportada.filename, rails_blob_path(@curso.tesisportada, disposition: 'attachment', target: '_blank') %> </div>
+                        <% else %>
+                                 <I>Sin comprobante</I>
+                        <% end %>  
+     </div>   
+     <div class="col">
+                        <% if @curso.tesiscarta.attached? %>
+                          
+                                <div class="col-6">  <%= link_to @curso.tesiscarta.filename, rails_blob_path(@curso.tesiscarta, disposition: 'attachment', target: '_blank') %> </div>
                         <% else %>
                                  <I>Sin comprobante</I>
                         <% end %>  

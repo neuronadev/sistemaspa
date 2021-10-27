@@ -1,12 +1,14 @@
 <div class="card pl-md-3 pt-md-3 pb-md-3">    
     <%= form_with(model: actividad, local:false) do |form| %>
         <input type="hidden" name="captipo" value="<%= current_usuario.rol %>">
-        <%= form.hidden_field :estado, value:'A' %>
-        <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
-        <%= form.hidden_field :fuente, value:current_usuario.rol %> 
-        <%= form.hidden_field :periodo, value:2021 %> 
-        <%= form.hidden_field :producto_id, value: @producto.id %>
-
+        <% if params[:action] == 'new' %> 
+            <%= form.hidden_field :estado, value:'U' %>
+            <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
+            <%= form.hidden_field :fuente, value:current_usuario.rol %> 
+            <%= form.hidden_field :periodo, value:2021 %> 
+            <%= form.hidden_field :producto_id, value: @producto.id %>
+            <%= form.hidden_field :fecha1, value: Time.now.strftime("%F") %>
+        <% end %> 
         <div class="row"> 
             <div class="col-md-11">
             <div class="form-group">
@@ -37,31 +39,59 @@
                     </div> 
                     <div class="col-md-2">
                         <div class="form-group">
-                            <%=  tesis.label :efterminal, "Ef. terminal:", class:'efterminal text-muted' %>
+                            <%=  tesis.label :efterminal, "Eficiencia terminal:", class:'efterminal text-muted' %>
                             <%=  tesis.select :efterminal, options_for_sino, {:include_blank=>'- Seleccione una opción -'},{class:"form-control"}  %>
+                           
                         </div>   
                     </div> 
             </div>     
 
         <% end %>
+       
         <div class="row">
-            <div class="col comprobante text-muted"><h5>Acta de exámen</h5></div>
-        </div>
-        <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
+                <div class="col-md-4">
+                    <span class="text-muted">Acata de exámen</span>
+                  
                         <% if actividad.tesisdoc.attached? %>
-                            <div class="row">
-                                <div class="col-6">   <%= link_to actividad.tesisdoc.filename, rails_blob_path(actividad.tesisdoc, disposition: 'attachment', target: '_blank') %></div>
+                            
+                                <div class="col text-truncate">   <%= link_to actividad.tesisdoc.filename, rails_blob_path(actividad.tesisdoc, disposition: 'attachment', target: '_blank') %></div>
                                 <div class="col"><%= form.file_field :tesisdoc, class:"form-control" %></div>
-                            </div>   
+                              
                         <% else %> 
-                            <%= form.file_field :tesisdoc, class:"form-control col-8" %> 
+                            <div><%= form.file_field :tesisdoc, class:"form-control col" %> </div>
                         <% end %>  
-                    </div>        
+                          
+                </div>  
+                <div class="col-md-4">
+                    <span class="text-muted">Portada de tesis</span> 
+                  
+                        <% if actividad.tesisportada.attached? %>
+                           
+                                <div class="col text-truncate">   <%= link_to actividad.tesisportada.filename, rails_blob_path(actividad.tesisportada, disposition: 'attachment', target: '_blank') %></div>
+                                <div class="col"><%= form.file_field :tesisportada, class:"form-control" %></div>
+                            
+                        <% else %> 
+                            <div><%= form.file_field :tesisportada, class:"form-control col" %></div>
+                            
+                        <% end %>  
+                          
+                </div>
+                <div class="col-md-4">
+                    <span class="text-muted">Documento de asignación</span>
+                   
+                        <% if actividad.tesiscarta.attached? %>
+                            
+                                <div class="col text-truncate">   <%= link_to actividad.tesiscarta.filename, rails_blob_path(actividad.tesiscarta, disposition: 'attachment', target: '_blank') %></div>
+                                <div class="col"><%= form.file_field :tesiscarta, class:"form-control" %></div>
+                             
+                        <% else %> 
+                            <div><%= form.file_field :tesiscarta, class:"form-control col" %></div>
+                             <div><small>Documento o equivalente en donde se nombra al Director de Tesis</small></div>
+                        <% end %>  
+                          
                 </div>  
         </div>
-        <div class="row">
+        <div class="row mt-md-4">
             <div class="col participantes text-muted"><h5>Participantes</h5></div>
         </div>
 

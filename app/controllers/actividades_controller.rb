@@ -93,15 +93,16 @@ class ActividadesController < ApplicationController
                   else
                       redirect_to actividad_path(@actividad.id) 
                   end
+                  
               end
           else
-            puts "AAAAAAAAAAAA:AAAAAAAAAAAAAAA" 
-            puts @actividad.errors.full_messages 
+            #puts "AAAAAAAAAAAA:AAAAAAAAAAAAAAA" 
+            #puts @actividad.errors.full_messages 
             @actividad.errors.add(:partcomp, "Errores") 
           end  
       else
-        puts "BBBBBBBBBBBB:BBBBBBBBBBBBBB"  
-          puts @actividad.errors.full_messages 
+        #puts "BBBBBBBBBBBB:BBBBBBBBBBBBBB"  
+        #puts @actividad.errors.full_messages 
       end
   end
 
@@ -193,8 +194,10 @@ class ActividadesController < ApplicationController
        actividad.fecha3 = Date.today
     end   
   
-    actividad.save
-    redirect_to actividades_actividades_path
+    actividad.save  
+    @act = actividad
+    #redirect_to actividades_actividades_path
+    
     #redirect_to actividades_path
 
   end
@@ -206,7 +209,7 @@ class ActividadesController < ApplicationController
   end
 
    def evaltecnico
-      @sustantivas = Sustantiva.where("investigadorid=? and (estado='U' or estado='C') and anio=2020",current_usuario.persona_id).order(:academico_id)
+      @sustantivas = Sustantiva.where("investigadorid=? and (estado='U' or estado='C') and anio=2021",current_usuario.persona_id).order(:academico_id)
    end
 
    def cuestionario
@@ -260,7 +263,7 @@ class ActividadesController < ApplicationController
 
 
   private def actividad_params
-   params.require(:actividad).permit(:id,:titulo,:anio,:producto_id, :personaid,:estado, :fechapub, :reemplazaidact, :periodo, :asignared, :fuente, :enlacedoc, :tesisdoc, documentos:[], 
+   params.require(:actividad).permit(:id,:titulo,:anio,:producto_id, :personaid,:estado, :fechapub, :reemplazaidact, :periodo, :asignared, :fuente, :enlacedoc, :tesisdoc, :tesisportada, :tesiscarta, :fecha1, documentos:[], 
         articulo_attributes:[:id,:volumen,:pgini,:pgfin,:revista_id,:actividad_id,:eidentificador,:doi, :issue,:fechapub,:abstract],
         libroarbitrado_attributes:[:id,:nopaginas, :idioma_id, :editorial_id, :actividad_id],
         capitulo_attributes: [:id,:pgini,:pgfin,:idioma_id,:libro_id, :actividad_id],

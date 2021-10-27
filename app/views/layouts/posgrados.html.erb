@@ -24,20 +24,17 @@
                                      <i class="fas fa-list-ul"></i> Inicio <span class="sr-only">(current)</span>
                                 <% end %>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                     <i class="fas fa-plus"></i> Nuevo registro
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                     <%= link_to new_posgrado_path(:tipo=>'C'), class:"dropdown-item" do %>
-                                          <i class="fas fa-chalkboard-teacher"></i> Curso
-                                     <% end %>
-                                     <div class="dropdown-divider"></div>
-                                     <%= link_to new_posgrado_path(:tipo=>'T'), class:"dropdown-item" do %>
-                                          <i class="fas fa-file-invoice"></i> Tesis
-                                     <% end %>
-                              </div>
-
+                            
+                         
+                            <li class="nav-item active">
+                                  <%= link_to new_posgrado_path(:tipo=>'C'), class:"nav-link" do %>
+                                          <i class="fas fa-chalkboard-teacher"></i> Registrar Curso
+                                  <% end %>
+                            </li>
+                            <li class="nav-item active">
+                                 <%= link_to new_posgrado_path(:tipo=>'T'), class:"nav-link" do %>
+                                          <i class="fas fa-file-invoice"></i> Registrar Tesis
+                                 <% end %>
                             </li>
                             <li class="nav-item active">
                                 <%= link_to destroy_usuario_session_path, class:"nav-link" do %>

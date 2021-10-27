@@ -1,4 +1,8 @@
-
+<style>
+  #posgrado thead,
+  #posgrado th {text-align: center;}
+ 
+</style>
 <div class="row border-bottom">
    <div class="col">
       <h5>Listado de productos registrados</h5>
@@ -25,7 +29,15 @@
             "info": "Página _PAGE_ de _PAGES_",
             "infoEmpty": "No records available",
             "infoFiltered": "(filtered from _MAX_ total records)"
-        }
+        },
+        "columnDefs": [
+            
+            { "width": "3%", "targets": 0 },
+            { "width": "65%", "targets": 1 },
+           
+
+        ],
+        "pageLength": 50
     });
   });
 </script>

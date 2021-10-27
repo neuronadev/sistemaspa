@@ -44,14 +44,14 @@
                                    <%= link_to a.titulo, actividades_actividad_path(a.id), data:{turbolinks:false}, class:"text-primary" %>
                                </td>
                          
-                         <td>
+                         <td id="actividad<%= a.id %>">
                            <div class="d-flex justify-content-center"> 
                                 <% if a.estado == 'A' %>
-                                    <%= link_to validar_path(a,'user'),  data:{confirm:"¿Desea validar el registro? Al aceptar no podrá hacer cambios. Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
-                                        <i class="fas fa-check-circle text-primary"></i>
+                                    <%= link_to validar_path(a,'user'), remote:true, data:{confirm:"¿Desea validar el registro? Al aceptar no podrá hacer cambios. Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
+                                        <i class="fas fa-check-circle text-primary fa-lg"></i>
                                     <% end %>
                                 <% else %> 
-                                        <i class="fas fa-check-circle text-secondary"></i>
+                                        <i class="fas fa-check-double fa-lg text-success"></i>
                                 <% end %>   
                             </div>    
                          </td>

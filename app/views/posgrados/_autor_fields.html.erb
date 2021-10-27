@@ -9,7 +9,7 @@
             </div>                
         </div>
         <div class="col-md-2">
-            <%= form.text_field :horas, class: 'form-control form-control-sm' %>
+            <%= form.text_field :horas, class: 'form-control form-control-sm', data:{ action:"keydown->utils#soloDigitos" } %>
         </div>
         <div class="col-md-1">
             <%= form.check_box :coordinador, class: 'form-control form-control-sm' %>

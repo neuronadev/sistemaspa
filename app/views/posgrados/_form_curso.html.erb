@@ -1,11 +1,14 @@
-<div class="card pl-md-3 pt-md-3 pb-md-3">
+<div class="card pl-md-3 pt-md-3 pb-md-3" data-controller="utils">
   <%= form_with(model: actividad, local:false) do |form| %>
       <input type="hidden" name="captipo" value="<%= current_usuario.rol %>">
-      <%= form.hidden_field :estado, value:'A' %>
-      <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
-      <%= form.hidden_field :fuente, value:current_usuario.rol %> 
-      <%= form.hidden_field :periodo, value:2021 %> 
-      <%= form.hidden_field :producto_id, value: @producto.id %> 
+       <% if params[:action] == 'new' %> 
+            <%= form.hidden_field :estado, value:'U' %>
+            <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
+            <%= form.hidden_field :fuente, value:current_usuario.rol %> 
+            <%= form.hidden_field :periodo, value:2021 %> 
+            <%= form.hidden_field :producto_id, value: @producto.id %>
+            <%= form.hidden_field :fecha1, value: Time.now.strftime("%F") %>
+        <% end %> 
 
       <div class="row"> 
           <div class="col-md-11">
@@ -42,21 +45,21 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="form-group">
-                  <%=  curso.label :hcurso, "Total horas del curso:",class:'hcurso text-muted'  %>
-                  <%=  curso.text_field :hcurso, class:"form-control" %>
+                  <%=  curso.label :hcurso, "Total horas del curso:", class:'hcurso text-muted' %>
+                  <%=  curso.text_field :hcurso, class:"form-control", data:{ action:"keydown->utils#soloDigitos" }  %>
                 </div>   
             </div>
             
             <div class="col-md-2">
                 <div class="form-group">
                   <%=  curso.label :creditos, "Créditos:", class:'creditos text-muted' %>
-                  <%=  curso.text_field :creditos, class:"form-control" %>
+                  <%=  curso.text_field :creditos, class:"form-control", data:{ action:"keydown->utils#soloDigitos" } %>
                 </div>   
             </div>
             <div class="col-md-2">
                 <div class="form-group ">
                   <%=  curso.label :noalumnos, "No. de alumnos:", class:'noalumnos text-muted' %>
-                  <%=  curso.text_field :noalumnos, class:"form-control" %>
+                  <%=  curso.text_field :noalumnos, class:"form-control", data:{ action:"keydown->utils#soloDigitos" } %>
                 </div>   
             </div>
                         

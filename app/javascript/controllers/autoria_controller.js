@@ -2,7 +2,6 @@ import {Controller} from "stimulus"
 
 export default class extends Controller {
   static targets = ["tmpAutor", "rwsAutores", "tmpAutorExt"]
-  connect(){console.log("desde el control autorias.")}
   
   nuevoPart(event){
       event.preventDefault();

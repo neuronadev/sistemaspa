@@ -2,7 +2,15 @@
 <% @cursos.each do |c| %>
 
     <tr> 
-        <td><%= c.producto.descripcion %></td>  
+        <td> 
+            <% if c.producto.id == 83 %>
+                 Tesis
+            <% end %>
+            <% if c.producto.id == 82 %>
+                 Curso
+            <% end %>
+        
+        </td>  
         <td>
              <% if c.producto.id == 83 %>
                    <%= link_to c.tesista.acta+' - '+c.titulo, posgrado_path(c.id) %>
@@ -17,6 +25,15 @@
             <% if c.producto.id == 83 %>
                  <%= c.tesista.nivelestudio.nomnivel %>
             <% end %>   
+        </td>
+        <td>
+
+            <% if c.estado == 'U' %>
+                   <span class="badge bg-warning text-dark">En validación</span>
+            <% end %> 
+             <% if c.estado == 'C' %>
+                   <span class="badge bg-success text-white-50"> <i class="fas fa-check-double text-white-50 fa-sm"></i> Validado</span>
+            <% end %> 
         </td>
         
     </tr>

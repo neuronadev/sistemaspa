@@ -1,3 +1,6 @@
 
-<%= render "posgrados/tabla/cursos" %>
-
+      <% if current_usuario.persona_id == 105 %>
+            <%= render "posgrados/tabla/cursos_val" %>
+      <% else %>
+            <%= render "posgrados/tabla/cursos" %>
+      <% end %>

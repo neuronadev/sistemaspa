@@ -1,9 +1,9 @@
 class PosgradosController < ApplicationController
   before_action :authenticate_usuario!
-  layout 'posgrados'
+  layout :type_layout
 
   def index
-      @cursos = Actividad.where(producto_id:[82,83], fuente:'P',estado:['A','S'], periodo:2021)
+      @cursos = Actividad.where(producto_id:[82,83], fuente:'P',estado:['U','A','S','C'], periodo:2021)
   end
 
   def new
@@ -37,4 +37,13 @@ class PosgradosController < ApplicationController
 
   def update
   end
+
+  def type_layout
+      if current_usuario.persona_id == 105
+         "investigador"
+      else
+        "posgrados" 
+      end     
+  end
+
 end

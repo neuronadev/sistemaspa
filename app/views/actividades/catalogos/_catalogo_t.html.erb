@@ -1,0 +1,16 @@
+<h5>Catálogo exclusivo de Técnicos</h5>
+      <hr> 
+         <div class="card-columns">
+            <% Prodcategoria.where(estado:'A').where(id:[8,9,10,11,12,13,14,15,16,17,18,19]).order(:id).each do |c| %>
+               <div class="card">
+                  <div class="card-body">
+                     <strong><%= c.nomcategoria %></strong>
+                     <ul>
+                        <% Producto.where(prodcategoria_id:c.id).order(:descripcion).each do |p| %>
+                           <li class="mb-md-1"><%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turboliks:false} %></li>
+                        <% end %>
+                     </ul>  
+                  </div>   
+               </div>   
+            <% end %> 
+         </div> 

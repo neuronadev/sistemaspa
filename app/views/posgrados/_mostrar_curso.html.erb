@@ -1,15 +1,35 @@
 
-<div class="row mb-md-2">
-    <div class="col-md-1">
-        <%= link_to posgrados_path do %>
+<div class="row mb-md-8">
+    <div class="col-md-3">
+        <%= link_to posgrados_path, data:{turbolinks:false} do %>
             <i class="fas fa-long-arrow-alt-left"></i> Regresar
         <% end%>
     </div>  
-    <div class="col-md-2">
-        <%= link_to edit_posgrado_path(@curso.id) do %>
-            <i class="fas fa-edit"></i> Editar curso
-        <% end%>
-    </div>  
+    <% if current_usuario.persona_id != 105 %>
+        <div class="col-md-4">
+              <% if @curso.estado == 'U' %>
+                    <%= link_to edit_posgrado_path(@curso.id), data:{turbolinks:false} do %>
+                        <i class="fas fa-edit"></i> Editar curso
+                    <% end %>
+              <% else %>  
+                    <% if @curso.estado == 'C' %>  
+                        <i class="fas fa-check-double text-success"></i> <span class="text-success">Producto validado por la Secretaría de Posgrado</span>
+                    <% end %>    
+              <% end %>      
+        </div>  
+    <% end %>   
+    <% if current_usuario.persona_id == 105 %> 
+        <div class="col-md-3" id="actividad<%= @curso.id %>">
+        <% if @curso.estado == 'U' %>
+                <%= link_to validar_path(@curso,'coor'), remote:true, data:{confirm:"¿Desea validar el registro? Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
+                    <i class="fas fa-check-circle text-warning"></i><small> Validar</small>
+                <% end %>
+        <% end %>
+        <% if @curso.estado == 'C' %>
+                    <i class="fas fa-check-double text-success"></i> <span class="text-success">Producto validado</span>
+        <% end %>
+        </div> 
+    <% end %> 
 </div>
 <div class="card">
    <div class="row pl-md-3 pt-md-3 mb-md-3">

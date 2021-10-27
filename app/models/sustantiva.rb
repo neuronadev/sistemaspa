@@ -8,7 +8,7 @@ class Sustantiva < ApplicationRecord
 
   def default_values
     self.estado ||= 'A'
-    self.anio = 2020
+    self.anio = 2021
   end  
 
 end

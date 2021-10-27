@@ -41,12 +41,12 @@ class TecnicoController < ApplicationController
 
 
  def detalle
-  @sust = Sustantiva.where("academico_id=? and estado != 'X' and anio=2020",current_usuario.persona.academico.id)
+  @sust = Sustantiva.where("academico_id=? and estado != 'X' and anio=2021",current_usuario.persona.academico.id)
   
-  @tot_act = Sustantiva.where("academico_id=? and estado != 'X' and anio=2020",current_usuario.persona.academico.id).count()
+  @tot_act = Sustantiva.where("academico_id=? and estado != 'X' and anio=2021",current_usuario.persona.academico.id).count()
   @prom = 0.0
   evaltec = 0.0
-  Sustantiva.where("academico_id=? and estado = 'C' and anio=2020",current_usuario.persona.academico.id).each do |s|
+  Sustantiva.where("academico_id=? and estado = 'C' and anio=2021",current_usuario.persona.academico.id).each do |s|
    if s.calidad.present? && s.eficiencia.present? 
        evaltec = evaltec + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
    end    

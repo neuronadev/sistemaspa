@@ -43,4 +43,29 @@
             
           </ul>
    </li>
+   <li class="navList__heading">
+       <%= link_to evaltecnico_path, data: {turbolinks:false} do %>
+         <i class="fas fa-bezier-curve text-white"></i><span class="text-white"> Actividades Sustantivas de Técnicos </span>
+       <% end %>   
+   </li>
+   <% if current_usuario.persona_id == 105 %>
+      <li>
+            <div class="navList__subheading row row--align-v-center">
+               <span class="navList__subheading-icon"><i class="fas fa-share-alt"></i></span>
+               <span class="navList__subheading-title">Posgrado</span>
+            </div>
+            <ul class="subList subList--hidden">
+               <li class="subList__item">
+                  <%= link_to posgrados_path(2020), data:{turbolinks:false} do %>
+                  <i class="fas fa-file-alt"></i> Valdiar productos
+                  <% end %>    
+               </li>
+            
+               
+            </ul>
+      </li>
+   <% end %>
+
+
+
  </ul>       
