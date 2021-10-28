@@ -1,11 +1,17 @@
 <% if [22,39,82,83].include? a.producto_id %>
      <% if [22,39].include? a.producto_id %>
-            <% if a.enlacedoc.attached? %>
+            <% if a.enlacedoc.attached?  && a.fuente == 'V'  %>
                   <div class="d-flex justify-content-center">
                        <%= link_to rails_blob_path(a.enlacedoc, disposition: 'attachment', target: '_blank') do %>
                               <i class="fas fa-file-pdf"></i>  <small class="text-muted"> Comprobante</small> 
                        <% end %>
                   </div>   
+             <% else %> 
+                   <% a.documentos.each do |d|%>
+                        <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank' } do %>
+                                <i class="fas fa-file-pdf"></i>  <small class="text-muted"> Comprobante</small>
+                        <% end %>
+                    <% end %>  
             <% end %>      
      <% end %>
      <% if a.producto_id == 82 

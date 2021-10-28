@@ -3,12 +3,18 @@
        <h6>Comprobante</h6>  
     <% if [22,39,82,83].include? actividad.producto_id %>
         <% if [22,39].include? actividad.producto_id %>
-                <% if actividad.enlacedoc.attached? %>
+                <% if actividad.enlacedoc.attached? && actividad.fuente == 'V' %>
                     <div class="d-flex ">
                         <%= link_to rails_blob_path(actividad.enlacedoc, disposition: 'attachment', target: '_blank') do %>
                                 <i class="fas fa-file-pdf"></i> <%= actividad.enlacedoc.filename %> 
                         <% end %>
-                    </div>   
+                    </div>  
+                <% else %>
+                     <% actividad.documentos.each do |d|%>
+                          <div id="doc<%= d.id %>" class="ml-md-3">
+                              <%= link_to d.filename, rails_blob_path(d, disposition: "attachment"), { target: '_blank' } %>
+                          </div>
+                     <% end %>   
                 <% end %>      
         <% end %>
         <% if actividad.producto_id == 82 
