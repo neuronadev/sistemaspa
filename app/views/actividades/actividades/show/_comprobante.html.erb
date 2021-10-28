@@ -10,11 +10,13 @@
                         <% end %>
                     </div>  
                 <% else %>
+                  <div class="d-flex ">
                      <% actividad.documentos.each do |d|%>
                           <div id="doc<%= d.id %>" class="ml-md-3">
                               <%= link_to d.filename, rails_blob_path(d, disposition: "attachment"), { target: '_blank' } %>
                           </div>
                      <% end %>   
+                   <% end %>  
                 <% end %>      
         <% end %>
         <% if actividad.producto_id == 82 
