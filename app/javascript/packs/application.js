@@ -14,7 +14,8 @@ import 'bootstrap/dist/js/bootstrap';
 
 //import "@fortawesome/fontawesome-free/js/all";
 require("packs/sesion");
-require('selectize');
+//require('selectize');
+require('select2');
 
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"

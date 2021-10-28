@@ -786,6 +786,11 @@
   resolved "https://registry.yarnpkg.com/@stimulus/webpack-helpers/-/webpack-helpers-2.0.0.tgz#54296d2a2dffd4f962d2e802d99a3fdd84b8845f"
   integrity sha512-D6tJWsAC024MwGEIKlUVYU8Ln87mlrmiwHvYAjipg+s8H4eLxUMQ3PZkWyPevfipH+oR3leuHsjYsK1gN5ViQA==
 
+"@ttskch/select2-bootstrap4-theme@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@ttskch/select2-bootstrap4-theme/-/select2-bootstrap4-theme-1.5.2.tgz#3b4519b349f3e7831c28752a1e9617312a192656"
+  integrity sha512-gAj8qNy/VYwQDBkACm0USM66kxFai8flX83ayRXPNhzZckEgSqIBB9sM74SCM3ssgeX+ZVy4BifTnLis+KpIyg==
+
 "@types/datatables.net@^1.10.20":
   version "1.10.20"
   resolved "https://registry.yarnpkg.com/@types/datatables.net/-/datatables.net-1.10.20.tgz#7de57b3ad4ec7e2eea5ee5c8178332b622e2b9de"
@@ -6170,6 +6175,11 @@ select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
   integrity sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
+
+select2@^4.1.0-rc.0:
+  version "4.1.0-rc.0"
+  resolved "https://registry.yarnpkg.com/select2/-/select2-4.1.0-rc.0.tgz#ba3cd3901dda0155e1c0219ab41b74ba51ea22d8"
+  integrity sha512-Hr9TdhyHCZUtwznEH2CBf7967mEM0idtJ5nMtjvk3Up5tPukOLXbHUNmh10oRfeNIhj+3GD3niu+g6sVK+gK0A==
 
 selectize@^0.12.6:
   version "0.12.6"

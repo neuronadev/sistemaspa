@@ -1,7 +1,7 @@
 <%= form.fields_for :articulo do |artc| %>
 
    <div class="row">
-        <%= render "medio_revista", artc:artc %>
+        <%= render "medio_revista", artc:artc, tipo:'C' %>
         <div class="mb-3 col-md-2">
                <%= artc.label :volumen, "Volumen:", class:"form-label" %>
                <%= artc.text_field :volumen, class:"form-control" %>

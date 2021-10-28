@@ -30,12 +30,13 @@
            <%= render "catalogo_i" %>  
 
      <% end %>
-     <% if current_usuario.rol == 'T' && @prom.to_f >= 8.5 %>
-
-           <%= render "catalogo_i" %>  
-           <%= render "catalogo_t" %>  
-     <% else%>
-           <strong>Es necesario que se han evaluadas todas las actividades sustantivas.</strong>
+     <% if current_usuario.rol == 'T' %>
+          <% if @prom.to_f >= 8.5 %>
+                <%= render "catalogo_i" %>  
+                <%= render "catalogo_t" %>  
+          <% else%>
+               <strong>Es necesario que se han evaluadas todas las actividades sustantivas.</strong>
+          <% end %>     
      <% end %>
 
 </div>

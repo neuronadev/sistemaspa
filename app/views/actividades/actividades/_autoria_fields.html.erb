@@ -3,9 +3,9 @@
        <%= form.hidden_field :_destroy %>  
        <%= form.hidden_field :rol_id, value:'1' %>
        <%= form.select :persona_id, 
-             Persona.all.order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, 
+             Persona.where(estado:'A').order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, 
              {},
-             {class:"form-control form-control-sm"} %>
+             {class:"form-control form-control-sm academico_search"} %>
   </td>
   <td>
        <%= form.check_box :corresponsal, value:'N',style:"height:100%;" %> 

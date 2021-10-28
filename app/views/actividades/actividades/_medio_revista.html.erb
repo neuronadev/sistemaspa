@@ -1,5 +1,22 @@
 
   <div class="mb-3 col-4">
-     <%= artc.label :revista_id, "Revista:", class:"form-label"  %>
-     <%= artc.select :revista_id, Revista.all.order(:nomrevista).map{|r| [r.nomrevista.downcase.capitalize, r.id] },{ prompt:'-- Seleccione --'}, class:" form-control"  %>
+     
+      <% if tipo == 'C' %> 
+         <%= artc.label :revista_id, "Revista:", class:"form-label"  %>
+         <%= artc.select :revista_id, Revista.where.not(tiporevista:'P').order(:nomrevista).map{|r| [r.nomrevista.downcase.capitalize, r.id] },{ prompt:'-- Seleccione --'}, class:" form-control revista_search"  %>
+      <% end %>
+      <% if tipo == 'D' %> 
+         <%= artc.label :revista_id, "Revista:", class:"form-label"  %>
+         <%= artc.select :revista_id, Revista.where.not(tiporevista:'P').order(:nomrevista).map{|r| [r.nomrevista.downcase.capitalize, r.id] },{ prompt:'-- Seleccione --'}, class:" form-control revista_search"  %>
+      <% end %>
+       <% if tipo == 'P' %> 
+         <%= artc.label :revista_id, "Periodico:", class:"form-label"  %>
+         <%= artc.select :revista_id, Revista.where(tiporevista:'P').order(:nomrevista).map{|r| [r.nomrevista.downcase.capitalize, r.id] },{ prompt:'-- Seleccione --'}, class:" form-control revista_search"  %>
+      <% end %>
   </div>
+
+<script>
+  $(document).ready(function() {
+    $('.revista_search').select2();
+   });
+</script>
