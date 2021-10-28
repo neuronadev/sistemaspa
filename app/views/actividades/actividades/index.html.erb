@@ -26,21 +26,7 @@
                          <td> <div class="d-flex justify-content-center"> <%= a.id %> </div> </td>
                          <td> <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="<%= a.producto.descripcion %>"><%= a.producto.descripcion %></span> </td>
                          <td>
-                                <% if a.documentos.attached? %> 
-                                   <div class="d-flex justify-content-center">
-                                      <% a.documentos.each do |d|%>
-                                        <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank' } do %>
-                                                <i class="fas fa-file-pdf"></i>  <small class="text-muted"> Comprobante</small>
-                                        <% end %>
-                                      <% end %>  
-                                    </div>  
-                                <% else %>
-                                     <div class="d-flex justify-content-center">
-                                        <%= link_to updoc_actividades_actividad_path(a.id), data:{turbolinks:false} do %>    
-                                        <i class="fas fa-upload text-danger"></i>  <small class="text-danger"> Comprobante</small> 
-                                        <% end %>   
-                                     </div>   
-                                <% end %> 
+                                <%= render "actividades/actividades/show/attached", a:a %>
                          </td>
                          <td> <div class="d-flex justify-content-left"> 
                                    <%= link_to a.titulo, actividades_actividad_path(a.id), data:{turbolinks:false}, class:"text-primary" %>

@@ -97,13 +97,14 @@ class ActividadesController < ApplicationController
               end
           else
             #puts "AAAAAAAAAAAA:AAAAAAAAAAAAAAA" 
-            #puts @actividad.errors.full_messages 
+            puts @actividad.errors.full_messages 
             @actividad.errors.add(:partcomp, "Errores") 
           end  
       else
         #puts "BBBBBBBBBBBB:BBBBBBBBBBBBBB"  
         #puts @actividad.errors.full_messages 
       end
+      puts @actividad.errors.full_messages 
   end
 
   def show

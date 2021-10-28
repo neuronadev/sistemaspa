@@ -3,7 +3,7 @@ class DivulgacionesController < ApplicationController
   layout 'divulgaciones'
   include Pagy::Backend
   def index
-    @pagy, @actividades = pagy( Actividad.where(fuente:'V', periodo:2021, estado:['A','S'] ).order(created_at: :desc), page: params[:page], items: 20 )
+    @pagy, @actividades = pagy( Actividad.where(fuente:'V', periodo:2021, estado:['A','S','U','C'] ).order(created_at: :desc), page: params[:page], items: 20 )
   end
 
   def buscar

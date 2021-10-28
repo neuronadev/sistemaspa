@@ -2,32 +2,38 @@
 <div class='ml-md-3  mb-md-5'>
 
    <%= form_with(model: actividad, local:false) do |form|  %>
-       <%= form.hidden_field :producto_id, value: 39 %> 
-       <input type="hidden" name="captipo" value="<%= current_usuario.rol %>">
-       <%= form.hidden_field :estado, value:'A' %>
-       <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
-       <%= form.hidden_field :fuente, value:current_usuario.rol %> 
-        <%= form.hidden_field :periodo, value:2021 %> 
-
-       <div class="form-group">
-            <%= form.label :titulo, 'Título', class:'titulo text-muted' %>
-            <%= form.text_field :titulo, class:"form-control" %> 
-       </div>
        
+       <input type="hidden" name="captipo" value="<%= current_usuario.rol %>">
+       <% if params[:action] == 'new' %>  
+            <%= form.hidden_field :producto_id, value: 39 %> 
+            <%= form.hidden_field :estado, value:'U' %>
+            <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
+            <%= form.hidden_field :fuente, value:current_usuario.rol %> 
+            <%= form.hidden_field :periodo, value:2021 %> 
+            <%= form.hidden_field :fecha1, value: Time.now.strftime("%F") %>
+       <% end %>  
+       <div class="row">
+          <div class="col-9"> 
+            <%= form.label :titulo, 'Título:', class:'titulo text-muted' %>
+            <%= form.text_field :titulo, class:"form-control" %> 
+          </div>
+          <div class="col">
+            <%= form.label :fechapub, 'Fecha de publicación:', class:'fechapub text-muted' %>
+            <%= form.date_field :fechapub, class:"form-control" %> 
+          </div>
+  
+       </div>      
 
        <%= form.fields_for :articulo do |articulo| %>
             <div class="form-row">
-               <div class="col">
-                    <%= articulo.label :fechapub, 'Fecha de publicación', class:'fechapub text-muted' %>
-                    <%= articulo.date_field :fechapub, class:"form-control" %> 
-                </div>
+               
                 <div class="col">
                     <%= articulo.label :volumen, "Sección/Página:", class:'volumen text-muted'  %>
                     <%= articulo.text_field :volumen, class:"form-control" %>
                 </div>
                 <div class="col">
                     <%= articulo.label :revista_id, "Medio de publicación:", class:'revista_id text-muted' %>
-                    <%= articulo.select :revista_id, Revista.all.where("tiporevista='P'").order(:nomrevista).pluck(:nomrevista,:id), { :include_blank=>'- Seleccione una opción -'}, {class:"form-control"} %>
+                    <%= articulo.select :revista_id, Revista.where(tiporevista:'P',estado:'E').order(:nomrevista).pluck(:nomrevista,:id), { :include_blank=>'- Seleccione una opción -'}, {class:"form-control"} %>
                 </div> 
             </div>    
        <% end %> 
@@ -41,7 +47,7 @@
                         <% if actividad.enlacedoc.attached? %>
                             <div class="row">
                                 <div class="col-6">   <%= link_to actividad.enlacedoc.filename, rails_blob_path(actividad.enlacedoc, disposition: 'attachment', target: '_blank') %></div>
-                                <div class="col"><%= form.file_field :tesisdoc, class:"form-control" %></div>
+                                <div class="col"><%= form.file_field :enlacedoc, class:"form-control" %></div>
                             </div>   
                         <% else %> 
                             <%= form.file_field :enlacedoc, class:"form-control col-8" %> 

@@ -1,9 +1,15 @@
 
 <% if @actividad.producto.prodgrupo.clave == 'PERIODICO' %>
+      <div>
+      <h5><%= @actividad.producto.descripcion %></h5>
+    </div>
       <%= render 'mostrar_articulo' %>
 <% end %>
 
 <% if @actividad.producto.prodgrupo.clave == 'OTRASD' %>
+<div>
+      <h5><%= @actividad.producto.descripcion %></h5>
+    </div>
       <%= render 'mostrar_casaabierta' %>
 <% end %>
 

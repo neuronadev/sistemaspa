@@ -2,21 +2,32 @@
 <div class='ml-md-3 mb-md-5'>
 
    <%= form_with(model: actividad, local:false) do |form|  %>
-       <%= form.hidden_field :producto_id, value: 22 %> 
-       <input type="hidden" name="captipo" value="<%= current_usuario.rol %>">
-       <%= form.hidden_field :estado, value:'A' %>
-       <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
-       <%= form.hidden_field :fuente, value:current_usuario.rol %> 
-       <%= form.hidden_field :periodo, value:2021 %> 
+       
 
-       <div class="form-group">
-            <%= form.label :titulo, 'Título', class:'titulo text-muted' %>
+       <input type="hidden" name="captipo" value="<%= current_usuario.rol %>">
+    <% if params[:action] == 'new' %>  
+        <%= form.hidden_field :producto_id, value: 22 %> 
+        <%= form.hidden_field :estado, value:'U' %>
+        <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
+        <%= form.hidden_field :fuente, value:current_usuario.rol %> 
+        <%= form.hidden_field :periodo, value:2021 %> 
+        <%= form.hidden_field :fecha1, value: Time.now.strftime("%F") %>
+    <% end %>
+       <div class="row">
+          <div class="col-9"> 
+            <%= form.label :titulo, 'Título:', class:'titulo text-muted' %>
             <%= form.text_field :titulo, class:"form-control" %> 
-       </div>
+          </div>
+          <div class="col">
+            <%= form.label :fechapub, 'Fecha:', class:'fechapub text-muted' %>
+            <%= form.date_field :fechapub, class:"form-control" %> 
+          </div>
+  
+       </div>      
        
 
        <%= form.fields_for :divulgacion do |divulgacion| %>
-            <div class="form-row">
+            <div class="form-row mt-md-3">
                <div class="col-4">
                     <%=  divulgacion.label :tipodivulgacion_id, "Tipo de actividad:", class:'tipodivulgacion_id text-muted' %>
                     <%=  divulgacion.select :tipodivulgacion_id, Tipodivulgacion.all.pluck(:nomtipodivulgacion,:id), { :include_blank=>'- Seleccione una opcion -'},{class:"form-control"} %>
@@ -33,7 +44,7 @@
                         <% if actividad.enlacedoc.attached? %>
                             <div class="row">
                                 <div class="col-6">   <%= link_to actividad.enlacedoc.filename, rails_blob_path(actividad.enlacedoc, disposition: 'attachment', target: '_blank') %></div>
-                                <div class="col"><%= form.file_field :tesisdoc, class:"form-control" %></div>
+                                <div class="col"><%= form.file_field :enlacedoc, class:"form-control" %></div>
                             </div>   
                         <% else %> 
                             <%= form.file_field :enlacedoc, class:"form-control col-8" %> 

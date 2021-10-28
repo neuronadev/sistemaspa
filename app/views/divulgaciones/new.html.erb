@@ -2,14 +2,14 @@
 
 <% if @tipo == 'ADP' %>
     <div>
-      <h5>Registro - Articulo de Divulgación en Periódico</h5>
+      <h5 class="text-primary">Registro - Artículo de Divulgación en Periódico</h5>
     </div>
     <%= render 'form_periodico', actividad: @actividad %>
 <% end %>
 
 <% if @tipo == 'CASA' %>
    <div>
-     <h5>Actividades Institucionales</h5>
+     <h5 class="text-success">Actividades Institucionales</h5>
    </div>
   <%= render 'form_casa_abierta', actividad: @actividad %>
 <% end %>

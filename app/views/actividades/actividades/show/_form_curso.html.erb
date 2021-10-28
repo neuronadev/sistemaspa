@@ -19,13 +19,22 @@
                  <label class="font-weight-bold">Feha termino:</label>
                  <div><%= actividad.curso.ffin %></div>
              </div>
+              <div class="mb-3 col-md-3">
+                    <label class="font-weight-bold">Total de horas del curso:</label>
+                    <div><%= actividad.curso.hcurso %></div> 
+              </div>
+                    
              <div class="mb-3 col-md-3">
-                 <label class="font-weight-bold">Total de horas del curso:</label>
-                 <div><%= actividad.curso.hcurso %></div> 
-             </div>
-             <div class="mb-3 col-md-3">
-                 <label class="font-weight-bold">Número de horas impartida:</label>
-                 <div><%= actividad.curso.himpartidas %></div>  
+                 <label class="font-weight-bold">Número de horas impartidas:</label>
+                 <div>
+                    <% if actividad.producto_id == 82 
+                          autor = Autor.where(actividad_id:actividad.id,persona_id:current_usuario.persona_id).first
+                     %>
+                            <%= autor.horas %> 
+                     <% else %> 
+                            <%= actividad.curso.himpartidas %>
+                     <% end %> 
+                 </div>  
              </div>
              <div class="mb-3 col-md-3">
                  <label class="font-weight-bold">Créditos:</label>
@@ -35,10 +44,19 @@
                  <label class="font-weight-bold">No. de alumnos:</label>
                  <div><%= actividad.curso.noalumnos %></div>  
              </div>
-             <div class="mb-3 col-md-3">
-                 <label class="font-weight-bold">¿Coordinador del Curso?:</label>
-                 <div><%= actividad.curso.coordinador %></div>  
-             </div>
+              <% if actividad.producto_id == 82 
+                    autor = Autor.where(actividad_id:actividad.id,persona_id:current_usuario.persona_id).first
+              %>
+                    <div class="mb-3 col-md-3">
+                        <label class="font-weight-bold">¿Coordinador del Curso?:</label>
+                        <div><%= autor.coordinador ? 'SI' : 'NO'   %></div>  
+                    </div>
+              <% else %>
+                    <div class="mb-3 col-md-3">
+                        <label class="font-weight-bold">¿Coordinador del Curso?:</label>
+                        <div><%= actividad.curso.coordinador %></div>  
+                    </div>
+              <% end %>      
         </div>  
         <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
         <%= render "actividades/actividades/show/autoria", actividad:@actividad, swcorr:'N' %>

@@ -1,4 +1,4 @@
- <div class="row">
+ <div class="row mt-md-3">
      <div class="mb-3 col-md-10">
         <h6>Participantes</h6>
         <table class="table">
@@ -16,7 +16,8 @@
                                 <% actividad.autores.each do |a| %>
                                     <tr>
                                         <td> <%= (a.persona.paterno||'')+' '+(a.persona.materno||'')+' '+(a.persona.nombre||'') if a.persona.id != 211 %>
-                                            <%= (a.firma || '') if a.persona.id == 211 %>
+                                             <%= (a.firma || '') if a.persona.id == 211 %>
+                                             <%= actividad.producto_id == 83 ? " (#{a.rol.nomrol}) " : '' %>
                                         </td>
                                          <% if swcorr == 'S' %> 
                                             <td>

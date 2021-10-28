@@ -24,21 +24,20 @@
                                      <i class="fas fa-list-ul"></i> Inicio <span class="sr-only">(current)</span>
                                 <% end %>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                     <i class="fas fa-plus"></i> Nuevo registro
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                     <%= link_to new_divulgacion_path(:tipo=>'ADP'), class:"dropdown-item" do %>
-                                          <i class="fas fa-newspaper"></i> Artículo de divulgación en periódico
-                                     <% end %>
-                                     <div class="dropdown-divider"></div>
-                                     <%= link_to new_divulgacion_path(:tipo=>'CASA'), class:"dropdown-item" do %>
-                                          <i class="fas fa-users"></i> Actividades institucionales
-                                     <% end %>
-                              </div>
-
+                            <li class="nav-item active">
+                                 <%= link_to new_divulgacion_path(:tipo=>'ADP'), class:"nav-link" do %>
+                                          <i class="fas fa-newspaper"></i> Artículo en periódico
+                                  <% end %>
                             </li>
+                            <li class="nav-item active">
+                                <%= link_to new_divulgacion_path(:tipo=>'CASA'), class:"nav-link" do %>
+                                          <i class="fas fa-users"></i> Actividad institucional
+                                <% end %>
+                            </li>
+
+
+
+                           
                        </ul> 
  
                 </div> 
