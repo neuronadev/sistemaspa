@@ -28,7 +28,7 @@
                   </div> 
                   <div class="mb-3 col-md-6">
                      <%=  cap_form.label :libro_id, "Libro:", class:"form-label" %>
-                     <%=  cap_form.select :libro_id, Libro.all.order(:nomlibro).collect { |l| [l.nomlibro+' (ISBN: '+(l.isbn||'') + ')',l.id] }, { :include_blank=>'Buscar Libro...'},class:"form-control"%>
+                     <%=  cap_form.select :libro_id, Libro.all.order(:nomlibro).collect { |l| [l.nomlibro+' (ISBN: '+(l.isbn||'') + ')',l.id] }, { :include_blank=>'Buscar Libro...'},class:"form-control libro_search"%>
                   </div>
                 
         <% end %>       
@@ -45,3 +45,8 @@
         </div> 
     </div>
 <% end %>
+<script>
+  $(document).ready(function() {
+    $('.libro_search').select2();
+   });
+</script>
