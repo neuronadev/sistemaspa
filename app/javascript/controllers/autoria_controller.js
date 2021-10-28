@@ -1,5 +1,7 @@
 import {Controller} from "stimulus"
 
+
+
 export default class extends Controller {
   static targets = ["tmpAutor", "rwsAutores", "tmpAutorExt"]
   
@@ -7,6 +9,7 @@ export default class extends Controller {
       event.preventDefault();
       var c = this.tmpAutorTarget.innerHTML.replace(/TEMPLATE_RECORD_AUTOR/g, Math.floor(Math.random()*10000000000000000000))
       this.rwsAutoresTarget.insertAdjacentHTML('beforeend', c)
+     
   }
 
   nuevoPartExt(event){

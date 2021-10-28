@@ -1,4 +1,4 @@
-<%= form_with model:[:actividades, actividad], remote:false do |form| %>
+<%= form_with model:[:actividades, actividad] do |form| %>
     <%= render "form_inputs_com", form:form %>
     <% if @parts[1] == 'IND' %>
          <%= form.hidden_field :titulo, value:'Registro de protección Industrial' %>
@@ -28,7 +28,7 @@
 
     
     <%= render "doc_comprobante", form:form %>
-    <%= render "form_autores", form:form %>
+    <%= render "form_autores", form:form, swcorr:'N' %>
     
     <%= render "red_acad", form:form  %>
 

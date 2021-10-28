@@ -29,30 +29,33 @@
    <div class="row">
       <template data-autoria-target='tmpAutor'>
         <%= form.fields_for :autores, Autor.new, child_index: 'TEMPLATE_RECORD_AUTOR' do |autor| %>
-              <%= render 'autoria_fields', form: autor %>
+              <%= render 'autoria_fields', form: autor, swcorr:swcorr %>
         <% end %>
       </template> 
       <template data-autoria-target='tmpAutorExt'>
         <%= form.fields_for :autores, Autor.new, child_index: 'TEMPLATE_RECORD_AUTOR_EXT' do |autor| %>
-              <%= render 'autoria_fields_ext', form: autor %>
+              <%= render 'autoria_fields_ext', form: autor, swcorr:swcorr %>
         <% end %>
       </template> 
       <div class="col-8">
         <table class="table table-sm mt-md-1">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Corresponsal</th>
+                    <th><div class="d-flex justify-content-center">Nombre</div></th>
+                    <% if swcorr == 'S' %> 
+                      <th><div class="d-flex justify-content-center">Corresponsal</div></th>
+                    <% end %>  
+                    
                     <th></th>
                 </tr>    
             </thead>
             <tbody data-autoria-target="rwsAutores">
                 <% if  @actividad.autores.any? %>
                     <%= form.fields_for :autores, @actividad.autores.where.not(persona_id:[211]) do |autor| %>
-                          <%= render 'autoria_fields', form: autor %>
+                          <%= render 'autoria_fields', form: autor, swcorr:swcorr %>
                     <% end %>
                     <%= form.fields_for :autores, @actividad.autores.where(persona_id:[211]) do |autor| %>
-                          <%= render 'autoria_fields_ext', form: autor %>
+                          <%= render 'autoria_fields_ext', form: autor, swcorr:swcorr %>
                     <% end %>
                 <% end %>    
 

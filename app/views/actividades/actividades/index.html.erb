@@ -10,10 +10,10 @@
                   <tr >
                       <th scope="col" style="width: 5%"><div class="d-flex justify-content-center">Folio</div></th>
                       <th scope="col" style="width: 20%"><div class="d-flex justify-content-center"> Producto</div></th>
-                      <th scope="col" style="width: 2%"></th>
-                      <th scope="col" style="width: 40%"><div class="d-flex justify-content-center"> Título</div></th>
+                      <th scope="col" style="width: 9%"></th>
+                      <th scope="col" style="width: 45%"><div class="d-flex justify-content-center"> Título</div></th>
                       
-                      <th scope="col" style="width: 5%"><div class="d-flex justify-content-center"> Vo.Bo.</div></th>
+                      <th scope="col" style="width: 9%"><div class="d-flex justify-content-center"> Vo.Bo.</div></th>
                       <th scope="col" style="width: 5%"><div class="d-flex justify-content-center"> Coor. Red</div></th>
                       <th scope="col" style="width: 6%"><div class="d-flex justify-content-center"> Sec. Acad</div></th>
                   </tr>
@@ -35,9 +35,11 @@
                                       <% end %>  
                                     </div>  
                                 <% else %>
-                                    <%= link_to updoc_actividades_actividad_path(a.id), data:{turbolinks:false} do %>    
-                                       <div class="d-flex justify-content-center"> <i class="fas fa-upload text-danger"></i>  <small class="text-danger"> Comprobante</small> </div>
-                                    <% end %>   
+                                     <div class="d-flex justify-content-center">
+                                        <%= link_to updoc_actividades_actividad_path(a.id), data:{turbolinks:false} do %>    
+                                        <i class="fas fa-upload text-danger"></i>  <small class="text-danger"> Comprobante</small> 
+                                        <% end %>   
+                                     </div>   
                                 <% end %> 
                          </td>
                          <td> <div class="d-flex justify-content-left"> 
@@ -47,11 +49,11 @@
                          <td id="actividad<%= a.id %>">
                            <div class="d-flex justify-content-center"> 
                                 <% if a.estado == 'A' %>
-                                    <%= link_to validar_path(a,'user'), remote:true, data:{confirm:"¿Desea validar el registro? Al aceptar no podrá hacer cambios. Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
-                                        <i class="fas fa-check-circle text-primary fa-lg"></i>
+                                    <%= link_to validar_path(a,'user'), remote:true, class:'text-muted', data:{confirm:"¿Desea validar el registro? Al aceptar no podrá hacer cambios. Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
+                                        <i class="fas fa-check-circle text-warning"></i> <span>Validar</span>
                                     <% end %>
                                 <% else %> 
-                                        <i class="fas fa-check-double fa-lg text-success"></i>
+                                        <i class="fas fa-check-double text-success"></i>
                                 <% end %>   
                             </div>    
                          </td>

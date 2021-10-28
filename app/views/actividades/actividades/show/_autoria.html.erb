@@ -5,7 +5,9 @@
                 <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Corresponsal</th>
+                            <% if swcorr == 'S' %> 
+                              <th>Corresponsal</th>
+                            <% end %> 
                             <th></th>
                         </tr>    
                     </thead>
@@ -16,9 +18,11 @@
                                         <td> <%= (a.persona.paterno||'')+' '+(a.persona.materno||'')+' '+(a.persona.nombre||'') if a.persona.id != 211 %>
                                             <%= (a.firma || '') if a.persona.id == 211 %>
                                         </td>
-                                        <td>
-                                            <%= 'SI' if ['1','S'].include? a.corresponsal   %>
-                                        </td>
+                                         <% if swcorr == 'S' %> 
+                                            <td>
+                                                <%= 'SI' if ['1','S'].include? a.corresponsal   %>
+                                            </td>
+                                        <% end %>    
                                     </tr>
                                 <% end %>
                         <% end %>

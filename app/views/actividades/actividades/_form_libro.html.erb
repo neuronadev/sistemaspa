@@ -1,4 +1,4 @@
-<%= form_with model:[:actividades, actividad], remote:false do |form| %>
+<%= form_with model:[:actividades, actividad] do |form| %>
     <%= render "form_inputs_com", form:form %>
     
     <div class="row">
@@ -31,7 +31,7 @@
     </div>
 
     <%= render "doc_comprobante", form:form %>
-    <%= render "form_autores", form:form %>
+    <%= render "form_autores", form:form, swcorr:'N' %>
     
     <%= render "red_acad", form:form  %>
 

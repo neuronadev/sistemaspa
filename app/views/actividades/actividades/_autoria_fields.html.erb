@@ -1,18 +1,25 @@
 <tr class="rwautor">
-  <td> 
+  <td> <div class="d-flex justify-content-center">
        <%= form.hidden_field :_destroy %>  
        <%= form.hidden_field :rol_id, value:'1' %>
        <%= form.select :persona_id, 
              Persona.where(estado:'A').order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, 
              {},
              {class:"form-control form-control-sm academico_search"} %>
+      </div>       
   </td>
+   <% if swcorr == 'S' %>   
+      <td>
+      <div class="d-flex justify-content-center">
+            <%= form.check_box :corresponsal, value:'N'%> 
+      </div>  
+      </td>
+   <% end %>   
   <td>
-       <%= form.check_box :corresponsal, value:'N',style:"height:100%;" %> 
-  </td>
-  <td>
-     <%= link_to "#", data:{ action:"click->autoria#quitarPart" } do  %>
+    <div class="d-flex justify-content-center"> 
+       <%= link_to "#", data:{ action:"click->autoria#quitarPart" } do  %>
            Eliminar
-     <% end %>  
+       <% end %>  
+     </div>  
   </td>
 </tr>
