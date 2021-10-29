@@ -20,33 +20,17 @@
           </ul>
    </li>
    
-    
-   <li>
-          <div class="navList__subheading row row--align-v-center">
-            <span class="navList__subheading-icon"><i class="fas fa-history"></i></span>
-            <span class="navList__subheading-title">Históricos</span>
-          </div>
-          <ul class="subList subList--hidden">
-            <li class="subList__item">
-               <%= link_to datahistory_path(2020), data:{turbolinks:false} do %>
-                   <i class="fas fa-th-list"></i> Periodo 2020
-               <% end %>    
-            </li>
-            <li class="subList__item">
-               <%= link_to datahistory_path(2019), data:{turbolinks:false}  do %>
-                   <i class="fas fa-th-list"></i> Periodo 2019
-               <% end %>    
-            </li>
-            
-            
-          </ul>
-   </li>
 
    <li class="navList__heading">
        <%= link_to sustdetalle_path, data: {turbolinks:false} do %>
          <i class="fas fa-bezier-curve text-white"></i><span class="text-white"> Registro de Actividades Sustantivas </span>
        <% end %>   
    </li>
-  
+  <li class="navList__heading">
+        
+       <%= link_to destroy_usuario_session_path  data: {turbolinks:false} do %>
+          <i class="fas fa-sign-out-alt text-white"></i><span class="text-white"> Salir </span>
+       <% end %>    
+   </li>
    
  </ul>       
