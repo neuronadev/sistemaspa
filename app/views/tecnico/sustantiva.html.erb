@@ -1,11 +1,18 @@
+
 <div class="card">
  <div class="card-body">
-   <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", tecnico_path, data: {turbolinks:false} ) %>
+   <i class="fas fa-home"></i>&nbsp;<%= link_to("Regresar", sustdetalle_path, data: {turbolinks:false} ) %>
    
  </div>
 </div> 
 
-
+<div class="card">
+   <div class="card-body">
+       <div>En esta sección debe agregar la actividad sustantiva, se requiere:</div>
+       <div><strong>Nombre del Académico</strong> con el cual colabora, <strong>Descripción breve de la actividad</strong> y <strong>Porcentaje</strong> del tiempo que dedica a esa actividad.</div>
+       
+   </div>
+</div>
 <div class="card">
  <div class="card-body">
 
@@ -18,6 +25,7 @@
          <div class="form-group">
            <i class="fas fa-plus"></i>&nbsp;<%= link_to_add_adic("Agregar actividad sustantiva", form, :sustantivas) %> <span style="color:red"><I><- Haga clic en el link</I></span>
            <hr>
+           
          </div> 
       </div>
    </div> 

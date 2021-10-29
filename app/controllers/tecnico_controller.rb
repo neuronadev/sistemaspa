@@ -44,6 +44,7 @@ class TecnicoController < ApplicationController
   @sust = Sustantiva.where("academico_id=? and estado != 'X' and anio=2021",current_usuario.persona.academico.id)
   
   @tot_act = Sustantiva.where("academico_id=? and estado != 'X' and anio=2021",current_usuario.persona.academico.id).count()
+  @suma_porc = Sustantiva.where("academico_id=? and estado != 'X' and anio=2021",current_usuario.persona.academico.id).sum(:porcentaje)
   @prom = 0.0
   evaltec = 0.0
   Sustantiva.where("academico_id=? and estado = 'C' and anio=2021",current_usuario.persona.academico.id).each do |s|

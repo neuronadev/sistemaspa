@@ -1,17 +1,27 @@
 <div class="card">
  <div class="card-body">
-  <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", tecnico_path, data: {turbolinks:false} ) %>&nbsp&nbsp&nbsp
-  <i class="fas fa-plus"></i>&nbsp;<%= link_to "Agregar actividad sustantiva", sustantiva_path, data: {turbolinks:false} %>
- </div> 
+     <div><strong class="text-primary">En esta sección debe agregar las actividades sustantivas que realiza con Académicos del INECOL.</strong></div>
+     <div class="text-muted"><I>Nota: La suma total del porcentaje de participacicón debe ser 100.</I></div>
+     <div class="text-muted">Haga clic en la opcion "Agregar actividad sustantiva"</div>
+ </div>
 </div> 
 
+
+<div class="card">
+ <div class="card-body">
+  <i class="fas fa-home"></i>&nbsp;<%= link_to("Inicio", tecnico_path, data: {turbolinks:false} ) %>&nbsp&nbsp&nbsp
+  <% if @suma_porc.to_f < 100%> 
+     <i class="fas fa-plus"></i>&nbsp;<%= link_to "Agregar actividad sustantiva", sustantiva_path, data: {turbolinks:false} %>
+  <% end %>
+ </div> 
+</div> 
 
 <div class="card">
   <div class="card-body">
    <table class="table"> 
      <thead> 
        <tr>
-          <th>En conlaboración con</th>
+          <th>Académico</th>
           <th>Actividad</th>
           <th>Participación(%)</th>
           <th>Editar</th>
@@ -24,7 +34,9 @@
      </thead>
 
      <tbody>
-         <% @sust.each do |s|
+         <%
+           
+            @sust.each do |s|
             #@tot_cal = @tot_cal + s.calidad
             #@tot_efi = @tot_efi + s.eficiencia 
             @invest = Persona.find(s.investigadorid)
@@ -32,7 +44,7 @@
            <tr>
               <td><%= (@invest.paterno||'') + " " + (@invest.materno||'') + (@invest.nombre||'') %></td>
               <td><%= s.descripcion  %> </td>
-              <td><%= s.porcentaje  %> </td>
+              <td><%= s.porcentaje  %> %</td>
               <td>
                    <% if s.estado == 'A' %>
                        <%= link_to sustedit_path(s.id), data:{turbolinks:false}  do %>
@@ -55,8 +67,8 @@
                </td>
                <td>
                    <% if s.estado == 'A' %>
-                       <%= link_to sustvalidar_path(s.id,1), data: { turbolinks:false, confirm: 'La información será enviada para validación, ¿Desea continuar?' } do %>
-                          <i class="fas fa-check-circle fa-1x text-info"></i>
+                       <%= link_to sustvalidar_path(s.id,1), data: { turbolinks:false, confirm: 'La información será enviada para evaluación, ya no podrá modificar. ¿Desea continuar?' } do %>
+                          <i class="fas fa-check-circle fa-1x text-warning"></i> Validar
                        <% end %>
                    <% end %>
                    <% if s.estado == 'U' || s.estado == 'C' %>
@@ -82,7 +94,10 @@
        </tbody>
          <tfoot>
              <tr>
-               <td></td><td></td><td></td><td></td><td></td><td></td>
+               <td></td><td></td>
+                <td> 
+                   <span class=<%= @suma_porc.to_f > 100 ? 'text-danger' : 'text-primary' %> > <%= @suma_porc.to_f <= 100 ? @suma_porc.to_s + ' %' : @suma_porc.to_s + ' El porcentaje total debe ser 100'  %> </span>
+               </td><td></td><td></td><td></td>
                <td><%= @tot_cal.to_s %></td>
                <td>
                 <%= @tot_efi.to_s %>
@@ -91,7 +106,7 @@
            
          </tfoot> 
   </table>
-
+   <i class="fas fa-check-circle fa-1x text-warning"></i> <I class="text-muted">Clic en el icono para que la actividad sea calificada por el Academico.</I>
   </div>
 </div>
 

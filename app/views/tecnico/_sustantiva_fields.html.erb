@@ -1,14 +1,16 @@
+
+
 <div class='nested-fields form-row'>
     <%= f.hidden_field :academico_id, value:current_usuario.persona.academico.id %>
     <div class="col-4">
      <div class="form-group">
-       <%= f.label :investigadorid, "Seleccione al Académico con el que colabora:" %>
+       <%= f.label :investigadorid, "Seleccione un Académico:" %>
        <%= f.select :investigadorid, Persona.where("orden=2").all.order(:orden).order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, { :include_blank=>'-Seleccione una opción-'}, {class:"form-control" } %>
      </div>
     </div>
     <div class="col-4">
       <div class="form-group">
-       <%= f.label :descripcion, "Describa la actividad:" %>
+       <%= f.label :descripcion, "Descripción breve de la actividad:" %>
        <%= f.text_area :descripcion, class:"form-control", placeholder: "Descripción" %>
       </div>
     </div>  
