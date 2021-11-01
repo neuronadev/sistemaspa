@@ -48,6 +48,15 @@ module ActividadesHelper
     else
         return false 
     end
-end
+   end
+
+   def mensaje_txt(idactividad)
+       m = Mensaje.where(actividad_id:idactividad).last
+       if m.nil?
+             ''
+       else
+             m.txt
+       end  
+   end
 
 end

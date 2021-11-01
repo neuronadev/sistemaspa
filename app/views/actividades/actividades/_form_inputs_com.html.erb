@@ -1,5 +1,20 @@
-<%= form.hidden_field :producto_id, value: @producto.id %>
-<%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
-<%= form.hidden_field :estado, value:'A' %>
-<%= form.hidden_field :periodo, value:'2021' %>
-<%= form.hidden_field :fuente, value:'M' %>
+
+    <% if params[:action] == 'new' %> 
+        <%= form.hidden_field :producto_id, value: @producto.id %>
+        <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
+        <%= form.hidden_field :estado, value:'A' %>
+        <%= form.hidden_field :periodo, value:'2021' %>
+        <%= form.hidden_field :fuente, value:'M' %>
+    <% end %>    
+
+    <% if params[:action] == 'edit' %> 
+         <% if @actividad.estado == 'G' %> 
+                 
+                 <%= form.hidden_field :estado, value:'U' %>
+                 <% 
+                    m = Mensaje.where(actividad_id:@actividad.id).last
+                 %> 
+                 <input type="hidden" name="mensaje" value='<%= m.id %>' >  
+                 <div class="alert alert-danger" role="alert"><%=  mensaje_txt(@actividad.id) %></div>
+         <% end %>       
+    <% end %>    

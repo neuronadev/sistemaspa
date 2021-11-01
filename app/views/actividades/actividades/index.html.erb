@@ -30,7 +30,16 @@
                          </td>
                          <td> <div class="d-flex justify-content-left"> 
                                    <%= link_to a.titulo, actividades_actividad_path(a.id), data:{turbolinks:false}, class:"text-primary" %>
-                               </td>
+                              </div>     
+                              <% if a.estado == 'G' %>
+                                    <div class="d-flex justify-content-left alert alert-danger" role="alert">
+                                       <small><%=  mensaje_txt(a.id) %>
+                                            <strong>Vaya al siguiente link para corregir:  <%= link_to "Corregir", edit_actividades_actividad_path(a.id) %></strong>
+                                       </small> 
+                                             
+                                    </div>
+                              <% end %>   
+                         </td>
                          
                          <td id="actividad<%= a.id %>">
                            <div class="d-flex justify-content-center"> 

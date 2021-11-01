@@ -80,7 +80,15 @@ class Actividades::ActividadesController < ApplicationController
     if @actividad.update(actividad_params)
          redirect_to [:actividades, @actividad]  
     else
-      render :edit
+      @producto = @actividad.producto  
+      if !@producto.pathf.blank? 
+        @parts = @producto.pathf.split('-')
+      else
+        @parts = ['-'] 
+      end 
+      respond_to do |format|
+        format.js
+      end 
     end
   end
 
