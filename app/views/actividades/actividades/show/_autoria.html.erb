@@ -13,7 +13,7 @@
                     </thead>
                     <tbody>
                         <% if actividad.autores.any? %>
-                                <% actividad.autores.each do |a| %>
+                                <% actividad.autores.order(:id).each do |a| %>
                                     <tr>
                                         <td> <%= (a.persona.paterno||'')+' '+(a.persona.materno||'')+' '+(a.persona.nombre||'') if a.persona.id != 211 %>
                                              <%= (a.firma || '') if a.persona.id == 211 %>

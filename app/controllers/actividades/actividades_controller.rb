@@ -77,19 +77,20 @@ class Actividades::ActividadesController < ApplicationController
 
   def update
     @actividad = Actividad.find(params[:id].to_i)
+
     if @actividad.update(actividad_params)
-         redirect_to [:actividades, @actividad]  
+          redirect_to [:actividades, @actividad]  
     else
-      @producto = @actividad.producto  
-      if !@producto.pathf.blank? 
-        @parts = @producto.pathf.split('-')
-      else
-        @parts = ['-'] 
-      end 
-      respond_to do |format|
-        format.js
-      end 
-    end
+          @producto = @actividad.producto  
+          if !@producto.pathf.blank? 
+               @parts = @producto.pathf.split('-')
+          else
+               @parts = ['-'] 
+          end 
+          respond_to do |format|
+              format.js
+          end 
+     end
   end
 
   def updoc
