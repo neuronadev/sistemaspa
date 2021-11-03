@@ -71,12 +71,13 @@
             </ul>
       </li>
    <% end %>
-
-   <li class="navList__heading">
-       <%= link_to redesindex_path, data: {turbolinks:false} do %>
-          <i class="fas fa-users text-white"></i><span class="text-white"> Red Académica </span>
-       <% end %>   
-   </li>
+    <% if current_usuario.rol == 'C' %>
+         <li class="navList__heading">
+            <%= link_to redesindex_path, data: {turbolinks:false} do %>
+               <i class="fas fa-users text-white"></i><span class="text-white"> Red Académica </span>
+            <% end %>   
+         </li>
+    <% end %>     
 
    <li class="navList__heading">
         
