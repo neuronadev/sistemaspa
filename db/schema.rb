@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_26_000000) do
+ActiveRecord::Schema.define(version: 2021_11_02_195830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 2021_10_26_000000) do
     t.index ["persona_id"], name: "index_academicos_on_persona_id"
     t.index ["red_id"], name: "index_academicos_on_red_id"
     t.index ["red_id"], name: "index_academicos_on_red_id"
+  end
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -1114,6 +1124,20 @@ ActiveRecord::Schema.define(version: 2021_10_26_000000) do
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
+  create_table "valetapas", force: :cascade do |t|
+    t.bigint "actividad_id", null: false
+    t.bigint "persona_id", null: false
+    t.string "etapa"
+    t.string "accion"
+    t.string "estado"
+    t.string "atendido"
+    t.string "activo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["actividad_id"], name: "index_valetapas_on_actividad_id"
+    t.index ["persona_id"], name: "index_valetapas_on_persona_id"
+  end
+
   create_table "vinculaciones", force: :cascade do |t|
     t.string "tipovinculacion", limit: 2
     t.string "niveldecreto", limit: 1
@@ -1253,5 +1277,7 @@ ActiveRecord::Schema.define(version: 2021_10_26_000000) do
   add_foreign_key "ttesistas", "tactividades"
   add_foreign_key "usuarios", "personas"
   add_foreign_key "usuarios", "personas"
+  add_foreign_key "valetapas", "actividades"
+  add_foreign_key "valetapas", "personas"
   add_foreign_key "vinculaciones", "actividades"
 end

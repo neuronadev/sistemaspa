@@ -51,7 +51,7 @@
    </li>
    <li class="navList__heading">
        <%= link_to evaltecnico_path, data: {turbolinks:false} do %>
-         <i class="fas fa-bezier-curve text-white"></i><span class="text-white"> Actividades Sustantivas de Técnicos </span>
+         <i class="fas fa-bezier-curve text-white"></i><span class="text-white"> Calificar Sustantivas de Técnicos </span>
        <% end %>   
    </li>
    <% if current_usuario.persona_id == 105 %>
@@ -71,13 +71,23 @@
             </ul>
       </li>
    <% end %>
+   
+   <li class="navList__heading">
+       <%= link_to redesindex_path, data: {turbolinks:false} do %>
+          <i class="fas fa-users text-white"></i><span class="text-white"> Red Académica </span>
+       <% end %>   
+   </li>
+   
    <li class="navList__heading">
         
        <%= link_to destroy_usuario_session_path  data: {turbolinks:false} do %>
           <i class="fas fa-sign-out-alt text-white"></i><span class="text-white"> Salir </span>
        <% end %>    
    </li>
-    
+
+       
+
+
 
 
  </ul>       

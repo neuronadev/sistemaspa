@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-body">
+         <div>Autores: <%= citaConIdentificacion(@actividad.id).html_safe %></div>
+        
+            <div class="row">
+                <div class="mb-3 col-md-9">
+                    <label class="font-weight-bold">Título del libro:</label>
+                    <div><%= @actividad.titulo %></div>
+                </div>  
+                <div class="mb-3 col-md-3">
+                    <label class="font-weight-bold">Año de publicacion:</label>
+                    <div><%= @actividad.anio %></div>
+                </div>  
+            </div>   
+            <div class="row">
+                        <div class="mb-3 col-md-3">
+                            <label class="font-weight-bold">Número de páginas:</label>
+                            <div><%= @actividad.libroarbitrado.nopaginas %></div>
+                        </div>    
+                        <div class="mb-3 col-md-3">
+                            <label class="font-weight-bold">Idioma:</label>
+                            <div><%= @actividad.libroarbitrado.idioma.nomidioma %></div>
+                        </div> 
+                        <div class="mb-3 col-md-3">
+                            <label class="font-weight-bold">ISBN:</label>
+                            <div><%= @actividad.libroarbitrado.isbn %></div>
+                        </div> 
+            </div>
+            
+            <div class="row mt-md-3">
+                <div class="col">
+                    <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+                </div> 
+            </div>
+          
+          <%= render "avalida/opciones" %> 
+
+    </div>     
+ </div>

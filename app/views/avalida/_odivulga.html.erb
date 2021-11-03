@@ -1,0 +1,25 @@
+ <div>Participantes: <%= citaConIdentificacion(@actividad.id).html_safe %></div>
+
+  <div class="row">
+        <div class="mb-3 col-md-9">
+               <label class="font-weight-bold">Nombre de la actividad:</label>
+               <div><%= @actividad.titulo %></div>
+         </div>  
+         <div class="mb-3 col-md-3">
+               <label class="font-weight-bold">Fecha:</label>
+               <div><%= @actividad.fechapub %></div>
+         </div>  
+    </div>   
+
+        <div class="mb-3 col-md-5">
+           <label class="font-weight-bold">Tipo de actividad:</label>
+            <div><%= @actividad.divulgacion.tipodivulgacion.nomtipodivulgacion %></div>
+        </div> 
+
+ <div class="row mt-md-3">
+     <div class="col">
+       <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+      </div> 
+   </div>
+
+    <%= render "avalida/opciones" %> 

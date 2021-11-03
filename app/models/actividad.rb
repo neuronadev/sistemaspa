@@ -15,6 +15,7 @@ class Actividad < ApplicationRecord
     has_one :divulgacion
     has_one :fasciculo
     has_many :mensajes
+    has_many :valetapas
     has_many_attached :documentos
     has_one_attached :tesisdoc  #Acta de examen
     has_one_attached :tesisportada #Portada de la tesis

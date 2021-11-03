@@ -12,6 +12,9 @@
    </div> 
    <div class="card">
       <div class="card-body">
+         <% if @actividad.estado == 'D' %> 
+                <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
+         <% end %>     
          <%= render "actividades/actividades/show/form_art", actividad:@actividad if @parts[0] == 'ART' %>
          <%= render "actividades/actividades/show/form_libro", actividad:@actividad if @parts[0] == 'LIBRO' %>
          <%= render "actividades/actividades/show/form_capitulo", actividad:@actividad if @parts[0] == 'CAPITULO' %>

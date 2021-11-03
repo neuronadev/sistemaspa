@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center mt-md-3">
+ <div class="col-11">
+   <div class="card">
+   <div class="card-body">
+         <h5>Productos Académicos <%= @p.academico.red.nomred %> </h5>
+         <table class="table table-sm" data-controller="validar">
+            <thead>
+               <tr>
+                  <th>Folio</th>
+                  <th>Producto </th>
+                  <th>Actividad</th> 
+                  <th><th>
+               </tr>
+            </thead>
+            <tbody>
+               <% 
+                  @i = 1
+                  @actividades.each do |a|
+                     @row_id = @i.to_s + '_' + a.id.to_s 
+               %>
+                     <tr id="tr_<%= @row_id %>" >
+                        <td> <%= a.id %> </td>
+                        <td> <%= a.producto.descripcion %> </td>
+                        <td> <%= a.titulo %> </td>
+                        <td> 
+                           <% if a.estado == 'U' %>
+                                 <button class="btn btn-warning btn-sm" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" >Validar</button>
+                           <% end %>  
+                           <% if a.estado == 'C' %>
+                                 <span class="badge badge-success" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>">Validado</span>
+                           <% end %> 
+                           <% if a.estado == 'G' %>
+                                 <span class="badge badge-info" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>">En edición</span>
+                           <% end %> 
+                           <% if a.estado == 'D' %>
+                                 <span class="badge badge-danger" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>">No se considera</span>
+                           <% end %> 
+                        </td>
+                     </tr> 
+                     <tr id="div_<%= @row_id %>" style="display:none">
+                        <td></td>
+                        <td></td>
+                        <td>
+                           <div>
+                                 contenido de la validacion
+                           </div>
+                        
+                        </td>
+                        <td></td>
+                     </tr>  
+               <% 
+                  @i = @i +1
+                  end
+               %>
+
+
+            </tbody>
+         </table>
+   </div>    
+  </div>
+  </div>
+</div>  

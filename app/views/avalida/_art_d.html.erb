@@ -1,0 +1,14 @@
+<div class="row mt-md-3">
+  <div class="col-4">
+      Fecha publicacón: <%= !@actividad.fechapub.blank? ? @actividad.fechapub : 'N/A'  %>
+    </div> 
+  <div class="col">
+      Revista: <%= @actividad.articulo.revista.nomrevista  %>
+    </div>
+</div>
+
+<div class="row mt-md-3">
+   <div class="col">
+     <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+   </div> 
+</div>

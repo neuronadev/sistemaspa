@@ -1,0 +1,44 @@
+<div class="card">
+    <div class="card-body"> 
+        <div class="row">
+        <div class="mb-3 col-md-9">
+                <label class="font-weight-bold">Título:</label>
+                <div><%= @actividad.titulo %></div>
+            </div>  
+            <div class="mb-3 col-md-3">
+                <label class="font-weight-bold">Año:</label>
+                <div><%= @actividad.anio %></div>
+            </div>  
+        </div>   
+        <div class="row">
+                    <div class="mb-3 col-md-2">
+                        <label class="font-weight-bold">Página inicial:</label>
+                        <div><%= @actividad.capitulo.pgini %></div>
+                    </div>     
+                    <div class="mb-3 col-md-2">
+                        <label class="font-weight-bold">Página final:</label>
+                        <div><%= @actividad.capitulo.pgfin %></div>
+                    </div> 
+                    <div class="mb-3 col-md-2">
+                        <label class="font-weight-bold">Idioma:</label>
+                        <div><%= @actividad.capitulo.idioma.nomidioma %></div>
+                    </div> 
+                    <div class="mb-3 col-md-8">
+                        <label class="font-weight-bold">Libro:</label>
+                        <div><%= @actividad.capitulo.libro.nomlibro %></div>
+                    </div> 
+                    <div class="mb-3 col-md-4">
+                        <label class="font-weight-bold">ISBN:</label>
+                        <div><%= @actividad.capitulo.libro.isbn %></div>
+                    </div> 
+            
+        </div>
+        <div class="row mt-md-3">
+        <div class="col">
+                <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+        </div> 
+        </div>
+            
+        <%= render "avalida/opciones" %> 
+    </div>
+</div>        

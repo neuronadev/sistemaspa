@@ -1,0 +1,62 @@
+ <div>Participantes: <%= citaConIdentificacion(@actividad.id).html_safe %></div>
+
+     <div class="row">
+        <div class="mb-3 col-md-9">
+              <label class="font-weight-bold">Título:</label>
+              <div><%= @actividad.titulo %></div>
+         </div>  
+         <div class="mb-3 col-md-3">
+               <label class="font-weight-bold">Año:</label>
+               <div><%= @actividad.anio %></div>
+         </div>  
+    </div>   
+
+                <% if @producto.prodgrupo.clave == 'DECRETO' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <label class="font-weight-bold">Nivel:</label>
+                          <div><%= @niveldecreto %></div> 
+                       </div>   
+                    </div>   
+                <% end %> 
+                <% if @producto.prodgrupo.clave == 'ORDENAMIENTO' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <label class="font-weight-bold">Fase:</label>
+                          <div><%= @ordenamiento %></div> 
+                       </div>   
+                    </div>   
+                <% end %> 
+                <% if @producto.prodgrupo.clave == 'INICIATIVA' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                           <label class="font-weight-bold">Nivel:</label>
+                           <div><%= @niveliniciativa %></div>  
+                       </div>   
+                    </div>   
+                <% end %> 
+                <% if @producto.prodgrupo.clave == 'REGLA' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <label class="font-weight-bold">Nivel:</label>
+                          <div><%= @nivelregla %></div>  
+                       </div>   
+                    </div>   
+                <% end %> 
+                <% if @producto.prodgrupo.clave == 'COMITE' %>
+                     <div class="col-4">
+                        <div class="form-group">
+                          <label class="font-weight-bold">Participación:</label>
+                          <div><%= @nivelcomite %></div> 
+                       </div>   
+                    </div>   
+                <% end %> 
+
+
+ <div class="row mt-md-3">
+     <div class="col">
+       <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+      </div> 
+ </div>
+
+ <%= render "avalida/opciones" %> 

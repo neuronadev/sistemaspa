@@ -33,8 +33,16 @@
                               </div>     
                               <% if a.estado == 'G' %>
                                     <div class="d-flex justify-content-left alert alert-danger" role="alert">
-                                       <small><%=  mensaje_txt(a.id) %>
+                                       <small>
                                             <strong>Vaya al siguiente link para corregir:  <%= link_to "Corregir", edit_actividades_actividad_path(a.id) %></strong>
+                                       </small> 
+                                             
+                                    </div>
+                              <% end %>  
+                              <% if a.estado == 'D' %>
+                                    <div class="d-flex justify-content-left">
+                                       <small>
+                                            <i class="fas fa-comment-alt text-danger"></i> <span class="text-danger">No cumple con la normativa.</span> <strong><%= link_to "Ver motivo", actividades_actividad_path(a.id), class:'text-danger' %></strong>
                                        </small> 
                                              
                                     </div>

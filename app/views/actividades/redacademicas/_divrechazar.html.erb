@@ -1,0 +1,25 @@
+
+<td></td>
+<td colspan="2">
+    <div class="d-flex p-2">
+        <%= link_to "#", data:{ action:'click->validar#btnRegresarIni','validar-row-param':@div_target} do %>
+             <i class="fas fa-long-arrow-alt-left"></i> Regresar 
+        <% end %>
+    </div> 
+    
+    <%= form_with url: 'comentario', model:@valetapa, data:{action:'ajax:success->validar#onPostMensaje', 'validar-row-param':@div_target  } do |form| %>
+            <input type="hidden" name="id" value='<%= @actividad.id %>'>
+            <input type="hidden" name="sec" value='<%= @sec %>'>
+            <input type="hidden" name="tipo" value='rechazar'>
+            <input type="hidden" name="etapa" value='CR'>
+            <input type="hidden" name="atendido" value='SI'>
+            <input type="hidden" name="activo" value='SI'>
+            <input type="hidden" name="estado" value='cerrado'>
+            <%= form.label :txtmensaje, 'Escriba el motivo por el cual el producto no será considerado:', class:'font-weight-bold text-danger' %>
+            <%= form.rich_text_area :txtmensaje %>
+           
+            <div class="d-flex justify-content-center p-2"> <%= form.submit "Aceptar", class:"btn btn-primary" %> </div>
+    <% end %>
+
+</td>
+<td></td>

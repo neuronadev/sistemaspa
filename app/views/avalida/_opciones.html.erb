@@ -1,0 +1,24 @@
+        <% if @actividad.estado == 'U' %>    
+               <div class="d-flex flex-row">
+                  <%= render "avalida/btn_aceptar" %>
+                  <%= render "avalida/btn_corregir" %>
+                  <%= render "avalida/btn_rechazar" %>
+               </div>   
+         <% end %> 
+         <% if @actividad.estado == 'C' %>
+               <div class="alert alert-success" role="alert">
+                  Producto validado con VoBo de la Coordinación de Red
+               </div>
+         <% end %>   
+         <% if @actividad.estado == 'G' %>
+               <div class="alert alert-primary" role="alert">
+                  Producto enviado al Académico responsable para edición de datos:
+                  - <%= !@actividad.valetapas.where(activo:'SI').first.nil? ? @actividad.valetapas.where(activo:'SI').first.txtmensaje : ''   %>
+               </div>
+         <% end %>  
+         <% if @actividad.estado == 'D' %>
+               <div class="alert alert-danger" role="alert">
+                 El producto no será considerado:
+                  - <%= !@actividad.valetapas.where(activo:'SI').first.nil? ? @actividad.valetapas.where(activo:'SI').first.txtmensaje : ''   %>
+               </div>
+         <% end %>  

@@ -1,0 +1,40 @@
+ <div>Participantes: <%= citaConIdentificacion(@actividad.id).html_safe %></div>
+
+     <div class="row">
+        <div class="mb-3 col-md-12">
+          <label class="font-weight-bold">Título de la tesis:</label>
+          <div><%= @actividad.titulo %></div>
+          
+        </div>
+     </div> 
+    
+        <div class="row">
+
+              
+               <div class="mb-3 col-md-8">
+                        <label class="font-weight-bold">Nivel:</label>
+                        <div><%= @actividad.tesista.nivelestudio.nomnivel %></div>
+               </div>  
+                <div class="mb-3 col-md-3">
+                     <label class="font-weight-bold">Feha del exámen de grado:</label>
+                     <div><%= @actividad.tesista.fgrado %></div>
+                </div>
+                <% if @actividad.producto_id == 83 %>
+                    <div class="mb-3 col-md-3">
+                      <label class="font-weight-bold">No. Acta:</label>
+                      <div><%= @actividad.tesista.acta %></div>
+                    </div>
+                    <div class="mb-3 col-md-3">  
+                      <label class="font-weight-bold">Eficiencia Terminal:</label>
+                      <div><%= @actividad.tesista.efterminal %></div>
+                    </div>  
+             <% end %>     
+        </div> 
+
+  <div class="row mt-md-3">
+     <div class="col">
+       <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+      </div> 
+ </div>
+
+ <%= render "avalida/opciones" %> 

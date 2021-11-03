@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
 
+ 
+  get 'actividades/redacademicas/index', to: 'actividades/redacademicas#index', as: 'redesindex'
+  get 'actividades/redacademicas/items/:id/:sec', to: 'actividades/redacademicas#items', as: 'items'
+  get 'actividades/redacademicas/itemaceptar/:id/:sec', to: 'actividades/redacademicas#itemaceptar', as: 'itemaceptar'
+  get 'actividades/redacademicas/itemcorregir/:id/:sec', to: 'actividades/redacademicas#itemcorregir', as: 'itemcorregir'
+  get 'actividades/redacademicas/itemrechazar/:id/:sec', to: 'actividades/redacademicas#itemrechazar', as: 'itemrechazar'
+  post 'actividades/redacademicas/comentario', to: 'actividades/redacademicas#comentario', as: 'itemcomentario'
+
+  namespace :actividades do
+    get 'redacademica/index'
+  end
   namespace :cloud do
     resources :cloudfile
     get 'cloudfile/index'

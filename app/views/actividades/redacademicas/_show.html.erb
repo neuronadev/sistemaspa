@@ -1,0 +1,27 @@
+<%
+  @producto = @actividad.producto
+  
+  if !@producto.pathf.blank? 
+      @parts = @producto.pathf.split('-')
+  else
+     @parts = ['-'] 
+  end
+
+%>
+<td></td>
+<td colspan="2">
+    <%= render "avalida/arts"  if @parts[0] == 'ART' %>
+    <%= render "avalida/libros" if @parts[0] == 'LIBRO' %>
+    <%= render "avalida/capitulos" if @parts[0] == 'CAPITULO' %>
+
+    <%= render "avalida/flora" if @parts[0] == 'FLORA' %>
+    <%= render "avalida/patente" if @parts[0] == 'PATENTE' %>
+    <%= render "avalida/editor" if @parts[0] == 'EDITOR' %>
+    <%= render "avalida/odivulga" if @parts[0] == 'ODIV' %>
+    <%= render "avalida/vinculapp" if @parts[0] == 'VINCULAPP' %>
+    <%= render "avalida/vinculasp" if @parts[0] == 'VINCULASP' %>
+    <%= render "avalida/adicional" if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
+    <%= render "avalida/curso" if @producto.prodgrupo.clave == 'CUR' %>
+    <%= render "avalida/tesis" if @producto.prodgrupo.clave == 'TESIS' %>
+</td>
+<td></td>

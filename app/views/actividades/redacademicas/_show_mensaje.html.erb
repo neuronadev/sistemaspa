@@ -1,0 +1,22 @@
+
+<td></td>
+<td colspan="2">
+     <div>
+          <%= link_to "#", data: { action: "click->validar#btnRegresarIni", 'validar-row-param':@div_target } do %>
+             <i class="fas fa-long-arrow-alt-left"></i> Regresar
+          <% end %>
+     </div>
+     <div class="alert alert-info" role="alert">
+          <% if  @v_etapa.accion == 'corregir' %> 
+              Producto enviado al Académico responsable para edición de datos.
+          <% end %>
+          <% if  @v_etapa.accion == 'rechazar' %> 
+              Producto se marco para no ser considerado.
+          <% end %>
+          <div><strong>Detalle:</strong></div>   
+          <div> <%= @v_etapa.txtmensaje  %></div> 
+     </div> 
+     
+
+</td>
+<td></td>
