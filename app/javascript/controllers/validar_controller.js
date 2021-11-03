@@ -8,10 +8,12 @@ export default class extends Controller {
        event.preventDefault() 
        let row_div = event.params.row
        let element_div = document.getElementById(row_div)
+       let element_tr = document.getElementById(row_div.replace("div","tr"))
        let data = row_div.split("_")
-
+       
        if (element_div.style.display == 'none'){
               element_div.style.display = 'table-row'
+              element_tr.classList.add("text-muted")
 
               fetch(`items/${data[2]}/${data[1]}`)
                  .then( response => response.text() )
@@ -19,8 +21,10 @@ export default class extends Controller {
 
 
        }else{
-              element_div.style.display = 'none'   
+              element_div.style.display = 'none'  
+              element_tr.classList.remove("text-muted") 
        }
+       
     }
 
     btnAceptar(event){

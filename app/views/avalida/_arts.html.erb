@@ -1,13 +1,6 @@
-
- <div class="card">
-    <div class="card-body">
-         <div>Autores: <%= citaConIdentificacion(@actividad.id).html_safe %></div>
-        
+         
           <%= render "avalida/art_c"  if @parts[1] == 'C' %>
           <%= render "avalida/art_d"  if @parts[1] == 'D' %>
           <%= render "avalida/art_p"  if @parts[1] == 'P' %>
           
-          <%= render "avalida/opciones" %> 
-
-    </div>     
- </div>
+          

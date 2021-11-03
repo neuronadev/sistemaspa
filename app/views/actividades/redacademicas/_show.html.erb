@@ -10,18 +10,37 @@
 %>
 <td></td>
 <td colspan="2">
-    <%= render "avalida/arts"  if @parts[0] == 'ART' %>
-    <%= render "avalida/libros" if @parts[0] == 'LIBRO' %>
-    <%= render "avalida/capitulos" if @parts[0] == 'CAPITULO' %>
+  <div class="card" style="background-color:#fbfbfb">
+    <div class="card-body"> 
+        <div class="d-flex">
+             <div class=""><span class="font-weight-bold"> Autores:</span> <%= citaConIdentificacion(@actividad.id).html_safe %></div>
+             <div class="ml-auto">
+                      <%= link_to "#", data:{action:'click->validar#seccVal', 'validar-row-param':@div_target}, title:'Cerrar vista' do %>
+                            <i class="fas fa-times fa-1x"></i>
+                      <% end %>
+              </div>
+         </div>
+              <%= render "avalida/arts"  if @parts[0] == 'ART' %>
+              <%= render "avalida/libros" if @parts[0] == 'LIBRO' %>
+              <%= render "avalida/capitulos" if @parts[0] == 'CAPITULO' %>
 
-    <%= render "avalida/flora" if @parts[0] == 'FLORA' %>
-    <%= render "avalida/patente" if @parts[0] == 'PATENTE' %>
-    <%= render "avalida/editor" if @parts[0] == 'EDITOR' %>
-    <%= render "avalida/odivulga" if @parts[0] == 'ODIV' %>
-    <%= render "avalida/vinculapp" if @parts[0] == 'VINCULAPP' %>
-    <%= render "avalida/vinculasp" if @parts[0] == 'VINCULASP' %>
-    <%= render "avalida/adicional" if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
-    <%= render "avalida/curso" if @producto.prodgrupo.clave == 'CUR' %>
-    <%= render "avalida/tesis" if @producto.prodgrupo.clave == 'TESIS' %>
+              <%= render "avalida/flora" if @parts[0] == 'FLORA' %>
+              <%= render "avalida/patente" if @parts[0] == 'PATENTE' %>
+              <%= render "avalida/editor" if @parts[0] == 'EDITOR' %>
+              <%= render "avalida/odivulga" if @parts[0] == 'ODIV' %>
+              <%= render "avalida/vinculapp" if @parts[0] == 'VINCULAPP' %>
+              <%= render "avalida/vinculasp" if @parts[0] == 'VINCULASP' %>
+              <%= render "avalida/adicional" if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
+              <%= render "avalida/curso" if @producto.prodgrupo.clave == 'CUR' %>
+              <%= render "avalida/tesis" if @producto.prodgrupo.clave == 'TESIS' %>
+         
+         <div class="row mt-md-3">
+           <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+         </div>  
+          
+          <%= render "avalida/opciones" %> 
+         
+   </div>
+  </div>          
 </td>
 <td></td>

@@ -1,14 +1,8 @@
 <div class="row mt-md-3">
   <div class="col-4">
-      Fecha publicacón: <%= !@actividad.fechapub.blank? ? @actividad.fechapub : 'N/A'  %>
+      <span class="font-weight-bold">Fecha publicacón:</span> <%= !@actividad.fechapub.blank? ? @actividad.fechapub : 'N/A'  %>
     </div> 
   <div class="col">
-      Periódico: <%= @actividad.articulo.revista.nomrevista  %>
+      <span class="font-weight-bold">Periódico:</span> <%= @actividad.articulo.revista.nomrevista  %>
     </div>
-</div>
-
-<div class="row mt-md-3">
-   <div class="col">
-     <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
-   </div> 
 </div>

@@ -18,7 +18,7 @@
                   @actividades.each do |a|
                      @row_id = @i.to_s + '_' + a.id.to_s 
                %>
-                     <tr id="tr_<%= @row_id %>" >
+                     <tr id="tr_<%= @row_id %>" class="">
                         <td> <%= a.id %> </td>
                         <td> <%= a.producto.descripcion %> </td>
                         <td> <%= a.titulo %> </td>
@@ -27,13 +27,13 @@
                                  <button class="btn btn-warning btn-sm" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" >Validar</button>
                            <% end %>  
                            <% if a.estado == 'C' %>
-                                 <span class="badge badge-success" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>">Validado</span>
+                                 <span class="badge badge-success" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">Validado</span>
                            <% end %> 
                            <% if a.estado == 'G' %>
-                                 <span class="badge badge-info" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>">En edición</span>
+                                 <span class="badge badge-info" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">En edición</span>
                            <% end %> 
                            <% if a.estado == 'D' %>
-                                 <span class="badge badge-danger" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>">No se considera</span>
+                                 <span class="badge badge-danger" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">No se considera</span>
                            <% end %> 
                         </td>
                      </tr> 

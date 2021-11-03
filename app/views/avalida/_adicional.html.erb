@@ -1,4 +1,4 @@
- <div>Participantes: <%= citaConIdentificacion(@actividad.id).html_safe %></div>
+
 
 
  <div class="row">
@@ -11,11 +11,3 @@
                <div><%= @actividad.anio %></div>
          </div>  
  </div>
-
- <div class="row mt-md-3">
-     <div class="col">
-       <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
-      </div> 
- </div>
-
- <%= render "avalida/opciones" %> 

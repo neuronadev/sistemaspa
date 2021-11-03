@@ -1,4 +1,4 @@
- <div>Participantes: <%= citaConIdentificacion(@actividad.id).html_safe %></div>
+
 
      <div class="row">
         <div class="mb-3 col-md-9">
@@ -15,7 +15,10 @@
                      <div class="col-4">
                         <div class="form-group">
                           <label class="font-weight-bold">Nivel:</label>
-                          <div><%= @niveldecreto %></div> 
+                          <div>
+                                <%  @h = @niveldecreto.invert  %>     
+                                <%= @h[@actividad.vinculacion.niveldecreto] %>
+                           </div> 
                        </div>   
                     </div>   
                 <% end %> 
@@ -23,7 +26,10 @@
                      <div class="col-4">
                         <div class="form-group">
                           <label class="font-weight-bold">Fase:</label>
-                          <div><%= @ordenamiento %></div> 
+                          <div>
+                               <%  @h = @ordenamiento.invert  %>     
+                               <%= @h[@actividad.vinculacion.ordenamiento] %> 
+                          </div> 
                        </div>   
                     </div>   
                 <% end %> 
@@ -31,7 +37,10 @@
                      <div class="col-4">
                         <div class="form-group">
                            <label class="font-weight-bold">Nivel:</label>
-                           <div><%= @niveliniciativa %></div>  
+                           <div>
+                                 <%  @h = @niveliniciativa.invert  %>     
+                                 <%= @h[@actividad.vinculacion.niveliniciativa] %>
+                           </div>  
                        </div>   
                     </div>   
                 <% end %> 
@@ -39,7 +48,10 @@
                      <div class="col-4">
                         <div class="form-group">
                           <label class="font-weight-bold">Nivel:</label>
-                          <div><%= @nivelregla %></div>  
+                          <div>
+                                <%  @h = @nivelregla.invert  %>     
+                                <%= @h[@actividad.vinculacion.nivelregla] %>
+                          </div>  
                        </div>   
                     </div>   
                 <% end %> 
@@ -47,16 +59,10 @@
                      <div class="col-4">
                         <div class="form-group">
                           <label class="font-weight-bold">Participación:</label>
-                          <div><%= @nivelcomite %></div> 
+                          <div>
+                                <%  @h = @nivelcomite.invert  %>     
+                                <%= @h[@actividad.vinculacion.nivelcomite] %>
+                          </div> 
                        </div>   
                     </div>   
                 <% end %> 
-
-
- <div class="row mt-md-3">
-     <div class="col">
-       <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
-      </div> 
- </div>
-
- <%= render "avalida/opciones" %> 
