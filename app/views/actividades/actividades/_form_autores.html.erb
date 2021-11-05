@@ -54,12 +54,26 @@
             </thead>
             <tbody data-autoria-target="rwsAutores">
                 <% if  @actividad.autores.any? %>
-                          <%= form.fields_for :autores, @actividad.autores.where.not(persona_id:[211]) do |autor| %>
-                                <%= render 'autoria_fields', form: autor, swcorr:swcorr %>
-                          <% end %>
-                          <%= form.fields_for :autores, @actividad.autores.where(persona_id:[211]) do |autor| %>
-                                <%= render 'autoria_fields_ext', form: autor, swcorr:swcorr %>
-                          <% end %>
+                      <% @actividad.autores.each do |aut| %>
+                            <% if aut.persona_id == 211 || aut.persona_id == 212 %>
+                                  <% if aut.persona_id == 211  %>
+                                        <%= form.fields_for :autores, @actividad.autores.where(id:aut.id) do |autor| %>
+                                              <%= render 'autoria_fields_ext', form: autor, swcorr:swcorr %>
+                                          <% end %>
+                                  <% end %>
+                                  <% if aut.persona_id == 212  %>
+                                        <%= form.fields_for :autores, @actividad.autores.where(id:aut.id) do |autor| %>
+                                              <%= render 'autoria_fields_ext', form: autor, swcorr:swcorr %>
+                                          <% end %>
+                                  <% end %>
+                            <% else %>
+                                     <%= form.fields_for :autores, @actividad.autores.where(id:aut.id) do |autor| %>
+                                            <%= render 'autoria_fields', form: autor, swcorr:swcorr %>
+                                     <% end %>
+                            <% end %>      
+
+                      <% end %>
+                         
                 <% end %>    
 
             </tbody>

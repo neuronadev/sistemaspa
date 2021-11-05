@@ -71,17 +71,25 @@
             </ul>
       </li>
    <% end %>
-    <% if current_usuario.rol == 'C' %>
+
+   <% if current_usuario.rol == 'C' %>
          <li class="navList__heading">
             <%= link_to redesindex_path, data: {turbolinks:false} do %>
                <i class="fas fa-users text-white"></i><span class="text-white"> Red Académica </span>
+            <% end %>   
+         </li>
+    <% end %>
+    <% if current_usuario.evaluador == 'A' %>
+        <li class="navList__heading">
+            <%= link_to validaindex_path, target:"_blank", data: {turbolinks:false} do %>
+               <i class="fas fa-users text-white"></i><span class="text-white"> Evaluación 2021 </span>
             <% end %>   
          </li>
     <% end %>     
 
    <li class="navList__heading">
         
-       <%= link_to destroy_usuario_session_path,  data: {turbolinks:false} do %>
+       <%= link_to destroy_usuario_session_path, data: {turbolinks:false} do %>
           <i class="fas fa-sign-out-alt text-white"></i><span class="text-white"> Salir </span>
        <% end %>    
    </li>

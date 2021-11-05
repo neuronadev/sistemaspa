@@ -8,8 +8,9 @@
     <% end %>    
 
     <% if params[:action] == 'edit' %> 
-         <%= form.hidden_field :estado, value:'U' %>
+        
          <% if @actividad.estado == 'G' %> 
+                 <%= form.hidden_field :estado, value:'U' %>
                 <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
          <% end %>   
         

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
- 
+
+  get 'valactividades/validaciones/index', to: 'valactividades/validaciones#index', as: 'validaindex'
+  
+
   get 'actividades/redacademicas/index', to: 'actividades/redacademicas#index', as: 'redesindex'
   get 'actividades/redacademicas/items/:id/:sec', to: 'actividades/redacademicas#items', as: 'items'
   get 'actividades/redacademicas/itemaceptar/:id/:sec', to: 'actividades/redacademicas#itemaceptar', as: 'itemaceptar'
