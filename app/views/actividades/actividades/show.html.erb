@@ -12,6 +12,10 @@
    </div> 
    <div class="card">
       <div class="card-body">
+         <% if !flash[:msgupdoc].blank? %> 
+            <div class="alert alert-success" > <%= flash[:msgupdoc] %> </div>  
+         <% end %>
+         
          <% if @actividad.estado == 'D' %> 
                 <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
          <% end %>     

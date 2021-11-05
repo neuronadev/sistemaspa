@@ -102,6 +102,7 @@ class Actividades::ActividadesController < ApplicationController
      if params[:actividad].present? 
         params[:actividad][:documentos].each do |doc| 
           @actividad.documentos.attach(doc)
+          flash[:msgupdoc] = "El documento se anexo correctamente al producto académico."
         end 
         redirect_to [:actividades,@actividad]
      else

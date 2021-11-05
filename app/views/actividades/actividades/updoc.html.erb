@@ -24,7 +24,10 @@
              </div>
               <div class="row pb-md-3 pl-md-3"> 
                <div class="col">
-                   <button type="submit" class="btn btn-primary">Enviar comprobante</button>
+                   
+       
+                   <%= form.submit "Enviar comprobante", class:"btn btn-primary", data: {disable_with: "Subiendo comprobante, un momento..."}   %>
+
                 </div>
        </div>  
         <% end %>            
