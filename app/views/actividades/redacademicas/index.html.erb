@@ -17,6 +17,7 @@
                   @i = 1
                   @actividades.each do |a|
                      @row_id = @i.to_s + '_' + a.id.to_s 
+                     if a.producto.prodgrupo.clave != 'ACTIVIDAD'
                %>
                      <tr id="tr_<%= @row_id %>" class="">
                         <td> <%= a.id %> </td>
@@ -49,7 +50,8 @@
                         <td></td>
                      </tr>  
                <% 
-                  @i = @i +1
+                    @i = @i +1
+                    end  
                   end
                %>
 
