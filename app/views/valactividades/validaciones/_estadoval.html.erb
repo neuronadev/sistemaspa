@@ -1,5 +1,6 @@
-<% if a.estado == 'C' %>
 
-   <i class="fas fa-check"></i> Validar
+    
+   <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+        validar
+   <% end %> 
 
-<% end %>

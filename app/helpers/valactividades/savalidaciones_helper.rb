@@ -1,0 +1,2 @@
+module Valactividades::SavalidacionesHelper
+end

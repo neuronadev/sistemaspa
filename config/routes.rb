@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  get 'valactividades/validaciones/infoproducto/:data', to:'valactividades/validaciones#infoproducto', as: 'savalproducto'
   get 'valactividades/validaciones/index', to: 'valactividades/validaciones#index', as: 'validaindex'
   
 
