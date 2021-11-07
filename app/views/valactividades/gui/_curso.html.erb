@@ -1,0 +1,53 @@
+ 
+ <div class="row">
+             <div class="col-sm">
+                <span class="font-weight-bold">Tipo impartición:</span> <%= @actividad.curso.tipocurso.nomtipocurso %>
+             </div> 
+             <div class="col-sm">
+                 <span class="font-weight-bold">Feha inicio:</span> <%= @actividad.curso.fini %>
+             </div>
+             <div class="col-sm">
+                 <span class="font-weight-bold">Feha termino:</span><%= @actividad.curso.ffin %>
+             </div>
+ </div>
+ <div class="row">            
+              <div class="col-sm">
+                    <span class="font-weight-bold">Total de horas del curso:</span><%= @actividad.curso.hcurso %>
+              </div>
+                    
+             <div class="col-sm">
+                 <span class="font-weight-bold">Número de horas impartidas:</span>
+                 
+                    <% if @actividad.producto_id == 82 
+                          autor = Autor.where(actividad_id:@actividad.id,persona_id:current_usuario.persona_id).first
+                     %>
+                            <%= autor.horas %> 
+                     <% else %> 
+                            <%= @actividad.curso.himpartidas %>
+                     <% end %> 
+                 
+             </div>
+             <div class="col-sm">
+                 <span class="font-weight-bold">Créditos:</span> <%= @actividad.curso.creditos %>
+             </div>
+             <div class="col-sm">
+                 <span class="font-weight-bold">No. de alumnos:</span> <%= @actividad.curso.noalumnos %>
+             </div>
+              <% if @actividad.producto_id == 82 
+                    autor = Autor.where(actividad_id:@actividad.id,persona_id:current_usuario.persona_id).first
+              %>
+                    <div class="col-sm">
+                        <span class="font-weight-bold">¿Coordinador del Curso?:</span> <%= autor.coordinador ? 'SI' : 'NO'   %>
+                    </div>
+              <% else %>
+                    <div class="col-sm">
+                        <span class="font-weight-bold">¿Coordinador del Curso?:</label> <%= @actividad.curso.coordinador %> 
+                    </div>
+              <% end %>      
+</div> 
+
+ <div class="row">
+   <div class="col-sm">
+     Comprobante:
+    </div>
+ </div>

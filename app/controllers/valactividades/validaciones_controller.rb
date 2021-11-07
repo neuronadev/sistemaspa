@@ -42,8 +42,9 @@ class Valactividades::ValidacionesController < ApplicationController
   end
 
   def infoproducto
-    @data = params[:data]
-    @tr,@idpersona,@idactividad = @data.split('_')
+    @trval = params[:trval]
+    @tritem = params[:tritem]
+    @tr,@idpersona,@idactividad = @trval.split('_')
 
     @actividad = Actividad.find(@idactividad.to_i)
     @producto = @actividad.producto
@@ -56,5 +57,91 @@ class Valactividades::ValidacionesController < ApplicationController
 
     render partial: 'show'
   end
+
+  def aceptarproducto
+    @trval = params[:target]
+    @tritem = params[:item]
+    @tr,@idpersona,@idactividad = @trval.split('_')
+
+    @actividad = Actividad.find(@idactividad.to_i)
+    @producto = @actividad.producto
+
+    if !@producto.pathf.blank? 
+        @parts = @producto.pathf.split('-')
+    else
+        @parts = ['-'] 
+    end
+       render partial: 'aceptarproducto'
+  end
   
+  def corregirproducto
+    @trval = params[:target]
+    @tritem = params[:item]
+    @tr,@idpersona,@idactividad = @trval.split('_')
+
+    @actividad = Actividad.find(@idactividad.to_i)
+    @producto = @actividad.producto
+    @valetapa = Valetapa.new
+
+    if !@producto.pathf.blank? 
+        @parts = @producto.pathf.split('-')
+    else
+        @parts = ['-'] 
+    end
+       render partial: 'corregirproducto' 
+  end
+
+  def rechazarproducto
+    @trval = params[:target]
+    @tritem = params[:item]
+    @tr,@idpersona,@idactividad = @trval.split('_')
+
+    @actividad = Actividad.find(@idactividad.to_i)
+    @producto = @actividad.producto
+    @valetapa = Valetapa.new
+    render partial: 'rechazarproducto'
+  end
+
+  def comentario
+      id = params[:id].to_i
+      @trval = params[:target]
+      @tritem = params[:item]
+      @actividad = Actividad.find(id)
+      valetapa = {actividad_id:@actividad.id, persona_id:current_usuario.persona_id, 
+                etapa:params[:etapa], accion:params[:tipo], estado:params[:estado], activo:params[:activo],
+                txtmensaje:params[:valetapa][:txtmensaje], atendido:params[:atendido] }
+      cerrar_activos_valetapa @actividad
+      @v_etapa = create_valetapa valetapa
+      if params[:tipo] == 'corregir' 
+        update_actividad @actividad, 'G'
+      end
+      if params[:tipo] == 'rechazar' 
+        update_actividad @actividad, 'D'
+      end
+      render partial: "mensaje"
+  end
+
+  private
+  def create_valetapa obj
+      
+      params = ActionController::Parameters.new({
+           valetapa:obj
+      })
+      
+      permitted = params.require(:valetapa).permit(:actividad_id, :persona_id, :etapa, :accion, :estado, :activo, :txtmensaje, :atendido)
+      v = Valetapa.new(permitted)
+      v.save 
+      return v
+  end
+  
+  def update_actividad actividad, estado
+       actividad.estado = estado
+       actividad.fecha3 = Date.today 
+       actividad.save
+  end
+
+  def cerrar_activos_valetapa actividad
+      Valetapa.where(actividad_id:actividad.id).update_all(activo:'NO')  
+  end
+
 end

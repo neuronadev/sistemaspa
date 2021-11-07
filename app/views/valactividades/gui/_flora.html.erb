@@ -1,0 +1,31 @@
+
+    <div class="row">
+         <div class="col-sm">
+               <label class="font-weight-bold">Título:</label>
+               <%= @actividad.titulo %>
+         </div>  
+         <div class="col-sm">
+               <label class="font-weight-bold">Fecha de publicacion:</label>
+               <%= @actividad.fechapub %>
+         </div>  
+    </div>   
+    <div class="row">
+    
+                  <div class="col-sm">
+                    <label class="font-weight-bold">Número de especies:</label>
+                    <%= @actividad.fasciculo.tipofasciculo.nomtipofasciculo %>
+                  </div>
+                  <div class="col-sm">
+                    <label class="font-weight-bold">Medio de publicación:</label>
+                    <%= @actividad.fasciculo.tipomedio.nomtipomedio %>
+                  </div>    
+                  <div class="col-sm">
+                    <label class="font-weight-bold">Nombre libro o revista:</label>
+                    <%= @actividad.fasciculo.nommedio %>
+                  </div> 
+                  <div class="col-sm">
+                    <label class="font-weight-bold">Código ISBN o ISSN:</label>
+                    <%= @actividad.fasciculo.codigo %>
+                  </div> 
+       
+    </div>

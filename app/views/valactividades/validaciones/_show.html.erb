@@ -3,4 +3,17 @@
   <%= render "valactividades/gui/libros" if @parts[0] == 'LIBRO' %>
   <%= render "valactividades/gui/capitulos" if @parts[0] == 'CAPITULO' %>
 
+  <%= render "valactividades/gui/flora" if @parts[0] == 'FLORA' %>
+  <%= render "valactividades/gui/patente" if @parts[0] == 'PATENTE' %>
+  <%= render "valactividades/gui/editor" if @parts[0] == 'EDITOR' %>
+  <%= render "valactividades/gui/odivulga" if @parts[0] == 'ODIV' %>
+  <%= render "valactividades/gui/vinculapp" if @parts[0] == 'VINCULAPP' %>
+  <%= render "valactividades/gui/vinculasp" if @parts[0] == 'VINCULASP' %>
+  <%= render "valactividades/gui/adicional" if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
+  <%= render "valactividades/gui/curso" if @producto.prodgrupo.clave == 'CUR' %>
+  <%= render "valactividades/gui/tesis" if @producto.prodgrupo.clave == 'TESIS' %>
+
+  <!-- Opciones de validaciones Botones -->
+  <%= render "valactividades/gui/opcionesval" %>
+
 

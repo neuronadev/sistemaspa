@@ -1,0 +1,20 @@
+<div class="d-flex p-2">
+        <%= link_to "#", data:{action:'click->valproducto#actionBack', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+             <i class="fas fa-long-arrow-alt-left"></i> Regresar 
+        <% end %>
+</div> 
+    <%= form_with url: 'comentario', model:@valetapa, data:{action:'ajax:success->valproducto#onPostMensaje', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem   } do |form| %>
+            <input type="hidden" name="id" value='<%= @actividad.id %>'>
+            <input type="hidden" name="target" value='<%= @trval %>'>
+            <input type="hidden" name="item" value='<%= @tritem %>'>
+            <input type="hidden" name="tipo" value='rechazar'>
+            <input type="hidden" name="etapa" value='SA'>
+            <input type="hidden" name="atendido" value='SI'>
+            <input type="hidden" name="activo" value='SI'>
+            <input type="hidden" name="estado" value='cerrado'>
+
+            <%= form.label :txtmensaje, 'Escriba el motivo por el cual el producto no será considerado:', class:"font-weight-bold text-danger" %>
+            <%= form.rich_text_area :txtmensaje %>
+            <div class="d-flex justify-content-center p-2"> <%= form.submit "Aceptar", class:"btn btn-primary" %> </div>
+            
+    <% end %>

@@ -1,0 +1,16 @@
+<div>
+          <%= link_to "#", data:{action:'click->valproducto#actionBack', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+             <i class="fas fa-long-arrow-alt-left"></i> Regresar
+          <% end %>
+     </div>
+     <div class="alert alert-info" role="alert">
+          <% if  @v_etapa.accion == 'corregir' %> 
+              Producto enviado al Académico responsable para edición de datos.
+          <% end %>
+          <% if  @v_etapa.accion == 'rechazar' %> 
+              El producto académico se marcó para no ser considerado.
+          <% end %>
+          <div><strong>Detalle:</strong></div>   
+          <div> <%= @v_etapa.txtmensaje  %></div> 
+     </div> 
+     

@@ -1,0 +1,48 @@
+<div class="row"> 
+    
+     <div class="col-sm">
+               <span class="font-weight-bold">Título:</span>
+               <%= @actividad.titulo %>
+    <div class="col-sm">
+               <span class="font-weight-bold">Año:</span>
+               <%= @actividad.anio %>
+    </div>  
+</div>    
+    <div class="row">
+            
+             <div class="col-sm">
+                <span class="font-weight-bold">Tipo editor:</span>
+               
+                   <%  @tipoed = Tipoeditor.find( @actividad.editor.tipoeditorid) %>
+                   <%=
+                          @tipoed.nomtipoeditor
+                  %> 
+             </div> 
+
+             <div class="col-sm">
+                <span class="font-weight-bold">Nombre de la revista o libro:</span>
+                <%= @actividad.editor.medio %>
+             </div>   
+             <div class="col-sm">
+                <span class="font-weight-bold">ISBN o ISSN:</span>
+                <%= @actividad.editor.codigo %>
+             </div>   
+ </div>
+ <div class="row">             
+             <div class="col-sm">
+                <span class="font-weight-bold">Nombre de la editorial:</span>
+                <%= @actividad.editor.editorial %>
+                
+             </div> 
+             <div class="col-sm">
+                <span class="font-weight-bold">Lugar de publicación (país o ciudad):</span>
+                <%= @actividad.editor.pais %>
+             </div> 
+             <div class="col-sm">
+                <span class="font-weight-bold">Ambito:</span>
+                <%= @actividad.editor.ambito.nomambito %>
+                
+             </div>  
+                 
+    </div> 
+   

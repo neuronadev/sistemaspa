@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
-  get 'valactividades/validaciones/infoproducto/:data', to:'valactividades/validaciones#infoproducto', as: 'savalproducto'
+  get 'valactividades/validaciones/infoproducto/:trval/:tritem', to:'valactividades/validaciones#infoproducto', as: 'savalproducto'
   get 'valactividades/validaciones/index', to: 'valactividades/validaciones#index', as: 'validaindex'
+  get 'valactividades/validaciones/aceptarproducto/:target/:item', to:'valactividades/validaciones#aceptarproducto', as: 'saaceptarproducto'
+  get 'valactividades/validaciones/corregirproducto/:target/:item', to:'valactividades/validaciones#corregirproducto', as: 'sacorregirproducto'
+  get 'valactividades/validaciones/rechazarproducto/:target/:item', to:'valactividades/validaciones#rechazarproducto', as: 'sarechazarproducto'
+  post 'valactividades/validaciones/comentario', to:'valactividades/validaciones#comentario', as: 'sacomentarioproducto'
   
 
   get 'actividades/redacademicas/index', to: 'actividades/redacademicas#index', as: 'redesindex'

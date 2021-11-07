@@ -1,0 +1,18 @@
+
+
+  <div class="row">
+        <div class="col-sm">
+               <label class="font-weight-bold">Nombre de la actividad:</label>
+               <%= @actividad.titulo %>
+         </div>  
+         <div class="col-sm">
+               <label class="font-weight-bold">Fecha:</label>
+               <%= @actividad.fechapub %>
+         </div>  
+    </div>   
+<div class="row">
+        <div class="col-sm">
+           <label class="font-weight-bold">Tipo de actividad:</label>
+            <%= @actividad.divulgacion.tipodivulgacion.nomtipodivulgacion %>
+        </div> 
+</div>
