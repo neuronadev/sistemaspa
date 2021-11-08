@@ -1,5 +1,30 @@
-    
-   <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-        validar
-   <% end %> 
-
+<% if a.estado == 'C' %> 
+     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+          <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+     <% end %> 
+<% end %>
+<% if a.estado == 'S' %> 
+     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+          <span class="badge badge-success font-weight-bold"><i class="fas fa-check-double text-white"></i> Validado</span>
+     <% end %> 
+<% end %>
+<% if a.estado == 'G' %> 
+     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+          <span class="badge badge-warning"><i class="fas fa-user-edit"></i> Corregir</span>
+     <% end %>  
+<% end %>
+<% if a.estado == 'D' %> 
+     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+          <span class="badge badge-danger "><i class="fas fa-user-times"></i> No considerar</span>
+     <% end %> 
+<% end %>
+<% if a.estado == 'A' %> 
+     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+          <span class="badge badge-dark "><i class="fas fa-window-minimize"></i>VoBo. Académico</span>
+     <% end %> 
+<% end %>
+<% if a.estado == 'U' %> 
+     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+          <span class="badge badge-light "><i class="fas fa-window-minimize"></i>VoBo. CR</span>
+     <% end %> 
+<% end %>

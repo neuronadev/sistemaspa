@@ -10,8 +10,15 @@
     <% if params[:action] == 'edit' %> 
         
          <% if @actividad.estado == 'G' %> 
-                 <%= form.hidden_field :estado, value:'U' %>
-                <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
+               <% if @actividad.valetapas.where(activo:'SI').any? %>
+                  <% if @actividad.valetapas.where(activo:'SI').first.etapa == 'CR' %>   
+                       <%= form.hidden_field :estado, value:'U' %>
+                  <% end %>  
+                  <% if @actividad.valetapas.where(activo:'SI').first.etapa == 'SA' %>   
+                       <%= form.hidden_field :estado, value:'C' %>
+                  <% end %>  
+               <% end %>   
+                 <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
          <% end %>   
         
     <% end %>  

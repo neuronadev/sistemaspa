@@ -7,15 +7,24 @@
             <% if activ.estado == 'A' %>
                   --
             <% end%>
-            <% if activ.estado == 'C' %>
+            <% if  activ.estado == 'C' %>
                   <i class="fas fa-check-double text-success"></i>
             <% end%>
-            <% if activ.estado == 'G' %>
-                   <small class="badge badge-warning">Corregir</small>
-            <% end%>
-            <% if activ.estado == 'D' %>
-                  <small class="badge badge-success"><i class="fas fa-times text-danger"></i> No se considera</small>
-            <% end%>
+            <% if activ.valetapas.where(activo:'SI').any? %>
+                  <% if activ.valetapas.where(activo:'SI').first.etapa == 'CR' %>
+                        <% if activ.estado == 'G' %>
+                              <small class="badge badge-warning">Corregir</small>
+                        <% end%>
+                        <% if activ.estado == 'D' %>
+                              <small class="badge badge-success"><i class="fas fa-times text-danger"></i> No se considera</small>
+                        <% end%>
+                  <% else %>
+                         <% if  activ.estado != 'C' %>
+                              <i class="fas fa-check-double text-success"></i>
+                         <% end %> 
+
+                  <% end %> 
+            <% end %>        
     <% end %>        
   </div>  
 </td>
@@ -25,8 +34,23 @@
  <div class="d-flex justify-content-center">
       <% if activ.estado == 'A' %>
                   --
-      <% else %>
-          <small class="badge badge-info">En validación</small>
       <% end %>
+       <% if activ.estado == 'S' %>
+            <i class="fas fa-check-double text-success"></i>
+      <% end%>     
+      <% if activ.estado == 'C' %>
+            <small class="badge badge-info">En validación</small>
+      <% end%> 
+      <% if activ.valetapas.where(activo:'SI').any? %>
+                  <% if activ.valetapas.where(activo:'SI').first.etapa == 'SA' %>
+                        <% if activ.estado == 'G' %>
+                              <small class="badge badge-warning">Corregir</small>
+                        <% end%>
+                        <% if activ.estado == 'D' %>
+                              <small class="badge badge-success"><i class="fas fa-times text-danger"></i> No se considera</small>
+                        <% end%>
+      
+                  <% end %> 
+      <% end %>   
  </div>     
 </td>

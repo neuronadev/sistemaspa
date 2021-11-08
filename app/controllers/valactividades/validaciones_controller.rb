@@ -5,37 +5,24 @@ class Valactividades::ValidacionesController < ApplicationController
       tipo = params[:tipo]  
       anio = 2021
       @actividades = []
-      invest = [] 
-      tecs = []
-
-      Usuario.where(rol:'I').each do |u|
-        if u.persona.estado == 'A'
-            invest << u.persona_id
-        end  
-      end
-      Usuario.where(rol:'T').each do |u|
-        if u.persona.estado == 'A'
-            tecs << u.persona_id
-        end  
-      end
 
       if tipo == "A" 
           Persona.where(tipopersona_id:[2,4]).order(:paterno).each do |p|
-            r = Actividad.where(periodo:2021,estado:['A','C','U']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
+            r = Actividad.where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
             @actividades << [persona:p.id, actividades:r.to_a]
          end
       end 
       
       if tipo == "I" 
         Persona.where(tipopersona_id:2).order(:paterno).each do |p|
-            r = Actividad.where(periodo:2021,estado:['A','C','U']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
+            r = Actividad.where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
             @actividades << [persona:p.id, actividades:r.to_a]
          end
       end 
       
       if tipo == "T" 
           Persona.where(tipopersona_id:4).order(:paterno).each do |p|
-             r = Actividad.where(periodo:2021,estado:['A','C','U']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
+             r = Actividad.where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
              @actividades << [persona:p.id, actividades:r.to_a]
           end
       end 
@@ -71,7 +58,13 @@ class Valactividades::ValidacionesController < ApplicationController
     else
         @parts = ['-'] 
     end
-       render partial: 'aceptarproducto'
+
+    valetapa = {actividad_id:@actividad.id, persona_id:current_usuario.persona_id, etapa:'SA', accion:'aceptar', estado:'cerrado', activo:'SI' }
+    cerrar_activos_valetapa @actividad
+    @v_etapa = create_valetapa valetapa
+    update_actividad @actividad, 'S'
+
+    render partial: 'aceptarproducto'
   end
   
   def corregirproducto
