@@ -7,6 +7,7 @@
        <%= f.label :investigadorid, "Seleccione un Académico:" %>
        <%= f.select :investigadorid, Persona.where("orden=2").all.order(:orden).order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, { :include_blank=>'-Seleccione una opción-'}, {class:"form-control" } %>
      </div>
+     <div><small class="text-danger">Seleccione el nombre del académico el cual colabora</small></div>
     </div>
     <div class="col-4">
       <div class="form-group">
