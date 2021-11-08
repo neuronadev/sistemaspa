@@ -13,11 +13,24 @@ export default class extends Controller {
            trval_div.style.display = 'table-row'
            fetch(`infoproducto/${trval}/${tritem}`)
                  .then( response => response.text() )
-                 .then ( html => { trval_div.querySelector('div').innerHTML = html  } )
+                 .then ( html => { 
+                          trval_div.querySelector('div').innerHTML = html  
+                          document.getElementById(tritem).classList.add('text-muted')
+                  } )
 
       }else{
            trval_div.style.display = 'none' 
+           document.getElementById(tritem).classList.remove('text-muted')
        }
+  }
+
+  cerrarTargetInfo(event){
+    event.preventDefault()
+    let trval = event.params.trval
+    let tritem = event.params.tritem
+    let trval_div = document.getElementById(trval)
+    trval_div.style.display = 'none' 
+    document.getElementById(tritem).classList.remove('text-muted')
   }
 
   actionBack(event){

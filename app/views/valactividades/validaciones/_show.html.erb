@@ -1,50 +1,69 @@
+<div class="card-body">
+      <div class="d-flex flex-row-reverse">
+            <div class="p-2">
+                <%= link_to "#", data:{action:'click->valproducto#cerrarTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                    <i class="fas fa-times"></i>
+                 <% end %>
+             </div>
+      </div>
+      <%= render "valactividades/gui/arts" if @parts[0] == 'ART' %>
+      <%= render "valactividades/gui/libros" if @parts[0] == 'LIBRO' %>
+      <%= render "valactividades/gui/capitulos" if @parts[0] == 'CAPITULO' %>
 
-  <%= render "valactividades/gui/arts" if @parts[0] == 'ART' %>
-  <%= render "valactividades/gui/libros" if @parts[0] == 'LIBRO' %>
-  <%= render "valactividades/gui/capitulos" if @parts[0] == 'CAPITULO' %>
+      <%= render "valactividades/gui/flora" if @parts[0] == 'FLORA' %>
+      <%= render "valactividades/gui/patente" if @parts[0] == 'PATENTE' %>
+      <%= render "valactividades/gui/editor" if @parts[0] == 'EDITOR' %>
+      <%= render "valactividades/gui/odivulga" if @parts[0] == 'ODIV' %>
+      <%= render "valactividades/gui/vinculapp" if @parts[0] == 'VINCULAPP' %>
+      <%= render "valactividades/gui/vinculasp" if @parts[0] == 'VINCULASP' %>
+      <%= render "valactividades/gui/adicional" if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
+      <%= render "valactividades/gui/curso" if @producto.prodgrupo.clave == 'CUR' %>
+      <%= render "valactividades/gui/tesis" if @producto.prodgrupo.clave == 'TESIS' %>
 
-  <%= render "valactividades/gui/flora" if @parts[0] == 'FLORA' %>
-  <%= render "valactividades/gui/patente" if @parts[0] == 'PATENTE' %>
-  <%= render "valactividades/gui/editor" if @parts[0] == 'EDITOR' %>
-  <%= render "valactividades/gui/odivulga" if @parts[0] == 'ODIV' %>
-  <%= render "valactividades/gui/vinculapp" if @parts[0] == 'VINCULAPP' %>
-  <%= render "valactividades/gui/vinculasp" if @parts[0] == 'VINCULASP' %>
-  <%= render "valactividades/gui/adicional" if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
-  <%= render "valactividades/gui/curso" if @producto.prodgrupo.clave == 'CUR' %>
-  <%= render "valactividades/gui/tesis" if @producto.prodgrupo.clave == 'TESIS' %>
+      <div class="row">
+        <div class="col-sm">
+          <strong>Participantes:</strong> <span class="font-italic"><%= citaConIdentificacion(@actividad.id).html_safe %></span>
+        </div>
+      </div>
 
-  <!-- Opciones de validaciones Botones -->
-  <% if  @actividad.estado == 'C' %>
-     <%= render "valactividades/gui/opcionesval" %>
-  <% end %>
-  <% if @actividad.estado == 'S' %>
-     <div class="alert alert-success" role="alert">
-         Producto validado por la SA.
-     </div>
-  <% end %>
-  <% if @actividad.estado == 'G' %>
-    <div class="alert alert-danger" role="alert">
-        Enviado a corrección: 
-         <% if @actividad.valetapas.where(etapa:'SA',activo:'SI').any? %>
-               <%= @actividad.valetapas.where(etapa:'SA',activo:'SI').first.txtmensaje %>
-         <% end %>
-     </div>
-  <% end %>
-  <% if @actividad.estado == 'D' %>
-    <div class="alert alert-danger" role="alert">
-        No considerado:
-         <% if @actividad.valetapas.where(etapa:'SA',activo:'SI').any? %>
-               <%= @actividad.valetapas.where(etapa:'SA',activo:'SI').first.txtmensaje %>
-         <% end %>
-     </div>
-  <% end %>
-  <% if @actividad.estado == 'A' %>
-    <div class="alert alert-dark" role="alert">
-         El académico no ha dado VoBo.
-     </div>
-  <% end %>
-  <% if @actividad.estado == 'U' %>
-    <div class="alert alert-dark" role="alert">
-         Falta la validación del coordinador.
-     </div>
-  <% end %>
+
+
+      <!-- Comprobante-->
+      <%= render "comprobante", actividad:@actividad %>     
+ 
+      <!-- Opciones de validaciones Botones -->
+      <% if  @actividad.estado == 'C' %>
+        <%= render "valactividades/gui/opcionesval" %>
+      <% end %>
+      <% if @actividad.estado == 'S' %>
+        <div class="alert alert-success" role="alert">
+            Producto validado por la SA.
+        </div>
+      <% end %>
+      <% if @actividad.estado == 'G' %>
+        <div class="alert alert-danger" role="alert">
+            Enviado a corrección: 
+            <% if @actividad.valetapas.where(etapa:'SA',activo:'SI').any? %>
+                  <%= @actividad.valetapas.where(etapa:'SA',activo:'SI').first.txtmensaje %>
+            <% end %>
+        </div>
+      <% end %>
+      <% if @actividad.estado == 'D' %>
+        <div class="alert alert-danger" role="alert">
+            No considerado:
+            <% if @actividad.valetapas.where(etapa:'SA',activo:'SI').any? %>
+                  <%= @actividad.valetapas.where(etapa:'SA',activo:'SI').first.txtmensaje %>
+            <% end %>
+        </div>
+      <% end %>
+      <% if @actividad.estado == 'A' %>
+        <div class="alert alert-dark" role="alert">
+            El académico no ha dado VoBo.
+        </div>
+      <% end %>
+      <% if @actividad.estado == 'U' %>
+        <div class="alert alert-dark" role="alert">
+            Falta la validación del coordinador.
+        </div>
+      <% end %>
+</div>      

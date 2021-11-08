@@ -2,25 +2,25 @@ class Valactividades::ValidacionesController < ApplicationController
   layout 'validaactividades'
   def index
     
-      tipo = params[:tipo]  
+      @tipo = params[:tipo]  
       anio = 2021
       @actividades = []
 
-      if tipo == "A" 
+      if @tipo == "A" 
           Persona.where(tipopersona_id:[2,4]).order(:paterno).each do |p|
             r = Actividad.where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
             @actividades << [persona:p.id, actividades:r.to_a]
          end
       end 
       
-      if tipo == "I" 
+      if @tipo == "I" 
         Persona.where(tipopersona_id:2).order(:paterno).each do |p|
             r = Actividad.where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
             @actividades << [persona:p.id, actividades:r.to_a]
          end
       end 
       
-      if tipo == "T" 
+      if @tipo == "T" 
           Persona.where(tipopersona_id:4).order(:paterno).each do |p|
              r = Actividad.where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
              @actividades << [persona:p.id, actividades:r.to_a]

@@ -1,5 +1,15 @@
 
-<h5> Listado de Productos Académicos (incluye Investigadores y Técnicos)</h5>
+<% if @tipo == 'A' %>
+  <h5> Listado de Productos Académicos (incluye Investigadores y Técnicos)</h5>
+<% end %>  
+<% if @tipo == 'I' %>
+  <h5> Listado de Productos de Investigadores</h5>
+<% end %>  
+<% if @tipo == 'T' %>
+  <h5> Listado de Productos de Técnicos</h5>
+<% end %>  
+
+
 <div data-controller = "valproducto">     
   <%= render "index" %>
 </div>  
