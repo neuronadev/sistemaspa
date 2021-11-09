@@ -1,0 +1,37 @@
+<div class="row d-flex justify-content-center">
+  <div class="col-8">
+        <table class="table">
+                <thead>
+                    <tr>
+                            <th><div class="d-flex justify-content-center">Académico</div></th>
+                            <th><div class="d-flex justify-content-center">Porcentaje total de colaboración</div></th>
+                            <th><div class="d-flex justify-content-center">Calificación</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @academicos.each do |items| %>
+
+                        <% items.each do |item| %>
+                            
+                                <tr>
+                                        <td><%= reporta(item[:persona]) %></td>
+                                        <td> 
+                                           <div class="d-flex justify-content-center">
+                                              <%=  format("%.0f",item[:porcentaje].to_f) %>%
+                                            </div>      
+                                        </td>
+                                        <td>
+                                           <div class="d-flex justify-content-center"> 
+                                               <%=  format("%.0f",item[:calificacion].to_f) %>
+                                            </div>    
+                                        </td>
+                                </tr>
+                            
+                        <% end %>   
+
+
+                    <% end %>
+                </tbody>
+        </table>
+   </div>     
+</div>    

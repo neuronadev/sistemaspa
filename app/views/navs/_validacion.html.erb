@@ -1,0 +1,43 @@
+<ul class="navList">
+   <li>
+          <div class="navList__subheading row row--align-v-center navList__subheading--open">
+            <span class="navList__subheading-icon"><i class="fas fa-tasks"></i></span>
+            <span class="navList__subheading-title">Investigadores</span>
+          </div>
+          <ul class="subList">
+            <li class="subList__item">
+                <%= link_to validaindex_path(:tipo=>'I'), class:"text-white" do %>
+                       <i class="fas fa-chalkboard-teacher"></i> Ver registros
+                <% end %> 
+            </li>
+             <li class="subList__item">
+                <%= link_to validaindex_path(:tipo=>'I'), class:"text-white" do %>
+                       <i class="fas fa-chalkboard-teacher"></i> Agrupar por Red
+                <% end %> 
+            </li>
+            
+          </ul>
+   </li>
+
+   <li>
+          <div class="navList__subheading row row--align-v-center navList__subheading--open">
+            <span class="navList__subheading-icon"><i class="fas fa-tasks"></i></span>
+            <span class="navList__subheading-title">Técnicos</span>
+          </div>
+          <ul class="subList">
+            <li class="subList__item">
+                <%= link_to validaindex_path(:tipo=>'T'), class:"text-white" do %>
+                       <i class="fas fa-chalkboard-teacher"></i> Ver registros
+                <% end %> 
+            </li>
+             <li class="subList__item">
+                <%= link_to tevaluacion_path, class:"text-white" do %>
+                       <i class="fas fa-chalkboard-teacher"></i> Ver evaluación
+                <% end %> 
+            </li>
+            
+          </ul>
+   </li>
+
+
+</ul>
