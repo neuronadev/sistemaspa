@@ -2,7 +2,7 @@
      <% if [22,39].include? a.producto_id %>
             <% if a.enlacedoc.attached?  && a.fuente == 'V'  %>
                   <div class="d-flex justify-content-center">
-                       <%= link_to rails_blob_path(a.enlacedoc, disposition: 'attachment', target: '_blank') do %>
+                       <%= link_to rails_blob_path(a.enlacedoc, disposition: 'inline', target: '_blank') do %>
                               <i class="fas fa-file-pdf"></i>  <small class="text-muted"> Comprobante</small> 
                        <% end %>
                   </div>   
@@ -10,14 +10,14 @@
                    <% if a.documentos.attached? %> 
                         <div class="d-flex justify-content-center">
                             <% a.documentos.each do |d|%>
-                                <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank' } do %>
+                                <%= link_to rails_blob_path(d, disposition: "inline", target: '_blank') do %>
                                         <i class="fas fa-file-pdf"></i>  <small class="text-muted"> Comprobante</small>
                                 <% end %>
                             <% end %>  
                         </div> 
                     <% else %>
                         <div class="d-flex justify-content-center">
-                                <%= link_to updoc_actividades_actividad_path(a.id), data:{turbolinks:false} do %>    
+                                <%= link_to updoc_actividades_actividad_path(a.id, disposition: "inline", target: '_blank'), data:{turbolinks:false} do %>    
                                     <i class="fas fa-upload text-danger"></i>  <small class="text-danger"> Comprobante</small> 
                                 <% end %>   
                         </div>   
@@ -29,7 +29,7 @@
      %>
            <% if autor.posgradoc.attached? %> 
                <div class="d-flex justify-content-center">
-                       <%= link_to rails_blob_path(autor.posgradoc, disposition: 'attachment', target: '_blank') do %>
+                       <%= link_to rails_blob_path(autor.posgradoc, disposition: 'inline', target: '_blank') do %>
                             <div><i class="fas fa-file-pdf"></i>  <small class="text-muted"> Comprobante</small></div>
                        <% end  %>
                </div>   
@@ -37,13 +37,13 @@
      <% end %>
      <% if a.producto_id == 83 %>
          <div class="d-flex flex-column justify-content-center">
-                <%= link_to rails_blob_path(a.tesisdoc, disposition: 'attachment', target: '_blank') do %>
+                <%= link_to rails_blob_path(a.tesisdoc, disposition: 'inline', target: '_blank') do %>
                         <div class="justify-content-center ml-1"><i class="fas fa-file-pdf"></i> <small class="text-muted"> Acta</small></div>
                 <% end  %>
-                <%= link_to rails_blob_path(a.tesisportada, disposition: 'attachment', target: '_blank') do %>
+                <%= link_to rails_blob_path(a.tesisportada, disposition: 'inline', target: '_blank') do %>
                         <div class="justify-content-center ml-1"><i class="fas fa-file-pdf"></i> <small class="text-muted"> Portada</small></div>
                 <% end  %>
-                <%= link_to rails_blob_path(a.tesiscarta, disposition: 'attachment', target: '_blank') do %>
+                <%= link_to rails_blob_path(a.tesiscarta, disposition: 'inline', target: '_blank') do %>
                         <div class="justify-content-center ml-1"><i class="fas fa-file-pdf"></i> <small class="text-muted"> Asignación</small></div>
                 <% end  %>
         </div> 
@@ -53,14 +53,14 @@
     <% if a.documentos.attached? %> 
         <div class="d-flex justify-content-center">
             <% a.documentos.each do |d|%>
-                <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank' } do %>
+                <%= link_to rails_blob_path(d, disposition: "inline"), { target: '_blank' } do %>
                         <i class="fas fa-file-pdf"></i>  <small class="text-muted"> Comprobante</small>
                 <% end %>
             <% end %>  
         </div>  
     <% else %>
         <div class="d-flex justify-content-center">
-            <%= link_to updoc_actividades_actividad_path(a.id), data:{turbolinks:false} do %>    
+            <%= link_to updoc_actividades_actividad_path(a.id, disposition: 'inline', target: '_blank'), data:{turbolinks:false} do %>    
                <i class="fas fa-upload text-danger"></i>  <small class="text-danger"> Comprobante</small> 
             <% end %>   
         </div>   

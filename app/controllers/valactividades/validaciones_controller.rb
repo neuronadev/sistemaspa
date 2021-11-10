@@ -14,7 +14,7 @@ class Valactividades::ValidacionesController < ApplicationController
       end 
       
       if @tipo == "I" 
-        Persona.where(tipopersona_id:2).order(:paterno).each do |p|
+        Persona.where(tipopersona_id:[2,3]).order(:paterno).each do |p|
             r = Actividad.where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
             @actividades << [persona:p.id, actividades:r.to_a]
          end

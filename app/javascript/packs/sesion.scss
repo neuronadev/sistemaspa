@@ -37,6 +37,7 @@ html, body {
   box-sizing: border-box;
   //font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif
   font-family: 'Ubuntu', sans-serif;
+  font-size: 1rem;
 }
 
 a {
@@ -366,7 +367,7 @@ a {
 
     &__item {
       padding: 8px;
-      text-transform: capitalize;
+      //text-transform: capitalize;
       padding: 8px 30px;
       color: $color-alto;
 

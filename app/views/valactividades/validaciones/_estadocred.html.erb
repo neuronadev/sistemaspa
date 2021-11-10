@@ -1,0 +1,31 @@
+<% if  ['C','S'].include? a.estado %> 
+    <div class="d-flex justify-content-center"> <i class="fas fa-check-double text-success"></i> </div>
+<% end %>
+<% if  ['U'].include? a.estado %> 
+    <div class="d-flex justify-content-center"><small>Falta VoBo</small></div>
+<% end %>
+<% if ['A'].include? a.estado %>
+   <div class="d-flex justify-content-center"> --- </div>   
+<% end %>
+
+<% if ['G','D'].include? a.estado %>        
+
+      <%
+        etapa_val = a.valetapas.where(activo:'SI').last
+        if etapa_val.nil?
+           etapa_val = ''
+        end
+      %>
+      <% if etapa_val.etapa == 'CR' %>
+            <% if a.estado == 'G' %>
+                  <div class="d-flex justify-content-center"> <small>Enviado a corrección</small> </div>
+            <% end %>
+            <% if a.estado == 'D' %>
+                  <div class="d-flex justify-content-center"> <small>No considerar</small> </div>
+            <% end %>   
+      <% end %>
+      <% if etapa_val.etapa == 'SA' %>
+            <div class="d-flex justify-content-center"> <i class="fas fa-check-double text-success"></i> </div>
+      <% end %>
+
+<% end %>

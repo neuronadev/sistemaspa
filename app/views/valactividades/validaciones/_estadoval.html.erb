@@ -1,30 +1,46 @@
-<% if a.estado == 'C' %> 
-     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-          <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
-     <% end %> 
-<% end %>
-<% if a.estado == 'S' %> 
-     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-          <span class="badge badge-success font-weight-bold"><i class="fas fa-check-double text-white"></i> Validado</span>
-     <% end %> 
-<% end %>
-<% if a.estado == 'G' %> 
-     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-          <span class="badge badge-warning"><i class="fas fa-user-edit"></i> Corregir</span>
-     <% end %>  
-<% end %>
-<% if a.estado == 'D' %> 
-     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-          <span class="badge badge-danger "><i class="fas fa-user-times"></i> No considerar</span>
-     <% end %> 
-<% end %>
-<% if a.estado == 'A' %> 
-     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-          <span class="badge badge-dark "><i class="fas fa-window-minimize"></i>VoBo. Académico</span>
-     <% end %> 
-<% end %>
-<% if a.estado == 'U' %> 
-     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-          <span class="badge badge-light "><i class="fas fa-window-minimize"></i>VoBo. CR</span>
-     <% end %> 
-<% end %>
+ <div class="d-flex justify-content-center">
+      <% if a.estado == 'C' %> 
+      <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+            <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+      <% end %> 
+      <% end %>
+      <% if a.estado == 'S' %> 
+      <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+            <i class="fas fa-check-double text-success"></i> <span class="text-success"> <small> Validado </small> </span>
+      <% end %> 
+      <% end %>
+
+      <% if ['A','U'].include? a.estado %>
+      ---
+      <% end %>
+
+      <% if ['G','D'].include? a.estado %>        
+
+            <%
+            etapa_val = a.valetapas.where(activo:'SI').last
+            if etapa_val.nil?
+            etapa_val = ''
+            end
+            %>
+            <% if etapa_val.etapa == 'SA' %>
+                  <% if a.estado == 'G' %>
+                        <small>
+                        <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                              <span class="badge badge-warning"><i class="fas fa-user-edit"></i>Enviado a corrección</span>
+                        <% end %> 
+                        </small>
+                  <% end %>
+                  <% if a.estado == 'D' %>
+                  
+                        <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                              <i class="fas fa-user-times text-danger"></i> <span class="text-danger"> <small> No considerar </small> </span>
+                        <% end %> 
+                        
+                  <% end %>   
+            <% end %>
+            <% if etapa_val.etapa == 'CR' %>
+            ---
+            <% end %>
+
+      <% end %>
+</div>      
