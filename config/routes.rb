@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'valactividades/validaciones/rechazarproducto/:target/:item', to:'valactividades/validaciones#rechazarproducto', as: 'sarechazarproducto'
   post 'valactividades/validaciones/comentario', to:'valactividades/validaciones#comentario', as: 'sacomentarioproducto'
   get 'valactividades/validaciones/evaluacion/', to:'valactividades/validaciones#evaluacion', as: 'tevaluacion'
+  get 'valactividades/validaciones/sustantivas/', to:'valactividades/validaciones#sustantivas', as: 'tsustantivas'
   
 
   get 'actividades/redacademicas/index', to: 'actividades/redacademicas#index', as: 'redesindex'

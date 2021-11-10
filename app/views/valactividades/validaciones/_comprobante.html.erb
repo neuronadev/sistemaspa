@@ -5,7 +5,7 @@
         <% if [22,39].include? actividad.producto_id %>
                 <% if actividad.enlacedoc.attached? && actividad.fuente == 'V' %>
                     <div class="d-flex ">
-                        <%= link_to rails_blob_path(actividad.enlacedoc, disposition: 'inline', target: '_blank') do %>
+                        <%= link_to rails_blob_path(actividad.enlacedoc, disposition: 'inline'), { target: '_blank' } do %>
                                <small> <i class="fas fa-file-pdf"></i> Comprobante </small>
                         <% end %>
                     </div>  
@@ -25,7 +25,7 @@
               <% if !autor.nil? %> 
                 <% if autor.posgradoc.attached? %> 
                     <div class="d-flex">
-                            <%= link_to rails_blob_path(autor.posgradoc, disposition: 'attachment', target: '_blank') do %>
+                            <%= link_to rails_blob_path(autor.posgradoc, disposition: 'inline'), { target: '_blank' } do %>
                                     <div><small><i class="fas fa-file-pdf"></i> Comprobante </small></div>
                             <% end  %>
                     </div>   
@@ -34,13 +34,13 @@
         <% end %>
         <% if actividad.producto_id == 83 %>
             <div class="d-flex flex-column">
-                    <%= link_to rails_blob_path(actividad.tesisdoc, disposition: 'attachment', target: '_blank') do %>
+                    <%= link_to rails_blob_path(actividad.tesisdoc, disposition: 'inline'), { target: '_blank' } do %>
                             <div><small><i class="fas fa-file-pdf"></i> Tesis </small></div>
                     <% end  %>
-                    <%= link_to rails_blob_path(actividad.tesisportada, disposition: 'attachment', target: '_blank') do %>
+                    <%= link_to rails_blob_path(actividad.tesisportada, disposition: 'inline'), { target: '_blank' } do %>
                             <div><small><i class="fas fa-file-pdf"></i> Portada </small> </div>
                     <% end  %>
-                    <%= link_to rails_blob_path(actividad.tesiscarta, disposition: 'attachment', target: '_blank') do %>
+                    <%= link_to rails_blob_path(actividad.tesiscarta, disposition: 'inline'), { target: '_blank' } do %>
                             <div> <small> <i class="fas fa-file-pdf"></i> Carta </small> </div>
                     <% end  %>
             </div> 

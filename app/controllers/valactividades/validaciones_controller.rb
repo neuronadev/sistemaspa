@@ -118,20 +118,27 @@ class Valactividades::ValidacionesController < ApplicationController
       @academicos = []
       Persona.where(tipopersona_id:4,estado:'A').order(:paterno).each do |p|
          if !p.academico.nil?
-            if !p.academico.sustantivas.nil? 
+            if !p.academico.sustantivas.where(anio:2021,estado:['A','U','C']).nil? 
                 porcentajetotal = p.academico.sustantivas.where(anio:2021,estado:['A','U','C']).sum(:porcentaje)
                 calif = 0.0.to_f
                 p.academico.sustantivas.where(anio:2021,estado:['A','U','C']).each do |s|
-                  if s.estado == 'C'  
-                       calif = calif + (  (s.porcentaje/100)*(((s.calidad/10)+(s.eficiencia/10))/2)  )
-                  end     
+                    if s.estado == 'C'  
+                            calidad =  !s.calidad.nil? ? s.calidad : 0.0
+                            eficiencia = !s.eficiencia.nil? ? s.eficiencia : 0.0
+                            calif = calif + (  (s.porcentaje/100)*(((calidad/10)+(eficiencia/10))/2)  )
+                    end     
                 end
-                @academicos << [persona:p.id, porcentaje:porcentajetotal,  calificacion:calif]
-                
+                @academicos << [persona:p.id, porcentaje:porcentajetotal, calificacion:calif, sustantivas:p.academico.sustantivas.where(anio:2021,estado:['A','U','C']).to_a]
+            else
+                 @academicos << [persona:p.id, porcentaje:0.0, calificacion:0.0, sustantivas:[]]      
             end    
          end 
       end
  end 
+
+ def sustantivas
+     
+ end
 
   private
   def create_valetapa obj
