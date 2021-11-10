@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col">
        
-    <% if [22,39,82,83].include? actividad.producto_id && ( ['P','V'].include? actividad.fuente ) %>
+    <% if (actividad.producto_id == 22 || actividad.producto_id == 39 || actividad.producto_id == 82 || actividad.producto_id == 83)  && ( actividad.fuente == 'V' || actividad.fuente == 'P' ) %>
         <% if [22,39].include? actividad.producto_id %>
                 <% if actividad.enlacedoc.attached? && actividad.fuente == 'V' %>
                     <div class="d-flex ">
@@ -20,26 +20,28 @@
                 <% end %>      
         <% end %>
         <% if actividad.producto_id == 82 
-            autor = Autor.where(actividad_id:actividad.id,persona_id:current_usuario.persona_id).first
+            autor = Autor.where(actividad_id:actividad.id,persona_id:idpersona).first
         %>
-            <% if autor.posgradoc.attached? %> 
-                <div class="d-flex">
-                        <%= link_to rails_blob_path(autor.posgradoc, disposition: 'attachment', target: '_blank') do %>
-                                <div><small><i class="fas fa-file-pdf"></i> <%= autor.posgradoc.filename %></small></div>
-                        <% end  %>
-                </div>   
-            <% end %>    
+              <% if !autor.nil? %> 
+                <% if autor.posgradoc.attached? %> 
+                    <div class="d-flex">
+                            <%= link_to rails_blob_path(autor.posgradoc, disposition: 'attachment', target: '_blank') do %>
+                                    <div><small><i class="fas fa-file-pdf"></i> Comprobante </small></div>
+                            <% end  %>
+                    </div>   
+                <% end %>
+              <% end %>      
         <% end %>
         <% if actividad.producto_id == 83 %>
             <div class="d-flex flex-column">
                     <%= link_to rails_blob_path(actividad.tesisdoc, disposition: 'attachment', target: '_blank') do %>
-                            <div><small><i class="fas fa-file-pdf"></i> <%= actividad.tesisdoc.filename %></small></div>
+                            <div><small><i class="fas fa-file-pdf"></i> Tesis </small></div>
                     <% end  %>
                     <%= link_to rails_blob_path(actividad.tesisportada, disposition: 'attachment', target: '_blank') do %>
-                            <div><small><i class="fas fa-file-pdf"></i> <%= actividad.tesisdoc.filename %></small> </div>
+                            <div><small><i class="fas fa-file-pdf"></i> Portada </small> </div>
                     <% end  %>
                     <%= link_to rails_blob_path(actividad.tesiscarta, disposition: 'attachment', target: '_blank') do %>
-                            <div> <small> <i class="fas fa-file-pdf"></i> <%= actividad.tesisdoc.filename %> </small> </div>
+                            <div> <small> <i class="fas fa-file-pdf"></i> Carta </small> </div>
                     <% end  %>
             </div> 
         <% end %> 
@@ -55,7 +57,8 @@
                             </div>
                         <% end %>  
                     <% else %>
-                        <small class="text-danger font-italic"> No se anexo ningún comprobante</small>      
+                        <small class="text-danger font-italic"> No se anexo ningún comprobante</small>  
+                       
                     <% end %>  
     <% end %>
    <div>
