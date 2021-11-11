@@ -128,9 +128,9 @@ class Valactividades::ValidacionesController < ApplicationController
                             calif = calif + (  (s.porcentaje/100)*(((calidad/10)+(eficiencia/10))/2)  )
                     end     
                 end
-                @academicos << [persona:p.id, porcentaje:porcentajetotal, calificacion:calif, sustantivas:p.academico.sustantivas.where(anio:2021,estado:['A','U','C']).to_a]
+                @academicos << [persona:p.id, porcentaje:porcentajetotal, calificacion:calif, sustantivas:p.academico.sustantivas.where(anio:2021,estado:['A','U','C'])]
             else
-                 @academicos << [persona:p.id, porcentaje:0.0, calificacion:0.0, sustantivas:[]]      
+                 @academicos << [persona:p.id, porcentaje:0.0, calificacion:0.0, sustantivas:nil]      
             end    
          end 
       end

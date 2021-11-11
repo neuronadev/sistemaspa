@@ -1,11 +1,11 @@
 <div class="card mt-md-3">
   <div class="card-body">
     <div class="row d-flex justify-content-center">
-    <div class="col-8">
+    <div class="col-10">
           <h5>Evaluaciones de Técnicos</h5>
-            <table class="table">
+            <table class="table" data-controller="vtecnicos">
                     <thead>
-                        <tr>
+                        <tr>    <th></th>
                                 <th><div class="d-flex justify-content-center">Académico</div></th>
                                 <th><div class="d-flex justify-content-center">Porcentaje total de colaboración</div></th>
                                 <th><div class="d-flex justify-content-center">Calificación</div></th>
@@ -14,9 +14,17 @@
                     <tbody>
                         <% @academicos.each do |items| %>
 
-                            <% items.each do |item| %>
+                            <% items.each do |item| 
+                                @persona = "t_#{item[:persona].to_s}"
+                            
+                            %>
                                 
                                     <tr>
+                                            <td>
+                                                <%= link_to "#", data:{action:'click->vtecnicos#mostrarSust', 'vtecnicos-idp-param':@persona } do %>
+                                                  <i class="fas fa-chevron-right"></i>
+                                                <% end %>
+                                            </td>
                                             <td><%= reporta(item[:persona]) %></td>
                                             <td> 
                                             <div class="d-flex justify-content-center">
@@ -29,10 +37,37 @@
                                                 </div>    
                                             </td>
                                     </tr>
-                                    <tr>
-                                       <td colspan="3">
-                                            <div>
-                                                  
+                                    <tr id="<%= @persona %>" style="display:none;" >
+                                       <td colspan="4">
+                                            <div style="background-color:#e1e1e1 !important;">
+                                                  <table class="table">
+                                                       <thead>
+                                                           <tr>
+                                                              
+                                                               <th><small class="font-weight-bold">Colaboración</small></th>
+                                                               <th><small class="font-weight-bold">Sustantiva</small></th>
+                                                               <th><small class="font-weight-bold">Portcentaje</small></th>
+                                                               <th><small class="font-weight-bold">Calidad</small></th>
+                                                               <th><small class="font-weight-bold">Eficiencia</small></th>
+                                                           </tr>
+                                                       </thead>
+                                                       <tbody>
+                                                         <% if item[:sustantivas].any? %>
+                                                               <% item[:sustantivas].each do |s| %>
+                                                                  <tr>
+                                                                      
+                                                                      <td> <div class="d-flex justify-content-start"> <small><%= reporta(s.investigadorid) %></small> </div> </td>
+                                                                      <td> <div class="d-flex justify-content-start"> <small> <%= s.descripcion %> </small> </td>
+                                                                      <td> <div class="d-flex justify-content-center"><small> <%= format('%.0f', s.porcentaje) %> % </small> </div>  </td>
+                                                                      <td> <div class="d-flex justify-content-center"> <small> <%= format('%.0f', s.calidad) if !s.calidad.nil?  %> </small> </div> </td>
+                                                                      <td> <div class="d-flex justify-content-center"><small> <%= format('%.0f', s.eficiencia) if !s.eficiencia.nil? %> </small> </div> </td>
+                                                                  </tr> 
+                                                               <% end %>    
+                                                         <% else %>
+                                                              <tr><td colspan="5" class="text-italic">No hay registros</td></tr>
+                                                         <% end %>      
+                                                       </tbody>
+                                                  </table>
 
                                             </div>
                                        </td>
