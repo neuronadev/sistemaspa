@@ -193,7 +193,11 @@ class ActividadesController < ApplicationController
     if tipo == 'sa' 
        actividad.estado = 'S'
        actividad.fecha3 = Date.today
-    end   
+    end 
+    if tipo == 'enlace' 
+      actividad.estado = 'C'
+      actividad.fecha2 = Date.today
+   end   
   
     actividad.save  
     @act = actividad

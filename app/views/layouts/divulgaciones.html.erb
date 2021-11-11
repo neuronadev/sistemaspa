@@ -19,27 +19,39 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                        <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <%= link_to divulgaciones_path, class:"nav-link" do %>
-                                     <i class="fas fa-list-ul"></i> Inicio <span class="sr-only">(current)</span>
-                                <% end %>
-                            </li>
-                            <li class="nav-item active">
-                                 <%= link_to new_divulgacion_path(:tipo=>'ADP'), class:"nav-link" do %>
-                                          <i class="fas fa-newspaper"></i> Artículo en periódico
-                                  <% end %>
-                            </li>
-                            <li class="nav-item active">
-                                <%= link_to new_divulgacion_path(:tipo=>'CASA'), class:"nav-link" do %>
-                                          <i class="fas fa-users"></i> Actividad institucional
-                                <% end %>
-                            </li>
-                             <li class="nav-item active">
-                                <%= link_to destroy_usuario_session_path, class:"nav-link" do %>
-                                     <i class="fas fa-sign-out-alt"></i> Salir <span class="sr-only">(current)</span>
-                                <% end %>
-                            </li>
-
+                          <% if current_usuario.evaluador == 'V' %>
+                                 <li class="nav-item active">
+                                    <%= link_to divulgaciones_path, class:"nav-link" do %>
+                                        <i class="fas fa-list-ul"></i> Inicio <span class="sr-only">(current)</span>
+                                    <% end %>
+                                </li>
+                                 <li class="nav-item active">
+                                    <%= link_to destroy_usuario_session_path, class:"nav-link" do %>
+                                        <i class="fas fa-sign-out-alt"></i> Salir <span class="sr-only">(current)</span>
+                                    <% end %>
+                                </li>
+                          <% else %>
+                                <li class="nav-item active">
+                                    <%= link_to divulgaciones_path, class:"nav-link" do %>
+                                        <i class="fas fa-list-ul"></i> Inicio <span class="sr-only">(current)</span>
+                                    <% end %>
+                                </li>
+                                <li class="nav-item active">
+                                    <%= link_to new_divulgacion_path(:tipo=>'ADP'), class:"nav-link" do %>
+                                            <i class="fas fa-newspaper"></i> Artículo en periódico
+                                    <% end %>
+                                </li>
+                                <li class="nav-item active">
+                                    <%= link_to new_divulgacion_path(:tipo=>'CASA'), class:"nav-link" do %>
+                                            <i class="fas fa-users"></i> Actividad institucional
+                                    <% end %>
+                                </li>
+                                <li class="nav-item active">
+                                    <%= link_to destroy_usuario_session_path, class:"nav-link" do %>
+                                        <i class="fas fa-sign-out-alt"></i> Salir <span class="sr-only">(current)</span>
+                                    <% end %>
+                                </li>
+                          <% end %>
 
                            
                        </ul> 

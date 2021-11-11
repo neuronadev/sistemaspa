@@ -12,7 +12,7 @@
                         <i class="fas fa-edit"></i> Editar curso
                     <% end %>
               <% else %>  
-                    <% if @curso.estado == 'C' %>  
+                    <% if @curso.estado == 'C' || @curso.estado == 'S' %>  
                         <i class="fas fa-check-double text-success"></i> <span class="text-success">Producto validado por la Secretaría de Posgrado</span>
                     <% end %>    
               <% end %>      

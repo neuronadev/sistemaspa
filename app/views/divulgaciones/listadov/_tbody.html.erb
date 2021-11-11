@@ -9,5 +9,28 @@
            
       </td>
       <td><%= cita(actividad.id).html_safe %></td>
+      <% if current_usuario.evaluador == 'V' %>  
+            <td id="actividad<%= actividad.id %>">
+                          <% if actividad.estado == 'U' %>
+                              <%= link_to validar_path(actividad,'enlace'), remote:true, data:{confirm:"¿Desea validar el registro? Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
+                                <div class="d-flex flex-row bd-highlight mb-1  justify-content-center">  
+                                    <div class="p-1 bd-highlight"> 
+                                        <i class="fas fa-check-circle text-warning fa-lg"></i>
+                                    </div>
+                                    <div class="p-1 bd-highlight"><small>Validar</small></div>   
+                                </div>
+                              <% end %>
+                          <% end %>
+                          <% if actividad.estado == 'C' %>
+                               <div class="d-flex flex-row bd-highlight mb-1  justify-content-center">  
+                                    <div class="p-1 bd-highlight"> 
+                                        <i class="fas fa-check-double fa-lg text-success"></i>
+                                    </div>
+                                    <div class="p-1 bd-highlight"><small></small></div>   
+                                </div>
+                          <% end %>
+            </td> 
+      <% end %> 
+
    </tr>
 <% end %>   
