@@ -1,7 +1,12 @@
 <div id="surveyContainer"></div>
+<div id="surveyElement" style="display:inline-block;width:100%;"></div>
+<div id="surveyResult"></div>
 
 <script>
-var surveyJSON ={
+Survey
+    .StylesManager
+    .applyTheme("modern");
+var json ={
  "locale": "es",
  "completedHtml": {
   "es": "La información del cuestionario ha sido enviada. <a href='/actividad/evaltecnico'>Regresar</a>"
@@ -1117,13 +1122,17 @@ var surveyJSON ={
   "es": "Terminar y enviar cuestionario"
  }
 };
-var survey = new Survey.Model(surveyJSON);
-Survey.StylesManager.applyTheme("bootstrap");
-$("#surveyContainer").Survey(
-     {
-         model: survey,
-         onComplete:sendDataToServer
-     });
+window.survey = new Survey.Model(json);
+
+survey
+    .onComplete
+    .add(function (sender) {
+        //document.querySelector('#surveyResult').textContent = "Result JSON:\n" + JSON.stringify(sender.data, null, 3);
+        sendDataToServer(sender);    
+    });
+
+survey.render("surveyElement");
+
 
 function sendDataToServer(survey) {
   var resultAsString = JSON.stringify(survey.data);

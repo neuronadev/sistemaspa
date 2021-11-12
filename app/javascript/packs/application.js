@@ -7,6 +7,7 @@ import 'bootstrap/dist/js/bootstrap';
 import "controllers"
 
 
+
 require("packs/sesion");
 
 require('select2');
