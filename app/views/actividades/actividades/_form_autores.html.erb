@@ -19,7 +19,7 @@
                         <%= t.nomtipoautor %>
                     <% end %>
                  <% end %>
-                 <% if t.clave == 'EXTERNO' %>
+                 <% if t.clave == 'EXTERNO' && @producto.prodgrupo.clave != 'PROY' %>
                     <%= link_to "#", data:{ action: "click->autoria#nuevoPartExt" }, class:"dropdown-item" do %>
                         <%= t.nomtipoautor %>
                     <% end %>
@@ -41,8 +41,12 @@
         <% end %>
       </template> 
       <div class="col-8">
-         <small class="text-primary font-weight-bold">Los participantes deben ser agregados conforme al orden en que aparecen en el comprobante.</small>
-        <small class="text-primary font-weight-bold">Para los participantes Externos, debe poner el nombre abreviado, por ejemplo: <I>Rivera-Hernández, SL.</I>   </small>
+        <% if @producto.prodgrupo.clave != 'PROY' %>
+          <small class="text-primary font-weight-bold">Los participantes deben ser agregados conforme al orden en que aparecen en el comprobante.</small>
+          <small class="text-primary font-weight-bold">Para los participantes Externos, debe poner el nombre abreviado, por ejemplo: <I>Rivera-Hernández, SL.</I>   </small>
+        <% else %>
+               <small class="text-primary font-weight-bold">La suma de porcentajes de participación debe ser 100.</small>
+        <% end %>
         <table class="table table-sm mt-md-1">
             <thead>
                 <tr>
@@ -50,6 +54,9 @@
                     <% if swcorr == 'S' %> 
                       <th><div class="d-flex justify-content-center">Corresponsal</div></th>
                     <% end %>  
+                    <% if @producto.prodgrupo.clave == 'PROY' %>
+                        <th><div class="d-flex justify-content-center">% de participación</div></th>    
+                    <% end %>
                     
                     <th></th>
                 </tr>    

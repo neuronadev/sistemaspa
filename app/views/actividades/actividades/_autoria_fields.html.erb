@@ -21,7 +21,15 @@
             <%= form.check_box :corresponsal, value:'N'%> 
       </div>  
       </td>
-   <% end %>   
+   <% end %>  
+   <% if @producto.prodgrupo.clave == 'PROY' %> 
+            <td>
+              <div class="d-flex justify-content-center">
+                    <%= form.text_field :porcentaje, class:'porcentaje' %> 
+              </div>  
+            </td>
+   <% end %>
+
   <td>
     <div class="d-flex justify-content-center"> 
        <%= link_to "#", data:{ action:"click->autoria#quitarPart" } do  %>

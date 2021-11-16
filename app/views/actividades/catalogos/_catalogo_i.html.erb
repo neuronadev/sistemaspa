@@ -6,7 +6,11 @@
                   <ul>
                      <% Producto.where(prodcategoria_id:c.id,estado:'A').order(:descripcion).each do |p| %>
                         <% if [81,82,83,85].include? p.id %>
-                              <li class="mb-md-1 text-secondary"> <%= p.descripcion %></li>
+                              <% if current_usuario.rol == 'Y' %> 
+                                     <li class="mb-md-1"> <%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turbolinks:false} %></li>
+                              <% else %>
+                                      <li class="mb-md-1 text-secondary"> <%= p.descripcion %></li>
+                              <% end %> 
                         <% else %>
                               <li class="mb-md-1"> <%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turbolinks:false} %></li>
                         <% end %>     

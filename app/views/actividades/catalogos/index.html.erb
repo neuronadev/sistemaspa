@@ -25,7 +25,7 @@
    <h5>Producción 2021</h5>
    <span>Seleccione un producto del catalogo.</span>
    <hr>
-     <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %>
+     <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' || current_usuario.rol == 'Y' %>
 
            <%= render "catalogo_i" %>  
 

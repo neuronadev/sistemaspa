@@ -17,6 +17,7 @@
          <%= render "form_adicional", actividad:@actividad if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
          <%= render "form_curso", actividad:@actividad if @producto.prodgrupo.clave == 'CUR' %>
          <%= render "form_tesis", actividad:@actividad if @producto.prodgrupo.clave == 'TESIS' %>
+         <%= render "form_proyecto", actividad:@actividad if @producto.prodgrupo.clave == 'PROY' %>
       </div>  
    </div>
 </div>  

@@ -136,7 +136,7 @@ class Actividades::ActividadesController < ApplicationController
   
   def actividad_params
       params.require(:actividad).permit(
-          :titulo, :anio, :producto_id, :personaid, :estado, :fechapub,
+          :titulo, :anio, :producto_id, :personaid, :estado, :fechapub, :aceptado, :monto,
           :asignared, :fuente, :periodo, documentos:[],
           articulo_attributes:[:id,:volumen,:pgini,:pgfin,:revista_id,:actividad_id,:eidentificador,:doi,:issue,:abstract],
           libroarbitrado_attributes:[:id,:nopaginas, :idioma_id, :editorial_id,:isbn, :actividad_id],
@@ -148,7 +148,7 @@ class Actividades::ActividadesController < ApplicationController
           curso_attributes:[:id, :fini,:ffin, :hcurso, :himpartidas, :creditos, :noalumnos, :actividad_id, :coordinador, :tipocurso_id],
           tesista_attributes:[:id,:ftermino,:nivelestudio_id,:actividad_id, :fgrado, :efterminal, :acta],
           editor_attributes: [:id,:tipoeditorid,:idioma_id,:ambito_id,:codigo,:medio,:editorial,:pais,:actividad_id],
-          autores_attributes: [:id,:rol_id,:persona_id,:firma,:corresponsal, :actividad_id, :_destroy]
+          autores_attributes: [:id,:rol_id,:persona_id,:firma,:corresponsal, :actividad_id, :porcentaje, :_destroy]
 
       )
   end

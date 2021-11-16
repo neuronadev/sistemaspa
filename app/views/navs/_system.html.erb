@@ -38,5 +38,34 @@
             
           </ul>
    </li>
+   <li>
+          <div class="navList__subheading row row--align-v-center">
+            <span class="navList__subheading-icon"><i class="fas fa-tasks"></i></span>
+            <span class="navList__subheading-title">Producción Académica</span>
+          </div>
+          <ul class="subList subList--hidden">
+            <li class="subList__item">
+               <%= link_to actividades_catalogos_path, data:{turbolinks:false} do%> 
+                   <i class="fas fa-plus"></i> Registar producto
+               <% end %>    
+            </li>
+            
+          </ul>
+   </li>
+   <li>
+         <div class="navList__subheading row row--align-v-center">
+            <span class="navList__subheading-icon"><i class="fas fa-tasks"></i></span>
+            <span class="navList__subheading-title">Proyectos</span>
+          </div>
+          <ul class="subList subList--hidden">
+            <li class="subList__item">
+               <%= link_to revistas_path, data:{turbolinks:false} do%> 
+                   <i class="fas fa-plus"></i> Registrar
+               <% end %>    
+            </li>
+            
+            
+          </ul>
+   </li>
    
  </ul>       

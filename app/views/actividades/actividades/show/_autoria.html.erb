@@ -4,10 +4,13 @@
         <table class="table">
                 <thead>
                         <tr>
-                            <th>Nombre</th>
+                            <th> <div class="d-flex justify-content-center"> Nombre </div> </th>
                             <% if swcorr == 'S' %> 
-                              <th>Corresponsal</th>
+                              <th> <div class="d-flex justify-content-center"> Corresponsal </div> </th>
                             <% end %> 
+                            <% if @producto.prodgrupo.clave == 'PROY' %>
+                                <th><div class="d-flex justify-content-center">% de participación</div></th>    
+                            <% end %>
                             <th></th>
                         </tr>    
                     </thead>
@@ -23,7 +26,10 @@
                                             <td>
                                                 <%= 'SI' if ['1','S'].include? a.corresponsal   %>
                                             </td>
-                                        <% end %>    
+                                        <% end %>   
+                                        <% if @producto.prodgrupo.clave == 'PROY' %>
+                                               <td> <div class="d-flex justify-content-center"> <%= a.porcentaje %> </div> </td>
+                                        <% end %> 
                                     </tr>
                                 <% end %>
                         <% end %>

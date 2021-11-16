@@ -20,11 +20,25 @@
                          <td> <div class="d-flex justify-content-center"> <%= a.id %> </div> </td>
                          <td> <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="<%= a.producto.descripcion %>"><%= a.producto.descripcion %></span> </td>
                          <td>
+                             <% if a.producto.prodgrupo.clave != 'PROY'  %>
                                 <%= render "actividades/actividades/show/attached", a:a %>
+                             <% end %>   
                          </td>
                          <td> <div class="d-flex justify-content-left"> 
                                    <%= link_to a.titulo, actividades_actividad_path(a.id), data:{turbolinks:false}, class:"text-primary" %>
-                              </div>     
+                              </div> 
+                              <% if a.producto.prodgrupo.clave == 'PROY' 
+                                    @t_porcentaje = Autor.where(actividad_id:a.id).sum(:porcentaje).to_f
+                              %>
+                                  <% if current_usuario.persona_id == a.personaid %>
+                                    <% if @t_porcentaje < 100 %>
+                                           <div class="alert alert-primary font-weight-bold" role="alert">Debe agregar a los participantes y el porcentaje de colaboración, haga clic en el siguiente link: 
+                                                 <%= link_to "Participantes", edit_actividades_actividad_path(a), class:"text-success" %> <i class="fas fa-users"></i>
+                                           </div>
+                                    <% end %>  
+                                  <% end %>  
+                              <% end %>
+
                               <% if a.estado == 'G' %>
                                     <div class="d-flex justify-content-left alert alert-danger" role="alert">
                                        <small>

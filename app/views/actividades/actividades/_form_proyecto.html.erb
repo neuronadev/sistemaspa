@@ -1,0 +1,63 @@
+<%= form_with model:[:actividades, actividad],  html:{id:"proyectos"} do |form| %>
+    <%= form.hidden_field :producto_id, value: @producto.id %>
+    
+    <%= form.hidden_field :estado, value:'S' %>
+    <%= form.hidden_field :periodo, value:'2021' %>
+    <%= form.hidden_field :fuente, value:'SY' %> 
+    <%= form.hidden_field :aceptado, value:'S' %> 
+
+
+   <div class="row">
+         <div class="mb-3 col-md-12">
+               <%= form.label :titulo, "Título del proyecto:", class:"form-label" %>
+                <% if params[:action] == 'edit' %>
+                         <%= form.text_field :titulo, class:"form-control", readonly:true %>  
+                <% else %>
+                         <%= form.text_field :titulo, class:"form-control" %>
+                <% end %>   
+         </div>  
+         <div class="mb-3 col-md-3">
+               <%= form.label :anio, "Año:", class:"form-label" %>
+               <% if params[:action] == 'edit' %>
+                    <%= form.text_field :anio, class:"form-control", readonly:true %>
+               <% else %>
+                    <%= form.text_field :anio, class:"form-control" %>
+               <% end %>   
+         </div>  
+         <div class="mb-3 col-md-5">
+               <%= form.label :personaid, "Responsable:", class:"form-label" %>
+               <% if params[:action] == 'edit' %> 
+                  <%= form.select :personaid, 
+                     Persona.where(estado:'A').order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, 
+                     {},
+                     {class:"form-control form-control-sm academico_search", disabled:true} %>
+               <% else %>
+                      <%= form.select :personaid, 
+                     Persona.where(estado:'A').order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, 
+                     {},
+                     {class:"form-control form-control-sm academico_search"} %>
+               <% end %>   
+         </div>
+          <div class="mb-3 col-md-3">
+               <%= form.label :monto, "Monto:", class:"form-label" %>
+               <% if params[:action] == 'edit' %> 
+                      <%= form.text_field :monto, class:"form-control", readonly:true %>
+                <% else %>
+                      <%= form.text_field :monto, class:"form-control" %>
+                <% end %>      
+         </div>
+    </div>  
+
+    <% if params[:action] != 'edit' %> 
+      <%= render "doc_comprobante", form:form %>
+    <% end %>
+    <%= render "form_autores", form:form, swcorr:'N' %>
+    <%= render "red_acad", form:form  %>
+
+    <div class="row mt-md-3">
+        <div class="col">
+            <%= form.submit "Enviar información", class:'btn btn-primary' ,data: { confirm: 'La información será enviada para validación. ¿Desea continuar?', disable_with: "Enviando información, un momento..." } %>
+        </div> 
+    </div>
+
+<% end %>   

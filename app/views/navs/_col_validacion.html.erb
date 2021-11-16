@@ -10,6 +10,9 @@
             <% if  activ.estado == 'C' %>
                   <i class="fas fa-check-double text-success"></i>
             <% end%>
+            <% if  activ.estado == 'S' %>
+                  <i class="fas fa-check-double text-success"></i>
+            <% end%>
             <% if activ.valetapas.where(activo:'SI').any? %>
                   <% if activ.valetapas.where(activo:'SI').last.etapa == 'CR' %>
                         <% if activ.estado == 'G' %>

@@ -15,13 +15,15 @@
             <i class="fas fa-trash-alt"></i> Eliminar
         <% end  if @actividad.estado != 'A' %>
    </li>
-   <li class="nav-item">
-       <% if @actividad.documentos.attached? %> 
-          <% @actividad.documentos.each do |d|%>
-              <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank', class:"nav-link active" } do %>
-                   <i class="fas fa-file-pdf"></i> Comprobante
-              <% end %>
-          <% end %> 
-       <% end %>   
-   </li>
+   <% if @actividad.producto.prodgrupo.clave != 'PROY'  %> 
+        <li class="nav-item">
+            <% if @actividad.documentos.attached? %> 
+                <% @actividad.documentos.each do |d|%>
+                    <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank', class:"nav-link active" } do %>
+                        <i class="fas fa-file-pdf"></i> Comprobante
+                    <% end %>
+                <% end %> 
+            <% end %>   
+        </li>
+    <% end %>    
 </ul>
