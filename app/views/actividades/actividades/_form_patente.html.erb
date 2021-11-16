@@ -34,7 +34,7 @@
 
     <div class="row mt-md-3">
         <div class="col">
-            <%= form.submit "Enviar información", class:'btn btn-primary' ,data: { confirm: 'La información será enviada para validación. ¿Desea continuar?' }  %>
+            <%= form.submit "Enviar información", class:'btn btn-primary' ,data: { confirm: 'La información será enviada para validación. ¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %>
         </div> 
     </div>
 <% end %>
