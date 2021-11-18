@@ -44,7 +44,7 @@
                                 </td>
                                 
                                 <td id="actividad<%= a.id %>">
-                                <div class="d-flex justify-content-center"> 
+                                    <div class="d-flex justify-content-center"> 
                                         <% if a.estado == 'A' %>
                                             <%= link_to validar_path(a,'user'), remote:true, class:'text-muted', data:{confirm:"¿Desea validar el registro? Al aceptar no podrá hacer cambios. Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
                                                 <i class="fas fa-check-circle text-warning"></i> <span>Validar</span>
@@ -54,9 +54,11 @@
                                         <% end %>   
                                     </div>    
                                 </td>
-                                
-                                <%= render "navs/col_validacion", activ:a %>
-                                
+                                <% if current_usuario.rol != 'T' %>  
+                                      <%= render "navs/col_validacion", activ:a %>
+                                <% else %>
+                                      <%= render "navs/col_valida_tecnico", activ:a %>
+                                <% end %>                                 
                             <tr> 
                         <% end %>
                     <% else %>

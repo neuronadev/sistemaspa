@@ -54,8 +54,13 @@
                                     <% end %>   
                                 </div>    
                             </td>
-                            
-                            <%= render "navs/col_validacion", activ:a %>
+                           
+                            <% if current_usuario.rol != 'T' %>  
+                                      <%= render "navs/col_validacion", activ:a %>
+                            <% else %>
+                                      <%= render "navs/col_valida_tecnico", activ:a %>
+                            <% end %>  
+                        
                             
                         <tr> 
                      <% end %>

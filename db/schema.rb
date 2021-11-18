@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_02_195830) do
+ActiveRecord::Schema.define(version: 2021_11_17_222843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 2021_11_02_195830) do
     t.date "faceptado"
     t.decimal "monto", precision: 12, scale: 2
     t.integer "periodo"
+    t.string "edoblur", limit: 1
     t.index ["estado"], name: "index_actividades_on_estado"
     t.index ["producto_id"], name: "index_actividades_on_producto_id"
     t.index ["producto_id"], name: "index_actividades_on_producto_id"
@@ -167,6 +168,7 @@ ActiveRecord::Schema.define(version: 2021_11_02_195830) do
     t.date "faceptado"
     t.decimal "monto", precision: 12, scale: 2
     t.integer "periodo"
+    t.string "edoblur", limit: 1
     t.index ["estado"], name: "index_actividades_on_estado"
     t.index ["producto_id"], name: "index_actividades_on_producto_id"
     t.index ["producto_id"], name: "index_actividades_on_producto_id"
