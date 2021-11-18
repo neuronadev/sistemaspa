@@ -3,8 +3,8 @@ class Actividades::ActividadesController < ApplicationController
 
   def index
     #@actividades = Actividad.where(periodo:2021,estado:['A','U','C','S','G','D']).includes(:autores).where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores)
-    
-    @actividades = Actividad.where(periodo:2021,estado:['A','U','C','S','G','D']).where.not(producto_id:[22,39,82,83])
+    #where.not(producto_id:[22,39,82,83])
+    @actividades = Actividad.where(periodo:2021,estado:['A','U','C','S','G','D'])
                       .includes(:autores)
                         .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores)
     @enlace = Actividad.where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[22,39])

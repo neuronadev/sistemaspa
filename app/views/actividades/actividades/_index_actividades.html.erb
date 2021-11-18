@@ -8,14 +8,37 @@
                       <th scope="col" style="width: 45%"><div class="d-flex justify-content-center"> Título</div></th>
                       
                       <th scope="col" style="width: 9%"><div class="d-flex justify-content-center"> Vo.Bo.</div></th>
-                      <th scope="col" style="width: 5%"><div class="d-flex justify-content-center"> Coor. Red</div></th>
+                      
+                      <th scope="col" style="width: 5%">
+                         <div class="d-flex justify-content-center"> 
+                              <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %>
+                                  Coor. Red
+                              <% else %>
+                                  Comité
+                              <% end %>    
+                         </div>
+                       </th>
+
                       <th scope="col" style="width: 6%"><div class="d-flex justify-content-center"> Sec. Acad</div></th>
                   </tr>
               </thead>
 
               <tbody>
                  
-                  <% @actividades.each do |a| %>
+                <% @actividades.each do |a| 
+                     row_show = 'S'
+                     if [22,39,82,83].include? a.producto_id
+                          if a.fuente == 'V' || a.fuente == 'P'
+                              row_show = 'N'
+                          end    
+                     end
+
+                     if row_show == 'S' 
+                    
+                %>
+                     
+                       
+
                      <tr>
                          <td> <div class="d-flex justify-content-center"> <%= a.id %> </div> </td>
                          <td> <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="<%= a.producto.descripcion %>"><%= a.producto.descripcion %></span> </td>
@@ -82,6 +105,7 @@
                          <% end %> 
                                                
                      <tr> 
+                    <% end %>   
                   <% end %>
               </tbody>
 
