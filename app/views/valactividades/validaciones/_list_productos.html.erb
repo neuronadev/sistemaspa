@@ -1,0 +1,116 @@
+
+<div>Productos registrados periodo 2021</div>
+
+<button type="button" class="btn btn-link" onclick="javascript:window.history.back();"><i class="fas fa-arrow-left"></i> Regresar</button>
+
+
+<%  
+   @actividades.each do |lista|
+     lista.each do |item|
+
+%>
+ <div class="card" data-controller = "valproducto">   
+   <div class="card-body">
+        <div class="row" style="background-color:#0573a2;"> 
+            <div class="col d-flex justify-content-center <%= !item[:actividades].any? ? 'text-white font-italic' : ' font-weight-bold text-white'  %> ">
+                <%= reporta(item[:persona]) %>
+            </div>
+        </div>   
+        
+        <div class="row"> 
+            <div class="col">
+                <%= render "actividades", data:item[:actividades], idpersona:item[:persona] %>       
+            </div> 
+        </div>
+    </div>    
+ </div>        
+<%
+     end
+   end  
+%>
+
+
+<% if @tipo == 'T' %>
+         <div id="accordionsust">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapsesust" aria-expanded="true" aria-controls="collapsesust">
+                           Sustantivas
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapsesust" class="collapse" aria-labelledby="headingOne" data-parent="#accordionsust">
+                    <div class="card-body">
+                           <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th><small class="font-weight-bold">Colaboración</small></th>
+                                        <th><small class="font-weight-bold">Sustantiva</small></th>
+                                        <th><small class="font-weight-bold">Portcentaje</small></th>
+                                        <th><small class="font-weight-bold">Calidad</small></th>
+                                        <th><small class="font-weight-bold">Eficiencia</small></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if @sustantivas.any? %>
+                                    <% 
+                                        calif = 0.0 
+                                        @sustantivas.each do |s| 
+                                        
+                                        if s.estado == 'C'  
+                                                calidad =  !s.calidad.nil? ? s.calidad : 0.0
+                                                eficiencia = !s.eficiencia.nil? ? s.eficiencia : 0.0
+                                                calif = calif + (  (s.porcentaje/100)*(((calidad/10)+(eficiencia/10))/2)  )
+                                        end    
+                                    
+                                    %>
+                                        <tr>
+                                            <td> <div class="d-flex justify-content-start"> <small><%= reporta(s.investigadorid) %></small> </div> </td>
+                                            <td> <div class="d-flex justify-content-start"> <small> <%= s.descripcion %> </small> </td>
+                                            <td> <div class="d-flex justify-content-center"><small> <%= format('%.0f', s.porcentaje) %> % </small> </div>  </td>
+                                            <td> <div class="d-flex justify-content-center"> <small> <%= format('%.0f', s.calidad) if !s.calidad.nil?  %> </small> </div> </td>
+                                            <td> <div class="d-flex justify-content-center"><small> <%= format('%.0f', s.eficiencia) if !s.eficiencia.nil? %> </small> </div> </td>
+                                            </tr> 
+                                        
+                                        <% end %>  
+                                        
+                                    <% else %>
+                                        <tr><td colspan="5" class="text-italic">No hay registros</td></tr>
+                                    <% end %>      
+                                </tbody>
+                          </table>
+                          <div>
+                                <% if !calif.nil? %>
+                                    <strong>Calificación: <%=  sprintf('%.2f', calif) %></strong>
+                                <% end %>     
+                          </div>  
+                    </div>  
+                </div>
+            </div>
+        </div>        
+<% end %>
+
+<% if current_usuario.evaluador == 'A' %>
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Históricos
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                            <div>
+                                <%= render "list_historico", actividades: @periodo_a, periodo:2020  %>
+                            </div>
+                            <div>
+                                <%= render "list_historico", actividades:@periodo_b, periodo:2019  %>
+                            </div>
+                    </div>  
+                </div>
+            </div>
+        </div>    
+<% end %>

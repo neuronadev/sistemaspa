@@ -1,7 +1,18 @@
 <div class="row mt-3">
+
+    <% if current_usuario.evaluador == 'A' %>
+       <% if @actividad.edoblur == 'D' %>
+               <div class="col-2">
+                  <%= link_to "#", data:{action:'click->valproducto#aceptarRechazar', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                     <i class="fas fa-check"></i> VoBo validación
+                  <% end %>  
+               </div>
+        <% end %>       
+    <% end %>  
+
    <div class="col-2">
       <%= link_to "#", data:{action:'click->valproducto#aceptarProducto', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-          <i class="fas fa-check"></i> Aceptar
+          <i class="fas fa-check"></i> Aceptar producto
       <% end %>  
    </div>
    <!--
@@ -12,8 +23,18 @@
    </div>
    -->
    <div class="col-2">
-      <%= link_to "#", data:{action:'click->valproducto#aceptarRechazar', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-          <i class="fas fa-times"></i> No considerar
-      <% end %>  
+
+     <% if current_usuario.evaluador == 'A' %>
+           <% if @actividad.edoblur != 'D' %>
+              <%= link_to "#", data:{action:'click->valproducto#aceptarRechazar', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                 <i class="fas fa-times"></i> No considerar
+              <% end %>
+           <% end %>
+      <% else %>
+            <%= link_to "#", data:{action:'click->valproducto#aceptarRechazar', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                 <i class="fas fa-times"></i> No considerar
+              <% end %>    
+     <% end %>           
+   
    </div>
 </div>

@@ -1,0 +1,18 @@
+<table class="table table-sm table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th></th>
+                            <th></th>
+                        </tr>   
+                    </thead>
+                    <tbody>
+                        <% @investigadores.each do |i|  %>
+                            <tr>   
+                                <td><div><%= reporta(i.id) %></div></td>
+                                <td> <%= link_to "Productos", listaproductos_path(i.id) %></td>
+                                <td> <%= link_to "Historico", listahistorico_path(i.id) %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>     
+</table>

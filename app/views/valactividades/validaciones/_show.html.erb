@@ -62,8 +62,43 @@
         </div>
       <% end %>
       <% if @actividad.estado == 'U' %>
-        <div class="alert alert-dark" role="alert">
-            Falta la validación del coordinador.
-        </div>
+          <% if @rol == 'T' %>
+                    <% if @actividad.edoblur.nil? %> 
+                           <%= render "valactividades/gui/opcionesval" %>
+                    <% end %>
+                    <% if @actividad.edoblur == 'D' %> 
+                            <div class="alert alert-danger" role="alert">
+                                  No considerado:
+                                  <% if @actividad.valetapas.where(activo:'SI',accion:'rechazar').any? %>
+                                        <%= @actividad.valetapas.where(activo:'SI',accion:'rechazar').last.txtmensaje %>
+                                  <% end %>
+                              </div>
+                    <% end %> 
+                    <% if @actividad.edoblur == 'C' %> 
+                              <div class="alert alert-success" role="alert">
+                                  Producto validado.
+                              </div>
+                    <% end %>
+
+                    <% if current_usuario.evaluador == 'A' %>
+                           <% if @actividad.edoblur == 'C' %> 
+                                 <%= render "valactividades/gui/opcionesval" %>
+                           <% end %>
+                           <% if @actividad.edoblur == 'S' %> 
+                                  <div class="alert alert-success" role="alert">
+                                       Producto validado.
+                                   </div>   
+                           <% end %>
+                           <% if @actividad.edoblur == 'D' %> 
+                                 <%= render "valactividades/gui/opcionesval" %>
+                           <% end %>
+ 
+                    <% end %> 
+
+          <% else %>
+               <div class="alert alert-dark" role="alert">
+                   Falta la validación del coordinador.
+                </div>
+          <% end %>      
       <% end %>
 </div>      

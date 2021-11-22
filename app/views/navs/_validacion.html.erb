@@ -1,49 +1,21 @@
 <ul class="navList">
-   <li>
-          <div class="navList__subheading row row--align-v-center navList__subheading--open">
-            <span class="navList__subheading-icon"><i class="fas fa-tasks"></i></span>
-            <span class="navList__subheading-title">Investigadores</span>
-          </div>
-          <ul class="subList">
-            <li class="subList__item">
-                <%= link_to validaindex_path(:tipo=>'I'), class:"text-white" do %>
-                       <i class="fas fa-chevron-right fa-sm"></i> Productos registrados
-                <% end %> 
-            </li>
-            <!--
-             <li class="subList__item">
-                <%= link_to validaindex_path(:tipo=>'I'), class:"text-white" do %>
-                      <i class="fas fa-chevron-right fa-sm"></i> Listar por Red
-                <% end %> 
-            </li>
-            --> 
-          </ul>
-   </li>
+    <li class="navList__heading">
+            <%= link_to validaindex_path(:tipo=>'A'), data: {turbolinks:false} do %>
+               <i class="fas fa-users text-white"></i><span class="text-white"> Inicio </span>
+            <% end %>   
+    </li>
 
-   <li>
-          <div class="navList__subheading row row--align-v-center navList__subheading--open">
-            <span class="navList__subheading-icon"><i class="fas fa-tasks"></i></span>
-            <span class="navList__subheading-title">Técnicos</span>
-          </div>
-          <ul class="subList">
-            <li class="subList__item">
+    <% if current_usuario.evaluador == 'A' %>
+        <li class="navList__heading">
+                <%= link_to validaindex_path(:tipo=>'I'), class:"text-white" do %>
+                        <i class="fas fa-chevron-right fa-sm"></i> Investigadores
+                <% end %> 
+        </li>
+        <li class="navList__heading">
                 <%= link_to validaindex_path(:tipo=>'T'), class:"text-white" do %>
-                       <i class="fas fa-chevron-right fa-sm"></i> Adicionales
+                        <i class="fas fa-chevron-right fa-sm"></i> Técnicos
                 <% end %> 
-            </li>
-             <li class="subList__item">
-                <%= link_to tevaluacion_path, class:"text-white" do %>
-                       <i class="fas fa-chevron-right fa-sm"></i> Evaluaciones
-                <% end %> 
-            </li>
-            <li class="subList__item">
-                <%= link_to tsustantivas_path, class:"text-white" do %>
-                       <i class="fas fa-chevron-right fa-sm"></i> Sustantivas
-                <% end %> 
-            </li>
-            
-          </ul>
-   </li>
+        </li>
+    <% end %>
+</ul>   
 
-
-</ul>

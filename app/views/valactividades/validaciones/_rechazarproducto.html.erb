@@ -3,12 +3,17 @@
              <i class="fas fa-long-arrow-alt-left"></i> Regresar 
         <% end %>
 </div> 
-    <%= form_with url: 'comentario', model:@valetapa, data:{action:'ajax:success->valproducto#onPostMensaje', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem   } do |form| %>
+    <%= form_with url: '/valactividades/validaciones/comentario', model:@valetapa, data:{action:'ajax:success->valproducto#onPostMensaje', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem   } do |form| %>
             <input type="hidden" name="id" value='<%= @actividad.id %>'>
             <input type="hidden" name="target" value='<%= @trval %>'>
             <input type="hidden" name="item" value='<%= @tritem %>'>
             <input type="hidden" name="tipo" value='rechazar'>
-            <input type="hidden" name="etapa" value='SA'>
+            <% if current_usuario.evaluador == 'C' %>  
+                <input type="hidden" name="etapa" value='CM'>
+            <% end %>
+            <% if current_usuario.evaluador == 'A' %>  
+                <input type="hidden" name="etapa" value='SA'>
+            <% end %> 
             <input type="hidden" name="atendido" value='SI'>
             <input type="hidden" name="activo" value='SI'>
             <input type="hidden" name="estado" value='cerrado'>

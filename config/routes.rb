@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   get 'valactividades/validaciones/rechazarproducto/:target/:item', to:'valactividades/validaciones#rechazarproducto', as: 'sarechazarproducto'
   post 'valactividades/validaciones/comentario', to:'valactividades/validaciones#comentario', as: 'sacomentarioproducto'
   get 'valactividades/validaciones/evaluacion/', to:'valactividades/validaciones#evaluacion', as: 'tevaluacion'
-  get 'valactividades/validaciones/sustantivas/', to:'valactividades/validaciones#sustantivas', as: 'tsustantivas'
+  get 'valactividades/validaciones/sustantivas/:personaid', to:'valactividades/validaciones#sustantivas', as: 'tsustantivas'
+  get 'valactividades/validaciones/listaproductos/:idacad', to:'valactividades/validaciones#listaproductos', as: 'listaproductos'
+  get 'valactividades/validaciones/listahistorico/:idacad', to:'valactividades/validaciones#listahistorico', as: 'listahistorico'
+  get 'valactividades/validaciones/vbvalidacion/:target/:item', to:'valactividades/validaciones#vbvalidacion', as: 'vbvalidacion'
   
 
   get 'actividades/redacademicas/index', to: 'actividades/redacademicas#index', as: 'redesindex'

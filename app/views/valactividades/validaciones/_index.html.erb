@@ -1,24 +1,49 @@
-<%  
-   @actividades.each do |lista|
-     lista.each do |item|
+<% if @tipo == 'A' %>  
+        <% if current_usuario.evaluador == 'A' %>  
+                <div class="card mt-md-3">
+                <div class="card-body">  
+                <div class="row ">
+                
+                        <div class="col-6 border-left border-top border-right border-bottom" style="overflow: scroll; height:600px;">
+                                <div class="d-flex justify-content-center font-weight-bold">Investigadores</div>        
+                                <%= render "list_invest" %>
+                        </div>  
+                
+                        <div class="col-5 border-left border-top border-right border-bottom  ml-md-5" style="overflow: scroll; height:600px;">
+                                <div class="d-flex justify-content-center font-weight-bold">Técnicos</div>
+                                <%= render "list_tecnicos" %> 
+                        </div>
 
-%>
- <div class="card">   
-   <div class="card-body">
-        <div class="row" style="background-color:#0573a2;"> 
-            <div class="col d-flex justify-content-center <%= !item[:actividades].any? ? 'text-white font-italic' : ' font-weight-bold text-white'  %> ">
-                <%= reporta(item[:persona]) %>
-            </div>
-        </div>   
-        
-        <div class="row"> 
-            <div class="col">
-                <%= render "actividades", data:item[:actividades], idpersona:item[:persona] %>       
-            </div> 
+                </div>     
+                </div>
+                </div>
+        <% end %>
+
+        <% if current_usuario.evaluador == 'C' %>
+        <div class="card mt-md-3">
+                <div class="card-body">  
+                <div class="row ">
+                
+                        <div class="col-12 border-left border-top border-right border-bottom  ml-md-5">
+                                <div class="d-flex justify-content-center font-weight-bold">Técnicos</div>
+                                <%= render "list_tecnicos" %> 
+                        </div>
+
+                </div>     
+                </div>
         </div>
-    </div>    
- </div>        
-<%
-     end
-   end  
-%>
+        <% end %>
+<% end %> 
+
+<% if @tipo == 'I' %>
+        <h5> Producción Académica de Investigadores 2021</h5>
+        <div data-controller = "valproducto">     
+            <%= render "list_todo" %>
+        </div> 
+<% end %>  
+<% if @tipo == 'T' %>
+        <h5>Producción Académica de Técicos 2021</h5>
+        <div data-controller = "valproducto">     
+            <%= render "list_todo" %>
+        </div> 
+<% end %>  

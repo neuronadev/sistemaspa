@@ -1,0 +1,54 @@
+<button type="button" class="btn btn-link" onclick="javascript:window.history.back();"><i class="fas fa-arrow-left"></i> Regresar</button>
+<div class="row mt-md-3">
+   <div class="col">
+      <%= reporta(@persona.id) %>
+    </div>  
+</div>
+
+<div class="row mt-md-3">
+  <div class="col"> 
+    <table class="table table-striped">
+        <thead>
+           <tr>
+              <th><small class="font-weight-bold">Colaboración</small></th>
+               <th><small class="font-weight-bold">Sustantiva</small></th>
+               <th><small class="font-weight-bold">Portcentaje</small></th>
+                <th><small class="font-weight-bold">Calidad</small></th>
+                <th><small class="font-weight-bold">Eficiencia</small></th>
+            </tr>
+        </thead>
+        <tbody>
+        <% if @sustantivas.any? %>
+           <% 
+            calif = 0.0 
+            @sustantivas.each do |s| 
+               
+               if s.estado == 'C'  
+                    calidad =  !s.calidad.nil? ? s.calidad : 0.0
+                    eficiencia = !s.eficiencia.nil? ? s.eficiencia : 0.0
+                    calif = calif + (  (s.porcentaje/100)*(((calidad/10)+(eficiencia/10))/2)  )
+               end    
+           
+           %>
+               <tr>
+                  <td> <div class="d-flex justify-content-start"> <small><%= reporta(s.investigadorid) %></small> </div> </td>
+                  <td> <div class="d-flex justify-content-start"> <small> <%= s.descripcion %> </small> </td>
+                  <td> <div class="d-flex justify-content-center"><small> <%= format('%.0f', s.porcentaje) %> % </small> </div>  </td>
+                  <td> <div class="d-flex justify-content-center"> <small> <%= format('%.0f', s.calidad) if !s.calidad.nil?  %> </small> </div> </td>
+                  <td> <div class="d-flex justify-content-center"><small> <%= format('%.0f', s.eficiencia) if !s.eficiencia.nil? %> </small> </div> </td>
+                </tr> 
+               
+            <% end %>  
+            
+        <% else %>
+               <tr><td colspan="5" class="text-italic">No hay registros</td></tr>
+        <% end %>      
+       </tbody>
+    </table>
+    <div>
+        <% if !calif.nil? %>
+             <strong>Calificación: <%=  sprintf('%.2f', calif) %></strong>
+        <% end %>     
+    </div>  
+  </div>  
+</div>

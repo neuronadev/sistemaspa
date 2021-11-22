@@ -81,11 +81,18 @@
     <% end %>
     <% if current_usuario.evaluador == 'A' %>
         <li class="navList__heading">
-            <%= link_to validaindex_path(:tipo=>'I'), target:"_blank", data: {turbolinks:false} do %>
+            <%= link_to validaindex_path(:tipo=>'A'), target:"_blank", data: {turbolinks:false} do %>
                <i class="fas fa-users text-white"></i><span class="text-white"> Evaluación 2021 </span>
             <% end %>   
          </li>
     <% end %>     
+    <% if current_usuario.evaluador == 'C' %>
+        <li class="navList__heading">
+            <%= link_to validaindex_path(:tipo=>'I'), target:"_blank", data: {turbolinks:false} do %>
+               <i class="fas fa-users text-white"></i><span class="text-white"> Validar Adicionales </span>
+            <% end %>   
+         </li>
+    <% end %>  
 
    <li class="navList__heading">
         

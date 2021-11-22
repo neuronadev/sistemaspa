@@ -11,7 +11,7 @@ export default class extends Controller {
       let trval_div = document.getElementById(trval)
       if ( trval_div.style.display == 'none' ){
            trval_div.style.display = 'table-row'
-           fetch(`infoproducto/${trval}/${tritem}`)
+           fetch(`/valactividades/validaciones/infoproducto/${trval}/${tritem}`)
                  .then( response => response.text() )
                  .then ( html => { 
                           trval_div.querySelector('div').innerHTML = html  
@@ -39,7 +39,7 @@ export default class extends Controller {
     let tritem = event.params.tritem
     let trval_div = document.getElementById(trval)
 
-    fetch(`infoproducto/${trval}/${tritem}`)
+    fetch(`/valactividades/validaciones/infoproducto/${trval}/${tritem}`)
                  .then( response => response.text() )
                  .then ( html => { trval_div.querySelector('div').innerHTML = html  } )
 
@@ -55,8 +55,8 @@ export default class extends Controller {
     var [ref,idp,idact] = tritem.split('_')
     var colval = "colsa_" + idact
     
-    if (confirm('Esta acción marcará el producto con el VoBo de la Secretaría Académica. ¿Desea continuar?')) {
-         fetch(`aceptarproducto/${trval}/${tritem}`)
+    if (confirm('Esta acción marcará el producto con el VoBo. ¿Desea continuar?')) {
+         fetch(`/valactividades/validaciones/aceptarproducto/${trval}/${tritem}`)
          .then( response => response.text() )
                 .then ( html => { 
                          trval_div.querySelector('div').innerHTML = html
@@ -71,6 +71,33 @@ export default class extends Controller {
     } 
 
   }
+  voboValidacion(event){
+    event.preventDefault()
+    let trval = event.params.trval
+    let tritem = event.params.tritem
+    let trval_div = document.getElementById(trval)
+    let tritem_data = document.getElementById(tritem)
+     
+    var [ref,idp,idact] = tritem.split('_')
+    var colval = "colsa_" + idact
+    
+    if (confirm('Esta acción marcará el producto con el VoBo. ¿Desea continuar?')) {
+         fetch(`/valactividades/validaciones/vbvalidacion/${trval}/${tritem}`)
+         .then( response => response.text() )
+                .then ( html => { 
+                         trval_div.querySelector('div').innerHTML = html
+                         document.querySelectorAll(`[id=${colval}]`).forEach(html=> 
+                          html.querySelector('div').innerHTML= `
+                          <a href="#" data-action="click->valproducto#showTargetInfo" data-valproducto-trval-param="trval_${html.getAttribute('data-pid')}_${idact}" data-valproducto-tritem-param="tritem_${idp}_${idact}">
+         <i class="fas fa-user-times text-danger"></i>
+         <span class="text-danger"> <small> No considerar </small> </span>
+      </a>`
+                       ) 
+                    })
+    } 
+      
+
+  }
 
   aceptarCorregir(event){
     event.preventDefault()
@@ -79,7 +106,7 @@ export default class extends Controller {
     let trval_div = document.getElementById(trval)
     let tritem_data = document.getElementById(tritem)
 
-       fetch(`corregirproducto/${trval}/${tritem}`)
+       fetch(`/valactividades/validaciones/corregirproducto/${trval}/${tritem}`)
          .then( response => response.text() )
                 .then ( html => { 
                          trval_div.querySelector('div').innerHTML = html
@@ -93,7 +120,7 @@ export default class extends Controller {
     let trval_div = document.getElementById(trval)
     let tritem_data = document.getElementById(tritem)
 
-       fetch(`rechazarproducto/${trval}/${tritem}`)
+       fetch(`/valactividades/validaciones/rechazarproducto/${trval}/${tritem}`)
          .then( response => response.text() )
                 .then ( html => { 
                          trval_div.querySelector('div').innerHTML = html
