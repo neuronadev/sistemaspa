@@ -1,0 +1,33 @@
+
+    <% if @actividad.edoblur.nil? %> 
+        ---
+    <% end %>
+    <% if @actividad.edoblur == 'D' %> 
+        <div class="alert alert-danger" role="alert">
+            No considerado:
+            <% if @actividad.valetapas.where(activo:'SI',accion:'rechazar').any? %>
+                <%= @actividad.valetapas.where(activo:'SI',accion:'rechazar').last.txtmensaje %>
+            <% end %>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                    <%= link_to "#", data:{action:'click->valproducto#aceptarRechazar', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                            <i class="fas fa-check"></i> VoBo validación
+                    <% end %>  
+            </div>
+            <div class="col-2">
+                    <%= link_to "#", data:{action:'click->valproducto#aceptarProducto', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                        <i class="fas fa-check"></i> Aceptar producto
+                    <% end %>  
+            </div>
+        </div>    
+    <% end %>
+    <% if @actividad.edoblur == 'C' %> 
+            <%= render "valactividades/gui/opcionesval" %>
+    <% end %>  
+    <% if @actividad.edoblur == 'S' %> 
+            <div class="alert alert-success" role="alert">
+                Validado
+            </div>
+    <% end %>   
+  

@@ -73,7 +73,7 @@
           <td class="text-center">
                <% if a.documentos.attached? %> 
                  <% a.documentos.each do |d|%>
-                    <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank' } do %>
+                    <%= link_to rails_blob_path(d, disposition: "inline"), { target: '_blank' } do %>
                         <i class="fas fa-file-pdf fa-2x"></i>
                     <% end %>
                <% end %>  

@@ -21,7 +21,9 @@
                   <div class="d-flex justify-content-center"> <small>Enviado a corrección</small> </div>
             <% end %>
             <% if a.estado == 'D' %>
-                  <div class="d-flex justify-content-center"> <small>No considerar</small> </div>
+                  <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                              <i class="fas fa-user-times text-danger"></i> <span class="text-danger"> <small> No considerar </small> </span>
+                  <% end %> 
             <% end %>   
       <% end %>
       <% if etapa_val.etapa == 'SA' %>

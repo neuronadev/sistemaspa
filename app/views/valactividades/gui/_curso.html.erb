@@ -18,12 +18,12 @@
              <div class="col-sm">
                  <span class="font-weight-bold">Número de horas impartidas:</span>
                  
-                    <% if @actividad.producto_id == 82 
-                          autor = Autor.where(actividad_id:@actividad.id,persona_id:current_usuario.persona_id).first
+                     <% if @actividad.producto_id == 82 
+                             autor = Autor.where(actividad_id:@actividad.id,persona_id:@idpersona.to_i).first
                      %>
-                            <%= autor.horas %> 
+                             <%= autor.horas %> 
                      <% else %> 
-                            <%= @actividad.curso.himpartidas %>
+                             <%= @actividad.curso.himpartidas %>
                      <% end %> 
                  
              </div>
@@ -34,7 +34,7 @@
                  <span class="font-weight-bold">No. de alumnos:</span> <%= @actividad.curso.noalumnos %>
              </div>
               <% if @actividad.producto_id == 82 
-                    autor = Autor.where(actividad_id:@actividad.id,persona_id:current_usuario.persona_id).first
+                    autor = Autor.where(actividad_id:@actividad.id,persona_id:@idpersona).first
               %>
                     <div class="col-sm">
                         <span class="font-weight-bold">¿Coordinador del Curso?:</span> <%= autor.coordinador ? 'SI' : 'NO'   %>

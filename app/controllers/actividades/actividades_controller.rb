@@ -4,15 +4,15 @@ class Actividades::ActividadesController < ApplicationController
   def index
     #@actividades = Actividad.where(periodo:2021,estado:['A','U','C','S','G','D']).includes(:autores).where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores)
     #where.not(producto_id:[22,39,82,83])
-    @actividades = Actividad.where(periodo:2021,estado:['A','U','C','S','G','D'])
+    @actividades = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D'])
                       .includes(:autores)
-                        .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores)
-    @enlace = Actividad.where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[22,39])
+                        .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
+    @enlace = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[22,39])
                         .includes(:autores)
-                          .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores)
-    @posgrado = Actividad.where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[82,83])
+                          .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
+    @posgrado = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[82,83])
                           .includes(:autores)
-                            .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores)
+                            .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
      
 
 

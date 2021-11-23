@@ -2,20 +2,30 @@
     <li class="navList__heading">
             <%= link_to validaindex_path(:tipo=>'A'), data: {turbolinks:false} do %>
                <i class="fas fa-users text-white"></i><span class="text-white"> Inicio </span>
-            <% end %>   
+            <% end %>  
+            
+    </li>
+
+    <li class="navList__heading">Listar todo
+        
     </li>
 
     <% if current_usuario.evaluador == 'A' %>
-        <li class="navList__heading">
+        <li class="subList__item">
                 <%= link_to validaindex_path(:tipo=>'I'), class:"text-white" do %>
-                        <i class="fas fa-chevron-right fa-sm"></i> Investigadores
+                        <i class="fas fa-address-book"></i> Investigadores
                 <% end %> 
         </li>
-        <li class="navList__heading">
+        <li class="subList__item">
                 <%= link_to validaindex_path(:tipo=>'T'), class:"text-white" do %>
-                        <i class="fas fa-chevron-right fa-sm"></i> Técnicos
+                         <i class="fas fa-users-cog"></i> Técnicos
                 <% end %> 
         </li>
+         <li class="subList__item">
+                <%= link_to tevaluacion_path, class:"text-white" do %>
+                        <i class="fas fa-book-open"></i> Evaluaciones
+                <% end %> 
+            </li>
     <% end %>
 </ul>   
 

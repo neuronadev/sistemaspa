@@ -6,8 +6,9 @@
 
 <%  
    @actividades.each do |lista|
+     
      lista.each do |item|
-
+       
 %>
  <div class="card" data-controller = "valproducto">   
    <div class="card-body">
@@ -17,9 +18,15 @@
             </div>
         </div>   
         
-        <div class="row"> 
+        <div class="row">
             <div class="col">
-                <%= render "actividades", data:item[:actividades], idpersona:item[:persona] %>       
+                  <% if @tipo == 'I' || @tipo == 'C' %>
+                        <%= render "activs_investigador", data:item[:actividades], idpersona:item[:persona] %>
+                  <% elsif @tipo == 'T' %>
+                        <%= render "activs_tecnico", data:item[:actividades], idpersona:item[:persona] %>
+                  <% end %>   
+                        
+            
             </div> 
         </div>
     </div>    

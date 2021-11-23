@@ -21,7 +21,7 @@
             <%
             etapa_val = a.valetapas.where(activo:'SI').last
             if etapa_val.nil?
-            etapa_val = ''
+               etapa_val = ''
             end
             %>
             <% if etapa_val.etapa == 'SA' %>
@@ -41,7 +41,9 @@
                   <% end %>   
             <% end %>
             <% if etapa_val.etapa == 'CR' %>
-            ---
+                  <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                        <span class="badge badge-info font-weight-bold"> Ver producto </span>
+                   <% end %>
             <% end %>
 
       <% end %>

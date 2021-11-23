@@ -29,76 +29,18 @@
 
 
       <!-- Comprobante-->
-      <%= render "comprobante", actividad:@actividad %>     
+       <%= render "comprobante", actividad:@actividad %>     
  
       <!-- Opciones de validaciones Botones -->
-      <% if  @actividad.estado == 'C' %>
-        <%= render "valactividades/gui/opcionesval" %>
-      <% end %>
-      <% if @actividad.estado == 'S' %>
-        <div class="alert alert-success" role="alert">
-            Producto validado por la SA.
-        </div>
-      <% end %>
-      <% if @actividad.estado == 'G' %>
-        <div class="alert alert-danger" role="alert">
-            Enviado a corrección: 
-            <% if @actividad.valetapas.where(etapa:'SA',activo:'SI').any? %>
-                  <%= @actividad.valetapas.where(etapa:'SA',activo:'SI').first.txtmensaje %>
-            <% end %>
-        </div>
-      <% end %>
-      <% if @actividad.estado == 'D' %>
-        <div class="alert alert-danger" role="alert">
-            No considerado:
-            <% if @actividad.valetapas.where(etapa:'SA',activo:'SI').any? %>
-                  <%= @actividad.valetapas.where(etapa:'SA',activo:'SI').first.txtmensaje %>
-            <% end %>
-        </div>
-      <% end %>
-      <% if @actividad.estado == 'A' %>
-        <div class="alert alert-dark" role="alert">
-            El académico no ha dado VoBo.
-        </div>
-      <% end %>
-      <% if @actividad.estado == 'U' %>
-          <% if @rol == 'T' %>
-                    <% if @actividad.edoblur.nil? %> 
-                           <%= render "valactividades/gui/opcionesval" %>
-                    <% end %>
-                    <% if @actividad.edoblur == 'D' %> 
-                            <div class="alert alert-danger" role="alert">
-                                  No considerado:
-                                  <% if @actividad.valetapas.where(activo:'SI',accion:'rechazar').any? %>
-                                        <%= @actividad.valetapas.where(activo:'SI',accion:'rechazar').last.txtmensaje %>
-                                  <% end %>
-                              </div>
-                    <% end %> 
-                    <% if @actividad.edoblur == 'C' %> 
-                              <div class="alert alert-success" role="alert">
-                                  Producto validado.
-                              </div>
-                    <% end %>
-
-                    <% if current_usuario.evaluador == 'A' %>
-                           <% if @actividad.edoblur == 'C' %> 
-                                 <%= render "valactividades/gui/opcionesval" %>
-                           <% end %>
-                           <% if @actividad.edoblur == 'S' %> 
-                                  <div class="alert alert-success" role="alert">
-                                       Producto validado.
-                                   </div>   
-                           <% end %>
-                           <% if @actividad.edoblur == 'D' %> 
-                                 <%= render "valactividades/gui/opcionesval" %>
-                           <% end %>
- 
-                    <% end %> 
-
-          <% else %>
-               <div class="alert alert-dark" role="alert">
-                   Falta la validación del coordinador.
-                </div>
-          <% end %>      
-      <% end %>
+       <% if @rol == 'I' || @rol == 'C' %>
+              <%= render "opciones_investigador" %>
+       <% end %>  
+       <% if @rol == 'T' %>  
+             <% if current_usuario.evaluador == 'C' %>
+                 <%= render "opciones_com" %>
+             <% end %>
+             <% if current_usuario.evaluador == 'A' %>
+                 <%= render "opciones_sa" %>
+             <% end %> 
+       <% end %>       
 </div>      

@@ -20,7 +20,7 @@
                 <% end %>      
         <% end %>
         <% if actividad.producto_id == 82 
-            autor = Autor.where(actividad_id:actividad.id,persona_id:idpersona).first
+            autor = Autor.where(actividad_id:actividad.id,persona_id:@idpersona).first
         %>
               <% if !autor.nil? %> 
                 <% if autor.posgradoc.attached? %> 

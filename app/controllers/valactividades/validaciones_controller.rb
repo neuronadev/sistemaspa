@@ -18,7 +18,7 @@ class Valactividades::ValidacionesController < ApplicationController
       if @tipo == "I" 
         @investigadores = Persona.where(tipopersona_id:[2,3], estado:'A').order(:paterno,:materno,:nombre) 
         Persona.where(tipopersona_id:[2,3]).order(:paterno).each do |p|
-            r = Actividad.where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
+            r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
             @actividades << [persona:p.id, actividades:r.to_a]
         end
       end 
@@ -26,7 +26,7 @@ class Valactividades::ValidacionesController < ApplicationController
       if @tipo == "T" 
           @tecnicos = Persona.where(tipopersona_id:4, estado:'A').order(:paterno)
           Persona.where(tipopersona_id:4).order(:paterno).each do |p|
-             r = Actividad.where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
+             r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
              @actividades << [persona:p.id, actividades:r.to_a]
           end
       end 
@@ -40,10 +40,13 @@ class Valactividades::ValidacionesController < ApplicationController
     @tipo = Usuario.where(persona_id:idacad).first.rol
     
     if current_usuario.evaluador == 'A'
-       r = Actividad.where(periodo:anio,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", idacad).references(:autores)
+       #r = Actividad.where(periodo:anio,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", idacad).references(:autores)
+       r = Actividad.includes(:producto).where(periodo:anio,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", idacad).references(:autores).order("productos.descripcion")
     end 
     if current_usuario.evaluador == 'C'
-       r = Actividad.where(periodo:anio,estado:['A','C','U','S','G','D'],personaid:idacad).order(:id)
+       #r = Actividad.where(periodo:anio,estado:['A','C','U','S','G','D'],personaid:idacad).order(:id)
+       #r = Actividad.includes(:producto).where(periodo:anio,estado:['A','C','U','S','G','D'],personaid:idacad).order("productos.descripcion")
+       r = Actividad.includes(:producto).where(periodo:anio,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", idacad).references(:autores).order("productos.descripcion")
     end
     @actividades << [persona:idacad, actividades:r.to_a]
     @periodo_a = Actividad.where(periodo:2020,estado:'S').includes(:autores).where("autores.persona_id = ?", idacad).references(:autores)

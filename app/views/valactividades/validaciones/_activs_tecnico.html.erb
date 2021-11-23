@@ -1,0 +1,69 @@
+
+<table class="table table-sm  <%= !data.any? ? 'text-muted font-italic' : ''  %>  "> <!-- tabla_items -->
+        <thead>
+            <tr>
+                <th class="text-center"><small class="font-weight-bold">Folio</small> </th>
+                <th class="text-center"><small class="font-weight-bold">Producto</small></th>
+                <th class="text-center"><small class="font-weight-bold">Título</small></th> 
+                <th class="text-center"></th>
+                <th class="text-center"><small class="font-weight-bold">Académico</small></th>
+                <th class="text-center"><small class="font-weight-bold">Comite</small></th>
+                <% if current_usuario.evaluador == 'A' %>
+                   <th class="text-center"><small class="font-weight-bold">SA</small></th>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+        <%  
+           if data.any? 
+             data.each do |a|
+                idx = idpersona.to_s + "_" + a.id.to_s
+                @tritem = "tritem_" + idx
+                @trval = "trval_" + idx
+                @colsa = "colsa_" + a.id.to_s
+                item_v = 'S'
+                  if current_usuario.evaluador == 'C'
+                        if @tipo == 'T' && a.personaid != idpersona
+                              if a.fuente == 'V' 
+                                    item_v = 'S'
+                              else
+                                    item_v = 'N'
+                              end
+                        end     
+                  end
+                  if item_v == 'S'
+        %>
+                        <tr id="<%= @tritem %>">  <!-- tr_item  -->
+                              <td class="col-1 text-center"> <%= a.id %> </td>
+                              <td class="col-md-2"> <%= a.producto.descripcion %> </td>
+                              <td class="col-md-5"> <div class="d-flex justify-content-between"> <%= a.titulo %> </div> </td>
+                              <td class="col-2"> <%= render "comprobante", actividad:a, idpersona:idpersona %> </td>
+                              <td class="col-1">
+                                    <%= render "estadoacad", a:a %>
+                              </td>
+                              <% if current_usuario.evaluador == 'C' %>
+                                 <td class="col-1" id="<%= @colsa %>" data-pid="<%= idpersona.to_s %>">
+                                    <%= render "estadocomite", a:a %>
+                                 </td>  
+                              <% end %>
+                              <% if current_usuario.evaluador == 'A' %>
+                                 <td class="col-1">
+                                    <%= render "estadocomite", a:a %>
+                                 </td>  
+                                 <td class="col-1" id="<%= @colsa %>" data-pid="<%= idpersona.to_s %>"><%= render "estadotecnicosa", a:a %></td>    
+                              <% end %>
+                        </tr>
+
+                        <tr id="<%= @trval %>" style="display:none;"> <!-- tr_valida -->
+                              <td colspan="7">
+                                   <%= render "valactividades/gui/target_info" %> <!-- target_info -->
+                              </td>  
+                        </tr>               
+                  <% end %>
+              <% end %>
+          <% else %>
+           <tr><td colspan="5"><span class="badge badge-warning font-italic">Sin actividades</span><td></tr>
+          <% end %>   
+
+        </tbody>
+        </table>

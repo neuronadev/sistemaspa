@@ -8,7 +8,7 @@ class Producto < ApplicationRecord
   validates :prodcategoria_id, presence:true
   validates :prodgrupo_id, presence:true
 
-  has_many :actividad
+  has_one :actividad
 
   belongs_to :prodcategoria
   belongs_to :prodgrupo
