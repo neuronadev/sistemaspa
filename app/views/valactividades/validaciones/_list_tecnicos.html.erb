@@ -7,6 +7,7 @@
                         </tr>   
                     </thead>
    <tbody>
+                 <% if current_usuario.evaluador == 'A' %>
                         <% @tecnicos.each do |i|  %>
                             <tr>   
                                 <td><div><%= reporta(i.id) %></div></td>
@@ -14,5 +15,18 @@
                                 <td><%= link_to "Sustantivas", tsustantivas_path(i.id) %>   </td>
                             </tr>
                         <% end %>
+                 <% end %>  
+                 <% if current_usuario.evaluador == 'C' %>
+                        <% @tecnicos.each do |i| 
+                           if i.evalua == current_usuario.persona_id && i.estado == 'A'
+                        %>
+                            <tr>   
+                                <td><div><%= reporta(i.id) %></div></td>
+                                <td><%= link_to "Adicionales", listaproductos_path(i.id) %></td>
+                                <td><%= link_to "Sustantivas", tsustantivas_path(i.id) %>   </td>
+                            </tr>
+                           <% end %> 
+                        <% end %>
+                 <% end %>        
    </tbody>     
 </table>

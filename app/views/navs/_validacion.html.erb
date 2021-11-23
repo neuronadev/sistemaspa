@@ -6,11 +6,10 @@
             
     </li>
 
-    <li class="navList__heading">Listar todo
-        
-    </li>
+    
 
     <% if current_usuario.evaluador == 'A' %>
+        <li class="navList__heading">Listar todo</li> 
         <li class="subList__item">
                 <%= link_to validaindex_path(:tipo=>'I'), class:"text-white" do %>
                         <i class="fas fa-address-book"></i> Investigadores
