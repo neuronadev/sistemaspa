@@ -28,12 +28,12 @@
                                             <td><%= reporta(item[:persona]) %></td>
                                             <td> 
                                             <div class="d-flex justify-content-center">
-                                                <%=  format("%.0f",item[:porcentaje].to_f) %>%
+                                                <%=  item[:porcentaje].to_f.round(2) %>%
                                                 </div>      
                                             </td>
                                             <td>
                                             <div class="d-flex justify-content-center"> 
-                                                <%=  format("%.0f",item[:calificacion].to_f) %>
+                                                <%=  item[:calificacion].to_f.round(2) %>
                                                 </div>    
                                             </td>
                                     </tr>
@@ -58,9 +58,9 @@
                                                                       
                                                                       <td> <div class="d-flex justify-content-start"> <small><%= reporta(s.investigadorid) %></small> </div> </td>
                                                                       <td> <div class="d-flex justify-content-start"> <small> <%= s.descripcion %> </small> </td>
-                                                                      <td> <div class="d-flex justify-content-center"><small> <%= format('%.0f', s.porcentaje) %> % </small> </div>  </td>
-                                                                      <td> <div class="d-flex justify-content-center"> <small> <%= format('%.0f', s.calidad) if !s.calidad.nil?  %> </small> </div> </td>
-                                                                      <td> <div class="d-flex justify-content-center"><small> <%= format('%.0f', s.eficiencia) if !s.eficiencia.nil? %> </small> </div> </td>
+                                                                      <td> <div class="d-flex justify-content-center"><small> <%= s.porcentaje %> % </small> </div>  </td>
+                                                                      <td> <div class="d-flex justify-content-center"> <small> <%= s.calidad if !s.calidad.nil?  %> </small> </div> </td>
+                                                                      <td> <div class="d-flex justify-content-center"><small> <%= s.eficiencia if !s.eficiencia.nil? %> </small> </div> </td>
                                                                   </tr> 
                                                                <% end %>    
                                                          <% else %>

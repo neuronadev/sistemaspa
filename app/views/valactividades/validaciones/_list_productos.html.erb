@@ -75,9 +75,9 @@
                                         <tr>
                                             <td> <div class="d-flex justify-content-start"> <small><%= reporta(s.investigadorid) %></small> </div> </td>
                                             <td> <div class="d-flex justify-content-start"> <small> <%= s.descripcion %> </small> </td>
-                                            <td> <div class="d-flex justify-content-center"><small> <%= format('%.0f', s.porcentaje) %> % </small> </div>  </td>
-                                            <td> <div class="d-flex justify-content-center"> <small> <%= format('%.0f', s.calidad) if !s.calidad.nil?  %> </small> </div> </td>
-                                            <td> <div class="d-flex justify-content-center"><small> <%= format('%.0f', s.eficiencia) if !s.eficiencia.nil? %> </small> </div> </td>
+                                            <td> <div class="d-flex justify-content-center"><small> <%= s.porcentaje.to_f.round(2) %> % </small> </div>  </td>
+                                            <td> <div class="d-flex justify-content-center"> <small> <%= s.calidad.to_f.round(2) if !s.calidad.nil?  %> </small> </div> </td>
+                                            <td> <div class="d-flex justify-content-center"><small> <%= s.eficiencia.to_f.round(2) if !s.eficiencia.nil? %> </small> </div> </td>
                                             </tr> 
                                         
                                         <% end %>  
@@ -89,7 +89,7 @@
                           </table>
                           <div>
                                 <% if !calif.nil? %>
-                                    <strong>Calificación: <%=  sprintf('%.2f', calif) %></strong>
+                                    <strong>Calificación: <%=  calif.to_f.round(2) %></strong>
                                 <% end %>     
                           </div>  
                     </div>  

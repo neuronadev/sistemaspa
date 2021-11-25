@@ -53,7 +53,8 @@ class TecnicoController < ApplicationController
    end    
   end
   
-  @prom = evaltec.round(2)
+  #@prom = evaltec.round(2)
+  @prom = evaltec
 
  end
 
