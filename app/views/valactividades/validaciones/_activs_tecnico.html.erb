@@ -24,27 +24,39 @@
                 item_v = 'S'
                   if current_usuario.evaluador == 'C'
                         if @tipo == 'T' && a.personaid != idpersona
-                              if a.fuente == 'V' 
+                              if a.fuente == 'V' || a.fuente == 'P'
                                     item_v = 'S'
                               else
                                     item_v = 'N'
                               end
                         end     
                   end
-                  if item_v == 'S'
+                  
         %>
                         <tr id="<%= @tritem %>">  <!-- tr_item  -->
                               <td class="col-1 text-center"> <%= a.id %> </td>
                               <td class="col-md-2"> <%= a.producto.descripcion %> </td>
                               <td class="col-md-5"> <div class="d-flex justify-content-between"> <%= a.titulo %> </div> </td>
-                              <td class="col-2"> <%= render "comprobante", actividad:a, idpersona:idpersona %> </td>
+                              <td class="col-2"> <div class="d-flex justify-content-center"><%= render "comprobante", actividad:a, idpersona:idpersona %></div> </td>
                               <td class="col-1">
                                     <%= render "estadoacad", a:a %>
                               </td>
                               <% if current_usuario.evaluador == 'C' %>
-                                 <td class="col-1" id="<%= @colsa %>" data-pid="<%= idpersona.to_s %>">
-                                    <%= render "estadocomite", a:a %>
-                                 </td>  
+                                    <% if item_v == 'S' %>
+                                           <% if a.fuente == 'V' || a.fuente == 'P' %>
+                                                    <td><small class="text-muted">Validado por Oficina de Enlace</small> </td> 
+                                           <% else %> 
+                                                    <td class="col-1" id="<%= @colsa %>" data-pid="<%= idpersona.to_s %>">
+                                                         <%= render "estadocomite", a:a %>
+                                                    </td> 
+                                           <% end %>          
+                                    <% else %>
+                                        <% if a.fuente == 'V' || a.fuente == 'P' %>
+                                               <td><small class="text-muted">Validado por Oficina de Enlace</small> </td> 
+                                        <% else %> 
+                                               <td><small class="text-muted">Capturado por otro Académico</small> </td>
+                                        <% end %>
+                                    <% end %>  
                               <% end %>
                               <% if current_usuario.evaluador == 'A' %>
                                  <td class="col-1">
@@ -59,7 +71,7 @@
                                    <%= render "valactividades/gui/target_info" %> <!-- target_info -->
                               </td>  
                         </tr>               
-                  <% end %>
+                  
               <% end %>
           <% else %>
            <tr><td colspan="5"><span class="badge badge-warning font-italic">Sin actividades</span><td></tr>

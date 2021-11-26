@@ -50,7 +50,7 @@
         
                     <% if actividad.documentos.attached? %> 
                         <% actividad.documentos.each do |d|%>
-                            <div id="doc<%= d.id %>" class="ml-md-3">
+                            <div id="doc<%= d.id %>" class="d-flex">
                                 <%= link_to  rails_blob_path(d, disposition: "inline"),  target: '_blank' do  %>
                                        <small><i class="fas fa-file-pdf text-primary"></i> Comprobante</small>
                                 <% end %>
