@@ -14,6 +14,7 @@ class Actividad < ApplicationRecord
     has_one :vinculacion
     has_one :divulgacion
     has_one :fasciculo
+    has_one :ficha
     has_many :mensajes
     has_many :valetapas
     has_many_attached :documentos
@@ -31,13 +32,14 @@ class Actividad < ApplicationRecord
     accepts_nested_attributes_for :vinculacion
     accepts_nested_attributes_for :divulgacion
     accepts_nested_attributes_for :fasciculo
+    accepts_nested_attributes_for :ficha
 
     has_many :autores, dependent: :destroy
     accepts_nested_attributes_for :autores, allow_destroy: true
     has_many :personas, through: :autores
     
     belongs_to :producto
-    validates :titulo, :fechapub, presence: true, if: Proc.new { |p| [1,2,3,4,5,8,22,37,39].include? p.producto_id  }
+    validates :titulo, :fechapub, presence: true, if: Proc.new { |p| [1,2,3,4,5,8,21,22,37,39].include? p.producto_id  }
     validates :titulo, :anio, presence: true, if: Proc.new { |p| [6,7,11,13,14,15,16,17,18,19,23,24,25,26,27,28,29,30,31,32,33,34,35,36,40,41,81,85].include? p.producto_id  }
     
     validates :titulo, :anio, presence: true, if: Proc.new { |p| [42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80].include? p.producto_id  }

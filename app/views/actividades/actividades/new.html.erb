@@ -9,6 +9,7 @@
          <%= render "form_libro", actividad:@actividad if @parts[0] == 'LIBRO' %>
          <%= render "form_capitulo", actividad:@actividad if @parts[0] == 'CAPITULO' %>
          <%= render "form_flora", actividad:@actividad if @parts[0] == 'FLORA' %>
+         <%= render "form_ficha", actividad:@actividad if @producto.prodgrupo.clave == 'FICHA' %>
          <%= render "form_patente", actividad:@actividad if @parts[0] == 'PATENTE' %>
          <%= render "form_editor", actividad:@actividad if @parts[0] == 'EDITOR' %>
          <%= render "form_odivulga", actividad:@actividad if @parts[0] == 'ODIV' %>

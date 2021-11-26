@@ -43,6 +43,7 @@ class Actividades::ActividadesController < ApplicationController
     @actividad.build_libroarbitrado
     @actividad.build_capitulo
     @actividad.build_fasciculo
+    @actividad.build_ficha
     @actividad.build_patente
     @actividad.build_editor
     @actividad.build_divulgacion
@@ -145,6 +146,7 @@ class Actividades::ActividadesController < ApplicationController
           vinculacion_attributes: [:id, :tipovinculacion, :niveldecreto, :ordenamiento, :niveliniciativa, :nivelregla, :nivelcomite, :actividad_id],
           divulgacion_attributes: [:id,:noparticipantes, :nodias,:tipodivulgacion_id, :actividad_id],
           fasciculo_attributes: [:id, :tipofasciculo_id, :tipomedio_id, :nommedio, :codigo, :actividad_id],
+          ficha_attributes: [:id, :nommedio, :actividad_id],
           curso_attributes:[:id, :fini,:ffin, :hcurso, :himpartidas, :creditos, :noalumnos, :actividad_id, :coordinador, :tipocurso_id],
           tesista_attributes:[:id,:ftermino,:nivelestudio_id,:actividad_id, :fgrado, :efterminal, :acta],
           editor_attributes: [:id,:tipoeditorid,:idioma_id,:ambito_id,:codigo,:medio,:editorial,:pais,:actividad_id],

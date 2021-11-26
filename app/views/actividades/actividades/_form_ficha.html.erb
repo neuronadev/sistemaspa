@@ -1,0 +1,39 @@
+
+
+<%= form_with model:[:actividades, actividad] do |form| %>
+    <%= render "form_inputs_com", form:form %>
+    
+    <div class="row">
+        <div class="mb-3 col-md-9">
+               <%= form.label :titulo, "Título de la Ficha:", class:"form-label" %>
+               <%= form.text_field :titulo, class:"form-control" %>
+         </div>  
+         <div class="mb-3 col-md-3">
+               <%= form.label :fechapub, "Fecha de publicacion:", class:"form-label" %>
+               <%= form.date_field :fechapub, class:"form-control" %>
+         </div>  
+    </div>   
+    <div class="row">
+        <%= form.fields_for :ficha do |ficha| %>
+                 
+                  
+                  <div class="mb-3 col-md-12">
+                     <%=  ficha.label :nommedio, "Nombre del Medio de publicación:", class:"form-label" %>
+                     <%=  ficha.text_field :nommedio ,class:"form-control" %>
+                  </div> 
+                  
+                
+        <% end %>       
+    </div>
+
+    <%= render "doc_comprobante", form:form %>
+    <%= render "form_autores", form:form, swcorr:'N' %>
+    
+    <%= render "red_acad", form:form  %>
+
+    <div class="row mt-md-3">
+        <div class="col">
+            <%= form.submit "Enviar información", class:'btn btn-primary' ,data: { confirm: 'La información será enviada para validación. ¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %>
+        </div> 
+    </div>
+<% end %>

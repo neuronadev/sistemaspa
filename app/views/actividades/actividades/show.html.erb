@@ -23,6 +23,7 @@
          <%= render "actividades/actividades/show/form_libro", actividad:@actividad if @parts[0] == 'LIBRO' %>
          <%= render "actividades/actividades/show/form_capitulo", actividad:@actividad if @parts[0] == 'CAPITULO' %>
          <%= render "actividades/actividades/show/form_flora", actividad:@actividad if @parts[0] == 'FLORA' %>
+         <%= render "actividades/actividades/show/form_ficha", actividad:@actividad if @producto.prodgrupo.clave == 'FICHA' %>
          <%= render "actividades/actividades/show/form_patente", actividad:@actividad if @parts[0] == 'PATENTE' %>
          <%= render "actividades/actividades/show/form_editor", actividad:@actividad if @parts[0] == 'EDITOR' %>
          <%= render "actividades/actividades/show/form_odivulga", actividad:@actividad if @parts[0] == 'ODIV' %>

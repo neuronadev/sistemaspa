@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_222843) do
+ActiveRecord::Schema.define(version: 2021_11_26_152831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -494,6 +494,14 @@ ActiveRecord::Schema.define(version: 2021_11_17_222843) do
     t.index ["actividad_id"], name: "index_fasciculos_on_actividad_id"
     t.index ["tipofasciculo_id"], name: "index_fasciculos_on_tipofasciculo_id"
     t.index ["tipomedio_id"], name: "index_fasciculos_on_tipomedio_id"
+  end
+
+  create_table "fichas", force: :cascade do |t|
+    t.string "nommedio"
+    t.bigint "actividad_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["actividad_id"], name: "index_fichas_on_actividad_id"
   end
 
   create_table "historicos", force: :cascade do |t|
@@ -1212,6 +1220,7 @@ ActiveRecord::Schema.define(version: 2021_11_17_222843) do
   add_foreign_key "fasciculos", "actividades"
   add_foreign_key "fasciculos", "tipofasciculos"
   add_foreign_key "fasciculos", "tipomedios"
+  add_foreign_key "fichas", "actividades"
   add_foreign_key "historicos", "personas"
   add_foreign_key "identificadores", "codigos"
   add_foreign_key "identificadores", "cru.personas", column: "persona_id"
