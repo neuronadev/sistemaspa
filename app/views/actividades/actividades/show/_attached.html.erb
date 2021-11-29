@@ -60,7 +60,7 @@
         </div>  
     <% else %>
         <div class="d-flex justify-content-center">
-            <%= link_to updoc_actividades_actividad_path(a.id, disposition: 'inline', target: '_blank'), data:{turbolinks:false} do %>    
+            <%= link_to updoc_actividades_actividad_path(a.id, disposition: 'inline'), { target: '_blank' }, data:{turbolinks:false} do %>    
                <i class="fas fa-upload text-danger"></i>  <small class="text-danger"> Comprobante</small> 
             <% end %>   
         </div>   

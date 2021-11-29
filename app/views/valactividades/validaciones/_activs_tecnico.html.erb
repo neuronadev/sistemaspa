@@ -2,7 +2,7 @@
 <table class="table table-sm  <%= !data.any? ? 'text-muted font-italic' : ''  %>  "> <!-- tabla_items -->
         <thead>
             <tr>
-                <th class="text-center"><small class="font-weight-bold">Folio</small> </th>
+                <th class="text-center"><small class="font-weight-bold">Folio</small></th>
                 <th class="text-center"><small class="font-weight-bold">Producto</small></th>
                 <th class="text-center"><small class="font-weight-bold">Título</small></th> 
                 <th class="text-center"></th>
@@ -35,9 +35,14 @@
         %>
                         <tr id="<%= @tritem %>">  <!-- tr_item  -->
                               <td class="col-1 text-center"> <%= a.id %> </td>
-                              <td class="col-md-2"> <%= a.producto.descripcion %> </td>
+                              <td class="col-md-2">
+                                  <%= a.producto.descripcion %>
+                                   <% if a.producto.prodgrupo.clave == 'OTRASD' %>
+                                         -<I><%= a.divulgacion.tipodivulgacion.nomtipodivulgacion %></I>
+                                   <% end %>                   
+                              </td>
                               <td class="col-md-5"> <div class="d-flex justify-content-between"> <%= a.titulo %> </div> </td>
-                              <td class="col-2"> <div class="d-flex justify-content-center"><%= render "comprobante", actividad:a, idpersona:idpersona %></div> </td>
+                              <td class="col-1"> <div class="d-flex justify-content-center"><%= render "comprobante", actividad:a, idpersona:idpersona %></div> </td>
                               <td class="col-1">
                                     <%= render "estadoacad", a:a %>
                               </td>
@@ -56,7 +61,7 @@
                                            <% end %>
                               <% end %>
                               <% if current_usuario.evaluador == 'A' %>
-                                 <td class="col-1">
+                               
                                           <% if a.fuente == 'V' %>
                                                   <td><small class="text-muted">Validado por Oficina de Enlace</small> </td> 
                                            <% elsif a.fuente == 'P' %>
@@ -68,8 +73,8 @@
                                                          <%= render "estadocomite", a:a %>
                                                     </td>  
                                            <% end %>
-                                 </td>  
-                                 <td class="col-1" id="<%= @colsa %>" data-pid="<%= idpersona.to_s %>"><%= render "estadotecnicosa", a:a %></td>    
+                             
+                                           <td class="col-1" id="<%= @colsa %>" data-pid="<%= idpersona.to_s %>"><%= render "estadotecnicosa", a:a %></td>    
                               <% end %>
                         </tr>
 
