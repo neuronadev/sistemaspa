@@ -21,6 +21,8 @@
                 @tritem = "tritem_" + idx
                 @trval = "trval_" + idx
                 @colsa = "colsa_" + a.id.to_s
+                
+
                 item_v = 'S'
                   if current_usuario.evaluador == 'C'
                         if @tipo == 'T' && a.personaid != idpersona
@@ -53,7 +55,9 @@
                                            <% elsif a.fuente == 'P' %>
                                                     <td><small class="text-muted">Validado por Sec. Posgrado</small> </td> 
                                            <% elsif @tipo == 'T' && a.personaid != idpersona %>
-                                                     <td><small class="text-muted">Capturado por otro Académico</small> </td>           
+                                                     <td>
+                                                       <small class="text-muted">Capturado por otro Académico</small> 
+                                                     </td>           
                                            <% else %>
                                                     <td class="col-1" id="<%= @colsa %>" data-pid="<%= idpersona.to_s %>">
                                                          <%= render "estadocomite", a:a %>
@@ -67,7 +71,9 @@
                                            <% elsif a.fuente == 'P' %>
                                                     <td><small class="text-muted">Validado por Sec. Posgrado</small> </td> 
                                            <% elsif @tipo == 'T' && a.personaid != idpersona %>
-                                                     <td><small class="text-muted">Capturado por otro Académico</small> </td>           
+                                                     <td><small class="text-muted">Capturado por otro Académico 
+                                                            :<strong><%= reporta(a.personaid) if !a.personaid.nil? %></strong>
+                                                     </small> </td>           
                                            <% else %>
                                                     <td class="col-1" id="<%= @colsa %>" data-pid="<%= idpersona.to_s %>">
                                                          <%= render "estadocomite", a:a %>
