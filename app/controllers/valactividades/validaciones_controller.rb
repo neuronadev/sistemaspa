@@ -63,13 +63,16 @@ class Valactividades::ValidacionesController < ApplicationController
   end
 
   def listahistorico
-    idacad = params[:idacad]
+    #idacad = params[:idacad]
+    persona = Persona.find_by_hashid(params[:idacad])
+    idacad = persona.id
     @periodo_a = Actividad.where(periodo:2020,estado:'S').includes(:autores).where("autores.persona_id = ?", idacad).references(:autores)
     @periodo_b = Actividad.where(periodo:2019,estado:'S').includes(:autores).where("autores.persona_id = ?", idacad).references(:autores) 
   end
 
   def infoproducto
     @trval = params[:trval]
+
     @tritem = params[:tritem]
     @tr,@idpersona,@idactividad = @trval.split('_')
     @rol = Usuario.where(persona_id:@idpersona.to_i).first.rol     

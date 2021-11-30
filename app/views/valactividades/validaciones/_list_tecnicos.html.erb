@@ -11,8 +11,8 @@
                         <% @tecnicos.each do |i|  %>
                             <tr>   
                                 <td><div><%= reporta(i.id) %></div></td>
-                                <td><%= link_to "Adicionales", listaproductos_path(i.id) %></td>
-                                <td><%= link_to "Sustantivas", tsustantivas_path(i.id) %>   </td>
+                                <td><%= link_to "Adicionales", listaproductos_path(i) %></td>
+                                <td><%= link_to "Sustantivas", tsustantivas_path(i) %>   </td>
                             </tr>
                         <% end %>
                  <% end %>  

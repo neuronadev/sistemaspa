@@ -10,8 +10,8 @@
                         <% @investigadores.each do |i|  %>
                             <tr>   
                                 <td><div><%= reporta(i.id) %></div></td>
-                                <td> <%= link_to "Productos", listaproductos_path(i.id) %></td>
-                                <td> <%= link_to "Historico", listahistorico_path(i.id) %></td>
+                                <td> <%= link_to "Productos", listaproductos_path(i) %></td>
+                                <td> <%= link_to "Historico", listahistorico_path(i) %></td>
                             </tr>
                         <% end %>
                     </tbody>     
