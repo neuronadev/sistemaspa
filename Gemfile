@@ -31,6 +31,7 @@ gem 'rest-client'
  gem 'bootstrap_form', '~> 4.3'
  gem 'pagy', '~> 3.7', '>= 3.7.1'
  gem 'pg_search'
+ gem 'hashid-rails', '~> 1.4', '>= 1.4.1'
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 #gem 'cocoon', '~> 1.2', '>= 1.2.14'

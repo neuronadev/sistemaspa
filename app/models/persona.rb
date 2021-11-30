@@ -1,5 +1,5 @@
 class Persona < ApplicationRecord
-  
+  include Hashid::Rails
   before_save :default_values
 
   has_one :usuario

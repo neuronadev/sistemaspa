@@ -1,5 +1,6 @@
 class Valactividades::ValidacionesController < ApplicationController
   layout 'validaactividades'
+  
   def index
     
       @tipo = params[:tipo]  
@@ -33,10 +34,12 @@ class Valactividades::ValidacionesController < ApplicationController
   end
 
   def listaproductos
-    idacad = params[:idacad].to_i
+    #idacad = params[:idacad].to_i
+    persona = Persona.find_by_hashid(params[:idacad])
+    idacad = persona.id
     anio = 2021
     @actividades = []
-    @persona_id = idacad.to_i
+    @persona_id = idacad
     @tipo = Usuario.where(persona_id:idacad).first.rol
     
     if current_usuario.evaluador == 'A'
@@ -239,7 +242,9 @@ class Valactividades::ValidacionesController < ApplicationController
  end 
 
  def sustantivas
-     personaid = params[:personaid]
+     #personaid = params[:personaid]
+     persona = Persona.find_by_hashid(params[:personaid])
+     personaid = persona.id
      @persona = Persona.find(personaid.to_i)
      @sustantivas = @persona.academico.sustantivas.where(anio:2021,estado:['A','U','C'])
 

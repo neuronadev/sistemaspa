@@ -4,10 +4,12 @@
           <% if current_usuario.evaluador == 'A'  %>
               <small class="text-muted font-italic">--</small>
           <% end %>
-          <% if current_usuario.evaluador == 'C'  %>
-                        <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                            <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
-                        <% end %>
+          <% if a.estado == 'A'  %>
+                <small class="text-muted font-italic">--</small>
+          <% elsif current_usuario.evaluador == 'C' && (a.estado == 'U' || a.estado == 'C') %>      
+                <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                    <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+                <% end %>
           <% end %>
     <% else %>
           <% if a.edoblur == 'C' %>

@@ -1,5 +1,6 @@
 class PersonasController < ApplicationController
   before_action :authenticate_usuario!
+  
  
   def index
     @personas = Persona.where("estado='A'").order(:paterno)
