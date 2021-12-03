@@ -10,6 +10,11 @@
           <%= render "navs/menu_prod" %>  
       </div>  
    </div> 
+       <% if @actividad.periodo == 2020 %>
+                <%= link_to datahistory_path(2020), data:{turbolinks:false} do %>
+                        <i class="fas fa-long-arrow-alt-left"></i> Regresar al histórico 2020
+                <% end %>  
+       <% end  %>
    <div class="card">
       <div class="card-body">
          <% if !flash[:msgupdoc].blank? %> 

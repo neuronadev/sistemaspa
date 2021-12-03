@@ -1,17 +1,28 @@
 
+
+
 <div class="card">
  <div class="col">
 
     <h5><%= @actividad.producto.descripcion %></h5>
+    <div> 
+         <% if @actividad.periodo == 2020 %>
+                <%= link_to datahistory_path(2020), data:{turbolinks:false} do %>
+                        <i class="fas fa-long-arrow-alt-left"></i> Regresar
+                <% end %>  
+          <% end  %>
+       </div> 
     <div class="card-body">
             
        <div class="row">
                 <div class="mb-3 col-md-9">
-                    <label class="form-label">Titulo:</label>
-                    <label><%= @actividad.titulo %></label>
+                    <h5>Titulo:</h5>
+                    <h5><%= @actividad.titulo %></h5>
                 
                 </div>
-       </div>       
+       </div>   
+       
+       <div class="mt-md-3">   
         <%= form_with model:@actividad, url:'savedoc', remote:true do |form| %>   
              <input type="hidden" name="id" value = "<%= @actividad.producto_id %>" >
              <div class="row">
@@ -29,9 +40,9 @@
                    <%= form.submit "Enviar comprobante", class:"btn btn-primary", data: {disable_with: "Subiendo comprobante, un momento..."}   %>
 
                 </div>
-       </div>  
+             </div>  
         <% end %>            
-        
+      </div>  
             
 
    </div>

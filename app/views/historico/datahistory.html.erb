@@ -9,7 +9,7 @@
    <tr>
      <th class="text-center">Producto</th>
      <th class="text-center">Título</th>
-     <th class="text-center">Autores</th>
+     <th class="text-center">Participantes</th>
      <th class="text-center">Comprobante</th>
    </tr>
  </thead>
@@ -72,11 +72,19 @@
           <td class="text-center">
                <% if a.documentos.attached? %> 
                  <% a.documentos.each do |d|%>
-                    <%= link_to rails_blob_path(d, disposition: "attachment"), { target: '_blank' } do %>
+                    <%= link_to rails_blob_path(d, disposition: "inline"), { target: '_blank' } do %>
                         <i class="fas fa-file-pdf fa-2x"></i>
                     <% end %>
-               <% end %>  
-             <% end %>   
+                 <% end %>
+              <% else %>
+                 <div class="d-flex justify-content-center">
+                    <% if a.producto.id != 82 && a.producto.id != 83 %>
+                       <%= link_to updoc_actividades_actividad_path(a.id), data:{turbolinks:false} do %>    
+                          <i class="fas fa-upload text-danger"></i>  <small class="text-danger"> Comprobante</small> 
+                       <% end %>   
+                    <% end %> 
+                 </div> 
+              <% end %>   
           </td>
         
         </tr>

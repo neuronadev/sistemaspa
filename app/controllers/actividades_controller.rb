@@ -279,7 +279,7 @@ class ActividadesController < ApplicationController
         vinculacion_attributes: [:id, :tipovinculacion, :niveldecreto, :ordenamiento, :niveliniciativa, :nivelregla, :nivelcomite, :actividad_id],
         divulgacion_attributes: [:id,:noparticipantes, :nodias,:tipodivulgacion_id, :actividad_id],
         fasciculo_attributes: [:id, :tipofasciculo_id, :tipomedio_id, :nommedio, :codigo, :actividad_id],
-        autores_attributes: [:id,:rol_id,:persona_id,:firma,:filiacion,:corresponsal,:posicion,:porcentaje, :horas, :coordinador, :posgradoc, :_destroy] )
+        autores_attributes: [:id,:rol_id,:persona_id,:firma,:filiacion,:corresponsal,:posicion,:porcentaje, :horas, :coordinador, :posgradoc, :actividad_id, :_destroy] )
   end
 
 end
