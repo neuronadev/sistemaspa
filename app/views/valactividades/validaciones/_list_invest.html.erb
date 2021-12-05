@@ -1,14 +1,23 @@
 <table class="table table-sm table-striped">
                     <thead>
                         <tr>
+                            <th></th> 
                             <th>Nombre</th>
                             <th></th>
                             <th></th>
                         </tr>   
                     </thead>
-                    <tbody>
-                        <% @investigadores.each do |i|  %>
-                            <tr>   
+                    <tbody data-controller="utilsvalida">
+                        <% @investigadores.where(evaluacion:'N').each do |i|
+                           @trval = "trval_" + i.id.to_s
+
+                        %>
+                            <tr id="<%= @trval %>">   
+                                <td> 
+                                 <%= link_to "#", data:{action:'click->utilsvalida#validado', 'utilsvalida-trval-param':@trval } do %>
+                                          <span class="badge badge-info"><i class="fas fa-user-edit"></i>OK</span>
+                                 <% end %>   
+                                </td>
                                 <td><div><%= reporta(i.id) %></div></td>
                                 <td> <%= link_to "Productos", listaproductos_path(i) %></td>
                                 <td> <%= link_to "Historico", listahistorico_path(i) %></td>

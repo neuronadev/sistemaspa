@@ -19,6 +19,7 @@
       <%= render "valactividades/gui/adicional" if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
       <%= render "valactividades/gui/curso" if @producto.prodgrupo.clave == 'CUR' %>
       <%= render "valactividades/gui/tesis" if @producto.prodgrupo.clave == 'TESIS' %>
+      <%= render "valactividades/gui/proyecto", actividad:@actividad if @producto.prodgrupo.clave == 'PROY' %>
 
       <div class="row">
         <div class="col-sm">

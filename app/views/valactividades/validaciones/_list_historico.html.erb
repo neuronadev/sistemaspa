@@ -46,7 +46,7 @@
        i = i+1
    end
   mostrar = 'S'
-  if producto.prodgrupo.clave == 'ACTIVIDAD' && (current_usuario.rol == 'I' || current_usuario.rol == 'C')
+  if producto.prodgrupo.clave == 'ACTIVIDAD' && (@tipo == 'I' || @tipo == 'C')
      mostrar = 'N'
   end
 

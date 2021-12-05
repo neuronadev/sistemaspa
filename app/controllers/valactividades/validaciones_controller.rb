@@ -10,6 +10,7 @@ class Valactividades::ValidacionesController < ApplicationController
       if @tipo == "A" 
            @investigadores = Persona.where(tipopersona_id:[2,3], estado:'A').order(:paterno,:materno,:nombre) 
            @tecnicos = Persona.where(tipopersona_id:4, estado:'A').order(:paterno)
+           @validados = Persona.where(tipopersona_id:[2,3,4], estado:'A', evaluacion:'S').order(:paterno,:materno,:nombre)
       #    Persona.where(tipopersona_id:[2,4]).order(:paterno).each do |p|
       #      r = Actividad.where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
       #      @actividades << [persona:p.id, actividades:r.to_a]
@@ -52,7 +53,7 @@ class Valactividades::ValidacionesController < ApplicationController
        r = Actividad.includes(:producto).where(periodo:anio,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", idacad).references(:autores).order("productos.descripcion")
     end
     @actividades << [persona:idacad, actividades:r.to_a]
-    @periodo_a = Actividad.where(periodo:2020,estado:'S').includes(:autores).where("autores.persona_id = ?", idacad).references(:autores)
+    @periodo_a = Actividad.includes(:producto).where(periodo:2020,estado:'S').includes(:autores).where("autores.persona_id = ?", idacad).references(:autores).order("productos.descripcion")
     @periodo_b = Actividad.where(periodo:2019,estado:'S').includes(:autores).where("autores.persona_id = ?", idacad).references(:autores) 
 
     if @tipo == 'T'
@@ -252,6 +253,16 @@ class Valactividades::ValidacionesController < ApplicationController
      @sustantivas = @persona.academico.sustantivas.where(anio:2021,estado:['A','U','C'])
 
 
+ end
+
+ def academicook
+   trval = params[:persona]
+   tr,idpersona = trval.split('_') 
+   persona = Persona.find(idpersona.to_i)
+   persona.evaluacion = 'S'
+   persona.save
+   @validados = Persona.where(tipopersona_id:[2,3,4], estado:'A', evaluacion:'S').order(:paterno,:materno,:nombre)
+   render partial: 'list_ok'
  end
 
   private
