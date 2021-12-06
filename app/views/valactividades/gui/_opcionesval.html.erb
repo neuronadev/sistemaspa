@@ -10,11 +10,15 @@
         <% end %>       
     <% end %>  
 
+   
+   
    <div class="col-2">
       <%= link_to "#", data:{action:'click->valproducto#aceptarProducto', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
           <i class="fas fa-check"></i> Aceptar producto
       <% end %>  
    </div>
+
+
    <!--
    <div class="col-2">
       <%= link_to "#", data:{action:'click->valproducto#aceptarCorregir', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
@@ -31,7 +35,7 @@
               <% end %>
            <% end %>
       <% else %>
-            <%= link_to "#", data:{action:'click->valproducto#aceptarRechazar', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+              <%= link_to "#", data:{action:'click->valproducto#aceptarRechazar', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
                  <i class="fas fa-times"></i> No considerar
               <% end %>    
      <% end %>           
