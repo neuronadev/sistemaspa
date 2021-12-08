@@ -51,9 +51,9 @@
                          
                          </td>
                          <td>
-                             <% if a.producto.prodgrupo.clave != 'PROY'  %>
+                           
                                 <%= render "actividades/actividades/show/attached", a:a %>
-                             <% end %>   
+                           
                          </td>
                          <td> <div class="d-flex justify-content-left"> 
                                    <%= link_to a.titulo, actividades_actividad_path(a.id), data:{turbolinks:false}, class:"text-primary" %>
