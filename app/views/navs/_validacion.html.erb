@@ -24,7 +24,13 @@
                 <%= link_to tevaluacion_path, class:"text-white" do %>
                         <i class="fas fa-book-open"></i> Evaluaciones
                 <% end %> 
-            </li>
+         </li>
+         <li class="navList__heading">
+            <%= link_to validaindex_path(:tipo=>'A'), data: {turbolinks:false} do %>
+               <i class="fas fa-users text-white"></i><span class="text-white"> Técnicos asignados </span>
+            <% end %>  
+            
+         </li>
     <% end %>
 </ul>   
 

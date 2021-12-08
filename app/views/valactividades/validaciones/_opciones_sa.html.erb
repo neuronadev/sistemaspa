@@ -1,6 +1,13 @@
 
     <% if @actividad.edoblur.nil? %> 
-        ---
+          <% if current_usuario.evaluador == 'A' &&  @persona.evalua == current_usuario.persona_id  %>
+                    <%= render "valactividades/gui/opcionesval" %>
+          <% elsif @actividad.fuente == 'V' || @actividad.fuente == 'P'  %>
+                    <%= render "valactividades/gui/opcionesval" %>
+          <% else %>      
+                 ---
+          <% end %>
+    
     <% end %>
     <% if @actividad.edoblur == 'D' %> 
         <div class="alert alert-danger" role="alert">
@@ -12,7 +19,7 @@
         <div class="row">
             <div class="col-2">
                     <%= link_to "#", data:{action:'click->valproducto#aceptarRechazar', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                            <i class="fas fa-check"></i> VoBo validación
+                            <i class="fas fa-check"></i> No considerar
                     <% end %>  
             </div>
             <div class="col-2">

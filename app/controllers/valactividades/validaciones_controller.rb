@@ -36,16 +36,13 @@ class Valactividades::ValidacionesController < ApplicationController
 
   def listaproductos
     #idacad = params[:idacad].to_i
-    persona = Persona.find_by_hashid(params[:idacad])
-    idacad = persona.id
+    persona_p = Persona.find_by_hashid(params[:idacad])
+    idacad = persona_p.id
     anio = 2021
     @actividades = []
     @persona_id = idacad
     @tipo = Usuario.where(persona_id:idacad).first.rol
-     
-     puts "---------------------------------------------------------"
-     puts @tipo
-     puts @persona_id
+   
 
     if current_usuario.evaluador == 'A'
        #r = Actividad.where(periodo:anio,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", idacad).references(:autores)
@@ -89,7 +86,7 @@ class Valactividades::ValidacionesController < ApplicationController
     else
         @parts = ['-'] 
     end
-
+    @persona = Persona.find(@idpersona.to_i)
     render partial: 'show'
   end
 
@@ -123,6 +120,7 @@ class Valactividades::ValidacionesController < ApplicationController
     @rol = Usuario.where(persona_id:@idpersona.to_i).first.rol     
     @actividad = Actividad.find(@idactividad.to_i)
     @producto = @actividad.producto
+    @persona = Persona.find(@idpersona.to_i)
 
     if !@producto.pathf.blank? 
         @parts = @producto.pathf.split('-')
@@ -148,7 +146,12 @@ class Valactividades::ValidacionesController < ApplicationController
           update_actividad_tecnico @actividad, 'C'
        end
        if current_usuario.evaluador == 'A'
-           update_actividad_tecnico_sa @actividad, 'S'
+           if @persona.evalua == current_usuario.persona_id
+                update_actividad_tecnico @actividad, 'C'
+                update_actividad_tecnico_sa @actividad, 'S'
+           else
+                update_actividad_tecnico_sa @actividad, 'S'
+           end
        end   
     end
 
@@ -181,6 +184,8 @@ class Valactividades::ValidacionesController < ApplicationController
     @producto = @actividad.producto
     @valetapa = Valetapa.new
 
+   
+
     m = @actividad.valetapas.where(accion:'rechazar', activo:'SI').last
     if m.nil?
        @valetapa.txtmensaje = ''
@@ -204,6 +209,8 @@ class Valactividades::ValidacionesController < ApplicationController
       cerrar_activos_valetapa @actividad
       @v_etapa = create_valetapa valetapa
 
+      @persona = Persona.find(@idpersona.to_i)
+
       if @rol != 'T'  
           if params[:tipo] == 'corregir' 
             update_actividad @actividad, 'G'
@@ -217,10 +224,15 @@ class Valactividades::ValidacionesController < ApplicationController
           end
           if params[:tipo] == 'rechazar' 
               if current_usuario.evaluador == 'C'
-                 update_actividad_tecnico @actividad, 'D'
+                   update_actividad_tecnico @actividad, 'D'
               end
               if current_usuario.evaluador == 'A'
-                update_actividad_tecnico_sa @actividad, 'D'
+                   if @persona.evalua == current_usuario.persona_id 
+                        update_actividad_tecnico @actividad, 'D'
+                        update_actividad_tecnico_sa @actividad, 'D'
+                   else 
+                       update_actividad_tecnico_sa @actividad, 'D'
+                   end
              end
           end
       end

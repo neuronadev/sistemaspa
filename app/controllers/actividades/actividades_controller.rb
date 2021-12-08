@@ -13,8 +13,10 @@ class Actividades::ActividadesController < ApplicationController
     @posgrado = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[82,83])
                           .includes(:autores)
                             .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
-     
-
+    
+    if params[:pry].present?
+        @proyectos = Actividad.includes(:producto).where(producto_id:[81,85], periodo:2021).order("productos.descripcion")
+    end
 
   end
 

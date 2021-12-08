@@ -2,8 +2,13 @@
 
     <% if a.edoblur.nil? %>
           <% if current_usuario.evaluador == 'A'  %>
-              <small class="text-muted font-italic">--</small>
+                <% if @persona.evalua == current_usuario.persona_id %>
+                          <span class="badge badge-secondary font-weight-bold"> <i class="fas fa-arrow-right"></i></span>
+                <% else %>
+                          <small class="text-muted font-italic">--</small>
+                <% end %>          
           <% end %>
+
           <% if a.estado == 'A'  %>
                 <small class="text-muted font-italic">--</small>
           <% elsif current_usuario.evaluador == 'C' && (a.estado == 'U' || a.estado == 'C') %>      

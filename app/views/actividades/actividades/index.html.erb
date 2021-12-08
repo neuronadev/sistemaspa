@@ -3,13 +3,22 @@
 
    <div class="card-body">
          <h5>Producción 2021</h5>
+         
+            <div class="row"><div class="col text-primary">Productos Académicos</div></div> 
+            <%= render "index_actividades" %>
+            <div class="row"><div class="col text-primary">Productos de Divulgación (<I>Capturados por la Oficina de Enlace</I>)</div></div> 
+            <%= render "index_enlace" %> 
+            <div class="row"><div class="col text-primary">Productos del Posgrado INECOL (<I>Capturados por la Secretaría de Posgrado</I>)</div></div> 
+            <%= render "index_posgrado" %> 
 
-         <div class="row"><div class="col text-primary">Productos Académicos</div></div> 
-         <%= render "index_actividades" %>
-         <div class="row"><div class="col text-primary">Productos de Divulgación (<I>Capturados por la Oficina de Enlace</I>)</div></div> 
-         <%= render "index_enlace" %> 
-         <div class="row"><div class="col text-primary">Productos del Posgrado INECOL (<I>Capturados por la Secretaría de Posgrado</I>)</div></div> 
-         <%= render "index_posgrado" %> 
+
+             
+            <% if current_usuario.rol="SY" &&  params[:pry].present? %>
+                   <div class="row"><div class="col text-primary">Listado de proyectos</I></div></div> 
+                   <%= render "index_proyecto" %> 
+            <% end %>
+
+
    </div>
 
 </div>

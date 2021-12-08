@@ -1,0 +1,29 @@
+<table class="table table-sm " style="font-size:14px;">
+              <thead>
+                  
+                  <tr >
+                      <th scope="col" style="width: 5%"><div class="d-flex justify-content-center">Folio</div></th>
+                      <th scope="col" style="width: 20%"><div class="d-flex justify-content-center"> Producto</div></th>
+                      <th scope="col" style="width: 9%"></th>
+                      <th scope="col" style="width: 45%"><div class="d-flex justify-content-center"> Título</div></th>
+                      <th scope="col" style="width: 45%"><div class="d-flex justify-content-center"> Responsable</div></th>
+
+                 </tr>    
+              </thead>  
+              <tbody>
+                   <% @proyectos.each do |a| %>
+                         <tr>
+                            <td><div class="d-flex justify-content-center"> <%= a.id %> </div> </td>
+                            <td><%= a.producto.descripcion %></td> 
+                            <td><%= render "actividades/actividades/show/attached", a:a %> </td>  
+                            <td><div class="d-flex justify-content-left"> 
+                                   <%= link_to a.titulo, actividades_actividad_path(a.id), data:{turbolinks:false}, class:"text-primary" %>
+                                </div>
+                            </td>          
+                            <td>
+                                <%= reporta(a.personaid) %>
+                            </td>
+                         </tr>
+                   <% end %>
+              </tbody>
+</table>

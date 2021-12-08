@@ -4,7 +4,7 @@
        <% if @actividad.edoblur == 'D' %>
                <div class="col-2">
                   <%= link_to "#", data:{action:'click->valproducto#aceptarRechazar', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                     <i class="fas fa-check"></i> VoBo validación
+                     <i class="fas fa-check"></i> No considerar
                   <% end %>  
                </div>
         <% end %>       
