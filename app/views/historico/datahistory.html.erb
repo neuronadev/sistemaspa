@@ -78,7 +78,7 @@
                  <% end %>
               <% else %>
                  <div class="d-flex justify-content-center">
-                    <% if a.producto.id != 82 && a.producto.id != 83 %>
+                    <% if a.producto.id != 82 && a.producto.id != 83 && a.producto.id !=81 && a.producto.id != 85 %>
                        <%= link_to updoc_actividades_actividad_path(a.id), data:{turbolinks:false} do %>    
                           <i class="fas fa-upload text-danger"></i>  <small class="text-danger"> Comprobante</small> 
                        <% end %>   
