@@ -1,19 +1,19 @@
 <% if @tipo == 'A' %>  
-        <% if current_usuario.evaluador == 'A' %>  
+        <% if current_usuario.evaluador == 'A' || current_usuario.evaluador == 'B' %>  
                 <div class="card mt-md-3">
                         <div class="card-body">  
                                 <div class="row ">
                                 
-                                        <div class="col-6 border-left border-top border-right border-bottom" style="overflow: scroll; height:600px;">
+                                        <div class="<%= current_usuario.evaluador == 'A' ? 'col-6' : 'col-12' %> border-left border-top border-right border-bottom" style="overflow: scroll; height:600px;">
                                                 <div class="d-flex justify-content-center font-weight-bold">Investigadores</div>        
                                                 <%= render "list_invest" %>
                                         </div>  
-                                
-                                        <div class="col-5 border-left border-top border-right border-bottom  ml-md-5" style="overflow: scroll; height:600px;">
-                                                <div class="d-flex justify-content-center font-weight-bold">Técnicos</div>
-                                                <%= render "list_tecnicos" %> 
-                                        </div>
-
+                                        <% if current_usuario.evaluador == 'A' %>  
+                                                <div class="col-5 border-left border-top border-right border-bottom  ml-md-5" style="overflow: scroll; height:600px;">
+                                                        <div class="d-flex justify-content-center font-weight-bold">Técnicos</div>
+                                                        <%= render "list_tecnicos" %> 
+                                                </div>
+                                        <% end %> 
                                 </div>
                         </div>
                 </div>

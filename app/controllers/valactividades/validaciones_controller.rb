@@ -44,7 +44,7 @@ class Valactividades::ValidacionesController < ApplicationController
     @tipo = Usuario.where(persona_id:idacad).first.rol
    
 
-    if current_usuario.evaluador == 'A'
+    if current_usuario.evaluador == 'A' || current_usuario.evaluador == 'B'  
        #r = Actividad.where(periodo:anio,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", idacad).references(:autores)
        r = Actividad.includes(:producto).where(periodo:anio,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", idacad).references(:autores).order("productos.descripcion")
     end 
