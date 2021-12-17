@@ -31,17 +31,29 @@
             <% end %>    
         <% end %>
         <% if actividad.producto_id == 83 %>
-            <div class="d-flex flex-column">
-                    <%= link_to rails_blob_path(actividad.tesisdoc, disposition: 'inline'), { target: '_blank' } do %>
-                            <div><i class="fas fa-file-pdf"></i> <%= actividad.tesisdoc.filename %></div>
-                    <% end  %>
-                    <%= link_to rails_blob_path(actividad.tesisportada, disposition: 'inline'), { target: '_blank' } do %>
-                            <div><i class="fas fa-file-pdf"></i> <%= actividad.tesisdoc.filename %> </div>
-                    <% end  %>
-                    <%= link_to rails_blob_path(actividad.tesiscarta, disposition: 'inline'), { target: '_blank' } do %>
-                            <div><i class="fas fa-file-pdf"></i> <%= actividad.tesisdoc.filename %> </div>
-                    <% end  %>
-            </div> 
+             <% if actividad.periodo == 2021 %>
+                    <div class="d-flex flex-column">
+                            <%= link_to rails_blob_path(actividad.tesisdoc, disposition: 'inline'), { target: '_blank' } do %>
+                                    <div><i class="fas fa-file-pdf"></i> <%= actividad.tesisdoc.filename %></div>
+                            <% end  %>
+                            <%= link_to rails_blob_path(actividad.tesisportada, disposition: 'inline'), { target: '_blank' } do %>
+                                    <div><i class="fas fa-file-pdf"></i> <%= actividad.tesisdoc.filename %> </div>
+                            <% end  %>
+                            <%= link_to rails_blob_path(actividad.tesiscarta, disposition: 'inline'), { target: '_blank' } do %>
+                                    <div><i class="fas fa-file-pdf"></i> <%= actividad.tesisdoc.filename %> </div>
+                            <% end  %>
+                    </div> 
+              <% else %>
+                     <div class="d-flex flex-column">
+                        <% if actividad.documentos.attached? %> 
+                                <% actividad.documentos.each do |d|%>
+                                    <div id="doc<%= d.id %>" class="ml-md-3">
+                                    <%= link_to d.filename, rails_blob_path(d, disposition: "inline"), { target: '_blank' } %>
+                                    </div>
+                                <% end %>    
+                        <% end %>   
+                     </div>    
+              <% end %>      
         <% end %> 
 
     <% else %>

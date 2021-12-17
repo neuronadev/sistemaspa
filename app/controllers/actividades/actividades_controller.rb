@@ -17,6 +17,9 @@ class Actividades::ActividadesController < ApplicationController
     if params[:pry].present?
         @proyectos = Actividad.includes(:producto).where(producto_id:[81,85], periodo:2021).order("productos.descripcion")
     end
+    if params[:tesis].present?
+       @tesis = Actividad.includes(:producto).where(producto_id:[83], periodo:2020).order("productos.descripcion")
+    end
 
   end
 
