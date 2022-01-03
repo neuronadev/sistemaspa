@@ -25,18 +25,25 @@
    <h5>Producción 2021</h5>
    <span>Seleccione un producto del catalogo.</span>
    <hr>
-     <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' || current_usuario.rol == 'Y' %>
+    
+   <% 
+     b_closse = true
+    if b_closse %>
+          <%= render "catalogo_close" %> 
+   <% else %> 
 
-           <%= render "catalogo_i" %>  
+                <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' || current_usuario.rol == 'Y' %>
 
-     <% end %>
-     <% if current_usuario.rol == 'T' %>
-          <% if @prom.to_f >= 8.5 %>
-                <%= render "catalogo_i" %>  
-                <%= render "catalogo_t" %>  
-          <% else%>
-               <strong>Es necesario que se han evaluadas todas las actividades sustantivas.</strong>
-          <% end %>     
-     <% end %>
+                    <%= render "catalogo_i" %>  
 
+                <% end %>
+                <% if current_usuario.rol == 'T' %>
+                    <% if @prom.to_f >= 8.5 %>
+                            <%= render "catalogo_i" %>  
+                            <%= render "catalogo_t" %>  
+                    <% else%>
+                        <strong>Es necesario que se han evaluadas todas las actividades sustantivas.</strong>
+                    <% end %>     
+                <% end %>
+  <% end %>
 </div>
