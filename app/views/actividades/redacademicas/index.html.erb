@@ -36,7 +36,7 @@
                            <% if a.estado == 'U' %>
                                  <button class="btn btn-warning btn-sm" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" >Validar</button>
                            <% end %>  
-                           <% if a.estado == 'C' %>
+                           <% if a.estado == 'C' ||  a.estado == 'S' %>
                                  <span class="badge badge-success" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">Validado</span>
                            <% end %> 
                            <% if a.estado == 'G' %>
