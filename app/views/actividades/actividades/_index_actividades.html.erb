@@ -91,9 +91,8 @@
                          <td id="actividad<%= a.id %>">
                            <div class="d-flex justify-content-center"> 
                                 <% if a.estado == 'A' %>
-                                    <%= link_to validar_path(a,'user'), remote:true, class:'text-muted', data:{confirm:"¿Desea validar el registro? Al aceptar no podrá hacer cambios. Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
-                                        <i class="fas fa-check-circle text-warning"></i> <span>Validar</span>
-                                    <% end %>
+                                     <span class="text-muted font-italic" onclick="messclose()" ><i class="fas fa-check-circle"></i> Validar</span>
+                                                    
                                 <% else %> 
                                         <i class="fas fa-check-double text-success"></i>
                                 <% end %>   
@@ -118,3 +117,10 @@
               </tbody>
 
          </table> 
+
+         <script>
+              function messclose(){
+
+                  alert("El sistema cerró el día 31 de Diciembre a las 24hrs, no es posbile realizar esta acción.")
+              }
+         </script>
