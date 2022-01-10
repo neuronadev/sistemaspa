@@ -1,10 +1,13 @@
+
+<button type="button" class="btn btn-primary" id="test"> Apps </button>
+
 <% if @tipo == 'A' %>  
         <% if current_usuario.evaluador == 'A' || current_usuario.evaluador == 'B' %>  
                 <div class="card mt-md-3">
                         <div class="card-body">  
                                 <div class="row ">
                                 
-                                        <div class="<%= current_usuario.evaluador == 'A' ? 'col-6' : 'col-12' %> border-left border-top border-right border-bottom" style="overflow: scroll; height:600px;">
+                                        <div id="datainvest" class="<%= current_usuario.evaluador == 'A' ? 'col-6' : 'col-12' %> border-left border-top border-right border-bottom" style="overflow: scroll; height:600px;">
                                                 <div class="d-flex justify-content-center font-weight-bold">Investigadores</div>        
                                                 <%= render "list_invest" %>
                                         </div>  
@@ -60,3 +63,19 @@
             <%= render "list_todo" %>
         </div> 
 <% end %>  
+
+<% if  @scroll.to_i > 0 %>
+
+        <script>
+                
+                document.addEventListener("DOMContentLoaded", function(event) {
+                        var pc = document.getElementById("trval_<%= @scroll %>").offsetTop;
+                        document.getElementById("datainvest").scrollTop = pc;
+                        var tr = document.getElementById("trval_<%= @scroll %>")
+                        tr.style.backgroundColor='#f5b7a9'; 
+                        setTimeout( ()=> {tr.style.backgroundColor=''},2*1000)                        
+                         
+                });
+        </script>
+
+<% end %>

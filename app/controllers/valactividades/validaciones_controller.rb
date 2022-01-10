@@ -6,6 +6,12 @@ class Valactividades::ValidacionesController < ApplicationController
       @tipo = params[:tipo]  
       anio = 2021
       @actividades = []
+
+      if params[:scroll].present?
+          @scroll = params[:scroll]
+      else 
+          @scroll = 0    
+      end
       
       if @tipo == "A" 
            @investigadores = Persona.where(tipopersona_id:[2,3], estado:'A').order(:paterno,:materno,:nombre) 

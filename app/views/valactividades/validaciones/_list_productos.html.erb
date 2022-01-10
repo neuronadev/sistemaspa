@@ -1,8 +1,11 @@
 
 <div>Productos registrados periodo 2021</div>
 
-<button type="button" class="btn btn-link" onclick="javascript:window.history.back();"><i class="fas fa-arrow-left"></i> Regresar</button>
 
+
+<%= link_to validaindex_path(:tipo=>'A',:scroll=>@persona_id), data: {turbolinks:false} do %>
+        <i class="fas fa-long-arrow-alt-left"></i><span class="text-primary"> Regresar </span>
+<% end %>   
 
 <%  
    @actividades.each do |lista|
