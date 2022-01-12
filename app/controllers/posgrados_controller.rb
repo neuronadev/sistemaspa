@@ -3,7 +3,7 @@ class PosgradosController < ApplicationController
   layout :type_layout
 
   def index
-      @cursos = Actividad.where(producto_id:[82,83], fuente:'P',estado:['U','A','S','C'], periodo:2021)
+      @cursos = Actividad.where(producto_id:[82,83], fuente:'P',estado:['U','A','S','C','D'], periodo:2021)
   end
 
   def new

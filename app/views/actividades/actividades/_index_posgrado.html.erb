@@ -35,10 +35,18 @@
                                 <% end %>  
                                 <% if a.estado == 'D' %>
                                         <div class="d-flex justify-content-left">
-                                        <small>
-                                                <i class="fas fa-comment-alt text-danger"></i> <span class="text-danger">No cumple con la normativa.</span> <strong><%= link_to "Ver motivo", actividades_actividad_path(a.id), class:'text-danger' %></strong>
-                                        </small> 
-                                                
+                                            <% if a.producto_id == 82 %>          
+                                                    <%  autores = Autor.where(actividad_id:a.id, persona_id:current_usuario.persona_id).first  %>
+                                                    <% if autores.aplicar == 'N' %>      
+                                                             <small>
+                                                               <i class="fas fa-comment-alt text-danger"></i> <span class="text-danger">No cumple con la normativa.</span> <strong><%= link_to "Ver motivo", actividades_actividad_path(a.id), class:'text-danger' %></strong>
+                                                             </small> 
+                                                    <% end %>    
+                                            <% else %>        
+                                                    <small>
+                                                        <i class="fas fa-comment-alt text-danger"></i> <span class="text-danger">No cumple con la normativa.</span> <strong><%= link_to "Ver motivo", actividades_actividad_path(a.id), class:'text-danger' %></strong>
+                                                    </small> 
+                                            <% end %>     
                                         </div>
                                 <% end %>   
                             </td>

@@ -22,7 +22,15 @@
          <% end %>
          
          <% if @actividad.estado == 'D' %> 
-                <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
+                <% if @actividad.producto_id == 82 %>          
+                      <%  autores = Autor.where(actividad_id:@actividad.id, persona_id:current_usuario.persona_id).first  %>
+                      <% if autores.aplicar == 'N' %>      
+                            <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
+                     <% end %>           
+                <% else %> 
+                   <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
+                <% end %> 
+         
          <% end %>     
          <%= render "actividades/actividades/show/form_art", actividad:@actividad if @parts[0] == 'ART' %>
          <%= render "actividades/actividades/show/form_libro", actividad:@actividad if @parts[0] == 'LIBRO' %>

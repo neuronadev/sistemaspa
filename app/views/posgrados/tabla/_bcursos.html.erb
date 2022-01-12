@@ -31,7 +31,7 @@
             <% if c.estado == 'U' %>
                    <span class="badge bg-warning text-dark">En validación</span>
             <% end %> 
-             <% if c.estado == 'C' || c.estado == 'S' %>
+             <% if c.estado == 'C' || c.estado == 'S' || c.estado == 'D' %>
                    <span class="badge bg-success text-white-50"> <i class="fas fa-check-double text-white-50 fa-sm"></i> Validado</span>
             <% end %> 
         </td>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_152831) do
+ActiveRecord::Schema.define(version: 2022_01_11_223243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -221,6 +221,8 @@ ActiveRecord::Schema.define(version: 2021_11_26_152831) do
     t.decimal "porcentaje", precision: 7, scale: 2
     t.decimal "horas", precision: 16, scale: 2
     t.boolean "coordinador"
+    t.string "aplicar", limit: 1
+    t.text "motivo"
     t.index ["actividad_id"], name: "index_autores_on_actividad_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
@@ -244,6 +246,8 @@ ActiveRecord::Schema.define(version: 2021_11_26_152831) do
     t.decimal "porcentaje", precision: 7, scale: 2
     t.decimal "horas", precision: 16, scale: 2
     t.boolean "coordinador"
+    t.string "aplicar", limit: 1
+    t.text "motivo"
     t.index ["actividad_id"], name: "index_autores_on_actividad_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
@@ -355,6 +359,12 @@ ActiveRecord::Schema.define(version: 2021_11_26_152831) do
     t.string "abreviatura", limit: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "convocatorias", force: :cascade do |t|
+    t.string "descconvocatoria", limit: 85
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "coordinadores", force: :cascade do |t|
@@ -535,6 +545,12 @@ ActiveRecord::Schema.define(version: 2021_11_26_152831) do
 
   create_table "idiomas", force: :cascade do |t|
     t.string "nomidioma", limit: 75
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "investigaciones", force: :cascade do |t|
+    t.string "descinvestigacion", limit: 85
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -735,16 +751,57 @@ ActiveRecord::Schema.define(version: 2021_11_26_152831) do
   end
 
   create_table "proyectos", force: :cascade do |t|
-    t.string "numero", limit: 20
-    t.string "nombreproy"
-    t.string "fuente", limit: 80
-    t.decimal "monto"
-    t.date "fini"
-    t.date "ffin"
-    t.integer "idreferencia"
-    t.string "nomreferencia", limit: 85
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "noregistro", limit: 30
+    t.text "nombre"
+    t.text "financiadora"
+    t.boolean "transfconoc"
+    t.text "nomcontacto"
+    t.string "emailcontacto", limit: 85
+    t.text "objetivo"
+    t.text "prodesperado"
+    t.text "impacto"
+    t.boolean "interinstitucional"
+    t.string "estado", limit: 3
+    t.date "fvobo"
+    t.date "fsa"
+    t.date "fst"
+    t.date "fadmin"
+    t.date "fdir"
+    t.bigint "convocatoria_id", null: false
+    t.bigint "investigacion_id", null: false
+    t.bigint "tipolocalidad_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["convocatoria_id"], name: "index_proyectos_on_convocatoria_id"
+    t.index ["investigacion_id"], name: "index_proyectos_on_investigacion_id"
+    t.index ["tipolocalidad_id"], name: "index_proyectos_on_tipolocalidad_id"
+  end
+
+  create_table "proyectos", force: :cascade do |t|
+    t.string "noregistro", limit: 30
+    t.text "nombre"
+    t.text "financiadora"
+    t.boolean "transfconoc"
+    t.text "nomcontacto"
+    t.string "emailcontacto", limit: 85
+    t.text "objetivo"
+    t.text "prodesperado"
+    t.text "impacto"
+    t.boolean "interinstitucional"
+    t.string "estado", limit: 3
+    t.date "fvobo"
+    t.date "fsa"
+    t.date "fst"
+    t.date "fadmin"
+    t.date "fdir"
+    t.bigint "convocatoria_id", null: false
+    t.bigint "investigacion_id", null: false
+    t.bigint "tipolocalidad_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["convocatoria_id"], name: "index_proyectos_on_convocatoria_id"
+    t.index ["investigacion_id"], name: "index_proyectos_on_investigacion_id"
+    t.index ["tipolocalidad_id"], name: "index_proyectos_on_tipolocalidad_id"
   end
 
   create_table "publicaciones", force: :cascade do |t|
@@ -1003,6 +1060,12 @@ ActiveRecord::Schema.define(version: 2021_11_26_152831) do
     t.integer "puntos"
   end
 
+  create_table "tipolocalidades", force: :cascade do |t|
+    t.string "desctipolocalidad", limit: 25
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tipomedios", force: :cascade do |t|
     t.string "nomtipomedio"
     t.datetime "created_at", precision: 6, null: false
@@ -1247,6 +1310,12 @@ ActiveRecord::Schema.define(version: 2021_11_26_152831) do
   add_foreign_key "productos", "cru.categorias", column: "categoria_id"
   add_foreign_key "productos", "prodcategorias"
   add_foreign_key "productos", "prodgrupos"
+  add_foreign_key "proyectos", "convocatorias"
+  add_foreign_key "proyectos", "investigaciones"
+  add_foreign_key "proyectos", "tipolocalidades"
+  add_foreign_key "proyectos", "convocatorias"
+  add_foreign_key "proyectos", "investigaciones"
+  add_foreign_key "proyectos", "tipolocalidades"
   add_foreign_key "publicaciones", "cru.productos", column: "producto_id"
   add_foreign_key "publicaciones", "cru.redes", column: "red_id"
   add_foreign_key "publicaciones", "medios"

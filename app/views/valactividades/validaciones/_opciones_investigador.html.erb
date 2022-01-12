@@ -18,17 +18,39 @@
       </div>
 <% end %>
 <% if @actividad.estado == 'D' %>
-      <div class="alert alert-danger" role="alert">
-           No considerado:
-          <% if @actividad.valetapas.where(etapa:'SA',activo:'SI').any? %>
-                <%= @actividad.valetapas.where(etapa:'SA',activo:'SI').last.txtmensaje %>
-          <% end %>
-          <% if @actividad.valetapas.where(etapa:'CR',activo:'SI').any? %>
-                <%= @actividad.valetapas.where(etapa:'CR',activo:'SI').last.txtmensaje %>
-                <%= render "valactividades/gui/opcionesval" %>
-          <% end %>
-           
-      </div>
+
+       <% if @actividad.producto_id == 82 %>  
+             <%  autores = Autor.where(actividad_id:@actividad.id, persona_id:@persona.id).first  %>
+             <% if autores.aplicar == 'N' %>   
+                     <div class="alert alert-danger" role="alert">
+                              No considerado:
+                          <% if @actividad.valetapas.where(etapa:'SA',activo:'SI').any? %>
+                              <%= @actividad.valetapas.where(etapa:'SA',activo:'SI').last.txtmensaje %>
+                          <% end %>
+                          <% if @actividad.valetapas.where(etapa:'CR',activo:'SI').any? %>
+                                <%= @actividad.valetapas.where(etapa:'CR',activo:'SI').last.txtmensaje %>
+                              <%= render "valactividades/gui/opcionesval" %>
+                          <% end %>
+                        
+                      </div>
+             <% else %>
+                      <div class="alert alert-success" role="alert">
+                            Producto validado por la SA.
+                      </div>         
+             <% end %>  
+       <% else %>
+                        <div class="alert alert-danger" role="alert">
+                              No considerado:
+                        <% if @actividad.valetapas.where(etapa:'SA',activo:'SI').any? %>
+                              <%= @actividad.valetapas.where(etapa:'SA',activo:'SI').last.txtmensaje %>
+                        <% end %>
+                        <% if @actividad.valetapas.where(etapa:'CR',activo:'SI').any? %>
+                              <%= @actividad.valetapas.where(etapa:'CR',activo:'SI').last.txtmensaje %>
+                              <%= render "valactividades/gui/opcionesval" %>
+                        <% end %>
+                        
+                        </div>
+       <% end %>                 
 <% end %>
 <% if @actividad.estado == 'A' %>
       <div class="alert alert-dark" role="alert">

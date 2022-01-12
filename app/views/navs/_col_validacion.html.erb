@@ -47,7 +47,9 @@
                   --
       <% end %>
        <% if activ.estado == 'S' %>
-            <i class="fas fa-check-double text-success"></i>
+
+             <i class="fas fa-check-double text-success"></i>
+      
       <% end%>     
       <% if activ.estado == 'C' %>
             <small class="badge badge-info">En validación</small>
@@ -58,7 +60,17 @@
                               <small class="badge badge-warning">Corregir</small>
                         <% end%>
                         <% if activ.estado == 'D' %>
-                              <small class="badge badge-success"><i class="fas fa-times text-danger"></i> No se considera</small>
+                             <% if activ.producto_id == 82 %>  
+                                    <%  autores = Autor.where(actividad_id:activ.id, persona_id:current_usuario.persona_id).first  %>
+                                    <% if autores.aplicar == 'N' %>      
+                                          <small class="badge badge-success"><i class="fas fa-times text-danger"></i> No se considera</small>
+                                    <% else %>
+                                          <i class="fas fa-check-double text-success"></i>
+                                    <% end %>      
+                              <% else %>
+                                    <small class="badge badge-success"><i class="fas fa-times text-danger"></i> No se considera</small>
+                              <% end %>      
+                               
                         <% end%>
       
                   <% end %> 

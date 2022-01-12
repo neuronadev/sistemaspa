@@ -33,11 +33,22 @@
                         </small>
                   <% end %>
                   <% if a.estado == 'D' %>
-                  
-                        <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                              <i class="fas fa-user-times text-danger"></i> <span class="text-danger"> <small> No considerar </small> </span>
+                        <% if a.producto_id == 82 %>  
+                              <%  autores = Autor.where(actividad_id:a.id, persona_id:@persona_id).first  %>
+                              <% if autores.aplicar == 'N' %>    
+                                     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                                         <i class="fas fa-user-times text-danger"></i> <span class="text-danger"> <small> No considerar </small> </span>
+                                     <% end %> 
+                              <% else %> 
+                                      <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                                          <i class="fas fa-check-double text-success"></i> <span class="text-success"> <small> Validado </small> </span>
+                                     <% end %> 
+                              <% end %> 
+                        <% else %>
+                                 <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                                      <i class="fas fa-user-times text-danger"></i> <span class="text-danger"> <small> No considerar </small> </span>
+                                 <% end %> 
                         <% end %> 
-                        
                   <% end %>   
             <% end %>
             <% if etapa_val.etapa == 'CR' %>

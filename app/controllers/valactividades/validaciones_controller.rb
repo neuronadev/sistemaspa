@@ -209,39 +209,41 @@ class Valactividades::ValidacionesController < ApplicationController
       @tr,@idpersona,@idactividad = @trval.split('_')
       @rol = Usuario.where(persona_id:@idpersona.to_i).first.rol     
       @actividad = Actividad.find(id)
-      valetapa = {actividad_id:@actividad.id, persona_id:current_usuario.persona_id, 
-                etapa:params[:etapa], accion:params[:tipo], estado:params[:estado], activo:params[:activo],
-                txtmensaje:params[:valetapa][:txtmensaje], atendido:params[:atendido] }
-      cerrar_activos_valetapa @actividad
-      @v_etapa = create_valetapa valetapa
 
-      @persona = Persona.find(@idpersona.to_i)
+      
+             valetapa = {actividad_id:@actividad.id, persona_id:current_usuario.persona_id, 
+                        etapa:params[:etapa], accion:params[:tipo], estado:params[:estado], activo:params[:activo],
+                        txtmensaje:params[:valetapa][:txtmensaje], atendido:params[:atendido] }
+             cerrar_activos_valetapa @actividad
+             @v_etapa = create_valetapa valetapa
 
-      if @rol != 'T'  
-          if params[:tipo] == 'corregir' 
-            update_actividad @actividad, 'G'
-          end
-          if params[:tipo] == 'rechazar' 
-            update_actividad @actividad, 'D'
-          end
-      else
-          if params[:tipo] == 'corregir' 
-               update_actividad_tecnico @actividad, 'G'
-          end
-          if params[:tipo] == 'rechazar' 
-              if current_usuario.evaluador == 'C'
-                   update_actividad_tecnico @actividad, 'D'
-              end
-              if current_usuario.evaluador == 'A'
-                   if @persona.evalua == current_usuario.persona_id 
-                        update_actividad_tecnico @actividad, 'D'
-                        update_actividad_tecnico_sa @actividad, 'D'
-                   else 
-                       update_actividad_tecnico_sa @actividad, 'D'
-                   end
+             @persona = Persona.find(@idpersona.to_i)
+
+             if @rol != 'T'  
+                  if params[:tipo] == 'corregir' 
+                    update_actividad @actividad, 'G'
+                  end
+                  if params[:tipo] == 'rechazar' 
+                    update_actividad @actividad, 'D'
+                  end
+               else
+                  if params[:tipo] == 'corregir' 
+                      update_actividad_tecnico @actividad, 'G'
+                  end
+                  if params[:tipo] == 'rechazar' 
+                      if current_usuario.evaluador == 'C'
+                          update_actividad_tecnico @actividad, 'D'
+                      end
+                      if current_usuario.evaluador == 'A'
+                          if @persona.evalua == current_usuario.persona_id 
+                                update_actividad_tecnico @actividad, 'D'
+                                update_actividad_tecnico_sa @actividad, 'D'
+                          else 
+                              update_actividad_tecnico_sa @actividad, 'D'
+                          end
+                    end
+                  end
              end
-          end
-      end
       render partial: "mensaje"
   end
 
