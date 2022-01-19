@@ -12,11 +12,11 @@ class Actividades::ActividadesController < ApplicationController
                           .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
     @posgrado = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[82,83])
                           .includes(:autores)
-                            .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("actividades.descripcion")
+                            .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
     
 
     if params[:pry].present?
-        @proyectos = Actividad.includes(:producto).where(producto_id:[81,85], periodo:2021).order("actividades.titulo")
+        @proyectos = Actividad.includes(:producto).where(producto_id:[81,85], periodo:2021).order("actividades.descripcion")
     end
     if params[:tesis].present?
        @tesis = Actividad.includes(:producto).where(producto_id:[83], periodo:2020).order("productos.descripcion")
