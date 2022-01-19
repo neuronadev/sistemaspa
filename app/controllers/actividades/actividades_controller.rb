@@ -12,7 +12,7 @@ class Actividades::ActividadesController < ApplicationController
                           .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
     @posgrado = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[82,83])
                           .includes(:autores)
-                            .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
+                            .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("actividades.titulo")
     
 
     if params[:pry].present?
