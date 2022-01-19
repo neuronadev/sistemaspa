@@ -1,11 +1,18 @@
 <ul class="nav">
   <li class="nav-item">
-        <%= link_to edit_actividades_actividad_path(@actividad.id), class:"nav-link active" do %> 
-            <i class="fas fa-edit"></i> Editar
-        <% end  if @actividad.estado == 'A' %>
-        <%= link_to "#", class:"nav-link active disabled" do %> 
-            <i class="fas fa-edit"></i> Editar
-        <% end  if @actividad.estado != 'A' %>
+       <% if current_usuario.rol == 'Y' %>
+                <%= link_to edit_actividades_actividad_path(@actividad.id), class:"nav-link active" do %> 
+                    <i class="fas fa-edit"></i> Editar
+                <% end %>
+       <% else %>
+                <%= link_to edit_actividades_actividad_path(@actividad.id), class:"nav-link active" do %> 
+                    <i class="fas fa-edit"></i> Editar
+                <% end  if @actividad.estado == 'A' %>
+                
+                <%= link_to "#", class:"nav-link active disabled" do %> 
+                    <i class="fas fa-edit"></i> Editar
+                <% end  if @actividad.estado != 'A' %>
+       <% end %>         
   </li>
   <li class="nav-item">
         <%= link_to actividades_actividad_path(@actividad.id), method:'delete', class:"nav-link active", data: {confirm: '¿Sea eliminar este producto?'} do %> 

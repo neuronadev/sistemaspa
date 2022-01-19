@@ -14,6 +14,7 @@ class Actividades::ActividadesController < ApplicationController
                           .includes(:autores)
                             .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
     
+
     if params[:pry].present?
         @proyectos = Actividad.includes(:producto).where(producto_id:[81,85], periodo:2021).order("productos.descripcion")
     end

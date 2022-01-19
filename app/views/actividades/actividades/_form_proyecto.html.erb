@@ -48,9 +48,10 @@
          </div>
     </div>  
 
-    <% if params[:action] != 'edit' %> 
-      <%= render "doc_comprobante", form:form %>
-    <% end %>
+    
+        <%= render "doc_comprobante", form:form %>
+    
+
     <%= render "form_autores", form:form, swcorr:'N' %>
     <%= render "red_acad", form:form  %>
 
