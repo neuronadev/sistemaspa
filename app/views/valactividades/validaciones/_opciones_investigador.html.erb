@@ -4,6 +4,11 @@
 <% if @actividad.estado == 'S' %>
       <div class="alert alert-success" role="alert">
            Producto validado por la SA.
+           <div> 
+                  <%= link_to "#", data:{action:'click->valproducto#onQuitarM', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem }, class:'text-danger' do %>
+                        <i class="fas fa-user-slash"></i> Quitar validación</button>
+                  <% end %>
+            </div>
       </div>
 <% end %>
 <% if @actividad.estado == 'G' %>
@@ -50,6 +55,11 @@
                         <% end %>
                         
                         </div>
+                        <div> 
+                        <%= link_to "#", data:{action:'click->valproducto#onQuitarM', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem }, class:'text-danger' do %>
+                              <i class="fas fa-user-slash"></i> Quitar validación</button>
+                        <% end %>
+            </div>
        <% end %>                 
 <% end %>
 <% if @actividad.estado == 'A' %>

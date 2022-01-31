@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'valactividades/validaciones/listahistorico/:idacad', to:'valactividades/validaciones#listahistorico', as: 'listahistorico'
   get 'valactividades/validaciones/vbvalidacion/:target/:item', to:'valactividades/validaciones#vbvalidacion', as: 'vbvalidacion'
   get 'valactividades/validaciones/academicook/:persona', to:'valactividades/validaciones#academicook', as: 'academicook'
+  get 'valactividades/validaciones/quitarval/:trval/:tritem', to:'valactividades/validaciones#quitarval', as: 'quitarval'
   
 
   get 'actividades/redacademicas/index', to: 'actividades/redacademicas#index', as: 'redesindex'

@@ -31,12 +31,19 @@ class Valactividades::ValidacionesController < ApplicationController
         end
       end 
       
-      if @tipo == "T" 
-          @tecnicos = Persona.where(tipopersona_id:4, estado:'A').order(:paterno)
-          Persona.where(tipopersona_id:4).order(:paterno).each do |p|
-             r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
-             @actividades << [persona:p.id, actividades:r.to_a]
-          end
+      if @tipo == "E" 
+        @investigadores = Persona.where(tipopersona_id:[2,3], estado:'A').order(:paterno,:materno,:nombre) 
+        Persona.where(tipopersona_id:[2,3]).order(:paterno).each do |p|
+            r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','G','D'], producto_id:10).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
+            @actividades << [persona:p.id, actividades:r.to_a]
+        end
+      end 
+      if @tipo == "V" 
+        @investigadores = Persona.where(tipopersona_id:[2,3], estado:'A').order(:paterno,:materno,:nombre) 
+        Persona.where(tipopersona_id:[2,3]).order(:paterno).each do |p|
+            r = Actividad.includes(:producto).where(periodo:2021,estado:['C','U']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
+            @actividades << [persona:p.id, actividades:r.to_a]
+        end
       end 
   end
 
@@ -94,6 +101,29 @@ class Valactividades::ValidacionesController < ApplicationController
     end
     @persona = Persona.find(@idpersona.to_i)
     render partial: 'show'
+  end
+
+  def quitarval
+    @trval = params[:trval]
+    @tritem = params[:tritem]
+    @tr,@idpersona,@idactividad = @trval.split('_')
+
+    @actividad = Actividad.find(@idactividad.to_i)
+    @actividad.estado='C'  
+    @actividad.save
+
+    @rol = Usuario.where(persona_id:@idpersona.to_i).first.rol     
+    @producto = @actividad.producto
+
+    if !@producto.pathf.blank? 
+        @parts = @producto.pathf.split('-')
+    else
+        @parts = ['-'] 
+    end
+
+    @persona = Persona.find(@idpersona.to_i)
+    render partial: 'show'
+      
   end
 
   def vbvalidacion

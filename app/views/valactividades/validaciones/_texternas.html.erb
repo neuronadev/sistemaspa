@@ -1,0 +1,53 @@
+
+<div>Tesis Externas - Periodo 2021</div>
+
+
+
+<%= link_to validaindex_path(:tipo=>'A',:scroll=>@persona_id), data: {turbolinks:false} do %>
+        <i class="fas fa-long-arrow-alt-left"></i><span class="text-primary"> Regresar </span>
+<% end %>   
+
+<div class="card" data-controller = "valproducto">   
+   <div class="card-body">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Título de la Tesis</th>
+                    <th>Responsable</th> 
+                    <th>Comprobante</th>
+                    <th>Académico</th>
+                    <th>CR</th>
+                    <th>SA</th>
+                </tr>          
+            </thead>
+            <tbody>
+                   <% @actividades.each do |a|
+                      persona = Persona.find(a.personaid)
+                      idx = persona.id.to_s + "_" + a.id.to_s
+                      @tritem = "tritem_" + idx
+                      @trval = "trval_" + idx
+                      @colsa = "colsa_" + a.id.to_s
+                   %>
+                       
+                       <tr id="<%= @tritem %>">
+                           <td> <%= a.titulo %> </td>
+                           <td> <%= reporta(persona.id) %> </td>
+                           <td> <%= render "comprobante", actividad:a, idpersona:a.personaid %> </td>
+                           <td class="col-1">
+                                    <%= render "estadoacad", a:a %>
+                           </td>
+                           <td>
+                                   <%= render "estadocred", a:a %>
+                           </td> 
+                           <td class="col-1" id="<%= @colsa %>" data-pid="<%= persona.id.to_s %>"> 
+                                          <%= render "estadoval", a:a %>
+                           </td>
+                       </tr>
+                   <% end %>
+            </tbody>
+
+        </table>
+
+   </div>
+</div>   
