@@ -70,6 +70,13 @@
         </div> 
 <% end %>  
 
+<% if @tipo == 'P' %>
+        <h5> Producción Académica 2021 - Publicaciones</h5>
+        <div data-controller = "valproducto">     
+            <%= render "list_todo" %>
+        </div> 
+<% end %>  
+
 <% if @tipo == 'T' %>
         <h5>Producción Académica de Técicos 2021</h5>
         <div data-controller = "valproducto">     
