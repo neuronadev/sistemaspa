@@ -84,6 +84,13 @@
         </div> 
 <% end %>  
 
+<% if @tipo == 'AG' %>
+        <h5>Producción Académica de Técicos 2021 - Agradecimiento en Tesis</h5>
+        <div data-controller = "valproducto">     
+            <%= render "list_todo" %>
+        </div> 
+<% end %> 
+
 <% if  @scroll.to_i > 0 %>
 
         <script>

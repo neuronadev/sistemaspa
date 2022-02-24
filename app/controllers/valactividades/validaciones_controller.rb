@@ -52,6 +52,21 @@ class Valactividades::ValidacionesController < ApplicationController
             @actividades << [persona:p.id, actividades:r.to_a]
         end
       end 
+
+      if @tipo == "T" 
+        @investigadores = Persona.where(tipopersona_id:[4], estado:'A').order(:paterno,:materno,:nombre) 
+        Persona.where(tipopersona_id:[4]).order(:paterno).each do |p|
+            r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','D','G']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
+            @actividades << [persona:p.id, actividades:r.to_a]
+        end
+      end 
+      if @tipo == "AG" 
+        @investigadores = Persona.where(tipopersona_id:[4], estado:'A').order(:paterno,:materno,:nombre) 
+        Persona.where(tipopersona_id:[4]).order(:paterno).each do |p|
+            r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','D','G'], producto_id:[60,61,62]).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
+            @actividades << [persona:p.id, actividades:r.to_a]
+        end
+      end 
   end
 
   def listaproductos
@@ -117,6 +132,28 @@ class Valactividades::ValidacionesController < ApplicationController
 
     @actividad = Actividad.find(@idactividad.to_i)
     @actividad.estado='C'  
+    @actividad.save
+
+    @rol = Usuario.where(persona_id:@idpersona.to_i).first.rol     
+    @producto = @actividad.producto
+
+    if !@producto.pathf.blank? 
+        @parts = @producto.pathf.split('-')
+    else
+        @parts = ['-'] 
+    end
+
+    @persona = Persona.find(@idpersona.to_i)
+    render partial: 'show'
+      
+  end
+  def quitarvaltec
+    @trval = params[:trval]
+    @tritem = params[:tritem]
+    @tr,@idpersona,@idactividad = @trval.split('_')
+
+    @actividad = Actividad.find(@idactividad.to_i)
+    @actividad.edoblur = 'C'  
     @actividad.save
 
     @rol = Usuario.where(persona_id:@idpersona.to_i).first.rol     
@@ -352,6 +389,9 @@ class Valactividades::ValidacionesController < ApplicationController
    def update_actividad_tecnico_sa actividad, estado
     actividad.edoblur = estado
     actividad.fecha3 = Date.today 
+    if actividad.fecha2.nil?
+      actividad.fecha2 = Date.today 
+    end
     actividad.save
    end
 

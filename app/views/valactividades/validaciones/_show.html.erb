@@ -36,7 +36,12 @@
  
       <!-- Opciones de validaciones Botones -->
        <% if @rol == 'I' || @rol == 'C' %>
-              <%= render "opciones_investigador" %>
+
+            <% if @tipo == 'T' %>
+                   <%= render "opciones_sa" %>
+            <% else %>
+                   <%= render "opciones_investigador" %>
+            <% end %>
        <% end %>  
        <% if @rol == 'T' %>  
              <% if current_usuario.evaluador == 'C' %>

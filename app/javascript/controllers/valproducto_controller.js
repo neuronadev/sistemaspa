@@ -173,4 +173,30 @@ export default class extends Controller {
 
   }
 
+  onQuitarMTEC(event){
+    event.preventDefault()
+    let trval = event.params.trval
+    let tritem = event.params.tritem
+    let trval_div = document.getElementById(trval)
+
+    var [ref,idp,idact] = tritem.split('_')
+    var colval = "colsa_" + idact
+    
+    if (confirm('Esta acción quitará la validación actual, ¿Desea continuar?')) {
+         fetch(`/valactividades/validaciones/quitarvaltec/${trval}/${tritem}`)
+                    .then( response => response.text() )
+                    .then ( html => { 
+                              trval_div.querySelector('div').innerHTML = html  
+                              document.getElementById(tritem).classList.add('text-muted')
+                              document.querySelectorAll(`[id=${colval}]`).forEach(html=> 
+                                html.querySelector('div').innerHTML= `
+                                <a href="#" data-action="click->valproducto#showTargetInfo" data-valproducto-trval-param="trval_${html.getAttribute('data-pid')}_${idact}" data-valproducto-tritem-param="tritem_${idp}_${idact}">
+                                   <span class="badge badge-primary font-weight-bold"><i class="fas fa-file-signature"></i> Validar</span>
+                                </a>`
+                             )
+         } )
+    }
+
+  }
+
 }

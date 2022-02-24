@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_11_223243) do
+ActiveRecord::Schema.define(version: 2022_02_21_013030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -671,6 +671,7 @@ ActiveRecord::Schema.define(version: 2022_01_11_223243) do
     t.integer "evalua"
     t.string "evaluacion", limit: 1, default: "N"
     t.integer "nopersonal"
+    t.string "firma"
     t.index ["tipopersona_id"], name: "index_personas_on_tipopersona_id"
   end
 
@@ -691,6 +692,7 @@ ActiveRecord::Schema.define(version: 2022_01_11_223243) do
     t.integer "evalua"
     t.string "evaluacion", limit: 1, default: "N"
     t.integer "nopersonal"
+    t.string "firma"
     t.index ["tipopersona_id"], name: "index_personas_on_tipopersona_id"
   end
 

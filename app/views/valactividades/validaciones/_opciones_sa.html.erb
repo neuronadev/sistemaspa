@@ -1,6 +1,6 @@
 
     <% if @actividad.edoblur.nil? %> 
-          <% if current_usuario.evaluador == 'A' &&  @persona.evalua == current_usuario.persona_id  %>
+          <% if current_usuario.evaluador == 'A'  %>
                     <%= render "valactividades/gui/opcionesval" %>
           <% elsif @actividad.fuente == 'V' || @actividad.fuente == 'P'  %>
                     <%= render "valactividades/gui/opcionesval" %>
@@ -36,5 +36,8 @@
             <div class="alert alert-success" role="alert">
                 Validado
             </div>
+             <%= link_to "#", data:{action:'click->valproducto#onQuitarMTEC', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem }, class:'text-danger' do %>
+                              <i class="fas fa-user-slash"></i> Quitar validación</button>
+             <% end %>
     <% end %>   
   

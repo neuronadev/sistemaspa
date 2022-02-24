@@ -1,4 +1,4 @@
-
+<% @persona = Persona.find(idpersona.to_i) %>
 <table class="table table-sm  <%= !data.any? ? 'text-muted font-italic' : ''  %>  "> <!-- tabla_items -->
         <thead>
             <tr>
@@ -66,22 +66,28 @@
                               <% end %>
                               <% if current_usuario.evaluador == 'A' %>
                                
-                                          <% if a.fuente == 'V' %>
-                                                  <td><small class="text-muted">Validado por Oficina de Enlace</small> </td> 
+                                          <% if a.fuente == 'V' && (a.estado == 'C' || a.estado == 'S') %>
+                                                  <td>
+                                                    <i class="fas fa-check-double text-success"></i>
+                                                    <small class="text-muted">Enlace</small>
+                                                   </td> 
                                            <% elsif a.fuente == 'P' %>
-                                                    <td><small class="text-muted">Validado por Sec. Posgrado</small> </td> 
+                                                    <td>
+                                                       <i class="fas fa-check-double text-success"></i>
+                                                       <small class="text-muted">Posgrado</small> </td> 
                                            <% elsif @tipo == 'T' && a.personaid != idpersona %>
                                                     <% if a.producto_id == 85 || a.producto_id == 81  %> 
-                                                           <td><small class="text-muted">Dep. Planeación. Responsable 
-                                                                 :<strong><%= reporta(a.personaid) if !a.personaid.nil? %></strong>
-                                                          </small> </td>
+                                                           <td>
+                                                               <i class="fas fa-check-double text-success"></i>
+                                                               <small class="text-muted">Planeación</small> </td> 
+                                                           </td>
                                                      <% else %>
-                                                          <td><small class="text-muted">Capturado por otro Académico 
-                                                                 :<strong><%= reporta(a.personaid) if !a.personaid.nil? %></strong>
-                                                          </small> </td>           
+                                                          <td>
+                                                              <%= render "estadocomite", a:a %>
+                                                          </td>           
                                                       <% end %>    
                                            <% else %>
-                                                    <td class="col-1" id="<%= @colsa %>" data-pid="<%= idpersona.to_s %>">
+                                                    <td>
                                                          <%= render "estadocomite", a:a %>
                                                     </td>  
                                            <% end %>
