@@ -8,7 +8,11 @@
                       <th scope="col" style="width: 45%"><div class="d-flex justify-content-center"> Título</div></th>
                       
                       <th scope="col" style="width: 9%"><div class="d-flex justify-content-center"> Vo.Bo.</div></th>
-                      <th scope="col" style="width: 5%"><div class="d-flex justify-content-center"> Depto. Enlace</div></th>
+                       <% if current_usuario.rol=="T" %>
+                            <th scope="col" style="width: 5%"><div class="d-flex justify-content-center"> Comité</div></th>
+                       <% else %>
+                            <th scope="col" style="width: 5%"><div class="d-flex justify-content-center"> Depto. Enlace</div></th>
+                       <% end %>
                       <th scope="col" style="width: 6%"><div class="d-flex justify-content-center"> Sec. Acad</div></th>
                   </tr>
               </thead>

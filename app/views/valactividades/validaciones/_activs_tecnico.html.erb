@@ -65,34 +65,10 @@
                                            <% end %>
                               <% end %>
                               <% if current_usuario.evaluador == 'A' %>
-                               
-                                          <% if a.fuente == 'V' && (a.estado == 'C' || a.estado == 'S') %>
-                                                  <td>
-                                                    <i class="fas fa-check-double text-success"></i>
-                                                    <small class="text-muted">Enlace</small>
-                                                   </td> 
-                                           <% elsif a.fuente == 'P' %>
-                                                    <td>
-                                                       <i class="fas fa-check-double text-success"></i>
-                                                       <small class="text-muted">Posgrado</small> </td> 
-                                           <% elsif @tipo == 'T' && a.personaid != idpersona %>
-                                                    <% if a.producto_id == 85 || a.producto_id == 81  %> 
-                                                           <td>
-                                                               <i class="fas fa-check-double text-success"></i>
-                                                               <small class="text-muted">Planeación</small> </td> 
-                                                           </td>
-                                                     <% else %>
-                                                          <td>
-                                                              <%= render "estadocomite", a:a %>
-                                                          </td>           
-                                                      <% end %>    
-                                           <% else %>
-                                                    <td>
-                                                         <%= render "estadocomite", a:a %>
-                                                    </td>  
-                                           <% end %>
-                             
-                                           <td class="col-1" id="<%= @colsa %>" data-pid="<%= idpersona.to_s %>"><%= render "estadotecnicosa", a:a %></td>    
+                                        <td class="col-1" id="<%= @colsa %>" data-pid="<%= idpersona.to_s %>">
+                                                  <%= render "estadocomite", a:a %>
+                                        </td>  
+                                        <td class="col-1" id="<%= @colsa %>" data-pid="<%= idpersona.to_s %>"><%= render "estadotecnicosa", a:a %></td>    
                               <% end %>
                         </tr>
 
