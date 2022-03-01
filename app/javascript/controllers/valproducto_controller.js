@@ -59,6 +59,8 @@ export default class extends Controller {
          fetch(`/valactividades/validaciones/aceptarproducto/${trval}/${tritem}`)
          .then( response => response.text() )
                 .then ( html => { 
+                         document.getElementById(tritem).style.backgroundColor = '#cdcdcd'
+                         
                          trval_div.querySelector('div').innerHTML = html
                          document.querySelectorAll(`[id=${colval}]`).forEach(html=> 
                           html.querySelector('div').innerHTML= `
@@ -139,12 +141,14 @@ export default class extends Controller {
     var colval = "colsa_" + idact
 
     document.querySelectorAll(`[id=${colval}]`).forEach(html=> 
+      
       html.querySelector('div').innerHTML= `
       <a href="#" data-action="click->valproducto#showTargetInfo" data-valproducto-trval-param="trval_${html.getAttribute('data-pid')}_${idact}" data-valproducto-tritem-param="tritem_${idp}_${idact}">
          <i class="fas fa-user-times text-danger"></i>
          <span class="text-danger"> <small> No considerar </small> </span>
       </a>`
-     ) 
+     )
+     document.getElementById(tritem).style.backgroundColor = '#cdcdcd' 
   }
 
   onQuitarM(event){

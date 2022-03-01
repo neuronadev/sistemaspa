@@ -34,8 +34,13 @@
                         end     
                   end
                   
+                  @str_style_rw = ''
+                  if (a.edoblur == 'S' || a.edoblur == 'D') && !a.fecha3.nil?
+                      @str_style_rw = 'background-color:#cdcdcd;'
+                  end
+
         %>
-                        <tr id="<%= @tritem %>">  <!-- tr_item  -->
+                        <tr id="<%= @tritem %>" style="<%= @str_style_rw %>">  <!-- tr_item  -->
                               <td class="col-1 text-center"> <%= a.id %> </td>
                               <td class="col-md-2">
                                   <%= a.producto.descripcion %>
