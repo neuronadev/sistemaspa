@@ -14,7 +14,7 @@
                 
                 <div class="row"> 
                     <div class="col">
-                        <% if @tipo == 'T' || @tipo == 'AG' %> 
+                        <% if @tipo == 'T' || @tipo == 'AG' || @tipo == 'DET' %> 
                              <%= render "activs_tecnico", data:item[:actividades], idpersona:item[:persona] %>       
                         <% else %>
                              <%= render "activs_investigador", data:item[:actividades], idpersona:item[:persona] %>       

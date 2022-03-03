@@ -90,6 +90,18 @@
             <%= render "list_todo" %>
         </div> 
 <% end %> 
+<% if @tipo == 'DEI' %>
+        <h5><strong>Investigadores.</strong> Producción Académica 2021 - Otras actividades de divulgación-Exposición de divulgación de temas científicos y/o de conservación </h5>
+        <div data-controller = "valproducto">     
+            <%= render "list_todo" %>
+        </div> 
+<% end %> 
+<% if @tipo == 'DET' %>
+        <h5><strong>Técnicos.</strong> Producción Académica 2021 - Otras actividades de divulgación-Exposición de divulgación de temas científicos y/o de conservación </h5>
+        <div data-controller = "valproducto">     
+            <%= render "list_todo" %>
+        </div> 
+<% end %> 
 
 <% if  @scroll.to_i > 0 %>
 

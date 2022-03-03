@@ -67,6 +67,24 @@ class Valactividades::ValidacionesController < ApplicationController
             @actividades << [persona:p.id, actividades:r.to_a]
         end
       end 
+      if @tipo == "DEI" 
+        @investigadores = Persona.where(tipopersona_id:[2,3], estado:'A').order(:paterno,:materno,:nombre) 
+        Persona.where(tipopersona_id:[2,3]).order(:paterno).each do |p|
+            r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','D','G'], producto_id:[22]).includes(:divulgacion).where("divulgaciones.tipodivulgacion_id=?",3).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
+            
+            @actividades << [persona:p.id, actividades:r.to_a]
+
+        end
+      end 
+      if @tipo == "DET" 
+        @investigadores = Persona.where(tipopersona_id:[4], estado:'A').order(:paterno,:materno,:nombre) 
+        Persona.where(tipopersona_id:[4]).order(:paterno).each do |p|
+            r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','D','G'], producto_id:[22]).includes(:divulgacion).where("divulgaciones.tipodivulgacion_id=?",3).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
+            
+            @actividades << [persona:p.id, actividades:r.to_a]
+
+        end
+      end 
   end
 
   def listaproductos
