@@ -1,5 +1,5 @@
  <div class="d-flex justify-content-center">
-   <% if a.estado == 'S' %>
+   <% if a.estado == 'S' && a.edoblur.nil?  %>
         <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
                                     <i class="fas fa-check-double text-success"></i> <span class="text-success"> <small> Validado </small> </span>
         <% end %><small><I>(I)</I></small>     
