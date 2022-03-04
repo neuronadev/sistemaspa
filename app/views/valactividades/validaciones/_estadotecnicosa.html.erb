@@ -1,57 +1,62 @@
  <div class="d-flex justify-content-center">
+  <% if a.estado == 'S' %>
+        <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                                    <i class="fas fa-check-double text-success"></i> <span class="text-success"> <small> Validado </small> </span>
+        <% end %><small><I>(I)</I></small>      
 
-    <% if a.edoblur.nil? %>
+  <% else %>
+          <% if a.edoblur.nil? %>
 
-            <% if a.fuente == 'V' %>
-                   <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                        <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
-                   <% end %> 
-            <% elsif a.fuente == 'P' %>
-                   <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                        <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
-                   <% end %>  
-            <% else %>
-                   <% if current_usuario.evaluador == 'A' &&  @persona.evalua == current_usuario.persona_id  %>
-                         <% if a.personaid == @persona.id %> 
-                               <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                                   <span class="badge badge-warning font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
-                               <% end %>
-                          <% else %> 
+                    <% if a.fuente == 'V' %>
+                         <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                              <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+                         <% end %> 
+                    <% elsif a.fuente == 'P' %>
+                         <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                              <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+                         <% end %>  
+                    <% else %>
+                         <% if current_usuario.evaluador == 'A' &&  @persona.evalua == current_usuario.persona_id  %>
+                                   <% if a.personaid == @persona.id %> 
+                                        <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                                             <span class="badge badge-warning font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+                                        <% end %>
+                                   <% else %> 
+                                        <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                                             <span class="badge badge-warning font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+                                        <% end %>
+                                   <% end %>    
+                         <% else %>
+                                        <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                                             <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+                                        <% end %> 
+                         <% end %> 
+                    <% end %> 
+          <% else %>
+                    <% if a.edoblur == 'C' %>
+                         <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                              <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+                         <% end %> 
+                    <% end %>
+                    <% if a.edoblur == 'D' 
+                         etapa = a.valetapas.where(activo:'SI',accion:'rechazar').last.etapa 
+                    %>
+                         <% if etapa == 'SA' %>
                               <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                                   <span class="badge badge-warning font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
-                               <% end %>
-                          <% end %>    
-                   <% else %>
-                               <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                                    <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
-                               <% end %> 
-                   <% end %> 
-            <% end %> 
-    <% else %>
-          <% if a.edoblur == 'C' %>
-                  <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                        <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
-                   <% end %> 
-          <% end %>
-          <% if a.edoblur == 'D' 
-                etapa = a.valetapas.where(activo:'SI',accion:'rechazar').last.etapa 
-          %>
-                <% if etapa == 'SA' %>
-                       <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                              <i class="fas fa-user-times text-danger"></i> <span class="text-danger"> <small> No considerar </small> </span>
-                        <% end %> 
-                <% else %>        
-                     <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                        <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
-                     <% end %> 
-                <% end %>     
-          <% end %>
-          <% if a.edoblur == 'S' %>
-                 <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                        <i class="fas fa-check-double text-success"></i> <span class="text-success"> <small> Validado </small> </span>
-                  <% end %>  
-          <% end %>
+                                        <i class="fas fa-user-times text-danger"></i> <span class="text-danger"> <small> No considerar </small> </span>
+                              <% end %> 
+                         <% else %>        
+                              <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                              <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+                              <% end %> 
+                         <% end %>     
+                    <% end %>
+                    <% if a.edoblur == 'S' %>
+                         <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                              <i class="fas fa-check-double text-success"></i> <span class="text-success"> <small> Validado </small> </span>
+                         <% end %>  
+                    <% end %>
 
-    <% end %>
-
+          <% end %>
+   <% end %>
 </div>    

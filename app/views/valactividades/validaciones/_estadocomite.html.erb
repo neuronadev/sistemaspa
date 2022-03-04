@@ -1,45 +1,50 @@
  <div class="d-flex justify-content-center">
+   <% if a.estado == 'S' %>
+        <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                                    <i class="fas fa-check-double text-success"></i> <span class="text-success"> <small> Validado </small> </span>
+        <% end %><small><I>(I)</I></small>     
 
-    <% if a.edoblur.nil? %>
-          <% if current_usuario.evaluador == 'A'  %>
-                <% if @persona.evalua == current_usuario.persona_id %>
-                          <span class="badge badge-secondary font-weight-bold"> <i class="fas fa-arrow-right"></i></span>
-                <% else %>
-                          <small class="text-muted font-italic">Sin validar</small>
-                <% end %>          
-          <% end %>
+   <% else %>
+            <% if a.edoblur.nil? %>
+                  <% if current_usuario.evaluador == 'A'  %>
+                        <% if @persona.evalua == current_usuario.persona_id %>
+                                    <span class="badge badge-secondary font-weight-bold"> <i class="fas fa-arrow-right"></i></span>
+                        <% else %>
+                                    <small class="text-muted font-italic">Sin validar</small>
+                        <% end %>          
+                  <% end %>
 
-          <% if a.estado == 'A'  %>
-                <small class="text-muted font-italic">--</small>
-          <% elsif current_usuario.evaluador == 'C' && (a.estado == 'U' || a.estado == 'C') %>      
-                <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                    <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
-                <% end %>
-          <% end %>
-    <% else %>
-          <% if a.edoblur == 'C' %>
-                  <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                        <i class="fas fa-check-double text-success"></i> <span class="text-success"> <small> Validado </small> </span>
-                  <% end %>  
-          <% end %>
-          <% if a.edoblur == 'D' 
-                etapa = a.valetapas.where(activo:'SI',accion:'rechazar').last.etapa
-           %>
-                 <% if etapa == 'CM' %>                 
+                  <% if a.estado == 'A'  %>
+                        <small class="text-muted font-italic">--</small>
+                  <% elsif current_usuario.evaluador == 'C' && (a.estado == 'U' || a.estado == 'C') %>      
                         <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                              <i class="fas fa-user-times text-danger"></i> <span class="text-danger"> <small> No considerar </small> </span>
-                        <% end %> 
-                 <% else %> 
-                       <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                              <i class="fas fa-user-times text-danger"></i> <span class="text-danger"> <small> No considerar </small> </span>
-                        <% end %>    
-                 <% end %>       
-          <% end %> 
-          <% if a.edoblur == 'S' %>
-                  <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                        <i class="fas fa-check-double text-success"></i> <span class="text-success"> <small> Validado </small> </span>
-                  <% end %>  
-          <% end %>
-    <% end %>
-
+                              <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+                        <% end %>
+                  <% end %>
+            <% else %>
+                  <% if a.edoblur == 'C' %>
+                              <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                                    <i class="fas fa-check-double text-success"></i> <span class="text-success"> <small> Validado </small> </span>
+                              <% end %>  
+                  <% end %>
+                  <% if a.edoblur == 'D' 
+                        etapa = a.valetapas.where(activo:'SI',accion:'rechazar').last.etapa
+                  %>
+                        <% if etapa == 'CM' %>                 
+                                    <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                                          <i class="fas fa-user-times text-danger"></i> <span class="text-danger"> <small> No considerar </small> </span>
+                                    <% end %> 
+                        <% else %> 
+                              <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                                          <i class="fas fa-user-times text-danger"></i> <span class="text-danger"> <small> No considerar </small> </span>
+                                    <% end %>    
+                        <% end %>       
+                  <% end %> 
+                  <% if a.edoblur == 'S' %>
+                              <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
+                                    <i class="fas fa-check-double text-success"></i> <span class="text-success"> <small> Validado </small> </span>
+                              <% end %>  
+                  <% end %>
+            <% end %>
+   <% end %>
 </div>    
