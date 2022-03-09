@@ -34,7 +34,7 @@
          </li>
          <li class="subList__item">
             <%= link_to validaindex_path(:tipo=>'V'), data: {turbolinks:false} do %>
-               <i class="fas fa-caret-right text-white"></i><span class="text-white"> Sin validar </span>
+               <i class="fas fa-caret-right text-white"></i><span class="text-white"> Sin validar (Invest.) </span>
             <% end %>
          </li>
          <li class="subList__item">
@@ -48,6 +48,12 @@
             <% end %>
          </li>
          <li class="subList__item">
+            <%= link_to validaindex_path(:tipo=>'TS'), class:"text-white" do %>
+               <i class="fas fa-caret-right text-white"></i><span class="text-white"> Sin validar (Tec.) </span>
+            <% end %>
+         </li>
+         <!--
+         <li class="subList__item">
             <%= link_to validaindex_path(:tipo=>'DEI'), class:"text-white" do %>
                <i class="fas fa-caret-right text-white"></i><span class="text-white"> Divulgación-Exposición (Invest.) </span>
             <% end %>
@@ -56,7 +62,7 @@
             <%= link_to validaindex_path(:tipo=>'DET'), class:"text-white" do %>
                <i class="fas fa-caret-right text-white"></i><span class="text-white"> Divulgación-Exposición (Tec.) </span>
             <% end %>
-         </li>
+         </li> -->
     <% end %>
 </ul>   
 

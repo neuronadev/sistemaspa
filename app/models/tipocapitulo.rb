@@ -1,0 +1,2 @@
+class Tipocapitulo < ApplicationRecord
+end

@@ -77,7 +77,7 @@
         </div> 
 <% end %>  
 
-<% if @tipo == 'T' %>
+<% if @tipo == 'T' || @tipo == 'TS' %>
         <h5>Producción Académica de Técicos 2021</h5>
         <div data-controller = "valproducto">     
             <%= render "list_todo" %>

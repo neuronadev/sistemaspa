@@ -1,0 +1,2 @@
+class Tdivulgacion < ApplicationRecord
+end

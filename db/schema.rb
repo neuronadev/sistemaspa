@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_21_013030) do
+ActiveRecord::Schema.define(version: 2022_03_08_165844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -287,6 +287,7 @@ ActiveRecord::Schema.define(version: 2022_02_21_013030) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "kate"
     t.integer "puntos"
+    t.integer "tipocapitulo_id"
     t.index ["actividad_id"], name: "index_capitulos_on_actividad_id"
     t.index ["idioma_id"], name: "index_capitulos_on_idioma_id"
     t.index ["libro_id"], name: "index_capitulos_on_libro_id"
@@ -399,6 +400,7 @@ ActiveRecord::Schema.define(version: 2022_02_21_013030) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "actividad_id", null: false
+    t.integer "tdivulacion_id"
     t.index ["actividad_id"], name: "index_divulgaciones_on_actividad_id"
     t.index ["tipodivulgacion_id"], name: "index_divulgaciones_on_tipodivulgacion_id"
   end
@@ -581,6 +583,7 @@ ActiveRecord::Schema.define(version: 2022_02_21_013030) do
     t.string "estado", limit: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "tipolibro_id"
     t.index ["editorial_id"], name: "index_libros_on_editorial_id"
     t.index ["editorial_id"], name: "index_libros_on_editorial_id"
     t.index ["medio_id"], name: "index_libros_on_medio_id"
@@ -596,6 +599,7 @@ ActiveRecord::Schema.define(version: 2022_02_21_013030) do
     t.string "estado", limit: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "tipolibro_id"
     t.index ["editorial_id"], name: "index_libros_on_editorial_id"
     t.index ["editorial_id"], name: "index_libros_on_editorial_id"
     t.index ["medio_id"], name: "index_libros_on_medio_id"
@@ -995,6 +999,12 @@ ActiveRecord::Schema.define(version: 2022_02_21_013030) do
     t.index ["tactividad_id"], name: "index_tcursos_on_tactividad_id"
   end
 
+  create_table "tdivulgaciones", force: :cascade do |t|
+    t.string "nomtipo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tesistas", force: :cascade do |t|
     t.date "ftermino"
     t.bigint "nivelestudio_id", null: false
@@ -1035,6 +1045,12 @@ ActiveRecord::Schema.define(version: 2022_02_21_013030) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tipocapitulos", force: :cascade do |t|
+    t.string "nomtipo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tipocursos", force: :cascade do |t|
     t.string "nomtipocurso", limit: 85
     t.datetime "created_at", precision: 6, null: false
@@ -1060,6 +1076,12 @@ ActiveRecord::Schema.define(version: 2022_02_21_013030) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "puntos"
+  end
+
+  create_table "tipolibros", force: :cascade do |t|
+    t.string "nomtipo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tipolocalidades", force: :cascade do |t|
