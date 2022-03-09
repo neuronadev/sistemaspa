@@ -64,7 +64,7 @@ class Valactividades::ValidacionesController < ApplicationController
       if @tipo == "TS" 
         @investigadores = Persona.where(tipopersona_id:[4], estado:'A').order(:paterno,:materno,:nombre) 
         Persona.where(tipopersona_id:[4]).order(:paterno).each do |p|
-            r = Actividad.includes(:producto).where(periodo:2021).where.not(edoblur: ['S']).where(fecha3:nil).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
+            r = Actividad.includes(:producto).where(periodo:2021).where.not(estado: ['X']).where(fecha3:nil).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
             @actividades << [persona:p.id, actividades:r.to_a]
         end
       end 
