@@ -103,6 +103,28 @@
         </div> 
 <% end %> 
 
+<% if @tipo == 'ODV' %>
+        <h5><strong>Técnicos.</strong> Producción Académica 2021 - Otras actividades de divulgación</h5>
+        <div data-controller = "valproducto">     
+            <%= render "list_todo" %>
+        </div> 
+<% end %> 
+
+<% if @tipo == 'PSEI' %>
+        <h5><strong>Investigadores.</strong> Producción Académica 2021 - Posgrado Externo</h5>
+        <div data-controller = "valproducto">     
+            <%= render "list_todo" %>
+        </div> 
+<% end %> 
+
+
+<% if @tipo == 'PSET' %>
+        <h5><strong>Técnicos.</strong> Producción Académica 2021 - Posgrado Externo</h5>
+        <div data-controller = "valproducto">     
+            <%= render "list_todo" %>
+        </div> 
+<% end %> 
+
 <% if  @scroll.to_i > 0 %>
 
         <script>

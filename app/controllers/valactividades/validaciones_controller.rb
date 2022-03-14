@@ -55,7 +55,7 @@ class Valactividades::ValidacionesController < ApplicationController
 
       if @tipo == "T" 
         @investigadores = Persona.where(tipopersona_id:[4], estado:'A').order(:paterno,:materno,:nombre) 
-        Persona.where(tipopersona_id:[4]).order(:paterno).each do |p|
+        Persona.where(tipopersona_id:[4], estado:'A').order(:paterno).each do |p|
             r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','D','G']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
             @actividades << [persona:p.id, actividades:r.to_a]
         end
@@ -63,7 +63,7 @@ class Valactividades::ValidacionesController < ApplicationController
       
       if @tipo == "TS" 
         @investigadores = Persona.where(tipopersona_id:[4], estado:'A').order(:paterno,:materno,:nombre) 
-        Persona.where(tipopersona_id:[4]).order(:paterno).each do |p|
+        Persona.where(tipopersona_id:[4],estado:'A').order(:paterno).each do |p|
             r = Actividad.includes(:producto).where(periodo:2021).where.not(estado: ['X']).where(fecha3:nil).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
             @actividades << [persona:p.id, actividades:r.to_a]
         end
@@ -71,7 +71,7 @@ class Valactividades::ValidacionesController < ApplicationController
 
       if @tipo == "AG" 
         @investigadores = Persona.where(tipopersona_id:[4], estado:'A').order(:paterno,:materno,:nombre) 
-        Persona.where(tipopersona_id:[4]).order(:paterno).each do |p|
+        Persona.where(tipopersona_id:[4], estado:'A').order(:paterno).each do |p|
             r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','D','G'], producto_id:[60,61,62]).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
             @actividades << [persona:p.id, actividades:r.to_a]
         end
@@ -94,6 +94,36 @@ class Valactividades::ValidacionesController < ApplicationController
 
         end
       end 
+      if @tipo == "ODV" 
+        @investigadores = Persona.where(tipopersona_id:[4], estado:'A').order(:paterno,:materno,:nombre) 
+        Persona.where(tipopersona_id:[4]).order(:paterno).each do |p|
+            r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','D','G'], producto_id:[22]).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
+            
+            @actividades << [persona:p.id, actividades:r.to_a]
+
+        end
+      end 
+
+      if @tipo == "PSEI" 
+        #@investigadores = Persona.where(tipopersona_id:[4], estado:'A').order(:paterno,:materno,:nombre) 
+        Persona.where(tipopersona_id:[2,3]).order(:paterno).each do |p|
+            r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','D','G'], producto_id:[9]).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
+            
+            @actividades << [persona:p.id, actividades:r.to_a]
+
+        end
+      end 
+
+      if @tipo == "PSET" 
+        #@investigadores = Persona.where(tipopersona_id:[4], estado:'A').order(:paterno,:materno,:nombre) 
+        Persona.where(tipopersona_id:[4]).order(:paterno).each do |p|
+            r = Actividad.includes(:producto).where(periodo:2021,estado:['A','C','U','S','D','G'], producto_id:[9]).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores).order("productos.descripcion")
+            
+            @actividades << [persona:p.id, actividades:r.to_a]
+
+        end
+      end 
+
   end
 
   def listaproductos
