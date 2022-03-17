@@ -227,6 +227,12 @@ class Valactividades::ValidacionesController < ApplicationController
       
   end
 
+  def vbproduccion
+      idpersona = params[:idpersona]
+      eval = Evaluacion.create!(persona_id: idpersona.to_i, fecha: Date.today)
+
+  end
+
   def vbvalidacion
     @trval = params[:target]
     @tritem = params[:item]

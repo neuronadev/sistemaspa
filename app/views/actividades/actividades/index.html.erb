@@ -2,8 +2,24 @@
 <div class="card">
 
    <div class="card-body">
-         <h5>Producción 2021</h5>
-         
+      <div class="d-flex" data-controller="aceptarprod"> 
+         <div><h5>Producción 2021</h5></div>
+         <div class="ml-auto p-2" id="vbprod"> 
+              <%
+                 evaluacion = Evaluacion.where(persona_id:current_usuario.persona_id)
+              %>
+              <% if evaluacion.blank?  %>
+                 <!--  <button type="button" class="btn btn btn-success" data-action="click->aceptarprod#vbproductos" data-aceptarprod-id-param="<%= current_usuario.persona_id %>" > VoBo producción </button>
+                 -->
+              <% else %>
+                 <!--
+                    <div class="alert alert-success" role="alert">
+                        <i class="fas fa-user-check"></i> Producción académica validada.
+                    </div>
+                  -->  
+              <% end %>
+         </div>
+      </div>   
             <div class="row"><div class="col text-primary">Productos Académicos</div></div> 
             <%= render "index_actividades" %>
             <div class="row"><div class="col text-primary">Productos de Divulgación (<I>Capturados por la Oficina de Enlace</I>)</div></div> 

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'valactividades/validaciones/academicook/:persona', to:'valactividades/validaciones#academicook', as: 'academicook'
   get 'valactividades/validaciones/quitarval/:trval/:tritem', to:'valactividades/validaciones#quitarval', as: 'quitarval'
   get 'valactividades/validaciones/quitarvaltec/:trval/:tritem', to:'valactividades/validaciones#quitarvaltec', as: 'quitarvaltec'
-  
+  get 'valactividades/validaciones/vbproduccion/:idpersona', to:'valactividades/validaciones#vbproduccion', as: 'vbproduccion'
 
   get 'actividades/redacademicas/index', to: 'actividades/redacademicas#index', as: 'redesindex'
   get 'actividades/redacademicas/items/:id/:sec', to: 'actividades/redacademicas#items', as: 'items'

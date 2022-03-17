@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  persona: one
+  fecha: 2022-03-16
+  actividad: one
+
+two:
+  persona: two
+  fecha: 2022-03-16
+  actividad: two

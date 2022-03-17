@@ -102,10 +102,14 @@
                          <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %> 
                                 <%= render "navs/col_validacion", activ:a %>
                          <% elsif current_usuario.rol == 'T'  %>
-                                  <% if current_usuario.persona_id == a.personaid %>
-                                          <%= render "navs/col_valida_tecnico", activ:a %>
+                                  <% if a.producto_id == 81 || a.producto_id == 85 %>
+                                           <%= render "navs/col_valida_tecnico", activ:a %>
                                   <% else %>
-                                          <%= render "navs/col_validacion", activ:a %>
+                                             <% if current_usuario.persona_id == a.personaid %>
+                                                       <%= render "navs/col_valida_tecnico", activ:a %>
+                                             <% else %>
+                                                       <%= render "navs/col_validacion", activ:a %>
+                                             <% end %>
                                   <% end %>
                          <% else %>
                               <strong>-</strong> 

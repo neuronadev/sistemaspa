@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_08_165844) do
+ActiveRecord::Schema.define(version: 2022_03_16_172112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -458,6 +458,14 @@ ActiveRecord::Schema.define(version: 2022_03_08_165844) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "anio"
     t.index ["persona_id"], name: "index_estimulos_on_persona_id"
+  end
+
+  create_table "evaluaciones", force: :cascade do |t|
+    t.bigint "persona_id", null: false
+    t.date "fecha"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["persona_id"], name: "index_evaluaciones_on_persona_id"
   end
 
   create_table "evaluadores", force: :cascade do |t|
@@ -1302,6 +1310,7 @@ ActiveRecord::Schema.define(version: 2022_03_08_165844) do
   add_foreign_key "editoriales", "cru.ambitos", column: "ambito_id"
   add_foreign_key "editoriales", "paises"
   add_foreign_key "estimulos", "personas"
+  add_foreign_key "evaluaciones", "personas"
   add_foreign_key "externos", "cru.personas", column: "persona_id"
   add_foreign_key "extras", "personas"
   add_foreign_key "fasciculos", "actividades"
