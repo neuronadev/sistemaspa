@@ -9,14 +9,14 @@
                  evaluacion = Evaluacion.where(persona_id:current_usuario.persona_id)
               %>
               <% if evaluacion.blank?  %>
-                 <!--  <button type="button" class="btn btn btn-success" data-action="click->aceptarprod#vbproductos" data-aceptarprod-id-param="<%= current_usuario.persona_id %>" > VoBo producción </button>
-                 -->
+                  <button type="button" class="btn btn btn-success" data-action="click->aceptarprod#vbproductos" data-aceptarprod-id-param="<%= current_usuario.persona_id %>" > VoBo producción </button>
+               
               <% else %>
-                 <!--
+                 
                     <div class="alert alert-success" role="alert">
                         <i class="fas fa-user-check"></i> Producción académica validada.
                     </div>
-                  -->  
+               
               <% end %>
          </div>
       </div>   

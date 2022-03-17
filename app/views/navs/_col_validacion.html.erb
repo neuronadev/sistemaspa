@@ -17,7 +17,7 @@
                  <% if [81,85,10].include? activ.producto_id %>
                          <%  autores = Autor.where(actividad_id:activ.id, persona_id:current_usuario.persona_id).first  %>
                          <% if autores.aplicar == 'N' %>      
-                                   <small class="badge text-danger"><i class="fas fa-times text-danger"></i> No se considera</small>    
+                                   <i class="fas fa-times text-danger"></i>
                          <% else %>
                                    <i class="fas fa-check-double text-success"></i>  
                                    <small class="text-muted"> <span class="ml-md-1">Depto. Planeación</span></small>
@@ -29,7 +29,7 @@
                               <% end %>
                   <% end %>
              <% elsif activ.estado == 'D' %>  
-                  <small class="badge text-danger"><i class="fas fa-times text-danger"></i> No se considera</small>    
+                  <i class="fas fa-times text-danger"></i>
 
             <% elsif activ.valetapas.where(activo:'SI').any? %>
                   <% if activ.valetapas.where(activo:'SI').last.etapa == 'CR' %>
@@ -37,7 +37,7 @@
                               <small class="badge badge-warning">Corregir</small>
                         <% end%>
                         <% if activ.estado == 'D' %>
-                               <small class="badge text-danger"><i class="fas fa-times text-danger"></i> No se considera</small>       
+                              <i class="fas fa-times text-danger"></i>
                         <% end%>
                   <% else %>
                          <% if  activ.estado != 'C' %>
@@ -65,7 +65,7 @@
              <% if [81,85,10].include? activ.producto_id %>
                    <%  autores = Autor.where(actividad_id:activ.id, persona_id:current_usuario.persona_id).first  %>
                    <% if autores.aplicar == 'N' %>      
-                          <small class="badge text-danger"><i class="fas fa-times text-danger"></i> No se considera</small>     
+                          <i class="fas fa-times text-danger"></i>
                    <% else %> 
                             <i class="fas fa-check-double text-success"></i>      
                    <% end %>
@@ -85,12 +85,12 @@
                              <% if activ.producto_id == 82 %>  
                                     <%  autores = Autor.where(actividad_id:activ.id, persona_id:current_usuario.persona_id).first  %>
                                     <% if autores.aplicar == 'N' %>      
-                                         <small class="badge text-danger"><i class="fas fa-times text-danger"></i> No se considera</small>      
+                                        <i class="fas fa-times text-danger"></i>
                                     <% else %>
                                           <i class="fas fa-check-double text-success"></i>
                                     <% end %>      
                               <% else %>
-                                    <small class="badge text-danger"><i class="fas fa-times text-danger"></i> No se considera</small>    
+                                  <i class="fas fa-times text-danger"></i>
                               <% end %>      
                                
                         <% end%>

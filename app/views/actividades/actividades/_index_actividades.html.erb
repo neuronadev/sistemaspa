@@ -82,7 +82,7 @@
                               <% if a.estado == 'D' %>
                                     <div class="d-flex justify-content-left">
                                        <small>
-                                            <i class="fas fa-comment-alt text-danger"></i> <span class="text-danger">No cumple con la normativa.</span> <strong><%= link_to "Ver motivo", actividades_actividad_path(a.id), class:'text-danger' %></strong>
+                                            <strong><i class="fas fa-comment-alt text-danger"></i> <%= link_to "No en apego normativa", actividades_actividad_path(a.id), title: 'Haga clic para ver motivo', class:'text-danger'%></strong>
                                        </small> 
                                              
                                     </div>
@@ -92,9 +92,9 @@
                                     <%  autores = Autor.where(actividad_id:a.id, persona_id:current_usuario.persona_id).first  %>
                                     <% if autores.aplicar == 'N' %>      
                                             <div class="d-flex justify-content-left">
-                                               <small>
-                                                  <i class="fas fa-comment-alt text-danger"></i> <span class="text-danger">No cumple con la normativa.</span> <strong><%= link_to "Ver motivo", actividades_actividad_path(a.id), class:'text-danger' %></strong>
-                                               </small> 
+                                                  <small>
+                                                       <strong><i class="fas fa-comment-alt text-danger"></i> <%= link_to "No en apego normativa", actividades_actividad_path(a.id), title: 'Haga clic para ver motivo', class:'text-danger'%></strong>
+                                                  </small> 
                                              </div>
                                     <% end %>      
                                        
