@@ -78,6 +78,7 @@
                                              
                                     </div>
                               <% end %>  
+
                               <% if a.estado == 'D' %>
                                     <div class="d-flex justify-content-left">
                                        <small>
@@ -86,6 +87,18 @@
                                              
                                     </div>
                               <% end %>   
+
+                              <% if [81,85,10].include? a.producto_id %>
+                                    <%  autores = Autor.where(actividad_id:a.id, persona_id:current_usuario.persona_id).first  %>
+                                    <% if autores.aplicar == 'N' %>      
+                                            <div class="d-flex justify-content-left">
+                                               <small>
+                                                  <i class="fas fa-comment-alt text-danger"></i> <span class="text-danger">No cumple con la normativa.</span> <strong><%= link_to "Ver motivo", actividades_actividad_path(a.id), class:'text-danger' %></strong>
+                                               </small> 
+                                             </div>
+                                    <% end %>      
+                                       
+                              <% end %>
                          </td>
                          
                          <td id="actividad<%= a.id %>">
@@ -102,20 +115,18 @@
                          <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %> 
                                 <%= render "navs/col_validacion", activ:a %>
                          <% elsif current_usuario.rol == 'T'  %>
-                                  <% if a.producto_id == 81 || a.producto_id == 85 %>
-                                           <%= render "navs/col_valida_tecnico", activ:a %>
-                                  <% else %>
+                                  
                                              <% if current_usuario.persona_id == a.personaid %>
                                                        <%= render "navs/col_valida_tecnico", activ:a %>
                                              <% else %>
                                                        <%= render "navs/col_validacion", activ:a %>
                                              <% end %>
-                                  <% end %>
+                              
                          <% else %>
                               <strong>-</strong> 
                          <% end %> 
                                                
-                     <tr> 
+                     </tr> 
                     <% end %>   
                   <% end %>
               </tbody>

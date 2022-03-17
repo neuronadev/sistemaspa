@@ -1,6 +1,99 @@
-  <td>
-     <div class="d-flex justify-content-center"><small class="badge badge-info">En validación</small></div>
-  </td>  
-  <td>
-     <div class="d-flex justify-content-center"><small class="badge badge-info">En validación</small></div>
-  </td>   
+<!-- VALIDACION DEL CR  --> 
+<td>
+  <div class="d-flex justify-content-center">
+    <% if activ.estado == 'U' %>
+          <small class="badge badge-info">En validación</small>
+    <% else%>
+            <% if activ.estado == 'A' %>
+                  --
+            
+            <% elsif  activ.estado == 'C' %>
+                  <i class="fas fa-check-double text-success"></i>
+                  <% if [81,85].include? activ.producto_id %>
+                          <small class="text-muted"> <span class="ml-md-1">Depto. Planeación</span></small>
+                  <% end %>
+            
+            <% elsif  activ.estado == 'S' %>
+                   <% if [81,85].include? activ.producto_id %>
+                         <%  autores = Autor.where(actividad_id:activ.id, persona_id:current_usuario.persona_id).first  %>
+                         <% if autores.aplicar == 'N' %>      
+                                    <small class="badge text-danger"><i class="fas fa-times text-danger"></i> No se considera</small>       
+                         <% else %>
+                                   <i class="fas fa-check-double text-success"></i>  
+                                   <small class="text-muted"> <span class="ml-md-1">Depto. Planeación</span></small>
+                         <% end %>
+                   <% else %>     
+                              <i class="fas fa-check-double text-success"></i>
+                              <% if [81,85].include? activ.producto_id %>
+                                    <small class="text-muted"> <span class="ml-md-1">Depto. Planeación</span></small>
+                              <% end %>
+                  <% end %>
+            <% elsif activ.estado == 'D' %>  
+                  <small class="badge text-danger"><i class="fas fa-times text-danger"></i> No se considera</small>    
+            
+            <% elsif activ.valetapas.where(activo:'SI').any? %>
+                  <% if activ.valetapas.where(activo:'SI').last.etapa == 'CR' %>
+                        <% if activ.estado == 'G' %>
+                              <small class="badge badge-warning">Corregir</small>
+                        <% end%>
+                        <% if activ.estado == 'D' %>
+                              <small class="badge text-danger"><i class="fas fa-times text-danger"></i> No se considera</small>    
+                        <% end%>
+                  <% else %>
+                         <% if  activ.estado != 'C' %>
+                              <i class="fas fa-check-double text-success"></i>
+                         <% end %> 
+
+                  <% end %> 
+            <% else %>
+                -
+            <% end %>        
+    <% end %>        
+  </div>  
+</td>
+
+<!-- VALIDACION DE LA SA  --> 
+<td>
+ <div class="d-flex justify-content-center">
+      <% if activ.estado == 'A' %>
+                  --
+      <% end %>
+       <% if activ.estado == 'U' %>
+          <small class="badge badge-info">En validación</small>
+       <% end %>   
+       <% if activ.estado == 'S' %>
+             <% if [81,85].include? activ.producto_id %>
+                   <%  autores = Autor.where(actividad_id:activ.id, persona_id:current_usuario.persona_id).first  %>
+                   <% if autores.aplicar == 'N' %>      
+                          <small class="badge text-danger"><i class="fas fa-times text-danger"></i> No se considera</small>     
+                   <% end %>
+             <% else %>                       
+                <i class="fas fa-check-double text-success"></i>
+             <% end %>
+      <% end%>     
+      <% if activ.estado == 'C' %>
+            <small class="badge badge-info">En validación</small>
+      <% end%> 
+      <% if activ.valetapas.where(activo:'SI').any? %>
+                  <% if activ.valetapas.where(activo:'SI').last.etapa == 'SA' %>
+                        <% if activ.estado == 'G' %>
+                              <small class="badge badge-warning">Corregir</small>
+                        <% end%>
+                        <% if activ.estado == 'D' %>
+                             <% if activ.producto_id == 82 %>  
+                                    <%  autores = Autor.where(actividad_id:activ.id, persona_id:current_usuario.persona_id).first  %>
+                                    <% if autores.aplicar == 'N' %>      
+                                          <small class="badge text-danger"><i class="fas fa-times text-danger"></i> No se considera</small>       
+                                    <% else %>
+                                          <i class="fas fa-check-double text-success"></i>
+                                    <% end %>      
+                              <% else %>
+                                    <small class="badge text-danger"><i class="fas fa-times text-danger"></i> No se considera</small>        
+                              <% end %>      
+                               
+                        <% end%>
+      
+                  <% end %> 
+      <% end %>   
+ </div>     
+</td>
