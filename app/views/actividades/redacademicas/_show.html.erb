@@ -34,10 +34,12 @@
               <%= render "avalida/curso" if @producto.prodgrupo.clave == 'CUR' %>
               <%= render "avalida/tesis" if @producto.prodgrupo.clave == 'TESIS' %>
          
+        <% if @producto.id != 82 %>
+
          <div class="row mt-md-3">
            <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
          </div>  
-          
+       <% end %>   
           <%= render "avalida/opciones" %> 
          
    </div>

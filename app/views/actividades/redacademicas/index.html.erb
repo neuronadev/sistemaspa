@@ -2,7 +2,7 @@
  <div class="col-11">
    <div class="card">
    <div class="card-body">
-         <h5>Productos Académicos <%= @p.academico.red.nomred %> </h5>
+         <h5>Productos Académicos </h5>
          <table class="table table-sm" data-controller="validar">
             <thead>
                <tr>
@@ -30,8 +30,14 @@
                %>
                      <tr id="tr_<%= @row_id %>" class="">
                         <td> <%= a.id %> </td>
-                        <td> <%= a.producto.descripcion %> </td>
-                        <td> <%= a.titulo %> </td>
+                        <td> <%= a.producto.descripcion %> 
+                             <% if a.producto.prodgrupo.clave == 'OTRASD' %>
+                                              -<I><%= a.divulgacion.tipodivulgacion.nomtipodivulgacion %> </I>
+                              <% end %> 
+                        </td>
+                        <td> <%= a.titulo %> 
+                              
+                        </td>
                         <td> 
                          
                            <% if a.estado == 'U' %>
@@ -41,7 +47,7 @@
                               <small class="text-danger">Sin validar</small>
                            <% end %>  
                            <% if a.estado == 'C' ||  a.estado == 'S' %>
-                                 <span class="badge badge-success" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">Validado</span>
+                                 <span class="badge badge-success" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">VER</span>
                            <% end %> 
                            <% if a.estado == 'G' %>
                                  <span class="badge badge-info" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">En edición</span>

@@ -1,7 +1,17 @@
 class Actividades::RedacademicasController < ApplicationController
   def index
-      @p = Persona.find(current_usuario.persona_id)
-      @actividades = Actividad.where(estado:['U','C','G','D','S'],periodo:2021,asignared:@p.academico.red_id)
+      #@p = Persona.find(current_usuario.persona_id)
+      #@actividades = Actividad.where(estado:['U','C','G','D','S'],periodo:2021,asignared:@p.academico.red_id)
+      @academicos = Academico.where(red_id:1)
+      @acad_array = []
+      @academicos.each do |s|
+         @acad_array.append(s.persona_id)
+      end
+      puts  @acad_array
+      #@actividades = Actividad.where(estado:['S'],periodo:2021,asignared:1).order(:producto_id)
+      @actividades = Actividad.includes(:producto).where(periodo:2021,estado:['S'])
+                      .includes(:autores)
+                        .where('autores.persona_id in (?)', @acad_array ).references(:autores).order("actividades.id")
   end
   def items
      id = params[:id].to_i
