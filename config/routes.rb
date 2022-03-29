@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     get 'cloudfile/show'
     get 'cloudfile/new'
     post 'cloudfile/create'
+    post 'cloudfile/downpdf'
   end
 
   namespace :actividades do

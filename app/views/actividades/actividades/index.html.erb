@@ -20,6 +20,39 @@
               <% end %>
          </div>
       </div>   
+
+      <div class="alert alert-primary" role="alert">
+          <%
+             estimulo = Estimulo.where(persona_id:current_usuario.persona_id,anio:2021).first
+             if !estimulo.blank?
+          %>
+               <% if estimulo.tipo == 'INVESTIGADOR' %>
+                     <% if  estimulo.monto.to_d > 0 %>
+                              <div> <strong>Monto Estímulo:</strong> <%= number_to_currency(estimulo.monto.to_d) %> </div>
+                     <% else %>
+                              <strong> No cumple con la normativa establecida en los lineamientos para tener acceso a estímulos. </strong>              
+                     <% end %>
+                     <div> 
+                            <strong>Presupuesto Operativo:</strong> <%= link_to "Ver presupuesto", "https://inecol-my.sharepoint.com/:b:/g/personal/antonio_francisco_inecol_mx/Ec7rVnZjEsdJrltTf_GzYqcBv4tuAMe6swZ_pax3EIW8tw?e=Yhybci", target:"_blank" %> 
+                     </div>
+               <% elsif estimulo.tipo == 'CATEDRA' %>
+                           <div> 
+                                 <strong>Presupuesto Operativo:</strong> <%= link_to "Ver presupuesto", "https://inecol-my.sharepoint.com/:b:/g/personal/antonio_francisco_inecol_mx/Ec7rVnZjEsdJrltTf_GzYqcBv4tuAMe6swZ_pax3EIW8tw?e=Yhybci", target:"_blank" %> 
+                           </div>
+               <% else %> 
+                      <% if  estimulo.monto.to_d > 0 %>
+                           <div> <strong>Monto Estímulo:</strong> <%= number_to_currency(estimulo.monto.to_d) %> </div>  
+                       <% else %> 
+                            
+                           <strong> No cumple con la normativa establecida en los lineamientos para tener acceso a estímulos. </strong>         
+                      <% end %>  
+               <% end %>
+             <% else %>
+                    <strong> No cumple con la normativa establecida en los lineamientos para tener acceso a estímulos. </strong>        
+             <% end %>  
+
+      </div>
+
             <div class="row"><div class="col text-primary">Productos Académicos</div></div> 
             <%= render "index_actividades" %>
             <div class="row"><div class="col text-primary">Productos de Divulgación (<I>Capturados por la Oficina de Enlace</I>)</div></div> 
