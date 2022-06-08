@@ -4,23 +4,23 @@ class Actividades::ActividadesController < ApplicationController
   def index
     #@actividades = Actividad.where(periodo:2021,estado:['A','U','C','S','G','D']).includes(:autores).where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores)
     #where.not(producto_id:[22,39,82,83])
-    @actividades = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D'])
+    @actividades = Actividad.includes(:producto).where(periodo:2022,estado:['A','U','C','S','G','D'])
                       .includes(:autores)
                         .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
-    @enlace = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[22,39])
-                        .includes(:autores)
-                          .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
-    @posgrado = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[82,83])
-                          .includes(:autores)
-                            .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
-    
-
-    if params[:pry].present?
-        @proyectos = Actividad.includes(:producto).where(producto_id:[81,85], periodo:2021).order("actividades.titulo")
-    end
-    if params[:tesis].present?
-       @tesis = Actividad.includes(:producto).where(producto_id:[83], periodo:2020).order("productos.descripcion")
-    end
+                        
+    #@enlace = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[22,39])
+    #                    .includes(:autores)
+    #                      .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
+    #@posgrado = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[82,83])
+    #                      .includes(:autores)
+    #                        .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
+   
+    #if params[:pry].present?
+    #    @proyectos = Actividad.includes(:producto).where(producto_id:[81,85], periodo:2021).order("actividades.titulo")
+    #end
+    #if params[:tesis].present?
+    #   @tesis = Actividad.includes(:producto).where(producto_id:[83], periodo:2020).order("productos.descripcion")
+    #end
 
   end
 

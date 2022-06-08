@@ -5,13 +5,13 @@
         <% if @producto.prodgrupo.clave != 'ACTIVIDAD' %> 
               <%= form.select :persona_id, 
                 Persona.where(estado:'A').order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, 
-                {},
-                {class:"form-control form-control-sm academico_search"} %>
+                {include_blank: true},
+                {class:"form-control", data:{controller:'ts--selectrev'}} %>
         <% else %>
               <%= form.select :persona_id, 
                 Persona.where(estado:'A', tipopersona_id:4).order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, 
-                {},
-                {class:"form-control form-control-sm academico_search"} %>
+                {include_blank: true},
+                {class:"form-control", data:{controller:'ts--selectrev'}} %>
         <% end %>        
       </div>       
   </td>

@@ -4,32 +4,13 @@
  <div class="card-body">
    <div class="row">
       <div class="col">
-       <h5 id="autores">Participantes</h5>
+       <h5 id="autores">Autores</h5>
        
       </div> 
       
-      
-        <button class="btn btn-success dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           Agregar participante
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-             <% Tipoautor.all.each do |t| %>
-                 <% if t.clave == 'ACINECOL' %>
-                    <%= link_to "#", data:{ action: "click->autoria#nuevoPart" }, class:"dropdown-item" do %>
-                        <%= t.nomtipoautor %>
-                    <% end %>
-                 <% end %>
-                 <% if t.clave == 'EXTERNO' && @producto.prodgrupo.clave != 'PROY' %>
-                    <%= link_to "#", data:{ action: "click->autoria#nuevoPartExt" }, class:"dropdown-item" do %>
-                        <%= t.nomtipoautor %>
-                    <% end %>
-                 <% end %>
-
-             <% end %> 
-        </div>
         
    </div> 
-   <div class="row">
+   <div class="row justify-content-center">
       <template data-autoria-target='tmpAutor'>
         <%= form.fields_for :autores, Autor.new, child_index: 'TEMPLATE_RECORD_AUTOR' do |autor| %>
               <%= render 'autoria_fields', form: autor, swcorr:swcorr %>
@@ -42,8 +23,7 @@
       </template> 
       <div class="col-8">
         <% if @producto.prodgrupo.clave != 'PROY' %>
-          <small class="text-primary font-weight-bold">Los participantes deben ser agregados conforme al orden en que aparecen en el comprobante.</small>
-          <small class="text-primary font-weight-bold">Para los participantes Externos, debe poner el nombre abreviado, por ejemplo: <I>Rivera-Hernández, SL.</I>   </small>
+          
         <% else %>
                <small class="text-primary font-weight-bold">La suma de porcentajes de participación debe ser 100.</small>
         <% end %>
@@ -62,6 +42,28 @@
                 </tr>    
             </thead>
             <tbody data-autoria-target="rwsAutores">
+                <tr><td colspan='3'>
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa-solid fa-user-plus"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <% Tipoautor.all.each do |t| %>
+                            <% if t.clave == 'ACINECOL' %>
+                                <%= link_to "#", data:{ action: "click->autoria#nuevoPart" }, class:"dropdown-item" do %>
+                                    <%= t.nomtipoautor %>
+                                <% end %>
+                            <% end %>
+                            <% if t.clave == 'EXTERNO' && @producto.prodgrupo.clave != 'PROY' %>
+                                <%= link_to "#", data:{ action: "click->autoria#nuevoPartExt" }, class:"dropdown-item" do %>
+                                    <%= t.nomtipoautor %>
+                                <% end %>
+                            <% end %>
+
+                        <% end %> 
+                    </div>
+               </div>
+        </td></tr>
                 <% if  @actividad.autores.any? %>
                       <% @actividad.autores.each do |aut| %>
                             <% if aut.persona_id == 211 || aut.persona_id == 212 %>
@@ -87,6 +89,9 @@
 
             </tbody>
         </table>
+
+        
+      
       </div>
    </div>
  </div>  

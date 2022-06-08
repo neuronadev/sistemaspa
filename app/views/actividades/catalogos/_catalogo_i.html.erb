@@ -1,22 +1,24 @@
-<div class="card-columns">
+<div class="row row-cols-1 row-cols-md-2 g-4">
          <% Prodcategoria.where(estado:'A').where(id:[1,2,3,4,5,6,7]).order(:id).each do |c| %>
-            <div class="card">
-               <div class="card-body">
-                  <strong><%= c.nomcategoria %></strong>
-                  <ul>
-                     <% Producto.where(prodcategoria_id:c.id,estado:'A').order(:descripcion).each do |p| %>
-                        <% if [81,82,83,85].include? p.id %>
-                              <% if current_usuario.rol == 'Y' %> 
-                                     <li class="mb-md-1"> <%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turbolinks:false} %></li>
+             <div class="col">
+                  <div class="card">
+                     <div class="card-body">
+                        <strong><%= c.nomcategoria %></strong>
+                        <ul>
+                           <% Producto.where(prodcategoria_id:c.id,estado:'A').order(:descripcion).each do |p| %>
+                              <% if [81,82,83,85].include? p.id %>
+                                    <% if current_usuario.rol == 'Y' %> 
+                                          <li class="mb-md-1"> <%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turbolinks:false} %></li>
+                                    <% else %>
+                                          <li class="mb-md-1 text-secondary"> <%= p.descripcion %></li>
+                                    <% end %> 
                               <% else %>
-                                      <li class="mb-md-1 text-secondary"> <%= p.descripcion %></li>
-                              <% end %> 
-                        <% else %>
-                              <li class="mb-md-1"> <%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turbolinks:false} %></li>
-                        <% end %>     
-                     <% end %>
-                  </ul>   
-               </div>   
-            </div>   
+                                    <li class="mb-md-1"> <%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turbolinks:false} %></li>
+                              <% end %>     
+                           <% end %>
+                        </ul>   
+                     </div>   
+                  </div>   
+             </div>     
          <% end %> 
-      </div> 
+</div> 

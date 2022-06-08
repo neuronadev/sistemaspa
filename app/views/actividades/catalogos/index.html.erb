@@ -1,49 +1,12 @@
-<%
+<div class="row p-2">
+    <div class="col">
+       <div class="fw-bold">Producción 2022</div>
+       <div>Seleccione un producto del catalogo.</div>
+    </div> 
+</div>    
+   
+   <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' || current_usuario.rol == 'Y' %>
+              <%= render "catalogo_i" %>  
+   <% end %>
 
-         @tot_act = Sustantiva.where("academico_id=? and estado != 'X' and anio=2021",current_usuario.persona.academico.id).count()
-         @prom = 0.0
-         evaltec = 0.0
-         Sustantiva.where("academico_id=? and estado = 'C' and anio=2021",current_usuario.persona.academico.id).each do |s|
-             if s.calidad.nil?
-                 dCalidad = 0.0
-             else
-                 dCalidad = s.calidad
-             end  
-             if s.eficiencia.nil?
-                 dEfi = 0.0
-             else
-                 dEfi = s.eficiencia
-             end   
-              
-              evaltec = evaltec + (  (s.porcentaje/100)*(((dCalidad/10)+(dEfi/10))/2)  )
-         
-        end
-         
-         @prom = evaltec.round(2)
-%>
-<div class="container mt-md-3">
-   <h5>Producción 2021</h5>
-   <span>Seleccione un producto del catalogo.</span>
-   <hr>
-    
-   <% 
-     b_closse = false
-    if b_closse %>
-          <%= render "catalogo_close" %> 
-   <% else %> 
-
-                <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' || current_usuario.rol == 'Y' %>
-
-                    <%= render "catalogo_i" %>  
-
-                <% end %>
-                <% if current_usuario.rol == 'T' %>
-                    <% if @prom.to_f >= 8.5 %>
-                            <%= render "catalogo_i" %>  
-                            <%= render "catalogo_t" %>  
-                    <% else%>
-                        <strong>Es necesario que se han evaluadas todas las actividades sustantivas.</strong>
-                    <% end %>     
-                <% end %>
-  <% end %>
 </div>

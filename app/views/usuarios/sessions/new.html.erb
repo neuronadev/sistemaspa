@@ -1,42 +1,33 @@
 
-<%= stylesheet_pack_tag 'login', media: 'all', 'data-turbolinks-track': 'reload' %>
+ <div class="row">    
+    <div class="col-md-4"></div>
+    <div class="col-md-4  d-flex align-items-center " style="height: 100vh">
+                <div class="row d-flex align-items-center shadow-lg p-3 mb-5 bg-body rounded-3" style="height: 50vh">                 
+                            <%= form_for(resource, as: resource_name, url: session_path(resource_name),  html: {class:"form form-login"}) do |f| %>
+                               <div class="d-flex justify-content-center"> 
+                                     <i class="fa-solid fa-circle-user fa-4x text-secondary"></i>
+                               </div>
+                               <div class="row">
+                                      <div class="mb-3">
+                                        <label class="form-label">Usuario:</label>
+                                        <input id="usuario_email" name="usuario[email]" type="email" value="" class="form-control" placeholder="Email" required>
+                                      </div>
 
-<div class="wrapper">
-    <div class="slide a">
+                                      <div>
+                                        <label class="form-label" >Password:</label>
+                                        <input id="usuario_password" name="usuario[password]" type="password" class="form-control" placeholder="Password" required>
+                                      </div>
 
-      <div class="container">
-          <div class="logo">Inicio de sesión</div>
-          <div class="login-item">
-            <%= form_for(resource, as: resource_name, url: session_path(resource_name),  html: {class:"form form-login"}) do |f| %>
-              <div class="form-field">
-                <label class="user" for="login-username"><span class="hidden">Username</span></label>
-                <input id="usuario_email" name="usuario[email]" type="email" value="" class="form-input" placeholder="Email" required>
-              </div>
-
-              <div class="form-field">
-                <label class="lock" for="login-password"><span class="hidden">Password</span></label>
-                <input id="usuario_password" name="usuario[password]" type="password" class="form-input" placeholder="Password" required>
-              </div>
-
-              <div class="actions">
-                <%= f.submit "Log in" %>
-              </div>
-            <% end %>      
-          </div>
-      </div>
-
-   </div>   
-</div> 
-
-<script>
-window.onload = function() {
-var slides = document.querySelectorAll('.slide');
-for (var i=0, im=slides.length; im>i; i++) {
-  var style = window.getComputedStyle(slides[i], false); var bg = style.backgroundImage.slice(5, -2);
-  var img = new Image();
-  img.src = bg;
-  var scale = ((img.naturalWidth / img.naturalHeight) * 100) + 'vh';
-  slides[i].style.minWidth = scale;
-}
-}
-</script>
+                                      <div class="row justify-content-center">
+                                        <div class="col text-center p-4"> 
+                                          <%= f.submit "Ingresar", class:"btn btn-primary mb-3" %>
+                                        </div>  
+                                      </div>
+                                </div>      
+                              <% end %>
+                </div>              
+    </div>
+    <div class="col-md-4">
+    
+    </div>        
+  </div>    

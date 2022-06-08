@@ -3,12 +3,11 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-import 'bootstrap/dist/js/bootstrap';
+import 'bootstrap';
 import "controllers"
+import "../stylesheets/application"
 
-
-
-require("packs/sesion");
+//require("packs/sesion");
 
 require('select2');
 
@@ -18,11 +17,11 @@ require('select2');
 //const application = Application.start()
 //const context = require.context("../controllers", true, /\.js$/)
 //application.load(definitionsFromContext(context))
-
+/*
 var $ = require('jquery');
 window.jQuery = $;
 window.$ = $;
-
+*/
 const images = require.context('../images', true)
 const imagePath = (name) => images(name, true)
 require("trix")

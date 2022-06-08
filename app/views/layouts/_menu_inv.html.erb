@@ -1,0 +1,22 @@
+<div class="w-75">
+    <div class="col"> 
+              <div class="d-flex justify-content-center p-3 fw-bold item">Menu de usuario</div>
+              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-success fw-bold item" >
+                          <%= link_to actividades_actividades_path, style:'text-decoration: none;' do %>
+                              <i class="fa-solid fa-house-chimney-user"></i> Inicio
+                          <% end %>   
+              </div>
+                   
+              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-success fw-bold item" >
+                          <%= link_to actividades_catalogos_path, style:'text-decoration: none;' do %>
+                                <i class="fa-regular fa-file-lines"></i> Nuevo...
+                          <% end %>  
+              </div>
+                   
+              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-success fw-bold item" >
+                          <%= link_to actividades_actividades_path, style:'text-decoration: none;' do %>
+                                <i class="fa-solid fa-clock-rotate-left"></i> Históricos
+                          <% end %>  
+              </div>
+    </div>  
+</div>   
