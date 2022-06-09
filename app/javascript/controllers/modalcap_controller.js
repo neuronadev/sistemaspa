@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import Rails from "@rails/ujs"
 import TomSelect from "tom-select"
 
 export default class extends Controller {
@@ -9,10 +10,21 @@ export default class extends Controller {
        var source = event.params.src
        var prod = event.params.prod
        this.element.modal.open(this.modalTarget)
+       
+       var modal_btn_aceptar = document.getElementById('modal_btn_aceptar')
+       var modal_btn_cancelar = document.getElementById('modal_btn_cancelar')
+       modal_btn_aceptar.style.display = 'flex'
+       modal_btn_cancelar.innerHTML = 'Cancelar'
+
        this.form(source, prod)
   }
   downModal(){
       this.element.modal.close(this.modalTarget)
+  }
+
+  submitform(event){
+      var form = document.getElementById('formmodal')
+      Rails.fire(form, 'submit')
   }
 
   async form(source, prod){
@@ -42,6 +54,8 @@ export default class extends Controller {
   onSuccess(event){
     var modal_body = document.getElementById('modal_body') 
     var pathf = document.getElementById('pathf')
+    var modal_btn_aceptar = document.getElementById('modal_btn_aceptar')
+    var modal_btn_cancelar = document.getElementById('modal_btn_cancelar')
   
     var select = null 
 
@@ -49,7 +63,7 @@ export default class extends Controller {
       if ( status == 'OK' ){
            
             let data = JSON.parse(xhr.response)
-            if ( pathf.value == 'LIBRO' ){
+            if ( pathf.value == 'CAPITULO' ){
                       select = document.getElementById('actividad_capitulo_attributes_libro_id')
             }
             if ( pathf.value == 'ART-C-JCR' || pathf.value == 'ART-C-CONACYT' || pathf.value == 'ART-C-OTROS' ){
@@ -60,7 +74,9 @@ export default class extends Controller {
             control.addOption({value:data.id, text:data.txt})
             control.refreshItems()
             control.setValue(data.id, false)
-            modal_body.innerHTML = xhr.response
+            modal_body.innerHTML = 'Registro realizado correctamente.'
+            modal_btn_aceptar.style.display = 'none'
+            modal_btn_cancelar.innerHTML = 'Cerrar'
            
       }
   }

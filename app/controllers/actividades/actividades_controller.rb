@@ -41,7 +41,7 @@ class Actividades::ActividadesController < ApplicationController
     if !@producto.pathf.blank? 
        @parts = @producto.pathf.split('-')
     else
-      @parts = ['-'] 
+      @parts = ['-']
     end
     @actividad = Actividad.new
     @actividad.build_articulo

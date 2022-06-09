@@ -30,7 +30,7 @@
                             <%=  cap_form.label :libro_id, "Libro:", class:"form-label" %>
                             <%=  cap_form.select :libro_id, Libro.all.order(:nomlibro).collect { |l| [l.nomlibro+' (ISBN: '+(l.isbn||'') + ')',l.id] }, { :include_blank=>'Buscar Libro...'}, {class:"form-control", data:{controller:'ts--selectrev'}}%>
                             <div>
-                                <div class="col" data-action="click->modalcap#launchModal" >
+                                <div class="col" data-action="click->modalcap#launchModal" data-modalcap-src-param="lib" data-modalcap-prod-param="<%= @producto.id %>" >
                                       <div class="text-primary fw-bold" style="font-size:14px; cursor:pointer">Registrar libro</div>
                                 </div>
                             </div> 

@@ -5,7 +5,7 @@ class InicioController < ApplicationController
     if current_usuario.rol == 'S'
         redirect_to administrador_path   
     end
-    if current_usuario.rol == 'I'
+    if current_usuario.rol == 'I' || current_usuario.rol == 'Y'
       redirect_to investigador_path   
     end
     if current_usuario.rol == 'C'

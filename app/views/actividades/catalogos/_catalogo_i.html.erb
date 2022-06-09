@@ -5,7 +5,7 @@
                      <div class="card-body">
                         <strong><%= c.nomcategoria %></strong>
                         <ul>
-                           <% Producto.where(prodcategoria_id:c.id,estado:'A').order(:descripcion).each do |p| %>
+                           <% Producto.where(prodcategoria_id:c.id,estado:['A','H']).order(:descripcion).each do |p| %>
                               <% if [81,82,83,85].include? p.id %>
                                     <% if current_usuario.rol == 'Y' %> 
                                           <li class="mb-md-1"> <%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turbolinks:false} %></li>
@@ -13,7 +13,12 @@
                                           <li class="mb-md-1 text-secondary"> <%= p.descripcion %></li>
                                     <% end %> 
                               <% else %>
-                                    <li class="mb-md-1"> <%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turbolinks:false} %></li>
+                                    <% if p.estado == 'A' %> 
+                                           <li class="mb-md-1"> <%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turbolinks:false} %></li>
+                                    <% else %>     
+                                           <li class="mb-md-1 text-secondary"> <%=  p.descripcion %></li> 
+                                    <% end %>     
+                              
                               <% end %>     
                            <% end %>
                         </ul>   

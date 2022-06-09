@@ -8,7 +8,7 @@
                     <%= form.text_field :titulo, class:"form-control" %>
                 </div>  
                 <div class="mb-3 col-md-3">
-                    <%= form.label :fechapub, "Fecha de publicacion:", class:"form-label" %>
+                    <%= form.label :fechapub, "Fecha de publicación:", class:"form-label" %>
                     <%= form.date_field :fechapub, class:"form-control" %>
                 </div>  
             </div>   
@@ -25,9 +25,11 @@
         
             
 
-            <div class="row mt-md-3">
+            <div class="row mt-4">
                 <div class="col">
-                    <%= form.submit "Enviar información", class:'btn btn-primary' ,data: { confirm: 'La información será enviada para validación. ¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %>
+                   <div class="d-flex justify-content-center">
+                     <%= form.submit "Enviar información", class:'btn btn-primary' ,data: { confirm: '¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %>
+                   </div>
                 </div> 
             </div>
         <% end %>

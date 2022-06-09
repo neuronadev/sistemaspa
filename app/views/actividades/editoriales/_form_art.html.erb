@@ -2,7 +2,7 @@
    puts @editorial.errors.full_messages
 %>
 
-<%= form_with model:[:actividades, @editorial], data:{action:'ajax:success->modalcap#onSuccess ajax:error->modalcap#onError'}, remote:true do |form| %>
+<%= form_with model:[:actividades, @editorial], data:{action:'ajax:success->modalcap#onSuccess ajax:error->modalcap#onError'}, remote:true, id:'formmodal' do |form| %>
     <input type="hidden" name="pathf" id="pathf" value="<%= @producto.pathf %>">
     <%= form.hidden_field :especializada, value:'S' %>
     <%= form.hidden_field :ambito_id, value:2  %>
@@ -44,7 +44,5 @@
               
         <% end %>
 
-    <div>
-       <%= form.submit %>
-    </div>
+    
 <% end %>

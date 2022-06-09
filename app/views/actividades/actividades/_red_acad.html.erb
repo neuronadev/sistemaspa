@@ -1,4 +1,4 @@
-<div class="row ">  
+<div class="row mt-4">  
      <div class="mb-3 col-md-5">
           <%= form.label :asignared, "Seleccione la red a la que pertenece este producto:", class:"form-label" %> 
           <%= form.select :asignared, Red.all.order(:nomred).pluck(:nomred,:id), { prompt:'Seleccione una red'}, class:'form-control' %>             

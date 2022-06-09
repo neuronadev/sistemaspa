@@ -21,7 +21,7 @@ class Actividades::EditorialesController < ApplicationController
          @tipo = 'O'
          render partial: 'form_art' 
     end
-    if @producto.pathf == 'LIBRO'
+    if @producto.pathf == 'CAPITULO'
           render partial: 'form_libro' 
      end
         
@@ -43,7 +43,7 @@ class Actividades::EditorialesController < ApplicationController
         if @editorial.save
               #render partial: 'show', notice:'El libro se ha registrado correctamente'
               format.json do 
-                  if @pathf == 'LIBRO' 
+                  if @pathf == 'CAPITULO' 
                          render json: {status:'OK', id:@editorial.libro.id, txt:@editorial.libro.nomlibro}
                   end
                   if  @pathf == 'ART-C-JCR' || @pathf == 'ART-C-CONACYT' || @pathf == 'ART-C-OTROS'
@@ -51,7 +51,7 @@ class Actividades::EditorialesController < ApplicationController
                   end   
               end    
         else
-                  if @pathf == 'LIBRO' 
+                  if @pathf == 'CAPITULO' 
                           format.html { render partial: 'form_libro', status: :unprocessable_entity }
                   end    
                   if  @pthf == 'ART-C-JCR' || @pthf == 'ART-C-CONACYT' || @pthf == 'ART-C-OTROS'

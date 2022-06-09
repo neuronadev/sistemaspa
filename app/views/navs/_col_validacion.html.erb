@@ -2,7 +2,7 @@
 <td>
   <div class="d-flex justify-content-center">
     <% if activ.estado == 'U' %>
-          <small class="badge badge-info">En validación</small>
+          <small class="badge bg-primary">En validación</small>
     <% else%>
             <% if activ.estado == 'A' %>
                   --
@@ -34,7 +34,7 @@
             <% elsif activ.valetapas.where(activo:'SI').any? %>
                   <% if activ.valetapas.where(activo:'SI').last.etapa == 'CR' %>
                         <% if activ.estado == 'G' %>
-                              <small class="badge badge-warning">Corregir</small>
+                              <small class="badge bg-warning">Corregir</small>
                         <% end%>
                         <% if activ.estado == 'D' %>
                               <i class="fas fa-times text-danger"></i>
@@ -59,7 +59,7 @@
                   --
       <% end %>
        <% if activ.estado == 'U' %>
-          <small class="badge badge-info">En validación</small>
+          <small class="badge bg-secondary">En validación</small>
        <% end %>   
        <% if activ.estado == 'S' %>
              <% if [81,85,10].include? activ.producto_id %>
@@ -74,12 +74,12 @@
              <% end %>
       <% end%>     
       <% if activ.estado == 'C' %>
-            <small class="badge badge-info">En validación</small>
+            <small class="badge bg-info">En validación</small>
       <% end%> 
       <% if activ.valetapas.where(activo:'SI').any? %>
                   <% if activ.valetapas.where(activo:'SI').last.etapa == 'SA' %>
                         <% if activ.estado == 'G' %>
-                              <small class="badge badge-warning">Corregir</small>
+                              <small class="badge bg-warning">Corregir</small>
                         <% end%>
                         <% if activ.estado == 'D' %>
                              <% if activ.producto_id == 82 %>  

@@ -18,5 +18,5 @@ export default class extends Controller {
     p_target.removeAttribute("style");
     p_target.classList.remove("show");
     //document.getElementsByClassName("modal-backdrop")[0].remove();
-}
+  }
 }

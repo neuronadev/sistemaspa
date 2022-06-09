@@ -201,7 +201,7 @@ class ActividadesController < ApplicationController
   
     actividad.save  
     @act = actividad
-    #redirect_to actividades_actividades_path
+    redirect_to actividades_actividades_path
     
     #redirect_to actividades_path
 

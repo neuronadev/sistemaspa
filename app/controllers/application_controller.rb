@@ -17,7 +17,8 @@ class ApplicationController < ActionController::Base
                elsif current_usuario.rol == 'T'
                     "tecnico"
                elsif current_usuario.rol == 'Y'
-                    "system"     
+                    #"system"     
+                    "investigador"
                else
                     "application"
                end

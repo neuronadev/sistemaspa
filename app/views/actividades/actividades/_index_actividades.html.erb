@@ -1,4 +1,6 @@
-<table class="table table-sm " style="font-size:14px;">
+<div class="row">
+ <div class="d-flex fw-bold">Producción 2022 </div>
+<table class="table table-sm ">
               <thead>
                   
                   <tr >
@@ -104,8 +106,9 @@
                          <td id="actividad<%= a.id %>">
                            <div class="d-flex justify-content-center"> 
                                 <% if a.estado == 'A' %>
-                                     <span class="text-muted font-italic" onclick="messclose()" ><i class="fas fa-check-circle"></i> Validar</span>
-                                                    
+                                      <%= link_to validar_path(a.id,'user'),  data: {confirm: 'El registro será habilitado para validación. ¿Desea continuar?'} do %>
+                                              <span class="" ><i class="fas fa-check-circle"></i> Validar </span>
+                                       <% end %>       
                                 <% else %> 
                                         <i class="fas fa-check-double text-success"></i>
                                 <% end %>   
@@ -132,10 +135,4 @@
               </tbody>
 
          </table> 
-
-         <script>
-              function messclose(){
-
-                  alert("El sistema cerró el día 31 de Diciembre a las 24hrs, no es posbile realizar esta acción.")
-              }
-         </script>
+</div>

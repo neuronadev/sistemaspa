@@ -1,22 +1,62 @@
 <div class="w-75">
     <div class="col"> 
               <div class="d-flex justify-content-center p-3 fw-bold item">Menu de usuario</div>
-              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-success fw-bold item" >
+              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
                           <%= link_to actividades_actividades_path, style:'text-decoration: none;' do %>
                               <i class="fa-solid fa-house-chimney-user"></i> Inicio
                           <% end %>   
               </div>
                    
-              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-success fw-bold item" >
+              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
                           <%= link_to actividades_catalogos_path, style:'text-decoration: none;' do %>
                                 <i class="fa-regular fa-file-lines"></i> Nuevo...
                           <% end %>  
               </div>
                    
-              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-success fw-bold item" >
-                          <%= link_to actividades_actividades_path, style:'text-decoration: none;' do %>
-                                <i class="fa-solid fa-clock-rotate-left"></i> Históricos
+             
+              <div class="d-flex justify-content-start border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body  item" >
+                 <div class="accordion col-12" id="accordionExample">
+                      <div class="col-12">
+                              
+                                    <div class="accordion-button collapsed d-flex justify-content-start p-2  fw-bold item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                          <%= link_to actividades_actividades_path, style:'text-decoration: none;' do %>
+                                                <i class="fa-solid fa-clock-rotate-left"></i> Históricos
+                                          <% end %>  
+                                    </div>
+                              
+                              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body col">
+                                        <div>
+                                          <%= link_to datahistory_path(2021), data:{turbolinks:false} do %>
+                                                <i class="fas fa-th-list"></i> Periodo 2021
+                                          <% end %> 
+                                        </div>  
+                                        <div>
+                                          <%= link_to datahistory_path(2020), data:{turbolinks:false} do %>
+                                                <i class="fas fa-th-list"></i> Periodo 2020
+                                          <% end %> 
+                                        </div>  
+                                        <div> 
+                                           <%= link_to datahistory_path(2019), data:{turbolinks:false}  do %>
+                                                <i class="fas fa-th-list"></i> Periodo 2019
+                                          <% end %>       
+                                        </div>
+                                        <div>  
+                                          <%= link_to histoconsultar_path, data:{turbolinks:false}  do %>
+                                                      <i class="fas fa-th-list"></i> Periodo 2018
+                                          <% end %>  
+                                        </div>  
+                                    </div>
+                              </div>
+                      </div>
+                 </div>
+             </div>    
+              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
+                          <%= link_to destroy_usuario_session_path, style:'text-decoration: none;' do %>
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Salir
                           <% end %>  
               </div>
+
+              
     </div>  
 </div>   

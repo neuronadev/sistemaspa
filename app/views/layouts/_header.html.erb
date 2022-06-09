@@ -1,10 +1,13 @@
 <div class="row sticky-top bg-white w-100 p-2 border-bottom">
-           <div class="row w-100">
+           <div class="row w-100 justify-content-between">
                 <div class="col-2 d-flex justify-content-center">
                     <%= image_tag 'inecol_1_60.png' %>
                 </div>
-                <div class="col-10">
-                   
+                <div class="col-10 align-items-center">
+                    <div class="d-flex justify-content-end p-2">
+                       <div><i class="fa-regular fa-user text-primary fw-bold"></i></div>
+                       <div class="ms-1 text-primary fw-bold"><%= @usuario_nom %></</div>
+                    </div>
                 </div>
                 
            </div>     
