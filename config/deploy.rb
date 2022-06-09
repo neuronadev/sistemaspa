@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.2"
+lock "~> 3.17.0"
 
 set :application, "sistemaspa"
 set :repo_url, "https://github.com/neuronadev/sistemaspa.git"
