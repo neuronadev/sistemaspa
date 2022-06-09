@@ -1,0 +1,2 @@
+module Actividades::LibrosHelper
+end

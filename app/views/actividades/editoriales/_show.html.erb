@@ -1,0 +1,16 @@
+<% if flash.any? %>
+    <% flash.each do |type, msg| %>
+    <div class="p-2 bg-emerald-800 text-sm text-white font-bold">
+        <%= msg %>
+    </div>
+    <% end %>
+<% else %>
+    <div class="flex flex-row p-3 text-sm font-bold text-gray-600 bg-slate-200">
+        Información del registro 
+    </div>
+<% end %>
+<div class="flex flex-row justify-center w-full  mt-4">
+    <div class="flex flex-col">
+        
+    </div>
+</div>

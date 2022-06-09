@@ -1,4 +1,4 @@
-
+    <input type="hidden" name="pathf" id="pathf" value="<%= @producto.pathf %>">
     <% if params[:action] == 'new' %> 
         <%= form.hidden_field :producto_id, value: @producto.id %>
         <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 

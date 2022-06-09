@@ -6,9 +6,10 @@ class Libro < ApplicationRecord
   validates :isbn, presence:true
   validates :anio, presence:true
   validates :nopaginas, presence:true
-  validates :editorial_id, presence:true
+
 
   belongs_to :editorial
+
 
   def default_values
     self.estado ||= 'A'

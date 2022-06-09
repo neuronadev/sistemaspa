@@ -1,4 +1,4 @@
-
+<div data-controller="modal modalcap">    
 <%= form_with model:[:actividades, actividad] do |form| %>
     <%= render "form_inputs_com", form:form %>
             <div class="row">
@@ -29,6 +29,11 @@
                         <div class="mb-3 col-md-6">
                             <%=  cap_form.label :libro_id, "Libro:", class:"form-label" %>
                             <%=  cap_form.select :libro_id, Libro.all.order(:nomlibro).collect { |l| [l.nomlibro+' (ISBN: '+(l.isbn||'') + ')',l.id] }, { :include_blank=>'Buscar Libro...'}, {class:"form-control", data:{controller:'ts--selectrev'}}%>
+                            <div>
+                                <div class="col" data-action="click->modalcap#launchModal" >
+                                      <div class="text-primary fw-bold" style="font-size:14px; cursor:pointer">Registrar libro</div>
+                                </div>
+                            </div> 
                         </div>
                         
                 <% end %>       
@@ -45,7 +50,6 @@
                 </div> 
             </div>
 <% end %>
- <div data-controller="modal modalcap">
-     <div class="col" data-action="click->modalcap#launchModal" > Registrar libro...</div>
-     <div> <%= render 'modal_cap_libro' %></div>
+
+<div> <%= render 'modal_cap_libro' %></div>
 </div>

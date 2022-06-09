@@ -1,0 +1,50 @@
+<% 
+   puts @editorial.errors.full_messages
+%>
+
+<%= form_with model:[:actividades, @editorial], data:{action:'ajax:success->modalcap#onSuccess ajax:error->modalcap#onError'}, remote:true do |form| %>
+    <input type="hidden" name="pathf" id="pathf" value="<%= @producto.pathf %>">
+    <%= form.hidden_field :especializada, value:'S' %>
+    <%= form.hidden_field :ambito_id, value:2  %>
+
+    <div class="row">
+        <div class="col">
+                <%= form.label :nomeditorial, 'Nombre de la editorial:' %>
+                <%= form.text_field :nomeditorial, class:'form-control' %>
+        </div> 
+    </div>
+  
+    <div class="row">
+        <div class="col">
+               <%= form.label :ciudad, 'Lugar o Ciudad de la editorial:' %>
+               <%= form.text_field :ciudad, class:'form-control' %>
+        </div>  
+        <div class="col">
+               <%= form.label :pais_id, 'País de la editorial:' %>
+               <%= form.select :pais_id, Pais.order(:nompais).all.map{ |item| [item.nompais, item.id] }, {prompt:'Seleccione..'}, {class:'form-control'}  %>
+        </div>          
+    </div>
+        
+
+    
+        <%= form.fields_for :revista, Revista.new do |f| %>
+             <%= f.hidden_field :tiporevista, value:@tipo %>
+                <div class="row">
+                    <div class="col">
+                        <%= form.label :nomrevista, 'Nombre de la revista:' %>
+                        <%= f.text_field :nomrevista, class:'form-control' %>
+                    </div>   
+                </div>
+                <div class="row">    
+                    <div class="col-5">
+                        <%= form.label :issn, 'ISSN:' %>
+                        <%= f.text_field :issn, class:'form-control' %>
+                    </div>
+                </div>
+              
+        <% end %>
+
+    <div>
+       <%= form.submit %>
+    </div>
+<% end %>

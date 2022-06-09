@@ -6,7 +6,8 @@ export default class extends Controller {
   connect() {
     
     new TomSelect(this.element,{
-        maxOptions:null
+        maxOptions:null,
+        user_created:true
     })
      
   }

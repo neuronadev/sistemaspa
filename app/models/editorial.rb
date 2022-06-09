@@ -10,6 +10,13 @@ class Editorial < ApplicationRecord
   belongs_to :pais
   belongs_to :ambito
 
+  has_one :libro
+  accepts_nested_attributes_for :libro
+
+  has_one :revista
+  accepts_nested_attributes_for :revista
+
+
   def default_values
     self.estado ||= 'A'
   end  

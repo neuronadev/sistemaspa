@@ -1,11 +1,17 @@
 
   <div class="mb-3 col-4">
       
-
-
       <% if tipo == 'C' %> 
          <%= artc.label :revista_id, "Revista:", class:"form-label"  %>
-         <%= artc.select :revista_id, Revista.where(estado:'A', tiporevista:'J').order(:nomrevista).map{|r| [r.nomrevista.upcase, r.id] },{ include_blank: true}, {class:"form-control", data:{controller:'ts--selectrev'}}  %>
+         <% if @parts[2] == 'JCR' %> 
+             <%= artc.select :revista_id, Revista.where(estado:'A', tiporevista:'J').order(:nomrevista).map{|r| [r.nomrevista.upcase, r.id] },{ include_blank: true}, {class:"form-control", data:{controller:'ts--selectrev'}}  %>
+         <% end %>
+         <% if @parts[2] == 'CONACYT' %> 
+             <%= artc.select :revista_id, Revista.where(estado:'A', tiporevista:'Y').order(:nomrevista).map{|r| [r.nomrevista.upcase, r.id] },{ include_blank: true}, {class:"form-control", data:{controller:'ts--selectrev'}}  %>
+         <% end %>
+         <% if @parts[2] == 'OTROS' %> 
+             <%= artc.select :revista_id, Revista.where(estado:'A', tiporevista:'O').order(:nomrevista).map{|r| [r.nomrevista.upcase, r.id] },{ include_blank: true}, {class:"form-control", data:{controller:'ts--selectrev'}}  %>
+         <% end %> 
       <% end %>
       <% if tipo == 'D' %> 
          <%= artc.label :revista_id, "Revista:", class:"form-label"  %>
@@ -15,4 +21,9 @@
          <%= artc.label :revista_id, "Periodico:", class:"form-label"  %>
          <%= artc.select :revista_id, Revista.where(tiporevista:'P',estado:'A').order(:nomrevista).map{|r| [r.nomrevista.downcase.capitalize, r.id] },{ include_blank: true}, {class:" form-control", data:{controller:'ts--selectrev'}} %>
       <% end %>
+      <div>
+          <div class="col" data-action="click->modalcap#launchModal" data-modalcap-src-param="rev" data-modalcap-prod-param="<%= @producto.id %>" >
+                     <div class="text-primary fw-bold" style="font-size:14px; cursor:pointer">Registrar revista</div>
+          </div>
+      </div> 
   </div>

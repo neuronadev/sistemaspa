@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  namespace :actividades do
+    resources :editoriales
+  end
+  namespace :actividades do
+    resources :libros
+  end
+  namespace :actividades do
+    resources :capitulos
+  end
+
   get 'valactividades/validaciones/infoproducto/:trval/:tritem', to:'valactividades/validaciones#infoproducto', as: 'savalproducto'
   get 'valactividades/validaciones/index', to: 'valactividades/validaciones#index', as: 'validaindex'
   get 'valactividades/validaciones/aceptarproducto/:target/:item', to:'valactividades/validaciones#aceptarproducto', as: 'saaceptarproducto'
