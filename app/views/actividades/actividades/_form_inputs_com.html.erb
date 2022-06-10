@@ -4,7 +4,7 @@
 
           <% if current_usuario.rol == 'Y' %>  
                 <div class="d-flex">
-                     <%=  form.select :persona_id, Persona.where(estado:'A').order(:paterno).map {|p| [(p.paterno+' '+p.materno+' '+p.nombre), p.id]}, {prompt:'Seleccione...'}  %>
+                     <%=  form.select :personaid, Persona.where(estado:'A').order(:paterno).map {|p| [(p.paterno+' '+p.materno+' '+p.nombre), p.id]}, {prompt:'Seleccione...'}  %>
                 </div>  
           <% else %>
                   <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
