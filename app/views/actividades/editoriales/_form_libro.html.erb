@@ -2,34 +2,34 @@
    puts @editorial.errors.full_messages
 %>
 
-<%= form_with model:[:actividades, @editorial], data:{action:'ajax:success->modalcap#onSuccess ajax:error->modalcap#onError'}, remote:true do |form| %>
+<%= form_with model:[:actividades, @editorial], data:{action:'ajax:success->modalcap#onSuccess ajax:error->modalcap#onError'}, remote:true, id:'formmodal' do |form| %>
     <input type="hidden" name="pathf" id="pathf" value="<%= @producto.pathf %>">
 
       <div class="row">
          <div class="col"> 
-            <%= form.label :nomeditorial, 'Nombre de la editorial:' %>
+            <span class="text-danger fw-bold">*</span> <%= form.label :nomeditorial, 'Nombre de la editorial:' %>
             <%= form.text_field :nomeditorial, class:'form-control' %>
          </div>   
       </div>
 
       <div class="row mt-2">
           <div class="col">
-            <%= form.label :especializada, '¿Es una editorial especializada?:' %>
+           <span class="text-danger fw-bold">*</span> <%= form.label :especializada, '¿Es una editorial especializada?:' %>
             <%= form.select :especializada, options_for_select([['SI','S'], ['NO', 'N']]), {}, {class:'form-control'} %>
           </div> 
           <div class="col">
-            <%= form.label :ciudad, 'Lugar o Ciudad de la editorial:' %>
+           <span class="text-danger fw-bold">*</span> <%= form.label :ciudad, 'Lugar o Ciudad de la editorial:' %>
             <%= form.text_field :ciudad, class:'form-control' %>
           </div>  
       </div>
 
       <div class="row mt-2">
           <div class="col">
-             <%= form.label :pais_id, 'País de la editorial:' %>
+             <span class="text-danger fw-bold">*</span> <%= form.label :pais_id, 'País de la editorial:' %>
              <%= form.select :pais_id, Pais.where(estado:'V').order(:nompais).all.map{ |item| [item.nompais, item.id] }, {prompt:'Seleccione..'}, {class:'form-control', data:{controller:'ts--selectrev'}}  %>
           </div>
           <div class="col">
-            <%= form.label :pais_id, 'Ámbito de la editorial:' %>
+            <span class="text-danger fw-bold">*</span> <%= form.label :pais_id, 'Ámbito de la editorial:' %>
             <%= form.select :ambito_id, Ambito.order(:nomambito).all.map{ |item| [item.nomambito, item.id] }, {prompt:'Seleccione..'}, {class:'form-control'}  %>
           </div>     
       </div>  
@@ -40,28 +40,28 @@
              <%= f.hidden_field :tipolibro_id, value:1 %>
                <div class="row mt-2"> 
                   <div class="col">
-                     <%= form.label :nomlibro, 'Título del libro:' %>
+                     <span class="text-danger fw-bold">*</span> <%= form.label :nomlibro, 'Título del libro:' %>
                      <%= f.text_field :nomlibro, class:'form-control' %>
                   </div>   
                </div>   
                <div class="row mt-2"> 
                   <div class="col">
-                     <%= form.label :editores, 'Editores del libro:' %>
+                     <span class="text-danger fw-bold">*</span> <%= form.label :editores, 'Editores del libro:' %>
                      <%= f.text_field :editores, class:'form-control' %>
                   </div>   
 
                   <div class="col">
-                     <%= form.label :isbn, 'ISBN:' %> 
+                     <span class="text-danger fw-bold">*</span> <%= form.label :isbn, 'ISBN:' %> 
                      <%= f.text_field :isbn, class:'form-control' %>
                   </div>   
                </div>   
                <div class="row mt-2"> 
                   <div class="col">
-                     <%= form.label :anio, 'Año de publicación:' %>
+                     <span class="text-danger fw-bold">*</span> <%= form.label :anio, 'Año de publicación:' %>
                      <%= f.text_field :anio, class:'form-control' %>
                   </div>   
                   <div class="col">
-                     <%= form.label :nopaginas, 'Número de páginas:' %>
+                    <span class="text-danger fw-bold">*</span> <%= form.label :nopaginas, 'Número de páginas:' %>
                      <%= f.text_field :nopaginas, class:'form-control' %>
                   </div>  
                </div>   

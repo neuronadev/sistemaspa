@@ -9,18 +9,18 @@
 
     <div class="row">
         <div class="col">
-                <%= form.label :nomeditorial, 'Nombre de la editorial:' %>
+                <span class="text-danger fw-bold">*</span> <%= form.label :nomeditorial, 'Nombre de la editorial:' %>
                 <%= form.text_field :nomeditorial, class:'form-control' %>
         </div> 
     </div>
   
     <div class="row">
         <div class="col">
-               <%= form.label :ciudad, 'Lugar o Ciudad de la editorial:' %>
+               <span class="text-danger fw-bold">*</span> <%= form.label :ciudad, 'Lugar o Ciudad de la editorial:' %>
                <%= form.text_field :ciudad, class:'form-control' %>
         </div>  
         <div class="col">
-               <%= form.label :pais_id, 'País de la editorial:' %>
+               <span class="text-danger fw-bold">*</span> <%= form.label :pais_id, 'País de la editorial:' %>
                <%= form.select :pais_id, Pais.where(estado:'V').order(:nompais).all.map{ |item| [item.nompais, item.id] }, {prompt:'Seleccione..'}, {class:'form-control', data:{controller:'ts--selectrev'}}  %>
         </div>          
     </div>
@@ -31,13 +31,13 @@
              <%= f.hidden_field :tiporevista, value:@tipo %>
                 <div class="row">
                     <div class="col">
-                        <%= form.label :nomrevista, 'Nombre de la revista:' %>
+                        <span class="text-danger fw-bold">*</span> <%= form.label :nomrevista, 'Nombre de la revista:' %>
                         <%= f.text_field :nomrevista, class:'form-control' %>
                     </div>   
                 </div>
                 <div class="row">    
                     <div class="col-5">
-                        <%= form.label :issn, 'ISSN:' %>
+                        <span class="text-danger fw-bold">*</span> <%= form.label :issn, 'ISSN:' %>
                         <%= f.text_field :issn, class:'form-control' %>
                     </div>
                 </div>

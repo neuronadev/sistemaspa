@@ -54,7 +54,7 @@ class Actividades::EditorialesController < ApplicationController
                   if @pathf == 'CAPITULO' 
                           format.html { render partial: 'form_libro', status: :unprocessable_entity }
                   end    
-                  if  @pthf == 'ART-C-JCR' || @pthf == 'ART-C-CONACYT' || @pthf == 'ART-C-OTROS'
+                  if  @pathf == 'ART-C-JCR' || @pathf == 'ART-C-CONACYT' || @pathf == 'ART-C-OTROS'
                          format.html { render partial: 'form_art', status: :unprocessable_entity }    
                   end
         end     

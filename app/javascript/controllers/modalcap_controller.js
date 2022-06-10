@@ -81,7 +81,7 @@ export default class extends Controller {
       }
   }
   onError(event){
-      //console.log("Errro.")
+      alert("Error en la información. En este formulario hay campos obligatorios.")
   }
   
 }
