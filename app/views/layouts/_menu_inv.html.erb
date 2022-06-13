@@ -58,6 +58,14 @@
                                           <i class="fa-solid fa-gears"></i> Validar
                                     <% end %>  
                         </div>
+             <% end %>  
+             <% if current_usuario.rol == 'Y' %> 
+                        <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Captura</div>  
+                        <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
+                                    <%= link_to validaindex_path(:tipo=>'A'), style:'text-decoration: none;', target:"_blank" do %>
+                                          <i class="fas fa-users"></i><span> Evaluación 2022 </span>
+                                    <% end %>            
+                        </div>            
              <% end %>           
 
             <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Links</div>  

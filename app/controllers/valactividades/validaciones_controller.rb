@@ -4,7 +4,7 @@ class Valactividades::ValidacionesController < ApplicationController
   def index
     
       @tipo = params[:tipo]  
-      anio = 2021
+      anio = 2022
       @actividades = []
 
       if params[:scroll].present?
@@ -14,13 +14,15 @@ class Valactividades::ValidacionesController < ApplicationController
       end
       
       if @tipo == "A" 
-           @investigadores = Persona.where(tipopersona_id:[2,3], estado:'A').order(:paterno,:materno,:nombre) 
-           @tecnicos = Persona.where(tipopersona_id:4, estado:'A').order(:paterno)
-           @validados = Persona.where(tipopersona_id:[2,3,4], estado:'A', evaluacion:'S').order(:paterno,:materno,:nombre)
-      #    Persona.where(tipopersona_id:[2,4]).order(:paterno).each do |p|
-      #      r = Actividad.where(periodo:2021,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
-      #      @actividades << [persona:p.id, actividades:r.to_a]
-      #   end
+           #@investigadores = Persona.where(tipopersona_id:[2,3], estado:'A').order(:paterno,:materno,:nombre) 
+           #@tecnicos = Persona.where(tipopersona_id:4, estado:'A').order(:paterno)
+           #@validados = Persona.where(tipopersona_id:[2,3,4], estado:'A', evaluacion:'S').order(:paterno,:materno,:nombre)
+
+
+          Persona.where(tipopersona_id:[2,3]).order(:paterno).each do |p|
+            r = Actividad.where(periodo:2022,estado:['A','C','U','S','G','D']).includes(:autores).where("autores.persona_id = ?", p.id).references(:autores)
+            @actividades << [persona:p.id, actividades:r.to_a]
+         end
       end 
       
       if @tipo == "I" 
