@@ -1,5 +1,8 @@
+<div class="row">
+   <div class="col-9">
+      <div class="row justify-content-between">
         <% if @actividad.estado == 'U' %>    
-               <div class="d-flex flex-row">
+               <div class="d-flex flex-row justify-content-between">
                   <%= render "avalida/btn_aceptar" %>
                   <%= render "avalida/btn_corregir" %>
                   <%= render "avalida/btn_rechazar" %>
@@ -22,3 +25,5 @@
                   - <%= !@actividad.valetapas.where(activo:'SI').first.nil? ? @actividad.valetapas.where(activo:'SI').first.txtmensaje : ''   %>
                </div>
          <% end %>  
+      </div>     
+</div>         

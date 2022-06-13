@@ -1,6 +1,6 @@
 <div class="w-75">
     <div class="col"> 
-              <div class="d-flex justify-content-center p-3 fw-bold item">Menu de usuario</div>
+              <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Menu de usuario</div>
               <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
                           <%= link_to actividades_actividades_path, style:'text-decoration: none;' do %>
                               <i class="fa-solid fa-house-chimney-user"></i> Inicio
@@ -51,9 +51,16 @@
                       </div>
                  </div>
              </div>    
-              
+             <% if current_usuario.rol == 'C' %> 
+                        <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Coor. de red</div>  
+                        <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
+                                    <%= link_to redesindex_path, style:'text-decoration: none;' do %>
+                                          <i class="fa-solid fa-gears"></i> Validar
+                                    <% end %>  
+                        </div>
+             <% end %>           
 
-            <div class="d-flex justify-content-center p-3 fw-bold item">Links</div>  
+            <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Links</div>  
 
             <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
                           <%= link_to "https://inecol-my.sharepoint.com/:b:/g/personal/antonio_francisco_inecol_mx/Ec7rVnZjEsdJrltTf_GzYqcBv4tuAMe6swZ_pax3EIW8tw?e=Yhybci", target:"_blank", style:'text-decoration: none;' do %>

@@ -1,18 +1,35 @@
+<div class="row mt-md-1">
+    <div class="d-flex">
+         <div>Revista:</div>
+         <div class="fw-bold"> <%= !@actividad.articulo.revista.blank? ? @actividad.articulo.revista.nomrevista : 'N/A'  %></div>
+    </div>
+</div>
+
 <div class="row mt-md-3">
-    <div class="col-4">
-        <span class="font-weight-bold">Fecha publicacón:</span> <%= !@actividad.fechapub.blank? ? @actividad.fechapub : 'N/A'  %>
-    </div> 
     <div class="col-2">
-      <span class="font-weight-bold">Volumen:</span> <%= !@actividad.articulo.volumen.blank? ? @actividad.articulo.volumen : 'N/A'  %>
+        <div class="d-flex justify-content-center"><span class="font-weight-bold">Fecha publicación:</span></div>
+        <div class="d-flex justify-content-center"><%= !@actividad.fechapub.blank? ? @actividad.fechapub : 'N/A'  %></div>
+    </div> 
+
+    <div class="col-2">
+        <div class="d-flex justify-content-center"><span class="font-weight-bold">Volumen:</span></div>
+        <div class="d-flex justify-content-center"><%= !@actividad.articulo.volumen.blank? ? @actividad.articulo.volumen : 'N/A'  %></div>
     </div>   
     <div class="col-2">
-      <span class="font-weight-bold">Número:</span> <%= !@actividad.articulo.issue.blank? ? @actividad.articulo.issue : 'N/A'  %>
+       <div class="d-flex justify-content-center"><span class="font-weight-bold">Número:</span></div>
+       <div class="d-flex justify-content-center"><%= !@actividad.articulo.issue.blank? ? @actividad.articulo.issue : 'N/A'  %></div>
     </div>
-    <div class="col-3">
-      <span class="font-weight-bold">Pg inicial:</span> <%= !@actividad.articulo.pgini.blank? ? @actividad.articulo.pgini : 'N/A'  %>
+    <div class="col-2">
+      <div class="d-flex justify-content-center"><span class="font-weight-bold">Pg inicial:</span></div>
+      <div class="d-flex justify-content-center"><%= !@actividad.articulo.pgini.blank? ? @actividad.articulo.pgini : 'N/A'  %></div>
     </div>
-    <div class="col-3">
-     <span class="font-weight-bold"> Pg final:</span> <%= !@actividad.articulo.pgfin.blank? ? @actividad.articulo.pgfin : 'N/A'  %>
+    <div class="col-2">
+     <div class="d-flex justify-content-center"><span class="font-weight-bold"> Pg final:</span></div>
+     <div class="d-flex justify-content-center"><%= !@actividad.articulo.pgfin.blank? ? @actividad.articulo.pgfin : 'N/A'  %></div>
+    </div>
+    <div class="col-2">
+      <div class="d-flex justify-content-center"><span class="font-weight-bold"> Num. electrónico:</span></div>
+      <div class="d-flex justify-content-center"><%= !@actividad.articulo.eidentificador.blank? ? @actividad.articulo.eidentificador : 'N/A'  %></div>
     </div>
     
 </div>

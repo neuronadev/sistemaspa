@@ -1,2 +1,4 @@
-$("#doc<%= @iddoc %>").remove()
+var el = document.getElementById("doc<%= @iddoc %>")
+el.innerHTML=''
 alert("Documento eliminado");
+

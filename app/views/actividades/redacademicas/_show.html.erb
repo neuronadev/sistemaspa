@@ -12,8 +12,8 @@
 <td colspan="2">
   <div class="card" style="background-color:#fbfbfb">
     <div class="card-body"> 
-        <div class="d-flex">
-             <div class=""><span class="font-weight-bold"> Autores:</span> <%= citaConIdentificacion(@actividad.id).html_safe %></div>
+        <div class="d-flex justify-content-between">
+             <div class=""><span class="font-weight-bold">Autores:</span> <%= citaConIdentificacion(@actividad.id).html_safe %></div>
              <div class="ml-auto">
                       <%= link_to "#", data:{action:'click->validar#seccVal', 'validar-row-param':@div_target}, title:'Cerrar vista' do %>
                             <i class="fas fa-times fa-1x"></i>

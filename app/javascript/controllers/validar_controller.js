@@ -41,7 +41,8 @@ export default class extends Controller {
                 .then ( html => { 
                     tabletr.innerHTML = html 
                     element_div.style.display = 'none' 
-                    } )
+                    tabletr.classList.remove("text-muted") 
+                })
         }            
     }
 
