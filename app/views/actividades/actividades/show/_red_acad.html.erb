@@ -1,0 +1,12 @@
+<div class="row mt-4">  
+     <div class="mb-3 col-md-5">
+          <%
+            if  !actividad.asignared.nil?
+                 red = Red.find(actividad.asignared) 
+          %>
+             <strong> <%=  red.nomred %></strong>
+          <% else %>    
+              <strong> <I>No se asignó ninguna red.</I></strong>
+          <% end %>
+     </div>     
+</div>     

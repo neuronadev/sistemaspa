@@ -3,10 +3,13 @@
             <%= render "form_inputs_com", form:form %>
 
             <div class="row">
-                <div class="mb-3 col-md-9">
+                <div class="mb-3 col-md-12">
                     <%= form.label :titulo, "Título:", class:"form-label" %>
                     <%= form.text_field :titulo, class:"form-control" %>
                 </div>  
+            </div>   
+            
+            <div class="row">
                 <div class="mb-3 col-md-3">
                     <%= form.label :fechapub, "Fecha de publicación:", class:"form-label" %>
                     <%= form.date_field :fechapub, class:"form-control" %>
