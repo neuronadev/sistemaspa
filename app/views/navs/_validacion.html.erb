@@ -1,87 +1,23 @@
-<ul class="navList">
-    <li class="navList__heading">
-            <%= link_to validaindex_path(:tipo=>'A'), data: {turbolinks:false} do %>
-               <i class="fas fa-users text-white"></i><span class="text-white"> Inicio </span>
-            <% end %>  
-            
-    </li>
+<div class="w-75">
+    <div class="col ms-5"> 
+              <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;"></div>
+              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
+                          <%= link_to validaindex_path(:tipo=>'A'), style:'text-decoration: none;' do %>
+                              <i class="fa-solid fa-house-chimney-user"></i> Inicio
+                          <% end %>   
+              </div>
+              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
+                          <%= link_to validaindex_path(:tipo=>'I'), style:'text-decoration: none;' do %>
+                              <i class="fas fa-address-book"></i> Investigadores
+                          <% end %>   
+              </div>
 
-    
 
-    <% if current_usuario.evaluador == 'A' %>
-        <li class="navList__heading">Listar todo</li> 
-        <li class="subList__item">
-                <%= link_to validaindex_path(:tipo=>'I'), class:"text-white" do %>
-                        <i class="fas fa-address-book"></i> Investigadores
-                <% end %> 
-        </li>
-        <li class="subList__item">
-                <%= link_to validaindex_path(:tipo=>'T'), class:"text-white" do %>
-                         <i class="fas fa-users-cog"></i> Técnicos
-                <% end %> 
-        </li>
-         <li class="subList__item">
-                <%= link_to tevaluacion_path, class:"text-white" do %>
-                        <i class="fas fa-book-open"></i> Evaluaciones
-                <% end %> 
-         </li>
-         
-         <li class="navList__heading">Categorias</li> 
-         <li class="subList__item">
-            <%= link_to validaindex_path(:tipo=>'E'), data: {turbolinks:false} do %>
-               <i class="fas fa-caret-right text-white"></i><span class="text-white"> Tesis externas </span>
-            <% end %>
-         </li>
-         <li class="subList__item">
-            <%= link_to validaindex_path(:tipo=>'V'), data: {turbolinks:false} do %>
-               <i class="fas fa-caret-right text-white"></i><span class="text-white"> Sin validar (Invest.) </span>
-            <% end %>
-         </li>
-         <!--
-         <li class="subList__item">
-            <%= link_to validaindex_path(:tipo=>'P'), data: {turbolinks:false} do %>
-               <i class="fas fa-caret-right text-white"></i><span class="text-white"> Publicaciones </span>
-            <% end %>
-         </li>
-         -->
-         <!--
-         <li class="subList__item">
-            <%= link_to validaindex_path(:tipo=>'AG'), class:"text-white" do %>
-               <i class="fas fa-caret-right text-white"></i><span class="text-white"> Agradecimientos-Tesis </span>
-            <% end %>
-         </li>
-         -->
-         <li class="subList__item">
-            <%= link_to validaindex_path(:tipo=>'TS'), class:"text-white" do %>
-               <i class="fas fa-caret-right text-white"></i><span class="text-white"> Sin validar (Tec.) </span>
-            <% end %>
-         </li>
-         <li class="subList__item">
-            <%= link_to validaindex_path(:tipo=>'ODV'), class:"text-white" do %>
-               <i class="fas fa-caret-right text-white"></i><span class="text-white"> Otras activ. div. (Tec.) </span>
-            <% end %>
-         </li>
-          <li class="subList__item">
-            <%= link_to validaindex_path(:tipo=>'PSEI'), class:"text-white" do %>
-               <i class="fas fa-caret-right text-white"></i><span class="text-white">Asignatura en Posgrado Externo (Inv.) </span>
-            <% end %>
-         </li>
-         <li class="subList__item">
-            <%= link_to validaindex_path(:tipo=>'PSET'), class:"text-white" do %>
-               <i class="fas fa-caret-right text-white"></i><span class="text-white"> Asignatura en Posgrado Externo (Tec.) </span>
-            <% end %>
-         </li>
-         <!--
-         <li class="subList__item">
-            <%= link_to validaindex_path(:tipo=>'DEI'), class:"text-white" do %>
-               <i class="fas fa-caret-right text-white"></i><span class="text-white"> Divulgación-Exposición (Invest.) </span>
-            <% end %>
-         </li>
-         <li class="subList__item">
-            <%= link_to validaindex_path(:tipo=>'DET'), class:"text-white" do %>
-               <i class="fas fa-caret-right text-white"></i><span class="text-white"> Divulgación-Exposición (Tec.) </span>
-            <% end %>
-         </li> -->
-    <% end %>
-</ul>   
+              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
+                          <%= link_to validaindex_path(:tipo=>'T'), style:'text-decoration: none;' do %>
+                               <i class="fas fa-users-cog"></i> Técnicos
+                          <% end %>   
+              </div>
 
+     </div>         
+</div>     

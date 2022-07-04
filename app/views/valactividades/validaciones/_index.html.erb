@@ -5,16 +5,18 @@
                         <div class="card-body">  
                                 <div class="row ">
                                 
-                                        <div id="datainvest" class="<%= current_usuario.evaluador == 'A' ? 'col-6' : 'col-12' %> border-left border-top border-right border-bottom" style="overflow: scroll; height:600px;">
+                                        <div id="datainvest" class="col-12 border-left border-top border-right border-bottom" style="overflow: scroll; height:600px;">
                                                 <div class="d-flex justify-content-center font-weight-bold">Investigadores</div>        
                                                 <%= render "list_invest" %>
                                         </div>  
+                                       <!-- 
                                         <% if current_usuario.evaluador == 'A' %>  
                                                 <div class="col-5 border-left border-top border-right border-bottom  ml-md-5" style="overflow: scroll; height:600px;">
                                                         <div class="d-flex justify-content-center font-weight-bold">Técnicos</div>
                                                         <%= render "list_tecnicos" %> 
                                                 </div>
                                         <% end %> 
+                                       --> 
                                 </div>
                         </div>
                 </div>
@@ -50,14 +52,14 @@
 <% end %> 
 
 <% if @tipo == 'I' %>
-        <h5> Producción Académica de Investigadores 2021</h5>
+        <h5> Producción Académica de Investigadores 2022</h5>
         <div data-controller = "valproducto">     
             <%= render "list_todo" %>
         </div> 
 <% end %>  
 
 <% if @tipo == 'E' %>
-        <h5> Producción Académica - Tesis Externas 2021</h5>
+        <h5> Producción Académica - Tesis Externas 2022</h5>
         <div data-controller = "valproducto">     
             <%= render "list_todo" %>
         </div> 

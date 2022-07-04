@@ -14,24 +14,24 @@
   </head>
 
   <body class="bg-light">
-    <div class="grid">
-         <header class="header"></header>
-        <aside class="sidenav position-fixed">
+  <div class="row">
+         <%= render "layouts/header" %>  
+  </div>       
+    <div class="row">
+         <div class="col-2">
             
-           <div class="w-50 mx-auto mb-md-3">
-              <%= image_pack_tag 'logo100_White.png', class:"card-img-top img-fluid" %>
-           </div> 
-           <div class="row row--align-v-center row--align-h-center">
-                        <%= render "navs/validacion" %>
-           </div>
-        </aside>
+           
+            <div class="row row--align-v-center row--align-h-center">
+                          <%= render "navs/validacion" %>
+            </div>
+         </div>
 
-        <main class="main">   
+        <div class="col">   
                 
                 <div class="container-fluid">
                     <%= yield %>
                 </div>    
-        </main>
+        </div>
     </div> 
 
   </body>

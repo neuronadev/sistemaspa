@@ -1,7 +1,7 @@
  <div class="d-flex justify-content-center">
       <% if a.estado == 'C' %> 
                   <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                        <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+                        <span class="badge bg-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
                   <% end %> 
       <% end %>
       <% if a.estado == 'S' %> 
@@ -12,7 +12,7 @@
 
       <% if ['A','U'].include? a.estado %>
             <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                        <span class="badge badge-info font-weight-bold"> Ver producto </span>
+                        <span class="badge bg-info font-weight-bold"> Ver producto </span>
             <% end %>
       <% end %>
 
@@ -28,7 +28,7 @@
                   <% if a.estado == 'G' %>
                         <small>
                         <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                              <span class="badge badge-warning"><i class="fas fa-user-edit"></i>Enviado a corrección</span>
+                              <span class="badge bg-warning"><i class="fas fa-user-edit"></i>Enviado a corrección</span>
                         <% end %> 
                         </small>
                   <% end %>
@@ -54,12 +54,12 @@
             <% if etapa_val.etapa == 'CR' %>
                    <% if a.estado == 'G' %>
                               <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                                      <span class="badge badge-info font-weight-bold"> Ver producto </span>
+                                      <span class="badge bg-info font-weight-bold"> Ver producto </span>
                               <% end %>
                    <% end %>
                    <% if a.estado == 'D' %>
                               <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                                    <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+                                    <span class="badge bg-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
                               <% end %>
                    <% end %>            
             <% end %>
