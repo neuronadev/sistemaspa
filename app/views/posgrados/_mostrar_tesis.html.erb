@@ -1,7 +1,7 @@
 
-<div class="row mb-md-8">
+<div class="row mb-md-8 p-2">
     <div class="col-md-2">
-        <%= link_to posgrados_path, data:{turbolinks:false} do %>
+        <%= link_to posgrados_path(:p=>@curso.periodo), data:{turbolinks:false} do %>
             <i class="fas fa-long-arrow-alt-left"></i> Regresar
         <% end%>
     </div>  
@@ -31,7 +31,7 @@
         </div> 
     <% end %>
 </div>
-<div class="card">
+<div class="card p-4">
    <div class="row pl-md-3 pt-md-3">
        <div class="col-md-12">
            <span class="text-secondary font-weight-bold">Título de la tesis:</span> <%= @curso.titulo %>

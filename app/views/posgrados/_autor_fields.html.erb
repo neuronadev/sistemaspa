@@ -1,5 +1,5 @@
 
-<div class='nested-fields'>
+<div class='nested-fields mt-1'>
     <div class="row"> 
         <div class="col-md-3">
             <%= form.hidden_field :_destroy %> 
@@ -12,7 +12,7 @@
             <%= form.text_field :horas, class: 'form-control form-control-sm', data:{ action:"keydown->utils#soloDigitos" } %>
         </div>
         <div class="col-md-1">
-            <%= form.check_box :coordinador, class: 'form-control form-control-sm' %>
+            <div class="d-flex justify-content-center"><%= form.check_box :coordinador, class: 'form-control form-control-sm form-check-input mt-0' %></div>
         </div>
 
         <div class="col-md-5">

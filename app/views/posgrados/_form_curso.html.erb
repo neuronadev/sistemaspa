@@ -1,17 +1,17 @@
-<div class="card pl-md-3 pt-md-3 pb-md-3" data-controller="utils">
+<div class="card pl-md-3 pt-md-3 pb-md-3 p-4" data-controller="utils">
   <%= form_with(model: actividad, local:false) do |form| %>
       <input type="hidden" name="captipo" value="<%= current_usuario.rol %>">
        <% if params[:action] == 'new' %> 
             <%= form.hidden_field :estado, value:'U' %>
             <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
             <%= form.hidden_field :fuente, value:current_usuario.rol %> 
-            <%= form.hidden_field :periodo, value:2021 %> 
+            <%= form.hidden_field :periodo, value:2022 %> 
             <%= form.hidden_field :producto_id, value: @producto.id %>
             <%= form.hidden_field :fecha1, value: Time.now.strftime("%F") %>
         <% end %> 
 
       <div class="row"> 
-          <div class="col-md-11">
+          <div class="col-md-12">
             <div class="form-group">
                 <%= form.label :titulo, 'Nombre del curso', class:'titulo text-muted' %>
                 <%= form.text_field :titulo, class:"form-control" %> 
@@ -20,7 +20,7 @@
       </div>
       <%= form.fields_for :curso do |curso| %>
             
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-md-4">
                 <div class="form-group">
                   <%=  curso.label :tipocurso_id, "Tipo impartición:", class:'tipocurso_id text-muted' %>
@@ -42,7 +42,7 @@
             </div>
             
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-md-2">
                 <div class="form-group">
                   <%=  curso.label :hcurso, "Total horas del curso:", class:'hcurso text-muted' %>
@@ -67,16 +67,16 @@
 
       <% end %>
 
-      <div class="row">
+      <div class="row mt-4">
           <div class="col participantes text-secondary"><h5>Participantes</h5></div>
           
       </div>
  
       <div class="row mt-md-2">
-         <div class="col-md-3 text-muted">Nombre</div>
-         <div class="col-md-2 text-muted">Horas Impartidas</div>
-         <div class="col-md-1 text-muted">Coordinador</div>
-         <div class="col-4 text-muted">Comprobante</div>
+         <div class="col-md-3 text-muted"> <div class="d-flex justify-content-center">Nombre</div> </div>
+         <div class="col-md-2 text-muted"> <div class="d-flex justify-content-center">Horas Impartidas</div></div>
+         <div class="col-md-1 text-muted"> <div class="d-flex justify-content-center">Coord.</div> </div>
+         <div class="col-4 text-muted"> <div class="d-flex justify-content-center">Comprobante</div> </div>
       </div>
 
       <div class="row border-bottom border-top">
@@ -100,8 +100,8 @@
       </div>
 
     <div class="row mt-md-5 mb-md-5">
-        <div class="col">
-            <%= form.submit "Guardar información", data: { confirm: '¿Desea continuar?' }, class:"btn btn-success" %>
+        <div class="col-12">
+            <div class="d-flex justify-content-center"><%= form.submit "Guardar información", data: { confirm: '¿Desea continuar?' }, class:"btn btn-success" %></div>
         </div>   
     </div>   
 

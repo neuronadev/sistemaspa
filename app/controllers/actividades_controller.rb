@@ -89,7 +89,7 @@ class ActividadesController < ApplicationController
                   if @captipo == 'V'
                         redirect_to divulgaciones_path    
                   elsif @captipo == 'P'     
-                        redirect_to posgrados_path    
+                        redirect_to posgrado_path(@actividad.id)
                   else
                       redirect_to actividad_path(@actividad.id) 
                   end
@@ -97,14 +97,14 @@ class ActividadesController < ApplicationController
               end
           else
             #puts "AAAAAAAAAAAA:AAAAAAAAAAAAAAA" 
-            puts @actividad.errors.full_messages 
+            #puts @actividad.errors.full_messages 
             @actividad.errors.add(:partcomp, "Errores") 
           end  
       else
         #puts "BBBBBBBBBBBB:BBBBBBBBBBBBBB"  
         #puts @actividad.errors.full_messages 
       end
-      puts @actividad.errors.full_messages 
+      #puts @actividad.errors.full_messages 
   end
 
   def show
@@ -146,7 +146,7 @@ class ActividadesController < ApplicationController
               if @captipo == 'V'
                 redirect_to divulgaciones_path    
               elsif @captipo == 'P'     
-                    redirect_to posgrados_path    
+                    redirect_to posgrado_path(@actividad.id)
               else
                   redirect_to actividad_path(@actividad.id) 
               end
@@ -158,7 +158,7 @@ class ActividadesController < ApplicationController
          @actividad.errors.add(:partcomp, "Errores") 
       end       
     else
-      puts @actividad.errors.full_messages 
+      puts '' #@actividad.errors.full_messages 
     end
          
   end

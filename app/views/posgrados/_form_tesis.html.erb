@@ -1,24 +1,24 @@
-<div class="card pl-md-3 pt-md-3 pb-md-3">    
+<div class="card pl-md-3 pt-md-3 pb-md-3 p-4">    
     <%= form_with(model: actividad, local:false) do |form| %>
         <input type="hidden" name="captipo" value="<%= current_usuario.rol %>">
         <% if params[:action] == 'new' %> 
             <%= form.hidden_field :estado, value:'U' %>
             <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
             <%= form.hidden_field :fuente, value:current_usuario.rol %> 
-            <%= form.hidden_field :periodo, value:2021 %> 
+            <%= form.hidden_field :periodo, value:2022 %> 
             <%= form.hidden_field :producto_id, value: @producto.id %>
             <%= form.hidden_field :fecha1, value: Time.now.strftime("%F") %>
         <% end %> 
         <div class="row"> 
-            <div class="col-md-11">
-            <div class="form-group">
-                <%= form.label :titulo, 'Título de la tesis:', class:'titulo text-muted' %>
-                <%= form.text_field :titulo, class:"form-control" %> 
-            </div>   
+            <div class="col-md-12">
+                <div class="form-group">
+                    <%= form.label :titulo, 'Título de la tesis:', class:'titulo text-muted' %>
+                    <%= form.text_field :titulo, class:"form-control" %> 
+                </div>   
             </div>
         </div> 
         <%= form.fields_for :tesista do |tesis| %>
-            <div class="row">
+            <div class="row mt-2">
                     <div class="col-md-2">
                         <div class="form-group">
                             <%=  tesis.label :acta, "Número de Acta:", class:'acta text-muted' %>
@@ -31,7 +31,7 @@
                             <%=  tesis.select :nivelestudio_id, Nivelestudio.order(:nomnivel).all.pluck(:nomnivel,:id), { :include_blank=>'- Seleccione una opción -'},{class:"form-control"} %>
                         </div>   
                     </div> 
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <%=  tesis.label :fgrado, "Fecha obtención de grado:", class:'fgrado text-muted' %>
                             <%=  tesis.date_field :fgrado, class:"form-control" %>
@@ -48,9 +48,9 @@
 
         <% end %>
        
-        <div class="row">
+        <div class="row mt-2">
                 <div class="col-md-4">
-                    <span class="text-muted">Acata de exámen</span>
+                    <span class="text-muted">Acta de exámen</span>
                   
                         <% if actividad.tesisdoc.attached? %>
                             
@@ -96,8 +96,8 @@
         </div>
 
         <div class="row mt-md-2">
-            <div class="col-md-3">Nombre</div>
-            <div class="col-md-2">En calidad de</div>
+            <div class="col-md-3"><div class="d-flex justify-content-center">Nombre</div></div>
+            <div class="col-md-2"><div class="d-flex justify-content-center">En calidad de</div></div>
         </div> 
 
         <div class="row border-bottom border-top">
@@ -121,8 +121,8 @@
         </div>
 
         <div class="row mt-md-5 mb-md-5">
-        <div class="col">
-            <%= form.submit "Guardar información", data: { confirm: '¿Desea continuar?' }, class:"btn btn-success" %>
+        <div class="col-12">
+            <div class="d-flex justify-content-center"> <%= form.submit "Guardar información", data: { confirm: '¿Desea continuar?' }, class:"btn btn-success" %> </div>
         </div>   
         </div>   
 
