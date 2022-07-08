@@ -5,7 +5,7 @@
             <i class="fas fa-long-arrow-alt-left"></i> Regresar
         <% end%>
     </div>  
-    <% if current_usuario.persona_id != 105 %>
+    <% if current_usuario.persona_id != 66 %>
         <div class="col-md-4">
               <% if @curso.estado == 'U' %>
                     <%= link_to edit_posgrado_path(@curso.id), data:{turbolinks:false} do %>
@@ -18,7 +18,7 @@
               <% end %>         
         </div>  
     <% end %>  
-    <% if current_usuario.persona_id == 105 %> 
+    <% if current_usuario.persona_id == 66 %> 
         <div class="col-md-3" id="actividad<%= @curso.id %>">
         <% if @curso.estado == 'U' %>
                 <%= link_to validar_path(@curso,'coor'), remote:true, data:{confirm:"¿Desea validar el registro? Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
