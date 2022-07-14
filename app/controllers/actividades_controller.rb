@@ -201,8 +201,12 @@ class ActividadesController < ApplicationController
   
     actividad.save  
     @act = actividad
-    redirect_to actividades_actividades_path
-    
+        
+    respond_to do |format|
+        format.html { redirect_to actividades_actividades_path }
+        format.js
+    end
+
     #redirect_to actividades_path
 
   end

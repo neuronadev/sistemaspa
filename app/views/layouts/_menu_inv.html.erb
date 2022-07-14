@@ -50,7 +50,16 @@
                               </div>
                       </div>
                  </div>
-             </div>    
+             </div>   
+             <% if current_usuario.persona_id == 66 %>
+                  <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Posgrado</div>
+                  <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
+                              <%= link_to posgrados_path, style:'text-decoration: none;', target:"_blank" do %>
+                                    <i class="fa-solid fa-magnifying-glass-arrow-right"></i> Validar
+                              <% end %>   
+                  </div>
+             <% end %>       
+
              <% if current_usuario.rol == 'C' %> 
                         <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Coor. de red</div>  
                         <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >

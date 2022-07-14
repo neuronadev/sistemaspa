@@ -26,17 +26,18 @@
                                 <% end %>
                             </li>
                             
-                         
-                            <li class="nav-item active border-2 border-end">
-                                  <%= link_to new_posgrado_path(:tipo=>'C'), class:"nav-link" do %>
-                                          <i class="fas fa-chalkboard-teacher"></i> Registrar Curso
-                                  <% end %>
-                            </li>
-                            <li class="nav-item active border-2 border-end">
-                                 <%= link_to new_posgrado_path(:tipo=>'T'), class:"nav-link" do %>
-                                          <i class="fas fa-file-invoice"></i> Registrar Tesis
-                                 <% end %>
-                            </li>
+                            <% if current_usuario.persona_id != 66 %>
+                                <li class="nav-item active border-2 border-end">
+                                    <%= link_to new_posgrado_path(:tipo=>'C'), class:"nav-link" do %>
+                                            <i class="fas fa-chalkboard-teacher"></i> Registrar Curso
+                                    <% end %>
+                                </li>
+                                <li class="nav-item active border-2 border-end">
+                                    <%= link_to new_posgrado_path(:tipo=>'T'), class:"nav-link" do %>
+                                            <i class="fas fa-file-invoice"></i> Registrar Tesis
+                                    <% end %>
+                                </li>
+                            <% end  %>
                             <li class="nav-item dropdown border-2 border-end">
                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                    <i class="fa-solid fa-clock-rotate-left"></i> Históricos
