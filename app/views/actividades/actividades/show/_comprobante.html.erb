@@ -1,80 +1,12 @@
 <div class="row">
-    <div class="mb-3 col-md-10">
-       <h6>Comprobante</h6>  
-    <% if [22,39,82,83].include? actividad.producto_id %>
-        <% if [22,39].include? actividad.producto_id %>
-                <% if actividad.enlacedoc.attached? && actividad.fuente == 'V' %>
-                    <div class="d-flex ">
-                        <%= link_to rails_blob_path(actividad.enlacedoc, disposition: 'inline'), { target: '_blank' } do %>
-                                <i class="fas fa-file-pdf"></i> <%= actividad.enlacedoc.filename %> 
-                        <% end %>
-                    </div>  
-                <% else %>
-                  <div class="d-flex ">
-                     <% actividad.documentos.each do |d|%>
-                          <div id="doc<%= d.id %>" class="ml-md-3">
-                              <%= link_to d.filename, rails_blob_path(d, disposition: "inline"), { target: '_blank' } %>
-                          </div>
-                     <% end %>   
-                   </div>  
-                <% end %>      
-        <% end %>
-        <% if actividad.producto_id == 82 
-            autor = Autor.where(actividad_id:actividad.id,persona_id:current_usuario.persona_id).first
-        %>
-            <% if autor.posgradoc.attached? %> 
-                <div class="d-flex">
-                        <%= link_to rails_blob_path(autor.posgradoc, disposition: 'inline'), { target: '_blank' } do %>
-                                <div><i class="fas fa-file-pdf"></i> <%= autor.posgradoc.filename %></div>
-                        <% end  %>
-                </div>   
-            <% end %>    
-        <% end %>
-        <% if actividad.producto_id == 83 %>
-             <% if actividad.periodo == 2021 %>
-                    <div class="d-flex flex-column">
-                            <%= link_to rails_blob_path(actividad.tesisdoc, disposition: 'inline'), { target: '_blank' } do %>
-                                    <div><i class="fas fa-file-pdf"></i> <%= actividad.tesisdoc.filename %></div>
-                            <% end  %>
-                            <%= link_to rails_blob_path(actividad.tesisportada, disposition: 'inline'), { target: '_blank' } do %>
-                                    <div><i class="fas fa-file-pdf"></i> <%= actividad.tesisdoc.filename %> </div>
-                            <% end  %>
-                            <%= link_to rails_blob_path(actividad.tesiscarta, disposition: 'inline'), { target: '_blank' } do %>
-                                    <div><i class="fas fa-file-pdf"></i> <%= actividad.tesisdoc.filename %> </div>
-                            <% end  %>
-                    </div> 
-              <% else %>
-                     <div class="d-flex flex-column">
-                        <% if actividad.documentos.attached? %> 
-                                <% actividad.documentos.each do |d|%>
-                                    <div id="doc<%= d.id %>" class="ml-md-3">
-                                    <%= link_to d.filename, rails_blob_path(d, disposition: "inline"), { target: '_blank' } %>
-                                    </div>
-                                <% end %>    
-                        <% end %>   
-                     </div>    
-              <% end %>      
-        <% end %> 
-
-    <% else %>
-        
-                    <% if actividad.documentos.attached? %> 
+     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                 Comprobante:
+     </div>
+     <div class="col d-flex justify-content-start">
+               <% if actividad.documentos.attached? %> 
                         <% actividad.documentos.each do |d|%>
-                            <div id="doc<%= d.id %>" class="ml-md-3">
                                 <%= link_to d.filename, rails_blob_path(d, disposition: "inline"), { target: '_blank' } %>
-                            </div>
-                        <% end %>    
-                    <% else %> 
-                       
-                        <div class="col">
-                         <!--
-                            <%= link_to updoc_actividades_actividad_path(actividad.id) do %>    
-                                <i class="fas fa-upload text-danger"></i> <small class="text-danger">Comprobante</small>
-                            <% end %>
-                         -->   
-                         <small class="text-danger">Sin comprobante</small>
-                        </div>         
-                    <% end %>  
-    <% end %>
-   <div>
-</div>    
+                        <% end %>   
+               <% end %>         
+     </div>
+</div> 

@@ -1,40 +1,67 @@
 <%= form.fields_for :articulo do |artc| %>
-
-   <div class="row">
-        <%= render "medio_revista", artc:artc, tipo:'C' %>
-        <div class="mb-3 col-md-1">
-               <%= artc.label :volumen, "Volumen:", class:"form-label" %>
-               <%= artc.text_field :volumen, class:"form-control" %>
-         </div>  
-         <div class="mb-3 col-md-1">
-               <%= artc.label :issue, "Issue:", class:"form-label" %>
-               <%= artc.text_field :issue, class:"form-control" %>
-         </div> 
-         <div class="mb-3 col-md-2">
-               <%= artc.label :pgini, "Página inicial:", class:"form-label" %>
-               <%= artc.text_field :pgini, class:"form-control", value:'0' %>
-         </div>  
-         <div class="mb-3 col-md-2">
-               <%= artc.label :pgfin, "Página final:", class:"form-label" %>
-               <%= artc.text_field :pgfin, class:"form-control", value:'0' %>
-         </div> 
-          <div class="mb-3 col-md-2">
-               <%= artc.label :eidentificador, "Número electrónico:", class:"form-label" %>
-               <%= artc.text_field :eidentificador, class:"form-control" %>
-         </div>
-         <div class="mb-3 col">
-               <%= artc.label :doi, "DOI:", class:"form-label" %>
-               <%= artc.text_field :doi, class:"form-control" %>
-         </div>  
-         
+   <div class="row  mb-1">
+        <div class="col-md-2 d-flex justify-content-end"> 
+              <%= form.label :fechapub, "Fecha de publicación:", class:"form-label fw-bold text-secondary" %>
+        </div>
+        <div class="col-md-2 d-flex justify-content-start">
+              <%= form.date_field :fechapub, class:"form-control" %>
+        </div>
    </div> 
-   <div class="row ">  
-         <div class="mb-3 col">
-               <%= artc.label :abstract, "Abstract:", class:"form-label" %>
-               <%= artc.text_area :abstract, class:"form-control" %>
-         </div>    
-    </div>
+   <%= render "medio_revista", artc:artc, tipo:'C' %>
+   <div class="row  mb-1">
+        <div class="col-md-2 d-flex justify-content-end"> 
+              <%= artc.label :volumen, "Volumen:", class:"form-label fw-bold text-secondary" %>
+        </div>
+        <div class="col-md-2 d-flex justify-content-start">
+              <%= artc.text_field :volumen, class:"form-control" %>
+        </div>
+   </div> 
+   <div class="row  mb-1">
+        <div class="col-md-2 d-flex justify-content-end"> 
+              <%= artc.label :issue, "Issue:", class:"form-label fw-bold text-secondary" %>
+        </div>
+        <div class="col-md-2 d-flex justify-content-start">
+              <%= artc.text_field :issue, class:"form-control" %>
+        </div>
+   </div> 
+   <div class="row  mb-1">
+        <div class="col-md-2 d-flex justify-content-end"> 
+              <%= artc.label :pgini, "Páginas:", class:"form-label fw-bold text-secondary" %>
+        </div>
+        <div class="col-md-6 d-flex justify-content-start">
+             <div class="row row-cols-auto"> 
+                  <div class="col-md-3"><%= artc.text_field :pgini, class:"form-control", placeholder:"Pg. Inicial" %></div>
+                  <div class="col">-</div>
+                  <div class="col-md-3"><%= artc.text_field :pgfin, class:"form-control", placeholder:"Pg. Final" %></div>
+             </div>     
+        </div>      
+   </div> 
 
-   
+   <div class="row  mb-1">
+        <div class="col-md-2 d-flex justify-content-end"> 
+              <%= artc.label :eidentificador, "Núm. electrónico:", class:"form-label fw-bold text-secondary" %>
+        </div>
+        <div class="col-md-3 d-flex justify-content-start">
+              <%=  artc.text_field :eidentificador, class:"form-control" %>
+        </div>
+   </div> 
+
+   <div class="row  mb-1">
+        <div class="col-md-2 d-flex justify-content-end"> 
+              <%= artc.label :doi, "DOI:", class:"form-label fw-bold text-secondary" %>
+        </div>
+        <div class="col-md-6 d-flex justify-content-start">
+              <%= artc.text_field :doi, class:"form-control" %>
+        </div>
+   </div> 
+
+   <div class="row  mb-1">
+        <div class="col-md-2 d-flex justify-content-end"> 
+              <%= artc.label :abstract, "Abstract:", class:"form-label fw-bold text-secondary" %>
+        </div>
+        <div class="col-md-8 d-flex justify-content-start">
+              <%= artc.text_area :abstract, class:"form-control" %>
+        </div>
+   </div> 
 
 <% end %>

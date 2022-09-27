@@ -1,6 +1,11 @@
 class PersonasController < ApplicationController
   before_action :authenticate_usuario!
-  
+
+  def search
+    @query = params[:txt]
+    @data = Persona.search_personas(@query).where(estado:'A').order(:paterno)
+    render partial: "search"
+  end
  
   def index
     @personas = Persona.where("estado='A'").order(:paterno)

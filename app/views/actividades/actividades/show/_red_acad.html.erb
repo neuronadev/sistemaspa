@@ -1,12 +1,12 @@
-<div class="row mt-4">  
-     <div class="mb-3 col-md-5">
-          <%
-            if  !actividad.asignared.nil?
+<div class="row">
+    <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+            Red Académica:
+    </div>
+    <div class="col d-flex justify-content-start">
+           <% if  !actividad.asignared.nil?
                  red = Red.find(actividad.asignared) 
-          %>
-             <strong> <%=  red.nomred %></strong>
-          <% else %>    
-              <strong> <I>No se asignó ninguna red.</I></strong>
-          <% end %>
-     </div>     
-</div>     
+            %>
+                <%=  red.nomred %>
+           <% end %>  
+    </div>
+</div>

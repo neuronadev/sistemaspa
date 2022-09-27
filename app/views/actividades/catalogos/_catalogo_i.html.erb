@@ -1,29 +1,41 @@
-<div class="row row-cols-1 row-cols-md-2 g-4">
-         <% Prodcategoria.where(estado:'A').where(id:[1,2,3,4,5,6,7]).order(:id).each do |c| %>
-             <div class="col">
-                  <div class="card">
-                     <div class="card-body">
-                        <strong><%= c.nomcategoria %></strong>
-                        <ul>
-                           <% Producto.where(prodcategoria_id:c.id,estado:['A','H']).order(:descripcion).each do |p| %>
-                              <% if [81,82,83,85].include? p.id %>
-                                    <% if current_usuario.rol == 'Y' %> 
-                                          <li class="mb-md-1"> <%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turbolinks:false} %></li>
-                                    <% else %>
-                                          <li class="mb-md-1 text-secondary"> <%= p.descripcion %></li>
-                                    <% end %> 
-                              <% else %>
-                                    <% if p.estado == 'A' %> 
-                                           <li class="mb-md-1"> <%= link_to p.descripcion, new_actividades_actividad_path(:item=>p.id), data:{turbolinks:false} %></li>
-                                    <% else %>     
-                                           <li class="mb-md-1 text-secondary"> <%=  p.descripcion %></li> 
-                                    <% end %>     
-                              
-                              <% end %>     
-                           <% end %>
-                        </ul>   
-                     </div>   
-                  </div>   
-             </div>     
-         <% end %> 
-</div> 
+
+<div class="eltab container" data-controller="cattab">
+    <div>
+       <h5>Catalogo de Productos Académicos</h5>
+       <p> Seleccione un producto de la lista </p>
+    </div> 
+    <div class="row headtab row-cols-5 border-bottom text-white">
+         <div id="1"  class="col headinicio headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
+               data-cattab-idx-param="1" 
+               data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
+             >
+               Generación de conocimiento
+         </div>
+         <div id="2" class="col headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
+               data-cattab-idx-param="2"
+               data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
+              >
+               Divulgación de la ciencia
+         </div>
+         <div id="3" class="col headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
+                style="text-align: center;"
+                data-cattab-idx-param="3"
+                data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
+              > Formación de recursos humanos
+         </div>
+         <div id="5" class="col headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
+              data-cattab-idx-param="4"
+              data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
+              > Obtención de recursos
+          </div>
+         <div id="6" class="col headitem p-2 d-flex bg-secondary justify-content-center" role="button" 
+              data-cattab-idx-param="5"
+              data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
+              > Vinculación
+         </div>
+    </div>
+
+     <div id="contcat" class="row cont">
+     </div>
+
+</div>

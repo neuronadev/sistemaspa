@@ -1,41 +1,67 @@
+
+
 <div class="row">
-            
-            <% if @actividad.articulo.present? %>
-                <div class="mb-3 col-md-6">
-                    <label class="font-weight-bold">Revista:</label>
-                    <div><%= @actividad.articulo.revista.nomrevista %></div>
-                </div>  
-            
-                <div class="mb-3 col-md-3">
-                    <label class="font-weight-bold">Volumen:</label>
-                    <div><%= @actividad.articulo.volumen %></div>
-                </div>  
-                <div class="mb-3 col-md-3">
-                    <label class="font-weight-bold">Número:</label>
-                    <div><%= @actividad.articulo.issue %></div>
-                </div>  
-                <div class="mb-3 col-md-3">
-                    <label class="font-weight-bold">Página inicial:</label>
-                    <div><%= @actividad.articulo.pgini %></div>
-                </div>  
-                <div class="mb-3 col-md-3">
-                    <label class="font-weight-bold">Página final:</label>
-                    <div><%= @actividad.articulo.pgfin %></div>
-                </div>  
-                 <div class="mb-3 col-md-2">
-                     <label class="font-weight-bold">Identificador:</label>
-                     <div><%= @actividad.articulo.eidentificador %></div>
-                    
-                </div>
-                <div class="mb-3 col-md-4">
-                    <label class="font-weight-bold">DOI:</label>
-                    <div><%= @actividad.articulo.doi %></div>
-                </div>  
-            <% end %>    
-    </div>
-    <div class="row">
-          <div class="mb-3 col-md-12">
-                <label class="font-weight-bold">Abstract:</label>
-                <div><%= @actividad.articulo.abstract %></div>
-           </div>  
-    </div>
+     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+           Revista:
+     </div>
+     <div class="col d-flex justify-content-start">
+          <%= @actividad.articulo.revista.nomrevista %>
+     </div>
+</div>
+
+<div class="row">
+     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+           Volumen:
+     </div>
+     <div class="col d-flex justify-content-start">
+          <%= @actividad.articulo.volumen %>
+     </div>
+</div>
+<div class="row">
+     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+           Issue:
+     </div>
+     <div class="col d-flex justify-content-start">
+          <%= @actividad.articulo.issue %>
+     </div>
+</div>
+<div class="row">
+     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+           Página Inicial:
+     </div>
+     <div class="col d-flex justify-content-start">
+           <%= @actividad.articulo.pgini %>
+     </div>
+</div>
+<div class="row">
+     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+           Página Final:
+     </div>
+     <div class="col d-flex justify-content-start">
+          <%= @actividad.articulo.pgfin %>
+     </div>
+</div>
+<div class="row">
+     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+           Número Electrónico:
+     </div>
+     <div class="col d-flex justify-content-start">
+          <%= @actividad.articulo.eidentificador %>
+     </div>
+</div>
+<div class="row">
+     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+           DOI:
+     </div>
+     <div class="col d-flex justify-content-start">
+          <%= @actividad.articulo.doi %>
+     </div>
+</div>
+<div class="row">
+     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+           Abstract:
+     </div>
+     <div class="col d-flex justify-content-start">
+          <%= @actividad.articulo.abstract %>
+     </div>
+</div>

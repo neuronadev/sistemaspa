@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_09_222724) do
+ActiveRecord::Schema.define(version: 2022_09_13_201812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "academicos", force: :cascade do |t|
     t.integer "noempleado"
@@ -223,6 +224,8 @@ ActiveRecord::Schema.define(version: 2022_06_09_222724) do
     t.boolean "coordinador"
     t.string "aplicar", limit: 1
     t.text "motivo"
+    t.string "autornom"
+    t.string "autorap"
     t.index ["actividad_id"], name: "index_autores_on_actividad_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
@@ -248,6 +251,8 @@ ActiveRecord::Schema.define(version: 2022_06_09_222724) do
     t.boolean "coordinador"
     t.string "aplicar", limit: 1
     t.text "motivo"
+    t.string "autornom"
+    t.string "autorap"
     t.index ["actividad_id"], name: "index_autores_on_actividad_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
@@ -746,6 +751,8 @@ ActiveRecord::Schema.define(version: 2022_06_09_222724) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "pathf"
+    t.string "concepto"
+    t.string "comprobante"
     t.index ["categoria_id"], name: "index_productos_on_categoria_id"
     t.index ["prodcategoria_id"], name: "index_productos_on_prodcategoria_id"
     t.index ["prodgrupo_id"], name: "index_productos_on_prodgrupo_id"
@@ -761,6 +768,8 @@ ActiveRecord::Schema.define(version: 2022_06_09_222724) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "pathf"
+    t.string "concepto"
+    t.string "comprobante"
     t.index ["categoria_id"], name: "index_productos_on_categoria_id"
     t.index ["prodcategoria_id"], name: "index_productos_on_prodcategoria_id"
     t.index ["prodgrupo_id"], name: "index_productos_on_prodgrupo_id"

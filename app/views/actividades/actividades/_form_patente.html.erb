@@ -6,35 +6,50 @@
     <% if @parts[1] == 'INT' %>
          <%= form.hidden_field :titulo, value:'Registro de protección Intelectual' %>
     <% end %>
-    <div class="row">
-         <%= form.fields_for :patente do |pt_form| %>
-               <div class="col-6">
-                  <div class="form-group">
-                        <%=  pt_form.label :tipopatente_id, "Tipo de patente:" %>
-                        <% if @parts[1] == 'IND' %>
-                          <%=  pt_form.select :tipopatente_id, Tipopatente.where("clave='IND'").all.pluck(:nomtipopatente,:id), { :include_blank=>'Seleccion el tipo de patente'},class:"form-control" %>
-                        <% end %>  
-                        <% if @producto.prodgrupo.clave == 'INT' %>
-                          <%=  pt_form.select :tipopatente_id, Tipopatente.where("clave='INT'").all.pluck(:nomtipopatente,:id), { :include_blank=>'Seleccion el tipo de patente'},class:"form-control" %>
-                        <% end %>  
-                  </div> 
-               </div>   
-         <% end %>   
-         <div class="mb-3 col-md-3">
-               <%= form.label :anio, "Año:", class:"form-label" %>
-               <%= form.text_field :anio, class:"form-control" %>
-         </div>  
-    </div>   
+    
+    <%= form.fields_for :patente do |pt_form| %>
+               <div class="row mb-1">
+                    <div class="col-md-2 d-flex justify-content-end"> 
+                             <%= pt_form.label :tipopatente_id, "Tipo de patente:", class:"form-label fw-bold text-secondary" %>
+                      </div>
+                      <div class="col-md-6 d-flex justify-content-start">
+                             <% if @parts[1] == 'IND' %>
+                                  <%=  pt_form.select :tipopatente_id, Tipopatente.where("clave='IND'").all.pluck(:nomtipopatente,:id), { :include_blank=>'Seleccion el tipo de patente'},class:"form-control" %>
+                             <% end %>  
+                             <% if @producto.prodgrupo.clave == 'INT' %>
+                                  <%=  pt_form.select :tipopatente_id, Tipopatente.where("clave='INT'").all.pluck(:nomtipopatente,:id), { :include_blank=>'Seleccion el tipo de patente'},class:"form-control" %>
+                              <% end %>  
+                      </div>
+              </div>
+    <% end %>   
+
+   <div class="row  mb-1">
+        <div class="col-md-2 d-flex justify-content-end"> 
+              <%= form.label :anio, "Año:", class:"form-label fw-bold text-secondary" %>
+        </div>
+        <div class="col-md-1 d-flex justify-content-start">
+              <%= form.text_field :anio, class:"form-control" %>
+        </div>
+   </div> 
 
     
     <%= render "doc_comprobante", form:form %>
-    <%= render "form_autores", form:form, swcorr:'N' %>
-    
     <%= render "red_acad", form:form  %>
-
-    <div class="row mt-md-3">
-        <div class="col">
-            <%= form.submit "Enviar información", class:'btn btn-primary' ,data: { confirm: 'La información será enviada para validación. ¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %>
-        </div> 
+    <div class="row">
+                <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                            Autores:
+                </div>
+                <div class="col d-flex justify-content-start">
+                      <%= render "form_autores", form:form, swcorr:'N' %>
+                </div>
     </div>
+
+    <div class="row mt-4">
+                <div class="col">
+                   <div class="d-flex justify-content-end">
+                     <%= form.submit "Enviar información", class:'btn btn-success' ,data: { confirm: '¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %>
+                   </div>
+                </div> 
+   </div>
+
 <% end %>

@@ -1,0 +1,44 @@
+<div class="itemrw mt-1">
+    <div class="row">
+            <%= form.hidden_field :_destroy %>  
+
+            <% if params[:action] == 'new' %> 
+                 <%= form.hidden_field :persona_id, class:'autoridp', value:211 %>
+            <% else %>     
+                 <%= form.hidden_field :persona_id, class:'autoridp' %>
+            <% end %>   
+            
+            <%= form.hidden_field :rol_id, value:1 %>
+
+            <div class="col-1 tipoautor d-flex justify-content-around align-items-center">
+                <div class="align-middle"><i class="fa-regular fa-user"></i></div>
+                <div class="align-middle cursor-pointer"><i class="fa-solid fa-eraser" data-action="click->autores#clearFields" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar campos de esta fila"></i> </div>
+            </div>
+
+            <div class="col-3">
+                <%= form.text_field :autorap, placeholder:'(apellidos)', autocomplete:'off', class:'autorap border-0 p-1 col-12 shadow-none bg-light rounded', 'data-action':'keyup->autores#search keypress->autores#kEnter'  %> 
+            </div>
+
+            <div class="col-3">
+                <%= form.text_field :autornom, placeholder:'(nombre)', autocomplete:'off', class:'autornom border-0 p-1 col-12 shadow-none bg-light rounded', 'data-action':'focus->autores#hiddenSearch keypress->autores#kEnter focusout->autores#tipoAutor' %>
+            </div>
+
+            <div id="controles" class="col-3 d-flex  align-items-center controles">
+               
+                     <div id="controla" class="d-flex col-2 justify-content-center controla"> <div class="align-middle"><i class="fa-solid fa-circle-minus text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar fila" data-action="click->autores#removeItem click->autores#validarControles" ></i></div></div>
+                     <div id="controlb" class="d-flex col-2 justify-content-center controlb"> <div class="align-middle"><i class="fa-solid fa-circle-plus text-success cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Agrear fila" data-action="click->autores#addItem click->autores#validarControles" ></i></div> </div>
+               
+            </div>
+
+    </div> <!-- -->
+    <div id="listasearch" class="listaper col-6 shadow-lg p-3 mb-5 bg-body rounded" style="position: absolute;z-index: 9; border: 1px solid #d3d3d3; display: none;"> 
+    </div> <!-- -->
+
+</div> <!-- -->
+
+
+<script>
+
+   
+
+</script>

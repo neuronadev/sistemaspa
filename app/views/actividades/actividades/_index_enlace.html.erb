@@ -1,23 +1,23 @@
-<table class="table table-sm " style="font-size:14px;">
+<table class="table table-sm ">
               <thead>
                   
                   <tr >
-                      <th scope="col" style="width: 5%"><div class="d-flex justify-content-center">Folio</div></th>
-                      <th scope="col" style="width: 20%"><div class="d-flex justify-content-center"> Producto</div></th>
+                      <th scope="col" style="width: 5%"><div class="d-flex justify-content-center text-secondary">Folio</div></th>
+                      <th scope="col" style="width: 20%"><div class="d-flex justify-content-center text-secondary"> Producto</div></th>
                       <th scope="col" style="width: 9%"></th>
-                      <th scope="col" style="width: 45%"><div class="d-flex justify-content-center"> Título</div></th>
+                      <th scope="col" style="width: 45%"><div class="d-flex justify-content-center text-secondary"> Título</div></th>
                       
-                      <th scope="col" style="width: 9%"><div class="d-flex justify-content-center"> Vo.Bo.</div></th>
+                      <th scope="col" style="width: 9%"><div class="d-flex justify-content-center text-secondary"> Vo.Bo.</div></th>
                        <% if current_usuario.rol=="T" %>
-                            <th scope="col" style="width: 5%"><div class="d-flex justify-content-center"> Comité</div></th>
+                            <th scope="col" style="width: 5%"><div class="d-flex justify-content-center text-secondary"> Comité</div></th>
                        <% else %>
-                            <th scope="col" style="width: 5%"><div class="d-flex justify-content-center"> Depto. Enlace</div></th>
+                            <th scope="col" style="width: 5%"><div class="d-flex justify-content-center text-secondary"> Depto. Enlace</div></th>
                        <% end %>
-                      <th scope="col" style="width: 6%"><div class="d-flex justify-content-center"> Sec. Acad</div></th>
+                      <th scope="col" style="width: 6%"><div class="d-flex justify-content-center text-secondary"> Sec. Acad</div></th>
                   </tr>
               </thead>
 
-              <tbody>
+              <tbody class="border-top-0">
                    <% if @enlace.any? %>
                         <% @enlace.each do |a|
                            row_show = 'S'

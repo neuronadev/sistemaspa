@@ -1,14 +1,19 @@
-
-    <div class="row">
-        <div class="mb-3 col-md-9">
-               <label class="font-weight-bold">Título:</label>
-               <div><%= @actividad.titulo %></div>
-         </div>  
-         <div class="mb-3 col-md-3">
-               <label class="font-weight-bold">Fecha de publicacion:</label>
-               <div><%= @actividad.fechapub %></div>
-         </div>  
-    </div>   
+                <div class="row">
+                      <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                           Título:
+                      </div>
+                      <div class="col d-flex justify-content-start">
+                           <%= @actividad.titulo %>
+                      </div>
+                </div>
+                <div class="row">
+                      <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                           Fecha de publicación:
+                      </div>
+                      <div class="col d-flex justify-content-start">
+                           <%= @actividad.fechapub %>
+                      </div>
+                </div>
   
     <%= render "actividades/actividades/show/form_art_c" if @parts[1] == 'C' %>
     <%= render "actividades/actividades/show/form_art_d" if @parts[1] == 'D' %>

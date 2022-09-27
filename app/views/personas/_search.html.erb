@@ -1,0 +1,24 @@
+<% if @data.any? %>
+      <div class="row">
+            <div class="col">
+                  <div class="d-flex justify-content-end me-2 mb-2">
+                        <i class="fa-solid fa-xmark cursor-pointer text-primary" data-action="click->autores#hiddenSearch" ></i>
+                  </div>
+            </div> 
+      </div>
+
+      <div class="row mb-2">
+            <div class="col text-secondary">
+                <i class="fa-solid fa-circle-info text-success"></i> Seleccione de la lista el nombre del Académico. Cerrar el cuadro de dialogo si va a ingresar un autor externo.
+            </div>
+      </div>      
+      
+      <div class="list-group mb-4" style="height: 200px; overflow: auto;">  
+            <% @data.each do |item| %>
+                  
+                  <div class="list-group-item list-group-item-action cursor-pointer" data-action="click->autores#selecItem" data-autores-idp-param = "<%= item.id %>" data-autores-nom-param = "<%= item.nombre %>" data-autores-apell-param = "<%= ((item.paterno||'') + ' ' + (item.materno||'')).strip %>" > 
+                     <i class="fa-regular fa-user text-primary"> </i> <%= (item.paterno||'') + ' ' + (item.materno||'') + ' ' + (item.nombre||'') %>
+                  </div>
+            <% end %>
+      </div>       
+<% end %>

@@ -1,52 +1,67 @@
 <div data-controller="modal modalcap">    
 <%= form_with model:[:actividades, actividad] do |form| %>
-    <%= render "form_inputs_com", form:form %>
-            <div class="row">
-                <div class="mb-3 col-md-9">
-                    <%= form.label :titulo, "Título del capítulo:", class:"form-label" %>
-                    <%= form.text_field :titulo, class:"form-control" %>
-                </div>  
-                <div class="mb-3 col-md-3">
-                    <%= form.label :anio, "Año de publicación:" %>
-                    <%= form.text_field :anio, class:"form-control" %>
-                </div>  
-            </div>   
-            <div class="row">
-                <%= form.fields_for :capitulo do |cap_form| %>
-                        
-                        <div class="mb-3 col-md-2">
-                            <%= cap_form.label :pgini, "Página inicial:", class:"form-label" %>
-                            <%= cap_form.text_field :pgini, class:"form-control"%>
-                        </div>    
-                        <div class="mb-3 col-md-2">
-                            <%= cap_form.label :pgfin, "Página final:", class:"form-label" %>
-                            <%= cap_form.text_field :pgfin, class:"form-control" %>
-                        </div> 
-                        <div class="mb-3 col-md-2">
-                            <%=  cap_form.label :idioma_id, "Idioma:", class:"form-label" %>
-                            <%=  cap_form.select :idioma_id, Idioma.all.pluck(:nomidioma,:id), { :include_blank=>'Idioma'},class:"form-control" %>
-                        </div> 
-                        <div class="mb-3 col-md-6">
-                            <%=  cap_form.label :libro_id, "Libro:", class:"form-label" %>
-                            <%=  cap_form.select :libro_id, Libro.all.order(:nomlibro).collect { |l| [l.nomlibro+' (ISBN: '+(l.isbn||'') + ')',l.id] }, { :include_blank=>'Buscar Libro...'}, {class:"form-control", data:{controller:'ts--selectrev'}}%>
-                            <div>
-                                <div class="col" data-action="click->modalcap#launchModal" data-modalcap-src-param="lib" data-modalcap-prod-param="<%= @producto.id %>" >
-                                      <div class="text-primary" style="font-size:14px; cursor:pointer"><i class="fa-solid fa-plus"></i> Registrar nuevo libro...</div>
+      <%= render "form_inputs_com", form:form %>
+
+       <div class="row mb-1">
+            <div class="col-md-2 d-flex justify-content-end"> 
+                 <%= form.label :titulo, "Título:", class:"form-label fw-bold text-secondary" %>
+            </div>
+            <div class="col d-flex justify-content-start">
+                 <%= form.text_field :titulo, class:"form-control" %>
+            </div>
+       </div>
+       <div class="row mb-1">
+            <div class="col-md-2 d-flex justify-content-end"> 
+                 <%= form.label :anio, "Año de publicación:", class:"form-label fw-bold text-secondary" %>
+            </div>
+            <div class="col-md-1 d-flex justify-content-start">
+                 <%= form.text_field :anio, class:"form-control" %>
+            </div>
+       </div>
+
+        <%= form.fields_for :capitulo do |cap_form| %>
+                        <div class="row  mb-1">
+                                <div class="col-md-2 d-flex justify-content-end"> 
+                                    <%= cap_form.label :pgini, "Páginas:", class:"form-label fw-bold text-secondary" %>
                                 </div>
-                            </div> 
+                                <div class="col-md-6 d-flex justify-content-start">
+                                    <div class="row row-cols-auto"> 
+                                        <div class="col-md-3"><%= cap_form.text_field :pgini, class:"form-control", placeholder:"Pg. Inicial" %></div>
+                                        <div class="col">-</div>
+                                        <div class="col-md-3"><%= cap_form.text_field :pgfin, class:"form-control", placeholder:"Pg. Final" %></div>
+                                    </div>     
+                                </div>      
+                        </div>   
+                        <div class="row mb-1">
+                                <div class="col-md-2 d-flex justify-content-end"> 
+                                      <%= cap_form.label :idioma_id, "Idioma:", class:"form-label fw-bold text-secondary" %>
+                                </div>
+                                <div class="col-md-3 d-flex justify-content-start">
+                                      <%=  cap_form.select :idioma_id, Idioma.all.pluck(:nomidioma,:id), { :include_blank=>'Idioma'},class:"form-control" %>
+                                </div>
                         </div>
                         
-                <% end %>       
-            </div>
+                        <%= render "medio_libro", cap_form:cap_form %>
+                        
+        <% end %>       
 
             <%= render "doc_comprobante", form:form %>
-            <%= render "form_autores", form:form, swcorr:'S' %>
-            
             <%= render "red_acad", form:form  %>
 
-            <div class="row mt-md-3">
+            <div class="row">
+                <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                            Autores:
+                </div>
+                <div class="col d-flex justify-content-start">
+                      <%= render "form_autores", form:form, swcorr:'N' %>
+                </div>
+            </div>
+
+            <div class="row mt-4">
                 <div class="col">
-                    <%= form.submit "Enviar información", class:'btn btn-primary' ,data: { confirm: 'La información será enviada para validación. ¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %>
+                   <div class="d-flex justify-content-end">
+                     <%= form.submit "Enviar información", class:'btn btn-success' ,data: { confirm: '¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %>
+                   </div>
                 </div> 
             </div>
 <% end %>

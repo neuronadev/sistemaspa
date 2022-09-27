@@ -1,12 +1,3 @@
-<div class="row p-2">
-    <div class="col">
-       <div class="fw-bold">Producción 2022</div>
-       <div>Seleccione un producto del catalogo.</div>
-    </div> 
-</div>    
-   
    <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' || current_usuario.rol == 'Y' %>
               <%= render "catalogo_i" %>  
    <% end %>
-
-</div>

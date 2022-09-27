@@ -1,4 +1,5 @@
 class Persona < ApplicationRecord
+  include PgSearch::Model
   include Hashid::Rails
   before_save :default_values
 
@@ -25,5 +26,8 @@ class Persona < ApplicationRecord
       self.orden = 2
   end  
 
-
+  pg_search_scope :search_personas,
+                  against: %i[paterno materno nombre],
+                  ignoring: :accents,
+                  using: { tsearch: { dictionary: 'spanish' } }
 end

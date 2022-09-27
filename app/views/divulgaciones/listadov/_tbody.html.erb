@@ -9,6 +9,7 @@
            
       </td>
       <td><%= cita(actividad.id).html_safe %></td>
+      <td> <%= actividad.periodo %> </td>
       <% if current_usuario.evaluador == 'V' %>  
             <td id="actividad<%= actividad.id %>">
                           <% if actividad.estado == 'U' %>

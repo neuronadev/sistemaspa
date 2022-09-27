@@ -1,4 +1,4 @@
-
+<!--
 <div class="card bg-light" data-controller="autoria">
  <div class="card-body">
    <div class="row justify-content-center">
@@ -10,6 +10,8 @@
         
    </div> 
    <div class="row justify-content-center">
+      
+
       <template data-autoria-target='tmpAutor'>
         <%= form.fields_for :autores, Autor.new, child_index: 'TEMPLATE_RECORD_AUTOR' do |autor| %>
               <%= render 'autoria_fields', form: autor, swcorr:swcorr %>
@@ -94,4 +96,27 @@
       </div>
    </div>
  </div>  
+</div>
+-->
+
+
+<div id="cont_rws" class="col mt-4" data-controller="autores">
+    
+    <div class="row mb-3">
+        <template data-autores-target="tplautor">
+            <%= form.fields_for :autores, Autor.new, child_index: 'RW_AUTOR' do |autor| %>
+                    <%= render 'form_autor_fields', form: autor %>
+            <% end %>
+        </template>
+        
+        <div data-autores-target="contautores" class="container"> 
+            <%= form.fields_for :autores do |autor| %>
+                 <% if @producto.id == 9 || @producto.id == 10  %> 
+                         <%= render 'form_autor_hidden', form: autor %> 
+                 <% else %> 
+                         <%= render 'form_autor_fields', form: autor %>                         
+                 <% end %>
+            <% end %>
+        </div>    
+    </div>
 </div>

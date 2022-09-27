@@ -3,9 +3,12 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-import 'bootstrap';
+//import 'bootstrap';
 import "controllers"
 import "../stylesheets/application"
+
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
 
 //require("packs/sesion");
 

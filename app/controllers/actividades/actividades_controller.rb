@@ -1,5 +1,6 @@
 class Actividades::ActividadesController < ApplicationController
   before_action :authenticate_usuario!
+  add_flash_types :info
 
   def index
     #@actividades = Actividad.where(periodo:2021,estado:['A','U','C','S','G','D']).includes(:autores).where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores)
@@ -8,12 +9,12 @@ class Actividades::ActividadesController < ApplicationController
                       .includes(:autores)
                         .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
                         
-    #@enlace = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[22,39])
-    #                    .includes(:autores)
-    #                      .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
-    #@posgrado = Actividad.includes(:producto).where(periodo:2021,estado:['A','U','C','S','G','D']).where(producto_id:[82,83])
-    #                      .includes(:autores)
-    #                        .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
+    @enlace = Actividad.includes(:producto).where(periodo:2022,estado:['A','U','C','S','G','D']).where(producto_id:[22,39])
+                        .includes(:autores)
+                          .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
+    @posgrado = Actividad.includes(:producto).where(periodo:2022,estado:['A','U','C','S','G','D']).where(producto_id:[82,83])
+                          .includes(:autores)
+                            .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
    
     #if params[:pry].present?
     #    @proyectos = Actividad.includes(:producto).where(producto_id:[81,85], periodo:2021).order("actividades.titulo")
@@ -66,6 +67,7 @@ class Actividades::ActividadesController < ApplicationController
         if @actividad.autores.present? 
            if @actividad.documentos.present? 
                @actividad.save
+               flash[:info] = "Registro realizado correctamente."
                redirect_to [:actividades, @actividad]
            else
                @actividad.errors.add(:documentos,"Se requiere el comprobante")  
@@ -98,6 +100,7 @@ class Actividades::ActividadesController < ApplicationController
     @actividad = Actividad.find(params[:id].to_i)
 
     if @actividad.update(actividad_params)
+          flash[:info] = "Registro actualizado." 
           redirect_to [:actividades, @actividad]  
     else
           @producto = @actividad.producto  
@@ -156,7 +159,7 @@ class Actividades::ActividadesController < ApplicationController
           curso_attributes:[:id, :fini,:ffin, :hcurso, :himpartidas, :creditos, :noalumnos, :actividad_id, :coordinador, :tipocurso_id],
           tesista_attributes:[:id,:ftermino,:nivelestudio_id,:actividad_id, :fgrado, :efterminal, :acta],
           editor_attributes: [:id,:tipoeditorid,:idioma_id,:ambito_id,:codigo,:medio,:editorial,:pais,:actividad_id],
-          autores_attributes: [:id,:rol_id,:persona_id,:firma,:corresponsal, :actividad_id, :porcentaje, :_destroy]
+          autores_attributes: [:id,:rol_id,:persona_id,:firma,:corresponsal, :actividad_id, :porcentaje, :autorap, :autornom, :_destroy]
 
       )
   end

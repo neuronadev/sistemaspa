@@ -1,0 +1,33 @@
+<div class="itemrw mt-1">
+    <div class="row">
+            <%= form.hidden_field :_destroy %>  
+
+            <% if params[:action] == 'new' %> 
+                 <%= form.hidden_field :persona_id, class:'autoridp', value:current_usuario.persona_id %>
+            <% else %>     
+                 <%= form.hidden_field :persona_id, class:'autoridp' %>
+            <% end %>   
+            
+            <%= form.hidden_field :rol_id, value:1 %>
+
+            <div class="col-1 tipoautor">
+                Inecol
+            </div>
+
+            <div class="col-3">
+                <%= form.text_field :autorap, placeholder:'(apellidos)', autocomplete:'off', class:'autorap border-0 p-1 col-12 shadow-none bg-light rounded', value:(current_usuario.persona.paterno||'') + ' ' + (current_usuario.persona.materno||'') , 'data-action':'keyup->autores#search keypress->autores#kEnter', readonly:true %> 
+            </div>
+
+            <div class="col-3">
+                <%= form.text_field :autornom, placeholder:'(nombre)', autocomplete:'off', class:'autornom border-0 p-1 col-12 shadow-none bg-light rounded', value:current_usuario.persona.nombre, 'data-action':'focus->autores#hiddenSearch keypress->autores#kEnter focusout->autores#tipoAutor', readonly:true %>
+            </div>
+
+            <div id="controles" class="col-3 controles">
+                
+            </div>
+
+    </div> <!-- -->
+    <div id="listasearch" class="listaper col-6 shadow-lg p-3 mb-5 bg-body rounded" style="position: absolute;z-index: 9; border: 1px solid #d3d3d3; display: none;"> 
+    </div> <!-- -->
+
+</div> <!-- -->

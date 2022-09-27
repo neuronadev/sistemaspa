@@ -1,19 +1,19 @@
-<div class="row">
+<div class="row" data-controller="modal modalalert">
  <div class="d-flex fw-bold">Producción 2022 </div>
 
           <table class="table table-sm ">
                     <thead>
                          
                          <tr >
-                              <th scope="col" style="width: 5%"><div class="d-flex justify-content-center">Folio</div></th>
-                              <th scope="col" style="width: 20%"><div class="d-flex justify-content-center"> Producto</div></th>
+                              <th scope="col" style="width: 5%"><div class="d-flex justify-content-center text-secondary">Folio</div></th>
+                              <th scope="col" style="width: 20%"><div class="d-flex justify-content-center text-secondary"> Producto</div></th>
                               <th scope="col" style="width: 9%"></th>
-                              <th scope="col" style="width: 45%"><div class="d-flex justify-content-center"> Título</div></th>
+                              <th scope="col" style="width: 45%"><div class="d-flex justify-content-center text-secondary"> Título</div></th>
                               
-                              <th scope="col" style="width: 9%"><div class="d-flex justify-content-center"> Vo.Bo.</div></th>
+                              <th scope="col" style="width: 9%"><div class="d-flex justify-content-center text-secondary"> Vo.Bo.</div></th>
                               
                               <th scope="col" style="width: 5%">
-                                   <div class="d-flex justify-content-center"> 
+                                   <div class="d-flex justify-content-center text-secondary"> 
                                         <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %>
                                         Coor. Red
                                         <% else %>
@@ -22,11 +22,11 @@
                                    </div>
                               </th>
 
-                              <th scope="col" style="width: 6%"><div class="d-flex justify-content-center"> Sec. Acad</div></th>
+                              <th scope="col" style="width: 6%"><div class="d-flex justify-content-center text-secondary"> Sec. Acad</div></th>
                          </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody class="border-top-0">
                          <% if @actividades.any? %>
                                    <% @actividades.each do |a| 
                                         row_show = 'S'
@@ -46,11 +46,12 @@
                                         <td> <div class="d-flex justify-content-center"> <%= a.id %> </div> </td>
                                         <td> 
                                         
-                                        <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="<%= a.producto.descripcion %>"><%= a.producto.descripcion %>
-                                                  <% if a.producto.prodgrupo.clave == 'OTRASD' %>
+                                             <span class="d-inline-block " data-toggle="tooltip" data-placement="top" title="<%= a.producto.descripcion %>">
+                                                  <%= a.producto.descripcion %>
+                                                   <% if a.producto.prodgrupo.clave == 'OTRASD' %>
                                                        -<I><%= a.divulgacion.tipodivulgacion.nomtipodivulgacion %></I>
-                                                  <% end %> 
-                                        </span>
+                                                   <% end %> 
+                                             </span>
                                         
                                         </td>
                                         <td>
@@ -58,8 +59,14 @@
                                              <%= render "actividades/actividades/show/attached", a:a %>
                                         
                                         </td>
-                                        <td> <div class="d-flex justify-content-left"> 
-                                                  <%= link_to a.titulo, actividades_actividad_path(a.id), data:{turbolinks:false}, class:"text-primary" %>
+                                        <td> <div class="row justify-content-left"> 
+                                                  <div>
+                                                      <%= a.titulo %>
+                                                  </div>    
+                                                  <div class="text-primary">
+                                                       <%= link_to "Ver registro", actividades_actividad_path(a.id), data:{turbolinks:false}, class:"text-decoration-none fst-italic" %>
+                                                  </div>
+                                                  
                                              </div> 
                                              <% if a.producto.prodgrupo.clave == 'PROY' 
                                                   @t_porcentaje = Autor.where(actividad_id:a.id).sum(:porcentaje).to_f
@@ -107,9 +114,7 @@
                                         <td id="actividad<%= a.id %>">
                                         <div class="d-flex justify-content-center"> 
                                              <% if a.estado == 'A' %>
-                                                  <%= link_to validar_path(a.id,'user'),  data: {confirm: 'El registro será habilitado para validación. ¿Desea continuar?'} do %>
-                                                            <span class="" ><i class="fas fa-check-circle"></i> Validar </span>
-                                                  <% end %>       
+                                                   <span class="" data-action="click->modalalert#modalshow" ><i class="fas fa-check-circle"></i> Validar </span>
                                              <% else %> 
                                                        <i class="fas fa-check-double text-success"></i>
                                              <% end %>   
@@ -141,5 +146,5 @@
                     </tbody>
 
                </table> 
-       
+        <div><%= render 'modal_alert' %></div>
 </div>

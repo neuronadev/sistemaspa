@@ -6,47 +6,84 @@
      
         <%= form.fields_for :editor do |ed_form| %>
              <%= ed_form.hidden_field :idioma_id, value:"4" %> 
+             <div class="row mb-1">
+                  <div class="col-md-2 d-flex justify-content-end"> 
+                     <%= ed_form.label :tipoeditorid, "Tipo editor:", class:"form-label fw-bold text-secondary" %>
+                  </div>
+                  <div class="col-md-5 d-flex justify-content-start">
+                      <%= ed_form.select :tipoeditorid, Tipoeditor.all.collect { |e| [ e.nomtipoeditor, e.id ] }, { prompt:'-- Seleccione --'},class:"form-control" %>
+                  </div>
+            </div>
+            <div class="row mb-1">
+                  <div class="col-md-2 d-flex justify-content-end"> 
+                     <%= ed_form.label :medio, "Nombre de la revista o libro:", class:"form-label fw-bold text-secondary" %>
+                  </div>
+                  <div class="col-md-6 d-flex justify-content-start">
+                     <%= ed_form.text_field :medio, class:"form-control"  %> 
+                  </div>
+            </div>
+            <div class="row mb-1">
+                  <div class="col-md-2 d-flex justify-content-end"> 
+                     <%= ed_form.label :codigo, "ISBN o ISSN:", class:"form-label fw-bold text-secondary" %>
+                  </div>
+                  <div class="col-md-3 d-flex justify-content-start">
+                     <%= ed_form.text_field :codigo, class:"form-control"  %>  
+                  </div>
+            </div>
+            <div class="row mb-1">
+                  <div class="col-md-2 d-flex justify-content-end"> 
+                     <%= ed_form.label :editorial, "Nombre de la editorial:", class:"form-label fw-bold text-secondary" %>
+                  </div>
+                  <div class="col-md-4 d-flex justify-content-start">
+                     <%= ed_form.text_field :editorial, class:"form-control" %> 
+                  </div>
+            </div>
+            <div class="row mb-1 ">
+                  <div class="col-md-2 d-flex justify-content-end"> 
+                     <%= ed_form.label :pais, "Lugar de publicación:", class:"form-label fw-bold text-secondary" %>
+                  </div>
+                  <div class="col-md-3 d-flex justify-content-start">
+                     <%= ed_form.text_field :pais, class:"form-control"%> 
+                  </div>
+                  <div class="col justify-content-start text-secondary "><span class="align-middle">(país o ciudad)</span></div>
+            </div>
+            <div class="row mb-1">
+                  <div class="col-md-2 d-flex justify-content-end"> 
+                     <%= ed_form.label :ambito_id, "Ambito de la editorial:", class:"form-label fw-bold text-secondary" %>
+                  </div>
+                  <div class="col-md-3 d-flex justify-content-start">
+                     <%= ed_form.select :ambito_id, Ambito.all.pluck(:nomambito,:id), { prompt:'-- Seleccione --'}, class:"form-control" %>
+                  </div>
+            </div>
              
-             <div class="mb-3 col-md-4">
-                <%= ed_form.label :tipoeditorid, "Tipo editor:" %>
-                <%= ed_form.select :tipoeditorid, Tipoeditor.all.collect { |e| [ e.nomtipoeditor, e.id ] }, { prompt:'-- Seleccione --'},class:"form-control" %>
-             </div> 
-             <div class="mb-3 col-md-5">
-                <%= ed_form.label :medio, "Nombre de la revista o libro:" %>
-                <%= ed_form.text_field :medio, class:"form-control"  %> 
-             </div>   
-             <div class="mb-3 col-md-3">
-                <%= ed_form.label :codigo, "ISBN o ISSN:" %>
-                <%= ed_form.text_field :codigo, class:"form-control"  %> 
-             </div>   
-             <div class="mb-3 col-md-3">
-                <%= ed_form.label :editorial, "Nombre de la editorial:" %>
-                <%= ed_form.text_field :editorial, class:"form-control" %> 
-             </div> 
-             <div class="mb-3 col-md-4">
-                <%= ed_form.label :pais, "Lugar de publicación (país o ciudad):" %>
-                <%= ed_form.text_field :pais, class:"form-control"%> 
-             </div> 
-             <div class="mb-3 col-md-3">
-                <%= ed_form.label :ambito_id, "Ambito de la editorial:" %>
-                <%= ed_form.select :ambito_id, Ambito.all.pluck(:nomambito,:id), { prompt:'-- Seleccione --'}, class:"form-control" %>
-             </div>  
         <% end %>
-        <div class="mb-3 col-md-2">
-               <%= form.label :anio, "Año:", class:"form-label" %>
-               <%= form.text_field :anio, class:"form-control" %>
-        </div> 
+        <div class="row mb-1">
+            <div class="col-md-2 d-flex justify-content-end"> 
+                 <%= form.label :anio, "Año:", class:"form-label fw-bold text-secondary" %>
+            </div>
+            <div class="col-md-3 d-flex justify-content-start">
+                 <%= form.text_field :anio, class:"form-control" %>
+            </div>
+       </div>
           
     </div>    
     
-   <%= render "doc_comprobante", form:form %>
-    <%= render "form_autores", form:form, swcorr:'N' %>
-    
+    <%= render "doc_comprobante", form:form %>
     <%= render "red_acad", form:form  %>
-
-   <div class="row mt-md-3">
-        <div class="col">
-            <%= form.submit "Enviar información", class:'btn btn-primary' ,data: { confirm: 'La información será enviada para validación. ¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %>
-        </div> 
+    <div class="row">
+                <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                            Autores:
+                </div>
+                <div class="col d-flex justify-content-start">
+                      <%= render "form_autores", form:form, swcorr:'N' %>
+                </div>
     </div>
+
+   <div class="row mt-4">
+                <div class="col">
+                   <div class="d-flex justify-content-end">
+                     <%= form.submit "Enviar información", class:'btn btn-success' ,data: { confirm: '¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %>
+                   </div>
+                </div> 
+   </div>
 <% end %>

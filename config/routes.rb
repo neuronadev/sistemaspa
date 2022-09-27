@@ -54,10 +54,14 @@ Rails.application.routes.draw do
     end             
   end
   namespace :actividades do
-    resources :catalogos
+      resources :catalogos do
+         collection do
+           post 'listcat'
+         end
+      end
   end
   namespace :actividades do
-    resources :productos
+        resources :productos
   end
 
   get 'extras/index'
@@ -76,7 +80,11 @@ Rails.application.routes.draw do
   get 'tecnico/index', to:'tecnico#index', as: 'tecnico'
   get 'auditoria/index', to:'auditoria#index', as: 'auditoria'
 
-  resources :personas
+  resources :personas do
+    collection do
+        post 'search'
+    end
+  end
   resources :redes
   resources :categorias
   resources :niveles
