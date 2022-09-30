@@ -13,14 +13,18 @@ class RevistasController < ApplicationController
      respond_to do |format|
          if @revista.valid?
              if @revista.save
-                 flash[:notice] = 'Registro ok...'
-                 format.html {redirect_to revistas_path}
-                 format.js
+                  format.json do 
+                     render json: {status:'OK', id:@revista.id, txt:@revista.nomrevista}
+                     #flash[:notice] = 'Registro ok...'
+                     #format.html {redirect_to revistas_path}
+                     #format.js
+                  end  
              end
          else
-            flash[:error] = "Error, la información esta incompleta."
-            format.html {render :action=>'new'}
-            format.js
+            format.html { render partial: 'form_per', status: :unprocessable_entity } 
+            #flash[:error] = "Error, la información esta incompleta."
+            #format.html {render :action=>'new'}
+            #format.js
          end
       end   
   end

@@ -1,6 +1,11 @@
 <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= artc.label :revista_id, "Revista:", class:"form-label fw-bold text-secondary" %>
+               <% if tipo == 'P' %>     
+                         <%= artc.label :revista_id, "Periodico:", class:"form-label fw-bold text-secondary" %>
+               <% else %>
+                         <%= artc.label :revista_id, "Revista:", class:"form-label fw-bold text-secondary" %>
+               <% end %>    
+        
         </div>
         <div class="col-md-6 d-flex justify-content-start">
             <div class="col"> 
@@ -16,15 +21,19 @@
                     <% end %> 
                 <% end %>
                 <% if tipo == 'D' %> 
-                    <%= artc.select :revista_id, Revista.where(estado:'A').order(:nomrevista).map{|r| [r.nomrevista.upcase, r.id] },{ include_blank: true}, {class:" form-control", placeholder:'Escriba el nombre de la revista...', data:{controller:'ts--selectrev'}}  %>
+                        <%= artc.select :revista_id, Revista.where(estado:'A', tiporevista:'D').order(:nomrevista).map{|r| [r.nomrevista.upcase, r.id] },{ include_blank: true}, {class:" form-control", placeholder:'Escriba el nombre de la revista...', data:{controller:'ts--selectrev'}}  %>
                 <% end %>
                 <% if tipo == 'P' %> 
-                    <%= artc.select :revista_id, Revista.where(tiporevista:'P',estado:'A').order(:nomrevista).map{|r| [r.nomrevista.downcase.capitalize, r.id] },{ include_blank: true}, {class:" form-control", placeholder:'Escriba el nombre del periodico...', data:{controller:'ts--selectrev'}} %>
+                        <%= artc.select :revista_id, Revista.where(tiporevista:'P',estado:'A').order(:nomrevista).map{|r| [r.nomrevista.downcase.capitalize, r.id] },{ include_blank: true}, {class:" form-control", placeholder:'Escriba el nombre del periodico...', data:{controller:'ts--selectrev'}} %>
                 <% end %>
             </div>    
 
             <div class="col d-flex align-items-center justify-content-center" data-action="click->modalcap#launchModal" data-modalcap-src-param="rev" data-modalcap-prod-param="<%= @producto.id %>" >
-               <div class="cursor-pointer text-primary"><i class="fa-solid fa-plus"></i> Registrar nueva revista...</div>
+               <div class="cursor-pointer text-primary"><i class="fa-solid fa-plus"></i> 
+                       <%=  'Registrar nueva revista...' if tipo == 'C' %>
+                       <%=  'Registrar nueva revista...' if tipo == 'D' %>
+                       <%=  'Registrar nuevo periodico...' if tipo == 'P' %>
+               </div>
             </div>
 
         </div>

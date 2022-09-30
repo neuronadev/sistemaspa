@@ -12,11 +12,13 @@ $color-cinnabar: #e74c3c; // main icon bg, red
 $color-amethyst: #af64cc; // main photo icon bg
 $color-transparent: rgba(255, 255, 255, .5);
 $color-alto: #D3D3D3;
-
+$blue:#0d6efd;
 
 $height-header: 50px;
 $height-footer: 50px;
 $width-sidenav: 240px;
+
+
 
 @mixin profile-avatar {
   //background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1609106/headshot.png");
@@ -36,7 +38,7 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   //font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif
-  font-family: 'Ubuntu', sans-serif;
+  //font-family: 'Ubuntu', sans-serif;
   font-size: 1rem;
 }
 

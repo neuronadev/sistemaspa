@@ -1,15 +1,15 @@
-<div class="w-75">
+<div class="w-75" data-controller="menu">
     <div class="col"> 
-              <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Menu de usuario</div>
-              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
-                          <%= link_to actividades_actividades_path, style:'text-decoration: none;' do %>
-                              <i class="fa-solid fa-house-chimney-user"></i> Inicio
+              <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Menu de usuario</div>
+              <div class="menubg rounded-pill d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                          <%= link_to actividades_actividades_path, style:'text-decoration: none; color:#202124;' do %>
+                              <i class="fa-solid fa-house-chimney-user " style="color: #5b5b5b ;"></i> Inicio
                           <% end %>   
               </div>
                    
-              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
-                          <%= link_to actividades_catalogos_path, style:'text-decoration: none;' do %>
-                                <i class="fa-regular fa-file-lines"></i> Nuevo...
+              <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                          <%= link_to actividades_catalogos_path, style:'text-decoration: none; color:#202124;' do %>
+                                <i class="fa-regular fa-file-lines" style="color:#5b5b5b;"></i> Nuevo...
                           <% end %>  
               </div>
                    
@@ -18,31 +18,31 @@
                  <div class="accordion col-12" id="accordionExample">
                       <div class="col-12">
                               
-                                    <div class="accordion-button collapsed d-flex justify-content-start p-2  fw-bold item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                          <%= link_to actividades_actividades_path, style:'text-decoration: none;' do %>
-                                                <i class="fa-solid fa-clock-rotate-left"></i> Históricos
+                                    <div class="accordion-button collapsed d-flex justify-content-start p-2 item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                          <%= link_to actividades_actividades_path, style:'text-decoration: none; color:#202124;' do %>
+                                                <i class="fa-solid fa-clock-rotate-left" style="color:#5b5b5b;"></i> Históricos
                                           <% end %>  
                                     </div>
                               
                               <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                     <div class="accordion-body col">
                                         <div>
-                                          <%= link_to datahistory_path(2021), data:{turbolinks:false} do %>
+                                          <%= link_to datahistory_path(2021)  do %>
                                                 <i class="fas fa-th-list"></i> Periodo 2021
                                           <% end %> 
                                         </div>  
                                         <div>
-                                          <%= link_to datahistory_path(2020), data:{turbolinks:false} do %>
+                                          <%= link_to datahistory_path(2020) do %>
                                                 <i class="fas fa-th-list"></i> Periodo 2020
                                           <% end %> 
                                         </div>  
                                         <div> 
-                                           <%= link_to datahistory_path(2019), data:{turbolinks:false}  do %>
+                                           <%= link_to datahistory_path(2019)  do %>
                                                 <i class="fas fa-th-list"></i> Periodo 2019
                                           <% end %>       
                                         </div>
                                         <div>  
-                                          <%= link_to histoconsultar_path, data:{turbolinks:false}  do %>
+                                          <%= link_to histoconsultar_path  do %>
                                                       <i class="fas fa-th-list"></i> Periodo 2018
                                           <% end %>  
                                         </div>  
@@ -52,56 +52,56 @@
                  </div>
              </div>   
              <% if current_usuario.persona_id == 66 %>
-                  <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Posgrado</div>
-                  <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
-                              <%= link_to posgrados_path, style:'text-decoration: none;', target:"_blank" do %>
-                                    <i class="fa-solid fa-magnifying-glass-arrow-right"></i> Validar
+                  <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Posgrado</div>
+                  <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                              <%= link_to posgrados_path, style:'text-decoration: none; color:#202124;', target:"_blank" do %>
+                                    <i class="fa-solid fa-magnifying-glass-arrow-right" style="color:#5b5b5b;"></i> Validar
                               <% end %>   
                   </div>
              <% end %>       
 
              <% if current_usuario.rol == 'C' %> 
-                        <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Coor. de red</div>  
-                        <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
-                                    <%= link_to redesindex_path, style:'text-decoration: none;' do %>
-                                          <i class="fa-solid fa-gears"></i> Validar
+                        <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Coor. de red</div>  
+                        <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                                    <%= link_to redesindex_path, style:'text-decoration: none; color:#202124;' do %>
+                                          <i class="fa-solid fa-gears" style="color:#5b5b5b;"></i> Validar
                                     <% end %>  
                         </div>
              <% end %>  
              <% if current_usuario.rol == 'Y' %> 
-                        <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Captura</div>  
-                        <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
-                                    <%= link_to validaindex_path(:tipo=>'A'), style:'text-decoration: none;', target:"_blank" do %>
-                                          <i class="fas fa-users"></i><span> Evaluación 2022 </span>
+                        <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Captura</div>  
+                        <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                                    <%= link_to validaindex_path(:tipo=>'A'), style:'text-decoration: none; color:#202124;', target:"_blank" do %>
+                                          <i class="fas fa-users" style="color:#5b5b5b;"></i><span> Evaluación 2022 </span>
                                     <% end %>            
                         </div>            
              <% end %>  
              <% if current_usuario.evaluador == 'A' %>
-                        <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Validaciones</div>  
-                        <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
-                                    <%= link_to validaindex_path(:tipo=>'A'), class:"", target:"_blank" do %>
-                                             <i class="fas fa-address-book"></i> Producción Académica
+                        <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Validaciones</div>  
+                        <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                                    <%= link_to validaindex_path(:tipo=>'A'), class:"", style:'color:#202124;', target:"_blank" do %>
+                                             <i class="fas fa-address-book" style="color:#5b5b5b;"></i> Producción Académica
                                     <% end %>          
                         </div>   
              <% end %>         
 
-            <div class="d-flex justify-content-center p-3 fw-bold text-center item" style="font-size:15px;">Links</div>  
+            <div class="d-flex justify-content-center p-3 fw-bold text-center item", style='color:#202124;'>Links</div>  
 
-            <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
-                          <%= link_to "https://inecol-my.sharepoint.com/:b:/g/personal/antonio_francisco_inecol_mx/Ec7rVnZjEsdJrltTf_GzYqcBv4tuAMe6swZ_pax3EIW8tw?e=Yhybci", target:"_blank", style:'text-decoration: none;' do %>
-                                <i class="fa-solid fa-chart-gantt"></i> Presupuesto 
+            <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                          <%= link_to "https://inecol-my.sharepoint.com/:b:/g/personal/antonio_francisco_inecol_mx/Ec7rVnZjEsdJrltTf_GzYqcBv4tuAMe6swZ_pax3EIW8tw?e=Yhybci", target:"_blank", style:'text-decoration: none; color:#202124;' do %>
+                                <i class="fa-solid fa-chart-gantt" style="color:#5b5b5b;"></i> Presupuesto 
                           <% end %>  
             </div>
-             <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
-                          <%= link_to "http://normateca.inecol.edu.mx/normateca/documentos/0118.pdf", target:"_blank", style:'text-decoration: none;' do %>
-                                <i class="fa-solid fa-file-circle-check"></i> Lineamientos
+             <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                          <%= link_to "http://normateca.inecol.edu.mx/normateca/documentos/0118.pdf", target:"_blank", style:'text-decoration: none; color:#202124;' do %>
+                                <i class="fa-solid fa-file-circle-check" style="color:#5b5b5b;"></i> Lineamientos
                           <% end %>  
             </div>
 
 
-            <div class="d-flex justify-content-start mt-3 p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
-                          <%= link_to destroy_usuario_session_path, style:'text-decoration: none;' do %>
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Salir
+            <div class="d-flex justify-content-start mt-3 p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                          <%= link_to destroy_usuario_session_path, style:'text-decoration: none; color:#202124;' do %>
+                                <i class="fa-solid fa-arrow-right-from-bracket" style="color:#5b5b5b;"></i> Salir
                           <% end %>  
               </div>
     </div>  

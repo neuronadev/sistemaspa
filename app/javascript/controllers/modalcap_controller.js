@@ -69,6 +69,9 @@ export default class extends Controller {
             if ( pathf.value == 'ART-C-JCR' || pathf.value == 'ART-C-CONACYT' || pathf.value == 'ART-C-OTROS' ){
                       select = document.getElementById('actividad_articulo_attributes_revista_id')
              } 
+             if ( pathf.value == 'ART-P' ){
+                     select = document.getElementById('actividad_articulo_attributes_revista_id')
+             } 
 
             let control = select.tomselect
             control.addOption({value:data.id, text:data.txt})

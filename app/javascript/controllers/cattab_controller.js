@@ -1,4 +1,5 @@
 import {Controller} from '@hotwired/stimulus'
+import Turbolinks from 'turbolinks'
 
 export default class extends Controller{
    static values = { url: String }
@@ -89,7 +90,8 @@ export default class extends Controller{
    }
 
    form(event){
-      window.location.href = event.params.url
+      //window.location.href = event.params.url
+      Turbolinks.visit(event.params.url)
    }
 
 }

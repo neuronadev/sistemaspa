@@ -1,35 +1,11 @@
-    <div class="row">
-       <div class="mb-3 col-md-9">
-               <label class="font-weight-bold">Título:</label>
-               <div><%= @actividad.titulo %></div>
-         </div>  
-         <div class="mb-3 col-md-3">
-               <label class="font-weight-bold">Año:</label>
-               <div><%= @actividad.anio %></div>
-         </div>  
-    </div>   
-    <div class="row">
-                  <div class="mb-3 col-md-2">
-                    <label class="font-weight-bold">Página inicial:</label>
-                    <div><%= @actividad.capitulo.pgini %></div>
-                  </div>     
-                  <div class="mb-3 col-md-2">
-                     <label class="font-weight-bold">Página final:</label>
-                    <div><%= @actividad.capitulo.pgfin %></div>
-                  </div> 
-                  <div class="mb-3 col-md-2">
-                     <label class="font-weight-bold">Idioma:</label>
-                     <div><%= @actividad.capitulo.idioma.nomidioma %></div>
-                  </div> 
-                  <div class="mb-3 col-md-8">
-                     <label class="font-weight-bold">Libro:</label>
-                     <div><%= @actividad.capitulo.libro.nomlibro %></div>
-                  </div> 
-                  <div class="mb-3 col-md-4">
-                     <label class="font-weight-bold">ISBN:</label>
-                     <div><%= @actividad.capitulo.libro.isbn %></div>
-                  </div> 
-          
-    </div>
+    <%= row_show('Título del capítulo:', @actividad.titulo) %>
+    <%= row_show('Año:', @actividad.anio) %>
+    <%= row_show('Página inicial:', @actividad.capitulo.pgini) %>     
+    <%= row_show('Página final:', @actividad.capitulo.pgfin) %>     
+    <%= row_show('Idioma:', @actividad.capitulo.idioma.nomidioma) %>
+    <%= row_show('Libro:', @actividad.capitulo.libro.nomlibro) %>
+    <%= row_show('ISBN:', @actividad.capitulo.libro.isbn) %>
+
     <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+    <%= render "actividades/actividades/show/red_acad", actividad:@actividad  %>
     <%= render "actividades/actividades/show/autoria", actividad:@actividad, swcorr:'S' %>

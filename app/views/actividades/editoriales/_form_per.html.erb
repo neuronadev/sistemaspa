@@ -1,0 +1,12 @@
+<%= form_with model:@revista, data:{action:'ajax:success->modalcap#onSuccess ajax:error->modalcap#onError'}, remote:true, id:'formmodal' do |form| %>
+             <input type="hidden" name="pathf" id="pathf" value="<%= @producto.pathf %>">
+             <%= form.hidden_field :tiporevista, value:@tipo %>
+             <%= form.hidden_field :editorial_id, value:1 %>
+
+                <div class="row">
+                    <div class="col">
+                        <span class="text-danger fw-bold">*</span> <%= form.label :nomrevista, 'Nombre del periodico:' %>
+                        <%= form.text_field :nomrevista, class:'form-control' %>
+                    </div>   
+                </div>
+<% end %>

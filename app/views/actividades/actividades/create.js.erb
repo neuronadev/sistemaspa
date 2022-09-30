@@ -2,7 +2,6 @@ alert("Error: Falta información, favor de revisar.")
 var form = document.querySelector("form");
 <%  
    @actividad.errors.each do |attribute, message|
-          puts attribute 
           @att_mod = '' 
           if attribute.to_s != 'autores' && attribute.to_s != 'documentos'
                 if attribute.to_s.include? "." 
@@ -19,7 +18,6 @@ var form = document.querySelector("form");
                     @att_mod = "[id*='#{attribute.to_s}']"  
                 end    
           end     
-          puts @att_mod
 %>
           var el = form.querySelector("<%= @att_mod.html_safe %>")
           if ( el != null ){

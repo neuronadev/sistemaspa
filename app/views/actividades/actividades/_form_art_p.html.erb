@@ -1,5 +1,13 @@
 <%= form.fields_for :articulo do |artc| %>
-
+     <div class="row  mb-1">
+        <div class="col-md-2 d-flex justify-content-end"> 
+              <%= form.label :fechapub, "Fecha de publicación:", class:"form-label fw-bold text-secondary" %>
+        </div>
+        <div class="col-md-2 d-flex justify-content-start">
+              <%= form.date_field :fechapub, class:"form-control" %>
+        </div>
+   </div> 
+   
     <%= render "medio_revista", artc:artc, tipo:'P' %>
 
 

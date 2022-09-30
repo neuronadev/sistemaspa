@@ -23,7 +23,16 @@ class Actividades::EditorialesController < ApplicationController
     end
     if @producto.pathf == 'CAPITULO'
           render partial: 'form_libro' 
-     end
+    end
+    if @producto.pathf == 'ART-P'
+          @tipo = 'P'
+          @revista = Revista.new
+          render partial: 'form_per' 
+    end
+    if @producto.pathf == 'ART-D'
+          @tipo = 'D'
+          render partial: 'form_div' 
+    end
         
   end
 
@@ -46,7 +55,7 @@ class Actividades::EditorialesController < ApplicationController
                   if @pathf == 'CAPITULO' 
                          render json: {status:'OK', id:@editorial.libro.id, txt:@editorial.libro.nomlibro}
                   end
-                  if  @pathf == 'ART-C-JCR' || @pathf == 'ART-C-CONACYT' || @pathf == 'ART-C-OTROS'
+                  if  @pathf == 'ART-C-JCR' || @pathf == 'ART-C-CONACYT' || @pathf == 'ART-C-OTROS' ||  @pathf == 'ART-D'
                          render json: {status:'OK', id:@editorial.revista.id, txt:@editorial.revista.nomrevista}
                   end   
               end    
@@ -54,7 +63,7 @@ class Actividades::EditorialesController < ApplicationController
                   if @pathf == 'CAPITULO' 
                           format.html { render partial: 'form_libro', status: :unprocessable_entity }
                   end    
-                  if  @pathf == 'ART-C-JCR' || @pathf == 'ART-C-CONACYT' || @pathf == 'ART-C-OTROS'
+                  if  @pathf == 'ART-C-JCR' || @pathf == 'ART-C-CONACYT' || @pathf == 'ART-C-OTROS' || @pathf == 'ART-D'
                          format.html { render partial: 'form_art', status: :unprocessable_entity }    
                   end
         end     
