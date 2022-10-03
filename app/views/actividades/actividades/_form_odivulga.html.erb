@@ -2,7 +2,7 @@
     <%= render "form_inputs_com", form:form %>
     <div class="row mb-1">
                   <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= form.label :titulo, "Nombre de la actividad:", class:"form-label fw-bold text-secondary" %>
+                     <%= form.label :titulo, "Nombre de la actividad:", class:"form-label " %>
                   </div>
                   <div class="col-md-6 d-flex justify-content-start">
                      <%= form.text_field :titulo, class:"form-control" %>
@@ -10,7 +10,7 @@
     </div>
     <div class="row mb-1">
                   <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= form.label :fechapub, "Fecha de la actividad:", class:"form-label fw-bold text-secondary" %>
+                     <%= form.label :fechapub, "Fecha de la actividad:", class:"form-label " %>
                   </div>
                   <div class="col-md-2 d-flex justify-content-start">
                      <%= form.date_field :fechapub, class:"form-control" %>
@@ -20,7 +20,7 @@
     <%= form.fields_for :divulgacion do |div_form| %>
         <div class="row mb-1">
                   <div class="col-md-2 d-flex justify-content-end"> 
-                         <%= form.label :tipodivulgacion_id, "Tipo actividad:", class:"form-label fw-bold text-secondary" %>
+                         <%= form.label :tipodivulgacion_id, "Tipo actividad:", class:"form-label " %>
                   </div>
                   <div class="col-md-4 d-flex justify-content-start">
                          <%=  div_form.select :tipodivulgacion_id, Tipodivulgacion.all.pluck(:nomtipodivulgacion,:id), { prompt:'-- Seleccione una opcion--'},class:"form-control" %>
@@ -30,7 +30,7 @@
     <%= render "doc_comprobante", form:form %>
     <%= render "red_acad", form:form  %>
     <div class="row">
-                <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                <div class="col-md-2 d-flex justify-content-end"> 
                             Autores:
                 </div>
                 <div class="col d-flex justify-content-start">

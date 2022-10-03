@@ -1,5 +1,5 @@
 <div class="row" data-controller="modal modalalert">
- <div class="d-flex fw-bold">Producción 2022 </div>
+ <div class="d-flex fw-bold text-secondary">Producción 2022 </div>
 
           <table class="table table-sm ">
                     <thead>
@@ -64,7 +64,7 @@
                                                       <%= a.titulo %>
                                                   </div>    
                                                   <div class="text-primary">
-                                                       <%= link_to "Ver registro", actividades_actividad_path(a.id), class:"text-decoration-none fst-italic" %>
+                                                       <%= link_to "Ver registro", actividades_actividad_path(a.id), class:"text-decoration-none mostrar" %>
                                                   </div>
                                                   
                                              </div> 
@@ -114,7 +114,7 @@
                                         <td id="actividad<%= a.id %>">
                                         <div class="d-flex justify-content-center"> 
                                              <% if a.estado == 'A' %>
-                                                   <span class="" data-action="click->modalalert#modalshow" ><i class="fas fa-check-circle"></i> Validar </span>
+                                                   <span class="cursor-pointer validar" data-action="click->modalalert#modalshow" data-modalalert-actividad-param='<%= a.id %>' ><i class="fas fa-check-circle"></i> Validar </span>
                                              <% else %> 
                                                        <i class="fas fa-check-double text-success"></i>
                                              <% end %>   

@@ -15,15 +15,26 @@
                 <div class="align-middle cursor-pointer"><i class="fa-solid fa-eraser" data-action="click->autores#clearFields" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar campos de esta fila"></i> </div>
             </div>
 
-            <div class="col-3">
+            <div class="col-2">
                 <%= form.text_field :autorap, placeholder:'(apellidos)', autocomplete:'off', class:'autorap border-0 p-1 col-12 shadow-none bg-light rounded', 'data-action':'keyup->autores#search keypress->autores#kEnter'  %> 
             </div>
 
-            <div class="col-3">
+            <div class="col-2">
                 <%= form.text_field :autornom, placeholder:'(nombre)', autocomplete:'off', class:'autornom border-0 p-1 col-12 shadow-none bg-light rounded', 'data-action':'focus->autores#hiddenSearch keypress->autores#kEnter focusout->autores#tipoAutor' %>
             </div>
+  
+            <% if [1,2,3,4,5,8].include? @producto.id %> 
+                <div class="col-2 align-items-center justify-content-center">
+                    <div class=" form-switch">
+                        <%= form.check_box :corresponsal, class:"form-check-input" %>
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Corresponsal
+                        </label> 
+                    </div>
+                </div>
+            <% end %> 
 
-            <div id="controles" class="col-3 d-flex  align-items-center controles">
+            <div id="controles" class="col-2 d-flex  align-items-start controles">
                
                      <div id="controla" class="d-flex col-2 justify-content-center controla"> <div class="align-middle"><i class="fa-solid fa-circle-minus text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar fila" data-action="click->autores#removeItem click->autores#validarControles" ></i></div></div>
                      <div id="controlb" class="d-flex col-2 justify-content-center controlb"> <div class="align-middle"><i class="fa-solid fa-circle-plus text-success cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Agrear fila" data-action="click->autores#addItem click->autores#validarControles" ></i></div> </div>

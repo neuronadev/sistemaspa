@@ -1,68 +1,27 @@
-    <div class="row">
-        <div class="mb-3 col-md-9">
-              <label class="font-weight-bold">Título:</label>
-              <div><%= actividad.titulo %></div>
-         </div>  
-         <div class="mb-3 col-md-3">
-               <label class="font-weight-bold">Año:</label>
-               <div><%= actividad.anio %></div>
-         </div>  
-    </div>   
+    
+    <%= row_show('Título:', actividad.titulo) %>
+    <%= row_show('Año:', actividad.anio) %>
 
-                <% if @producto.prodgrupo.clave == 'DECRETO' %>
-                     <div class="col-4">
-                        <div class="form-group">
-                          <label class="font-weight-bold">Nivel:</label>
-                          <div>
-                                <%  @h = @niveldecreto.invert  %>     
-                                <%= @h[@actividad.vinculacion.niveldecreto] %>
-                           </div> 
-                       </div>   
-                    </div>   
-                <% end %> 
-                <% if @producto.prodgrupo.clave == 'ORDENAMIENTO' %>
-                     <div class="col-4">
-                        <div class="form-group">
-                          <label class="font-weight-bold">Fase:</label>
-                          <div>
-                               <%  @h = @ordenamiento.invert  %>     
-                               <%= @h[@actividad.vinculacion.ordenamiento] %> 
-                          </div> 
-                       </div>   
-                    </div>   
-                <% end %> 
-                <% if @producto.prodgrupo.clave == 'INICIATIVA' %>
-                     <div class="col-4">
-                        <div class="form-group">
-                           <label class="font-weight-bold">Nivel:</label>
-                           <div>
-                                 <%  @h = @niveliniciativa.invert  %>     
-                                 <%= @h[@actividad.vinculacion.niveliniciativa] %>
-                           </div> 
-                       </div>   
-                    </div>   
-                <% end %> 
-                <% if @producto.prodgrupo.clave == 'REGLA' %>
-                     <div class="col-4">
-                        <div class="form-group">
-                          <label class="font-weight-bold">Nivel:</label>
-                          <div>
-                                <%  @h = @nivelregla.invert  %>     
-                                <%= @h[@actividad.vinculacion.nivelregla] %>
-                          </div>  
-                       </div>   
-                    </div>   
-                <% end %> 
-                <% if @producto.prodgrupo.clave == 'COMITE' %>
-                     <div class="col-4">
-                        <div class="form-group">
-                          <label class="font-weight-bold">Participación:</label>
-                         <div>
-                                <%  @h = @nivelcomite.invert  %>     
-                                <%= @h[@actividad.vinculacion.nivelcomite] %>
-                          </div>
-                       </div>   
-                    </div>   
-                <% end %> 
-                 <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
-                 <%= render "actividades/actividades/show/autoria", actividad:@actividad, swcorr:'N' %>
+    <% if @producto.prodgrupo.clave == 'DECRETO' %>
+          <%  @h = @niveldecreto.invert  %>
+          <%= row_show('Nivel:', @h[@actividad.vinculacion.niveldecreto]) %>
+    <% end %> 
+    <% if @producto.prodgrupo.clave == 'ORDENAMIENTO' %>
+          <%  @h = @ordenamiento.invert  %>
+          <%= row_show('Fase:', @h[@actividad.vinculacion.ordenamiento]) %>
+    <% end %> 
+    <% if @producto.prodgrupo.clave == 'INICIATIVA' %>
+          <%  @h = @niveliniciativa.invert  %>
+          <%= row_show('Nivel:', @h[@actividad.vinculacion.niveliniciativa]) %>
+    <% end %> 
+    <% if @producto.prodgrupo.clave == 'REGLA' %>
+           <%  @h = @nivelregla.invert  %>
+           <%= row_show('Nivel:', @h[@actividad.vinculacion.nivelregla]) %>
+    <% end %> 
+    <% if @producto.prodgrupo.clave == 'COMITE' %>
+           <%  @h = @nivelregla.invert  %>
+           <%= row_show('Participación:', @h[@actividad.vinculacion.nivelcomite]) %>
+    <% end %> 
+    
+    <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+    <%= render "actividades/actividades/show/autoria", actividad:@actividad, swcorr:'N' %>

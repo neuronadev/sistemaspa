@@ -8,7 +8,7 @@
              <%= ed_form.hidden_field :idioma_id, value:"4" %> 
              <div class="row mb-1">
                   <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= ed_form.label :tipoeditorid, "Tipo editor:", class:"form-label fw-bold text-secondary" %>
+                     <%= ed_form.label :tipoeditorid, "Tipo editor:", class:"form-label " %>
                   </div>
                   <div class="col-md-5 d-flex justify-content-start">
                       <%= ed_form.select :tipoeditorid, Tipoeditor.all.collect { |e| [ e.nomtipoeditor, e.id ] }, { prompt:'-- Seleccione --'},class:"form-control" %>
@@ -16,7 +16,7 @@
             </div>
             <div class="row mb-1">
                   <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= ed_form.label :medio, "Nombre de la revista o libro:", class:"form-label fw-bold text-secondary" %>
+                     <%= ed_form.label :medio, "Nombre de la revista o libro:", class:"form-label " %>
                   </div>
                   <div class="col-md-6 d-flex justify-content-start">
                      <%= ed_form.text_field :medio, class:"form-control"  %> 
@@ -24,7 +24,7 @@
             </div>
             <div class="row mb-1">
                   <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= ed_form.label :codigo, "ISBN o ISSN:", class:"form-label fw-bold text-secondary" %>
+                     <%= ed_form.label :codigo, "ISBN o ISSN:", class:"form-label " %>
                   </div>
                   <div class="col-md-3 d-flex justify-content-start">
                      <%= ed_form.text_field :codigo, class:"form-control"  %>  
@@ -32,7 +32,7 @@
             </div>
             <div class="row mb-1">
                   <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= ed_form.label :editorial, "Nombre de la editorial:", class:"form-label fw-bold text-secondary" %>
+                     <%= ed_form.label :editorial, "Nombre de la editorial:", class:"form-label " %>
                   </div>
                   <div class="col-md-4 d-flex justify-content-start">
                      <%= ed_form.text_field :editorial, class:"form-control" %> 
@@ -40,7 +40,7 @@
             </div>
             <div class="row mb-1 ">
                   <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= ed_form.label :pais, "Lugar de publicación:", class:"form-label fw-bold text-secondary" %>
+                     <%= ed_form.label :pais, "Lugar de publicación:", class:"form-label " %>
                   </div>
                   <div class="col-md-3 d-flex justify-content-start">
                      <%= ed_form.text_field :pais, class:"form-control"%> 
@@ -49,7 +49,7 @@
             </div>
             <div class="row mb-1">
                   <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= ed_form.label :ambito_id, "Ambito de la editorial:", class:"form-label fw-bold text-secondary" %>
+                     <%= ed_form.label :ambito_id, "Ambito de la editorial:", class:"form-label " %>
                   </div>
                   <div class="col-md-3 d-flex justify-content-start">
                      <%= ed_form.select :ambito_id, Ambito.all.pluck(:nomambito,:id), { prompt:'-- Seleccione --'}, class:"form-control" %>
@@ -59,7 +59,7 @@
         <% end %>
         <div class="row mb-1">
             <div class="col-md-2 d-flex justify-content-end"> 
-                 <%= form.label :anio, "Año:", class:"form-label fw-bold text-secondary" %>
+                 <%= form.label :anio, "Año:", class:"form-label " %>
             </div>
             <div class="col-md-3 d-flex justify-content-start">
                  <%= form.text_field :anio, class:"form-control" %>
@@ -71,7 +71,7 @@
     <%= render "doc_comprobante", form:form %>
     <%= render "red_acad", form:form  %>
     <div class="row">
-                <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                <div class="col-md-2 d-flex justify-content-end "> 
                             Autores:
                 </div>
                 <div class="col d-flex justify-content-start">

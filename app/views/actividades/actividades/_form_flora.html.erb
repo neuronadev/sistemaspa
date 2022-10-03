@@ -3,7 +3,7 @@
     
     <div class="row mb-1">
            <div class="col-md-2 d-flex justify-content-end"> 
-                <%= form.label :titulo, "Título:", class:"form-label fw-bold text-secondary" %>
+                <%= form.label :titulo, "Título:", class:"form-label " %>
             </div>
             <div class="col-md-6 d-flex justify-content-start">
                 <%= form.text_field :titulo, class:"form-control" %>
@@ -11,7 +11,7 @@
     </div>
     <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= form.label :fechapub, "Fecha de publicación:", class:"form-label fw-bold text-secondary" %>
+              <%= form.label :fechapub, "Fecha de publicación:", class:"form-label " %>
         </div>
         <div class="col-md-2 d-flex justify-content-start">
               <%= form.date_field :fechapub, class:"form-control" %>
@@ -23,7 +23,7 @@
                  
                   <div class="row  mb-1">
                       <div class="col-md-2 d-flex justify-content-end"> 
-                             <%=  fasc.label :tipofasciculo_id, "Número de especies:", class:"form-label fw-bold text-secondary" %>
+                             <%=  fasc.label :tipofasciculo_id, "Número de especies:", class:"form-label " %>
                       </div>  
                       <div class="col-md-4 d-flex justify-content-start">  
                              <%=  fasc.select :tipofasciculo_id, Tipofasciculo.all.pluck(:nomtipofasciculo,:id), { :include_blank=>'No. de especies'},class:"form-control" %>
@@ -31,7 +31,7 @@
                   </div>    
                   <div class="row  mb-1">
                       <div class="col-md-2 d-flex justify-content-end"> 
-                             <%=  fasc.label :tipomedio_id, "Medio de publicación:", class:"form-label fw-bold text-secondary" %>
+                             <%=  fasc.label :tipomedio_id, "Medio de publicación:", class:"form-label " %>
                       </div>  
                       <div class="col-md-4 d-flex justify-content-start">  
                              <%=  fasc.select :tipomedio_id, Tipomedio.all.pluck(:nomtipomedio,:id), { :include_blank=>'Medio de publicación'},class:"form-control" %>
@@ -40,7 +40,7 @@
 
                   <div class="row  mb-1">
                       <div class="col-md-2 d-flex justify-content-end"> 
-                             <%=  fasc.label :nommedio, "Nombre libro o revista:", class:"form-label fw-bold text-secondary" %>
+                             <%=  fasc.label :nommedio, "Nombre libro o revista:", class:"form-label " %>
                       </div>  
                       <div class="col-md-3 d-flex justify-content-start">  
                             <%=  fasc.text_field :nommedio, class:"form-control", placeholder:"Nombre medio de publicación", class:"form-control" %> 
@@ -49,7 +49,7 @@
 
                   <div class="row  mb-1">
                       <div class="col-md-2 d-flex justify-content-end"> 
-                             <%=  fasc.label :codigo, "Código ISBN o ISSN:", class:"form-label fw-bold text-secondary" %>
+                             <%=  fasc.label :codigo, "Código ISBN o ISSN:", class:"form-label " %>
                       </div>  
                       <div class="col-md-3 d-flex justify-content-start">  
                             <%=  fasc.text_field :codigo, class:"form-control", placeholder:"ISBN o ISSN", class:"form-control" %> 
@@ -64,7 +64,7 @@
     <%= render "red_acad", form:form  %>
 
     <div class="row">
-                <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                <div class="col-md-2 d-flex justify-content-end"> 
                             Autores:
                 </div>
                 <div class="col d-flex justify-content-start">

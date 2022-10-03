@@ -23,6 +23,12 @@
   .bgbody{
     background-color: $gray-100;
   }
+  .validar{
+    color: $orange-700;
+  }
+  .mostrar{
+     color: $blue-700;
+  }
   
 
 @import "~bootstrap/scss/bootstrap-utilities";

@@ -1,67 +1,10 @@
 
 
-<div class="row">
-     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
-           Revista:
-     </div>
-     <div class="col d-flex justify-content-start">
-          <%= @actividad.articulo.revista.nomrevista %>
-     </div>
-</div>
-
-<div class="row">
-     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
-           Volumen:
-     </div>
-     <div class="col d-flex justify-content-start">
-          <%= @actividad.articulo.volumen %>
-     </div>
-</div>
-<div class="row">
-     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
-           Issue:
-     </div>
-     <div class="col d-flex justify-content-start">
-          <%= @actividad.articulo.issue %>
-     </div>
-</div>
-<div class="row">
-     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
-           Página Inicial:
-     </div>
-     <div class="col d-flex justify-content-start">
-           <%= @actividad.articulo.pgini %>
-     </div>
-</div>
-<div class="row">
-     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
-           Página Final:
-     </div>
-     <div class="col d-flex justify-content-start">
-          <%= @actividad.articulo.pgfin %>
-     </div>
-</div>
-<div class="row">
-     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
-           Número Electrónico:
-     </div>
-     <div class="col d-flex justify-content-start">
-          <%= @actividad.articulo.eidentificador %>
-     </div>
-</div>
-<div class="row">
-     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
-           DOI:
-     </div>
-     <div class="col d-flex justify-content-start">
-          <%= @actividad.articulo.doi %>
-     </div>
-</div>
-<div class="row">
-     <div class="col-md-2 d-flex justify-content-end fw-bold"> 
-           Abstract:
-     </div>
-     <div class="col d-flex justify-content-start">
-          <%= @actividad.articulo.abstract %>
-     </div>
-</div>
+<%= row_show( 'Revista:', @actividad.articulo.revista.nomrevista ) %>
+<%= row_show( 'Volumen:', @actividad.articulo.volumen ) %>
+<%= row_show( 'Issue:', @actividad.articulo.issue ) %>
+<%= row_show( 'Página Inicial:', @actividad.articulo.pgini ) %>
+<%= row_show( 'Página Final:', @actividad.articulo.pgfin ) %>
+<%= row_show( 'Número Electrónico:', @actividad.articulo.eidentificador ) %>
+<%= row_show( 'DOI:', @actividad.articulo.doi ) %>
+<%= row_show( 'Abstract:', @actividad.articulo.abstract ) %>

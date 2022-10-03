@@ -1,7 +1,7 @@
 <%= form.fields_for :articulo do |artc| %>
    <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= form.label :fechapub, "Fecha de publicación:", class:"form-label fw-bold text-secondary" %>
+              <%= form.label :fechapub, "Fecha de publicación:", class:"form-label " %>
         </div>
         <div class="col-md-2 d-flex justify-content-start">
               <%= form.date_field :fechapub, class:"form-control" %>
@@ -10,7 +10,7 @@
    <%= render "medio_revista", artc:artc, tipo:'C' %>
    <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= artc.label :volumen, "Volumen:", class:"form-label fw-bold text-secondary" %>
+              <%= artc.label :volumen, "Volumen:", class:"form-label " %>
         </div>
         <div class="col-md-2 d-flex justify-content-start">
               <%= artc.text_field :volumen, class:"form-control" %>
@@ -18,7 +18,7 @@
    </div> 
    <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= artc.label :issue, "Issue:", class:"form-label fw-bold text-secondary" %>
+              <%= artc.label :issue, "Issue:", class:"form-label " %>
         </div>
         <div class="col-md-2 d-flex justify-content-start">
               <%= artc.text_field :issue, class:"form-control" %>
@@ -26,7 +26,7 @@
    </div> 
    <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= artc.label :pgini, "Páginas:", class:"form-label fw-bold text-secondary" %>
+              <%= artc.label :pgini, "Páginas:", class:"form-label " %>
         </div>
         <div class="col-md-6 d-flex justify-content-start">
              <div class="row row-cols-auto"> 
@@ -39,7 +39,7 @@
 
    <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= artc.label :eidentificador, "Núm. electrónico:", class:"form-label fw-bold text-secondary" %>
+              <%= artc.label :eidentificador, "Núm. electrónico:", class:"form-label " %>
         </div>
         <div class="col-md-3 d-flex justify-content-start">
               <%=  artc.text_field :eidentificador, class:"form-control" %>
@@ -48,7 +48,7 @@
 
    <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= artc.label :doi, "DOI:", class:"form-label fw-bold text-secondary" %>
+              <%= artc.label :doi, "DOI:", class:"form-label " %>
         </div>
         <div class="col-md-6 d-flex justify-content-start">
               <%= artc.text_field :doi, class:"form-control" %>
@@ -57,7 +57,7 @@
 
    <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= artc.label :abstract, "Abstract:", class:"form-label fw-bold text-secondary" %>
+              <%= artc.label :abstract, "Abstract:", class:"form-label " %>
         </div>
         <div class="col-md-8 d-flex justify-content-start">
               <%= artc.text_area :abstract, class:"form-control" %>

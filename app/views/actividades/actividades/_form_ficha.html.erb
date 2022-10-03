@@ -6,7 +6,7 @@
 
         <div class="row mb-1">
                   <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= form.label :titulo, "Título de la Ficha:", class:"form-label fw-bold text-secondary" %>
+                     <%= form.label :titulo, "Título de la Ficha:", class:"form-label " %>
                   </div>
                   <div class="col-md-6 d-flex justify-content-start">
                      <%= form.text_field :titulo, class:"form-control" %>
@@ -14,7 +14,7 @@
         </div>
         <div class="row mb-1">
                   <div class="col-md-2 d-flex justify-content-end"> 
-                        <%= form.label :fechapub, "Fecha de publicacion:", class:"form-label fw-bold text-secondary" %>
+                        <%= form.label :fechapub, "Fecha de publicacion:", class:"form-label " %>
                   </div>
                   <div class="col-md-2 d-flex justify-content-start">
                         <%= form.date_field :fechapub, class:"form-control" %>
@@ -25,7 +25,7 @@
         <%= form.fields_for :ficha do |ficha| %>
                  <div class="row mb-1">
                     <div class="col-md-2 d-flex justify-content-end"> 
-                        <%= ficha.label :nommedio, "Medio de publicación:", class:"form-label fw-bold text-secondary" %>
+                        <%= ficha.label :nommedio, "Medio de publicación:", class:"form-label " %>
                     </div>
                     <div class="col-md-5 d-flex justify-content-start">
                          <%=  ficha.text_field :nommedio ,class:"form-control" %>

@@ -3,7 +3,7 @@
      
      <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= form.label :titulo, "Nombre del curso:", class:"form-label fw-bold text-secondary" %>
+              <%= form.label :titulo, "Nombre del curso:", class:"form-label " %>
         </div>
         <div class="col-md-6 d-flex justify-content-start">
               <%= form.text_field :titulo, class:"form-control" %>
@@ -14,7 +14,7 @@
       <%= form.fields_for :curso do |cur_form| %>
             <div class="row  mb-1">
                 <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= form.label :tipocurso_id, "Tipo impartición:", class:"form-label fw-bold text-secondary" %>
+                     <%= form.label :tipocurso_id, "Tipo impartición:", class:"form-label " %>
                 </div>
                 <div class="col-md-4 d-flex justify-content-start">
                      <%=  cur_form.select :tipocurso_id, Tipocurso.all.pluck(:nomtipocurso,:id), { :include_blank=>'Tipo de impartición'}, class:"form-control" %>
@@ -23,7 +23,7 @@
 
              <div class="row  mb-1">
                 <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= form.label :fini, "Feha inicio:", class:"form-label fw-bold text-secondary" %>
+                     <%= form.label :fini, "Feha inicio:", class:"form-label " %>
                 </div>
                 <div class="col-md-2 d-flex justify-content-start">
                      <%= cur_form.date_field :fini, class:"form-control" %>
@@ -32,7 +32,7 @@
 
              <div class="row  mb-1">
                 <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= form.label :ffin, "Feha termino:", class:"form-label fw-bold text-secondary" %>
+                     <%= form.label :ffin, "Feha termino:", class:"form-label " %>
                 </div>
                 <div class="col-md-2 d-flex justify-content-start">
                      <%= cur_form.date_field :ffin, class:"form-control" %>
@@ -41,7 +41,7 @@
 
              <div class="row  mb-1">
                 <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= form.label :hcurso, "Total de horas del curso:", class:"form-label fw-bold text-secondary" %>
+                     <%= form.label :hcurso, "Total de horas del curso:", class:"form-label" %>
                 </div>
                 <div class="col-md-1 d-flex justify-content-start">
                      <%= cur_form.text_field :hcurso, class:"form-control" %>
@@ -50,7 +50,7 @@
 
              <div class="row  mb-1">
                 <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= form.label :himpartidas, "Horas impartidas:", class:"form-label fw-bold text-secondary" %>
+                     <%= form.label :himpartidas, "Horas impartidas:", class:"form-label " %>
                 </div>
                 <div class="col-md-1 d-flex justify-content-start">
                      <%= cur_form.text_field :himpartidas, class:"form-control"%>
@@ -59,7 +59,7 @@
 
              <div class="row  mb-1">
                 <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= form.label :creditos, "Creditos:", class:"form-label fw-bold text-secondary" %>
+                     <%= form.label :creditos, "Creditos:", class:"form-label " %>
                 </div>
                 <div class="col-md-1 d-flex justify-content-start">
                      <%= cur_form.text_field :creditos, class:"form-control" %>
@@ -68,7 +68,7 @@
 
              <div class="row  mb-1">
                 <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= form.label :noalumnos, "No. de alumnos:", class:"form-label fw-bold text-secondary" %>
+                     <%= form.label :noalumnos, "No. de alumnos:", class:"form-label " %>
                 </div>
                 <div class="col-md-1 d-flex justify-content-start">
                      <%= cur_form.text_field :noalumnos, class:"form-control"%>
@@ -77,7 +77,7 @@
 
              <div class="row  mb-1">
                 <div class="col-md-2 d-flex justify-content-end"> 
-                     <%= form.label :coordinador, "¿Coordinador del Curso?:", class:"form-label fw-bold text-secondary" %>
+                     <%= form.label :coordinador, "¿Coordinador del Curso?:", class:"form-label " %>
                 </div>
                 <div class="col-md-1 d-flex justify-content-start">
                      <div class="form-check form-switch"><%= cur_form.check_box :coordinador, class:"form-check-input" %></div>
@@ -90,7 +90,7 @@
     <%= render "doc_comprobante", form:form %>
     <%= render "red_acad", form:form  %>
     <div class="row">
-                <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                <div class="col-md-2 d-flex justify-content-end"> 
                             Autores:
                 </div>
                 <div class="col d-flex justify-content-start">

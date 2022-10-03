@@ -2,7 +2,7 @@
     <%= render "form_inputs_com", form:form %>
     <div class="row mb-1">
            <div class="col-md-2 d-flex justify-content-end"> 
-                <%= form.label :titulo, "Título:", class:"form-label fw-bold text-secondary" %>
+                <%= form.label :titulo, "Título:", class:"form-label " %>
             </div>
             <div class="col-md-6 d-flex justify-content-start">
                 <%= form.text_field :titulo, class:"form-control" %>
@@ -10,7 +10,7 @@
     </div>
     <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= form.label :anio, "Año de publicación:", class:"form-label fw-bold text-secondary" %>
+              <%= form.label :anio, "Año de publicación:", class:"form-label " %>
         </div>
         <div class="col-md-1 d-flex justify-content-start">
               <%= form.text_field :anio, class:"form-control" %>
@@ -22,7 +22,7 @@
                   <%= lib_form.hidden_field :editorial_id, value:1 %>  
                   <div class="row  mb-1">
                         <div class="col-md-2 d-flex justify-content-end"> 
-                             <%= lib_form.label :nopaginas, "Número de páginas:", class:"form-label fw-bold text-secondary" %>
+                             <%= lib_form.label :nopaginas, "Número de páginas:", class:"form-label " %>
                         </div>
                         <div class="col-md-1 d-flex justify-content-start">
                              <%= lib_form.text_field :nopaginas, class:"form-control" %>
@@ -30,7 +30,7 @@
                    </div> 
                    <div class="row  mb-1">
                         <div class="col-md-2 d-flex justify-content-end"> 
-                             <%= lib_form.label :idioma_id, "Idioma:", class:"form-label fw-bold text-secondary" %>
+                             <%= lib_form.label :idioma_id, "Idioma:", class:"form-label " %>
                         </div>
                         <div class="col-md-2 d-flex justify-content-start">
                             <%=  lib_form.select :idioma_id, Idioma.all.pluck(:nomidioma,:id), { prompt:'-- Seleccione --'}, class:"form-control" %>
@@ -38,7 +38,7 @@
                    </div> 
                    <div class="row  mb-1">
                         <div class="col-md-2 d-flex justify-content-end"> 
-                             <%= lib_form.label :isbn, "Isbn:", class:"form-label fw-bold text-secondary" %>
+                             <%= lib_form.label :isbn, "Isbn:", class:"form-label " %>
                         </div>
                         <div class="col-md-3 d-flex justify-content-start">
                             <%= lib_form.text_field :isbn, class:"form-control" %>
@@ -52,7 +52,7 @@
     <%= render "red_acad", form:form  %>
 
     <div class="row">
-                <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                <div class="col-md-2 d-flex justify-content-end "> 
                             Autores:
                 </div>
                 <div class="col d-flex justify-content-start">

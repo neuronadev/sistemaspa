@@ -5,10 +5,13 @@ export default class extends Controller {
     static targets =  ["modal"]
     connect(){}
 
-    modalshow(){
-        console.log("Mostrar modal...")
+    modalshow(event){
+        var idactividad = event.params.actividad
         this.element.modal.open(this.modalTarget)
-        
+        var btn_acep = document.getElementById('modal_btn_aceptar')
+        btn_acep.dataset.act = idactividad
+        var btnchk = document.getElementById('checkval')
+        btnchk.checked = false
     }
 
     check(event){
@@ -25,8 +28,30 @@ export default class extends Controller {
         this.element.modal.close(this.modalTarget)
     }
 
-    submitform(event){
-        
+    async submitform(event){
+        var token = document.querySelector('meta[name="csrf-token"]').content
+        var idactividad = event.target.dataset.act
+        await fetch(
+              '/validaciones/productos/vobousuario',
+              {
+                 method: 'POST',
+                 headers: { 'Content-Type':'application/json', 'Accept':'application/html', 'X-CSRF-Token': token },
+                 body: JSON.stringify( {idprod:idactividad} )
+              }       
+        )
+         .then( response => {
+                   
+                   var td = document.getElementById(`actividad${idactividad}`)
+                   td.innerHTML = `<div class="d-flex flex-row bd-highlight mb-1  justify-content-center">  
+                                                <div class="p-1 bd-highlight"> 
+                                                    <i class="fas fa-check-double fa-lg text-success"></i>
+                                                </div>
+                                                <div class="p-1 bd-highlight"><small></small></div>   
+                                            </div>`
+                   this.element.modal.close(this.modalTarget)
+
+                   alert('Registro validado.')           
+         } )
     }
 
 }

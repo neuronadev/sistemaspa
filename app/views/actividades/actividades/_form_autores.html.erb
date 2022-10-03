@@ -101,7 +101,12 @@
 
 
 <div id="cont_rws" class="col mt-4" data-controller="autores">
-    
+    <div class="row text-secondary">
+        <div class="col-9"> 
+           Para los autores del inecol, al momento de escribir los apelldios, se mostrará una lista con
+           las coincidencias, debe seleccione el nombre correcto de la lista. Para autores externos, escribir los apellidos y nombres.
+        </div>   
+    </div>
     <div class="row mb-3">
         <template data-autores-target="tplautor">
             <%= form.fields_for :autores, Autor.new, child_index: 'RW_AUTOR' do |autor| %>

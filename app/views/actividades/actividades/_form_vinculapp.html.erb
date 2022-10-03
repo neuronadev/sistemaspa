@@ -2,7 +2,7 @@
     <%= render "form_inputs_com", form:form %>
     <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= form.label :titulo, "Nombre de la actividad:", class:"form-label fw-bold text-secondary" %>
+              <%= form.label :titulo, "Nombre de la actividad:", class:"form-label " %>
         </div>
         <div class="col-md-6 d-flex justify-content-start">
               <%= form.text_field :titulo, class:"form-control" %>
@@ -10,7 +10,7 @@
      </div> 
      <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= form.label :anio, "Año:", class:"form-label fw-bold text-secondary" %>
+              <%= form.label :anio, "Año:", class:"form-label" %>
         </div>
         <div class="col-md-1 d-flex justify-content-start">
               <%= form.text_field :anio, class:"form-control" %>
@@ -21,7 +21,7 @@
                 <% if @producto.prodgrupo.clave == 'DECRETO' %>
                          <div class="row  mb-1">
                             <div class="col-md-2 d-flex justify-content-end"> 
-                                  <%= form.label :niveldecreto, "Nivel:", class:"form-label fw-bold text-secondary" %>
+                                  <%= form.label :niveldecreto, "Nivel:", class:"form-label " %>
                             </div>
                             <div class="col-md-3 d-flex justify-content-start">
                                   <%= vin_form.select :niveldecreto, options_for_select(@niveldecreto), { :include_blank=>'-Nivel de gobierno-'}, class:"form-control"  %> 
@@ -31,7 +31,7 @@
                 <% if @producto.prodgrupo.clave == 'ORDENAMIENTO' %>
                           <div class="row  mb-1">
                               <div class="col-md-2 d-flex justify-content-end"> 
-                                    <%= form.label :ordenamiento, "Fase:", class:"form-label fw-bold text-secondary" %>
+                                    <%= form.label :ordenamiento, "Fase:", class:"form-label " %>
                               </div>
                               <div class="col-md-3 d-flex justify-content-start">
                                     <%= vin_form.select :ordenamiento, options_for_select(@ordenamiento), { :include_blank=>'-Fase-'}, class:"form-control"  %> 
@@ -41,7 +41,7 @@
                 <% if @producto.prodgrupo.clave == 'INICIATIVA' %>
                           <div class="row  mb-1">
                               <div class="col-md-2 d-flex justify-content-end"> 
-                                    <%= form.label :niveliniciativa, "Nivel:", class:"form-label fw-bold text-secondary" %>
+                                    <%= form.label :niveliniciativa, "Nivel:", class:"form-label " %>
                               </div>
                               <div class="col-md-3 d-flex justify-content-start">
                                     <%= vin_form.select :niveliniciativa, options_for_select(@niveliniciativa), { :include_blank=>'-Nivel de gobierno-'}, class:"form-control"  %> 
@@ -51,7 +51,7 @@
                 <% if @producto.prodgrupo.clave == 'REGLA' %>
                          <div class="row  mb-1">
                               <div class="col-md-2 d-flex justify-content-end"> 
-                                    <%= form.label :nivelregla, "Nivel:", class:"form-label fw-bold text-secondary" %>
+                                    <%= form.label :nivelregla, "Nivel:", class:"form-label " %>
                               </div>
                               <div class="col-md-3 d-flex justify-content-start">
                                     <%= vin_form.select :nivelregla, options_for_select(@nivelregla), { :include_blank=>'-Nivel de gobierno-'}, class:"form-control"  %> 
@@ -61,7 +61,7 @@
                 <% if @producto.prodgrupo.clave == 'COMITE' %>
                           <div class="row  mb-1">
                               <div class="col-md-2 d-flex justify-content-end"> 
-                                    <%= form.label :nivelcomite, "Participación:" , class:"form-label fw-bold text-secondary" %>
+                                    <%= form.label :nivelcomite, "Participación:" , class:"form-label " %>
                               </div>
                               <div class="col-md-3 d-flex justify-content-start">
                                     <%
@@ -85,7 +85,7 @@
     <%= render "doc_comprobante", form:form %>
     <%= render "red_acad", form:form  %>
     <div class="row">
-                <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                <div class="col-md-2 d-flex justify-content-end"> 
                             Autores:
                 </div>
                 <div class="col d-flex justify-content-start">

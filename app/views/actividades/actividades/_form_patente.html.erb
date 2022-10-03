@@ -10,7 +10,7 @@
     <%= form.fields_for :patente do |pt_form| %>
                <div class="row mb-1">
                     <div class="col-md-2 d-flex justify-content-end"> 
-                             <%= pt_form.label :tipopatente_id, "Tipo de patente:", class:"form-label fw-bold text-secondary" %>
+                             <%= pt_form.label :tipopatente_id, "Tipo de patente:", class:"form-label " %>
                       </div>
                       <div class="col-md-6 d-flex justify-content-start">
                              <% if @parts[1] == 'IND' %>
@@ -25,7 +25,7 @@
 
    <div class="row  mb-1">
         <div class="col-md-2 d-flex justify-content-end"> 
-              <%= form.label :anio, "Año:", class:"form-label fw-bold text-secondary" %>
+              <%= form.label :anio, "Año:", class:"form-label" %>
         </div>
         <div class="col-md-1 d-flex justify-content-start">
               <%= form.text_field :anio, class:"form-control" %>
@@ -36,7 +36,7 @@
     <%= render "doc_comprobante", form:form %>
     <%= render "red_acad", form:form  %>
     <div class="row">
-                <div class="col-md-2 d-flex justify-content-end fw-bold"> 
+                <div class="col-md-2 d-flex justify-content-end"> 
                             Autores:
                 </div>
                 <div class="col d-flex justify-content-start">

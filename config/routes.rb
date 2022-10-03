@@ -10,6 +10,14 @@ Rails.application.routes.draw do
     resources :capitulos
   end
 
+  namespace :validaciones do
+       resources :productos do
+          collection do
+             post 'vobousuario'
+          end
+       end
+  end
+
   get 'valactividades/validaciones/infoproducto/:trval/:tritem', to:'valactividades/validaciones#infoproducto', as: 'savalproducto'
   get 'valactividades/validaciones/index', to: 'valactividades/validaciones#index', as: 'validaindex'
   get 'valactividades/validaciones/aceptarproducto/:target/:item', to:'valactividades/validaciones#aceptarproducto', as: 'saaceptarproducto'

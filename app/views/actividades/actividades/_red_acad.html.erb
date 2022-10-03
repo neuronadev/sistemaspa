@@ -1,6 +1,6 @@
 <div class="row mb-1">
      <div class="col-md-2 d-flex justify-content-end"> 
-          <%= form.label :asignared, "Red académica:", class:"form-label fw-bold text-secondary" %>
+          <%= form.label :asignared, "Red académica:", class:"form-label " %>
      </div>
      <div class="col-md-4 d-flex justify-content-start">
           <%= form.select :asignared, Red.all.order(:nomred).pluck(:nomred,:id), { prompt:'Seleccione una red'}, class:"form-control" %>
