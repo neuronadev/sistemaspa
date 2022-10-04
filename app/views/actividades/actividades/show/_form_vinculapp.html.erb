@@ -19,9 +19,10 @@
            <%= row_show('Nivel:', @h[@actividad.vinculacion.nivelregla]) %>
     <% end %> 
     <% if @producto.prodgrupo.clave == 'COMITE' %>
-           <%  @h = @nivelregla.invert  %>
+           <%  @h = @nivelcomite.invert  %>
            <%= row_show('Participación:', @h[@actividad.vinculacion.nivelcomite]) %>
     <% end %> 
     
     <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+    <%= render "actividades/actividades/show/red_acad", actividad:@actividad  %>
     <%= render "actividades/actividades/show/autoria", actividad:@actividad, swcorr:'N' %>

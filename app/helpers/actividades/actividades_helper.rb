@@ -4,7 +4,7 @@ module Actividades::ActividadesHelper
                             <div class='col-md-2 d-flex justify-content-end'> 
                                 #{titulo}
                             </div>
-                            <div class='col d-flex justify-content-start fw-bold'>
+                            <div class='col d-flex justify-content-start'>
                                 #{contenido}
                             </div>
                   </div>  ".html_safe

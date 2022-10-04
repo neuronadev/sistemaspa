@@ -8,7 +8,9 @@
                  <%= form.hidden_field :persona_id, class:'autoridp' %>
             <% end %>   
             
-            <%= form.hidden_field :rol_id, value:1 %>
+            <% if ![10].include? @producto.id %>    
+                 <%= form.hidden_field :rol_id, value:1 %>
+            <% end %> 
 
             <div class="col-1 tipoautor d-flex justify-content-around align-items-center">
                 <div class="align-middle"><i class="fa-regular fa-user"></i></div>
@@ -33,7 +35,11 @@
                     </div>
                 </div>
             <% end %> 
-
+            <% if [10].include? @producto.id %> 
+                  <div class="col-2 align-items-center justify-content-center">
+                      <%= form.select :rol_id, Rol.where(id:[4,9]).all.map { |r| [r.nomrol, r.id] }, class:'form-control'  %> 
+                  </div>
+            <% end %> 
             <div id="controles" class="col-2 d-flex  align-items-start controles">
                
                      <div id="controla" class="d-flex col-2 justify-content-center controla"> <div class="align-middle"><i class="fa-solid fa-circle-minus text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar fila" data-action="click->autores#removeItem click->autores#validarControles" ></i></div></div>

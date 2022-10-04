@@ -1,0 +1,22 @@
+<div class="row border-bottom mt-2">
+
+        <div class="col-1 d-flex justify-content-center  align-self-center">
+              <%= a.id %>
+        </div>
+        <div class="col-3  align-self-center">
+             <%= a.producto.descripcion %>
+        </div>
+        <div class="col-6  align-self-center">
+               <%= a.titulo %>
+               <div>
+                    <%= link_to actividades_actividad_path(a.id), class:"text-decoration-none mostrar" do %>
+                         <i class="fa-regular fa-file-powerpoint"></i> Ver producto
+                    <% end %>
+               
+               </div>
+        </div>
+        <div class="col  align-self-center">
+              <%= render "actividades/actividades/items/validacion_fila", a:a %>
+        </div>
+
+</div>

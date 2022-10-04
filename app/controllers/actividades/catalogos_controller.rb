@@ -7,13 +7,20 @@ class Actividades::CatalogosController < ApplicationController
 
   def listcat
       idcat = params[:idcat]
-      if idcat.to_i == 6
-              @productos = Producto.where(prodcategoria_id:[6,7], estado:['A','E']).order(:descripcion)
-       elsif idcat == 'ini'
-              @productos = Producto.where(prodcategoria_id:1, estado:['A','E']).order(:descripcion)
-       else
-              @productos = Producto.where(prodcategoria_id:idcat.to_i, estado:['A','E']).order(:descripcion)
-      end   
+      
+      if idcat == 'ini'
+            @productos = Producto.where(prodcategoria_id:1, estado:['A','E']).order(:descripcion)
+      else 
+            @productos = Producto.where(prodcategoria_id:idcat.to_i, estado:['A','E']).order(:descripcion) 
+      end
+
+      #if idcat.to_i == 6
+      #        @productos = Producto.where(prodcategoria_id:[6,7], estado:['A','E']).order(:descripcion)
+      # elsif idcat == 'ini'
+      #        @productos = Producto.where(prodcategoria_id:1, estado:['A','E']).order(:descripcion)
+      # else
+      #        @productos = Producto.where(prodcategoria_id:idcat.to_i, estado:['A','E']).order(:descripcion)
+      #end   
 
       render partial: 'listado_cat'
   end
