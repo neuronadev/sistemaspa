@@ -1,46 +1,43 @@
 
-<div class="eltab container" data-controller="cattab">
-    <div>
-       <h5>Catalogo de Productos Académicos</h5>
-       <p> Seleccione un producto de la lista </p>
-    </div> 
-    <div class="row headtab row-cols-5 border-bottom text-white">
-         <div id="1"  class="col-2 headinicio headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
-               data-cattab-idx-param="1" 
-               data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
-             >
-               Generación de conocimiento
-         </div>
-         <div id="2" class="col-2 headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
-               data-cattab-idx-param="2"
-               data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
-              >
-               Divulgación de la ciencia
-         </div>
-         <div id="3" class="col-2 headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
-                style="text-align: center;"
-                data-cattab-idx-param="3"
-                data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
-              > Formación de recursos humanos
-         </div>
-         <div id="5" class="col-2 headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
-              data-cattab-idx-param="4"
-              data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
-              > Obtención de recursos
+<%= nomseccion('Catalogo de Productos Académicos', 'Seleccione un producto de la lista') %>
+<div class="eltab container" data-controller="cattab" style="min-height: 70vh">
+          <div class="row headtab row-cols-5 border-bottom text-white">
+               <div id="1"  class="col-2 headinicio headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
+                         data-cattab-idx-param="1" 
+                         data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
+                    >
+                         Generación de conocimiento
+               </div>
+               <div id="2" class="col-2 headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
+                         data-cattab-idx-param="2"
+                         data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
+                    >
+                         Divulgación de la ciencia
+               </div>
+               <div id="3" class="col-2 headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
+                         style="text-align: center;"
+                         data-cattab-idx-param="3"
+                         data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
+                    > Formación de recursos humanos
+               </div>
+               <div id="5" class="col-2 headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
+                    data-cattab-idx-param="4"
+                    data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
+                    > Obtención de recursos
+                    </div>
+               <div id="6" class="col-2 headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
+                    data-cattab-idx-param="5"
+                    data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
+                    > Vinculación (Solución de problemas)
+               </div>
+               <div id="7" class="col-2 headitem p-2 d-flex bg-secondary justify-content-center" role="button" 
+                    data-cattab-idx-param="5"
+                    data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
+                    > Vinculación (Políticas públicas)
+               </div>
           </div>
-         <div id="6" class="col-2 headitem p-2 d-flex border-end bg-secondary justify-content-center" role="button" 
-              data-cattab-idx-param="5"
-              data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
-              > Vinculación (Solución de problemas)
-         </div>
-         <div id="7" class="col-2 headitem p-2 d-flex bg-secondary justify-content-center" role="button" 
-              data-cattab-idx-param="5"
-              data-action="mouseover->cattab#overbackcolor mouseout->cattab#outbackcolor click->cattab#backcolor click->cattab#conttab"
-              > Vinculación (Políticas públicas)
-         </div>
-    </div>
 
-     <div id="contcat" class="row cont">
-     </div>
+          <div id="contcat" class="row cont">
+          </div>
 
 </div>

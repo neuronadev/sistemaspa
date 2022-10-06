@@ -72,11 +72,12 @@
                 </div>
     </div>
 
-    <div class="row mt-4">
-                <div class="col">
-                   <div class="d-flex justify-content-end">
-                     <%= form.submit "Enviar información", class:'btn btn-success' ,data: { confirm: '¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %>
-                   </div>
+   <div class="row d-flex justify-content-end mt-4">
+                <div class="col-3">
+                    <div class="row">
+                        <div class="col"><%= form.submit "Enviar información", class:'btn btn-success' ,data: { confirm: '¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %></div>
+                        <div class="col"><%= render "actividades/actividades/items/btncancel" %></div>
+                    </div>
                 </div> 
    </div>
 <% end %>

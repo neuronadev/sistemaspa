@@ -1,25 +1,30 @@
-<div class="container" data-controller="modal modalalert">
-    <div class="row border-bottom headlist">
-        <div class="col-1 d-flex justify-content-center">
-             Folio
-        </div>
-        <div class="col-3 d-flex justify-content-center">
-             Producto
-        </div>
-        <div class="col-6 d-flex justify-content-center">
-             Nombre de la publicación
-        </div>
-        <div class="col d-flex justify-content-center">
-        </div>
-    </div>
+<%= nomseccion('Productos Académicos', 'Periodo 2022') %>
+<div class="container p-2 d-flex justify-content-center" data-controller="modal modalalert">
+     <div class="col-11">
+          <div class="row border-bottom headlist">
+               <div class="col-1 d-flex justify-content-center">
+                    Folio
+               </div>
+               <div class="col-3 d-flex justify-content-center">
+                    Producto
+               </div>
+               <div class="col-6 d-flex justify-content-center">
+                    Nombre del producto
+               </div>
+               <div class="col d-flex justify-content-center">
+               </div>
+          </div>
 
-    <div class="row">
-         <% if @actividades.any? %>
-               <% @actividades.each do |a| %>
-                    <%= render "actividades/actividades/items/prod_fila", a:a %>     
-               <% end %>          
-          <% else %>
-         <% end %>
-    </div>
- <div><%= render 'modal_alert' %></div>
+          <div class="row">
+               <div class="col"> 
+                         <% if @actividades.any? %>
+                                   <% @actividades.each do |a| %>
+                                        <%= render "actividades/actividades/items/prod_fila", a:a %>     
+                                   <% end %>          
+                              <% else %>
+                         <% end %>
+               </div>  
+          </div>
+          <div><%= render 'modal_alert' %></div>
+     </div>     
 </div>

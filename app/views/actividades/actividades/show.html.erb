@@ -1,72 +1,80 @@
 
-<div class="container mt-md-3">
-   <% if info %>
-         <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
-              <i class="fa-solid fa-check"></i> <%= info %>
-         </div>
-   <% end %>
-   <div class="row">
-      <div class="col">
-        <h5> <%= @producto.descripcion %> </h5>  
-      </div>  
-   </div>
-   <div class="row">
-      <div class="col">
-          <%= render "navs/menu_prod" %>  
-      </div>  
-   </div> 
-       <% if @actividad.periodo == 2020 %>
-                <%= link_to datahistory_path(2020), data:{turbolinks:false} do %>
-                        <i class="fas fa-long-arrow-alt-left"></i> Regresar al histórico 2020
-                <% end %>  
-       <% end  %>
-   <div class="card">
-      <div class="card-body">
-         <% if !flash[:msgupdoc].blank? %> 
-            <div class="alert alert-success" > <%= flash[:msgupdoc] %> </div>  
-         <% end %>
-         
-         <% if @actividad.estado == 'D' %> 
-                <% if @actividad.producto_id == 82 %>          
-                      <%  autores = Autor.where(actividad_id:@actividad.id, persona_id:current_usuario.persona_id).first  %>
-                      <% if autores.aplicar == 'N' %>      
-                            <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
-                     <% end %>           
-                <% else %> 
-                   <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
-                <% end %> 
-         
-         <% end %>    
-         <% if [81,85].include? @actividad.producto_id %>
-                <%  autores = Autor.where(actividad_id:@actividad.id, persona_id:current_usuario.persona_id).first  %>
-                <% if autores.aplicar == 'N' %>   
-                          <div class="alert alert-danger" role="alert">
-                               Un análisis contrastando sus actividades sustantivas registradas, contra el proyecto reportado, se concluye que forma parte
-                               de sus labores que desempeña en su puesto de trabajo, por lo tanto, no es una actividad adicional para considerarse en la evaluación de puntos.
-                           </div>
-                <% end %>
-         <% end %> 
-          <% if [10].include? @actividad.producto_id %>
-                      <%  autores = Autor.where(actividad_id:@actividad.id, persona_id:current_usuario.persona_id).first  %>
-                      <% if autores.aplicar == 'N' %>      
-                            <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
-                     <% end %> 
-          <% end %>
-        
-         <%= render "actividades/actividades/show/form_art", actividad:@actividad if @parts[0] == 'ART' %>
-         <%= render "actividades/actividades/show/form_libro", actividad:@actividad if @parts[0] == 'LIBRO' %>
-         <%= render "actividades/actividades/show/form_capitulo", actividad:@actividad if @parts[0] == 'CAPITULO' %>
-         <%= render "actividades/actividades/show/form_flora", actividad:@actividad if @parts[0] == 'FLORA' %>
-         <%= render "actividades/actividades/show/form_ficha", actividad:@actividad if @producto.prodgrupo.clave == 'FICHA' %>
-         <%= render "actividades/actividades/show/form_patente", actividad:@actividad if @parts[0] == 'PATENTE' %>
-         <%= render "actividades/actividades/show/form_editor", actividad:@actividad if @parts[0] == 'EDITOR' %>
-         <%= render "actividades/actividades/show/form_odivulga", actividad:@actividad if @parts[0] == 'ODIV' %>
-         <%= render "actividades/actividades/show/form_vinculapp", actividad:@actividad if @parts[0] == 'VINCULAPP' %>
-         <%= render "actividades/actividades/show/form_vinculasp", actividad:@actividad if @parts[0] == 'VINCULASP' %>
-         <%= render "actividades/actividades/show/form_adicional", actividad:@actividad if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
-         <%= render "actividades/actividades/show/form_curso", actividad:@actividad if @producto.prodgrupo.clave == 'CUR' %>
-         <%= render "actividades/actividades/show/form_tesis", actividad:@actividad if @producto.prodgrupo.clave == 'TESIS' %>
-         <%= render "actividades/actividades/show/form_proyecto", actividad:@actividad if @producto.prodgrupo.clave == 'PROY' %>
-      </div>  
-   </div>
+<div class="row mt-md-3">
+     <%= render "actividades/actividades/items/back" %>
+     
+     <div class="row d-flex justify-content-center">
+          <div class="col-11">
+               <% if info %>
+                     <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
+                        <i class="fa-solid fa-check"></i> <%= info %>
+                     </div>
+               <% end %>
+
+               <div class="row">
+                     <h5> <%= @producto.descripcion %> </h5>  
+                     <div class="row">
+                        <div class="col">
+                           <%= render "navs/menu_prod" %>  
+                        </div>  
+                     </div> 
+
+                     <% if @actividad.periodo == 2020 %>
+                                 <%= link_to datahistory_path(2020) do %>
+                                          <i class="fas fa-long-arrow-alt-left"></i> Regresar al histórico 2020
+                                 <% end %>  
+                     <% end  %>
+               </div>
+               <div class="row" style="min-height: 50vh">
+                  <div class="card">
+                     <div class="card-body">
+                        <% if !flash[:msgupdoc].blank? %> 
+                           <div class="alert alert-success" > <%= flash[:msgupdoc] %> </div>  
+                        <% end %>
+                        
+                        <% if @actividad.estado == 'D' %> 
+                              <% if @actividad.producto_id == 82 %>          
+                                    <%  autores = Autor.where(actividad_id:@actividad.id, persona_id:current_usuario.persona_id).first  %>
+                                    <% if autores.aplicar == 'N' %>      
+                                          <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
+                                    <% end %>           
+                              <% else %> 
+                                 <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
+                              <% end %> 
+                        
+                        <% end %>    
+                        <% if [81,85].include? @actividad.producto_id %>
+                              <%  autores = Autor.where(actividad_id:@actividad.id, persona_id:current_usuario.persona_id).first  %>
+                              <% if autores.aplicar == 'N' %>   
+                                       <div class="alert alert-danger" role="alert">
+                                             Un análisis contrastando sus actividades sustantivas registradas, contra el proyecto reportado, se concluye que forma parte
+                                             de sus labores que desempeña en su puesto de trabajo, por lo tanto, no es una actividad adicional para considerarse en la evaluación de puntos.
+                                          </div>
+                              <% end %>
+                        <% end %> 
+                        <% if [10].include? @actividad.producto_id %>
+                                    <%  autores = Autor.where(actividad_id:@actividad.id, persona_id:current_usuario.persona_id).first  %>
+                                    <% if autores.aplicar == 'N' %>      
+                                          <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
+                                    <% end %> 
+                        <% end %>
+                     
+                        <%= render "actividades/actividades/show/form_art", actividad:@actividad if @parts[0] == 'ART' %>
+                        <%= render "actividades/actividades/show/form_libro", actividad:@actividad if @parts[0] == 'LIBRO' %>
+                        <%= render "actividades/actividades/show/form_capitulo", actividad:@actividad if @parts[0] == 'CAPITULO' %>
+                        <%= render "actividades/actividades/show/form_flora", actividad:@actividad if @parts[0] == 'FLORA' %>
+                        <%= render "actividades/actividades/show/form_ficha", actividad:@actividad if @producto.prodgrupo.clave == 'FICHA' %>
+                        <%= render "actividades/actividades/show/form_patente", actividad:@actividad if @parts[0] == 'PATENTE' %>
+                        <%= render "actividades/actividades/show/form_editor", actividad:@actividad if @parts[0] == 'EDITOR' %>
+                        <%= render "actividades/actividades/show/form_odivulga", actividad:@actividad if @parts[0] == 'ODIV' %>
+                        <%= render "actividades/actividades/show/form_vinculapp", actividad:@actividad if @parts[0] == 'VINCULAPP' %>
+                        <%= render "actividades/actividades/show/form_vinculasp", actividad:@actividad if @parts[0] == 'VINCULASP' %>
+                        <%= render "actividades/actividades/show/form_adicional", actividad:@actividad if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
+                        <%= render "actividades/actividades/show/form_curso", actividad:@actividad if @producto.prodgrupo.clave == 'CUR' %>
+                        <%= render "actividades/actividades/show/form_tesis", actividad:@actividad if @producto.prodgrupo.clave == 'TESIS' %>
+                        <%= render "actividades/actividades/show/form_proyecto", actividad:@actividad if @producto.prodgrupo.clave == 'PROY' %>
+                     </div>  
+                  </div>
+               </div>
+          </div>
+
 </div> 
