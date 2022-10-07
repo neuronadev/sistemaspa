@@ -1,13 +1,6 @@
+    <%= row_show( 'Nombre actividad:', actividad.titulo ) %>
+    <%= row_show( 'Año:', actividad.anio ) %>
 
-    <div class="row">
-         <div class="mb-3 col-md-9">
-              <label class="font-weight-bold">Título de la actividad:</label>
-              <div><%= actividad.titulo %></div>
-         </div>  
-         <div class="mb-3 col-md-3">
-               <label class="font-weight-bold">Año:</label>
-               <div><%= actividad.anio %></div>
-         </div>  
-    </div>
     <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+    <%= render "actividades/actividades/show/red_acad", actividad:@actividad  %>
     <%= render "actividades/actividades/show/autoria", actividad:@actividad, swcorr:'N' %>

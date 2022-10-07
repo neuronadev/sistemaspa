@@ -102,7 +102,7 @@
 
 <div id="cont_rws" class="col mt-4" data-controller="autores">
     <div class="row text-secondary">
-       <% if ![9].include? @producto.id %>
+       <% if ![9,50,51,59,60,61,62,66].include? @producto.id %>
           <div class="col"> 
              Para ingresar un académico del inecol, al momento de escribir los apelldios, se mostrará una lista con
              las coincidencias, debe seleccione el nombre correcto de la lista. Para autores externos, escribir los apellidos y nombres.
@@ -119,7 +119,7 @@
         
         <div data-autores-target="contautores" class="container"> 
             <%= form.fields_for :autores do |autor| %>
-                 <% if @producto.id == 9 %> 
+                 <% if [9,50,51,59,60,61,62,66].include? @producto.id %> 
                          <%= render 'form_autor_hidden', form: autor %> 
                  <% else %> 
                          <%= render 'form_autor_fields', form: autor %>                         

@@ -18,11 +18,11 @@
             </div>
 
             <div class="col-3">
-                <%= form.text_field :autorap, placeholder:'(apellidos)', autocomplete:'off', class:'autorap border-0 p-1 col shadow-none bg-light rounded', 'data-action':'keyup->autores#search keypress->autores#kEnter'  %> 
+                <%= form.text_field :autorap, placeholder:'(apellidos)', autocomplete:'off', class:'autorap border-0 p-1 col shadow-none bg-light rounded fw-bold', 'data-action':'keyup->autores#search keypress->autores#kEnter'  %> 
             </div>
 
             <div class="col-3">
-                <%= form.text_field :autornom, placeholder:'(nombre)', autocomplete:'off', class:'autornom border-0 p-1 col shadow-none bg-light rounded', 'data-action':'focus->autores#hiddenSearch keypress->autores#kEnter focusout->autores#tipoAutor' %>
+                <%= form.text_field :autornom, placeholder:'(nombre)', autocomplete:'off', class:'autornom border-0 p-1 col shadow-none bg-light rounded fw-bold', 'data-action':'focus->autores#hiddenSearch keypress->autores#kEnter focusout->autores#tipoAutor' %>
             </div>
   
             <% if [1,2,3,4,5,8].include? @producto.id %> 

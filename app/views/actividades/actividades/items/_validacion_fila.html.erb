@@ -1,24 +1,24 @@
 <div class="row" id="actividad<%= a.id %>">
     <% if a.estado == 'A' %>
-          <div class="col cursor-pointer validar" data-action="click->modalalert#modalshow" data-modalalert-actividad-param='<%= a.id %>' style="font-size:14px;" >
+          <div class="col cursor-pointer validar fw-bold" data-action="click->modalalert#modalshow" data-modalalert-actividad-param='<%= a.id %>' style="font-size:14px;" >
                     <i class="fas fa-check-circle"></i> Enviar a validación
           </div>
     <% end %> 
 
     <% if a.estado == 'U' %>
-          <div class="col validarcr" style="font-size:14px;"><i class="fa-solid fa-arrow-right"></i> En validación-Coor. Red</div>
+          <div class="col validarcr fw-bold" style="font-size:14px;"><i class="fa-solid fa-arrow-right"></i> En validación-Coor. Red</div>
     <% end %>      
 
     <% if a.estado == 'C' %>
-          <div class="col validarsa" style="font-size:14px;"><i class="fa-solid fa-arrow-right"></i> En validación-SA</div>
+          <div class="col validarsa fw-bold" style="font-size:14px;"><i class="fa-solid fa-arrow-right"></i> En validación-SA</div>
     <% end %>      
     
     <% if a.estado == 'S' %>
-          <div class="col validarok" style="font-size:14px;"><i class="fas fa-check-double text-success"></i> Validado</div>
+          <div class="col validarok fw-bold" style="font-size:14px;"><i class="fas fa-check-double text-success"></i> Validado</div>
     <% end %> 
 
     <% if a.estado == 'D' %>
-          <div class="col validarno" style="font-size:14px;"><i class="fas fa-times"></i> No en apego normativa</div>
+          <div class="col validarno fw-bold" style="font-size:14px;"><i class="fas fa-times"></i> No en apego normativa</div>
     <% end %> 
 
 

@@ -11,15 +11,15 @@
             <%= form.hidden_field :rol_id, value:1 %>
 
             <div class="col-1 tipoautor">
-                <div class="align-middle"><i class="fa-regular fa-user"></i></div>
+                <div class="align-middle"><i class="fa-regular fa-user text-success fw-bold"></i></div>
             </div>
 
             <div class="col-3">
-                <%= form.text_field :autorap, placeholder:'(apellidos)', autocomplete:'off', class:'autorap border-0 p-1 col-12 shadow-none bg-light rounded', value:(current_usuario.persona.paterno||'') + ' ' + (current_usuario.persona.materno||'') , 'data-action':'keyup->autores#search keypress->autores#kEnter', readonly:true %> 
+                <%= form.text_field :autorap, placeholder:'(apellidos)', autocomplete:'off', class:'autorap border-0 p-1 col-12 shadow-none bg-light rounded fw-bold', value:(current_usuario.persona.paterno||'') + ' ' + (current_usuario.persona.materno||'') , 'data-action':'keyup->autores#search keypress->autores#kEnter', readonly:true %> 
             </div>
 
             <div class="col-3">
-                <%= form.text_field :autornom, placeholder:'(nombre)', autocomplete:'off', class:'autornom border-0 p-1 col-12 shadow-none bg-light rounded', value:current_usuario.persona.nombre, 'data-action':'focus->autores#hiddenSearch keypress->autores#kEnter focusout->autores#tipoAutor', readonly:true %>
+                <%= form.text_field :autornom, placeholder:'(nombre)', autocomplete:'off', class:'autornom border-0 p-1 col-12 shadow-none bg-light rounded fw-bold', value:current_usuario.persona.nombre, 'data-action':'focus->autores#hiddenSearch keypress->autores#kEnter focusout->autores#tipoAutor', readonly:true %>
             </div>
 
             <div id="controles" class="col-3 controles">

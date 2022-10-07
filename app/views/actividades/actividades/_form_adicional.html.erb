@@ -1,24 +1,48 @@
 <%= form_with(model:[:actividades, actividad])  do |form| %>
    <%= render "form_inputs_com", form:form %>
-    <div class="row">
-        <div class="mb-3 col-md-8">
-            <%= form.label :titulo, "Título o nombre de la actividad:"%>
-            <%= form.text_field :titulo, class:"form-control" %>
-        </div> 
-        <div class="mb-3 col-md-2">
-            <%= form.label :anio, "Año:" %>
-            <%= form.text_field :anio,class:"form-control" %> 
-        </div>    
+
+    <div class="row mb-2">
+                 <div class="col-md-2 d-flex justify-content-end"> 
+                       <%= form.label :titulo, "Nombre actividad:", class:"form-label" %>
+                 </div>
+                 <div class="col d-flex justify-content-start">
+                       <%= form.text_field :titulo, class:"form-control" %>
+                 </div>
+    </div>
+    <div class="row mb-2">
+                 <div class="col-md-2 d-flex justify-content-end"> 
+                       <%= form.label :anio, "Año:", class:"form-label" %>
+                 </div>
+                 <div class="col-1 d-flex justify-content-start">
+                       <%= form.text_field :anio, class:"form-control" %>
+                 </div>
     </div>
 
+
      <%= render "doc_comprobante", form:form %>
-     <%= render "form_autores", form:form, swcorr:'N' %>
      <%= render "red_acad", form:form  %>
 
-    <div class="row">
-        <div class="col">
-           
-            <%= form.submit "Enviar información", class:'btn btn-primary' ,data: { confirm: 'La información será enviada para validación. ¿Desea continuar?', disable_with: "Enviando información, un momento..." }  %>
-        </div> 
+     <div class="row">
+                <div class="col-md-2 d-flex justify-content-end"> 
+                            Participante(s):
+                </div>
+                <div class="col d-flex justify-content-start">
+                      <%= render "form_autores", form:form, swcorr:'S' %>
+                </div>
+            </div>
+
+    <div class="row d-flex justify-content-end mt-4">
+                <div class="col-3">
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-success" type="submit" data-confirm= "¿Desea continuar?" disable_with="Enviando información, un momento...">
+                               <i class="fa-solid fa-check"></i>
+                               <%= 'Registrar' if params[:action]=='new' %>  
+                               <%= 'Actualizar' if params[:action]=='edit' %>  
+                            </button> 
+                        </div>
+                        <div class="col"><%= render "actividades/actividades/items/btncancel" %></div>
+                    </div>
+                </div> 
     </div>
 <% end %>
