@@ -140,9 +140,9 @@ export default class extends Controller{
 
              if ( i == 0 ){ ctrl_a.innerHTML = '' }
              if ( i == 0 && elms.length > 1 ) { ctrl_b.innerHTML = '' }
-             if ( i == 0 && elms.length == 1 ) { ctrl_b.innerHTML = `<div class="align-middle"><i class="fa-solid fa-circle-plus text-success cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Agrear fila" data-action="click->autores#addItem click->autores#validarControles"></i></div>` }
+             if ( i == 0 && elms.length == 1 ) { ctrl_b.innerHTML = `<div class="align-middle"><i class="fa-solid fa-circle-plus fa-lg text-success cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Agrear fila" data-action="click->autores#addItem click->autores#validarControles"></i></div>` }
              if ( i > 0 && i != elms.length-1 ){ ctrl_b.innerHTML = '' }
-             if ( i == elms.length-1 ){ ctrl_b.innerHTML = `<div class="align-middle"><i class="fa-solid fa-circle-plus text-success cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Agrear fila" data-action="click->autores#addItem click->autores#validarControles"></i></div>` }
+             if ( i == elms.length-1 ){ ctrl_b.innerHTML = `<div class="align-middle"><i class="fa-solid fa-circle-plus fa-lg text-success cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Agrear fila" data-action="click->autores#addItem click->autores#validarControles"></i></div>` }
       }
       this.tooltips()
   }
