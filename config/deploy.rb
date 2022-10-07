@@ -2,7 +2,8 @@
 lock "~> 3.17.0"
 
 set :application, "sistemaspa"
-set :repo_url, "https://github.com/neuronadev/sistemaspa.git"
+#set :repo_url, "https://github.com/neuronadev/sistemaspa.git"
+set :repo_url, "git@github.com:neuronadev/sistemaspa.git"
 set :branch, "interfaz_1"
 #set :repo_url, "file:///home/developer/desarrollos/estudiantes"
 #set :ssh_options, { :forward_agent => true }
@@ -17,9 +18,8 @@ set :pg_encoding, 'UTF-8'
 set :pg_pool, '100'
 
 #set :rvm_type, :system
-set :rvm_ruby_version, 'ruby-2.6.3'
-
-
+#set :rvm_ruby_version, 'ruby-2.6.3'
+set :rvm_ruby_version, 'ruby-2.6.6'
 
 append :linked_files, "config/database.yml", "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
