@@ -2,7 +2,8 @@
    <div class="col-md-2 d-flex justify-content-end"> 
            
    </div>
-   <div class="col d-flex justify-content-start">
+   <div class="col justify-content-start">
+     <div class="row">
           <% if actividad.autores.any? %>
               <%
                 total_au = actividad.autores.count
@@ -11,15 +12,23 @@
                    idx += 1
                    str = ''
               %>
-                <div class="ms-1 <%= 'fw-bold' if a.persona.id != 211 %> "   >
-                   <% str = (a.persona.paterno||'') + ' ' + (a.persona.materno||'') +', ' + (a.persona.nombre||'') if a.persona.id != 211 %>
-                   <% str = (a.autorap || '') + ', ' + (a.autornom || '') if a.persona.id == 211 %> 
-                   <% str += '*' if ['1','S'].include? a.corresponsal   %>
-                   <% str += '; ' if idx < total_au %>
-                   <%= str %>
-                </div> 
+                  <div class="ms-1 <%= 'fw-bold' if a.persona.id != 211 %> "   >
+                     <% str = (a.persona.paterno||'') + ' ' + (a.persona.materno||'') +', ' + (a.persona.nombre||'') if a.persona.id != 211 %>
+                     <% if a.persona.id == 211 %>
+                           <% if !a.firma.nil? %>
+                                   <% str = (a.firma || '')  %>  
+                           <% else %>  
+                                   <% str = (a.autorap || '') + ', ' + (a.autornom || '') %> 
+                           <% end %>        
+                     <% end %>
+                     
+                     <% str += '*' if ['1','S'].include? a.corresponsal   %>
+                     <% str += '; ' if idx < total_au %>
+                     <%= str %>
+                  </div> 
                 <% end %>   
           <% end %>
+     </div>    
    </div>
 </div>
 

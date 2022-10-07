@@ -17,16 +17,16 @@
                 <div class="align-middle cursor-pointer"><i class="fa-solid fa-eraser" data-action="click->autores#clearFields" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar campos de esta fila"></i> </div>
             </div>
 
-            <div class="col-2">
-                <%= form.text_field :autorap, placeholder:'(apellidos)', autocomplete:'off', class:'autorap border-0 p-1 col-12 shadow-none bg-light rounded', 'data-action':'keyup->autores#search keypress->autores#kEnter'  %> 
+            <div class="col-3">
+                <%= form.text_field :autorap, placeholder:'(apellidos)', autocomplete:'off', class:'autorap border-0 p-1 col shadow-none bg-light rounded', 'data-action':'keyup->autores#search keypress->autores#kEnter'  %> 
             </div>
 
-            <div class="col-2">
-                <%= form.text_field :autornom, placeholder:'(nombre)', autocomplete:'off', class:'autornom border-0 p-1 col-12 shadow-none bg-light rounded', 'data-action':'focus->autores#hiddenSearch keypress->autores#kEnter focusout->autores#tipoAutor' %>
+            <div class="col-3">
+                <%= form.text_field :autornom, placeholder:'(nombre)', autocomplete:'off', class:'autornom border-0 p-1 col shadow-none bg-light rounded', 'data-action':'focus->autores#hiddenSearch keypress->autores#kEnter focusout->autores#tipoAutor' %>
             </div>
   
             <% if [1,2,3,4,5,8].include? @producto.id %> 
-                <div class="col-2 align-items-center justify-content-center">
+                <div class="col-3 align-items-center justify-content-center">
                     <div class=" form-switch">
                         <%= form.check_box :corresponsal, class:"form-check-input" %>
                         <label class="form-check-label" for="flexCheckChecked">
@@ -36,7 +36,7 @@
                 </div>
             <% end %> 
             <% if [10].include? @producto.id %> 
-                  <div class="col-2 align-items-center justify-content-center">
+                  <div class="col-3 align-items-center justify-content-center">
                       <%= form.select :rol_id, Rol.where(id:[4,9]).all.map { |r| [r.nomrol, r.id] }, class:'form-control'  %> 
                   </div>
             <% end %> 

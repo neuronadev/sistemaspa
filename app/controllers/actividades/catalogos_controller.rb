@@ -9,9 +9,11 @@ class Actividades::CatalogosController < ApplicationController
       idcat = params[:idcat]
       
       if idcat == 'ini'
-            @productos = Producto.where(prodcategoria_id:1, estado:['A','E']).order(:descripcion)
-      else 
-            @productos = Producto.where(prodcategoria_id:idcat.to_i, estado:['A','E']).order(:descripcion) 
+             @productos = Producto.where(prodcategoria_id:1, estado:['A','E']).order(:descripcion)
+      elsif idcat.to_i == 8 
+              @productos = Producto.where(prodcategoria_id:[8,9,10,11,12,13,14,15,16,17,18,19], estado:['A','E']).order(:descripcion)    
+      else  
+              @productos = Producto.where(prodcategoria_id:idcat.to_i, estado:['A','E']).order(:descripcion) 
       end
 
       #if idcat.to_i == 6
