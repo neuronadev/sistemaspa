@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  namespace :evaluaciones do
+    resources :calificaciones
+  end
+  namespace :evaluaciones do
+    resources :itemsustantivas
+  end
+  namespace :evaluaciones do
+    resources :evaltecnicos
+  end
+
   namespace :actividades do
     resources :editoriales
   end

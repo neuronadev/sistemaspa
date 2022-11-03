@@ -1,15 +1,21 @@
 <div class="w-75" id="colmenu" data-controller="menuinv">
     <div class="col"> 
-              <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Menu de usuario</div>
+            <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Menu de usuario</div>
               <div id="menuini" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
                           <%= link_to actividades_actividades_path, style:'text-decoration: none; color:#202124;' do %>
                               <i class="fa-solid fa-house-chimney-user " style="color: #5b5b5b ;"></i> Inicio
                           <% end %>   
               </div>
                    
-             <div id="catalogos" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+              <div id="catalogos" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
                           <%= link_to actividades_catalogos_path, style:'text-decoration: none; color:#202124;' do %>
                                 <i class="fa-regular fa-file-lines" style="color:#5b5b5b;"></i> Nuevo...
+                          <% end %>  
+              </div>
+
+              <div id="catalogos" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                          <%= link_to evaluaciones_evaltecnicos_path, style:'text-decoration: none; color:#202124;' do %>
+                                <i class="fa-solid fa-gears" style="color:#5b5b5b;"></i> Evaluación
                           <% end %>  
               </div>
                    
@@ -18,7 +24,6 @@
                                 <i class="fa-solid fa-arrow-right-from-bracket" style="color:#5b5b5b;"></i> Salir
                           <% end %>  
               </div>
-
               
     </div>  
 </div>   

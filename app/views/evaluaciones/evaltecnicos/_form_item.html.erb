@@ -1,0 +1,20 @@
+<div class="row mb-4" id="itemrw" class="itemrw">
+        <%= item.hidden_field :_destroy %>  
+        <div class="col-md-4 d-flex justify-content-start" style="max-height: 50px;">
+              <%= item.select :persona_id, 
+                        Persona.where(tipopersona_id:[2,3,4]).order(:paterno).map {|p| [ (p.paterno||'') + ' ' + (p.materno||'') +  ' ' + (p.nombre||''), p.id ]},
+                        { include_blank: true}, {class:"form-control", placeholder:'Escriba el nombre del acádemico...', data:{controller:'ts--selectrev'}}
+                        %>
+        </div>
+
+        <div class="col-md-5 d-flex justify-content-start"  style="max-height: 50px;">
+              <%= item.text_area :descripcion, class:"form-control", style:"max-height: 70px;" %>
+        </div>
+
+        <div class="col-md-1 d-flex justify-content-start"  style="max-height: 50px;">
+              <%= item.text_field :porcentaje, class:"form-control itemporc", maxlength:'5', "data-action":"keydown->utils#numbers keyup->sustantiva#input_suma" %>
+        </div>
+        <div class="col-md-1 d-flex justify-content-start"  style="max-height: 50px;">
+                <div class="cursor-pointer" data-action="click->sustantiva#removeItem">Eliminar</div>
+        </div>
+</div>

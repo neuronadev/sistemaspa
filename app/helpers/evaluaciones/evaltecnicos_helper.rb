@@ -1,0 +1,2 @@
+module Evaluaciones::EvaltecnicosHelper
+end

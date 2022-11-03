@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_13_201812) do
+ActiveRecord::Schema.define(version: 2022_11_03_170111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -261,6 +261,17 @@ ActiveRecord::Schema.define(version: 2022_09_13_201812) do
     t.index ["rol_id"], name: "index_autores_on_rol_id"
   end
 
+  create_table "calificaciones", force: :cascade do |t|
+    t.bigint "itemsustantiva_id", null: false
+    t.decimal "calificacion", precision: 16, scale: 2
+    t.text "quiz"
+    t.string "tipo", limit: 2
+    t.string "estado", limit: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["itemsustantiva_id"], name: "index_mru.calificaciones_on_itemsustantiva_id"
+  end
+
   create_table "calprevios", force: :cascade do |t|
     t.integer "idpersona"
     t.string "tipoprod", limit: 15
@@ -466,6 +477,14 @@ ActiveRecord::Schema.define(version: 2022_09_13_201812) do
     t.index ["persona_id"], name: "index_estimulos_on_persona_id"
   end
 
+  create_table "evaltecnicos", force: :cascade do |t|
+    t.bigint "persona_id", null: false
+    t.integer "anio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["persona_id"], name: "index_mru.evaltecnicos_on_persona_id"
+  end
+
   create_table "evaluaciones", force: :cascade do |t|
     t.bigint "persona_id", null: false
     t.date "fecha"
@@ -569,6 +588,17 @@ ActiveRecord::Schema.define(version: 2022_09_13_201812) do
     t.string "descinvestigacion", limit: 85
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "itemsustantivas", force: :cascade do |t|
+    t.bigint "evaltecnico_id", null: false
+    t.bigint "persona_id", null: false
+    t.text "descripcion"
+    t.decimal "porcentaje", precision: 16, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["evaltecnico_id"], name: "index_mru.itemsustantivas_on_evaltecnico_id"
+    t.index ["persona_id"], name: "index_mru.itemsustantivas_on_persona_id"
   end
 
   create_table "libroarbitrados", force: :cascade do |t|
@@ -1303,6 +1333,7 @@ ActiveRecord::Schema.define(version: 2022_09_13_201812) do
   add_foreign_key "autores", "cru.roles", column: "rol_id"
   add_foreign_key "autores", "personas"
   add_foreign_key "autores", "roles"
+  add_foreign_key "calificaciones", "itemsustantivas"
   add_foreign_key "capitulos", "actividades"
   add_foreign_key "capitulos", "idiomas"
   add_foreign_key "capitulos", "libros"
@@ -1321,6 +1352,7 @@ ActiveRecord::Schema.define(version: 2022_09_13_201812) do
   add_foreign_key "editoriales", "cru.ambitos", column: "ambito_id"
   add_foreign_key "editoriales", "paises"
   add_foreign_key "estimulos", "personas"
+  add_foreign_key "evaltecnicos", "personas"
   add_foreign_key "evaluaciones", "personas"
   add_foreign_key "externos", "cru.personas", column: "persona_id"
   add_foreign_key "extras", "personas"
@@ -1331,6 +1363,8 @@ ActiveRecord::Schema.define(version: 2022_09_13_201812) do
   add_foreign_key "historicos", "personas"
   add_foreign_key "identificadores", "codigos"
   add_foreign_key "identificadores", "cru.personas", column: "persona_id"
+  add_foreign_key "itemsustantivas", "evaltecnicos"
+  add_foreign_key "itemsustantivas", "personas"
   add_foreign_key "libroarbitrados", "actividades"
   add_foreign_key "libroarbitrados", "editoriales"
   add_foreign_key "libroarbitrados", "idiomas"

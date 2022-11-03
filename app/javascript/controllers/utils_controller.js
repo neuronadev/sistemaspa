@@ -11,5 +11,12 @@ export default class extends Controller {
               event.preventDefault()
         } 
      }
+    
+    numbers(event){
+        if ( event.keyCode >= 65 && event.keyCode <= 90 ){
+            event.preventDefault() 
+        } 
+    } 
+   
 
 }
