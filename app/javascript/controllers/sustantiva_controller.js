@@ -3,7 +3,7 @@ import {Controller} from '@hotwired/stimulus'
 export default class extends Controller{
   static targets = ['itemsust']  
 
-  connect(){ console.log("sustantivas.....") }
+  connect(){ this.tooltips() }
 
   add(event){
     event.preventDefault()
@@ -17,6 +17,8 @@ export default class extends Controller{
     item.querySelector("input[name*='_destroy']").value = 1
     item.style.display = "none"
     item.classList.remove('itemrw')
+    this.actualiza_suma()
+    this.btnsubmit()
   }
 
   input_suma(event){
@@ -29,7 +31,20 @@ export default class extends Controller{
         }else{
                 total_div.innerHTML = suma
         }
+        this.btnsubmit()
 
+  }
+
+  
+  btnsubmit(){
+      var suma = this.itemsuma()
+
+      if ( suma == 100 ){
+             document.getElementById("btnsubmit").disabled = false
+      }else{
+             if ( suma == 0  ){ document.getElementById("btnsubmit").disabled = true }
+             if ( suma < 100  ){ document.getElementById("btnsubmit").disabled = true }
+      }
   }
 
   actualiza_suma(){
@@ -50,6 +65,14 @@ export default class extends Controller{
             }
        }
       return suma 
+  }
+
+  tooltips(){
+      var tooltip_elms = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      for ( let i=0; i < tooltip_elms.length; i++ ){
+             new bootstrap.Tooltip(tooltip_elms[i])
+      }
+
   }
 
 }

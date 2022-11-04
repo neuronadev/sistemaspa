@@ -1,4 +1,4 @@
-<div class="row mb-4" id="itemrw" class="itemrw">
+<div class="row mb-4 mt-4" id="itemrw" class="itemrw">
         <%= item.hidden_field :_destroy %>  
         <div class="col-md-4 d-flex justify-content-start" style="max-height: 50px;">
               <%= item.select :persona_id, 
@@ -14,7 +14,9 @@
         <div class="col-md-1 d-flex justify-content-start"  style="max-height: 50px;">
               <%= item.text_field :porcentaje, class:"form-control itemporc", maxlength:'5', "data-action":"keydown->utils#numbers keyup->sustantiva#input_suma" %>
         </div>
-        <div class="col-md-1 d-flex justify-content-start"  style="max-height: 50px;">
-                <div class="cursor-pointer" data-action="click->sustantiva#removeItem">Eliminar</div>
+        <div class="col-md-1 d-flex justify-content-center text-danger"  style="max-height: 50px; font-size:14px;">
+                <div class="col cursor-pointer align-middle" data-action="click->sustantiva#removeItem">
+                    <i class="fa-solid fa-delete-left"></i><span class="ms-2">Eliminar</span>
+                </div>
         </div>
 </div>

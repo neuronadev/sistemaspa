@@ -1,0 +1,60 @@
+<div class="row">
+    
+     <% if info %>
+                     <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
+                        <i class="fa-solid fa-circle-exclamation"></i> <%= info %>
+                     </div>
+    <% end %> 
+
+</div>
+
+<div class="row justify-content-center p-2" data-controller="sustantiva utils">
+     <div class="col-12">
+            <div class="row">
+                 <div class="col-2 cursor-pointer text-primary fw-bolder"
+                      data-action="click->sustantiva#add"
+                      data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar actividad sustantiva"
+                      > <i class="fa-solid fa-plus"></i> Sustantiva...</div> 
+            </div>
+
+            <div class="row mt-2">
+                 <div class="col-12">
+                    <%= form_with model: [:evaluaciones, @evaltecnico] do |form|  %>
+                        <%= form.hidden_field :persona_id, value:current_usuario.persona_id %>
+                        <%= form.hidden_field :anio, value:'2022' %>
+                        <template data-sustantiva-target="itemsust"> 
+                                <%= form.fields_for :itemsustantivas, Itemsustantiva.new, child_index: 'IDX_ITEM' do |item| %> 
+                                        <%= render "form_item", item:item %>
+                                <% end %>
+                        </template>
+
+                       
+
+                        <div class="mb-2 bg-light p-2 rounded" id="sustantivas" style="min-height: 200px;"> 
+                              <%= render "head" %>   
+                             
+                        </div>
+
+                        <div class="row mb-4 fw-bold" id="total">
+                            <div class="col-md-9 d-flex justify-content-end">
+                                 Total:
+                            </div>
+                             <div class="col-md-1 d-flex justify-content-center" id="totalporc">
+                                   0.0
+                             </div>
+                        </div>
+                        
+                        <div class="row justify-content-center">
+
+                                <button id="btnsubmit" class="btn btn-success col-2" type="submit" data-confirm= "¿Desea continuar?" disable_with="Enviando información, un momento..." disabled>
+                                    <i class="fa-solid fa-check"></i> Aceptar
+                                </button> 
+
+                        </div>
+
+                    <% end %>
+                 </div>   
+            </div>
+     </div>       
+
+</div>

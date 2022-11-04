@@ -13,7 +13,6 @@ export default class extends Controller{
       document.addEventListener("turbolinks:load", function(event) {
             const url = new URL(event.data.url)
             var parts = url.pathname.split("/")
-            //console.log(parts[parts.length-1])
             if ( isNaN(parts[parts.length-1]) ){
                if ( parts[parts.length-1] == 'actividades' || parts[parts.length-1] == 'edit' ){
                   clearItems()   
@@ -24,9 +23,15 @@ export default class extends Controller{
                         clearItems()   
                         selItem('catalogos') 
                }
+               if ( parts[parts.length-2] == 'evaltecnicos' || parts[parts.length-1] == 'evaltecnicos' ){
+                      clearItems()   
+                      selItem('evaltecnicos') 
+               }
             }else{
-                  clearItems()   
-                  selItem('menuini') 
+
+                         clearItems()   
+                         selItem('menuini') 
+
             }
 
                

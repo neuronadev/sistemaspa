@@ -1,14 +1,15 @@
 class Evaluaciones::EvaltecnicosController < ApplicationController
   add_flash_types :info
+
   def index
-     @sustantivas = Evaltecnico.where(persona_id: current_usuario.persona_id)
-     @evaltecnico = Evaltecnico.new
-     @evaltecnico.itemsustantivas.build
+     @sustantivas = Evaltecnico.where(persona_id: current_usuario.persona_id, anio:2022)
+     
 
      if !@sustantivas.any? 
           flash[:info] = "No ha registrado actividades sustantivas" 
+          redirect_to new_evaluaciones_evaltecnico_path
      else
-          flash[:info] = "" 
+          flash[:info] = nil
      end
 
   end
@@ -22,6 +23,11 @@ class Evaluaciones::EvaltecnicosController < ApplicationController
   end
 
   def create
+      @evaltecnico = Evaltecnico.new(evaltecnico_params)
+      if @evaltecnico.valid?
+           @evaltecnico.save
+           redirect_to evaluaciones_evaltecnicos_path
+      end
   end
 
   def edit
@@ -29,4 +35,11 @@ class Evaluaciones::EvaltecnicosController < ApplicationController
 
   def update
   end
+
+  private 
+  def evaltecnico_params
+      params.require(:evaltecnico).permit( :persona_id, :anio, itemsustantivas_attributes:[:id, :persona_id, :descripcion, :porcentaje, :_destroy] )
+  end
+
+
 end
