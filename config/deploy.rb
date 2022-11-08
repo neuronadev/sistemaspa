@@ -2,8 +2,8 @@
 lock "~> 3.17.0"
 
 set :application, "sistemaspa"
-#set :repo_url, "https://github.com/neuronadev/sistemaspa.git"
-set :repo_url, "git@github.com:neuronadev/sistemaspa.git"
+set :repo_url, "https://github.com/neuronadev/sistemaspa.git"
+#set :repo_url, "git@github.com:neuronadev/sistemaspa.git"
 set :branch, "interfaz_1"
 #set :ssh_options, {:forward_agent => true}
 
