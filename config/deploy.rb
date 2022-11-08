@@ -2,14 +2,14 @@
 lock "~> 3.17.0"
 
 set :application, "sistemaspa"
-set :repo_url, "https://github.com/neuronadev/sistemaspa.git"
-#set :repo_url, "git@github.com:neuronadev/sistemaspa.git"
+#set :repo_url, "https://github.com/neuronadev/sistemaspa.git"
+set :repo_url, "git@github.com:neuronadev/sistemaspa.git"
 set :branch, "interfaz_1"
 #set :ssh_options, {:forward_agent => true}
 
 #set :repo_url, "file:///home/developer/desarrollos/estudiantes"
 #set :ssh_options, { :forward_agent => true }
-set :deploy_to, "/home/deploy/apps/sistemaspa"
+set :deploy_to, "/home/spa/app"
 set :pg_without_sudo, false
 
 set :pg_host, 'localhost'
