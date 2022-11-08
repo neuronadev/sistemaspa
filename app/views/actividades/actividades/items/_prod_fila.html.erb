@@ -16,7 +16,14 @@
                </div>
         </div>
         <div class="col  align-self-center">
-              <%= render "actividades/actividades/items/validacion_fila", a:a %>
+             <% if current_usuario.rol == 'I' %> 
+                 <%= render "actividades/actividades/items/validacion_fila", a:a %>
+             <% end %>    
+
+             <% if current_usuario.rol == 'T' %> 
+                 <%= render "actividades/actividades/items/validacion_fila_t", a:a %>
+             <% end %>    
+        
         </div>
 
 </div>

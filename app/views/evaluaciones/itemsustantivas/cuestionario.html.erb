@@ -3,11 +3,13 @@
  <link href="https://unpkg.com/survey-core@1.8.77/modern.min.css" type="text/css" rel="stylesheet"/>
 
  <% if @tipo == 'CA' %> 
-     <%= nomseccion("Técnicos-Cuestionario de <span class='text-primary'>Calidad</span>", 'Periodo 2022') %>
+     <%= nomseccion("Cuestionario de <span class='text-primary'>Calidad</span>", 'Periodo 2022') %>
+     <div class="row fw-bolder"><div class="col text-primary">Nombre: <%= @itemsust.evaltecnico.persona.paterno + ' ' + @itemsust.evaltecnico.persona.materno + ' ' + @itemsust.evaltecnico.persona.nombre  %></div></div>
      <%= render "calidad" %>
  <% end %>    
 
  <% if @tipo == 'EF' %> 
-     <%= nomseccion("Técnicos-Cuestionario de <span class='text-primary'>Eficiencia", 'Periodo 2022') %>
+     <%= nomseccion("Cuestionario de <span class='text-primary'>Eficiencia", 'Periodo 2022') %>
+     <div class="row fw-bolder"><div class="col text-primary">Nombre: <%= @itemsust.evaltecnico.persona.paterno + ' ' + @itemsust.evaltecnico.persona.materno + ' ' + @itemsust.evaltecnico.persona.nombre  %></div></div>
      <%= render "eficiencia" %>
  <% end %>    

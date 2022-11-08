@@ -21,6 +21,7 @@ class Evaluaciones::ItemsustantivasController < ApplicationController
   def cuestionario
       @tipo = params[:tipo]
       @iditem = params[:iditem]
+      @itemsust = Itemsustantiva.find(@iditem.to_i)
   end
 
   def savecuestionario
