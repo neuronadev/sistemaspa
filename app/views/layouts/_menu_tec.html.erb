@@ -15,9 +15,17 @@
 
               <div id="evaltecnicos" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
                           <%= link_to evaluaciones_evaltecnicos_path, style:'text-decoration: none; color:#202124;' do %>
-                                <i class="fa-solid fa-gears" style="color:#5b5b5b;"></i> Evaluación
+                                <i class="fa-solid fa-gears" style="color:#5b5b5b;"></i> Sustantivas
                           <% end %>  
               </div>
+              <%  if Itemsustantiva.where(persona_id:current_usuario.persona_id).any? %>
+                    <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Técnicos</div>
+                    <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                              <%= link_to evaluaciones_itemsustantivas_path, style:'text-decoration: none; color:#202124;' do %>
+                                 <i class="fa-solid fa-spell-check" style="color:#5b5b5b;"></i> Evaluar
+                              <% end %>   
+                     </div> 
+             <%  end %>
                    
               <div class="d-flex justify-content-start mt-3 p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
                           <%= link_to destroy_usuario_session_path, style:'text-decoration: none; color:#202124;' do %>

@@ -1,0 +1,1150 @@
+<div id="surveyContainer"></div>
+<div id="surveyElement" style="display:inline-block;width:100%;"></div>
+<div id="surveyResult"></div>
+
+<script>
+Survey
+    .StylesManager
+    .applyTheme("modern");
+var json ={
+ "locale": "es",
+ "completedHtml": {
+  "es": "La información del cuestionario ha sido enviada. <a href='/evaluaciones/itemsustantivas'>Regresar</a>"
+ },
+ "pages": [
+  {
+   "name": "page1",
+   "elements": [
+    {
+     "type": "radiogroup",
+     "name": "p1",
+     "title": {
+      "default": "¿El técnico se distingue por manejar elevados estándares de calidad en el desempeño de su trabajo más allá de estándares rutinarios de simple cumplimiento a su deber?",
+      "es": "¿El técnico llega invariablemente puntual a su trabajo y labora escrupulosamente las horas estipuladas en su contrato? (Nota de apoyo: cabe mencionar que independientemente de la calidad del trabajo, el contrato laboral señala que el técnico debe cumplir con 40 horas semanales y de no cumplirse está incurriendo en una falta administrativa que debe sancionarse)."
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p2",
+     "title": {
+      "default": "¿El técnico conoce el \"estado del arte\" y lo aplica en el desempeño de sus funciones? Es decir, ¿el técnico está actualizado y hace un esfuerzo por estarlo en todo momento ya sea gestionando cursos de capacitación o capacitándose de forma autodidacta?",
+      "es": "¿El técnico utiliza con medida y prudencia la posibilidad de salir de su sitio de trabajo para disfrutar de un breve descanso o tomar un café/té/refresco o comer algo ligero?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p3",
+     "title": {
+      "default": "¿El técnico contribuye de manera sistemática a que la productividad del grupo académico u oficina a la que está adscrita sea elevada más allá de cumplir con su deber?",
+      "es": "¿El técnico exhibe invariablemente una buena actitud, opera de manera proactiva/ propositiva y cumple con sus obligaciones y sus pendientes de manera autónoma?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p4",
+     "title": {
+      "default": "¿El técnico asume roles de liderazgo y muestra un sólido compromiso con el grupo al que está adscrito y se integra fácilmente a grupos de trabajo?",
+      "es": "¿El técnico se esmera en conocer a fondo los procesos administrativos inherentes a su labor/responsabilidad, se actualiza, los respeta y se adapta, evitando fricciones con el personal administrativo de la institución?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p5",
+     "title": {
+      "default": "¿El técnico contribuye/coadyuva de manera sistemática al cumplimiento de los Indicadores de Administración de Resultados (CAR) a los que está obligada la institución, gracias a la calidad y puntualidad de su trabajo?",
+      "es": "¿El técnico es de buen trato, da soluciones que evitan conflictos o desavenencias al interior del grupo, contribuye a un buen ambiente de trabajo?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p6",
+     "title": {
+      "default": "¿El técnico apoya a los estudiantes aplicando invariablemente buenas prácticas y compartiendo su dominio sobre el \"estado del arte\" en las técnicas que ocupa cotidianamente?",
+      "es": "¿El técnico además de poder ser autónomo, es capaz de integrarse fácilmente a grupos de trabajo promoviendo la colaboración?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p7",
+     "title": {
+      "default": "¿El técnico contribuye con la generación de mejores manuales de operación, protocolos de manejo eficiente de equipo, y en general, a mejorar las prácticas cotidianas dentro de su ámbito de trabajo c:Jbonando su parte a la consolidación de una \"cultura de buenas prácticas\"?",
+      "es": "¿El técnico exhibe creatividad en el desempeño de su labor mostrando elementos de mejora continua en su labor cotidiana?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p8",
+     "title": {
+      "default": "¿El técnico representa un ejemplo a seguir dentro de la institución y se siente orgulloso de pertenecer a la misma? ¿Se le puede catalogar como leal e institucional debido al compromiso que muestra? ",
+      "es": "¿El técnico está dispuesto a hacer esfuerzos extraordinarios cuando las circunstancias así lo ameritan, dedicando su atención para cumplir los objetivos comprometidos en tiempo y forma? "
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p9",
+     "title": {
+      "default": "¿El técnico maneja invariablemente altos estándares de ética y honorabilidad, siendo por lo tanto la información que recaba o maneja totalmente confiable?",
+      "es": "¿El técnico es altamente eficiente en el cumplimiento de su deber, buscando en todo momento las fórmulas para lograr mejores resültados y mejorar la eficiencia de los procesos en los que está involucrado?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p10",
+     "title": {
+      "default": "¿El técnico es ejemplo de honestidad en el manejo de los recursos públicos que opera?",
+      "es": "¿El técnico se esmera por acrecentar los acervos institucionales en materia de colecciones, bibliotecas de sonidos, fotografías, etc.?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p11",
+     "title": {
+      "default": "¿El técnico cuida con esmero los equipos que utiliza de manera cotidiana en el ejercicio de su deber? ¿Se preocupa por prolongar su vida útil y por asegurarse que los equipos reciban el mantenimiento preventivo de manera puntual y oportuna?",
+      "es": "¿El técnico realmente contribuye a solucionar problemas, a resolver retos, a superar limitaciones dentro del grupo al que está adscrito, siempre tratando de mejorar los resultados en tiempo y forma?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p12",
+     "title": {
+      "default": "¿El técnico cuida con esmero los vehículos que utiliza, si ese fuese el caso? ¿Transmite esta misma cultura a los estudiantes y demás integrantes del grupo donde trabaja?",
+      "es": "¿El técnico contribuye a la captación de recursos externos para poder llevar a cabo investigación científica y tecnológica aportando ideas, buscando agencias financiadoras, apoyando al armado de propuestas de financiamiento externo, gestionando recursos de manera voluntaria?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p13",
+     "title": {
+      "default": "¿El técnico, sea o no su lengua materna el español, redacta bien en español y de no ser así se esmera por superar esa limitante?",
+      "es": "¿El técnico se esmera en lograr que el conocimiento logrado mediante la investigación científica y tecnológica que se lleva a cabo dentro del laboratorio/oficina/espacio donde trabaja sea accesible al ciudadano común?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p14",
+     "title": {
+      "default": "¿El técnico domina el lenguaje oral (habla y se sabe expresar de manera correcta y coherente) en español y de no ser así se esmera por superar esa limitante?",
+      "es": "¿El técnico se esmera en tener una excelente relación con las empresas externas que le dan mantenimiento a los equipos que opera buscando además las mejores ofertas económicas y de calidad en beneficio de la institución? Si el técnico no opera equipos, ¿se esmera en construir/mantener excelentes relaciones con empresarios, usuarios del conocimiento y tecnologías que se desarrollan dentro de la institución, y en general con el público.?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p15",
+     "title": {
+      "default": "¿El técnico redacta bien en inglés y de no ser así se esmera por superar esa limitante?",
+      "es": "¿El técnico se ha esmerado en capacitarse (tomando cursos o en forma autodidacta) para poderle dar el mantenimiento mínimo necesario a los equipos que opera o depende invariablemente de servicios externos para dicho fin? Si no opera equipos, ¿se esmera en mantenerse actualizado en las \"artes de su oficio\"?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p16",
+     "title": {
+      "default": "¿El técnico domina el lenguaje oral (habla y se sabe expresar de manera correcta y coherente) en inglés y de no ser así se esmera por superar esa limitante?",
+      "es": "¿El técnico tiene un amplio conocimiento sobre los consumibles, reactivos y demás insumos que se requieren dentro del laboratorio donde trabaja y se esmera por mantenerse actualizado en ese ámbito? Si no trabaja con reactivos, ¿se esmera en conocer los insumos vinculados a las \"artes de su oficio\", como serían por ejemplo buscadores de información o tomando cursos o capacitándose en forma autodidacta? "
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p17",
+     "title": {
+      "default": "¿El técnico domina las siguientes herramientas de software de uso institucional y de no ser así se esmera en superar esa limitante?\n a) Office (Word, Excel, Power Point, Outlook, Skype empresarial).\n b) Navegadores de internet (Firefox Mozilla, Chrome, Safari, Explorer,\nOpera).\n e) Outlook 365 (OneDrive, Office Web).\n d) Algún lenguaje de programación (deseable, no obligatorio).",
+      "es": "Vinculado a lo anterior, ¿el técnico está al día en cuanto a las acciones de emergencia en el caso de un accidente dentro del laboratorio por algún derrame, alguna exposición accidental a alguna ·sustancia tóxica o corrosiva-y en general en materia de higiene y seguridad? Si el técnico no labora dentro de un laboratorio, pero lo hace dentro de una oficina, únicamente aplicarían las normas generales de seguridad e higiene."
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p18",
+     "title": {
+      "default": "¿El técnico domina las tecnologías de la información necesarias para su trabajo y constantemente se esmera en superar sus habilidades? ",
+      "es": "¿El técnico está siempre dispuesto a salir al campo o a reuniones fuera de la institución cuando así se le requiera?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p19",
+     "title": {
+      "default": "¿El técnico aporta a la página web institucional con contenidos de interés emanados de su grupo de trabajo o del desempeño de su función específica, para contribuir en actividades de difusión y divulgación?",
+      "es": "¿El técnico aprovecha eficientemente el tiempo al navegar por la web, investigando únicamente asuntos que competen con el cumplimiento de su deber o pierde tiempo atendiendo intereses personales no vinculados al cumplimiento de su deber?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p20",
+     "title": {
+      "default": "¿El técnico conoce a la institución y si se le preguntara podría describir cada una de las Redes Académicas y demás instancias que conforman el \"entramado institucional\"?",
+      "es": "¿El técnico se enfoca cotidianamente en los asuntos que competen al cumplimiento de su deber, sin divagar o distraerse reiteradamente en asuntos personales o de otra índole?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p21",
+     "title": {
+      "default": "¿El técnico asiste a los seminarios institucionales para ampliar sus horizontes y en general participa de la vida académica institucional?",
+      "es": "¿El técnico se preocupa por contestar el teléfono y toma invariablemente recados útiles apoyando a los demás investigadores y técnicos, asumiéndolo como responsabilidad colectiva?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p22",
+     "title": {
+      "default": "¿El técnico está interesado en resolver problemas que aquejan a la sociedad y se interesa por el impacto de su contribución fuera de las _instalaciones de la institución?",
+      "es": "¿El técnico se preocupa por mantener su oficina/cubículo/espacio de trabajo ordenado y pulcro, tomando en cuenta es'te importante aspecto?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p23",
+     "title": {
+      "default": "¿El técnico, además de hacerlo en su grupo, demuestra apoyo a sus colegas en otras Redes Académicas o instancias institucionales para resolver problemas que los aquejan?",
+      "es": "¿El técnico se preocupa por mantener una adecuada imagen institucional y colabora de manera voluntaria con los demás empleados de la institución por mejorar la imagen institucional?"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p24",
+     "title": {
+      "default": "¿El técnico contribuye con acciones concretas a mejorar la imagen institucional ante la sociedad?",
+      "es": "¿El técnico busca de manera voluntaria la manera de contribuir a las políticas de eficiencia y ahorro dictadas por la SHCP, en materia de energía eléctrica (i.e., no usa luz eléctrica cuando no sea estrictamente necesario), agua (i.e., ayuda a ahorrar agua), y demás insumos de uso cotidiano? ·"
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    },
+    {
+     "type": "radiogroup",
+     "name": "p25",
+     "title": {
+      "default": "¿El técnico demuestra constantemente el acierto de la institución al haberlo contratado, ya que cada día se muestra como un elemento mejor formado, y más productivo, comprometido y leal con la institución? ",
+      "es": "¿El técnico representa un caso notable de personal altamente eficiente no dejando lugar a dudas que es un elemento que enaltece a la institución gracias a su productividad y eficiencia? "
+     },
+     "isRequired": true,
+     "choices": [
+      {
+       "value": "10",
+       "text": "Siempre/rendimiento óptimo"
+      },
+      {
+       "value": "9",
+       "text": "Casi siempre(>90% de las veces)"
+      },
+      {
+       "value": "8",
+       "text": "Casi siempre(entre 80 y 90% de las veces)"
+      },
+      {
+       "value": "7",
+       "text": "Regularmente"
+      },
+      {
+       "value": "5",
+       "text": "Ocasionalmente"
+      },
+      {
+       "value": "3",
+       "text": "Rara vez"
+      },
+      {
+       "value": "0",
+       "text": "Nunca"
+      },
+      {
+       "value": "na",
+       "text": "No Aplica"
+      }
+     ],
+     "colCount": 5
+    }
+   ]
+  }
+ ],
+ "completeText": {
+  "es": "Terminar y enviar cuestionario"
+ }
+};
+window.survey = new Survey.Model(json);
+
+survey
+    .onComplete
+    .add(function (sender) {
+        //document.querySelector('#surveyResult').textContent = "Result JSON:\n" + JSON.stringify(sender.data, null, 3);
+        sendDataToServer(sender);    
+    });
+
+survey.render("surveyElement");
+
+
+function sendDataToServer(survey) {
+  var resultAsString = JSON.stringify(survey.data);
+  var token = document.querySelector('meta[name="csrf-token"]').content
+         fetch(
+            '/evaluaciones/itemsustantivas/savecuestionario',
+            {
+              method: 'POST',
+              headers: { 'Content-Type':'application/json', 'Accept':'application/html', 'X-CSRF-Token': token },
+              body: JSON.stringify( {iditem:'<%= @iditem %>', tipo:'<%= @tipo %>', data: resultAsString } )
+            }
+         ) 
+
+}
+</script>

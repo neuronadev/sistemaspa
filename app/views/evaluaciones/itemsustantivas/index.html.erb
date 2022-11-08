@@ -1,2 +1,9 @@
-<h1>Evaluaciones::Itemsustantivas#index</h1>
-<p>Find me in app/views/evaluaciones/itemsustantivas/index.html.erb</p>
+<%= nomseccion('Técnicos', 'Periodo 2022') %>
+
+
+<div class="mb-2 bg-light p-2 rounded" id="sustantivas" style="min-height: 200px;"> 
+     <%= render "head" %>
+     <%  @itemsust.each do |s| %>
+            <%= render 'item', data:s %>
+     <% end %>  
+</div>    

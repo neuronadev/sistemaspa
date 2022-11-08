@@ -1,0 +1,13 @@
+ <script src="https://unpkg.com/knockout@3.5.1/build/output/knockout-latest.js"></script>
+ <script src="https://unpkg.com/survey-knockout@1.8.77/survey.ko.min.js"></script>
+ <link href="https://unpkg.com/survey-core@1.8.77/modern.min.css" type="text/css" rel="stylesheet"/>
+
+ <% if @tipo == 'CA' %> 
+     <%= nomseccion("Técnicos-Cuestionario de <span class='text-primary'>Calidad</span>", 'Periodo 2022') %>
+     <%= render "calidad" %>
+ <% end %>    
+
+ <% if @tipo == 'EF' %> 
+     <%= nomseccion("Técnicos-Cuestionario de <span class='text-primary'>Eficiencia", 'Periodo 2022') %>
+     <%= render "eficiencia" %>
+ <% end %>    

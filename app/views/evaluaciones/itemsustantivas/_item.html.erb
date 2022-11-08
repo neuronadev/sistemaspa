@@ -1,0 +1,31 @@
+<div class="row border-bottom  p-2">
+        <div class="col-md-3 d-flex justify-content-start" >
+            <%= (data.evaltecnico.persona.paterno||'') + ' ' + (data.evaltecnico.persona.materno||'') + ' ' + (data.evaltecnico.persona.nombre||'') %>
+        </div>
+
+        <div class="col-md-5 d-flex justify-content-start" >
+             <%= data.descripcion %>
+        </div>
+
+        <div class="col-md-1 d-flex justify-content-center" >
+             <%= data.porcentaje %>
+        </div>
+        <div class="col-md-1 d-flex justify-content-center">
+             
+             <% if !data.calificaciones.where(tipo:'CA').any? %> 
+                     <%= link_to "Cuestionario", cuestionario_evaluaciones_itemsustantivas_path(:tipo=>'CA', :iditem=>data.id), data:{turbolinks:false}  %>
+             <% else %>
+                      <% c = data.calificaciones.where(tipo:'CA').first %>
+                      <%= c.calificacion %>         
+             <% end %>
+        
+        </div>
+        <div class="col-md-1 d-flex justify-content-center">
+             <% if !data.calificaciones.where(tipo:'EF').any? %> 
+                     <%= link_to "Cuestionario", cuestionario_evaluaciones_itemsustantivas_path(:tipo=>'EF', :iditem=>data.id), data:{turbolinks:false}  %>
+             <% else %>
+                      <% c = data.calificaciones.where(tipo:'EF').first %>
+                      <%= c.calificacion %>         
+             <% end %>
+        </div>
+</div>

@@ -4,7 +4,12 @@ Rails.application.routes.draw do
     resources :calificaciones
   end
   namespace :evaluaciones do
-    resources :itemsustantivas
+    resources :itemsustantivas do
+         collection do
+            get 'cuestionario'
+            post 'savecuestionario'
+         end
+    end
   end
   namespace :evaluaciones do
     resources :evaltecnicos

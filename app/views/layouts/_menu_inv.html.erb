@@ -51,6 +51,16 @@
                       </div>
                  </div>
              </div>   
+
+             <%  if Itemsustantiva.where(persona_id:current_usuario.persona_id).any? %>
+                    <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Técnicos</div>
+                    <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                              <%= link_to evaluaciones_itemsustantivas_path, style:'text-decoration: none; color:#202124;' do %>
+                                 <i class="fa-solid fa-spell-check" style="color:#5b5b5b;"></i> Evaluar
+                              <% end %>   
+                     </div> 
+             <%  end %>
+
              <% if current_usuario.persona_id == 66 %>
                   <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Posgrado</div>
                   <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
@@ -80,7 +90,7 @@
                         <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Validaciones</div>  
                         <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
                                     <%= link_to validaindex_path(:tipo=>'A'), class:"", style:'color:#202124;', target:"_blank" do %>
-                                             <i class="fas fa-address-book" style="color:#5b5b5b;"></i> Producción Académica
+                                             <i class="fas fa-address-book" style="color:#5b5b5b;"></i> Producción
                                     <% end %>          
                         </div>   
              <% end %>         
