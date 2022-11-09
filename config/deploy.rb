@@ -76,7 +76,9 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
+set :default_env, {
+    path: "$HOME/.nvm/versions/node/v16.14.0/bin:$PATH" # this will add "$HOME/nodejs/bin" into PATH environment variable during Capistrano command execution
+}
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }
 
