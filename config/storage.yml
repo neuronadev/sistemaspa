@@ -5,7 +5,7 @@ test:
 local:
   service: Disk
   #root: "/home/developer/dataspa/storage" 
-  root: "/home/deploy/documentos/storage" 
+  root: "/home/spa/documentos/storage" 
 
   
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
