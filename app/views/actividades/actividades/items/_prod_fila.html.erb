@@ -16,7 +16,7 @@
                </div>
         </div>
         <div class="col  align-self-center">
-             <% if current_usuario.rol == 'I' %> 
+             <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %> 
                  <%= render "actividades/actividades/items/validacion_fila", a:a %>
              <% end %>    
 
