@@ -7,7 +7,7 @@ class Actividades::ActividadesController < ApplicationController
     #where.not(producto_id:[22,39,82,83])
     @actividades = Actividad.includes(:producto).where(periodo:2022,estado:['A','U','C','S','G','D'])
                       .includes(:autores)
-                        .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).where.not(producto_id:[82,83]).order("productos.descripcion")
+                        .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).where.not(producto_id:[22,39,82,83]).order("productos.descripcion")
                         
     @enlace = Actividad.includes(:producto).where(periodo:2022,estado:['A','U','C','S','G','D']).where(producto_id:[22,39])
                         .includes(:autores)
