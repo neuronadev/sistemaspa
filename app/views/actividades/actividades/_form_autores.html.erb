@@ -118,13 +118,25 @@
         </template>
         
         <div data-autores-target="contautores" class="container"> 
-            <%= form.fields_for :autores do |autor| %>
-                 <% if [9,50,51,59,60,61,62,66].include? @producto.id %> 
-                         <%= render 'form_autor_hidden', form: autor %> 
-                 <% else %> 
-                         <%= render 'form_autor_fields', form: autor %>                         
-                 <% end %>
-            <% end %>
+                <% if params[:action] == 'new' %>
+                    <%= form.fields_for :autores do |autor| %>
+                        <% if [9,50,51,59,60,61,62,66].include? @producto.id %> 
+                                <%= render 'form_autor_hidden', form: autor %> 
+                        <% else %> 
+                                <%= render 'form_autor_fields', form: autor %>                         
+                        <% end %>
+                    <% end %>
+                <% end %>    
+                <% if params[:action] == 'edit' %>
+                    <%= form.fields_for :autores, form.object.autores.order(:id) do |autor| %>
+                        <% if [9,50,51,59,60,61,62,66].include? @producto.id %> 
+                                <%= render 'form_autor_hidden', form: autor %> 
+                        <% else %> 
+                                <%= render 'form_autor_fields', form: autor %>                         
+                        <% end %>
+                    <% end %>
+                <% end %>
+
         </div>    
     </div>
 </div>
