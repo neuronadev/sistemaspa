@@ -58,5 +58,12 @@
                     </div>
               <% end %>      
         </div>  
-        <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
-        <%= render "actividades/actividades/show/autoria", actividad:@actividad, swcorr:'N' %>
+        
+        <% if actividad.producto_id != 82 %>
+                 <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+                 <%= render "actividades/actividades/show/autoria", actividad:@actividad, swcorr:'N' %>
+
+        <% end %>
+        <% if actividad.producto_id == 82 %>
+                 <%= render "actividades/actividades/show/autoria_posgrado_curso", actividad:@actividad, autor:autor %>
+        <% end %>

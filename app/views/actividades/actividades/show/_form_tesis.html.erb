@@ -7,6 +7,12 @@
              <%= row_show( 'Número de acta:', actividad.tesista.acta) %>
      <% end %>
   
-    <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
-    <%= render "actividades/actividades/show/red_acad", actividad:@actividad  %>
-    <%= render "actividades/actividades/show/autoria", actividad:@actividad, swcorr:'N' %>
+      <% if actividad.producto_id != 83 %>
+            <%= render "actividades/actividades/show/comprobante", actividad:@actividad %>
+            <%= render "actividades/actividades/show/red_acad", actividad:@actividad  %>
+            <%= render "actividades/actividades/show/autoria", actividad:@actividad, swcorr:'N' %>
+      <% end %>  
+
+       <% if actividad.producto_id == 83 %>
+                <%= render "actividades/actividades/show/autoria_posgrado_tesis", actividad:@actividad %>
+        <% end %>    

@@ -7,7 +7,12 @@
     <% end %> 
 
     <% if a.estado == 'U' %>
-          <div class="col validarcr fw-bold" style="font-size:14px;"><i class="fa-solid fa-arrow-right"></i> En validación-Comité</div>
+          <% if a.fuente == 'P' %>
+                   <div class="col validarcr fw-bold" style="font-size:14px;"><i class="fa-solid fa-arrow-right"></i> En validación</div> 
+          <% else %>
+                   <div class="col validarcr fw-bold" style="font-size:14px;"><i class="fa-solid fa-arrow-right"></i> En validación-Comité</div>
+          <% end %> 
+          
     <% end %>      
 
     <% if a.estado == 'C' %>

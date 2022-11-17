@@ -7,6 +7,10 @@
                         <% actividad.documentos.each do |d|%>
                                 <%= link_to d.filename, rails_blob_path(d, disposition: "inline"), { target: '_blank' } %>
                         <% end %>   
-               <% end %>         
+               <% end %>
+               <% if actividad.enlacedoc.attached? %> 
+                       <%= link_to actividad.enlacedoc.filename, rails_blob_path(actividad.enlacedoc, disposition: "inline"), { target: '_blank' } %>
+               <% end %>
+               
      </div>
 </div> 

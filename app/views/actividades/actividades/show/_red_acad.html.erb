@@ -1,12 +1,14 @@
-<div class="row mt-2">
-    <div class="col-md-2 d-flex justify-content-end"> 
-            Red Académica:
+<% if actividad.fuente != 'V' %>
+    <div class="row mt-2">
+        <div class="col-md-2 d-flex justify-content-end"> 
+                Red Académica:
+        </div>
+        <div class="col d-flex justify-content-start">
+            <% if  !actividad.asignared.nil?
+                    red = Red.find(actividad.asignared) 
+                %>
+                    <%=  red.nomred %>
+            <% end %>  
+        </div>
     </div>
-    <div class="col d-flex justify-content-start">
-           <% if  !actividad.asignared.nil?
-                 red = Red.find(actividad.asignared) 
-            %>
-                <%=  red.nomred %>
-           <% end %>  
-    </div>
-</div>
+<% end %>    

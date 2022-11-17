@@ -1,0 +1,24 @@
+<div class="row mt-2">
+     <div class="col-md-2 d-flex justify-content-end"> 
+                 Comprobantes:
+     </div>
+     <div class="col-md-9 d-flex justify-content-start">
+                <% if actividad.tesisdoc.attached? %> 
+                       <div class="row mt-2">
+                           Acta de exámen: <%= link_to actividad.tesisdoc.filename, rails_blob_path(actividad.tesisdoc, disposition: "inline"), { target: '_blank' } %>
+                       </div>    
+                <% end %>
+                
+                <% if actividad.tesisportada.attached? %> 
+                        <div class="row mt-2">
+                            Portada de la tesis: <%= link_to actividad.tesisportada.filename, rails_blob_path(actividad.tesisportada, disposition: "inline"), { target: '_blank' } %>
+                        </div>    
+                <% end %>
+                
+                <% if actividad.tesiscarta.attached? %> 
+                        <div class="row mt-2"> 
+                            Asignación <%= link_to actividad.tesiscarta.filename, rails_blob_path(actividad.tesiscarta, disposition: "inline"), { target: '_blank' } %>
+                        </div>    
+                <% end %>
+     </div>    
+</div> 

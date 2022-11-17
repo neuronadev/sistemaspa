@@ -1,0 +1,10 @@
+<div class="row mt-2">
+     <div class="col-md-2 d-flex justify-content-end"> 
+                 Comprobante:
+     </div>
+     <div class="col d-flex justify-content-start">
+               <% if autor.posgradoc.attached? %> 
+                       <%= link_to autor.posgradoc.filename, rails_blob_path(autor.posgradoc, disposition: "inline"), { target: '_blank' } %>
+               <% end %>
+     </div>
+</div> 
