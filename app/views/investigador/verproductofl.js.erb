@@ -1,2 +1,6 @@
-$("#modal-window").find(".modal-content").html("<%= j (render 'investigador/detalleprod') %>");
-$("#modal-window").modal();
+console.log("<%= @actividad.id %>")
+var el = document.getElementById("drw"+<%= @actividad.id %>)
+el.style.display='table-row'
+
+var el_rw = document.getElementById("data"+<%= @actividad.id %>)
+el_rw.innerHTML = "<%= j (render 'investigador/detalleprod') %>"

@@ -8,7 +8,6 @@
     <%= stylesheet_pack_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'sesion', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application' %>
- 
   </head>
 
   <body>
@@ -21,26 +20,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       
-      
-      <li class="nav-item active dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-users-cog fa-1x"></i></i> &nbsp; Investigadores <span class="sr-only">(current)</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <%= link_to("Actividades Adicionales", auditadicionalesinv_path, class:"dropdown-item", data: {turbolinks:false}) %>
-        </div>
-      </li>
-
-      <li class="nav-item active dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         <i class="fas fa-users fa-1x"></i></i> &nbsp; Técnicos <span class="sr-only">(current)</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <%= link_to("Evaluación/Calificaciones", auditevaluacion_path, class:"dropdown-item", data: {turbolinks:false}) %>
-          <%= link_to("Actividades Adicionales", auditadicionales_path, class:"dropdown-item", data: {turbolinks:false}) %>
-        </div>
-      </li>
-
+    
        <li class="nav-item active">
             <%= link_to auditadicionalesinv_path, class:"nav-link", data: {turbolinks:false} do %>
                     <i class="fas fa-caret-right"></i> Investigadores
@@ -51,6 +31,9 @@
                  <i class="fas fa-caret-right"></i> Técnicos
           <% end %>
       </li>
+      <li class="nav-item active">
+          <%= link_to("Evaluación/Calificaciones", auditevaluacion_path, class:"nav-link", data: {turbolinks:false}) %>
+      </li>    
       <li class="nav-item active">
           <%= link_to cancelados_path, class:"nav-link", data: {turbolinks:false} do %>
                  <i class="fas fa-user-slash"></i> Folios cancelados

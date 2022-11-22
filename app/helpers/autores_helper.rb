@@ -10,7 +10,7 @@ module AutoresHelper
         i=0
         str = ""
         simbolo = ""
-        actividad.autores.order("posicion asc").each do |a|
+        actividad.autores.order(:id).each do |a|
             if i > 0  
                 simbolo = "; " 
              else
@@ -22,7 +22,7 @@ module AutoresHelper
             else
                 str = str + simbolo + (a.firma||"")
             end
-            if a.corresponsal == 'S'
+            if a.corresponsal == 'S' || a.corresponsal == '1'
                 str = str + "<strong>*</strong>" 
             end     
            i = i+1     

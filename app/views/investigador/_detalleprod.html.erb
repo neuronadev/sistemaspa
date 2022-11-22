@@ -47,13 +47,8 @@
 
 </style>
 
-<div class="modal-header">
-   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-   
- </div>
- <div class="modal-body">
-  
- <% a = @actividad %>
+ 
+<% a = @actividad %>
 
 
 <div class="hoptions">
@@ -62,7 +57,7 @@
 
 
 
-  <div class="contprod" id="div<%= a.id %>">
+<div class="contprod" id="div<%= a.id %>">
         <div class="rwp">
              <div style="font-weight: bold; color:#154360; text-decoration: underline grey;"><%= a.producto.descripcion %></div>
              <div style="margin-left:20px; color:blue;"><b>Año:</b> <%= a.anio %></div>
@@ -71,31 +66,7 @@
         <div class="divide"></div>
         <div><b>Título:</b> <%= a.titulo %> </div>
         <div><b>Autores:</b> <%= cita(a.id).html_safe %> </div>
-        <div class="rwp"> <div style="font-weight: bold;">Comprobante:</div>  
-         <% if a.producto_id == 82
-                           files = a.curso.comprobante.split(',')
-                           files.each do |file|      
-                   %>
-                               <%= link_to pstcomprobante_path(a.id, file.strip), { target: '_blank' } do %>
-                                       <i class="fas fa-file-pdf iconsize"></i> Ver documento
-                               <% end %>
-                           <% end %>
-          <% elsif a.producto_id == 83 %>
-                          <%= link_to pstcomtesis_path(a.id), { target: '_blank' } do %>
-                                <i class="fas fa-file-pdf iconsize"></i> Ver documento
-                          <% end %> 
-          <% else %> 
-                <% if a.documentos.attached? %> 
-                    <div style="font-size:14px; margin-left:10px;">  
-                        <% a.documentos.each do |d|%>
-                            <%= link_to rails_blob_path(d, disposition: "inline"),  target: '_blank' do %>
-                                <i class="fas fa-file-pdf"></i> Ver documento
-                            <% end %>
-                        <% end %>
-                    </div>
-                <% end %> 
-          <% end %>
-        </div>  
+        
 
         <div class="detallep">
             <%= render partial: "detalle/tipo"  %> 
@@ -213,93 +184,11 @@
                 <% end %>
             <% end %>
          -->
-  </div>
+</div>
 
-
- </div>
- <div class="modal-footer">
-   <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
- </div>
-
-<script>
-    $(function () {
-        $('.formrechaza').hide(); 
-        $('.formaceptar').hide(); 
-
-        $('#test').click(function(){
-           $('body').scrollTo('#div3135');
-        });
-    });
-    $(function () {
-        $('.formactivar').hide(); 
-    });
-     
-    
-
-    function showform(idact,tipo){
-       if (tipo == 1){
-          $('#activar'+idact).show();  
-       }  
-       if (tipo == 2){
-          $('#rechazar'+idact).show();  
-       } 
-       if (tipo == 3){
-          $('#msgaceptar'+idact).show();  
-       }   
-    }
-
-    function hideform(idact){
-        $('#rechazar'+idact).hide();  
-    }
-    function cancelform(idact,tipo){
-        if (tipo == 1){ $('#activar'+idact).hide(); }
-        if (tipo == 2){ $('#rechazar'+idact).hide(); }
-        if (tipo == 3){ $('#msgaceptar'+idact).hide(); }
-        
-    }
-
-    function aceptaractivar(idact){
-      
-        $.ajax({
-                    url: '<%= activartec_path %>',
-                    data: "id="+idact + "&txt=" + $("#activartxt"+idact).val(),
-                    type: "get",
-                    success: function(data){ 
-                          window.location.reload(true);
-                     },
-                    error: function(dayta){   }
-                })
-           
-    }
-
-    function aceptarform(idact){
-          $.ajax({
-                    url: '<%= rechazasa_path %>',
-                    data: "id="+idact + "&txt=" + $("#motivotxt"+idact).val(),
-                    type: "get",
-                    success: function(data){ 
-                         $('#modal-window').modal('hide')
-                         $("#sa"+idact).html("<i class='fas fa-user-times text-danger'></i> No cubre la normativa.")
-                     },
-                    error: function(dayta){   }
-                })
-    }  
-
-   function aceptarproducto(idact){
-       if (confirm('¿Desea continuar?')) {
-           $.ajax({
-                    url: '<%= validasamsg_path %>',
-                    data: "id="+idact + "&txt=" + $("#aceptartxt"+idact).val(),
-                    type: "get",
-                    success: function(data){ 
-                         alert("Producto aceptado");
-                         $('#modal-window').modal('hide')
-                         $("#sa"+idact).html("<i class='fas fa-check-double text-success'></i>")
-                         $("#saaceptar"+idact).html("<i class='fas fa-check text-primary' onclick='aceptarsa("+idact+")' style='cursor: pointer;'></i>")
-                     },
-                    error: function(dayta){   }
-                })
-       }        
-   }
-
-</script>
+ 
+<div class="rwp" style="width: 75%;">
+     <div class="col" style="justify-content: center;"> 
+         <button type="button" onclick="cerrar(<%= a.id %>)">Cerrar</button>
+     </div>
+</div>

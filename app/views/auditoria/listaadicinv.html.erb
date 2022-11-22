@@ -16,7 +16,7 @@
     <table class='table table-sm table-striped table-bordered w-auto'>
     <thead>
         <tr>
-            <th class="text-center th-sm">Foliocccc</th>
+            <th class="text-center th-sm">Folio</th>
             <th class="text-center th-sm">Producto</th>
             <th class="text-center th-sm">Título</th>
             <!--<th class="text-center th-sm">Autores</th>
@@ -59,27 +59,42 @@
 
     %>
 
-    <tr>
+    <tr id="info<%= a.id %>">
         <td class="text-center"><%= a.id %></td>
         <td id="desc<%= a.id %>" style="width:15%;"><%= a.producto.descripcion %>  </td>
         <td style="width:30%;">
           <!--  <%= link_to a.titulo, datadetalle_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>-->
-            <%= link_to a.titulo, verproductofl_path(a.id, @persona.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>       
+            <%= link_to a.titulo, verproductofl_path(a.id, @persona.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', 'style'=>'text-decoration: none;'}  %>       
                 &nbsp;
               
 
                 <% if a.producto_id == 82
-                           files = a.curso.comprobante.split(',')
-                           files.each do |file|      
-                   %>
-                               <%= link_to pstcomprobante_path(a.id, file.strip), { target: '_blank' } do %>
-                                       <i class="fas fa-file-pdf iconsize"></i> Ver documento
-                               <% end %>
-                           <% end %>
+                          autor = Autor.where(actividad_id:a.id,persona_id:@persona.id).first
+                %>
+                            <div style="font-size:14px; margin-left:10px;">  
+                                <% if autor.posgradoc.attached? %> 
+                                   <%= link_to 'Ver documento', rails_blob_path(autor.posgradoc, disposition: "inline"), { target: '_blank' } %>
+                                <% end %>
+                            </div>    
+                            
                 <% elsif a.producto_id == 83 %>
-                                <%= link_to pstcomtesis_path(a.id), { target: '_blank' } do %>
-                                        <i class="fas fa-file-pdf iconsize"></i> Ver documento
-                                <% end %> 
+                               <% if a.tesisdoc.attached? %> 
+                                    <div class="row mt-2">
+                                        Acta de exámen: <%= link_to a.tesisdoc.filename, rails_blob_path(a.tesisdoc, disposition: "inline"), { target: '_blank' } %>
+                                    </div>    
+                                <% end %>
+                                
+                                <% if a.tesisportada.attached? %> 
+                                        <div class="row mt-2">
+                                            Portada de la tesis: <%= link_to a.tesisportada.filename, rails_blob_path(a.tesisportada, disposition: "inline"), { target: '_blank' } %>
+                                        </div>    
+                                <% end %>
+                                
+                                <% if a.tesiscarta.attached? %> 
+                                        <div class="row mt-2"> 
+                                            Asignación <%= link_to a.tesiscarta.filename, rails_blob_path(a.tesiscarta, disposition: "inline"), { target: '_blank' } %>
+                                        </div>    
+                                <% end %>
                 <% else %> 
                         <% if a.documentos.attached? %> 
                             <div style="font-size:14px; margin-left:10px;">  
@@ -124,9 +139,27 @@
         </td> -->
        
         <td class="text-center">
-           <%= facp %>
+              <% 
+                    f_acep = ''
+                    d = Evaluacion.where(persona_id:@persona.id).first 
+                    if !d.nil? 
+                           f_acep = d.fecha.strftime("%d-%m-%Y") 
+                    else
+                           f_acep = 'N/A'
+                    end
+              %>
+                    <strong><%= 
+                              f_acep
+                    %> </strong>
         </td>
        
+    </tr>
+    <tr id="drw<%= a.id %>" style="display:none;">
+        <td></td>
+        <td colspan="5" id="data<%= a.id %>"> 
+           
+        </td>
+        <td></td>
     </tr> 
     <%        
     end
@@ -156,16 +189,9 @@
    </div>
 </div>
 
-
-
-<script> 
-            $(document).ready(function() { 
-                $("#buscar").on("keyup", function() { 
-                    var value = $(this).val().toLowerCase(); 
-                    $("#titulos tr").filter(function() { 
-                        $(this).toggle($(this).text() 
-                        .toLowerCase().indexOf(value) > -1) 
-                    }); 
-                }); 
-            }); 
-</script> 
+<script>
+   function cerrar(id){
+        var el = document.getElementById("drw"+id);
+        el.style.display='none';
+   }
+</script>
