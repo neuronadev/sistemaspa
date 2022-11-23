@@ -64,47 +64,50 @@
         <td id="desc<%= a.id %>" style="width:15%;"><%= a.producto.descripcion %>  </td>
         <td style="width:30%;">
           <!--  <%= link_to a.titulo, datadetalle_path(a.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>-->
-            <%= link_to a.titulo, verproductofl_path(a.id, @persona.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', 'style'=>'text-decoration: none;'}  %>       
-                &nbsp;
-              
-
+            <%= a.titulo %>       
+            <%= link_to "Ver detalle...", verproductofl_path(a.id, @persona.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', 'style'=>'text-decoration: none;'}  %>        
                 <% if a.producto_id == 82
                           autor = Autor.where(actividad_id:a.id,persona_id:@persona.id).first
                 %>
                             <div style="font-size:14px; margin-left:10px;">  
                                 <% if autor.posgradoc.attached? %> 
-                                   <%= link_to 'Ver documento', rails_blob_path(autor.posgradoc, disposition: "inline"), { target: '_blank' } %>
+                                   <%= link_to 'Comprobante', rails_blob_path(autor.posgradoc, disposition: "inline"), { target: '_blank', 'style':'text-decoration: none;' } %>
                                 <% end %>
                             </div>    
                             
                 <% elsif a.producto_id == 83 %>
                                <% if a.tesisdoc.attached? %> 
-                                    <div class="row mt-2">
-                                        Acta de exámen: <%= link_to a.tesisdoc.filename, rails_blob_path(a.tesisdoc, disposition: "inline"), { target: '_blank' } %>
+                                    <div style="font-size:14px; margin-left:10px;">
+                                        Acta de exámen: <%= link_to "Comprobante", rails_blob_path(a.tesisdoc, disposition: "inline"), { target: '_blank', 'style':'text-decoration: none;' } %>
                                     </div>    
                                 <% end %>
                                 
                                 <% if a.tesisportada.attached? %> 
-                                        <div class="row mt-2">
-                                            Portada de la tesis: <%= link_to a.tesisportada.filename, rails_blob_path(a.tesisportada, disposition: "inline"), { target: '_blank' } %>
+                                        <div style="font-size:14px; margin-left:10px;">
+                                            Portada de la tesis: <%= link_to "Comprobante", rails_blob_path(a.tesisportada, disposition: "inline"), { target: '_blank', 'style':'text-decoration: none;' } %>
                                         </div>    
                                 <% end %>
                                 
                                 <% if a.tesiscarta.attached? %> 
-                                        <div class="row mt-2"> 
-                                            Asignación <%= link_to a.tesiscarta.filename, rails_blob_path(a.tesiscarta, disposition: "inline"), { target: '_blank' } %>
+                                        <div style="font-size:14px; margin-left:10px;"> 
+                                            Asignación <%= link_to "Comprobante", rails_blob_path(a.tesiscarta, disposition: "inline"), { target: '_blank', 'style':'text-decoration: none;' } %>
                                         </div>    
                                 <% end %>
                 <% else %> 
                         <% if a.documentos.attached? %> 
                             <div style="font-size:14px; margin-left:10px;">  
                                 <% a.documentos.each do |d|%>
-                                    <%= link_to rails_blob_path(d, disposition: "inline"),  target: '_blank' do %>
-                                        <i class="fas fa-file-pdf iconsize"></i> Ver documento
+                                    <%= link_to rails_blob_path(d, disposition: "inline"),  {target: '_blank', 'style':'text-decoration: none;'} do %>
+                                        <i class="fas fa-file-pdf iconsize"></i> Comprobante
                                     <% end %>
                                 <% end %>
                             </div>
                         <% end %> 
+                        <% if a.enlacedoc.attached? %> 
+                             <div style="font-size:14px; margin-left:10px;">  
+                                 <%= link_to "Comprobante", rails_blob_path(a.enlacedoc, disposition: "inline"), { target: '_blank' } %>
+                             </div>    
+                        <% end %>
                 <% end %>  
 
 

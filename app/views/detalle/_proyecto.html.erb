@@ -7,6 +7,7 @@
               <th>Nombre</th>
               <th>Tipo</th>
               <th>Porcentaje</th>
+              <th></th>
           </tr>
        </thead> 
        <tbody>
@@ -17,6 +18,12 @@
                     <td> <%= (a.persona.paterno||'')+' '+(a.persona.materno||'')+' '+(a.persona.nombre||'') %> </td>
                     <td> <%= a.rol.nomrol %> </td>
                     <td> <%= a.porcentaje %>  </td>
+                    <td>
+                         <% if a.aplicar == 'N' %>
+                               Un análisis contrastando sus actividades sustantivas registradas, contra el proyecto reportado, se concluye que forma parte de sus labores que desempeña en su
+                               puesto de trabajo, por lo tanto, no es una actividad adicional para considerarse en la evaluación de puntos.
+                         <% end %>
+                    </td>
                </tr> 
             <%
                 end
