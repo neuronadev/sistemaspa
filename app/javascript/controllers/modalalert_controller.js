@@ -42,7 +42,7 @@ export default class extends Controller {
          .then( response => {
                    
                    var td = document.getElementById(`actividad${idactividad}`)
-                   td.innerHTML = `<div class="col validarcr" style="font-size:14px;"><i class="fa-solid fa-arrow-right"></i> En validación-Coor. Red</div>`
+                   td.innerHTML = `<div class="col validarcr" style="font-size:14px;"><i class="fa-solid fa-arrow-right"></i> En validación</div>`
                    this.element.modal.close(this.modalTarget)
 
                    alert('Registro validado.')           

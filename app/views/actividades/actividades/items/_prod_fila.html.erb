@@ -19,11 +19,11 @@
                </div>
         </div>
         <div class="col  align-self-center">
-             <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %> 
+             <% if a.producto.prodgrupo_id != 29 %> 
                  <%= render "actividades/actividades/items/validacion_fila", a:a %>
              <% end %>    
 
-             <% if current_usuario.rol == 'T' %> 
+             <% if a.producto.prodgrupo_id == 29 %> 
                  <%= render "actividades/actividades/items/validacion_fila_t", a:a %>
              <% end %>    
         
