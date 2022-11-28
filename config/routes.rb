@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'revisiones/index'
   namespace :evaluaciones do
     resources :calificaciones
   end
@@ -31,7 +32,10 @@ Rails.application.routes.draw do
              post 'vobousuario'
           end
        end
+
+       resources :academicos
   end
+
 
   get 'valactividades/validaciones/infoproducto/:trval/:tritem', to:'valactividades/validaciones#infoproducto', as: 'savalproducto'
   get 'valactividades/validaciones/index', to: 'valactividades/validaciones#index', as: 'validaindex'

@@ -36,8 +36,8 @@
              <% if current_usuario.evaluador == 'C' %> 
                   <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Validaciones</div>
                   <div id="menuini" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
-                              <%= link_to validaindex_path(:tipo=>'A'), style:'text-decoration: none; color:#202124;' do %>
-                              <i class="fa-solid fa-users"  style="color: #5b5b5b ;"></i> Técnicos
+                              <%= link_to validaciones_academicos_path, style:'text-decoration: none; color:#202124;' do %>
+                                  <i class="fa-solid fa-users"  style="color: #5b5b5b ;"></i> Técnicos
                               <% end %>   
                   </div>
             <% end %>   

@@ -21,6 +21,7 @@
                         @actividades.each do |a|
                            @row_id = @i.to_s + '_' + a.id.to_s
                            idresp = 0
+                           producto = Producto.find(a.producto_id)
 
                            if !a.personaid.nil?
                               idresp = a.personaid
@@ -28,51 +29,49 @@
                               u = Usuario.where(persona_id:resp.id).first
                            end
                            
-                           
+                           if producto.prodgrupo_id != 29 && a.fuente == 'M'
                      %>
-                           <tr id="tr_<%= @row_id %>" class="">
-                              <td> <%= a.id %> </td>
-                              <td> <%= a.producto.descripcion %> 
-                                 <% if a.producto.prodgrupo.clave == 'OTRASD' %>
-                                                   -<I><%= a.divulgacion.tipodivulgacion.nomtipodivulgacion %> </I>
-                                    <% end %> 
-                              </td>
-                              <td> <%= a.titulo %> 
+                                 <tr id="tr_<%= @row_id %>" class="">
+                                    <td> <%= a.id %> </td>
+                                    <td> <%= a.producto.descripcion %> 
+                                       <% if a.producto.prodgrupo.clave == 'OTRASD' %>
+                                                         -<I><%= a.divulgacion.tipodivulgacion.nomtipodivulgacion %> </I>
+                                          <% end %> 
+                                    </td>
+                                    <td> <%= a.titulo %> 
+                                          
+                                    </td>
+                                    <td> 
                                     
-                              </td>
-                              <td> 
-                              
-                                 <% if a.estado == 'U' %>
-                                       <button class="btn btn-warning btn-sm" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" >Validar</button>
-                                 <% end %>  
-                                 <% if a.estado == 'C' ||  a.estado == 'S' %>
-                                       <span class="badge bg-success" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">VER</span>
-                                 <% end %> 
-                                 <% if a.estado == 'G' %>
-                                       <span class="badge bg-info" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">En edición</span>
-                                 <% end %> 
-                                 <% if a.estado == 'D' %>
-                                       <span class="badge bg-danger" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">No se considera</span>
-                                 <% end %>
-                              
-                              </td>
-                           </tr> 
-                           <tr id="div_<%= @row_id %>" style="display:none">
-                              <td></td>
-                              <td></td>
-                              <td>
-                                 <div>
-                                       contenido de la validacion
-                                 </div>
-                              
-                              </td>
-                              <td></td>
-                           </tr>  
-                     <% 
-                        @i = @i +1
-                      
-                     end
-                     %>
+                                       <% if a.estado == 'U' %>
+                                             <button class="btn btn-warning btn-sm" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" >Validar</button>
+                                       <% end %>  
+                                       <% if a.estado == 'C' ||  a.estado == 'S' %>
+                                             <span class="badge bg-success" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">VER</span>
+                                       <% end %> 
+                                       <% if a.estado == 'G' %>
+                                             <span class="badge bg-info" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">En edición</span>
+                                       <% end %> 
+                                       <% if a.estado == 'D' %>
+                                             <span class="badge bg-danger" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">No se considera</span>
+                                       <% end %>
+                                    
+                                    </td>
+                                 </tr> 
+                                 <tr id="div_<%= @row_id %>" style="display:none">
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                       <div>
+                                             contenido de la validacion
+                                       </div>
+                                    
+                                    </td>
+                                    <td></td>
+                                 </tr>  
+                              <% @i = @i +1 %>  
+                           <% end %>    
+                         <% end %>
                <% else %>      
                      <tr><td span="4">No hay registros</td></tr>
                <% end %>

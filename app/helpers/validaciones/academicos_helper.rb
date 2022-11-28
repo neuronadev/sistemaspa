@@ -1,0 +1,2 @@
+module Validaciones::AcademicosHelper
+end

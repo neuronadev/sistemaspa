@@ -1,7 +1,7 @@
 class Actividades::RedacademicasController < ApplicationController
   def index
       @p = Persona.find(current_usuario.persona_id)
-      @actividades = Actividad.where(estado:['U','C','G','D'],periodo:2022,asignared:@p.academico.red_id,producto_id:[1,2,5,6,7])
+      @actividades = Actividad.where(estado:['U','C','G','D'],periodo:2022,asignared:@p.academico.red_id).order(:producto_id)
       
       #@academicos = Academico.where(red_id:1)
       #@acad_array = []
