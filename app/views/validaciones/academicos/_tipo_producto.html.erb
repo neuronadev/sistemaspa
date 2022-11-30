@@ -1,0 +1,14 @@
+<%= render "actividades/actividades/show/form_art", actividad:@actividad, show_abstract:'N' if @parts[0] == 'ART' %>
+<%= render "actividades/actividades/show/form_libro", actividad:@actividad if @parts[0] == 'LIBRO' %>
+<%= render "actividades/actividades/show/form_capitulo", actividad:@actividad if @parts[0] == 'CAPITULO' %>
+<%= render "actividades/actividades/show/form_flora", actividad:@actividad if @parts[0] == 'FLORA' %>
+<%= render "actividades/actividades/show/form_ficha", actividad:@actividad if @producto.prodgrupo.clave == 'FICHA' %>
+<%= render "actividades/actividades/show/form_patente", actividad:@actividad if @parts[0] == 'PATENTE' %>
+<%= render "actividades/actividades/show/form_editor", actividad:@actividad if @parts[0] == 'EDITOR' %>
+<%= render "actividades/actividades/show/form_odivulga", actividad:@actividad if @parts[0] == 'ODIV' %>
+<%= render "actividades/actividades/show/form_vinculapp", actividad:@actividad if @parts[0] == 'VINCULAPP' %>
+<%= render "actividades/actividades/show/form_vinculasp", actividad:@actividad if @parts[0] == 'VINCULASP' %>
+<%= render "actividades/actividades/show/form_adicional", actividad:@actividad if @producto.prodgrupo.clave == 'ACTIVIDAD' %>
+<%= render "actividades/actividades/show/form_curso", actividad:@actividad if @producto.prodgrupo.clave == 'CUR' %>
+<%= render "actividades/actividades/show/form_tesis", actividad:@actividad if @producto.prodgrupo.clave == 'TESIS' %>
+<%= render "actividades/actividades/show/form_proyecto", actividad:@actividad if @producto.prodgrupo.clave == 'PROY' %>

@@ -33,7 +33,12 @@ Rails.application.routes.draw do
           end
        end
 
-       resources :academicos
+       resources :academicos do
+            collection do
+               post 'adicionales'
+               post 'producto'
+            end
+       end
   end
 
 

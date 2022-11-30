@@ -7,4 +7,6 @@
 <%= row_show( 'Página Final:', @actividad.articulo.pgfin ) %>
 <%= row_show( 'Número Electrónico:', @actividad.articulo.eidentificador ) %>
 <%= row_show( 'DOI:', @actividad.articulo.doi ) %>
-<%= row_show( 'Abstract:', @actividad.articulo.abstract ) %>
+<% if show_abstract == 'S' %>
+    <%= row_show( 'Abstract:', @actividad.articulo.abstract ) %>
+<% end %>

@@ -1,7 +1,7 @@
                 <%= row_show('Título:', @actividad.titulo ) %>
                 <%= row_show('Fecha de publicación', @actividad.fechapub ) %>
   
-    <%= render "actividades/actividades/show/form_art_c" if @parts[1] == 'C' %>
+    <%= render "actividades/actividades/show/form_art_c", show_abstract:show_abstract if @parts[1] == 'C' %>
     <%= render "actividades/actividades/show/form_art_d" if @parts[1] == 'D' %>
     <%= render "actividades/actividades/show/form_art_d" if @parts[1] == 'P' %>
     

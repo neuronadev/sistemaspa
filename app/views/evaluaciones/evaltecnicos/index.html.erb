@@ -9,8 +9,8 @@
                  <% eval.itemsustantivas.each do |s| 
                     suma += s.porcentaje
                  %>
-                         <%= render "item", data:s %>  
+                     <%= render "item", data:s %>  
                  <% end %>
        <% end %>
 </div>    
-<%= render "total_porc", total:suma  %>
+<%= render "total_porc", total:suma, sustantivas:@sustantivas  %>

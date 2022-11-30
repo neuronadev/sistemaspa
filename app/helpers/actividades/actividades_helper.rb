@@ -1,7 +1,7 @@
 module Actividades::ActividadesHelper
     def row_show(titulo,contenido)
            str = "<div class='row mt-1'>
-                            <div class='col-md-2 d-flex justify-content-end'> 
+                            <div class='col-md-3 d-flex justify-content-end'> 
                                 #{titulo}
                             </div>
                             <div class='col d-flex justify-content-start'>

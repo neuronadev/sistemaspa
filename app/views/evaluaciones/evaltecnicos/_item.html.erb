@@ -1,5 +1,5 @@
 <div class="row border-bottom  p-2">
-        <div class="col-md-4 d-flex justify-content-start" >
+        <div class="col-md-3 d-flex justify-content-start" >
             <%= (data.persona.paterno||'') + ' ' + (data.persona.materno||'') + ' ' + (data.persona.nombre||'') %>
         </div>
 
@@ -7,9 +7,26 @@
              <%= data.descripcion %>
         </div>
 
-        <div class="col-md-1 d-flex justify-content-center" >
+        <div class="col-md-2 d-flex justify-content-center" >
             <%= data.porcentaje %>
         </div>
-        <div class="col-md-1 d-flex justify-content-center">
+        <div class="col-md-2 d-flex justify-content-center">
+             <div class="row">
+                      <% if data.calificaciones.any? %>
+                            <% if !data.calificaciones.where(tipo:'CA').first.nil? %> 
+                                    <div class="col fw-bold text-center"> <%= data.calificaciones.where(tipo:'CA').first.calificacion %> </div>
+                             <% else %>     
+                                     <div class="col fst-italic text-center"> S/Cal. </div>
+                            <% end %>
+                            <% if !data.calificaciones.where(tipo:'EF').first.nil? %> 
+                                    <div class="col fw-bold text-center"> <%= data.calificaciones.where(tipo:'EF').first.calificacion %> </div>
+                             <% else %>     
+                                     <div class="col fst-italic text-center"> S/Cal. </div>
+                            <% end %>
+                       <% else %>     
+                                  <div class="col fst-italic text-center"> S/Cal. </div>
+                                  <div class="col fst-italic text-center"> S/Cal. </div> 
+                      <% end %>
+             </div>
         </div>
 </div>

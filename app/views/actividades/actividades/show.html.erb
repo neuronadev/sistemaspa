@@ -58,7 +58,7 @@
                                     <% end %> 
                         <% end %>
                      
-                        <%= render "actividades/actividades/show/form_art", actividad:@actividad if @parts[0] == 'ART' %>
+                        <%= render "actividades/actividades/show/form_art", actividad:@actividad, show_abstract:'S' if @parts[0] == 'ART' %>
                         <%= render "actividades/actividades/show/form_libro", actividad:@actividad if @parts[0] == 'LIBRO' %>
                         <%= render "actividades/actividades/show/form_capitulo", actividad:@actividad if @parts[0] == 'CAPITULO' %>
                         <%= render "actividades/actividades/show/form_flora", actividad:@actividad if @parts[0] == 'FLORA' %>

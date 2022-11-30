@@ -1,34 +1,36 @@
-<div class="row">
-   <div class="col-md-2 d-flex justify-content-end"> 
-           
-   </div>
-   <div class="col justify-content-start">
-     <div class="row">
-          <% if actividad.autores.any? %>
-              <%
-                total_au = actividad.autores.count
-                idx = 0
-                actividad.autores.order(:id).each do |a|
-                   idx += 1
-                   str = ''
-              %>
-                  <div class="ms-1 <%= 'fw-bold' if a.persona.id != 211 %> "   >
-                     <% str = (a.persona.paterno||'') + ' ' + (a.persona.materno||'') +', ' + (a.persona.nombre||'') if a.persona.id != 211 %>
-                     <% if a.persona.id == 211 %>
-                           <% if !a.firma.nil? %>
-                                   <% str = (a.firma || '')  %>  
-                           <% else %>  
-                                   <% str = (a.autorap || '') + ', ' + (a.autornom || '') %> 
-                           <% end %>        
-                     <% end %>
-                     
-                     <% str += '*' if ['1','S'].include? a.corresponsal   %>
-                     <% str += '; ' if idx < total_au %>
-                     <%= str %>
-                  </div> 
-                <% end %>   
-          <% end %>
-     </div>    
-   </div>
-</div>
+<%
+  if actividad.autores.any?
+     total_au = actividad.autores.count
+     idx = 0
+     list_autor = ''
+       actividad.autores.order(:id).each do |a|
+            idx += 1
+            str = ''
+            str = (a.persona.paterno||'') + ' ' + (a.persona.materno||'') +', ' + (a.persona.nombre||'') if a.persona.id != 211
+            if a.persona.id == 211
+                  if !a.firma.nil?
+                       str = (a.firma || '')
+                   else
+                       str = (a.autorap || '') + ', ' + (a.autornom || '')
+                  end     
+            end
+            str += '*' if ['1','S'].include? a.corresponsal
+            str += '; ' if idx < total_au
+            if a.persona.id != 211
+                  list_autor += "<span class='fw-bold'>"+str+"</span>"
+             else
+                  list_autor += str
+            end     
+        end  
+  end
 
+%>
+
+<div class="row mt-2">
+   <div class='col-md-3 d-flex justify-content-end'> 
+      Autores:
+   </div>
+   <div class='col justify-content-start'>
+         <%= list_autor.html_safe %>
+   </div>
+</div>  

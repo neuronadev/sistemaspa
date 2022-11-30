@@ -1,0 +1,20 @@
+<div class="row mb-4">
+     <div class="col-12">
+          <div class="row justify-content-end">
+               <div class="col-auto">
+                    <i class="fa-regular fa-rectangle-xmark fa-lg text-primary cursor-pointer" data-action="click->tecnico#closewin" data-tecnico-idtarget-param="<%= @actividad.id %>" ></i>
+               </div>
+          </div>
+          <div class="row">
+               <div class="col-12">
+                      <%= render "tipo_producto" %>
+               </div>
+          </div>
+          
+     </div>
+</div>
+<div class="row">
+    <div class="col">
+        <%= render "menu_validar"  %>
+    </div>
+</div>

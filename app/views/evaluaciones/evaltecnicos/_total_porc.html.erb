@@ -1,8 +1,31 @@
 <div class="row mb-4 fw-bold" id="total">
-     <div class="col-md-9 d-flex justify-content-end">
-           Total:
+     <div class="col-md-8 d-flex justify-content-end">
+           Total(%):
     </div>
-    <div class="col-md-1 d-flex justify-content-center" id="totalporc">
+    <div class="col-md-2 d-flex justify-content-center" id="totalporc">
             <%= total %>
+     </div>
+     <div class="col-md-2 d-flex justify-content-center">
+           <%     cal_final = 0.0
+                  sustantivas.each do |s| %>
+                   <% s.itemsustantivas.each do |item| 
+                         porcentaje = item.porcentaje
+                         calidad = 0.0
+                         eficiencia = 0.0
+                         cal_item = 0.0
+                         if item.calificaciones.any?
+                               calidad = !item.calificaciones.where(tipo:'CA').first.nil? ?  item.calificaciones.where(tipo:'CA').first.calificacion : 0.0
+                               eficiencia = !item.calificaciones.where(tipo:'EF').first.nil? ?  item.calificaciones.where(tipo:'EF').first.calificacion : 0.0
+                         end  
+                         cal_item = (porcentaje.to_f/100) * ((calidad/10) + (eficiencia/10))/2
+                         cal_final += cal_item
+                   %>
+                   <% end %>
+           <% end %>
+           <% if cal_final >= 8.5 %>   
+                  <div class="text-primary">Calificación: <%= sprintf('%.5s', cal_final)   %></div>
+           <% else %>    
+                   <div class="text-danger">Calificación: <%= sprintf('%.5s', cal_final)  %></div>
+           <% end %> 
      </div>
 </div>
