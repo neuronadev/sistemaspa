@@ -38,6 +38,7 @@ Rails.application.routes.draw do
                post 'adicionales'
                post 'producto'
                post 'validar'
+               post 'aplicartipo'
             end
        end
   end

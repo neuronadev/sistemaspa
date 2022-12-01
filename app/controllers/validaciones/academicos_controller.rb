@@ -27,7 +27,17 @@ class Validaciones::AcademicosController < ApplicationController
     def validar
         @actividad = Actividad.find(params[:idprod].to_i)
         @tipo = params[:tipo]
-        
+
         render partial: "validar"
+    end
+    def aplicartipo
+        @actividad = Actividad.find(params[:idprod].to_i)
+        @tipo = params[:tipo]
+
+        if @tipo == 'A'
+            @actividad.estado = 'C'
+            @actividad.save
+        end
+
     end
 end
