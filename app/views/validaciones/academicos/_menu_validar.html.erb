@@ -1,7 +1,21 @@
-<div class="row">
-  <div class="col">
-    <div>Aceptar producto</div>
-    <div>Solictyar edición</div>
-    <div>No se valida</div>
+<div class="row mb-3">
+  <div class="col-12">
+     <div class="row">
+         <div class="col text-success fw-bold">
+             <span class="cursor-pointer" data-action="click->tecnico#validar" data-tecnico-idprod-param="<%= @actividad.id %>" data-tecnico-tipo-param="A">
+                  <i class="fa-solid fa-check"></i> Aceptar producto
+             </span>
+         </div>
+         <div class="col text-success fw-bold">
+             <span class="cursor-pointer" data-action="click->tecnico#validar" data-tecnico-idprod-param="<%= @actividad.id %>" data-tecnico-tipo-param="E">
+                 <i class="fa-solid fa-rotate-left"></i> Enviar a edición
+             </span>
+         </div>
+         <div class="col text-danger fw-bold">
+             <span class="cursor-pointer" data-action="click->tecnico#validar" data-tecnico-idprod-param="<%= @actividad.id %>" data-tecnico-tipo-param="N">
+                 <i class="fa-solid fa-file-circle-plus"></i> No cumple con la normativa
+             </span>
+         </div>
+     </div>   
   </div>
 </div>

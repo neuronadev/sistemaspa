@@ -1,0 +1,12 @@
+
+<% if @tipo == 'A' %>
+     <%= render "validaciones/academicos/acciones/aceptar" %>
+<% end %>
+<% if @tipo == 'E' %>
+     <%= render "validaciones/academicos/acciones/editar" %>
+<% end %>
+<% if @tipo == 'N' %>
+     <%= render "validaciones/academicos/acciones/rechazar" %>
+<% end %>
+
+<div class="text-primary cursor-pointer" data-action="click->tecnico#detalle" data-tecnico-idprod-param = "<%= @actividad.id %>" > Cancelar</div>

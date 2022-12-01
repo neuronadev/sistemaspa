@@ -16,16 +16,16 @@
                             <% if !data.calificaciones.where(tipo:'CA').first.nil? %> 
                                     <div class="col fw-bold text-center"> <%= data.calificaciones.where(tipo:'CA').first.calificacion %> </div>
                              <% else %>     
-                                     <div class="col fst-italic text-center"> S/Cal. </div>
+                                     <div class="col fst-italic text-center text-danger"> S/Cal. </div>
                             <% end %>
                             <% if !data.calificaciones.where(tipo:'EF').first.nil? %> 
                                     <div class="col fw-bold text-center"> <%= data.calificaciones.where(tipo:'EF').first.calificacion %> </div>
                              <% else %>     
-                                     <div class="col fst-italic text-center"> S/Cal. </div>
+                                     <div class="col fst-italic text-center text-danger"> S/Cal. </div>
                             <% end %>
                        <% else %>     
-                                  <div class="col fst-italic text-center"> S/Cal. </div>
-                                  <div class="col fst-italic text-center"> S/Cal. </div> 
+                                  <div class="col fst-italic text-center text-danger"> S/Cal. </div>
+                                  <div class="col fst-italic text-center text-danger"> S/Cal. </div> 
                       <% end %>
              </div>
         </div>

@@ -56,4 +56,22 @@ export default class extends Controller {
        div_det.style.display = "flex"
   }
 
+  async validar(event){
+    var idprod = event.params.idprod
+    var tipo = event.params.tipo
+    var str_validar = "div_validar_"+idprod
+    var div_validar = document.getElementById(str_validar)
+
+    var url = "/validaciones/academicos/validar"
+    var token = document.querySelector('meta[name="csrf-token"]').content
+    await fetch(   url,
+                 { method:'POST', headers: { 'Content-Type':'application/json', 'Accept':'application/html', 'X-CSRF-Token': token },
+                   body: JSON.stringify( {idprod:idprod, tipo:tipo} )
+                 } 
+    ).then( response => response.text() )
+     .then( html => {
+                        div_validar.innerHTML = html
+                    } ) 
+  }
+
 }  

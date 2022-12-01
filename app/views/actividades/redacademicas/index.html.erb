@@ -22,14 +22,17 @@
                            @row_id = @i.to_s + '_' + a.id.to_s
                            idresp = 0
                            producto = Producto.find(a.producto_id)
-
+ 
                            if !a.personaid.nil?
-                              idresp = a.personaid
-                              resp = Persona.find(idresp)
-                              u = Usuario.where(persona_id:resp.id).first
+                                 idresp = a.personaid
+                                 resp = Persona.find(idresp)
+                                 tipo_academico = resp.tipopersona_id
+                                 u = Usuario.where(persona_id:resp.id).first
+                            else
+                                 tipo_academico = 0
                            end
                            
-                           if producto.prodgrupo_id != 29 && a.fuente == 'M'
+                           if producto.prodgrupo_id != 29 && a.fuente == 'M' && tipo_academico != 4
                      %>
                                  <tr id="tr_<%= @row_id %>" class="">
                                     <td> <%= a.id %> </td>

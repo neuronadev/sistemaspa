@@ -37,6 +37,7 @@ Rails.application.routes.draw do
             collection do
                post 'adicionales'
                post 'producto'
+               post 'validar'
             end
        end
   end

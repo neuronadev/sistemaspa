@@ -24,4 +24,10 @@ class Validaciones::AcademicosController < ApplicationController
         render partial: "producto"
 
     end
+    def validar
+        @actividad = Actividad.find(params[:idprod].to_i)
+        @tipo = params[:tipo]
+        
+        render partial: "validar"
+    end
 end
