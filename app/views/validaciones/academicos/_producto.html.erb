@@ -13,8 +13,13 @@
           
      </div>
 </div>
+
 <div class="row">
-    <div class="col" id="div_validar_<%= @actividad.id %>">
-        <%= render "menu_validar"  %>
-    </div>
+          <div class="col" id="div_validar_<%= @actividad.id %>">
+               <%  if @actividad.estado == 'U' %>       
+                         <%= render "menu_validar"  %>
+               <% else %>
+                         <%= render "mensaje_val" %>
+               <% end %>         
+          </div>
 </div>

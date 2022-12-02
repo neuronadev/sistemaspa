@@ -39,5 +39,7 @@ class Validaciones::AcademicosController < ApplicationController
             @actividad.save
         end
 
+        render partial: "mensaje_val"
+
     end
 end

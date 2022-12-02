@@ -19,13 +19,13 @@
    <div class="col-12">
             <% @adicionales.each do |item| %>
                 <div class="row p-2 border-bottom">
-                    <div class="col-1 text-center align-middle" >  <%= item.id %>  </div>
+                    <div class="col-1 text-center align-middle <%= 'text-success fw-bold' if item.estado=='C' %> " >  <%= item.id %>  </div>
                     <div class="col-4 align-middle" > <%= item.producto.descripcion %></div>
                     <div class="col-6 align-middle" style="text-align: justify;"> 
                               <div><%= item.titulo %></div>
                               <div class="text-primary cursor-pointer" data-action="click->tecnico#detalle" data-tecnico-idprod-param = "<%= item.id %>" > Ver producto</div>
                     </div>
-                    <div class="col-1 align-middle" style="text-align: justify;"> 
+                    <div class="col-1 align-middle" style="text-align: center;"> 
                         <%= render "estado_producto", item:item %> 
                     </div>
 
@@ -34,9 +34,6 @@
                         <div class="col-10 rounded border border-success bg-light" id="data_producto_<%= item.id %>">DATA</div>
                         <div class="col-1"></div>
                     </div>  
-                   
-                    
-
                 </div>  
                 
             <% end %>
