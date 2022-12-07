@@ -3,3 +3,13 @@
         <i class="fa-solid fa-check"></i> Producto validado por el comite.
     </div>
 <% end %>
+<% if @actividad.estado == 'G' %>
+    <div class="alert alert-warning" role="alert">
+        <i class="fa-solid fa-check"></i> Producto en edición de la información.
+    </div>
+<% end %>
+<% if @actividad.estado == 'D' %>
+    <div class="alert alert-danger" role="alert">
+        <i class="fa-solid fa-check"></i> Producto rechazado
+    </div>
+<% end %>

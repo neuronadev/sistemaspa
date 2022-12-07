@@ -1,0 +1,24 @@
+var str_validar = "div_validar_"+"<%= @actividad.id %>";
+var str_folio = "folio_"+"<%= @actividad.id %>";
+var str_estado = "estado_"+"<%= @actividad.id %>";
+var div_validar = document.getElementById(str_validar);
+var cel_folio = document.getElementById(str_folio);
+var cel_estado = document.getElementById(str_estado);
+
+<%  if @actividad.estado == 'G'  %>
+     div_validar.innerHTML=`<div class="alert alert-warning" role="alert">
+                             <%= @valetapa.txtmensaje %>
+                          </div>`;
+     cel_folio.classList.add("text-warning")
+     cel_folio.classList.add("fw-bold")
+     cel_estado.innerHTML=`<span class="badge bg-warning"><i class="fa-solid fa-pen-to-square fw-bold text-white"></i></span>`
+<% end %>                          
+
+<%  if @actividad.estado == 'D'  %>
+     div_validar.innerHTML=`<div class="alert alert-danger" role="alert">
+                             <%= @valetapa.txtmensaje %>
+                          </div>`;
+     cel_folio.classList.add("text-danger")
+     cel_folio.classList.add("fw-bold")
+     cel_estado.innerHTML=`<span class="badge bg-danger"><i class="fa-solid fa-xmark fw-bold text-white"></i></span>`                     
+<% end %>                          

@@ -6,6 +6,14 @@ export default class extends Controller {
         
       event.target.classList.add("bg-light")
   }
+  sustantivas(event){
+    var div_sustantivas = document.getElementById("div_sustantivas")
+    div_sustantivas.style.display="flex"
+  }
+  closesust(event){
+    var div_sustantivas = document.getElementById("div_sustantivas")
+    div_sustantivas.style.display="none"
+  }
   unsel(event){
     event.target.classList.remove("bg-light")
   }
@@ -30,7 +38,12 @@ export default class extends Controller {
         )
         .then( response => response.text() )
         .then( html => {
-                        div_adicionales.innerHTML = html
+                         var items = document.getElementsByClassName("list-group-item")
+                         for(let i = 0; i < items.length; i++){
+                                items[i].classList.remove("fw-bold")
+                         }
+                         event.target.classList.add("fw-bold") 
+                         div_adicionales.innerHTML = html
                         } )
   }
 
@@ -70,6 +83,7 @@ export default class extends Controller {
                  } 
     ).then( response => response.text() )
      .then( html => {
+                        
                         div_validar.innerHTML = html
                     } ) 
   }
@@ -86,9 +100,18 @@ export default class extends Controller {
                    body: JSON.stringify( {idprod:idprod, tipo:tipo} )
                  } 
     ).then( response => response.text() )
-     .then( html => {
+     .then( html => {   
+                        var str_folio = "folio_"+idprod;
+                        var str_estado = "estado_"+idprod;
+                        var cel_folio = document.getElementById(str_folio);
+                        var cel_estado = document.getElementById(str_estado);
+                        cel_folio.classList.add("text-success")
+                        cel_folio.classList.add("fw-bold")
+                        cel_estado.innerHTML=`<span class="badge bg-success"><i class="fa-solid fa-check fw-bold text-white"></i></span>`
                         div_validar.innerHTML = html
                     } ) 
   }
+
+ 
 
 }  

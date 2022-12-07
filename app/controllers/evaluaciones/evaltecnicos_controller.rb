@@ -31,6 +31,7 @@ class Evaluaciones::EvaltecnicosController < ApplicationController
   end
 
   def edit
+      
   end
 
   def update

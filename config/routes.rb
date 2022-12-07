@@ -39,6 +39,7 @@ Rails.application.routes.draw do
                post 'producto'
                post 'validar'
                post 'aplicartipo'
+               post 'mensaje'
             end
        end
   end

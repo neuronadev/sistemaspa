@@ -1,1 +1,19 @@
-Editar
+<%= form_with url: 'academicos/mensaje', model:@valetapa, remote:true do |form| %>
+            <input type="hidden" name="id" value='<%= @actividad.id %>'>
+            <input type="hidden" name="sec" value='0'>
+            <input type="hidden" name="tipo" value='corregir'>
+            <input type="hidden" name="etapa" value='CM'>
+            <input type="hidden" name="atendido" value='NO'>
+            <input type="hidden" name="activo" value='SI'>
+            <input type="hidden" name="estado" value='activo'>
+            <input type="hidden" name="persona_id" value='<%= current_usuario.persona_id %>'>
+
+            <%= form.label :txtmensaje, 'Escriba el motivo por el cual el producto debe ser corregido:', class:"font-weight-bold" %>
+            <%= form.rich_text_area :txtmensaje %>
+            <div class="row">
+               <div class="d-flex justify-content-center p-2"> 
+                   <button type="submit" class="btn btn-primary col-2"> <i class="fa-solid fa-check"></i> Aceptar</button>    
+                   <button type="button" class="btn btn-secondary col-2 ms-3" data-action="click->tecnico#detalle" data-tecnico-idprod-param = "<%= @actividad.id %>" > <i class="fa-solid fa-xmark"></i> Cancelar</button>   
+               </div>            
+           </div>
+<% end %>
