@@ -99,8 +99,19 @@ class Actividades::ActividadesController < ApplicationController
   def update
     @actividad = Actividad.find(params[:id].to_i)
 
+    if @actividad.estado == 'G'
+          valetapa = Valetapa.where(actividad_id:@actividad.id).last
+          if valetapa.etapa == 'CM' || valetapa.etapa == 'CR'
+                params[:actividad][:estado ] = 'U'
+          end
+          if valetapa.etapa == 'SA'
+                params[:actividad][:estado ] = 'C'
+          end
+    end
+
     if @actividad.update(actividad_params)
           flash[:info] = "Registro actualizado." 
+          
           redirect_to [:actividades, @actividad]  
     else
           @producto = @actividad.producto  

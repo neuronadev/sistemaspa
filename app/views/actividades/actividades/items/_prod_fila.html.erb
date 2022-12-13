@@ -1,4 +1,4 @@
-<div class="row border-bottom mt-2 <%= 'fw-bold' if a.estado=='A' %> ">
+<div class="row border-bottom mt-2 <%= 'fw-bold' if a.estado=='A' || a.estado == 'G' %> ">
 
         <div class="col-1 d-flex justify-content-center  align-self-center">
               <%= a.id %>
@@ -8,6 +8,7 @@
              <% if a.producto.prodgrupo_id == 29 %>
                 - <%= a.producto.concepto %>  
              <% end %>
+             
         </div>
         <div class="col-6  align-self-center">
                <%= a.titulo %>
@@ -16,6 +17,11 @@
                          <i class="fa-regular fa-file-powerpoint"></i> Ver producto
                     <% end %>
                
+               </div>
+               <div style="color:#ff6347;">
+                    <% if a.estado == 'G' %>
+                         <i class="fa-regular fa-pen-to-square"></i> Debe atender la solicitud de cambios en el producto. Ingrese a la opción Corregir.
+                    <% end %>
                </div>
         </div>
         <div class="col  align-self-center">

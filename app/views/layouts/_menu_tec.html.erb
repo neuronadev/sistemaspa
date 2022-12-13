@@ -25,21 +25,23 @@
                                  <i class="fa-solid fa-spell-check" style="color:#5b5b5b;"></i> Evaluar
                               <% end %>   
                      </div> 
-             <%  end %>
-                   
-             <div class="d-flex justify-content-start mt-3 p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
-                          <%= link_to destroy_usuario_session_path, style:'text-decoration: none; color:#202124;' do %>
-                                <i class="fa-solid fa-arrow-right-from-bracket" style="color:#5b5b5b;"></i> Salir
-                         <% end %>  
-             </div>
-
-             <% if current_usuario.evaluador == 'C' %> 
+            <%  end %>
+             
+            <% if current_usuario.evaluador == 'C' %> 
                   <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Validaciones</div>
                   <div id="menuini" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
                               <%= link_to validaciones_academicos_path, style:'text-decoration: none; color:#202124;' do %>
                                   <i class="fa-solid fa-users"  style="color: #5b5b5b ;"></i> Técnicos
                               <% end %>   
                   </div>
-            <% end %>   
+            <% end %> 
+
+             <div class="d-flex justify-content-start mt-3 p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                          <%= link_to destroy_usuario_session_path, style:'text-decoration: none; color:#202124;' do %>
+                                <i class="fa-solid fa-arrow-right-from-bracket" style="color:#5b5b5b;"></i> Salir
+                         <% end %>  
+             </div>
+
+              
     </div>  
 </div>   

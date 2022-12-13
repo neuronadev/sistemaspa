@@ -8,7 +8,7 @@
             <input type="hidden" name="estado" value='activo'>
             <input type="hidden" name="persona_id" value='<%= current_usuario.persona_id %>'>
 
-            <%= form.label :txtmensaje, 'Escriba el motivo por el cual el producto debe ser corregido:', class:"font-weight-bold" %>
+            <%= form.label :txtmensaje, 'Escriba el motivo por el cual el producto debe ser editado:', class:"font-weight-bold", class:"text-primary" %>
             <%= form.rich_text_area :txtmensaje %>
             <div class="row">
                <div class="d-flex justify-content-center p-2"> 

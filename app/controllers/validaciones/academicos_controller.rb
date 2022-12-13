@@ -42,6 +42,15 @@ class Validaciones::AcademicosController < ApplicationController
         if @tipo == 'A'
             @actividad.estado = 'C'
             @actividad.save
+
+            valetapa = Valetapa.where(actividad_id:@actividad.id).last
+            if !valetapa.nil? && (valetapa.etapa == 'CM' && valetapa.estado == 'activo')
+                   valetapa_accion = Valetapa.find(valetapa.id)
+                   valetapa_accion.estado = 'cerrado'
+                   valetapa_accion.atendido = 'SI'
+                   valetapa_accion.activo = 'NO'
+                   valetapa_accion.save
+            end
         end
 
         render partial: "mensaje_val"

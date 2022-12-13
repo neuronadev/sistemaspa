@@ -14,6 +14,19 @@
      </div>
 </div>
 
+<div class="row ms-2" style="color:#ff6347;">
+    <%   
+       valetapa = Valetapa.where(actividad_id:@actividad.id).last
+       activa_val = ''
+       if !valetapa.nil?
+            if @actividad.estado == 'U' && (valetapa.accion == 'corregir' && valetapa.estado == 'activo')
+                  activa_val = valetapa.txtmensaje
+            end
+       end
+   %>
+     <%= activa_val %>
+</div>
+
 <div class="row">
           <div class="col" id="div_validar_<%= @actividad.id %>">
                <%  if @actividad.estado == 'U' %>       

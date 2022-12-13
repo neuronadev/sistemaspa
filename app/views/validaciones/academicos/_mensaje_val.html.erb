@@ -3,13 +3,26 @@
         <i class="fa-solid fa-check"></i> Producto validado por el comite.
     </div>
 <% end %>
-<% if @actividad.estado == 'G' %>
+<% if @actividad.estado == 'G'
+      @val_msg = Valetapa.where(actividad_id:@actividad.id)
+      @txt_msg = '' 
+      if @val_msg.any?
+           @txt_msg = @val_msg.last.txtmensaje
+      end
+  
+%>
     <div class="alert alert-warning" role="alert">
-        <i class="fa-solid fa-check"></i> Producto en edición de la información.
+       <i class="fa-regular fa-pen-to-square"></i> Producto en edición. <%= @txt_msg %>
     </div>
 <% end %>
-<% if @actividad.estado == 'D' %>
+<% if @actividad.estado == 'D'
+      @val_msg = Valetapa.where(actividad_id:@actividad.id)
+      @txt_msg = '' 
+      if @val_msg.any?
+           @txt_msg = @val_msg.last.txtmensaje
+      end
+%>
     <div class="alert alert-danger" role="alert">
-        <i class="fa-solid fa-check"></i> Producto rechazado
+        <i class="fa-solid fa-xmark"></i> No cumple con la normativa. <%= @txt_msg %>
     </div>
 <% end %>
