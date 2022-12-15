@@ -64,7 +64,7 @@ export default class extends Controller{
                     }     
             }
        }
-      return suma 
+      return  Math.ceil(suma)
   }
 
   tooltips(){

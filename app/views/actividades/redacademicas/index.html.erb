@@ -15,8 +15,7 @@
             <tbody>
                <% if @actividades.any? %> 
                      <% 
-                       puts "---------------------------------" 
-                       puts @actividades
+                      
                         @i = 1
                         @actividades.each do |a|
                            @row_id = @i.to_s + '_' + a.id.to_s
