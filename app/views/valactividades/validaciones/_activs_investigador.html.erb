@@ -19,7 +19,9 @@
                 @trval = "trval_" + idx
                 @colsa = "colsa_" + a.id.to_s
                 @persona_id = idpersona
-                
+                @producto = Producto.find(a.producto_id)
+
+                    if @producto.prodgrupo.clave != 'ACTIVIDAD'
         %>
                         <tr id="<%= @tritem %>">  <!-- tr_item  -->
                               <td class="col-1 text-center"> <%= a.id %> </td>
@@ -47,6 +49,7 @@
                                    <%= render "valactividades/gui/target_info" %> <!-- target_info -->
                               </td>  
                         </tr>
+                    <% end %>
               <% end %>
           <% else %>
            <tr><td colspan="5"><span class="badge bg-warning font-italic">Sin actividades</span><td></tr>
