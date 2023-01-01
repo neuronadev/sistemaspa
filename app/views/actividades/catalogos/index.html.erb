@@ -1,2 +1,7 @@
-           <%= render "catalogo_i" %>  
-   
+
+<% if current_usuario.persona.firma.nil? %>
+       <%= render "catalogo_close" %>   
+<% else %>
+        <%= render "catalogo_i" %>  
+<% end %>
+           
