@@ -8,11 +8,17 @@
               <div class="d-flex justify-content-end p-2"><i class="fa-solid fa-xmark text-danger cursor-pointer fa-xl" data-action="click->tecnico#closesust" ></i></div>
               <div class="row mt-1 ms-3 border p-2" id="">
                     <% if  !@sustantivas.nil? %>
-                       <% @sustantivas.itemsustantivas.each do |item| %>
+                       <% @sustantivas.itemsustantivas.each do |item| 
+                          @invest = Persona.find(item.persona_id)
+                       %>
                           <div class="row p-1">
                                <div class="col-auto text-primary"><i class="fa-regular fa-circle-check"></i></div>
-                               <div class="col"> <%=  item.descripcion %></div>
-                          </div>     
+                               <div class="col-11"> 
+                                      <%=  item.descripcion %>
+                                      <strong>Investigador: <%=  (@invest.paterno||'') + ' ' + (@invest.materno||'') + ' ' + (@invest.nombre||'') %> </strong>
+                                      <strong>Porcentaje: <%= item.porcentaje %> </strong>
+                               </div>
+                          </div>
                        <% end %>
                      <% else %>  
                           <div class="row p-1">
