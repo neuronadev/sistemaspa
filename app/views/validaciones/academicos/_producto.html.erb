@@ -32,7 +32,11 @@
                <%  if @actividad.estado == 'U' %>       
                          <%= render "menu_validar"  %>
                <% else %>
-                         <%= render "mensaje_val" %>
+                         <%  if @actividad.estado == 'A' %>
+                                 <span class="text-danger">El técnico no ha realizado la acción de "Eviar a validación" de los productos registrados.</span>
+                         <% else %>
+                            <%= render "mensaje_val" %>
+                         <% end %>   
                <% end %>         
           </div>
 </div>

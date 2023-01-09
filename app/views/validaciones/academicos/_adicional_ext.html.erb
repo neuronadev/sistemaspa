@@ -2,7 +2,13 @@
                     <div id="folio_<%= item.id %>" class="col-1 text-center align-middle" > 
                          <%= item.id %> 
                     </div>
-                    <div class="col-4 align-middle" > <%= item.producto.descripcion %></div>
+                    <div class="col-4 align-middle" > 
+                        <%= item.producto.descripcion %>
+                        <% if item.producto.prodgrupo_id == 29 %>
+                             - <strong><%= item.producto.concepto %></strong>
+                       <% end %> 
+                    
+                    </div>
                     <div class="col-6 align-middle" style="text-align: justify;"> 
                               <div><%= item.titulo %></div>
                               <div class="text-success">Responsable: <%=  (responsable.nombre||'') + ' ' + (responsable.paterno||'') + ' ' + (responsable.materno||'') %></div>
