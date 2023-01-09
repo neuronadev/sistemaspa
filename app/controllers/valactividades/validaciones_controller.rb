@@ -166,8 +166,9 @@ class Valactividades::ValidacionesController < ApplicationController
     persona = Persona.find_by_hashid(params[:idacad])
     idacad = persona.id
     #@periodo = Actividad.where(periodo:2021,estado:'S').includes(:autores).where("autores.persona_id = ?", idacad).references(:autores)
-    @periodo_a = Actividad.where(periodo:2020,estado:'S').includes(:autores).where("autores.persona_id = ?", idacad).references(:autores)
-    @periodo_b = Actividad.where(periodo:2019,estado:'S').includes(:autores).where("autores.persona_id = ?", idacad).references(:autores) 
+    @periodo_a = Actividad.where(periodo:2021,estado:'S').includes(:autores).where("autores.persona_id = ?", idacad).references(:autores)
+    @periodo_b = Actividad.where(periodo:2020,estado:'S').includes(:autores).where("autores.persona_id = ?", idacad).references(:autores)
+    @periodo_c = Actividad.where(periodo:2019,estado:'S').includes(:autores).where("autores.persona_id = ?", idacad).references(:autores) 
   end
 
   def infoproducto
