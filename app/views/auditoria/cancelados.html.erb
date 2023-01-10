@@ -15,14 +15,14 @@
    <tbody>
       <%  @folios.each do |f| %>
            <tr>
-                <td> <%= f.id %> </td>
+                <td> <strong><%= f.id %></strong> </td>
                 <td> 
-                      <%= link_to f.titulo, verproductofl_path(f.id, f.personaid),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %>  
+                      <%=  f.titulo  %>  
                 </td>
 
                 <td class="text-center">  <!-- USUARIO -->
                     <% if f.estado == 'A' %>
-                        <span style="color:red;font-size:13px;">Falta VoBo</span>
+                        <span style="color:red;font-size:13px;">Falta VoBo del académico</span>
                     <% elsif f.estado == 'U' || f.estado == 'C' || f.estado == 'Z' || f.estado == 'S' %>   
                         <i class="fas fa-check-double text-success"></i> 
                     <% else %>
@@ -31,7 +31,7 @@
                 </td>
                 <td class="text-center"> <!-- COORDINADOR -->
                     <% if f.estado == 'U' %>
-                        <span style="color:red;font-size:13px;">Falta VoBo</span>
+                        <span style="color:red;font-size:13px;">Falta VoBo del CR</span>
                     <% elsif f.estado == 'C' || f.estado == 'S' || f.estado == 'Z' %>   
                         <i class="fas fa-check-double text-success"></i> 
                     <% else %>    
@@ -132,7 +132,16 @@
                             <td colspan='5'><span style="color:red"><I>Folio <%= f.id %>, observaciones: <%= @m.txt %></I></td>
                             <td> </td>
                         </tr>
-            <%   end
+            <%   
+                   else 
+            %> 
+                       <tr>
+                            <td> </td><td> </td>
+                            <td colspan='5'><span style="color:red"><I>Folio <%=f.id %>, observaciones: Eliminado por el usuario.</I></td>
+                            <td> </td>
+                        </tr>
+            <%
+                  end
                 end 
             %>
             
