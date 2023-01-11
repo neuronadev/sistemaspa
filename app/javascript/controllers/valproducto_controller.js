@@ -135,6 +135,8 @@ export default class extends Controller {
     let trval_div = document.getElementById(trval)
     let tritem_data = document.getElementById(tritem)
     let [data, status, xhr] = event.detail;
+    console.log(event.params)
+    console.log(xhr)
     trval_div.querySelector('div').innerHTML = xhr.response
 
     var [ref,idp,idact] = tritem.split('_')
@@ -146,6 +148,31 @@ export default class extends Controller {
       <a href="#" data-action="click->valproducto#showTargetInfo" data-valproducto-trval-param="trval_${html.getAttribute('data-pid')}_${idact}" data-valproducto-tritem-param="tritem_${idp}_${idact}">
          <i class="fas fa-user-times text-danger"></i>
          <span class="text-danger"> <small> No considerar </small> </span>
+      </a>`
+     )
+     document.getElementById(tritem).style.backgroundColor = '#cdcdcd' 
+  }
+
+
+  onPostMensajeCorr(event){
+    let trval = event.params.trval
+    let tritem = event.params.tritem
+    let trval_div = document.getElementById(trval)
+    let tritem_data = document.getElementById(tritem)
+    let [data, status, xhr] = event.detail;
+    console.log(event.params)
+    console.log(xhr)
+    trval_div.querySelector('div').innerHTML = xhr.response
+
+    var [ref,idp,idact] = tritem.split('_')
+    var colval = "colsa_" + idact
+
+    document.querySelectorAll(`[id=${colval}]`).forEach(html=> 
+      
+      html.querySelector('div').innerHTML= `
+      <a href="#" data-action="click->valproducto#showTargetInfo" data-valproducto-trval-param="trval_${html.getAttribute('data-pid')}_${idact}" data-valproducto-tritem-param="tritem_${idp}_${idact}">
+         <i class="fas fa-user-times text-warning"></i>
+         <span class="text-primary"> <small> Enviado a corrección </small> </span>
       </a>`
      )
      document.getElementById(tritem).style.backgroundColor = '#cdcdcd' 
