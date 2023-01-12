@@ -1,18 +1,18 @@
   <div class="row">
         <div class="mb-3 col-md-12">
-               <label class="font-weight-bold">Título:</label>
+               <label class="fw-bold">Título:</label>
                <div><%= actividad.titulo %></div>
          </div>  
          <div class="mb-3 col-md-3">
-               <label class="font-weight-bold">Año:</label>
+               <label class="fw-bold">Año:</label>
                <div><%= actividad.anio %></div>
          </div>  
          <div class="mb-3 col-md-3">
-               <label class="font-weight-bold">Monto:</label>
+               <label class="fw-bold">Monto:</label>
                <div><%= number_to_currency(actividad.monto) %></div>
          </div> 
          <div class="mb-3 col-md-3">
-               <label class="font-weight-bold">Responsable:</label>
+               <label class="fw-bold">Responsable:</label>
                <div><%= reporta(@actividad.personaid) %></div>
          </div> 
     </div>   

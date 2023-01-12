@@ -2,7 +2,7 @@
 
      <div class="row">
         <div class="col-sm">
-          <label class="font-weight-bold">Título de la tesis:</label>
+          <label class="fw-bold">Título de la tesis:</label>
            <%= @actividad.titulo %>
           
         </div>
@@ -12,20 +12,20 @@
 
               
                <div class="col-sm">
-                        <label class="font-weight-bold">Nivel:</label>
+                        <label class="fw-bold">Nivel:</label>
                         <%= @actividad.tesista.nivelestudio.nomnivel %>
                </div>  
                 <div class="col-sm">
-                     <label class="font-weight-bold">Feha del exámen de grado:</label>
+                     <label class="fw-bold">Feha del exámen de grado:</label>
                      <%= @actividad.tesista.fgrado %>
                 </div>
                 <% if @actividad.producto_id == 83 %>
                     <div class="col-sm">
-                      <label class="font-weight-bold">No. Acta:</label>
+                      <label class="fw-bold">No. Acta:</label>
                       <%= @actividad.tesista.acta %>
                     </div>
                     <div class="col-sm">  
-                      <label class="font-weight-bold">Eficiencia Terminal:</label>
+                      <label class="fw-bold">Eficiencia Terminal:</label>
                       <%= @actividad.tesista.efterminal %>
                     </div>  
              <% end %>     

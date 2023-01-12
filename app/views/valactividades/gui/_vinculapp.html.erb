@@ -2,11 +2,11 @@
 
      <div class="row">
         <div class="col-sm">
-              <label class="font-weight-bold">Título:</label>
+              <label class="fw-bold">Título:</label>
               <%= @actividad.titulo %>
          </div>  
          <div class="col-sm">
-               <label class="font-weight-bold">Año:</label>
+               <label class="fw-bold">Año:</label>
                <%= @actividad.anio %>
          </div>  
     </div>  
@@ -15,7 +15,7 @@
                 <% if @producto.prodgrupo.clave == 'DECRETO' %>
                      <div class="col-sm">
                        
-                          <label class="font-weight-bold">Nivel:</label>
+                          <label class="fw-bold">Nivel:</label>
                           
                                 <%  @h = @niveldecreto.invert  %>     
                                 <%= @h[@actividad.vinculacion.niveldecreto] %>
@@ -26,7 +26,7 @@
                 <% if @producto.prodgrupo.clave == 'ORDENAMIENTO' %>
                      <div class="col-sm">
                       
-                          <label class="font-weight-bold">Fase:</label>
+                          <label class="fw-bold">Fase:</label>
                         
                                <%  @h = @ordenamiento.invert  %>     
                                <%= @h[@actividad.vinculacion.ordenamiento] %> 
@@ -36,7 +36,7 @@
                 <% if @producto.prodgrupo.clave == 'INICIATIVA' %>
                      <div class="col-sm">
                        
-                           <label class="font-weight-bold">Nivel:</label>
+                           <label class="fw-bold">Nivel:</label>
                           
                                  <%  @h = @niveliniciativa.invert  %>     
                                  <%= @h[@actividad.vinculacion.niveliniciativa] %>
@@ -46,7 +46,7 @@
                 <% if @producto.prodgrupo.clave == 'REGLA' %>
                      <div class="col-sm">
                         
-                          <label class="font-weight-bold">Nivel:</label>
+                          <label class="fw-bold">Nivel:</label>
                         
                                 <%  @h = @nivelregla.invert  %>     
                                 <%= @h[@actividad.vinculacion.nivelregla] %>
@@ -56,7 +56,7 @@
                 <% if @producto.prodgrupo.clave == 'COMITE' %>
                      <div class="col-sm">
                         
-                          <label class="font-weight-bold">Participación:</label>
+                          <label class="fw-bold">Participación:</label>
                         
                                 <%  @h = @nivelcomite.invert  %>     
                                 <%= @h[@actividad.vinculacion.nivelcomite] %>

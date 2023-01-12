@@ -34,6 +34,27 @@
       <!-- Comprobante-->
        <%= render "comprobante", actividad:@actividad %>     
  
+       <% if @actividad.fuente == 'V'  %>
+                  <span style="color:#d35400;"><strong>Capturado por: Area de enlace con la sociedad</strong></span>
+       <% elsif @actividad.fuente == 'P' %>
+                  <span style="color:#d35400;"><strong>Capturado por: Posgrado</strong></span>
+         <% else %>
+                  <%
+                      @persona = nil 
+                      if !@actividad.personaid.nil?
+                             @persona = Persona.find(@actividad.personaid)
+                       else
+                             @persona = nil 
+                      end
+                  %>
+                  <% if !@persona.nil? %>
+                             <span style="color:#d35400;"><strong> Capturado por: <%=  (@persona.paterno||'') + ' ' + (@persona.materno||'') + ' ' + (@persona.nombre||'') %></strong></span>
+                   <% else %>   
+                             <span style="color:#d35400;">[No se asigno]</strong></span>
+                  <% end %>
+       <% end %>
+
+
       <!-- Opciones de validaciones Botones -->
        <% if @rol == 'I' || @rol == 'C' %>
 

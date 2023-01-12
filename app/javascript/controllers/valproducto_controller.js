@@ -135,8 +135,7 @@ export default class extends Controller {
     let trval_div = document.getElementById(trval)
     let tritem_data = document.getElementById(tritem)
     let [data, status, xhr] = event.detail;
-    console.log(event.params)
-    console.log(xhr)
+    
     trval_div.querySelector('div').innerHTML = xhr.response
 
     var [ref,idp,idact] = tritem.split('_')
