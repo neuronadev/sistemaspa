@@ -35,7 +35,7 @@
                     <% elsif f.estado == 'C' || f.estado == 'S' || f.estado == 'Z' %>   
                         <i class="fas fa-check-double text-success"></i> 
                     <% else %>    
-                        ------
+                        ----
                     <% end %>  
                 </td>
                 <td class="text-center" id="sa<%= f.id %>"> <!-- SA -->
@@ -46,7 +46,7 @@
                     <% elsif f.estado == 'Z' %> 
                         <i class="fas fa-user-times text-danger"></i> <span style="color:red;font-size:13px;">No cubre la normativa.</span>
                     <% else %>    
-                        ------
+                        ----
                     <% end %>  
                 </td>
                  <td class="text-center" id="saaceptar<%= f.id %>">
@@ -63,87 +63,68 @@
                      <% elsif  f.estado == 'Z' && f.aceptado.nil? %>
                          <i class="fas fa-check text-primary" onclick="aceptarsa(<%= f.id %>)" style="cursor: pointer;"></i>
                     <% else %>
-                         -----   
+                         ----   
                    <% end %> 
                </td>
-           </tr> 
-            <% if f.estado == 'X' 
+               <td>
+                    <% if f.estado == 'X' 
             
                 @m = Mensaje.where(actividad_id:f.id).where(tipo:'C').where(estado:'A').first 
                 if  @m.nil?
                      @m = ''
                 end
-            %>
-                 
-                        <tr>
-                            <td> </td><td> </td>
-                            <td colspan='5'><span style="color:red"><I>Folio <%=f.id %>, observaciones: Eliminado por el usuario.</I></td>
-                            <td> </td>
-                        </tr>
-            <%  
-                end 
-            %>
-            <% if f.estado == 'S' %>
-                <% 
-                    @m = Mensaje.where(actividad_id:f.id).where(tipo:'O').where(estado:'A').first 
-                    if  !@m.nil?
                 %>
-                        <tr>
-                            <td> </td><td> </td>
-                            <td colspan='5'><span style="color:green"><I>Folio <%=f.id %>, observaciones: <%= @m.txt %></I></td>
-                            <td> </td>
-                        </tr>
-            <%   end
-                end 
-            %>
+                        <span style="color:red"><I>Folio <%=f.id %>, observaciones: Eliminado por el usuario.</I> 
+                <%  
+                    end 
+                %>
+                <% if f.estado == 'S' %>
+                    <% 
+                        @m = Mensaje.where(actividad_id:f.id).where(tipo:'O').where(estado:'A').first 
+                        if  !@m.nil?
+                    %>
+       
+                        <span style="color:green"><I>Folio <%=f.id %>, observaciones: <%= @m.txt %></I>
+       
+                <%   end
+                    end 
+                %>
             <% if f.estado == 'Z' %>
                 <% 
                     @m = Mensaje.where(actividad_id:f.id).where(tipo:'Z').where(estado:'A').first 
                     if  !@m.nil?
                 %>
-                        <tr>
-                            <td> </td><td> </td>
-                            <td colspan='5'><span style="color:red"><I>Folio <%=f.id %>, observaciones: <%= @m.txt %></I></td>
-                            <td> </td>
-                        </tr>
-            <%   end
-                end 
-            %> 
-            <% if f.estado == 'G' %>
-                <% 
-                    @m = Mensaje.where(actividad_id:f.id).where(tipo:'C').where(estado:'A').first 
-                    if  !@m.nil?
+                         <span style="color:red"><I>Folio <%=f.id %>, observaciones: <%= @m.txt %></I>
+                <%   end
+                    end 
+                %> 
+                <% if f.estado == 'G' %>
+                    <% 
+                        @m = Mensaje.where(actividad_id:f.id).where(tipo:'C').where(estado:'A').first 
+                        if  !@m.nil?
+                    %>
+                            <span style="color:red"><I>Folio <%= f.id %>, Se envio a corrección por parte del Coordinador de Red: <%= @m.txt %>
+                <%   end
+                    end 
                 %>
-                        <tr>
-                            <td> </td><td> </td>
-                            <td colspan='5'><span style="color:red"><I>Folio <%= f.id %>, Se envio a corrección por parte del Coordinador de Red: <%= @m.txt %></I></td>
-                            <td> </td>
-                        </tr>
-            <%   end
-                end 
-            %>
-            <% if f.estado == 'D' %>
-                <% 
-                    @m = Mensaje.where(actividad_id:f.id).where(tipo:'N').where(estado:'A').first 
-                    if  !@m.nil?
+                <% if f.estado == 'D' %>
+                    <% 
+                        @m = Mensaje.where(actividad_id:f.id).where(tipo:'N').where(estado:'A').first 
+                        if  !@m.nil?
+                    %>
+                             
+                             <span style="color:red"><I>Folio <%= f.id %>, observaciones: <%= @m.txt %></I>
+                <%   
+                    else 
+                %> 
+                       <span style="color:red"><I>Folio <%=f.id %>, observaciones: Eliminado por el usuario.</I>
+                <%
+                    end
+                    end 
                 %>
-                        <tr>
-                            <td> </td><td> </td>
-                            <td colspan='5'><span style="color:red"><I>Folio <%= f.id %>, observaciones: <%= @m.txt %></I></td>
-                            <td> </td>
-                        </tr>
-            <%   
-                   else 
-            %> 
-                       <tr>
-                            <td> </td><td> </td>
-                            <td colspan='5'><span style="color:red"><I>Folio <%=f.id %>, observaciones: Eliminado por el usuario.</I></td>
-                            <td> </td>
-                        </tr>
-            <%
-                  end
-                end 
-            %>
+               </td>
+           </tr> 
+            
             
       <% end %>
   </tbody> 
