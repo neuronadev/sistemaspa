@@ -13,11 +13,9 @@
         <div class="col-6  align-self-center">
                <%= a.titulo %>
                <div>
-                    <%= link_to actividades_actividad_path(a.id), class:"text-decoration-none mostrar" do %>
-                         <i class="fa-regular fa-file-powerpoint"></i> Ver producto
-                    <% end %>
-               
+                    <%= render "/actividades/actividades/items/ver_producto", a:a %>
                </div>
+
                <div style="color:#ff6347;">
                     <% if a.estado == 'G' %>
                          <i class="fa-regular fa-pen-to-square"></i> Debe atender la solicitud de cambios en el producto. Ingrese a la opción Corregir.

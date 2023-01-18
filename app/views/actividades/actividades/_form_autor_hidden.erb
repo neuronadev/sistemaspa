@@ -21,13 +21,13 @@
             <div class="col-3">
                 <%= form.text_field :autornom, placeholder:'(nombre)', autocomplete:'off', class:'autornom border-0 p-1 col-12 shadow-none bg-light rounded fw-bold', value:current_usuario.persona.nombre, 'data-action':'focus->autores#hiddenSearch keypress->autores#kEnter focusout->autores#tipoAutor', readonly:true %>
             </div>
+            
 
             <div id="controles" class="col-3 controles">
                 
             </div>
 
     </div> <!-- -->
-    <div id="listasearch" class="listaper col-6 shadow-lg p-3 mb-5 bg-body rounded" style="position: absolute;z-index: 9; border: 1px solid #d3d3d3; display: none;"> 
-    </div> <!-- -->
+    <div id="listasearch" class="listaper col-6 shadow-lg p-3 mb-5 bg-body rounded" style="position: absolute;z-index: 9; border: 1px solid #d3d3d3; display: none;"></div>
 
 </div> <!-- -->

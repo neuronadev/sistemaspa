@@ -18,12 +18,18 @@
                                         <td class="col-7 align-middle"> <div class="d-flex" style="text-align: justify;"> <%= p.concepto %> </div> </td>
 
                                     </tr>    
-                                 <% else %>   
-                                    <tr class="text-secondary" role="button" >
-                                        <td class="col-4 align-middle"> <%=  p.descripcion %> <span class="text-success fst-italic">Estos productos los captura el area correspondiente.</span> </td>
-                                        <td class="col-7 align-middle"> <div class="d-flex" style="text-align: justify;"> <%= p.concepto %> </div> </td>
-
-                                    </tr>      
+                                 <% else %>  
+                                      <% if (p.id == 81 || p.id == 85) && current_usuario.email == 'antonio.francisco@inecol.mx' %>  
+                                            <tr class="" data-action="click->cattab#form" data-cattab-url-param="<%= new_actividades_actividad_path(:item=>p.id) %>" role="button" >
+                                                <td class="col-4 align-middle"> <%=  p.descripcion %>  </td>
+                                                <td class="col-7 align-middle"> <div class="d-flex" style="text-align: justify;"> <%= p.concepto %> </div> </td>
+                                            </tr>    
+                                      <% else %>
+                                            <tr class="text-secondary" role="button" >
+                                                <td class="col-4 align-middle"> <%=  p.descripcion %> <span class="text-success fst-italic">Estos productos los captura el area correspondiente.</span> </td>
+                                                <td class="col-7 align-middle"> <div class="d-flex" style="text-align: justify;"> <%= p.concepto %> </div> </td>
+                                            </tr>      
+                                      <% end %>   
                                 <% end %>    
 
                             <% end %>

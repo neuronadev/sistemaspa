@@ -100,14 +100,20 @@
 -->
 
 
-<div id="cont_rws" class="col mt-4" data-controller="autores">
+<div id="cont_rws" class="col mt-4" data-controller="autores utils">
     <div class="row mb-2 text-primary">
        <% if ![9,50,51,59,60,61,62,66].include? @producto.id %>
-          <div class="col"> 
-             Para ingresar a un académico del INECOL, escriba los apellidos y a continuación se mostrará una lista con
-             las coincidencias, seleccione el nombre correcto de la lista. Para autores externos, escriba los apellidos y nombres y hacer caso omiso al listado que posiblemente se muestre.
+          <div class="col">
+            <% if ![81,85].include? @producto.id %>
+              Para ingresar a un académico del INECOL, escriba los apellidos y a continuación se mostrará una lista con
+              las coincidencias, seleccione el nombre correcto de la lista. Para autores externos, escriba los apellidos y nombres y hacer caso omiso al listado que posiblemente se muestre.
+            <% end %> 
+             <% if [81,85].include? @producto.id %>
+                   <div class="fw-bold text-danger">A continuación, ingrese a los académico del INECOL y el porcentaje de participación en el proyecto. Ingrese los apellidos y seleccione al académico de la lista que se despliega.</div>
+             <% end %>
           </div>   
        <% end %>
+
     </div>
 
     <div class="row mb-4">
@@ -139,4 +145,10 @@
 
         </div>    
     </div>
+    <% if @producto.id == 81 || @producto.id == 85 %>
+       <div class="row mb-2">
+            <div class="col-6 text-end"><strong>Participación Total:</strong></div>
+            <div class="col-1 text-center fw-bold" id="total_part">0.0</div>
+       </div>
+    <% end %>
 </div>

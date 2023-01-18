@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'proyectos/index'
+  get 'proyectos/new'
+  get 'proyectos/edit'
+  get 'proyectos/update'
+  get 'proyectos/create'
   get 'revisiones/index'
   namespace :evaluaciones do
     resources :calificaciones

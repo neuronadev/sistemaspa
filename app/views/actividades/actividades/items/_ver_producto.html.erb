@@ -1,0 +1,30 @@
+
+<% if a.producto_id == 81 || a.producto_id == 85 %>
+        <%  
+            @t_porcentaje = Autor.where(actividad_id:a.id).sum(:porcentaje).to_f
+        %>
+        <% if current_usuario.persona_id == a.personaid %>
+                <% if @t_porcentaje < 100 %>
+                       <div class="alert text-danger alert-primary fw-bold" role="alert">Debe agregar a los participantes y el porcentaje de colaboración, haga clic en el siguiente link: 
+                                <%= link_to "Participantes", edit_actividades_actividad_path(a), class:"text-success" %> <i class="fas fa-users"></i>
+                        </div>
+                <% else %>
+                         <%= link_to actividades_actividad_path(a.id), class:"text-decoration-none mostrar" do %>
+                               <i class="fa-regular fa-file-powerpoint"></i> Ver producto
+                         <% end %>
+                <% end %>  
+        <% else %>
+                 <% if @t_porcentaje < 100 %>
+                        <div class="alert text-danger alert-primary fw-bold" role="alert"> El responsable del proyecto debe asignar los porcentajes de partición.</div>
+                 <% end %>
+                 <% if @t_porcentaje == 100 %>
+                        <%= link_to actividades_actividad_path(a.id), class:"text-decoration-none mostrar" do %>
+                               <i class="fa-regular fa-file-powerpoint"></i> Ver producto
+                         <% end %>
+                 <% end %>
+        <% end %>  
+<% else %>
+        <%= link_to actividades_actividad_path(a.id), class:"text-decoration-none mostrar" do %>
+                <i class="fa-regular fa-file-powerpoint"></i> Ver producto
+        <% end %>
+<% end %>        

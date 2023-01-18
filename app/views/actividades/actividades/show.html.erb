@@ -44,12 +44,14 @@
                         <% end %>    
                         <% if [81,85].include? @actividad.producto_id %>
                               <%  autores = Autor.where(actividad_id:@actividad.id, persona_id:current_usuario.persona_id).first  %>
-                              <% if autores.aplicar == 'N' %>   
-                                       <div class="alert alert-danger" role="alert">
-                                             Un análisis contrastando sus actividades sustantivas registradas, contra el proyecto reportado, se concluye que forma parte
-                                             de sus labores que desempeña en su puesto de trabajo, por lo tanto, no es una actividad adicional para considerarse en la evaluación de puntos.
-                                          </div>
-                              <% end %>
+                                 <% if !autores.nil? %>
+                                    <% if autores.aplicar == 'N' %>   
+                                             <div class="alert alert-danger" role="alert">
+                                                   Un análisis contrastando sus actividades sustantivas registradas, contra el proyecto reportado, se concluye que forma parte
+                                                   de sus labores que desempeña en su puesto de trabajo, por lo tanto, no es una actividad adicional para considerarse en la evaluación de puntos.
+                                                </div>
+                                    <% end %>
+                                 <% end %>   
                         <% end %> 
                         <% if [10].include? @actividad.producto_id %>
                                     <%  autores = Autor.where(actividad_id:@actividad.id, persona_id:current_usuario.persona_id).first  %>

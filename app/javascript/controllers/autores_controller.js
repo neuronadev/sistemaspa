@@ -147,6 +147,42 @@ export default class extends Controller{
       this.tooltips()
   }
 
+  ajustarPorc(event){
+      var div_total = document.getElementById("total_part")
+      var suma_total = this.sumaItems()
+      div_total.innerHTML = suma_total
+  }
+
+  sumaPorc(event){
+      var div_total = document.getElementById("total_part")
+      var suma_total = this.sumaItems()
+
+      if (parseFloat(suma_total) <= 100){
+              div_total.innerHTML = suma_total
+      }else{
+              event.target.value = ''
+              suma_total = this.sumaItems()
+              div_total.innerHTML = suma_total
+              alert("La suma total del porcentaje de participación no debe ser mayor al 100% ")
+      }
+      
+  }
+
+  sumaItems(){
+    var items_porc = document.getElementsByClassName("itemporc")
+    var suma = 0.0
+    for ( let i = 0; i < items_porc.length; i ++ ){
+          var item = items_porc[i]
+          let item_destroy = item.id.replace(/_porcentaje/g,'__destroy')
+          if ( document.getElementById(item_destroy).value == '0' || document.getElementById(item_destroy).value == 'false' ){
+                if ( item.value.trim().length > 0 ){
+                       suma += parseFloat(item.value)
+                }
+          }
+    }
+    return suma
+  }
+
   handleDragStart(event) {
 
         console.log("STAR")
