@@ -41,7 +41,8 @@
           <div class="mb-3 col-md-3">
                <%= form.label :monto, "Monto:", class:"form-label" %>
                <% if params[:action] == 'edit' %> 
-                      <%= form.text_field :monto, class:"form-control", readonly:true %>
+                      <%= form.hidden_field :monto, class:"form-control", readonly:true %>
+                      <span class="form-control fw-bold"> <%= number_to_currency(form.object.monto) %> </span>
                 <% else %>
                       <%= form.text_field :monto, class:"form-control" %>
                 <% end %>      
