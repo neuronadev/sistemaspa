@@ -65,6 +65,12 @@
             <%= render "list_todo" %>
         </div> 
 <% end %>  
+<% if @tipo == 'POS' %>
+        <h5> Producción Académica - Tesis INECOL 2022</h5>
+        <div data-controller = "valproducto">     
+            <%= render "list_todo" %>
+        </div> 
+<% end %>  
 
 <% if @tipo == 'V' %>
         <h5> Producción Académica 2021 - Productos sin validación de la SA</h5>

@@ -8,7 +8,7 @@
             <% if a.edoblur.nil? %>
                   <% if current_usuario.evaluador == 'A'  %>
                         <% if @persona.evalua == current_usuario.persona_id %>
-                                    <span class="badge badge-secondary font-weight-bold"> <i class="fas fa-arrow-right"></i></span>
+                                    <span class="badge bge-secondary font-weight-bold"> <i class="fas fa-arrow-right"></i></span>
                         <% else %>
                                     <small class="text-muted font-italic">Sin validar</small>
                         <% end %>          
@@ -18,7 +18,7 @@
                         <small class="text-muted font-italic">--</small>
                   <% elsif current_usuario.evaluador == 'C' && (a.estado == 'U' || a.estado == 'C') %>      
                         <%= link_to "#", data:{action:'click->valproducto#showTargetInfo', 'valproducto-trval-param':@trval, 'valproducto-tritem-param':@tritem } do %>
-                              <span class="badge badge-primary font-weight-bold"> <i class="fas fa-file-signature"></i> Validar </span>
+                              <span class="badge bg-primary fw-bold"> <i class="fas fa-file-signature"></i> Validar </span>
                         <% end %>
                   <% end %>
             <% else %>
