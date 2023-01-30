@@ -1,10 +1,10 @@
 class Actividades::RedacademicasController < ApplicationController
   def index
       if current_usuario.email == 'gerardo.mata@inecol.mx'
-           @actividades = Actividad.where(estado:['U','C','G','D'],periodo:2022,asignared:18).order(:producto_id)
+           @actividades = Actividad.where(estado:['U','C','G','D','S'],periodo:2022,asignared:18).order(:producto_id)
       else
            @p = Persona.find(current_usuario.persona_id)
-           @actividades = Actividad.where(estado:['U','C','G','D'],periodo:2022,asignared:@p.academico.red_id).order(:producto_id)
+           @actividades = Actividad.where(estado:['U','C','G','D','S'],periodo:2022,asignared:@p.academico.red_id).order(:producto_id)
       end 
       #@academicos = Academico.where(red_id:1)
       #@acad_array = []
