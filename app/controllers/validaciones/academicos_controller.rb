@@ -2,7 +2,12 @@ class Validaciones::AcademicosController < ApplicationController
     layout "/validacion/academico"
     def index
         
-        @tecnicos = Persona.where(evalua:current_usuario.persona_id ).where.not(estado:'B').order(:paterno)
+        if current_usuario.evaluador == 'A'
+            @tecnicos = Persona.where(tipopersona_id:4).where.not(estado:'B').order(:paterno)
+        else
+            @tecnicos = Persona.where(evalua:current_usuario.persona_id ).where.not(estado:'B').order(:paterno)
+        end
+
     end
     def adicionales
         @academico = Persona.find(params[:idacad])

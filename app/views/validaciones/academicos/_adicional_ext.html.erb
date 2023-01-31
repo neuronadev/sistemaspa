@@ -12,8 +12,13 @@
                     <div class="col-6 align-middle" style="text-align: justify;"> 
                               <div><%= item.titulo %></div>
                               <div class="text-success">Responsable: <%=  (responsable.nombre||'') + ' ' + (responsable.paterno||'') + ' ' + (responsable.materno||'') %></div>
+                              <% if current_usuario.evaluador == 'A' %>
+                                 <div class="text-primary cursor-pointer" data-action="click->tecnico#detalle" data-tecnico-idprod-param = "<%= item.id %>" > Ver producto</div>
+                              <% end %>   
+
                     </div>
                     <div id="estado_<%= item.id %>" class="col-1 align-middle" style="text-align: center;"> 
+                         <%= render "estado_producto", item:item %> 
                     </div>
 
                     <div class="row p-2" id="div_detalle_<%= item.id %>" style="display:none;">
