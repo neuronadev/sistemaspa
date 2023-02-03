@@ -66,7 +66,8 @@ class Actividad < ApplicationRecord
 
       include PgSearch::Model
       pg_search_scope :search_by_titulo,
-                       against: %i[titulo id],
+                       against: [:titulo, :id],
+                       ignoring: :accents,
                        using: { tsearch: { dictionary: 'spanish' } }
-
+      
 end

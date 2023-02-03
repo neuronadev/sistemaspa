@@ -9,6 +9,13 @@ Rails.application.routes.draw do
   namespace :evaluaciones do
     resources :calificaciones
   end
+
+  resources :busquedas do
+    collection do
+       post 'producto'
+    end
+  end
+
   namespace :evaluaciones do
     resources :itemsustantivas do
          collection do
@@ -48,6 +55,8 @@ Rails.application.routes.draw do
             end
        end
   end
+
+  
 
 
   get 'valactividades/validaciones/infoproducto/:trval/:tritem', to:'valactividades/validaciones#infoproducto', as: 'savalproducto'

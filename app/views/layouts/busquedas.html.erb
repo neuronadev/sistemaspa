@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Validaciones::SPA</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>  
+     <script src="https://kit.fontawesome.com/00934c45cc.js" data-mutate-approach="sync"></script>      
+    
+  </head>
+
+  <body class="bg-light">
+  <div class="row">
+         <%= render "layouts/header" %>  
+  </div>       
+    <div class="row">
+         <div class="col-2">
+            
+           
+            <div class="row row--align-v-center row--align-h-center">
+                          <%= render "navs/validacion" %>
+            </div>
+         </div>
+
+        <div class="col">   
+                
+                <div class="container-fluid">
+                    <%= yield %>
+                </div>    
+        </div>
+    </div> 
+
+  </body>
+</html>
