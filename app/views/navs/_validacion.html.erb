@@ -16,11 +16,13 @@
                               <i class="fa-solid fa-chevron-right"></i> Tesis INECOL
                           <% end %>   
               </div>
-              <div class="justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body mt-2 fw-bold item">
-                         <%= link_to busquedas_path, style:'text-decoration: none;' do %> 
-                           <i class="fa-solid fa-filter"></i> Buscar
-                         <% end %>  
-              </div>
+              <% if current_usuario.evaluador == 'A' %>   
+                    <div class="justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body mt-2 fw-bold item">
+                                <%= link_to busquedas_path, style:'text-decoration: none;' do %> 
+                                <i class="fa-solid fa-filter"></i> Buscar
+                                <% end %>  
+                    </div>
+              <% end %>  
         <!--      
               <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body fw-bold item" >
                           <%= link_to validaindex_path(:tipo=>'I'), style:'text-decoration: none;' do %>
