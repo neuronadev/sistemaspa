@@ -40,12 +40,25 @@ class Validaciones::AcademicosController < ApplicationController
 
         render partial: "validar"
     end
+    
+    def validarsa
+        @actividad = Actividad.find(params[:idprod].to_i)
+        @tipo = params[:tipo]
+        
+        if @tipo == 'E'
+            @valacademico = Valetapa.new
+        end
+
+        render partial: "validarsa"
+    end
+
     def aplicartipo
         @actividad = Actividad.find(params[:idprod].to_i)
         @tipo = params[:tipo]
 
         if @tipo == 'A'
             @actividad.estado = 'C'
+            @actividad.fecha2 = Date.today
             @actividad.save
 
             valetapa = Valetapa.where(actividad_id:@actividad.id).last
@@ -61,9 +74,34 @@ class Validaciones::AcademicosController < ApplicationController
         render partial: "mensaje_val"
 
     end
+
+    def aplicartiposa
+        @actividad = Actividad.find(params[:idprod].to_i)
+        @tipo = params[:tipo]
+
+        if @tipo == 'A'
+            @actividad.estado = 'S'
+            @actividad.fecha3 = Date.today
+            @actividad.save
+
+            valetapa = Valetapa.where(actividad_id:@actividad.id).last
+            if !valetapa.nil? && (valetapa.etapa == 'SA' && valetapa.estado == 'activo')
+                   valetapa_accion = Valetapa.find(valetapa.id)
+                   valetapa_accion.estado = 'cerrado'
+                   valetapa_accion.atendido = 'SI'
+                   valetapa_accion.activo = 'NO'
+                   valetapa_accion.save
+            end
+        end
+
+        render partial: "mensaje_val"
+
+    end
+
     def mensaje
    
         @actividad = Actividad.find(params[:id].to_i) 
+        @etapa = params[:etapa]
 
         @valetapa = Valetapa.new
         @valetapa.actividad_id = params[:id]

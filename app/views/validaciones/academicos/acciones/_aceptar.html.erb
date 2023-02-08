@@ -1,7 +1,13 @@
 <div class="alert alert-success" role="alert">
    El producto será validado, ¿desea continuar?
     <div class="row">
-      <div class="col-2 text-primary cursor-pointer mt-3" data-action="click->tecnico#aplicartipo" data-tecnico-idprod-param = "<%= @actividad.id %>" data-tecnico-tipo-param="<%= @tipo %>" > <i class="fa-solid fa-check"></i> Aceptar</div>  
-      <div class="col-3 text-primary cursor-pointer mt-3 text-danger" data-action="click->tecnico#detalle" data-tecnico-idprod-param = "<%= @actividad.id %>" > <i class="fa-solid fa-xmark"></i> Cancelar acción</div>
+      <% if userval == 'CM' %> 
+          <div class="col-2 text-primary cursor-pointer mt-3" data-action="click->tecnico#aplicartipo" data-tecnico-idprod-param = "<%= @actividad.id %>" data-tecnico-tipo-param="<%= @tipo %>" > <i class="fa-solid fa-check"></i> Aceptar</div>  
+          <div class="col-3 text-primary cursor-pointer mt-3 text-danger" data-action="click->tecnico#detalle" data-tecnico-idprod-param = "<%= @actividad.id %>" > <i class="fa-solid fa-xmark"></i> Cancelar acción</div>
+      <% end %>
+      <% if userval == 'SA' %> 
+          <div class="col-2 text-primary cursor-pointer mt-3" data-action="click->tecnico#aplicartiposa" data-tecnico-idprod-param = "<%= @actividad.id %>" data-tecnico-tipo-param="<%= @tipo %>" > <i class="fa-solid fa-check"></i> Aceptar</div>  
+          <div class="col-3 text-primary cursor-pointer mt-3 text-danger" data-action="click->tecnico#detalle" data-tecnico-idprod-param = "<%= @actividad.id %>" > <i class="fa-solid fa-xmark"></i> Cancelar acción</div>
+      <% end %>
     </div>  
 </div>

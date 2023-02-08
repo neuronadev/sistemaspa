@@ -2,6 +2,13 @@
     <div class="alert alert-primary" role="alert">
         <i class="fa-solid fa-check"></i> Producto validado por el comite.
     </div>
+    
+<% end %>
+<% if @actividad.estado == 'S' %>
+    <div class="alert alert-primary" role="alert">
+        <i class="fa-solid fa-check"></i> Producto validado por la SA.
+    </div>
+    
 <% end %>
 <% if @actividad.estado == 'G'
       @val_msg = Valetapa.where(actividad_id:@actividad.id)

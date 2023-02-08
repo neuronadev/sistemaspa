@@ -29,14 +29,22 @@
 
 <div class="row">
           <div class="col" id="div_validar_<%= @actividad.id %>">
-               <%  if @actividad.estado == 'U' %>       
+               <%  if @actividad.estado == 'U' %>
                          <%= render "menu_validar"  %>
                <% else %>
                          <%  if @actividad.estado == 'A' %>
                                  <span class="text-danger">El técnico no ha realizado la acción de "Eviar a validación" de los productos registrados.</span>
                          <% else %>
-                            <%= render "mensaje_val" %>
+                                  <%= render "mensaje_val" %>
                          <% end %>   
                <% end %>         
           </div>
 </div>
+<%  if @actividad.estado == 'C' && current_usuario.evaluador == 'A' %>
+     <div class="row">
+          <div class="col alert alert-success" role="alert" id="div_validar_sa_<%= @actividad.id %>">
+                  Secretaría Académica.
+                    <%= render "menu_validarsa"  %>
+          </div>
+     </div>
+<% end %>         

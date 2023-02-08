@@ -1,0 +1,10 @@
+
+<% if @tipo == 'A' %>
+     <%= render "validaciones/academicos/acciones/aceptar", userval:'SA' %>
+<% end %>
+<% if @tipo == 'E' %>
+     <%= render "validaciones/academicos/acciones/editar", userval:'SA' %>
+<% end %>
+<% if @tipo == 'N' %>
+     <%= render "validaciones/academicos/acciones/rechazar", userval:'SA' %>
+<% end %>

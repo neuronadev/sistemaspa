@@ -87,6 +87,27 @@ export default class extends Controller {
                         div_validar.innerHTML = html
                     } ) 
   }
+  
+  async validarsa(event){
+    var idprod = event.params.idprod
+    var tipo = event.params.tipo
+    var str_validar = "div_validar_sa_"+idprod
+    var div_validar = document.getElementById(str_validar)
+
+    var url = "/validaciones/academicos/validarsa"
+    var token = document.querySelector('meta[name="csrf-token"]').content
+    await fetch(   url,
+                 { method:'POST', headers: { 'Content-Type':'application/json', 'Accept':'application/html', 'X-CSRF-Token': token },
+                   body: JSON.stringify( {idprod:idprod, tipo:tipo} )
+                 } 
+    ).then( response => response.text() )
+     .then( html => {
+                        
+                        div_validar.innerHTML = html
+                    } ) 
+  }
+
+
   async aplicartipo(event){
     var idprod = event.params.idprod
     var tipo = event.params.tipo
@@ -113,5 +134,30 @@ export default class extends Controller {
   }
 
  
+  async aplicartiposa(event){
+    var idprod = event.params.idprod
+    var tipo = event.params.tipo
+    var str_validar = "div_validar_sa_"+idprod
+    var div_validar = document.getElementById(str_validar)
+
+    var url = "/validaciones/academicos/aplicartiposa"
+    var token = document.querySelector('meta[name="csrf-token"]').content
+    await fetch(   url,
+                 { method:'POST', headers: { 'Content-Type':'application/json', 'Accept':'application/html', 'X-CSRF-Token': token },
+                   body: JSON.stringify( {idprod:idprod, tipo:tipo} )
+                 } 
+    ).then( response => response.text() )
+     .then( html => {   
+                        var str_folio = "folio_"+idprod;
+                        var str_estado = "estado_"+idprod;
+                        var cel_folio = document.getElementById(str_folio);
+                        var cel_estado = document.getElementById(str_estado);
+                        cel_folio.classList.add("text-success")
+                        cel_folio.classList.add("fw-bold")
+                        cel_estado.innerHTML=`<span class="badge bg-primary"><i class="fa-solid fa-check fw-bold text-white"></i> SA</span>`
+                        div_validar.innerHTML = html
+                    } ) 
+  }
+
 
 }  

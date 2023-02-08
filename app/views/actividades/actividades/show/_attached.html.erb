@@ -72,7 +72,7 @@
         <div class="d-flex justify-content-center">
             <% a.documentos.each do |d|%>
                 <%= link_to rails_blob_path(d, disposition: "inline"), { target: '_blank' } do %>
-                        <i class="fas fa-file-pdf mostrar"></i> 
+                        <i class="fas fa-file-pdf mostrar"></i> Comprobante
                 <% end %>
             <% end %>  
         </div>  

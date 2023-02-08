@@ -1,10 +1,10 @@
 
 <% if @tipo == 'A' %>
-     <%= render "validaciones/academicos/acciones/aceptar" %>
+     <%= render "validaciones/academicos/acciones/aceptar", userval:'CM' %>
 <% end %>
 <% if @tipo == 'E' %>
-     <%= render "validaciones/academicos/acciones/editar" %>
+     <%= render "validaciones/academicos/acciones/editar", userval:'CM' %>
 <% end %>
 <% if @tipo == 'N' %>
-     <%= render "validaciones/academicos/acciones/rechazar" %>
+     <%= render "validaciones/academicos/acciones/rechazar", userval:'CM' %>
 <% end %>

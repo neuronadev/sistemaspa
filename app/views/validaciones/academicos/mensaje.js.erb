@@ -1,4 +1,9 @@
-var str_validar = "div_validar_"+"<%= @actividad.id %>";
+<% if @etapa == 'CM' %>
+  var str_validar = "div_validar_"+"<%= @actividad.id %>";
+<% end %>
+<% if @etapa == 'SA' %>
+  var str_validar = "div_validar_sa_"+"<%= @actividad.id %>";
+<% end %>
 var str_folio = "folio_"+"<%= @actividad.id %>";
 var str_estado = "estado_"+"<%= @actividad.id %>";
 var div_validar = document.getElementById(str_validar);
@@ -20,5 +25,7 @@ var cel_estado = document.getElementById(str_estado);
                           </div>`;
      cel_folio.classList.add("text-danger")
      cel_folio.classList.add("fw-bold")
+
      cel_estado.innerHTML=`<span class="badge bg-danger"><i class="fa-solid fa-xmark fw-bold text-white"></i></span>`                     
+     
 <% end %>                          

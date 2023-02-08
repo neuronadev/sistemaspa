@@ -50,8 +50,11 @@ Rails.application.routes.draw do
                post 'adicionales'
                post 'producto'
                post 'validar'
+               post 'validarsa'
                post 'aplicartipo'
+               post 'aplicartiposa'
                post 'mensaje'
+
             end
        end
   end

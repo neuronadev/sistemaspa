@@ -2,7 +2,12 @@
             <input type="hidden" name="id" value='<%= @actividad.id %>'>
             <input type="hidden" name="sec" value='0'>
             <input type="hidden" name="tipo" value='corregir'>
-            <input type="hidden" name="etapa" value='CM'>
+            <% if userval == 'CM' %>
+                <input type="hidden" name="etapa" value='CM'>
+            <% end %>
+            <% if userval == 'SA' %>
+                <input type="hidden" name="etapa" value='SA'>
+            <% end %>
             <input type="hidden" name="atendido" value='NO'>
             <input type="hidden" name="activo" value='SI'>
             <input type="hidden" name="estado" value='activo'>

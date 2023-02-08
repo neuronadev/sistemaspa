@@ -2,11 +2,19 @@
             persona = nil
             persona =  Persona.find(a.personaid) if !a.personaid.nil?
         %>
+            <div class="row border-bottom">
                 <div class="col-auto"> <%= a.id %>  </div> 
-                <div class="col"> <%= a.producto.descripcion %>  </div> 
-                <div class="col"> <%= a.titulo %>  </div>
-                 <div class="col"> <% if !persona.nil? %>  
+                <div class="col"> 
+                   <%= a.producto.descripcion %>  
+                </div> 
+                <div class="col"> 
+                           <%= a.titulo %>  
+                           <%= render "/actividades/actividades/show/attached", a:a  %>
+                </div>
+                <div class="col"> <% if !persona.nil? %>  
                                <%= (persona.paterno||'') + ' ' + (persona.materno||'') + ' ' + (persona.nombre||'') %> 
                        <% end %> 
-                 </div>
+                </div>
+            </div>    
+
 <% end %>
