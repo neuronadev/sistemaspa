@@ -1,3 +1,4 @@
+<% corre = false %>
 <div class="row" id="actividad<%= a.id %>">
 
     <% if a.estado == 'A' %>
@@ -28,9 +29,14 @@
 
     <% if a.estado == 'G' %>
           <div class="col validarno fw-bold" style="font-size:14px;">
-                <%= link_to edit_actividades_actividad_path(a) do %> 
-                   <i class="fas fa-times"></i> Corregir
-                <% end %>   
+              <% if corre %>
+                  <%= link_to edit_actividades_actividad_path(a) do %> 
+                     <i class="fas fa-times"></i> Corregir
+                <% end %>
+              <% else %>     
+                     <i class="fas fa-times"></i> <I>No se realizó la corrección solicitada</I>
+              <% end %>
+         
          </div>
     <% end %> 
 
