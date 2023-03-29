@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_03_170111) do
+ActiveRecord::Schema.define(version: 2023_03_29_221658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "unaccent"
 
   create_table "academicos", force: :cascade do |t|
     t.integer "noempleado"
@@ -474,6 +473,7 @@ ActiveRecord::Schema.define(version: 2022_11_03_170111) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "anio"
     t.string "tipo"
+    t.text "categoria"
     t.index ["persona_id"], name: "index_estimulos_on_persona_id"
   end
 
