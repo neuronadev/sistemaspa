@@ -1,3 +1,27 @@
-<div class="alert alert-dark" role="alert">
-  A simple dark alert—check it out!
-</div>
+   <%
+       monto_e = Estimulo.where(persona_id:current_usuario.persona_id,anio:2022, categoria:'E').order(:categoria).first
+       monto_p = Estimulo.where(persona_id:current_usuario.persona_id,anio:2022, categoria:'P').order(:categoria).first
+   %>
+
+<div class="alert alert-primary fw-bold" role="alert">
+  
+   <% if  !monto_e.nil? %>  
+          <% if monto_e.monto.to_f > 0.0 %>   
+                   <div>Monto Estímulo: <%= number_to_currency(monto_e.monto) %></div>
+          <% else%>    
+                   <div class="text-secondary">No cumple con la normativa establecida en los lineamientos para tener acceso a estímulos.</div>
+          <% end %>
+
+   <% else %>
+            <div class="text-secondary">No cumple con la normativa establecida en los lineamientos para tener acceso a estímulos.</div>
+   <% end %>
+ 
+   <% if  !monto_p.nil? %>  
+          <% if monto_p.monto.to_f > 0.0 %>   
+                 <div>Presupuesto Operativo: <%= number_to_currency(monto_p.monto) %></div>
+          <% else%>    
+                <div class="text-secondary">No cumple con la normativa establecida en los lineamientos para tener acceso a presupuesto.</div>
+          <% end %>
+  <% end %>
+ 
+  </div>
