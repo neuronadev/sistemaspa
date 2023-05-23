@@ -7,7 +7,7 @@ class BusquedasController < ApplicationController
 
     def producto
         txt_q = params[:txt]
-        @actividades = Actividad.search_by_titulo(txt_q).where(periodo:2022)
+        @actividades = Actividad.search_by_titulo(txt_q).where(periodo:2023)
         render partial: "productos"
     end
 end

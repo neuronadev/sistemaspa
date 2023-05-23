@@ -3,9 +3,7 @@
         <%= form_with model:[:actividades, actividad] do |form| %>
             <%= render "form_inputs_com", form:form %>
             <% if @parts[1] == 'P' %>
-                <div class="alert alert-danger" role="alert">
-                   Los artículos publicados en los siguientes periódicos serán capturados por el area de enlace: El Portal Comunicación Veracruzana, La Crónica y La Jornada Veracruz
-                </div> 
+                
             <% end %> 
             <div class="row mb-1">
                  <div class="col-md-2 d-flex justify-content-end"> 

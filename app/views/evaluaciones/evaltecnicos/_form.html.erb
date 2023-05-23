@@ -22,7 +22,7 @@
                  <div class="col-12">
                     <%= form_with model: [:evaluaciones, @evaltecnico] do |form|  %>
                         <%= form.hidden_field :persona_id, value:current_usuario.persona_id %>
-                        <%= form.hidden_field :anio, value:'2022' %>
+                        <%= form.hidden_field :anio, value:'2023' %>
                         <template data-sustantiva-target="itemsust"> 
                                 <%= form.fields_for :itemsustantivas, Itemsustantiva.new, child_index: 'IDX_ITEM' do |item| %> 
                                         <%= render "form_item", item:item %>

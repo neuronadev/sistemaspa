@@ -4,7 +4,7 @@ class DivulgacionesController < ApplicationController
   include Pagy::Backend
   def index
     @idx_pg = params[:page] 
-    @pagy, @actividades = pagy( Actividad.where(fuente:'V', periodo:[2021,2022], estado:['A','S','U','C'] ).order(created_at: :desc), page: params[:page], items: 20 )
+    @pagy, @actividades = pagy( Actividad.where(fuente:'V', periodo:[2021,2023], estado:['A','S','U','C'] ).order(created_at: :desc), page: params[:page], items: 20 )
   end
 
   def buscar

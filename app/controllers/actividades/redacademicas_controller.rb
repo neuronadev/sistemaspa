@@ -1,10 +1,10 @@
 class Actividades::RedacademicasController < ApplicationController
   def index
       if current_usuario.email == 'gerardo.mata@inecol.mx'
-           @actividades = Actividad.where(estado:['U','C','G','D','S'],periodo:2022,asignared:18).order(:producto_id)
+           @actividades = Actividad.where(estado:['U','C','G','D','S'],periodo:2023,asignared:18).order(:producto_id)
       else
            @p = Persona.find(current_usuario.persona_id)
-           @actividades = Actividad.where(estado:['U','C','G','D','S'],periodo:2022,asignared:@p.academico.red_id).order(:producto_id)
+           @actividades = Actividad.where(estado:['U','C','G','D','S'],periodo:2023,asignared:@p.academico.red_id).order(:producto_id)
       end 
       #@academicos = Academico.where(red_id:1)
       #@acad_array = []
@@ -13,7 +13,7 @@ class Actividades::RedacademicasController < ApplicationController
       #end
       #puts  @acad_array
       #@actividades = Actividad.where(estado:['S'],periodo:2021,asignared:1).order(:producto_id)
-      #@actividades = Actividad.includes(:producto).where(periodo:2022,estado:['U']).where(producto_id:[1,2,5,6,7])
+      #@actividades = Actividad.includes(:producto).where(periodo:2023,estado:['U']).where(producto_id:[1,2,5,6,7])
       #                .includes(:autores)
       #                  .where('autores.persona_id in (?)', @acad_array ).references(:autores).order("actividades.id")
   end

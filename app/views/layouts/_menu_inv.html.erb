@@ -26,6 +26,11 @@
                               
                               <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                     <div class="accordion-body col">
+                                       <div>
+                                          <%= link_to datahistory_path(2022)  do %>
+                                                <i class="fas fa-th-list"></i> Periodo 2022
+                                          <% end %> 
+                                        </div> 
                                         <div>
                                           <%= link_to datahistory_path(2021)  do %>
                                                 <i class="fas fa-th-list"></i> Periodo 2021
@@ -83,7 +88,7 @@
                         <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Captura</div>  
                         <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
                                     <%= link_to validaindex_path(:tipo=>'A'), style:'text-decoration: none; color:#202124;', target:"_blank" do %>
-                                          <i class="fas fa-users" style="color:#5b5b5b;"></i><span> Evaluación 2022 </span>
+                                          <i class="fas fa-users" style="color:#5b5b5b;"></i><span> Evaluación 2023 </span>
                                     <% end %>            
                         </div>            
              <% end %>  
