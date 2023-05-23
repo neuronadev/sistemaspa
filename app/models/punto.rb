@@ -1,0 +1,2 @@
+class Punto < ApplicationRecord
+end

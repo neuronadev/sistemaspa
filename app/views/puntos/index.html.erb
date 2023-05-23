@@ -1,0 +1,55 @@
+<h3>Puntajes</h3>
+<p>Producción 2022</p>
+
+<table style="width:60%;">
+  <thead>
+    <tr>
+            <th>Folio</th>
+            <th>Producto</th>
+            <th>Titulo</th>
+            <th>Producto-PT</th>
+            <th>PT</th>
+    </tr>
+   </thead>
+
+   <tbody>
+        <% @puntos.each do |p| 
+             actividad = Actividad.find(p.actividad_id)
+        %>
+            <tr>
+                 <td> <%= p.actividad_id %> </td>
+                 <td> <%= actividad.producto.descripcion %> </td>
+                 <td> <%= actividad.titulo %> </td>
+                 <td> <%= p.ptprod %> </td>
+                 <td> <%= p.pt %> </td>
+            </tr>
+            <tr>
+               <td></td>
+               <td></td>
+               <td colspan="3">
+                    <table> 
+                               <tr>
+                                    <td> Nombre </td>
+                                    <td> Porcentaje </td>
+                                    <td> Puntos </td>
+                                </tr>
+                        <%
+                            data = Punto.where(actividad_id:p.actividad_id)
+                            data.each do |d|
+                                autor = Persona.find(d.persona_id)
+                        %>
+                                <tr>
+                                    <td> <%= (autor.nombre||'') + ' ' + (autor.paterno||'') + ' ' + (autor.materno||'') %> </td>
+                                    <td> <%= d.porcentaje %> </td>
+                                    <td> <%= d.pt %> </td>
+                                </tr>
+                        <% end %>
+                    </table>     
+                    
+               </td>
+            </tr>
+        <% end %>    
+   </tbody>
+
+
+</table>

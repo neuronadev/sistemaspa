@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_29_221658) do
+ActiveRecord::Schema.define(version: 2023_05_23_224558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "academicos", force: :cascade do |t|
     t.integer "noempleado"
@@ -879,6 +880,17 @@ ActiveRecord::Schema.define(version: 2023_03_29_221658) do
     t.index ["medio_id"], name: "index_publicaciones_on_medio_id"
     t.index ["producto_id"], name: "index_publicaciones_on_producto_id"
     t.index ["red_id"], name: "index_publicaciones_on_red_id"
+  end
+
+  create_table "puntos", force: :cascade do |t|
+    t.integer "persona_id"
+    t.integer "actividad_id"
+    t.decimal "ptprod", precision: 16, scale: 2
+    t.decimal "porcentaje", precision: 16, scale: 2
+    t.decimal "pt", precision: 16, scale: 2
+    t.text "comentarios"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "redes", force: :cascade do |t|

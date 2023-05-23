@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  persona_id: 1
+  actividad_id: 1
+  ptprod: 9.99
+  porcentaje: 9.99
+  pt: 9.99
+  comentarios: MyText
+
+two:
+  persona_id: 1
+  actividad_id: 1
+  ptprod: 9.99
+  porcentaje: 9.99
+  pt: 9.99
+  comentarios: MyText
