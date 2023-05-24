@@ -1,55 +1,67 @@
 <h3>Puntajes</h3>
 <p>Producción 2022</p>
 
-<table style="width:60%;">
-  <thead>
-    <tr>
-            <th>Folio</th>
-            <th>Producto</th>
-            <th>Titulo</th>
-            <th>Producto-PT</th>
-            <th>PT</th>
-    </tr>
-   </thead>
+<div class="d-flex justify-content-center">
+          <table class="table" style="width:80%;">
+          <thead>
+          <tr>
+                    <th class="text-center">Folio</th>
+                    <th class="text-center">Producto</th>
+                    <th class="text-center">Titulo</th>
+                    <!-- <th class="text-center">Ptos. del Produto</th> -->
+                    <th class="text-center">Ptos. por participación</th>
+          </tr>
+          </thead>
 
-   <tbody>
-        <% @puntos.each do |p| 
-             actividad = Actividad.find(p.actividad_id)
-        %>
-            <tr>
-                 <td> <%= p.actividad_id %> </td>
-                 <td> <%= actividad.producto.descripcion %> </td>
-                 <td> <%= actividad.titulo %> </td>
-                 <td> <%= p.ptprod %> </td>
-                 <td> <%= p.pt %> </td>
-            </tr>
-            <tr>
-               <td></td>
-               <td></td>
-               <td colspan="3">
-                    <table> 
-                               <tr>
-                                    <td> Nombre </td>
-                                    <td> Porcentaje </td>
-                                    <td> Puntos </td>
-                                </tr>
-                        <%
-                            data = Punto.where(actividad_id:p.actividad_id)
-                            data.each do |d|
-                                autor = Persona.find(d.persona_id)
-                        %>
-                                <tr>
-                                    <td> <%= (autor.nombre||'') + ' ' + (autor.paterno||'') + ' ' + (autor.materno||'') %> </td>
-                                    <td> <%= d.porcentaje %> </td>
-                                    <td> <%= d.pt %> </td>
-                                </tr>
-                        <% end %>
-                    </table>     
-                    
-               </td>
-            </tr>
-        <% end %>    
-   </tbody>
+          <tbody>
+               <% @puntos.each do |p| 
+                    actividad = Actividad.find(p.actividad_id)
+               %>
+                    <tr class="active">
+                         <td> <strong><%= p.actividad_id %></strong> </td>
+                         <td> <%= actividad.producto.descripcion %> </td>
+                         <td> <%= link_to actividad.titulo, actividades_actividad_path(actividad.id) %> </td>
+                        <!-- <td class="text-center"> <%= p.ptprod %> </td> -->
+                         <td class="text-center"> <%= p.pt %> </td>
+                    </tr>
+                    <tr>
+                         <td colspan="5">
+                              
+                                <div class="col-10">
+                                 <div class="d-flex justify-content-center">
+                                        <div><strong>Coautoria o participantes</strong></div> 
+                                             <table  class="table" style="width:50%;"> 
+                                                       
+                                                       <tr>
+                                                            <th> Nombre </th>
+                                                            <% if actividad.producto_id != 9 && actividad.producto_id != 82 %>
+                                                                    <th> Porcentaje </th>
+                                                            <% end %> 
+                                                            <th> Puntos </th>
+                                                       </tr>
+
+                                                       <%
+                                                            data = Punto.where(actividad_id:p.actividad_id)
+                                                            data.each do |d|
+                                                                 autor = Persona.find(d.persona_id)
+                                                       %>
+                                                                 <tr>
+                                                                      <td > <%= (autor.nombre||'') + ' ' + (autor.paterno||'') + ' ' + (autor.materno||'') %> </td>
+                                                                      <% if actividad.producto_id != 9 && actividad.producto_id != 82 %>
+                                                                            <td class="text-center"> <%= d.porcentaje %> </td>
+                                                                      <% end %>   
+                                                                      <td class="text-center"> <%= d.pt %> </td>
+                                                                 </tr>
+                                                       <% end %>
+                                             </table>     
+                                        </div>     
+                              </div>  
+                              
+                         </td>
+                    </tr>
+               <% end %>    
+          </tbody>
 
 
-</table>
+          </table>
+</div>
