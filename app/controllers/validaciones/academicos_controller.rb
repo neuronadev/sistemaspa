@@ -11,7 +11,7 @@ class Validaciones::AcademicosController < ApplicationController
     end
     def adicionales
         @academico = Persona.find(params[:idacad])
-        @adicionales = Actividad.includes(:producto).where(periodo:2023,estado:['A','U','C','S','G','D'])
+        @adicionales = Actividad.includes(:producto).where(periodo:2022,estado:['A','U','C','S','G','D'])
                       .includes(:autores)
                       .where('autores.persona_id = ?', params[:idacad] ).references(:autores).order("actividades.titulo")
         @sustantivas = Evaltecnico.where(persona_id:params[:idacad]).first
