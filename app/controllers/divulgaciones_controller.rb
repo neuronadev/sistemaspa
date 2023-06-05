@@ -2,14 +2,15 @@ class DivulgacionesController < ApplicationController
   before_action :authenticate_usuario!
   layout 'divulgaciones'
   include Pagy::Backend
+
   def index
-    @idx_pg = params[:page] 
-    @pagy, @actividades = pagy( Actividad.where(fuente:'V', periodo:[2021,2023], estado:['A','S','U','C'] ).order(created_at: :desc), page: params[:page], items: 20 )
+    @idx_pg = params[:page]
+    @pagy, @actividades = pagy( Actividad.where(producto_id:[39,22], periodo:[2023], estado:['U','C'] ).order(created_at: :desc), page: params[:page], items: 20 )
   end
 
   def buscar
     @query = params[:query]
-    @pagy, @actividades = pagy( Actividad.search_by_titulo(@query).where(estado:['A','S','U','C']).where(fuente:'V'), page: params[:page], items: 20 )
+    @pagy, @actividades = pagy( Actividad.search_by_titulo(@query).where(estado:['S','U','C']).where(fuente:'V'), page: params[:page], items: 20 )
   
     #render partial: 'listado', locals: {pubs:r }
  end

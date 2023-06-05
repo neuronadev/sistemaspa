@@ -24,7 +24,7 @@
                         <%= artc.select :revista_id, Revista.where(estado:'A', tiporevista:'D').order(:nomrevista).map{|r| [r.nomrevista.upcase, r.id] },{ include_blank: true}, {class:" form-control", placeholder:'Escriba el nombre de la revista...', data:{controller:'ts--selectrev'}}  %>
                 <% end %>
                 <% if tipo == 'P' %> 
-                        <%= artc.select :revista_id, Revista.where(tiporevista:'P',estado:'A').order(:nomrevista).map{|r| [r.nomrevista.downcase.capitalize, r.id] },{ include_blank: true}, {class:" form-control", placeholder:'Escriba el nombre del periodico...', data:{controller:'ts--selectrev'}} %>
+                        <%= artc.select :revista_id, Revista.where(tiporevista:'P',estado:['A','E']).order(:nomrevista).map{|r| [r.nomrevista.downcase.capitalize, r.id] },{ include_blank: true}, {class:" form-control", placeholder:'Escriba el nombre del periodico...', data:{controller:'ts--selectrev'}} %>
                 <% end %>
             </div>    
 

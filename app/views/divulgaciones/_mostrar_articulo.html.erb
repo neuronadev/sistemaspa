@@ -56,11 +56,12 @@
             </div>
             <div class="col-md-6 pl-md-1 pt-md-1">
                 <div class="col">
-                                    <% if @actividad.enlacedoc.attached? %>
-                                    
-                                            <div class="col-6">  <%= link_to @actividad.enlacedoc.filename, rails_blob_path(@actividad.enlacedoc, disposition: 'attachment', target: '_blank') %> </div>
-                                    <% else %>
-                                            <I>Sin comprobante</I>
+                                    <% if @actividad.documentos.attached? %> 
+                                        <% @actividad.documentos.each do |d|%>
+                                            <div id="doc<%= d.id %>">
+                                                <%= link_to d.filename, rails_blob_path(d, disposition: "attachment"), { target: '_blank' } %>
+                                            </div>
+                                        <% end %>      
                                     <% end %>  
                 </div>        
             </div>  
