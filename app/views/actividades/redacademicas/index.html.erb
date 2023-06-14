@@ -44,20 +44,13 @@
                                           
                                     </td>
                                     <td> 
-                                    
-                                       <% if a.estado == 'U' %>
-                                             <button class="btn btn-warning btn-sm" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" >Validar</button>
-                                       <% end %>  
-                                       <% if a.estado == 'C' ||  a.estado == 'S' %>
-                                             <span class="badge bg-success" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">VER</span>
-                                       <% end %> 
-                                       <% if a.estado == 'G' %>
-                                             <span class="badge bg-info" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">En edición</span>
-                                       <% end %> 
-                                       <% if a.estado == 'D' %>
-                                             <span class="badge bg-danger" data-action="click->validar#seccVal" data-validar-row-param="div_<%= @row_id %>" style="cursor: pointer">No se considera</span>
-                                       <% end %>
-                                    
+                                          <% if a.producto_id == 22 %>
+                                                     <%= render 'actividades/redacademicas/btn_vals_div', a:a %>
+                                          <% elsif a.producto_id == 39 %>            
+                                                     <%= render 'actividades/redacademicas/btn_vals_per', a:a %> 
+                                          <% else %>
+                                                     <%= render 'actividades/redacademicas/btn_vals_g', a:a %>
+                                          <% end %>
                                     </td>
                                  </tr> 
                                  <tr id="div_<%= @row_id %>" style="display:none">

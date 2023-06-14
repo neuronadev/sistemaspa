@@ -1,37 +1,53 @@
 
 <% @actividades.each do |actividad| %>
+   <% validar = false 
+         if actividad.producto_id == 22
+                if [6,7,8,9,10,11,12].include?(actividad.divulgacion.tipodivulgacion.id) 
+                      validar = true
+                end
+         end
+         if actividad.producto_id == 39
+               if [889,886,317].include?(actividad.articulo.revista.id)
+                     validar = true
+               end
+         end
+   
+   %>  
+   
+   <% if validar %> 
+    
+        <tr>
+            <td><%= actividad.id %></td>
+            <td><%= actividad.producto.descripcion %></td>
+            <td>
+                <%= link_to actividad.titulo, divulgacion_path(actividad.id) %> 
+                
+            </td>
+            <td><%= cita(actividad.id).html_safe %></td>
+            <td> <%= actividad.periodo %> </td>
+            <% if current_usuario.evaluador == 'V' %>  
+                    <td id="actividad<%= actividad.id %>">
+                                <% if actividad.estado == 'U' %>
+                                    <%= link_to validar_path(actividad,'enlace'), remote:true, data:{confirm:"¿Desea validar el registro? Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
+                                        <div class="d-flex flex-row bd-highlight mb-1  justify-content-center">  
+                                            <div class="p-1 bd-highlight"> 
+                                                <i class="fas fa-check-circle text-warning fa-lg"></i>
+                                            </div>
+                                            <div class="p-1 bd-highlight"><small>Validar</small></div>   
+                                        </div>
+                                    <% end %>
+                                <% end %>
+                                <% if actividad.estado == 'C' || actividad.estado == 'S' %>
+                                    <div class="d-flex flex-row bd-highlight mb-1  justify-content-center">  
+                                            <div class="p-1 bd-highlight"> 
+                                                <i class="fas fa-check-double fa-lg text-success"></i>
+                                            </div>
+                                            <div class="p-1 bd-highlight"><small></small></div>   
+                                        </div>
+                                <% end %>
+                    </td> 
+            <% end %> 
 
-   <tr>
-      <td><%= actividad.id %></td>
-      <td><%= actividad.producto.descripcion %></td>
-      <td>
-           <%= link_to actividad.titulo, divulgacion_path(actividad.id) %> 
-           
-      </td>
-      <td><%= cita(actividad.id).html_safe %></td>
-      <td> <%= actividad.periodo %> </td>
-      <% if current_usuario.evaluador == 'V' %>  
-            <td id="actividad<%= actividad.id %>">
-                          <% if actividad.estado == 'U' %>
-                              <%= link_to validar_path(actividad,'enlace'), remote:true, data:{confirm:"¿Desea validar el registro? Asegurarse de la correcta categorización, ver Cap VIII, 8.IV lineamientos", disabled_with: "Enviando.."} do %>
-                                <div class="d-flex flex-row bd-highlight mb-1  justify-content-center">  
-                                    <div class="p-1 bd-highlight"> 
-                                        <i class="fas fa-check-circle text-warning fa-lg"></i>
-                                    </div>
-                                    <div class="p-1 bd-highlight"><small>Validar</small></div>   
-                                </div>
-                              <% end %>
-                          <% end %>
-                          <% if actividad.estado == 'C' || actividad.estado == 'S' %>
-                               <div class="d-flex flex-row bd-highlight mb-1  justify-content-center">  
-                                    <div class="p-1 bd-highlight"> 
-                                        <i class="fas fa-check-double fa-lg text-success"></i>
-                                    </div>
-                                    <div class="p-1 bd-highlight"><small></small></div>   
-                                </div>
-                          <% end %>
-            </td> 
-      <% end %> 
-
-   </tr>
+        </tr>
+    <% end %>    
 <% end %>   
