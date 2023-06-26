@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_23_224558) do
+ActiveRecord::Schema.define(version: 2023_06_26_123605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "unaccent"
 
   create_table "academicos", force: :cascade do |t|
     t.integer "noempleado"
@@ -891,6 +890,7 @@ ActiveRecord::Schema.define(version: 2023_05_23_224558) do
     t.text "comentarios"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "anio"
   end
 
   create_table "redes", force: :cascade do |t|
