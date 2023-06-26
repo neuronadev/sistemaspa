@@ -20,6 +20,28 @@
                                 <i class="fa-solid fa-gears" style="color:#5b5b5b;"></i> Sustantivas
                           <% end %>  
               </div>
+              <div class="d-flex justify-content-start border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body  item" >
+                 <div class="accordion col-12" id="accordionExample">
+                      <div class="col-12">
+                              
+                                    <div class="accordion-button collapsed d-flex justify-content-start p-2 item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreep" aria-expanded="false" aria-controls="collapseThreep">
+                                          <%= link_to actividades_actividades_path, style:'text-decoration: none; color:#202124;' do %>
+                                                <i class="fa-regular fa-circle-check" style="color:#5b5b5b;"></i> Puntos
+                                          <% end %>  
+                                    </div>
+                              
+                              <div id="collapseThreep" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body col">
+                                       <div>
+                                          <%= link_to puntos_path(:anio=>2022), style:'text-decoration: none; color:#202124;' do %>
+                                               <i class="fa-solid fa-check"></i> Puntos 2022
+                                          <% end %>  
+                                        </div> 
+                                    </div>
+                              </div>
+                      </div>
+                 </div>
+              </div>   
               <%  if Itemsustantiva.where(persona_id:current_usuario.persona_id).any? %>
                     <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Técnicos</div>
                     <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
