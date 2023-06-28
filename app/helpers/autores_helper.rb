@@ -49,7 +49,11 @@ module AutoresHelper
             #if !a.firma.present?
             if esinceol == 'S'
                    #str = str + simbolo + "<b>" + (a.persona.paterno||"") + ", " + (a.persona.nombre||"") + "</b>"
-                   str = str + simbolo + "<b>" + (a.autorap||"") + ", " + (a.autornom||"") + "</b>"
+                   if !a.autorap.nil? && !a.autornom.nil?
+                         str = str + simbolo + "<b>" + (a.autorap||"") + ", " + (a.autornom||"") + "</b>"
+                   else
+                         str = str + simbolo + "<b>" + (a.persona.paterno||"") + ", " + (a.persona.nombre||"") + "</b>"
+                   end
              else
                    #str = str + simbolo + (a.persona.paterno||"") + "," + (a.persona.nombre||"")     
                    if a.firma.present?
