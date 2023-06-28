@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2023_06_26_123605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "academicos", force: :cascade do |t|
     t.integer "noempleado"
@@ -885,8 +886,8 @@ ActiveRecord::Schema.define(version: 2023_06_26_123605) do
     t.integer "persona_id"
     t.integer "actividad_id"
     t.decimal "ptprod", precision: 16, scale: 2
-    t.decimal "porcentaje", precision: 16, scale: 2
-    t.decimal "pt", precision: 16, scale: 2
+    t.decimal "porcentaje", precision: 16, scale: 5
+    t.decimal "pt", precision: 16, scale: 5
     t.text "comentarios"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
