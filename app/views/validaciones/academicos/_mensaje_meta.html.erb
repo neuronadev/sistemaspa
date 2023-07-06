@@ -1,0 +1,35 @@
+<% if @actividad.estado == 'C' %>
+    <div class="alert alert-primary" role="alert">
+        <i class="fa-solid fa-check"></i> Producto validado por el la coordinación de red.
+    </div>
+    
+<% end %>
+<% if @actividad.estado == 'S' %>
+    <div class="alert alert-primary" role="alert">
+        <i class="fa-solid fa-check"></i> Producto validado por la SA.
+    </div>
+    
+<% end %>
+<% if @actividad.estado == 'G'
+      @val_msg = Valetapa.where(actividad_id:@actividad.id)
+      @txt_msg = '' 
+      if @val_msg.any?
+           @txt_msg = @val_msg.last.txtmensaje
+      end
+  
+%>
+    <div class="alert alert-warning" role="alert">
+       <i class="fa-regular fa-pen-to-square"></i> Producto en edición. <%= @txt_msg %>
+    </div>
+<% end %>
+<% if @actividad.estado == 'D'
+      @val_msg = Valetapa.where(actividad_id:@actividad.id)
+      @txt_msg = '' 
+      if @val_msg.any?
+           @txt_msg = @val_msg.last.txtmensaje
+      end
+%>
+    <div class="alert alert-danger" role="alert">
+        <i class="fa-solid fa-xmark"></i> No cumple con la normativa. <%= @txt_msg %>
+    </div>
+<% end %>

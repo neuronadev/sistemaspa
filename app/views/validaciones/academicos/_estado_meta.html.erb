@@ -1,0 +1,9 @@
+<% if item.estado == 'S' %>
+    <span class="badge bg-primary"><i class="fa-solid fa-check fw-bold text-white"></i> SA</span>
+<% end %>
+<% if item.estado == 'G' %>
+    <span class="badge bg-warning"><i class="fa-solid fa-pen-to-square fw-bold text-white"></i></span>
+<% end %>
+<% if item.estado == 'D' %>
+    <span class="badge bg-danger"><i class="fa-solid fa-xmark fw-bold text-white"></i></span>
+<% end %>

@@ -1,0 +1,20 @@
+<div class="row text-primary fw-bold">
+     <div class="col-12">
+          <i class="fa-solid fa-list"></i> Actividades Resgistradas
+     </div>     
+</div>
+
+<div class="row bg-body rounded-3 mt-1 mb-5">    
+   <div class="col-12">
+            <% @metas.each do |item| 
+               responsable = Persona.find(item.personaid)
+            %>
+                <% if @academico.id == item.personaid %> 
+                           <%= render "meta_prop", item:item %>
+                 <% else %> 
+                           <%= render "meta_ext", item:item, responsable:responsable %> 
+                <% end %>    
+                
+            <% end %>
+   </div>     
+</div>   

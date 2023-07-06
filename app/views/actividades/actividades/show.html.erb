@@ -38,7 +38,7 @@
                                           <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
                                     <% end %>           
                               <% else %> 
-                                 <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
+                                 <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').last.txtmensaje   %></div>
                               <% end %> 
                         
                         <% end %>    

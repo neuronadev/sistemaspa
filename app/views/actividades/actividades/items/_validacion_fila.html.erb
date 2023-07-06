@@ -30,8 +30,8 @@
     <% if a.estado == 'G' %>
           <div class="col validarno fw-bold" style="font-size:14px;">
               <% if corre %>
-                  <%= link_to edit_actividades_actividad_path(a) do %> 
-                     <i class="fas fa-times"></i> Corregir
+                  <%= link_to edit_actividades_actividad_path(a), class:'text-decoration-none' do %> 
+                     <i class="fas fa-times text-danger"></i> <span class="text-danger">Corregir</span>
                 <% end %>
               <% else %>     
                      <i class="fas fa-times"></i> <I>No se realizó la corrección solicitada</I>

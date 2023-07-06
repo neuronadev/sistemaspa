@@ -1,22 +1,40 @@
 class Validaciones::AcademicosController < ApplicationController
     layout "/validacion/academico"
     def index
-        
-        if current_usuario.evaluador == 'A'
-            @tecnicos = Persona.where(tipopersona_id:4).where.not(estado:'B').order(:paterno)
-        else
-            @tecnicos = Persona.where(evalua:current_usuario.persona_id ).where.not(estado:'B').order(:paterno)
+        # Validar Tecnicos: A listar a todos. B listar solo los que le tocan.
+        if params[:tipo] == 'T'
+            if current_usuario.evaluador == 'A'
+                @academicos = Persona.where(tipopersona_id:4).where.not(estado:'B').order(:paterno)
+            else
+                @academicos = Persona.where(evalua:current_usuario.persona_id ).where.not(estado:'B').order(:paterno)
+            end
+        end
+        if params[:tipo] == 'I'
+            if current_usuario.evaluador == 'A'
+                @academicos = Persona.where(tipopersona_id:[2,3]).where.not(estado:'B').order(:paterno)
+            else
+                @academicos = Persona.where(evalua:current_usuario.persona_id ).where.not(estado:'B').order(:paterno)
+            end
         end
 
     end
     def adicionales
         @academico = Persona.find(params[:idacad])
-        @adicionales = Actividad.includes(:producto).where(periodo:2022,estado:['A','U','C','S','G','D'])
+        @adicionales = Actividad.includes(:producto).where(periodo:2023,estado:['A','U','C','S','G','D'])
                       .includes(:autores)
                       .where('autores.persona_id = ?', params[:idacad] ).references(:autores).order("actividades.titulo")
         @sustantivas = Evaltecnico.where(persona_id:params[:idacad]).first
         render partial: "adicionales"
     end
+
+    def metasinvest
+        @academico = Persona.find(params[:idacad])
+        @metas = Actividad.includes(:producto).where(periodo:2023,estado:['C','S','G','D'])
+                      .includes(:autores)
+                      .where('autores.persona_id = ?', params[:idacad] ).references(:autores).order("actividades.titulo")
+        render partial: "metas"
+    end
+
     def producto
         @actividad = Actividad.find(params[:idprod].to_i)
         @producto = @actividad.producto
@@ -30,6 +48,20 @@ class Validaciones::AcademicosController < ApplicationController
         render partial: "producto"
 
     end
+
+    def productoinvest
+        @actividad = Actividad.find(params[:idprod].to_i)
+        @producto = @actividad.producto
+
+        if !@producto.pathf.blank? 
+             @parts = @producto.pathf.split('-')
+        else
+             @parts = ['-'] 
+       end
+
+        render partial: "productometa"
+    end
+
     def validar
         @actividad = Actividad.find(params[:idprod].to_i)
         @tipo = params[:tipo]

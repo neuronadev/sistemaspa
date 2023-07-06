@@ -1,0 +1,65 @@
+<div class="row mb-4">
+     <div class="col-12">
+          <div class="row justify-content-end">
+               <div class="col-auto">
+                    <i class="fa-regular fa-rectangle-xmark fa-lg text-primary cursor-pointer" data-action="click->tecnico#closewin" data-tecnico-idtarget-param="<%= @actividad.id %>" ></i>
+               </div>
+          </div>
+          <div class="row">
+               <div class="col-12">
+                      <%= render "tipo_producto" %>
+               </div>
+          </div>
+          
+     </div>
+</div>
+
+<div class="row ms-2" style="color:#ff6347;">
+    <%   
+       valetapa = Valetapa.where(actividad_id:@actividad.id).last
+       activa_val = ''
+       if !valetapa.nil?
+            if @actividad.estado == 'U' && (valetapa.accion == 'corregir' && valetapa.estado == 'activo')
+                  activa_val = valetapa.txtmensaje
+            end
+       end
+   %>
+     <%= activa_val %>
+</div>
+
+<% if  [1,2,3].include?(@actividad.producto_id) %>
+     <div class="row">
+          <%= link_to edit_actividades_actividad_path(@actividad), class:'text-decoration-none' do %> 
+                              <span class="text-primary">Editar Producto</span>
+          <% end %>
+     </div>
+<% end %>
+<div class="row">
+          <div class="col" id="div_validar_<%= @actividad.id %>">
+               <%  if @actividad.estado == 'U' %>
+                         <%= render "menu_validar"  %>
+               <% else %>
+                         <%  if @actividad.estado == 'A' %>
+                                 <span class="text-danger">El investigador no ha realizado la acción de "Eviar a validación" de este producto.</span>
+                         <% else %>
+                                  <%= render "mensaje_meta" %>
+                         <% end %>   
+               <% end %>         
+          </div>
+</div>
+<%  if @actividad.estado == 'C' && current_usuario.evaluador == 'A' %>
+     <div class="row">
+          <div class="col alert alert-success" role="alert" id="div_validar_sa_<%= @actividad.id %>">
+                  Secretaría Académica.
+                    <%= render "menu_validarsa"  %>
+          </div>
+     </div>
+<% end %>
+<%  if @actividad.estado == 'C' && current_usuario.evaluador == 'B' %>
+     <div class="row">
+          <div class="col alert alert-success" role="alert" id="div_validar_sa_<%= @actividad.id %>">
+                  Secretaría Académica.
+                    <%= render "menu_validarsa"  %>
+          </div>
+     </div>
+<% end %>

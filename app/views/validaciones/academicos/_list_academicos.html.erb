@@ -7,10 +7,17 @@
 <div class="row">    
    <div class="col">
         <ul class="list-group list-group-flush" style="overflow: scroll; height:600px;">
-            <% tecnicos.each do |item| %>
-                <li class="list-group-item cursor-pointer" data-action="mouseover->tecnico#sel mouseout->tecnico#unsel click->tecnico#adicionales" data-tecnico-idacad-param="<%= item.id %>" > 
-                    <%= (item.paterno||'') + ' ' + (item.materno||'') + ' ' + (item.nombre||'') %> 
-                </li>
+            <% academicos.each do |item| %>
+                    <% if params[:tipo] == 'T' %>
+                        <li class="list-group-item cursor-pointer" data-action="mouseover->tecnico#sel mouseout->tecnico#unsel click->tecnico#adicionales" data-tecnico-idacad-param="<%= item.id %>" > 
+                            <%= (item.paterno||'') + ' ' + (item.materno||'') + ' ' + (item.nombre||'') %> 
+                        </li>
+                    <% end %>    
+                    <% if params[:tipo] == 'I' %>
+                        <li class="list-group-item cursor-pointer" data-action="mouseover->tecnico#sel mouseout->tecnico#unsel click->investigador#metas" data-investigador-idacad-param="<%= item.id %>" > 
+                            <%= (item.paterno||'') + ' ' + (item.materno||'') + ' ' + (item.nombre||'') %> 
+                        </li>
+                    <% end %>
             <% end %>   
         </ul>
    </div>     

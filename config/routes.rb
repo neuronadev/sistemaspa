@@ -53,7 +53,9 @@ Rails.application.routes.draw do
        resources :academicos do
             collection do
                post 'adicionales'
+               post 'metasinvest'
                post 'producto'
+               post 'productoinvest'
                post 'validar'
                post 'validarsa'
                post 'aplicartipo'

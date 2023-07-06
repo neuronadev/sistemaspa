@@ -7,7 +7,7 @@
                      <%=  form.select :personaid, Persona.where(estado:'A').order(:paterno).map {|p| [(p.paterno+' '+p.materno+' '+p.nombre), p.id]}, {prompt:'Seleccione...'}  %>
                 </div>  
           <% else %>
-                  <%= form.hidden_field :personaid, value:current_usuario.persona_id %> 
+               <!--   <%= form.hidden_field :personaid, value:current_usuario.persona_id %>  -->
           <% end %>        
         
         <%= form.hidden_field :estado, value:'A' %>
@@ -26,7 +26,7 @@
                        <%= form.hidden_field :estado, value:'C' %>
                   <% end %>  
                <% end %>   
-                 <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').first.txtmensaje   %></div>
+                 <div class="alert alert-danger" role="alert"><%=  @actividad.valetapas.where(activo:'SI').last.txtmensaje   %></div>
          <% end %>   
         
     <% end %>  
