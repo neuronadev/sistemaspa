@@ -40,13 +40,26 @@
 <div class="row bg-body rounded-3 mt-1 mb-5">    
    <div class="col-12">
             <% @adicionales.each do |item| 
-               responsable = Persona.find(item.personaid)
+                 responsable = Persona.find(item.personaid)
+                 @mostrar = true
+                 if item.producto_id == 22
+                       if [6,7,8,9,10,11,12].include?(item.divulgacion.tipodivulgacion.id)
+                            @mostrar = false
+                       end
+                 end
+                 if item.producto_id == 39 
+                       if [889,886,317,889].include?(item.articulo.revista.id)
+                            @mostrar = false
+                       end
+                 end
+                 
             %>
-                <% if @academico.id == item.personaid %> 
-                           <%= render "adicional_prop", item:item %>
-                 <% else %> 
-                           <%= render "adicional_ext", item:item, responsable:responsable %> 
-                <% end %>    
+             
+                     <% if @academico.id == item.personaid %> 
+                                 <%= render "adicional_prop", item:item %>
+                     <% else %> 
+                                 <%= render "adicional_ext", item:item, responsable:responsable %> 
+                     <% end %>    
                 
             <% end %>
    </div>     

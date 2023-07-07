@@ -10,7 +10,13 @@
                     </div>
                     <div class="col-6 align-middle" style="text-align: justify;"> 
                               <div><%= item.titulo %></div>
-                              <div class="text-primary cursor-pointer" data-action="click->tecnico#detalle" data-tecnico-idprod-param = "<%= item.id %>" > Ver producto</div>
+                                   <% if @mostrar == true %>
+                                        <div class="text-primary cursor-pointer" data-action="click->tecnico#detalle" data-tecnico-idprod-param = "<%= item.id %>" > 
+                                            Ver producto
+                                        </div>
+                                   <% else %>
+                                         <span class="text-success"> Este producto lo valida la <strong>Oficina de Comunicación</strong>.</span>
+                                   <% end %>    
                               <%   
                                  valetapa = Valetapa.where(actividad_id:item.id).last
                                  activa_val = ''
