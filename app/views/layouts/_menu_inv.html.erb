@@ -127,12 +127,15 @@
              <% if current_usuario.evaluador == 'A' %>
                         <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Validaciones</div>  
                         <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
-                                    <%= link_to validaindex_path(:tipo=>'A'), class:"", style:'color:#202124;', target:"_blank" do %>
+                                  <!--  <%= link_to validaindex_path(:tipo=>'A'), class:"", style:'color:#202124;', target:"_blank" do %>
                                              <i class="fas fa-address-book" style="color:#5b5b5b;"></i> Producción
-                                    <% end %>          
+                                    <% end %> -->
+                                    <%= link_to validaciones_academicos_path(:tipo=>'I'), style:'text-decoration: none; color:#202124;', target:"_blank" do %>
+                                        <i class="fa-solid fa-users"  style="color: #5b5b5b ;"></i> Investigadores
+                              <% end %>   
                         </div>   
                         <div id="menuini" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
-                              <%= link_to validaciones_academicos_path, style:'text-decoration: none; color:#202124;', target:"_blank" do %>
+                              <%= link_to validaciones_academicos_path(:tipo=>'T'), style:'text-decoration: none; color:#202124;', target:"_blank" do %>
                                   <i class="fa-solid fa-users"  style="color: #5b5b5b ;"></i> Técnicos
                               <% end %>   
                         </div>

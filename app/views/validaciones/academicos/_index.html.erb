@@ -1,6 +1,6 @@
 <div class="d-flex row fw-bold sticky-top">
    
-   <div> Producción 2023 </div> 
+   <div> Producción 2023 <%=  params[:tipo] == 'I' ? 'Investigadores' : 'Técnicos' %></div> 
    <%= link_to actividades_actividades_path do %> 
          <i class="fa-solid fa-arrow-left-long"></i> Regresar 
    <% end %>
