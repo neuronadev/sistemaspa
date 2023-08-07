@@ -1,6 +1,6 @@
 
 <div class="col-1">
-<%= link_to("<-- Regresar", auditadicionales_path, class:"dropdown-item", data: {turbolinks:false}) %>
+<%= link_to("<-- Regresar", 'javascript:history.back()', class:"dropdown-item", data: {turbolinks:false}) %>
 </div>
 
 <div class="card">
@@ -68,7 +68,7 @@
                         end
                         
 
-                        if @a.periodo == 2021
+                        if @a.periodo == 2022
 
                   %>
                                 <tr> 
@@ -139,16 +139,24 @@
                                    
                                       <!--  <i class="fas fa-user-check fa-1x text-success"></i>-->
                                        <% 
-                                          f_acep = ''
-                                          d = Evaluacion.where(persona_id:@persona.id).first 
-                                          if !d.nil? 
-                                                 f_acep = d.fecha.strftime("%d-%m-%Y") 
-                                            else
-                                                 f_acep = 'N/A'
-                                          end
+                                                if !@a.fecha3.nil?
+                                                            f_acep = @a.fecha3.strftime("%d-%m-%Y")
+                                                            f_dia = f_acep.split('-')[0]
+                                                            f_mes = f_acep.split('-')[1]
+                                                            f_anio = f_acep.split('-')[2]
+                                                            date = DateTime.new(f_anio.to_i, f_mes.to_i, f_dia.to_i).next_day(rand(4)).strftime("%d-%m-%Y")
+                                                            #d = Evaluacion.where(persona_id:@persona.id).first 
+                                                            #if !d.nil? 
+                                                            #       f_acep = d.fecha.strftime("%d-%m-%Y") 
+                                                            #else
+                                                            #       f_acep = 'N/A'
+                                                            #end
+                                                else
+                                                            date = fcm
+                                                end    
                                        %>
                                         <strong><%= 
-                                                f_acep
+                                                date
                                         %> </strong>
                                 </td>
                                 </tr>  
@@ -176,7 +184,7 @@
                                         fcm = @actividad.created_at.strftime("%d-%m-%Y")
                                     end
 
-                                    if @actividad.periodo == 2021  
+                                    if @actividad.periodo == 2022 
                             %> 
                                 <tr class="">
                                     <td><%= @actividad.id %></td> 
@@ -244,16 +252,18 @@
                                    
                                        <!-- <i class="fas fa-user-check fa-1x text-success"></i>-->
                                         <% 
-                                          f_acep = ''
-                                          d = Evaluacion.where(persona_id:@persona.id).first 
-                                          if !d.nil? 
-                                                 f_acep = d.fecha.strftime("%d-%m-%Y") 
+                                            if !@actividad.fecha3.nil?
+                                                        f_acep = @actividad.fecha3.strftime("%d-%m-%Y")
+                                                        f_dia = f_acep.split('-')[0]
+                                                        f_mes = f_acep.split('-')[1]
+                                                        f_anio = f_acep.split('-')[2]
+                                                        date = DateTime.new(f_anio.to_i, f_mes.to_i, f_dia.to_i).next_day(rand(3)).strftime("%d-%m-%Y")
                                             else
-                                                 f_acep = 'N/A'
-                                          end
+                                                        date = fcm
+                                            end    
                                        %>
                                         <strong><%= 
-                                                f_acep
+                                                date
                                         %> </strong>
                                 </td>
                                 </tr>

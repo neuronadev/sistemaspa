@@ -6,6 +6,7 @@
         <tr>
             <th class="text-center">Consecutivo</th>
             <th class="text-center">Nombre</th>
+            <th class="text-center">Calif.</th>
             <th class="text-center">Red</th>
             <th class="text-center">Adicionales</th>
         </tr>
@@ -13,18 +14,26 @@
     <tbody>
         <%  @i = 1
             @listado.each do |l|
-            @academico = Academico.find(l[0])
-            @persona = Persona.find(@academico.persona_id) 
+            #@persona = Persona.find(@academico.persona_id) 
+            @persona = Persona.find(l[0])
+            @academico = Academico.find(@persona.academico.id)
             @strColor = ''
             if l[1] < 8.5
-            @strColor = ' text-danger'
+                  @strColor = ' text-danger'
             else
-            @strColor = ''
+                  @strColor = ''
             end
         %>
         <tr>
         <td class="text-center"><%= @i %></td>
         <td><span class='<%= @strColor %>'><%= (@persona.paterno||'') + " " + (@persona.materno||'') + " " + (@persona.nombre||'') %></span></td>
+        <td>
+                 <% if l[1] >= 8.5 %>   
+                          <div class="text-primary">Calificación: <%= sprintf('%.5s', l[1]) %></div>
+                 <% else %>    
+                          <div class="text-danger">Calificación: <%= sprintf('%.5s', l[1])  %></div>
+                 <% end %> 
+        </td>
         <td><%= @academico.red.nomred %></td>
         <td> <%= link_to("Ver Adicionales", auditdetalle_path(@academico.id), data:{turbolinks:false} ) %> </td>
         </tr>

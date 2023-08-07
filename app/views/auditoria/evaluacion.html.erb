@@ -17,8 +17,10 @@
     <tbody>
         <%  @i = 1
             @listado.each do |l|
-            @academico = Academico.find(l[0])
-            @persona = Persona.find(@academico.persona_id) 
+           
+            @persona = Persona.find(l[0]) 
+            @academico = Academico.find( @persona.academico.id )
+
             @strColor = ''
             if l[1] < 8.5
             @strColor = ' text-danger'
