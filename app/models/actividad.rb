@@ -73,25 +73,28 @@ class Actividad < ApplicationRecord
                        using: { tsearch: { dictionary: 'spanish' } }
 
    def puntosAutores(idpersona)
-       #p = Puntajes::Asignar.new
-       #p.porcentajeAutores(self.autores.where.not(persona_id:[211,212]).order(:id), self.id)
-       c = Puntajes::Util.new
-       tp = c.tablaPorc(self.autores)
-       coaut = self.autores.where(persona_id:idpersona).first
-       pos = c.autoresPosPdf(autores, idpersona)
-       corr = c.autoresCorr(coaut)
-       pxa = 0.0
-       if ( pos == 1 || corr == 'S' )
-              pxa = tp[:p]
-       else
-              pxa = tp[:r]
-       end
-       ptosxprod = c.puntosProd(self)
-       #if self.producto_id == 1
-           ptosxcoaut = ptosxprod * pxa/100.0
-       #end
-       #puts ptosxprod
-       return ptosxcoaut
-   end
+        ptosxcoaut = 0.0 
+        if self.estado == 'S'
+            c = Puntajes::Util.new
+            tp = c.tablaPorc(self.autores)
+            coaut = self.autores.where(persona_id:idpersona).first
+            pos = c.autoresPosPdf(autores, idpersona)
+            corr = c.autoresCorr(coaut)
+            pxa = 0.0
+            if ( pos == 1 || corr == 'S' )
+                    pxa = tp[:p]
+            else
+                    pxa = tp[:r]
+            end
+            ptosxprod = c.puntosProd(self)
+            #if self.producto_id == 1
+                ptosxcoaut = ptosxprod * pxa/100.0
+            #end
+            #puts ptosxprod
+        else
+            ptosxcoaut = '---'
+        end   
+     return ptosxcoaut
+  end
       
 end
