@@ -12,7 +12,7 @@ module Puntajes
            primer_a = 0
            corres_a = 0
            i = 0
-           autores.each do |aut|
+           autores.order(:id).each do |aut|
                     if i == 0 && (aut.persona_id != 211 && aut.persona_id != 212)
                             primer_a += 1
                     end
@@ -26,7 +26,7 @@ module Puntajes
       def autoresPosPdf(autores, persona_lista)
               i = 1
               pos = 0
-              autores.each do |aut|
+              autores.order(:id).each do |aut|
                      if  aut.persona_id == persona_lista
                           pos = i
                      end

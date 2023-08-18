@@ -75,25 +75,25 @@ class Actividad < ApplicationRecord
    def puntosAutores(idpersona)
         ptosxcoaut = 0.0 
         if self.estado == 'S'
+            p_autores = self.autores.order(:id) 
             c = Puntajes::Util.new
-            tp = c.tablaPorc(self.autores)
+            tp = c.tablaPorc(p_autores)
             coaut = self.autores.where(persona_id:idpersona).first
-            pos = c.autoresPosPdf(autores, idpersona)
+            pos = c.autoresPosPdf(p_autores, idpersona)
             corr = c.autoresCorr(coaut)
             pxa = 0.0
+            
             if ( pos == 1 || corr == 'S' )
                     pxa = tp[:p]
             else
                     pxa = tp[:r]
             end
+            
             ptosxprod = c.puntosProd(self)
-            #if self.producto_id == 1
-                ptosxcoaut = ptosxprod * pxa/100.0
-            #end
-            #puts ptosxprod
+            ptosxcoaut = ptosxprod * pxa/100.0
         else
             ptosxcoaut = '---'
-        end   
+        end 
      return ptosxcoaut
   end
       
