@@ -1,6 +1,6 @@
 <div class="row p-2 border-bottom">
         <div id="folio_<%= item.id %>" class="col-1 text-center align-middle <%= 'text-success fw-bold' if item.estado=='S' %> <%= 'text-warning fw-bold' if item.estado=='G' %> <%= 'text-danger fw-bold' if item.estado=='D' %>" > 
-                      <%= item.id %> 
+                      <%= item.id %>
         </div>
         <div class="col-4 align-middle" > 
                 <%= item.producto.descripcion %>
@@ -23,9 +23,12 @@
                  <%= render "estado_meta", item:item %> 
         </div>
 
-        <div class="row p-2" id="div_detalle_<%= item.id %>" style="display:none;">
+       <div class="row p-2" id="div_detalle_<%= item.id %>" style="display:none;">
                         <div class="col-1"></div>
                         <div class="col-10 rounded border border-success bg-light" id="data_producto_<%= item.id %>">DATA</div>
                         <div class="col-1"></div>
-        </div>  
-</div>  
+       </div>  
+       <div> 
+        <strong>  <%= item.puntosAutores(@academico.id) %> </strong>
+       </div>
+</div>

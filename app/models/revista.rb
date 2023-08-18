@@ -9,6 +9,7 @@ class Revista < ApplicationRecord
 
  belongs_to :editorial
  has_one :articulo
+ has_many :cuartiles
 
   def default_values
     self.estado ||= 'A'

@@ -7,6 +7,7 @@
 <div class="row bg-body rounded-3 mt-1 mb-5">    
    <div class="col-12">
             <% @metas.each do |item| 
+               
                responsable = Persona.find(item.personaid)
             %>
                 <% if @academico.id == item.personaid %> 

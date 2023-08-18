@@ -3,7 +3,7 @@
 </div>
 
 <div class="container p-2 d-flex justify-content-center" data-controller="modal modalalert">
-     <div class="col-11">
+     <div class="col-12">
           <div class="row border-bottom headlist fw-bold">
                <div class="col-1 d-flex justify-content-center">
                     Folio
@@ -14,13 +14,18 @@
                <div class="col-6 d-flex justify-content-center">
                     Nombre del producto
                </div>
-               <div class="col d-flex justify-content-center">
+               <div class="col-1 d-flex justify-content-center">
                   Estado validación
+               </div>
+               <div class="col-1 d-flex justify-content-center">
+
+                       Puntos
+               
                </div>
           </div>
 
-          <div class="row">
-               <div class="col"> 
+
+
                          <% if @actividades.any? %>
                                    <% @actividades.each do |a| %>
                                         <% if current_usuario.rol == 'I' || current_usuario.rol == 'C' %>  
@@ -38,8 +43,8 @@
                                         </div>
                                    </div>
                          <% end %>
-               </div>  
-          </div>
+
+
           <div><%= render 'modal_alert' %></div>
      </div>     
 </div>

@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_26_123605) do
+ActiveRecord::Schema.define(version: 2023_08_15_183846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "unaccent"
 
   create_table "academicos", force: :cascade do |t|
     t.integer "noempleado"
@@ -389,6 +388,16 @@ ActiveRecord::Schema.define(version: 2023_06_26_123605) do
     t.integer "idred"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cuartiles", force: :cascade do |t|
+    t.bigint "revista_id", null: false
+    t.integer "periodo"
+    t.string "cuartil"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.decimal "factori", precision: 16, scale: 2
+    t.index ["revista_id"], name: "index_cuartiles_on_revista_id"
   end
 
   create_table "cursos", force: :cascade do |t|
@@ -1351,6 +1360,7 @@ ActiveRecord::Schema.define(version: 2023_06_26_123605) do
   add_foreign_key "capitulos", "idiomas"
   add_foreign_key "capitulos", "libros"
   add_foreign_key "catlibros", "cateditoriales"
+  add_foreign_key "cuartiles", "revistas"
   add_foreign_key "cursos", "actividades"
   add_foreign_key "cursos", "tipocursos"
   add_foreign_key "divulgaciones", "actividades"
