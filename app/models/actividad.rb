@@ -90,7 +90,8 @@ class Actividad < ApplicationRecord
             end
             
             ptosxprod = c.puntosProd(self)
-            ptosxcoaut = ptosxprod * pxa/100.0
+            ptosxcoaut = (ptosxprod * pxa/100.0).truncate(3)
+            
         else
             ptosxcoaut = '---'
         end 
