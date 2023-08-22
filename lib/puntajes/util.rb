@@ -58,48 +58,52 @@ module Puntajes
           if actividad.producto.id == 7  #capitulo
                 p = 15.0
           end
-          if actividad.producto.id == 8  #art div
-                p = 8.0
-          end
-          if actividad.producto.id == 10  #dir tesis ext
-                if actividad.tesista.nivelestudio.id == 1
-                       p = 8.0
-                end
-                if actividad.tesista.nivelestudio.id == 2
-                       p = 15.0
-                end
-                if actividad.tesista.nivelestudio.id == 3
-                       p = 25.0
-                end
-          end
-          if actividad.producto.id == 22  #otras act de div
-                p = 1.0
-          end
-          if actividad.producto.id == 37  #floras
-                  puts "AAAA"
-                 if actividad.fasciculo.tipofasciculo.id == 1
-                      p = 10.0
-                 end
-                 if actividad.fasciculo.tipofasciculo.id == 2
-                      p = 15.0  
-                 end
-                 if actividad.fasciculo.tipofasciculo.id == 3
-                      p = 20.0   
-                 end
-                 if actividad.fasciculo.tipofasciculo.id == 4
-                      p = 25.0  
-                 end
-                 if actividad.fasciculo.tipofasciculo.id == 5
-                      p = 30.0  
-                 end
+
+          #FALTAN LOS LIBROS AQUI.-----------------------------------------
+
+          #if actividad.producto.id == 8  #art div
+          #      p = 8.0
+          #end
+
+          #if actividad.producto.id == 10  #dir tesis ext
+          #      if actividad.tesista.nivelestudio.id == 1
+          #             p = 8.0
+          #      end
+          #      if actividad.tesista.nivelestudio.id == 2
+          #             p = 15.0
+          #      end
+          #      if actividad.tesista.nivelestudio.id == 3
+          #             p = 25.0
+          #      end
+          #end
+          #if actividad.producto.id == 22  #otras act de div
+          #      p = 1.0
+          #end
+          #if actividad.producto.id == 37  #floras
+          #        puts "AAAA"
+          #       if actividad.fasciculo.tipofasciculo.id == 1
+          #            p = 10.0
+          #       end
+          #       if actividad.fasciculo.tipofasciculo.id == 2
+          #            p = 15.0  
+          #       end
+          #       if actividad.fasciculo.tipofasciculo.id == 3
+          #            p = 20.0   
+          #       end
+          #       if actividad.fasciculo.tipofasciculo.id == 4
+          #            p = 25.0  
+          #       end
+          #       if actividad.fasciculo.tipofasciculo.id == 5
+          #            p = 30.0  
+          #       end
                  
-          end
-          if actividad.producto.id == 39  #art div periodico
-                p = 1.0
-          end
-          if actividad.producto.id == 86  #art div sin arb
-                p = 1.0
-          end
+          #end
+          #if actividad.producto.id == 39  #art div periodico
+          #      p = 1.0
+          #end
+          #if actividad.producto.id == 86  #art div sin arb
+          #      p = 1.0
+          #end
 
         return p
 
