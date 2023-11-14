@@ -3,12 +3,20 @@
             <%= (data.persona.paterno||'') + ' ' + (data.persona.materno||'') + ' ' + (data.persona.nombre||'') %>
         </div>
 
-        <div class="col-md-5 d-flex justify-content-start" >
+        <div class="col-md-3 d-flex justify-content-start" >
              <%= data.descripcion %>
         </div>
 
         <div class="col-md-2 d-flex justify-content-center" >
-            <%= data.porcentaje %>
+            <%= data.porcentaje %> %
+        </div>
+        <div class="col-md-1 d-flex justify-content-center">
+            <% if data.calificaciones.blank? %>
+                 <%= link_to "Editar", sustedit_evaluaciones_evaltecnico_path(data.id) %>
+            <% else %>  
+                 <span class="fs-italic text-secondary">Edit</span>
+            <% end %>
+
         </div>
         <div class="col-md-2 d-flex justify-content-center">
              <div class="row">

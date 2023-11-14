@@ -1,11 +1,21 @@
 <%= nomseccion('Técnicos', 'Periodo 2023') %>
 
-<!--
+
 <div class="mb-2 bg-light p-2 rounded" id="sustantivas" style="min-height: 200px;"> 
      <%= render "head" %>
-     <%  @itemsust.each do |s| %>
-            <%= render 'item', data:s %>
-     <% end %>  
+     <% if !@itemsust.blank? %>
+               <%  @itemsust.each do |s| %>
+                    <% 
+                         suma_porc = Itemsustantiva.where(evaltecnico_id:s.evaltecnico_id).sum(:porcentaje) 
+                         
+                    %>
+                    <% if suma_porc == 100 %>
+                              <%= render 'item', data:s %>
+                    <% end %>
+               <% end %>  
+     <% else %>          
+              <div class="row border-bottom  p-2">
+                       Sin registros.  
+              </div>
+     <% end %>
 </div>    
-
--->

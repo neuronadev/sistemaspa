@@ -30,7 +30,12 @@ Rails.application.routes.draw do
     end
   end
   namespace :evaluaciones do
-    resources :evaltecnicos
+       resources :evaltecnicos do
+            member do
+                  get 'sustedit'
+                  post 'sustupdate'
+            end
+       end
   end
 
   namespace :actividades do

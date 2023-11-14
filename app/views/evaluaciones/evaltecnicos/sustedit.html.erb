@@ -1,0 +1,50 @@
+<div>
+   <%= link_to "Regresar", evaluaciones_evaltecnicos_path %>
+</div>
+
+
+<div class="mt-3" data-controller="utils">
+   <%= form_with model:@itemsust, url: sustupdate_evaluaciones_evaltecnico_path, method: :post do |form| %>
+   
+        <table class="table">
+
+              <tr>
+                   <td>Académico:</td>
+                   <td>
+                         <%= form.select :persona_id, 
+                             Persona.where(tipopersona_id:[2,3,4]).order(:paterno).map {|p| [ (p.paterno||'') + ' ' + (p.materno||'') +  ' ' + (p.nombre||''), p.id ]},
+                             { include_blank: true}, {class:"form-control", placeholder:'Seleccione el acádemico con quién colabora...', data:{controller:'ts--selectrev'}}
+                        %>
+                   </td>
+              </tr>
+              <tr>
+                   <td>Actividad:</td>
+                   <td>
+                         <%= form.text_area :descripcion, class:"form-control", style:"max-height: 70px;" %>
+                   </td>
+              </tr>
+              <tr>
+                   <td>Porcentaje:</td>
+                   <td>
+                        <%= form.text_field :porcentaje, class:"form-control itemporc", maxlength:'5', "data-action":"keydown->utils#numbers keyup->sustantiva#input_suma", style:'width:65px' %>
+                   </td>
+              </tr>
+
+        </table>
+        
+        <div class="mt-12" data-controller="utils">
+            <div class="col-md-12 d-flex justify-content-center">
+                    <div class="row">
+                        <div class="col text-center text-danger">
+                                <%= link_to "Cancelar", evaluaciones_evaltecnicos_path, class:"btn btn-secondary" %>
+                        </div>
+                        <div class="col text-center text-danger">
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                        </div> 
+                    </div>
+                </div>
+        </div>
+        
+   <% end %> 
+ 
+</div>

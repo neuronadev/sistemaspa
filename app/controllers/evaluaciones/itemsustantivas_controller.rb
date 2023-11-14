@@ -1,6 +1,6 @@
 class Evaluaciones::ItemsustantivasController < ApplicationController
   def index
-      @itemsust = Itemsustantiva.where(persona_id:current_usuario.persona_id)
+      @itemsust = Itemsustantiva.where(persona_id:current_usuario.persona_id).includes(:evaltecnico).where('evaltecnicos.anio':2023)
   end
 
   def show
