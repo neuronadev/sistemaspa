@@ -1,11 +1,6 @@
 <%= form_with(model:[:actividades, actividad])  do |form| %>
    <%= render "form_inputs_com", form:form %>
 
-    <% if @producto.id == 47 %>
-          <div class="alert alert-danger" role="alert">
-              Eventos de divulgación (por ejemplo casa abierta, fometo, etc.) llevados por la Oficina de Enlace, será esta misma área quién se encargará de registrarlos.
-          </div>
-    <% end %>
 
     <div class="row mb-2">
                  <div class="col-md-2 d-flex justify-content-end"> 
