@@ -14,7 +14,7 @@ class AuditoriaController < ApplicationController
     
     tecnicos.each do |t|
         cal_final = 0.0
-        Evaltecnico.where(persona_id: t, anio:2022).each do |s|
+        Evaltecnico.where(persona_id: t, anio:2023).each do |s|
             s.itemsustantivas.each do |item| 
                   porcentaje = item.porcentaje
                   calidad = 0.0
@@ -40,7 +40,7 @@ class AuditoriaController < ApplicationController
     
     @t = (p.paterno||'') + " " + (p.materno||'') + (p.nombre||'')
 
-    @sust = Evaltecnico.where(persona_id: p.id, anio:2022).first
+    @sust = Evaltecnico.where(persona_id: p.id, anio:2023).first
     @tot_act = @sust.itemsustantivas.count
 
     @prom = 0.0
@@ -66,13 +66,13 @@ class AuditoriaController < ApplicationController
     academicos = Academico.all
     tecnicos = Array.new
     @listado = Array.new
-    Persona.where(:tipopersona_id=>4).order(:paterno).each do |p|
+    Persona.where(:tipopersona_id=>4, estado:'A').order(:paterno).each do |p|
       tecnicos.push(p.id)
     end
     
     tecnicos.each do |t|
        cal_final = 0.0
-       Evaltecnico.where(persona_id: t, anio:2022).each do |s|
+       Evaltecnico.where(persona_id: t, anio:2023).each do |s|
             s.itemsustantivas.each do |item| 
                   porcentaje = item.porcentaje
                   calidad = 0.0
@@ -100,7 +100,7 @@ class AuditoriaController < ApplicationController
     @listado = Array.new
 
        cal_final = 0.0
-       Evaltecnico.where(persona_id: p.id, anio:2022).each do |s|
+       Evaltecnico.where(persona_id: p.id, anio:2023).each do |s|
             s.itemsustantivas.each do |item| 
                   porcentaje = item.porcentaje
                   calidad = 0.0
@@ -120,7 +120,7 @@ class AuditoriaController < ApplicationController
 
 
   def adicionalesinv
-      @personas = Persona.where(tipopersona_id:[2,3]).order(:paterno)
+      @personas = Persona.where(tipopersona_id:[2,3], estado:'A').order(:paterno)
   end
 
   def listaadicinv
@@ -131,11 +131,11 @@ class AuditoriaController < ApplicationController
       Autor.where(:persona_id=>personaid).each do |a|
          idsActiv.push(a.actividad_id) 
       end
-       @actividad = Actividad.where(:id=>idsActiv).where("estado in ('S','W') and periodo=2022").order(:producto_id).order(:id)
+       @actividad = Actividad.where(:id=>idsActiv).where("estado in ('S','W') and periodo=2023").order(:producto_id).order(:id)
   end
   
   def cancelados
-    @folios = Actividad.where(periodo:2022, estado:['A','C','U','G','D','Z','W','X']).order(:id)
+    @folios = Actividad.where(periodo:2023, estado:['A','C','U','G','D','Z','W','X']).order(:id)
                                                     
   end
 

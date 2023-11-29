@@ -51,9 +51,15 @@
                      @a = Actividad.find(u.actividad_id)
                       
 
+                     #fcaptura = !@a.created_at.nil? ? @a.created_at.strftime("%d-%m-%Y") : ""
+                     #fvobo = !@a.fecha1.nil? ? @a.fecha1.strftime("%d-%m-%Y") : ""
+                     #fcm = !@a.fecha3.nil? ? @a.fecha3.strftime("%d-%m-%Y") : ""
+                     #fsa = !@a.fecha3.nil? ? @a.fecha3.strftime("%d-%m-%Y") : ""
+                     #facp = !@a.faceptado.nil? ? @a.faceptado.strftime("%d-%m-%Y") : ""
+
                      fcaptura = !@a.created_at.nil? ? @a.created_at.strftime("%d-%m-%Y") : ""
                      fvobo = !@a.fecha1.nil? ? @a.fecha1.strftime("%d-%m-%Y") : ""
-                     fcm = !@a.fecha3.nil? ? @a.fecha3.strftime("%d-%m-%Y") : ""
+                     fcm = !@a.fecha2.nil? ? @a.fecha2.strftime("%d-%m-%Y") : ""
                      fsa = !@a.fecha3.nil? ? @a.fecha3.strftime("%d-%m-%Y") : ""
                      facp = !@a.faceptado.nil? ? @a.faceptado.strftime("%d-%m-%Y") : ""
                      
@@ -68,7 +74,7 @@
                         end
                         
 
-                        if @a.periodo == 2022
+                        if @a.periodo == 2023
 
                   %>
                                 <tr> 
@@ -156,7 +162,7 @@
                                                 end    
                                        %>
                                         <strong><%= 
-                                                date
+                                                facp
                                         %> </strong>
                                 </td>
                                 </tr>  
@@ -172,11 +178,16 @@
                             %>
                             <% Autor.where(:persona_id=>@persona.id).each do |u| 
                                 @actividad = Actividad.find(u.actividad_id)
-                                fcaptura = !@actividad.created_at.nil? ? @actividad.created_at.strftime("%d-%m-%Y") : ""
-                                fvobo = !@actividad.fecha1.nil? ? @actividad.fecha1.strftime("%d-%m-%Y") : ""
-                                fcm = !@actividad.fecha3.nil? ? @actividad.fecha3.strftime("%d-%m-%Y") : ""
-                                fsa = !@actividad.fecha3.nil? ? @actividad.fecha3.strftime("%d-%m-%Y") : ""
-                                facp = !@actividad.faceptado.nil? ? @actividad.faceptado.strftime("%d-%m-%Y") : ""
+                                #fcaptura = !@actividad.created_at.nil? ? @actividad.created_at.strftime("%d-%m-%Y") : ""
+                                #fvobo = !@actividad.fecha1.nil? ? @actividad.fecha1.strftime("%d-%m-%Y") : ""
+                                #fcm = !@actividad.fecha3.nil? ? @actividad.fecha3.strftime("%d-%m-%Y") : ""
+                                #fsa = !@actividad.fecha3.nil? ? @actividad.fecha3.strftime("%d-%m-%Y") : ""
+                                #facp = !@actividad.faceptado.nil? ? @actividad.faceptado.strftime("%d-%m-%Y") : ""
+                                 fcaptura = !@a.created_at.nil? ? @a.created_at.strftime("%d-%m-%Y") : ""
+                                 fvobo = !@a.fecha1.nil? ? @a.fecha1.strftime("%d-%m-%Y") : ""
+                                 fcm = !@a.fecha2.nil? ? @a.fecha2.strftime("%d-%m-%Y") : ""
+                                 fsa = !@a.fecha3.nil? ? @a.fecha3.strftime("%d-%m-%Y") : ""
+                                 facp = !@a.faceptado.nil? ? @a.faceptado.strftime("%d-%m-%Y") : ""
                                  
                                 if @actividad.personaid != @persona.id && @actividad.estado == 'S'
 
@@ -184,7 +195,7 @@
                                         fcm = @actividad.created_at.strftime("%d-%m-%Y")
                                     end
 
-                                    if @actividad.periodo == 2022 
+                                    if @actividad.periodo == 2023
                             %> 
                                 <tr class="">
                                     <td><%= @actividad.id %></td> 
@@ -263,7 +274,7 @@
                                             end    
                                        %>
                                         <strong><%= 
-                                                date
+                                                facp
                                         %> </strong>
                                 </td>
                                 </tr>

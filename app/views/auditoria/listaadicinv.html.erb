@@ -143,24 +143,24 @@
        
         <td class="text-center">
               <% 
-                  if !a.fecha3.nil?
-                            f_acep = a.fecha3.strftime("%d-%m-%Y")
-                            f_dia = f_acep.split('-')[0]
-                            f_mes = f_acep.split('-')[1]
-                            f_anio = f_acep.split('-')[2]
-                            date = DateTime.new(f_anio.to_i, f_mes.to_i, f_dia.to_i).next_day(3).strftime("%d-%m-%Y")
+                  #if !a.fecha3.nil?
+                  #          f_acep = a.fecha3.strftime("%d-%m-%Y")
+                  #          f_dia = f_acep.split('-')[0]
+                  #          f_mes = f_acep.split('-')[1]
+                  #          f_anio = f_acep.split('-')[2]
+                  #          date = DateTime.new(f_anio.to_i, f_mes.to_i, f_dia.to_i).next_day(3).strftime("%d-%m-%Y")
                             #d = Evaluacion.where(persona_id:@persona.id).first 
                             #if !d.nil? 
                             #       f_acep = d.fecha.strftime("%d-%m-%Y") 
                             #else
                             #       f_acep = 'N/A'
                             #end
-                 else
-                            date = fcr
-                 end           
+                 #else
+                            #date = fcr
+                 #end           
               %>
                     <strong><%= 
-                              date
+                            facp
                     %> </strong>
         </td>
        
