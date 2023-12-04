@@ -1,4 +1,37 @@
-<% corre = true %>
+<% corre = true 
+   edo_val =  'En validación' 
+
+   if a.producto_id == 22
+            if [5,6,7,8,9,10,11,12].include?a.divulgacion.tipodivulgacion_id
+                   edo_val =  'Área de Com. y Enlace' 
+            else
+                    if !a.personaid.blank?
+                          persona = Persona.find(a.personaid)
+                          if persona.tipopersona_id == 4
+                                 edo_val =  'En validación-Comité'
+                           end
+                           if persona.tipopersona_id == 2 || persona.tipopersona_id == 3
+                                    edo_val =  'En validación-Coor. Red'
+                           end
+                    end             
+             
+            end
+     #elsif a.producto_id == 22
+           
+     else
+
+                        if !a.personaid.blank?
+                              persona = Persona.find(a.personaid)
+                              if persona.tipopersona_id == 4
+                                    edo_val =  'En validación'
+                              end
+                              if persona.tipopersona_id == 2 || persona.tipopersona_id == 3
+                                    edo_val =  'En validación-Coor. Red'
+                              end
+                        end             
+   end         
+
+%>
 <div class="row" id="actividad<%= a.id %>">
 
     <% if a.estado == 'A' %>
@@ -8,11 +41,7 @@
     <% end %> 
 
     <% if a.estado == 'U' %>
-          <% if a.fuente == 'P' || a.fuente == 'V' %>
-                   <div class="col validarcr fw-bold" style="font-size:14px;"><i class="fa-solid fa-arrow-right"></i> En validación</div> 
-          <% else %>
-                   <div class="col validarcr fw-bold" style="font-size:14px;"><i class="fa-solid fa-arrow-right"></i> En validación-Coor. Red</div>
-          <% end %> 
+             <div class="col validarcr fw-bold" style="font-size:14px;"><i class="fa-solid fa-arrow-right"></i><%= edo_val %></div>
     <% end %>      
 
     <% if a.estado == 'C' %>
