@@ -16,8 +16,12 @@
                     end             
              
             end
-     #elsif a.producto_id == 22
-           
+     elsif a.producto_id == 39
+           if [889,886,317,991,933,317,976].include?a.articulo.revista_id
+                   edo_val =  'Área de Com. y Enlace' 
+            else 
+                   edo_val =  'En validación'
+           end
      else
 
                         if !a.personaid.blank?
