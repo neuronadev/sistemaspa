@@ -1,0 +1,35 @@
+
+<%= form_with url: "", method: :get do |form| %>
+   <table>    
+      <tr> 
+          <td><%= form.select :tipo, Tipodivulgacion.all.map { |t| [t.nomtipodivulgacion, t.id] }, prompt: '--Seleccione--', class:'form-select' %></td>
+          <td> <button type="submit"> Aceptar </button></td>
+      </tr>
+   </table>   
+      
+<% end %>
+
+<table class="table table-striped table-sm mt-5">
+   <thead>
+          <tr>
+               <th>FOLIO</th>
+               <th>TITULO</th>
+               <th>ESTADO</th>
+               <th>RESPONSABLE</th>
+          </tr>
+   </thead>
+
+   <tbody>
+       <% @actividades.each do |act| 
+          resp = Persona.find(act.personaid)
+       %>
+              <tr> 
+                   <td> <%= act.id %> </td>
+                   <td> <%= act.titulo %> </td>
+                   <td> <%= act.estado %> </td>
+                   <td> <%= (resp.nombre||'') + ' ' + (resp.paterno||'')  + (resp.materno||'')  %> </td> 
+              </tr>
+       <% end %>
+   </tbody>
+
+<table>

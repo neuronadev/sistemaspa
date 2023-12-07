@@ -153,6 +153,13 @@ class Actividades::ActividadesController < ApplicationController
       redirect_to actividades_actividades_path
   end
 
+  def institucionales
+      @actividades = Actividad.where(producto_id:22,estado:['C','S','G'], periodo:2023) 
+      puts "------------------------------"
+      puts @actividades
+  end
+
+
   private
   
   def actividad_params

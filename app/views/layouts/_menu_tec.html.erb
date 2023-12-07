@@ -74,6 +74,13 @@
                               <% end %>   
                    </div>  
             <% end %>  
+            <% if current_usuario.evaluador == 'A' %>
+                        <div id="menuini" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                                    <%= link_to institucionales_path('TODO'), style:'text-decoration: none; color:#202124;' do %>
+                                       <i class="fa-solid fa-spell-check" style="color:#5b5b5b;"></i> Casa Abierta
+                                    <% end %>   
+                        </div>  
+            <% end %>   
 
             
              <div class="d-flex justify-content-start mt-3 p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
