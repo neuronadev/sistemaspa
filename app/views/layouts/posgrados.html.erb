@@ -43,6 +43,11 @@
                                    <i class="fa-solid fa-clock-rotate-left"></i> Históricos
                                </a>
                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                         <%= link_to posgrados_path(:p=>2022), class:"dropdown-item", data: { turbolinks: false } do %>
+                                            <i class="fa-regular fa-calendar"></i> Captura 2022
+                                         <% end %>
+                                   </li>
                                    <li>
                                          <%= link_to posgrados_path(:p=>2021), class:"dropdown-item", data: { turbolinks: false } do %>
                                             <i class="fa-regular fa-calendar"></i> Captura 2021
