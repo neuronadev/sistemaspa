@@ -2,7 +2,7 @@
 <%= form_with url: tipoinst_path, local:true do |form| %>
    <table>    
       <tr> 
-          <td><%= form.select :tipo, Tipodivulgacion.all.map { |t| [t.nomtipodivulgacion, t.id] }, prompt: '--Seleccione--', class:'form-select' %></td>
+          <td> <%= form.select :tipo, Tipodivulgacion.all.map { |t| [t.nomtipodivulgacion, t.id] }, selected:@tipo_act %> </td>
           <td> <button type="submit"> Aceptar </button></td>
       </tr>
    </table>   
@@ -14,9 +14,9 @@
           <tr>
                <th>FOLIO</th>
                <th>TITULO</th>
+
                <th>ESTADO</th>
                <th>RESPONSABLE</th>
-               <th></th>
           </tr>
    </thead>
 
@@ -24,7 +24,7 @@
        <% @actividades.each do |act| 
           resp = Persona.find(act.personaid)
        %>
-              <tr> 
+               <tr> 
                    <td> <%= act.id %> </td>
                    <td><span class="text-primary"> <%= act.titulo %> </span>
                         <div> <%= citaConIdentificacion(act.id).html_safe %>  </div>

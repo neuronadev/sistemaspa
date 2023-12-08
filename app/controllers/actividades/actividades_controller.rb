@@ -154,9 +154,16 @@ class Actividades::ActividadesController < ApplicationController
   end
 
   def institucionales
-      @actividades = Actividad.where(producto_id:22,estado:['C','S','G'], periodo:2023) 
-      puts "------------------------------"
-      puts @actividades
+      @actividades = Actividad.where(producto_id:22,estado:['C','S','G','A'], periodo:2023).order(:titulo)
+  end
+
+  def tipoinst
+       @tipo_act = params[:tipo].to_i
+       if !params[:tipo].blank?
+             @actividades = Actividad.where(producto_id:22,estado:['C','S','G','A'], periodo:2023).includes(divulgacion: :tipodivulgacion).where("tipodivulgaciones.id":@tipo_act).order(:titulo)
+       else
+             @actividades = Actividad.where(producto_id:22,estado:['C','S','G','A'], periodo:2023).order(:titulo)
+       end
   end
 
 

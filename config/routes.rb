@@ -96,7 +96,8 @@ Rails.application.routes.draw do
   get 'actividades/redacademicas/itemcorregir/:id/:sec', to: 'actividades/redacademicas#itemcorregir', as: 'itemcorregir'
   get 'actividades/redacademicas/itemrechazar/:id/:sec', to: 'actividades/redacademicas#itemrechazar', as: 'itemrechazar'
   post 'actividades/redacademicas/comentario', to: 'actividades/redacademicas#comentario', as: 'itemcomentario'
-  get 'actividades/actividades/institucionales/:tipo', to: 'actividades/actividades#institucionales', as: 'institucionales'
+  get 'actividades/actividades/institucionales/', to: 'actividades/actividades#institucionales', as: 'institucionales'
+  post 'actividades/actividades/tipoinst/', to: 'actividades/actividades#tipoinst', as: 'tipoinst'
 
   namespace :actividades do
        get 'redacademica/index'
