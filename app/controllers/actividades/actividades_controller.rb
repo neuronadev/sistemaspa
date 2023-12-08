@@ -154,16 +154,26 @@ class Actividades::ActividadesController < ApplicationController
   end
 
   def institucionales
-      @actividades = Actividad.where(producto_id:22,estado:['C','S','G','A','U'], periodo:2023).order(:titulo)
+      @tipo_act = "0"
+      @actividades = Actividad.where(producto_id:22,estado:['C','S','G','A','U','X'], periodo:2023).order(:titulo)
   end
 
   def tipoinst
        @tipo_act = params[:tipo].to_i
        if !params[:tipo].blank?
-             @actividades = Actividad.where(producto_id:22,estado:['C','S','G','A','U'], periodo:2023).includes(divulgacion: :tipodivulgacion).where("tipodivulgaciones.id":@tipo_act).order(:titulo)
+             @actividades = Actividad.where(producto_id:22,estado:['C','S','G','A','U','X'], periodo:2023).includes(divulgacion: :tipodivulgacion).where("tipodivulgaciones.id":@tipo_act).order(:titulo)
        else
-             @actividades = Actividad.where(producto_id:22,estado:['C','S','G','A','U'], periodo:2023).order(:titulo)
+             @actividades = Actividad.where(producto_id:22,estado:['C','S','G','A','U','X'], periodo:2023).order(:titulo)
        end
+  end
+
+  def bajainst
+      @idactividad = params[:id]
+      @tipo_act = params[:actipo] == "0" ? "" : params[:actipo]
+
+      @actividad = Actividad.find(@idactividad.to_i)
+      @actividad.estado = 'X'
+      @actividad.save
   end
 
 

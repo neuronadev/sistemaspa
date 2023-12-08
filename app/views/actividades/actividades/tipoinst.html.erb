@@ -8,15 +8,15 @@
    </table>   
       
 <% end %>
-
 <table class="table table-striped table-sm mt-5">
    <thead>
           <tr>
                <th>FOLIO</th>
                <th>TITULO</th>
-
                <th>ESTADO</th>
                <th>RESPONSABLE</th>
+               <th></th>
+               <td></th>
           </tr>
    </thead>
 
@@ -24,12 +24,18 @@
        <% @actividades.each do |act| 
           resp = Persona.find(act.personaid)
        %>
-               <tr> 
+              <tr> 
                    <td> <%= act.id %> </td>
                    <td><span class="text-primary"> <%= act.titulo %> </span>
                         <div> <%= citaConIdentificacion(act.id).html_safe %>  </div>
                    </td>
-                   <td> <%= act.estado %> </td>
+                   <td id="act<%= act.id %>"> 
+                              <% if act.estado == 'X' %>
+                                     <div class='text-danger'>Eliminado</div>
+                              <% else %>
+                                      <%= act.estado %>
+                              <% end %>        
+                  </td>
                    <td> <%= (resp.nombre||'') + ' ' + (resp.paterno||'')  + (resp.materno||'')  %> </td> 
                    <td>  
                            <% if act.documentos.attached? %> 
@@ -37,6 +43,9 @@
                                        <%= link_to d.filename, rails_blob_path(d, disposition: "inline"), { target: '_blank', class:'text-success' } %>
                               <% end %>   
                            <% end %>
+                   </td>
+                   <td>
+                        <%= link_to "Eliminar", bajainst_path(act.id, @tipo_act), remote:true, data: {confirm: 'Desea eliminar el registro?'} %>
                    </td>
               </tr>
        <% end %>

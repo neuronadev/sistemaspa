@@ -98,6 +98,7 @@ Rails.application.routes.draw do
   post 'actividades/redacademicas/comentario', to: 'actividades/redacademicas#comentario', as: 'itemcomentario'
   get 'actividades/actividades/institucionales/', to: 'actividades/actividades#institucionales', as: 'institucionales'
   post 'actividades/actividades/tipoinst/', to: 'actividades/actividades#tipoinst', as: 'tipoinst'
+  get 'actividades/actividades/bajainst/:id/:actipo', to: 'actividades/actividades#bajainst', as: 'bajainst'
 
   namespace :actividades do
        get 'redacademica/index'
