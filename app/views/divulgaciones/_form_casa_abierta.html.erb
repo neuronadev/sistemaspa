@@ -1,5 +1,5 @@
 
-<div class='ml-md-3 mb-md-5'>
+<div class='ml-md-3 mb-md-5 ms-5'>
 
    <%= form_with(model: actividad, local:false) do |form|  %>
        
@@ -15,28 +15,29 @@
     <% end %>
        <div class="row">
           <div class="col-9"> 
-            <%= form.label :titulo, 'Título:', class:'titulo text-muted' %>
+            <%= form.label :titulo, 'Título:', class:'titulo fw-bold' %>
             <%= form.text_field :titulo, class:"form-control" %> 
           </div>
-          <div class="col">
-            <%= form.label :fechapub, 'Fecha:', class:'fechapub text-muted' %>
+       </div>   
+       <div class="row mt-2">
+          <div class="col-2">
+            <%= form.label :fechapub, 'Fecha de Publicación:', class:'fechapub fw-bold' %>
             <%= form.date_field :fechapub, class:"form-control" %> 
           </div>
-  
        </div>      
        
 
        <%= form.fields_for :divulgacion do |divulgacion| %>
             <div class="form-row mt-md-3">
                <div class="col-4">
-                    <%=  divulgacion.label :tipodivulgacion_id, "Tipo de actividad:", class:'tipodivulgacion_id text-muted' %>
+                    <%=  divulgacion.label :tipodivulgacion_id, "Tipo de actividad:", class:'tipodivulgacion_id fw-bold' %>
                     <%=  divulgacion.select :tipodivulgacion_id, Tipodivulgacion.all.pluck(:nomtipodivulgacion,:id), { :include_blank=>'- Seleccione una opcion -'},{class:"form-control"} %>
                 </div>
             </div>    
        <% end %> 
   
        <div class="row mt-md-3">
-            <div class="col comprobante text-muted">Comprobante</div>
+            <div class="col comprobante fw-bold">Comprobante</div>
         </div>
         <div class="row">
                 <div class="col-md-6">
@@ -53,9 +54,9 @@
                 </div>  
         </div>
 
-       <div class="card">
+       <div class="card mt-3 col-7">
         <div class="card-body">
-            <div class="card-header participantes text-muted">Participantes</div>
+            <div class="card-header participantes fw-bold">Participantes</div>
               <div class="card-body">
                 <div data-controller="nested-form">
                     <template data-target='nested-form.template'>
@@ -77,7 +78,7 @@
         </div>   
        </div>
 
-       <div class="actions">
+       <div class="actions mt-5">
           <%= form.submit "Guardar información", data: { confirm: '¿Desea continuar?' }, class:"btn btn-success" %>
        </div>
 

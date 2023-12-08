@@ -4,7 +4,7 @@
         <div class="col-4">
             <%= form.hidden_field :_destroy %> 
             <%= form.hidden_field :rol_id, value:'1' %>
-            <%= form.select :persona_id, Persona.all.order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, {},{class:"form-control form-control-sm"} %> 
+            <%= form.select :persona_id, Persona.all.order(:paterno).collect {|p| [((p.paterno||'')+' '+(p.materno||'')+' '+(p.nombre||'')), p.id]}, { include_blank: true},{class:"form-control form-control-sm", placeholder:'Escriba el nombre...', data:{controller:'ts--selectrev'}} %> 
         </div>
         <div class="col-4">
             <%= form.text_field :firma, placeholder: 'Participante', class: 'form-control form-control-sm' %>
