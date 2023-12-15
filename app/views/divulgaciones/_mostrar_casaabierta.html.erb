@@ -44,18 +44,26 @@
             
             <div class="col  mt-md-2">
             <strong>Comprobante:</strong>
-            <% if @actividad.documentos.attached? %>
+            
                  <div class="col-6">  
-                         <% @actividad.documentos.each do |d|%>
-                                            <div id="doc<%= d.id %>">
-                                                <%= link_to d.filename, rails_blob_path(d, disposition: "attachment"), { target: '_blank' } %>
-                                            </div>
-                         <% end %>      
+                     <%  if @actividad.producto_id == 22 %>
+                          <% if [5,6,7,8,9,10,11,12].include?(@actividad.divulgacion.tipodivulgacion.id)  %>
+                                 <% if @actividad.enlacedoc.attached? %>
+                                       <div class="col-6">  <%= link_to @actividad.enlacedoc.filename, rails_blob_path(@actividad.enlacedoc, disposition: 'attachment', target: '_blank') %> </div>
+                                 <% else %>                                        
+                                       <div class="col-6"> Sin comprobante </div>  
+                                 <% end %>      
+                          <% end %>        
+                     <% else %>
+                                <% @actividad.documentos.each do |d|%>
+                                    <div id="doc<%= d.id %>">
+                                        <%= link_to d.filename, rails_blob_path(d, disposition: "attachment"), { target: '_blank' } %>
+                                    </div>
+                                <% end %>      
+                     <% end %>       
                   
                   </div>
-            <% else %>
-                    <I>Sin comprobante</I>
-            <% end %>   
+            
             </div>
 
             <div clas="row mt-md-3">
