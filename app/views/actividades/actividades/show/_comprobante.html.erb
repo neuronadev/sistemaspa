@@ -5,11 +5,15 @@
      <div class="col d-flex justify-content-start">
                <% if actividad.documentos.attached? %> 
                         <% actividad.documentos.each do |d|%>
+                             <div>
                                 <%= link_to d.filename, rails_blob_path(d, disposition: "inline"), { target: '_blank' } %>
+                             </div>   
                         <% end %>   
                <% end %>
                <% if actividad.enlacedoc.attached? %> 
+                     <div> 
                        <%= link_to actividad.enlacedoc.filename, rails_blob_path(actividad.enlacedoc, disposition: "inline"), { target: '_blank' } %>
+                     </div>  
                <% end %>
                
      </div>

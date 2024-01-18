@@ -1,3 +1,56 @@
+<% if actividad.producto_id == 82 && (current_usuario.evaluador == 'A' || current_usuario.evaluador == 'B' || current_usuario.evaluador == 'C'  ) %>
+   <div class="row">
+             <div class="mb-3 col-md-5">
+                <label class="font-weight-bold">Tipo impartición:</label>
+                <div><strong><%= actividad.curso.tipocurso.nomtipocurso %></strong></div>
+             </div> 
+             <div class="mb-3 col-md-3">
+                 <label class="font-weight-bold">Feha inicio:</label>
+                 <div><strong><%= actividad.curso.fini.strftime('%d-%m-%Y') %></strong></div>
+             </div>
+             <div class="mb-3 col-md-3">
+                 <label class="font-weight-bold">Feha termino:</label>
+                 <div><strong><%= actividad.curso.ffin.strftime('%d-%m-%Y') %></strong></div>
+             </div>
+              <div class="mb-3 col-md-3">
+                    <label class="font-weight-bold">Total de horas del curso:</label>
+                    <div><strong><%= actividad.curso.hcurso %></strong></div> 
+              </div>
+               <div class="mb-3 col-md-3">
+                 <label class="font-weight-bold">Créditos:</label>
+                 <div><strong><%= actividad.curso.creditos %></strong></div>  
+             </div>
+             <div class="mb-3 col-md-3">
+                 <label class="font-weight-bold">No. de alumnos:</label>
+                 <div><strong><%= actividad.curso.noalumnos %></strong></div>  
+             </div>
+    </div>                    
+   <table class="table">
+     <thead> 
+        <tr><td>Académico</td>
+            <td> Horas Imp. </td>
+            <td> Coor. de Curso </td>
+            <td></td>
+        </tr>
+     </thead>  
+     <tbody> 
+        <% Autor.where(actividad_id:actividad.id).each do |d| 
+           p = Persona.find(d.persona_id)
+        %>
+                  <tr>
+                       <td> <%= (p.nombre||'') + ' ' + (p.materno||'') + ' ' + (p.materno||'') %> </td>
+                       <td> <%= d.horas %> </td>
+                       <td> <%= d.coordinador ? 'SI' : 'NO' %> </td>
+                       <td> <%= render "actividades/actividades/show/autoria_posgrado_curso", actividad:@actividad, autor:d %>  </td>
+                  </tr>
+                
+        <% end %>
+      </tbody>  
+    </table>
+
+<% else %>
+     
+     
      <div class="row">
         <div class="mb-3 col-md-12">
             <label class="font-weight-bold">Título:</label>
@@ -31,6 +84,7 @@
                           autor = Autor.where(actividad_id:actividad.id,persona_id:current_usuario.persona_id).first
                      %>
                             <%= autor.horas %> 
+                            
                      <% else %> 
                             <%= actividad.curso.himpartidas %>
                      <% end %> 
@@ -67,3 +121,4 @@
         <% if actividad.producto_id == 82 %>
                  <%= render "actividades/actividades/show/autoria_posgrado_curso", actividad:@actividad, autor:autor %>
         <% end %>
+<% end %>        

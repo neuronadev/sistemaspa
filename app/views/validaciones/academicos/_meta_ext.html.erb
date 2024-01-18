@@ -13,7 +13,7 @@
                               <div><%= item.titulo %></div>
                               <div class="text-success">Responsable: <%=  (responsable.nombre||'') + ' ' + (responsable.paterno||'') + ' ' + (responsable.materno||'') %></div>
                               <% if current_usuario.evaluador == 'A' %>
-                                 <div class="text-primary cursor-pointer" data-action="click->tecnico#detalle" data-tecnico-idprod-param = "<%= item.id %>" > Ver producto</div>
+                                 <div class="text-primary cursor-pointer" data-action="click->tecnico#detalle" data-tecnico-idprod-param = "<%= item.id %>" data-tecnico-idacad-param = "<%= @academico .id %>" > Ver producto</div>
                               <% end %>   
 
                     </div>
