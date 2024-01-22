@@ -21,7 +21,7 @@
                <% if params[:action] == 'edit' %>
                     <%= form.text_field :anio, class:"form-control", readonly:true %>
                <% else %>
-                    <%= form.text_field :anio, class:"form-control" %>
+                    <%= form.text_field :anio, class:"form-control", value:2023 %>
                <% end %>   
          </div>  
          <div class="mb-3 col-md-5">

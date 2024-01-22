@@ -65,13 +65,13 @@ class Actividades::ActividadesController < ApplicationController
    
     if @actividad.valid?
         if @actividad.autores.present? 
-           if @actividad.documentos.present? 
+           #if @actividad.documentos.present? 
                @actividad.save
                flash[:info] = "Registro realizado correctamente."
                redirect_to [:actividades, @actividad]
-           else
-               @actividad.errors.add(:documentos,"Se requiere el comprobante")  
-           end    
+           #else
+           #    @actividad.errors.add(:documentos,"Se requiere el comprobante")  
+           #end    
         else
             @actividad.errors.add(:autores,"Se requiere los participantes")
         end    
