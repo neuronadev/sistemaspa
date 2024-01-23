@@ -38,7 +38,7 @@
            p = Persona.find(d.persona_id)
         %>
                   <tr>
-                       <td> <%= (p.nombre||'') + ' ' + (p.materno||'') + ' ' + (p.materno||'') %> </td>
+                       <td> <%= (p.nombre||'') + ' ' + (p.paterno||'') + ' ' + (p.materno||'') %> </td>
                        <td> <%= d.horas %> </td>
                        <td> <%= d.coordinador ? 'SI' : 'NO' %> </td>
                        <td> <%= render "actividades/actividades/show/autoria_posgrado_curso", actividad:@actividad, autor:d %>  </td>
