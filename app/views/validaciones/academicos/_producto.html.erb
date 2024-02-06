@@ -40,7 +40,7 @@
                <% end %>         
           </div>
 </div>
-<%  if @actividad.estado == 'C' && current_usuario.evaluador == 'A' %>
+<%  if @actividad.estado == 'C' && (current_usuario.evaluador == 'A' || current_usuario.evaluador == 'E') %>
      <div class="row">
           <div class="col alert alert-success" role="alert" id="div_validar_sa_<%= @actividad.id %>">
                   Secretaría Académica.

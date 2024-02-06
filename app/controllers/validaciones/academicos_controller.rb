@@ -4,16 +4,20 @@ class Validaciones::AcademicosController < ApplicationController
         # Validar Tecnicos: A listar a todos. B listar solo los que le tocan.
         if params[:tipo] == 'T'
             if current_usuario.evaluador == 'A'
-                @academicos = Persona.where(tipopersona_id:4).where.not(estado:'B').order(:paterno)
+                   @academicos = Persona.where(tipopersona_id:4).where.not(estado:'B').order(:paterno)
+            elsif current_usuario.evaluador == 'E'    
+                   @academicos = Persona.where(evalua:current_usuario.persona_id ).where(tipopersona_id:4).where.not(estado:'B').order(:paterno)
             else
-                @academicos = Persona.where(evalua:current_usuario.persona_id ).where.not(estado:'B').order(:paterno)
+                   @academicos = Persona.where(evalua:current_usuario.persona_id ).where.not(estado:'B').order(:paterno)
             end
         end
         if params[:tipo] == 'I'
             if current_usuario.evaluador == 'A'
-                @academicos = Persona.where(tipopersona_id:[2,3]).where.not(estado:'B').order(:paterno)
+                 @academicos = Persona.where(tipopersona_id:[2,3]).where.not(estado:'B').order(:paterno)
+            elsif current_usuario.evaluador == 'E'
+                 @academicos = Persona.where(evalua:current_usuario.persona_id ).where(tipopersona_id:[2,3]).where.not(estado:'B').order(:paterno) 
             else
-                @academicos = Persona.where(evalua:current_usuario.persona_id ).where.not(estado:'B').order(:paterno)
+                 @academicos = Persona.where(evalua:current_usuario.persona_id ).where.not(estado:'B').order(:paterno)
             end
         end
 

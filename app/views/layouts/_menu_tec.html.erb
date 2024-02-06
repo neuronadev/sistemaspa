@@ -51,7 +51,7 @@
                      </div> 
             <%  end %>
              
-            <% if current_usuario.evaluador == 'C' || current_usuario.evaluador == 'A' %> 
+            <% if current_usuario.evaluador == 'C' || current_usuario.evaluador == 'A' ||  current_usuario.evaluador == 'E' %> 
                   <div class="d-flex justify-content-center p-3 fw-bold text-center item" >Validaciones</div>
                   <div id="menuini" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
                               <%= link_to validaciones_academicos_path(:tipo=>'T'), style:'text-decoration: none; color:#202124;' do %>
@@ -60,7 +60,7 @@
                   </div>
             <% end %> 
 
-             <% if current_usuario.evaluador == 'B' || current_usuario.evaluador == 'A' %>
+             <% if current_usuario.evaluador == 'B' || current_usuario.evaluador == 'A' || current_usuario.evaluador == 'E' %>
                    <!--
                     <div class="d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
                              <%= link_to validaindex_path(:tipo=>'A'), target:"_blank", style:'text-decoration: none; color:#202124;' do %>
