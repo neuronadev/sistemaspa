@@ -15,7 +15,7 @@
                                             Ver producto
                                         </div>
                                    <% else %>
-                                         <span class="text-success"> Este producto lo valida la <strong>Oficina de Comunicación</strong>.</span>
+                                         <span class="text-success" data-action="click->tecnico#detalle" data-tecnico-idprod-param = "<%= item.id %>"> Este producto lo valida la <strong>Oficina de Comunicación</strong>.</span>
                                    <% end %>    
                               <%   
                                  valetapa = Valetapa.where(actividad_id:item.id).last

@@ -41,6 +41,7 @@ module Puntajes
            end
         return c   
       end
+      
       def puntosProd(actividad)
           p = 0.0
           if actividad.producto.id == 1  #jcr

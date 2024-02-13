@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_15_183846) do
+ActiveRecord::Schema.define(version: 2024_02_13_155122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -793,6 +793,7 @@ ActiveRecord::Schema.define(version: 2023_08_15_183846) do
     t.string "pathf"
     t.string "concepto"
     t.string "comprobante"
+    t.string "tipo", limit: 100
     t.index ["categoria_id"], name: "index_productos_on_categoria_id"
     t.index ["prodcategoria_id"], name: "index_productos_on_prodcategoria_id"
     t.index ["prodgrupo_id"], name: "index_productos_on_prodgrupo_id"
@@ -810,6 +811,7 @@ ActiveRecord::Schema.define(version: 2023_08_15_183846) do
     t.string "pathf"
     t.string "concepto"
     t.string "comprobante"
+    t.string "tipo", limit: 100
     t.index ["categoria_id"], name: "index_productos_on_categoria_id"
     t.index ["prodcategoria_id"], name: "index_productos_on_prodcategoria_id"
     t.index ["prodgrupo_id"], name: "index_productos_on_prodgrupo_id"
