@@ -39,9 +39,15 @@
                    <td> <%= (resp.nombre||'') + ' ' + (resp.paterno||'')  + (resp.materno||'')  %> </td> 
                    <td>  
                            <% if act.documentos.attached? %> 
-                              <% act.documentos.each do |d|%>
-                                       <%= link_to d.filename, rails_blob_path(d, disposition: "inline"), { target: '_blank', class:'text-success' } %>
-                              <% end %>   
+                                    <% act.documentos.each do |d|%>
+                                             <%= link_to d.filename, rails_blob_path(d, disposition: "inline"), { target: '_blank', class:'text-success' } %>
+                                    <% end %>   
+                           <% else %>
+                                    <% if act.enlacedoc.attached? %> 
+                                        <div> 
+                                             <%= link_to act.enlacedoc.filename, rails_blob_path(act.enlacedoc, disposition: "inline"), { target: '_blank' } %>
+                                        </div>  
+                                    <% end %>
                            <% end %>
                    </td>
                    <td>
