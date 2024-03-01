@@ -34,7 +34,14 @@
         
         </div>
         <div class="col  align-self-center">
-             <%= a.puntosAutores(current_usuario.persona_id) %>
+             <%
+                  puntos = Punto.where(persona_id:current_usuario.persona_id,anio:2023,actividad_id:a.id).first
+             %>
+             <% if !puntos.blank? %>    
+                     <%=  puntos.pt %>
+             <% else %>    
+                    --
+             <% end %>
         </div>
 
 </div>
