@@ -27,6 +27,15 @@
                         <div class="col-1"></div>
                     </div>  
                      <div> 
-                       <strong> Puntos: <%= item.puntosAutores(@academico.id) %> </strong>
+                           <strong> Puntos:
+                              <%
+                                   puntos = Punto.where(persona_id:@academico.id,anio:2023,actividad_id:item.id).first
+                              %>
+                              <% if !puntos.blank? %>
+                                        <%=  puntos.pt %>
+                              <% else %>
+                                        --
+                              <% end %>
+                           </strong>                        
                     </div>
 </div>  
