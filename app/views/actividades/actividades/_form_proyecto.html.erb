@@ -2,7 +2,7 @@
     <%= form.hidden_field :producto_id, value: @producto.id %>
     
     <%= form.hidden_field :estado, value:'S' %>
-    <%= form.hidden_field :periodo, value:'2023' %>
+    <%= form.hidden_field :periodo, value:'2024' %>
     <%= form.hidden_field :fuente, value:'SY' %> 
     <%= form.hidden_field :aceptado, value:'S' %> 
 
@@ -21,7 +21,7 @@
                <% if params[:action] == 'edit' %>
                     <%= form.text_field :anio, class:"form-control", readonly:true %>
                <% else %>
-                    <%= form.text_field :anio, class:"form-control", value:2023 %>
+                    <%= form.text_field :anio, class:"form-control", value:2024 %>
                <% end %>   
          </div>  
          <div class="mb-3 col-md-5">

@@ -5,14 +5,14 @@ class Actividades::ActividadesController < ApplicationController
   def index
     #@actividades = Actividad.where(periodo:2021,estado:['A','U','C','S','G','D']).includes(:autores).where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores)
     #where.not(producto_id:[22,39,82,83])
-    @actividades = Actividad.includes(:producto).where(periodo:2023,estado:['A','U','C','S','G','D'])
+    @actividades = Actividad.includes(:producto).where(periodo:2024,estado:['A','U','C','S','G','D'])
                       .includes(:autores)
                         .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).where.not(producto_id:[82,83]).order("productos.descripcion")
                         
-    @enlace = Actividad.includes(:producto).where(periodo:2023,estado:['A','U','C','S','G','D'],fuente:'V').where(producto_id:[22,39])
+    @enlace = Actividad.includes(:producto).where(periodo:2024,estado:['A','U','C','S','G','D'],fuente:'V').where(producto_id:[22,39])
                         .includes(:autores)
                           .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
-    @posgrado = Actividad.includes(:producto).where(periodo:2023,estado:['A','U','C','S','G','D']).where(producto_id:[82,83])
+    @posgrado = Actividad.includes(:producto).where(periodo:2024,estado:['A','U','C','S','G','D']).where(producto_id:[82,83])
                           .includes(:autores)
                             .where('autores.persona_id = ?', current_usuario.persona_id ).references(:autores).order("productos.descripcion")
    
@@ -155,15 +155,15 @@ class Actividades::ActividadesController < ApplicationController
 
   def institucionales
       @tipo_act = "0"
-      @actividades = Actividad.where(producto_id:22,estado:['C'], periodo:2023).order(:titulo)
+      @actividades = Actividad.where(producto_id:22,estado:['C'], periodo:2024).order(:titulo)
   end
 
   def tipoinst
        @tipo_act = params[:tipo].to_i
        if !params[:tipo].blank?
-             @actividades = Actividad.where(producto_id:22,estado:['C'], periodo:2023).includes(divulgacion: :tipodivulgacion).where("tipodivulgaciones.id":@tipo_act).order(:titulo)
+             @actividades = Actividad.where(producto_id:22,estado:['C'], periodo:2024).includes(divulgacion: :tipodivulgacion).where("tipodivulgaciones.id":@tipo_act).order(:titulo)
        else
-             @actividades = Actividad.where(producto_id:22,estado:['C'], periodo:2023).order(:titulo)
+             @actividades = Actividad.where(producto_id:22,estado:['C'], periodo:2024).order(:titulo)
        end
   end
 
