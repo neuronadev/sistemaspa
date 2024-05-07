@@ -194,7 +194,7 @@ class Actividades::ActividadesController < ApplicationController
           curso_attributes:[:id, :fini,:ffin, :hcurso, :himpartidas, :creditos, :noalumnos, :actividad_id, :coordinador, :tipocurso_id],
           tesista_attributes:[:id,:ftermino,:nivelestudio_id,:actividad_id, :fgrado, :efterminal, :acta],
           editor_attributes: [:id,:tipoeditorid,:idioma_id,:ambito_id,:codigo,:medio,:editorial,:pais,:actividad_id],
-          autores_attributes: [:id,:rol_id,:persona_id,:firma,:corresponsal, :actividad_id, :porcentaje, :autorap, :autornom, :_destroy]
+          autores_attributes: [:id,:rol_id,:persona_id,:firma,:corresponsal, :actividad_id, :porcentaje, :autorap, :autornom, :estudiante,:_destroy]
 
       )
   end

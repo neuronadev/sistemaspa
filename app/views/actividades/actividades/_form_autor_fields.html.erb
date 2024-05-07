@@ -21,7 +21,7 @@
                    <%= form.text_field :autorap, style:'width:100%;', placeholder:'(apellidos)', autocomplete:'off', class:'autorap border-0 p-1 col shadow-none bg-light rounded fw-bold', 'data-action':'keyup->autores#search keypress->autores#kEnter'  %> 
             </div>
 
-            <div class="col-2">
+            <div class="col-3">
                   <%= form.text_field :autornom, style:'width:100%;', placeholder:'(nombre)', autocomplete:'off', class:'autornom border-0 p-1 col shadow-none bg-light rounded fw-bold', 'data-action':'focus->autores#hiddenSearch keypress->autores#kEnter focusout->autores#tipoAutor' %>
             </div>
              <% if @producto.id == 81 || @producto.id == 85 %>
@@ -29,27 +29,39 @@
                      <%= form.text_field :porcentaje, maxlength:"5", style:'width:100%; text-align: center; border-color: blue;', placeholder:'% Porcentaje', autocomplete:'off', class:'itemporc border-1 text-primary p-1 col shadow-none bg-light rounded', 'data-action':' keypress->autores#kEnter keypress->utils#soloDigitos keyup->autores#sumaPorc',  'data-bs-toggle':"tooltip", 'data-bs-placement':"top", title:"Ingrese el porcentaje de participación" %>
                    </div>
              <% end %> 
-            
-  
+              
             <% if [1,2,3,4,5,8].include? @producto.id %> 
-                <div class="col-3 align-items-center justify-content-center">
-                    <div class=" form-switch">
-                        <%= form.check_box :corresponsal, class:"form-check-input" %>
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Corresponsal
-                        </label> 
-                    </div>
-                </div>
+                       <div class="d-flex col align-items-center justify-content-center">
+                            <div class="row">
+                                    <div class="form-switch">
+                                        <%= form.check_box :corresponsal, class:"form-check-input" %>
+                                        <label class="form-check-label text-success fw-bold" for="flexCheckChecked" style="font-size:14px;">
+                                            Corresponsal
+                                        </label> 
+                                    </div>
+                            </div>    
+                        </div>
             <% end %> 
+            <div class="d-flex col align-items-center justify-content-center">
+                            <div class="row">
+                                    <div class="form-switch">
+                                        <%= form.check_box :estudiante, class:"form-check-input" %>
+                                        <label class="form-check-label" for="flexCheckChecked" style="font-size:14px;">
+                                            <div class="text-success fw-bold" data-bs-toggle="tooltip" data-bs-placement="top" title="Indicar si el autor es estudiante del posgrado INECOl" >Estudiante</div>
+                                        </label>
+                                    </div>
+                            </div>    
+                        </div>
+            
             <% if [10].include? @producto.id %> 
                   <div class="col-3 align-items-center justify-content-center">
                       <%= form.select :rol_id, Rol.where(id:[4,9]).all.map { |r| [r.nomrol, r.id] }, class:'form-control'  %> 
                   </div>
             <% end %> 
-            <div id="controles" class="col-2 d-flex align-items-start controles">
+            <div id="controles" class="col d-flex align-items-start controles">
                
-                     <div id="controla" class="d-flex col-2 justify-content-center controla"> <div class="align-middle"><i class="fa-solid fa-circle-minus fa-lg text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar fila" data-action="click->autores#removeItem click->autores#ajustarPorc click->autores#validarControles" ></i></div></div>
-                     <div id="controlb" class="d-flex col-2 justify-content-center controlb"> <div class="align-middle"><i class="fa-solid fa-circle-plus fa-lg text-success cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Agrear fila" data-action="click->autores#addItem click->autores#validarControles" ></i></div> </div>
+                     <div id="controla" class="d-flex col justify-content-center controla"> <div class="align-middle"><i class="fa-solid fa-circle-minus fa-lg text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar fila" data-action="click->autores#removeItem click->autores#ajustarPorc click->autores#validarControles" ></i></div></div>
+                     <div id="controlb" class="d-flex col justify-content-center controlb"> <div class="align-middle"><i class="fa-solid fa-circle-plus fa-lg text-success cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Agrear fila" data-action="click->autores#addItem click->autores#validarControles" ></i></div> </div>
                
             </div>
 

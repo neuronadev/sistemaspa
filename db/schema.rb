@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_02_13_155122) do
+ActiveRecord::Schema.define(version: 2024_05_07_214915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "academicos", force: :cascade do |t|
     t.integer "noempleado"
@@ -225,6 +226,7 @@ ActiveRecord::Schema.define(version: 2024_02_13_155122) do
     t.text "motivo"
     t.string "autornom"
     t.string "autorap"
+    t.boolean "estudiante"
     t.index ["actividad_id"], name: "index_autores_on_actividad_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
@@ -252,6 +254,7 @@ ActiveRecord::Schema.define(version: 2024_02_13_155122) do
     t.text "motivo"
     t.string "autornom"
     t.string "autorap"
+    t.boolean "estudiante"
     t.index ["actividad_id"], name: "index_autores_on_actividad_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"
     t.index ["persona_id"], name: "index_autores_on_persona_id"

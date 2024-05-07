@@ -1,0 +1,11 @@
+<template data-autores-target="tplautor">
+       <%= form.fields_for :autores, Autor.new, child_index: 'RW_AUTOR' do |autor| %>
+                  <%= render 'add_field', form: autor %>
+       <% end %>
+</template>
+
+<div class="col mt-4">
+       <%= form.fields_for :autores do |autor| %>
+              <%= render 'add_field', form:autor %>
+       <% end %>   
+</div>
