@@ -6,7 +6,7 @@ class PosgradosController < ApplicationController
       if  params[:p].present?
             @periodo = params[:p].to_i
       else      
-            @periodo = 2023     
+            @periodo = 2024
       end
 
       @cursos = Actividad.where(producto_id:[82,83], fuente:'P',estado:['U','A','S','C','D'], periodo:@periodo)
