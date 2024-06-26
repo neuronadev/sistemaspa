@@ -11,7 +11,7 @@
                             </tr>
                         </thead>
                         <tbody> 
-                            <% @productos.where(id:[1,2,5,6,7]).each do |p| %>
+                            <% @productos.each do |p| %>
                                 <% if p.estado == 'A' %>
                                     <tr class="" data-action="click->cattab#form" data-cattab-url-param="<%= new_actividades_actividad_path(:item=>p.id) %>" role="button" >
                                         <td class="col-4 align-middle"> <%=  p.descripcion %>  </td>

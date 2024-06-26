@@ -23,7 +23,7 @@ class Actividades::CatalogosController < ApplicationController
       # else
       #        @productos = Producto.where(prodcategoria_id:idcat.to_i, estado:['A','E']).order(:descripcion)
       #end   
-
+      
       render partial: 'listado_cat'
   end
 
