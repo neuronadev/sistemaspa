@@ -24,7 +24,7 @@
                          <%= form.label :tipodivulgacion_id, "Tipo actividad:", class:"form-label " %>
                   </div>
                   <div class="col-md-4 d-flex justify-content-start">
-                         <%=  div_form.select :tipodivulgacion_id, Tipodivulgacion.all.pluck(:nomtipodivulgacion,:id), { prompt:'-- Seleccione una opcion--'},class:"form-control" %>
+                         <%=  div_form.select :tipodivulgacion_id, Tipodivulgacion.where(id:[1,2,3,4]).all.pluck(:nomtipodivulgacion,:id), { prompt:'-- Seleccione una opcion--'},class:"form-control" %>
                   </div>
         </div>
     <% end %>
