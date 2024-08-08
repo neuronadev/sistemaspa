@@ -25,7 +25,7 @@
             <th class="text-center th-sm">Fecha CR</th>
             <th class="text-center th-sm">Fecha SA</th>
            <!--  <th class="text-center th-sm">Estatus</th> -->
-            <th class="text-center th-sm">Aceptado</th>
+            <th class="text-center th-sm"></th>
 
 
         </tr>
@@ -39,6 +39,7 @@
     fcr = !a.fecha2.nil? ? a.fecha2.strftime("%d-%m-%Y") : ""
     fsa = !a.fecha3.nil? ? a.fecha3.strftime("%d-%m-%Y") : ""
     facp = !a.faceptado.nil? ? a.faceptado.strftime("%d-%m-%Y") : ""
+    
 
      if [81,82,83,85].include?(producto.id) 
          fcr = fcaptura

@@ -42,7 +42,8 @@
                       <!--<th class="text-center">Participantes</th>-->
                       <th class="text-center">Captura</th>
                       <th class="text-center">Validación-Comité</th> 
-                      <th class="text-center">Aceptado</th>
+                      <th class="text-center th-sm">Fecha SA</th>
+                      <th class="text-center"></th>
                    </tr>
                  </thead>
                  <tbody>
@@ -74,7 +75,7 @@
                         end
                         
 
-                        if @a.periodo == 2024
+                        if @a.periodo == 2023
 
                   %>
                                 <tr> 
@@ -162,7 +163,7 @@
                                                 end    
                                        %>
                                         <strong><%= 
-                                                facp
+                                                fsa
                                         %> </strong>
                                 </td>
                                 </tr>  
@@ -195,7 +196,7 @@
                                         fcm = @actividad.created_at.strftime("%d-%m-%Y")
                                     end
 
-                                    if @actividad.periodo == 2024
+                                    if @actividad.periodo == 2023
                             %> 
                                 <tr class="">
                                     <td><%= @actividad.id %></td> 
@@ -273,8 +274,9 @@
                                                         date = fcm
                                             end    
                                        %>
+                                       
                                         <strong><%= 
-                                                facp
+                                                fsa 
                                         %> </strong>
                                 </td>
                                 </tr>
