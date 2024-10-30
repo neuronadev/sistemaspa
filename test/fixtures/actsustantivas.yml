@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  acad_tecnico: 1
+  acad_jefe: 1
+  actividad: MyText
+  porcentaje: 9.99
+  anio: 1
+  estado: MyString
+
+two:
+  acad_tecnico: 1
+  acad_jefe: 1
+  actividad: MyText
+  porcentaje: 9.99
+  anio: 1
+  estado: MyString

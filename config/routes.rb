@@ -11,6 +11,11 @@ Rails.application.routes.draw do
 
   resources :puntos
 
+  namespace :sustantivas do
+    resources :actividades
+  end
+
+
   namespace :evaluaciones do
     resources :calificaciones
   end

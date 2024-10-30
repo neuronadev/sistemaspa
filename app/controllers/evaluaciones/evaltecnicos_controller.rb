@@ -2,7 +2,7 @@ class Evaluaciones::EvaltecnicosController < ApplicationController
   add_flash_types :info
 
   def index
-     @sustantivas = Evaltecnico.where(persona_id: current_usuario.persona_id, anio:2023)
+     @sustantivas = Evaltecnico.where(persona_id: current_usuario.persona_id, anio:2024)
      @total_porc = 0.0
      @sustantivas.each do |s|
          s.itemsustantivas.each do |item| 

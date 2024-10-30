@@ -1,0 +1,2 @@
+class Actsustantiva < ApplicationRecord
+end

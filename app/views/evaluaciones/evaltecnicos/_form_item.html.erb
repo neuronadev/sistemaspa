@@ -1,22 +1,24 @@
-<div class="row mb-4 mt-4" id="itemrw" class="itemrw">
-        <%= item.hidden_field :_destroy %>  
-        <div class="col-md-3 d-flex justify-content-start" style="max-height: 50px;">
-              <%= item.select :persona_id, 
-                        Persona.where(tipopersona_id:[2,3,4]).order(:paterno).map {|p| [ (p.paterno||'') + ' ' + (p.materno||'') +  ' ' + (p.nombre||''), p.id ]},
-                        { include_blank: true}, {class:"form-control", placeholder:'Seleccione el acádemico con quién colabora...', data:{controller:'ts--selectrev'}}
-                        %>
-        </div>
 
-        <div class="col-md-5 d-flex justify-content-start"  style="max-height: 50px;">
-              <%= item.text_area :descripcion, class:"form-control", style:"max-height: 70px;" %>
-        </div>
+<tr id="itemrw" class="itemrw">
+     <%= item.hidden_field :_destroy %>  
+     <td>
+         <%= item.select :persona_id, 
+              Persona.where(tipopersona_id:[2,3,4]).order(:paterno).map {|p| [ (p.paterno||'') + ' ' + (p.materno||'') +  ' ' + (p.nombre||''), p.id ]},
+              { include_blank: true}, {class:"form-control", placeholder:'Seleccione el acádemico con quién colabora...', data:{controller:'ts--selectrev'}}
+        %>
+     </td>
+     <td>
+        <%= item.text_area :descripcion, class:"form-control", style:"max-height: 70px;" %>
+     </td>
+     <td>
+        <%= item.text_field :porcentaje, class:"form-control itemporc", maxlength:'5', "data-action":"keydown->utils#numbers keyup->sustantiva#input_suma", style:'width:65px' %>
+     </td>
 
-        <div class="col-md-2 d-flex justify-content-center"  style="max-height: 50px;">
-              <%= item.text_field :porcentaje, class:"form-control itemporc", maxlength:'5', "data-action":"keydown->utils#numbers keyup->sustantiva#input_suma", style:'width:65px' %>
-        </div>
-        <div class="col-md-1 d-flex justify-content-center text-danger"  style="max-height: 50px; font-size:14px;">
-                <div class="col cursor-pointer align-middle" data-action="click->sustantiva#removeItem">
-                    <i class="fa-solid fa-delete-left"></i><span class="ms-2">Eliminar</span>
-                </div>
-        </div>
-</div>
+     <td>---</td>
+     <td>---</td>
+
+
+     <td data-action="click->sustantiva#removeItem">
+             <i class="fa-solid fa-delete-left"></i><span class="ms-2">Eliminar</span>
+     </td>
+</tr>

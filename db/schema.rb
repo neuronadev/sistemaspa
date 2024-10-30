@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_05_07_214915) do
+ActiveRecord::Schema.define(version: 2024_10_30_225508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "unaccent"
 
   create_table "academicos", force: :cascade do |t|
     t.integer "noempleado"
@@ -176,6 +175,17 @@ ActiveRecord::Schema.define(version: 2024_05_07_214915) do
     t.index ["red_id"], name: "index_actividades_on_red_id"
   end
 
+  create_table "actsustantivas", force: :cascade do |t|
+    t.integer "acad_tecnico"
+    t.integer "acad_jefe"
+    t.text "actividad"
+    t.decimal "porcentaje", precision: 16, scale: 2
+    t.integer "anio"
+    t.string "estado", limit: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "ambitos", force: :cascade do |t|
     t.string "nomambito", limit: 85
     t.datetime "created_at", precision: 6, null: false
@@ -293,6 +303,17 @@ ActiveRecord::Schema.define(version: 2024_05_07_214915) do
     t.string "titulo"
     t.string "nocontrol"
     t.string "corresponsal"
+  end
+
+  create_table "calsustantivas", force: :cascade do |t|
+    t.bigint "actsustantiva_id", null: false
+    t.bigint "tcalificacion_id", null: false
+    t.decimal "calificacion", precision: 16, scale: 2
+    t.string "estado", limit: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["actsustantiva_id"], name: "index_calsustantivas_on_actsustantiva_id"
+    t.index ["tcalificacion_id"], name: "index_calsustantivas_on_tcalificacion_id"
   end
 
   create_table "capitulos", force: :cascade do |t|
@@ -1033,6 +1054,13 @@ ActiveRecord::Schema.define(version: 2024_05_07_214915) do
     t.index ["tactividad_id"], name: "index_tautores_on_tactividad_id"
   end
 
+  create_table "tcalificaciones", force: :cascade do |t|
+    t.string "descripcion"
+    t.string "clave", limit: 3
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tcapitulos", force: :cascade do |t|
     t.bigint "catlibro_id"
     t.integer "pgini"
@@ -1361,6 +1389,8 @@ ActiveRecord::Schema.define(version: 2024_05_07_214915) do
   add_foreign_key "autores", "personas"
   add_foreign_key "autores", "roles"
   add_foreign_key "calificaciones", "itemsustantivas"
+  add_foreign_key "calsustantivas", "actsustantivas"
+  add_foreign_key "calsustantivas", "tcalificaciones"
   add_foreign_key "capitulos", "actividades"
   add_foreign_key "capitulos", "idiomas"
   add_foreign_key "capitulos", "libros"

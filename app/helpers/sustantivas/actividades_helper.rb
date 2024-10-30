@@ -1,0 +1,2 @@
+module Sustantivas::ActividadesHelper
+end
