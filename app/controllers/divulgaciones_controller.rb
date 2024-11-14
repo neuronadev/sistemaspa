@@ -4,13 +4,15 @@ class DivulgacionesController < ApplicationController
   include Pagy::Backend
 
   def index
-    @idx_pg = params[:page]
-    @pagy, @actividades = pagy( Actividad.where(producto_id:[39,22], periodo:[2024], estado:['U','C'] ).order(created_at: :desc), page: params[:page], items: 20 )
+    #@idx_pg = params[:page]
+    #@pagy, @actividades = pagy( Actividad.where(producto_id:[39,22], periodo:[2024], estado:['U','C'] ).order(created_at: :desc), page: params[:page], items: 20 )
+    @actividades = Actividad.where(producto_id:[39,22], periodo:[2024], estado:['U','C'] ).order(created_at: :desc)
   end
 
   def buscar
     @query = params[:query]
-    @pagy, @actividades = pagy( Actividad.search_by_titulo(@query).where(estado:['S','U','C']).where(fuente:'V'), page: params[:page], items: 20 )
+    #@pagy, @actividades = pagy( Actividad.search_by_titulo(@query).where(estado:['S','U','C']).where(fuente:'V'), page: params[:page], items: 20 )
+    @actividades = Actividad.search_by_titulo(@query).where(periodo:[2024], estado:['S','U','C']).where(fuente:'V')
   
     #render partial: 'listado', locals: {pubs:r }
  end

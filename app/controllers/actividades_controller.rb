@@ -144,7 +144,7 @@ class ActividadesController < ApplicationController
               flash[:notice] = 'Actualización ok...'
 
               if @captipo == 'V'
-                redirect_to divulgaciones_path    
+                  redirect_to divulgacion_path(@actividad.id)   
               elsif @captipo == 'P'     
                     redirect_to posgrado_path(@actividad.id)
               else

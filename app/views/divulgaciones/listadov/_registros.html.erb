@@ -1,12 +1,10 @@
+<div style="display:flex; padding: 10px; width: 100%; align-items: center; justify-content: center;">
+   <div style="display:flex; padding: 5px; height: 80vh; width: 95%; overflow: auto; border: 1px ridge #e8e8e8;">
+         <table class="table table-sm table-striped" style="font-size:14px;">
+            
+            <%= render "divulgaciones/listadov/thead" %>
+            <%= render "divulgaciones/listadov/tbody" %>
 
-
-<div class="table-responsive-sm">
-<div class="col-md-4 ml-auto align-middle p-2"> <%= pagy_bootstrap_nav(@pagy).html_safe %> </div>
-
-   <table class="table table-sm table-striped" style="font-size:14px;">
-      
-      <%= render "divulgaciones/listadov/thead" %>
-      <%= render "divulgaciones/listadov/tbody" %>
-
-   </table>
-</div>   
+         </table>
+   </div>      
+</div>

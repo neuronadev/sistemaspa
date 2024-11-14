@@ -1412,7 +1412,6 @@ ActiveRecord::Schema.define(version: 2024_11_13_204515) do
   add_foreign_key "capitulos", "idiomas"
   add_foreign_key "capitulos", "libros"
   add_foreign_key "catlibros", "cateditoriales"
-  add_foreign_key "comites", "academicos"
   add_foreign_key "comites", "catevaluadores"
   add_foreign_key "cuartiles", "revistas"
   add_foreign_key "cursos", "actividades"

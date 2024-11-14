@@ -4,7 +4,7 @@
             <i class="fas fa-long-arrow-alt-left"></i> Regresar
         <% end%>
     </div>  
-     <% if current_usuario.evaluador != 'V' %>
+     <% if current_usuario.evaluador == 'V' %>
          <% if @actividad.estado == 'U' %>
             <div class="col-md-2">
                 <%= link_to edit_divulgacion_path(@actividad.id) do %>
@@ -66,7 +66,7 @@
             
             </div>
 
-            <div clas="row mt-md-3">
+            <div clas="row mt-md-3" style="width: 60%;">
               <div class="col">  
                     <table class="table mt-md-3">
                         <thead>
