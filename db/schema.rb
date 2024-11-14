@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_30_225508) do
+ActiveRecord::Schema.define(version: 2024_11_13_204515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -354,6 +354,13 @@ ActiveRecord::Schema.define(version: 2024_10_30_225508) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "catevaluadores", force: :cascade do |t|
+    t.string "descripcion", limit: 100
+    t.string "clave", limit: 4
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "catidiomas", force: :cascade do |t|
     t.string "nombre", limit: 85
     t.datetime "created_at", null: false
@@ -399,6 +406,16 @@ ActiveRecord::Schema.define(version: 2024_10_30_225508) do
     t.string "abreviatura", limit: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comites", force: :cascade do |t|
+    t.bigint "academico_id", null: false
+    t.bigint "catevaluador_id", null: false
+    t.string "estado", limit: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["academico_id"], name: "index_val.comites_on_academico_id"
+    t.index ["catevaluador_id"], name: "index_val.comites_on_catevaluador_id"
   end
 
   create_table "convocatorias", force: :cascade do |t|
@@ -1395,6 +1412,8 @@ ActiveRecord::Schema.define(version: 2024_10_30_225508) do
   add_foreign_key "capitulos", "idiomas"
   add_foreign_key "capitulos", "libros"
   add_foreign_key "catlibros", "cateditoriales"
+  add_foreign_key "comites", "academicos"
+  add_foreign_key "comites", "catevaluadores"
   add_foreign_key "cuartiles", "revistas"
   add_foreign_key "cursos", "actividades"
   add_foreign_key "cursos", "tipocursos"

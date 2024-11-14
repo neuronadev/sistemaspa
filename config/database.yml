@@ -6,7 +6,7 @@ development:
   password: s4Inecol.#18
   host: localhost
   port: 5432
-  schema_search_path: "mru,cru,cloud"
+  schema_search_path: "mru,cru,cloud,val"
 
 production:
   adapter: postgresql
@@ -16,4 +16,4 @@ production:
   password: s4Inecol.#18
   host: localhost
   port: 5432
-  schema_search_path: "mru,cru,cloud"
+  schema_search_path: "mru,cru,cloud,val"

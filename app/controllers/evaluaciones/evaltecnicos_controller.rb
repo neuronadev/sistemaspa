@@ -10,6 +10,7 @@ class Evaluaciones::EvaltecnicosController < ApplicationController
          end     
      end
 
+     
      if !@sustantivas.any? 
           flash[:info] = "No ha registrado actividades sustantivas" 
           redirect_to new_evaluaciones_evaltecnico_path

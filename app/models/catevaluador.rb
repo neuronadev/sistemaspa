@@ -1,0 +1,2 @@
+class Catevaluador < ApplicationRecord
+end

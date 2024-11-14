@@ -1,3 +1,9 @@
+<%
+ 
+  @captura = false
+
+%>
+
 <div class="row">
     
      <% if info %>
@@ -10,6 +16,7 @@
 
 <div class="row justify-content-center p-2" data-controller="sustantiva utils">
      <div class="col-12">
+       <% if @captura %>
             <div class="row">
                  <div class="col-2 cursor-pointer text-primary fw-bolder"
                       data-action="click->sustantiva#add"
@@ -17,7 +24,7 @@
                       > <i class="fa-solid fa-plus"></i> Sustantiva...
                  </div> 
             </div>
-
+       <% end %> 
             <div class="row mt-2">
                  <div class="col-12">
                     <%= form_with model: [:evaluaciones, @evaltecnico] do |form|  %>

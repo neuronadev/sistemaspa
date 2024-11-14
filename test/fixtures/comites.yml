@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  academico: one
+  catevaluador: one
+  estado: MyString
+
+two:
+  academico: two
+  catevaluador: two
+  estado: MyString
