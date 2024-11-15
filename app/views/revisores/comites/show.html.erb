@@ -1,0 +1,20 @@
+<div class="row" style=" display: flex; align-items: center; justify-content: center;"> 
+     <div class="col-8 alert alert-success" role="alert">
+       Registro realizado correctamente.
+     </div>
+     <div class="col-8">
+        <div class="row p-1 border-bottom">
+                <div class="col-2 fw-bold">Académico:</div>
+                <div class="col"> <%= @comite.academico.persona.nomcompleto %>  </div>
+        </div>
+        <div class="row p-1 border-bottom">
+                <div class="col-2 fw-bold">Rol:</div>
+                <div class="col"> <%= @comite.rol %> </div>
+        </div>
+        <div class="row p-1">
+             <%= link_to revisores_comites_path do  %>
+                        Regresar
+             <% end %>     
+        </div>
+      </div>  
+</div>

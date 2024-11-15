@@ -19,6 +19,17 @@
                                 <i class="fa-solid fa-gears" style="color:#5b5b5b;"></i> Sustantivas
                           <% end %>  
               </div>
+
+              <% if !@datos_academico_ints.comite.nil? %>
+                    <% if @datos_academico_ints.comite.estado == 'A' %>
+                         <div id="evaltecnicos" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                              <%= link_to revisores_comites_path, style:'text-decoration: none; color:#202124;' do %>
+                                    <i class="fa-solid fa-gears" style="color:#5b5b5b;"></i> Comite-Validar
+                              <% end %>  
+                         </div>
+                    <% end %>    
+              <% end %>
+
               <!--
               <div class="d-flex justify-content-start border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body  item" >
                  <div class="accordion col-12" id="accordionExample">

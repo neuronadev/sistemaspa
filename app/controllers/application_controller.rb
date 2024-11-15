@@ -6,7 +6,12 @@ class ApplicationController < ActionController::Base
     
      protected def select_layout
          
+         
+
          if !current_usuario.nil?
+
+               @datos_academico_ints = current_usuario.persona.datosAcademico
+
                ambitos_select  
                if current_usuario.rol == 'S'
                     "administrar"

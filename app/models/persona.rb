@@ -26,6 +26,15 @@ class Persona < ApplicationRecord
       self.orden = 2
   end  
 
+  def datosAcademico
+       return self.academico
+  end
+
+  def nomcompleto
+      return  (nombre||'') + ' ' + (paterno||'') + ' ' + (materno||'')
+  end
+
+
   pg_search_scope :search_personas,
                   against: %i[paterno materno nombre],
                   ignoring: :accents,

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :revisores do
+      resources :comites
+  end
   get 'puntos/index'
   get 'puntos/show'
   get 'proyectos/index'

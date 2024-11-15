@@ -1,0 +1,2 @@
+module Revisores::ComitesHelper
+end

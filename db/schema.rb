@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_13_204515) do
+ActiveRecord::Schema.define(version: 2024_11_14_183315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "academicos", force: :cascade do |t|
     t.integer "noempleado"
@@ -416,6 +417,15 @@ ActiveRecord::Schema.define(version: 2024_11_13_204515) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["academico_id"], name: "index_val.comites_on_academico_id"
     t.index ["catevaluador_id"], name: "index_val.comites_on_catevaluador_id"
+  end
+
+  create_table "comvalidaciones", force: :cascade do |t|
+    t.bigint "comite_id", null: false
+    t.bigint "academico_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["academico_id"], name: "index_val.comvalidaciones_on_academico_id"
+    t.index ["comite_id"], name: "index_val.comvalidaciones_on_comite_id"
   end
 
   create_table "convocatorias", force: :cascade do |t|
@@ -1413,6 +1423,8 @@ ActiveRecord::Schema.define(version: 2024_11_13_204515) do
   add_foreign_key "capitulos", "libros"
   add_foreign_key "catlibros", "cateditoriales"
   add_foreign_key "comites", "catevaluadores"
+  add_foreign_key "comvalidaciones", "academicos"
+  add_foreign_key "comvalidaciones", "comites"
   add_foreign_key "cuartiles", "revistas"
   add_foreign_key "cursos", "actividades"
   add_foreign_key "cursos", "tipocursos"
