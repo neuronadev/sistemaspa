@@ -24,16 +24,16 @@ class Validaciones::AcademicosController < ApplicationController
     end
     def adicionales
         @academico = Persona.find(params[:idacad])
-        @adicionales = Actividad.includes(:producto).where(periodo:2023,estado:['U','C','S','G','D'])
+        @adicionales = Actividad.includes(:producto).where(periodo:2024,estado:['U','C','S','G','D'])
                       .includes(:autores)
                       .where('autores.persona_id = ?', params[:idacad] ).references(:autores).order("actividades.titulo")
-        @sustantivas = Evaltecnico.where(persona_id:params[:idacad], anio:2023).first
+        @sustantivas = Evaltecnico.where(persona_id:params[:idacad], anio:2024).first
         render partial: "adicionales"
     end
 
     def metasinvest
         @academico = Persona.find(params[:idacad])
-        @metas = Actividad.includes(:producto).where(periodo:2023,estado:['C','S','G','D'])
+        @metas = Actividad.includes(:producto).where(periodo:2024,estado:['C','S','G','D'])
                       .includes(:autores)
                       .where('autores.persona_id = ?', params[:idacad] ).references(:autores).order("actividades.titulo")
         render partial: "metas"
