@@ -36,8 +36,8 @@
     @msg = ''
     producto = Producto.find(a.producto_id)
     fcaptura = !a.created_at.nil? ? a.created_at.strftime("%d-%m-%Y") : ""
-    fcr = !a.fecha2.nil? ? a.fecha2.strftime("%d-%m-%Y") : ""
-    fsa = !a.fecha3.nil? ? a.fecha3.strftime("%d-%m-%Y") : ""
+    fcr = !a.fecha2.nil? ? a.fecha2.strftime("%d-%m-%Y") : "En validación"
+    fsa = !a.fecha3.nil? ? a.fecha3.strftime("%d-%m-%Y") : "En validación"
     facp = !a.faceptado.nil? ? a.faceptado.strftime("%d-%m-%Y") : ""
     
 

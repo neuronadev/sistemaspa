@@ -131,7 +131,7 @@ class AuditoriaController < ApplicationController
       Autor.where(:persona_id=>personaid).each do |a|
          idsActiv.push(a.actividad_id) 
       end
-       @actividad = Actividad.where(:id=>idsActiv).where("estado in ('S','W') and periodo=2023").order(:producto_id).order(:id)
+       @actividad = Actividad.where(:id=>idsActiv).where("estado in ('C','S','W') and periodo=2024").order(:producto_id).order(:id)
   end
   
   def cancelados
