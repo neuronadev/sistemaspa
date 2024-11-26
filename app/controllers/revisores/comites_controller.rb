@@ -1,5 +1,4 @@
 class Revisores::ComitesController < ApplicationController
-  before_action :select_layout
   layout :select_layout_comite
 
   def index
@@ -29,10 +28,9 @@ class Revisores::ComitesController < ApplicationController
   def update
   end
 
-  def select_layout_comite
-       if @datos_academico_ints.comite.rol == 'ADM'
-             "revisores/administrador"
-       end             
+  def asignado
+      @comite = Comite.find(params[:id])
+      @asignados = Comvalidacion.where(comite_id:@comite.id) 
   end
 
   private

@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
      before_action :select_layout
      layout :select_layout
     
+     def select_layout_comite
+          if @datos_academico_ints.comite.rol == 'ADM'
+                "revisores/administrador"
+          end             
+     end
+
      protected def select_layout
          
          

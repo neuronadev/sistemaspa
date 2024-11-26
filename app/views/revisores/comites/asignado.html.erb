@@ -1,0 +1,41 @@
+<div class="" style=" display: flex; flex-direction:column; align-items: center; justify-content: flex-start;">
+        
+       <div class="row"> 
+         <div class="col-11">
+           <div style="display:flex; justify-content:space-between;">
+                    <div>
+                        <%= link_to revisores_comvalidaciones_path do  %>
+                                Regresar
+                        <% end %>     
+                    </div>  
+                    <div> 
+                        <%=  link_to new_revisores_comite_comvalidacion_path(@comite.id) do %>
+                            + Asignar
+                        <% end %>
+                    </div>   
+            </div>        
+        </div>
+        
+
+        <div class="col-11"> 
+            <div class="row border-top p-2">
+                <div class="col fw-bold centrarel">Nombre</div>
+                <div class="col fw-bold centrarel">Adscripción</div>
+            </div>
+        </div>
+
+        <div class="col-11 border-bottom"> 
+                <% @asignados.each do |item|  %>
+                    <div class="row border-top p-1">
+                        <div class="col"> 
+                            <%= item.academico.persona.nomcompleto %>
+                        </div>
+
+                        <div class="col centrarel"> 
+                            <%= item.academico.nomred %>
+                        </div>
+
+                    </div>
+                <% end %>
+        </div>
+</div>

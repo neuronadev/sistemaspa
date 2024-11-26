@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
 
+  
   namespace :revisores do
-      resources :comites
+      resources :comvalidaciones, only: [:index] 
+      resources :comites do
+         resources :comvalidaciones
+         member do
+              get "asignado"
+         end
+      end   
   end
+
   get 'puntos/index'
   get 'puntos/show'
   get 'proyectos/index'

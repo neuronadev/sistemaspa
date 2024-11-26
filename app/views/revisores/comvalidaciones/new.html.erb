@@ -1,0 +1,22 @@
+<div>
+    <%=  link_to asignado_revisores_comite_path(@comite.id) do %>
+             Regresar
+    <% end %> 
+</div>  
+<%= form_with model: [:revisores, @comite, @comvalidacion] do |form| %>
+      <%= form.hidden_field :comite_id, value:@comite.id %>
+      <div class="row fw-bold">Evaluador: <%= @comite.academico.persona.nomcompleto %>  </div>
+      <div class="row" style=" display: flex; align-items: center; justify-content: center;"> 
+            <div class="col-8">
+                <div class="row p-1">
+                        <div class="col-2">Académico:</div>
+                        <div class="col"> <%= form.select :academico_id, Academico.includes(:persona).where('personas.estado':'A').all.order('personas.nombre').map{ |item| [item.persona.nomcompleto, item.id] } %>  </div>
+                </div>
+                <div class="row p-1 mt-5">
+                        <div class="col centrarel"> 
+                            <%= form.submit "Aceptar"%>
+                        </div>   
+                </div>
+            </div>  
+      </div>
+<% end %>
