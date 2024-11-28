@@ -1,0 +1,10 @@
+<div> <%=  @actividad.producto.descripcion %> </div>
+<div> <%=  @actividad.titulo %> </div>
+<div> <%=  @actividad.anio %> </div>
+<div>
+     <%= act_comprobante(@actividad).html_safe %>
+</div>
+
+<div>
+  <%= @parts %>
+</div>

@@ -2,7 +2,9 @@ class Revisores::ComitesController < ApplicationController
   layout :select_layout_comite
 
   def index
-       @comites = Comite.where(estado:'A')
+
+      @comites = Comite.where(estado:'A')
+
   end
 
   def show

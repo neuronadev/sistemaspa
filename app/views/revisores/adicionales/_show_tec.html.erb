@@ -1,0 +1,11 @@
+<% if @actividad.producto.prodgrupo_id == 1 || @actividad.producto.prodgrupo_id == 28 %>   <!-- Articulos  -->
+        <%= render 'revisores/datos/articulo' %>
+<% end %>
+
+<% if @actividad.producto.prodgrupo_id == 29 %> <!-- Tecnicos -->
+        <%= render 'revisores/datos/tecnico' %>
+<% end %>
+
+<% if @actividad.producto.prodgrupo_id == 8 %> <!-- Divulgacion  -->
+        <%= render 'revisores/datos/divulga' %>
+<% end %>

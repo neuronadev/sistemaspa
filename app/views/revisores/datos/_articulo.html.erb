@@ -1,0 +1,16 @@
+<div> <%=  @actividad.producto.descripcion %> </div>
+<div> <%=  @actividad.titulo %> </div>
+<div> <%=  @actividad.articulo.revista.nomrevista %> </div>
+<div> <%=  @actividad.fechapub %> </div>
+<div> <%=  @actividad.articulo.doi %> </div>
+<div> <%=  @actividad.articulo.volumen %> </div>
+<div> <%=  @actividad.articulo.issue %> </div>
+<div> <%=  @actividad.articulo.eidentificador %> </div>
+<div> <%=  @actividad.articulo.pgini %> </div>
+<div> <%=  @actividad.articulo.pgfin %> </div>
+<div>
+    <%= act_comprobante(@actividad).html_safe %>
+</div>
+<div>
+  <%= @parts %>
+</div>

@@ -1,0 +1,26 @@
+<% @adicionales.each do |item| %>
+    <div class="row border-top p-1">
+        <div class="col-1">
+            <%= item.id %>
+        </div>
+        <div class="col-4">
+            <%= item.producto.descripcion.strip %>
+            <% if (71..80).to_a.include?(item.producto.id) || (42..49).to_a.include?(item.producto.id) || [50,51,52,53,55,56,57,58,60,61,62].to_a.include?(item.producto.id)  %>
+                - <div class="fst-italic fw-bold"><%= item.producto.concepto %></div>
+            <% end %>
+        </div>
+        <div class="col-5">
+            <%= item.titulo %>
+        </div>
+
+        <div class="col-1">
+            <%= item.estado %>
+        </div>
+         <div class="col-1">
+              <%= link_to  revisores_comite_tecevaluacion_adicional_path(@datos_academico_ints.comite.id, @academico.id, item.id ) do %>
+                  Validar
+              <% end %>    
+        
+        </div>
+    </div>
+<% end %>

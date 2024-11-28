@@ -1,0 +1,9 @@
+<% @tecnicos.each do |t|  %>
+      <div class="border-top ">
+          <div> 
+              <%= link_to revisores_comite_tecevaluacion_path(@datos_academico_ints.comite, t.academico) do %>
+                <%= t.academico.persona.nomcompleto %>
+              <% end %>  
+          </div>
+      </div>
+<% end %>

@@ -1,0 +1,11 @@
+<div> <%=  @actividad.producto.descripcion %> </div>
+<div> <%=  @actividad.divulgacion.tipodivulgacion.nomtipodivulgacion %> </div>
+<div> <%=  @actividad.titulo %> </div>
+<div> <%=  @actividad.fechapub %> </div>
+<div>
+      <%= act_comprobante(@actividad).html_safe %>
+</div>
+
+<div>
+  <%= @parts %>
+</div>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>INECOL::Sistema de Producción Académica</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>  
+     <script src="https://kit.fontawesome.com/00934c45cc.js" data-mutate-approach="sync"></script>      
+    
+  </head>
+
+  <body class="bgbody" >
+     <div class="container-fluid">
+         <div class="row">
+             <div class="col-12">
+                  <%= link_to actividades_actividades_path do  %>
+                       Regresar
+                  <% end %>     
+             </div>       
+         </div>
+
+         <div class="row">
+            <div class="col-2" style="height: 90vh;">
+                 <div> 
+                   <div>
+                       <%= link_to revisores_comite_tecevaluaciones_path(@datos_academico_ints.comite.id) do  %>
+                             Técnicos
+                       <% end %>
+                   </div>
+                   <div>
+                       <%= link_to revisores_comites_path do  %>
+                             Investigadores
+                       <% end %>
+                   </div>
+                 </div>    
+
+            </div>
+            <div class="col">
+                  <%= yield %> 
+            </div>
+                
+         </div>      
+
+     </div>    
+  </body>
+</html>

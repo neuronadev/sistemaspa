@@ -1,28 +1,37 @@
-
 <div class="row" style=" display: flex; align-items: center; justify-content: center;">
-        
-      
-        
+
+        <div class="col-11"> 
+            <%= link_to  new_revisores_comite_path do %>
+                Nuevo...
+            <% end %>   
+        </div>
+
         <div class="col-11"> 
             <div class="row border-top p-2">
                 <div class="col fw-bold centrarel">Nombre</div>
                 <div class="col fw-bold centrarel">Rol</div>
+                <div class="col fw-bold centrarel">Adscripción</div>
+                <div class="col fw-bold centrarel">Opciones</div>
             </div>
         </div>
 
-
         <div class="col-11 border-bottom"> 
-                <% @comite.each do |c|  %>
+                <% @comites.each do |c|  %>
                     <div class="row border-top p-1">
                         <div class="col"> 
                             <%= c.academico.persona.nomcompleto %>
                         </div>
 
                         <div class="col centrarel"> 
-                            
-                            <%=  link_to asignado_revisores_comite_path(c.id) do %>
-                                  Académicos
-                            <% end %>
+                            <%= c.rol %>
+                        </div>
+
+                        <div class="col centrarel"> 
+                            <%= c.academico.nomred %>
+                        </div>
+
+                        <div class="col centrarel"> 
+                            Asignación
                         </div>
                     </div>
                 <% end %>

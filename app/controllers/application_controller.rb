@@ -6,8 +6,11 @@ class ApplicationController < ActionController::Base
     
      def select_layout_comite
           if @datos_academico_ints.comite.rol == 'ADM'
-                "revisores/administrador"
+                return "revisores/administrador"
           end             
+          if @datos_academico_ints.comite.rol == 'CT'
+                return "revisores/comite"
+         end   
      end
 
      protected def select_layout

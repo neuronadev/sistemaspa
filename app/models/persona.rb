@@ -34,6 +34,10 @@ class Persona < ApplicationRecord
       return  (nombre||'') + ' ' + (paterno||'') + ' ' + (materno||'')
   end
 
+  def apellidonom
+     return  (paterno||'') + ' ' + (materno||'') + ' ' + (nombre||'')
+end
+
 
   pg_search_scope :search_personas,
                   against: %i[paterno materno nombre],
