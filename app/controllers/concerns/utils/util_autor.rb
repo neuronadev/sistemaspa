@@ -26,6 +26,5 @@ module Utils
               #####
               return str_prts
         end
-       
     end
 end

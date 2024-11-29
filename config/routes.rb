@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-
+  
+  namespace :revisores do
+    get 'productos/show'
+  end
   namespace :revisores do
     get 'adicionales/show'
   end
@@ -9,6 +12,9 @@ Rails.application.routes.draw do
          resources :comvalidaciones
          resources :tecevaluaciones, only: [:index, :show] do
                    resources :adicionales, only: [:show]
+         end
+         resources :invevaluaciones, only: [:index, :show] do
+                   resources :productos, only: [:show]
          end
          member do
               get "asignado"

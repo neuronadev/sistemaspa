@@ -1,0 +1,9 @@
+<% @investigadores.each do |inv|  %>
+      <div class="border-top ">
+          <div> 
+              <%= link_to revisores_comite_invevaluacion_path(@datos_academico_ints.comite, inv.academico) do %>
+                    <%= inv.academico.persona.nomcompleto %>
+              <% end %>  
+          </div>
+      </div>
+<% end %>
