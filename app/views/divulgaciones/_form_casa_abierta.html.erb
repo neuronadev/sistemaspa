@@ -31,7 +31,7 @@
             <div class="form-row mt-md-3">
                <div class="col-4">
                     <%=  divulgacion.label :tipodivulgacion_id, "Tipo de actividad:", class:'tipodivulgacion_id fw-bold' %>
-                    <%=  divulgacion.select :tipodivulgacion_id, Tipodivulgacion.where(id:[5,6,7,9,10,11,13,14,15]).order(:nomtipodivulgacion).pluck(:nomtipodivulgacion,:id), { :include_blank=>'- Seleccione una opcion -'},{class:"form-control"} %>
+                    <%=  divulgacion.select :tipodivulgacion_id, Tipodivulgacion.where(id:[5,6,7,9,10,11,13,14,15,16,17]).order(:nomtipodivulgacion).pluck(:nomtipodivulgacion,:id), { :include_blank=>'- Seleccione una opcion -'},{class:"form-control"} %>
                 </div>
             </div>    
        <% end %> 
