@@ -6,9 +6,15 @@
                               <i class="fa-solid fa-house-chimney-user " style="color: #5b5b5b ;"></i> Inicio
                           <% end %>   
               </div>
-                   
+              <!--          
               <div id="catalogos" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
                           <%= link_to actividades_catalogos_path, style:'text-decoration: none; color:#202124;' do %>
+                                <i class="fa-regular fa-file-lines" style="color:#5b5b5b;"></i> Nuevo...
+                          <% end %>  
+              </div>
+              -->
+              <div id="catalogos" class="menuitem d-flex justify-content-start p-2 border border-1 border-top-0 border-start-0 border-end-0 border-bottom border-body item" >
+                          <%= link_to actividades_catalogo_path(1), style:'text-decoration: none; color:#202124;' do %>
                                 <i class="fa-regular fa-file-lines" style="color:#5b5b5b;"></i> Nuevo...
                           <% end %>  
               </div>
